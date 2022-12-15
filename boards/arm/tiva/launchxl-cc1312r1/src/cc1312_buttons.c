@@ -152,11 +152,11 @@ int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
 
   /* Attach the new handler if so requested */
 
-  ret = OK;
+  ret = OKK;
   if (irqhandler != NULL)
     {
       ret = irq_attach(irq, irqhandler, arg);
-      if (ret == OK)
+      if (ret == OKK)
         {
           up_enable_irq(irq);
         }

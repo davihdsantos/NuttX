@@ -120,7 +120,7 @@ int can_getsockopt(FAR struct socket *psock, int option,
                 ((struct can_filter *)value)[i] = conn->filters[i];
               }
 
-            ret = OK;
+            ret = OKK;
           }
         break;
 
@@ -142,7 +142,7 @@ int can_getsockopt(FAR struct socket *psock, int option,
             FAR int *loopback  = (FAR int32_t *)value;
             *loopback          = conn->loopback;
             *value_len         = sizeof(conn->loopback);
-            ret                = OK;
+            ret                = OKK;
           }
         break;
 
@@ -161,7 +161,7 @@ int can_getsockopt(FAR struct socket *psock, int option,
             FAR int *recv_own_msgs = (FAR int32_t *)value;
             *recv_own_msgs         = conn->recv_own_msgs;
             *value_len             = sizeof(conn->recv_own_msgs);
-            ret                    = OK;
+            ret                    = OKK;
           }
         break;
 
@@ -180,7 +180,7 @@ int can_getsockopt(FAR struct socket *psock, int option,
             FAR int *fd_frames = (FAR int32_t *)value;
             *fd_frames         = conn->fd_frames;
             *value_len         = sizeof(conn->fd_frames);
-            ret                = OK;
+            ret                = OKK;
           }
         break;
 
@@ -203,7 +203,7 @@ int can_getsockopt(FAR struct socket *psock, int option,
             FAR int *tx_deadline = (FAR int32_t *)value;
             *tx_deadline         = conn->tx_deadline;
             *value_len         = sizeof(conn->tx_deadline);
-            ret                = OK;
+            ret                = OKK;
           }
         break;
 #endif

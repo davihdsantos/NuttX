@@ -123,7 +123,7 @@ int sam_sdinitialize(int port, int minor)
   finfo("Successfuly bound SPI%d to MMC/SD slot %d\n",
         port, SAMD2L2_MMCSDSLOTNO);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAMD21_XPLAINED_IOMODULE */

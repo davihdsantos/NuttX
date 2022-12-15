@@ -61,7 +61,7 @@
 
 int tm4c_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_TIVA_ADC
   /* Initialize ADC and register the ADC driver. */

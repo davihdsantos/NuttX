@@ -126,7 +126,7 @@ static int usbhost_trsyslog(uint32_t event, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_USBHOST_TRACE */
 
@@ -245,7 +245,7 @@ void usbhost_trace2(uint16_t id, uint8_t u7, uint16_t u16)
 int usbhost_trenumerate(usbhost_trcallback_t callback, FAR void *arg)
 {
   uint16_t ndx;
-  int ret = OK;
+  int ret = OKK;
 
   /* Temporarily disable tracing to avoid conflicts */
 
@@ -258,7 +258,7 @@ int usbhost_trenumerate(usbhost_trcallback_t callback, FAR void *arg)
       /* Call the user provided callback */
 
       ret = callback(g_trace[ndx], arg);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Abort the enumeration */
 

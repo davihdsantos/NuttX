@@ -253,7 +253,7 @@ int syslog_add_intbuffer(int ch)
          }
 
       g_syslog_intbuffer.si_inndx = (uint16_t)inndx;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -293,7 +293,7 @@ int syslog_flush_intbuffer(FAR const struct syslog_channel_s *channel,
 {
   syslog_putc_t putfunc;
   int ch;
-  int ret = OK;
+  int ret = OKK;
 
   /* Select which putc function to use for this flush */
 

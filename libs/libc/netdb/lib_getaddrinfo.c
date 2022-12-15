@@ -229,7 +229,7 @@ int getaddrinfo(FAR const char *hostname, FAR const char *servname,
             }
         }
 #endif
-      return OK;
+      return OKK;
    }
 
   if (hostname == NULL)
@@ -333,7 +333,7 @@ int getaddrinfo(FAR const char *hostname, FAR const char *servname,
           prev_ai = ai;
         }
 
-      return OK;
+      return OKK;
     }
 
   return EAI_AGAIN;

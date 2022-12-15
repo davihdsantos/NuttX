@@ -925,7 +925,7 @@ static int stm32_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buffe
       col++;
     }
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1066,7 +1066,7 @@ static int stm32_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1084,7 +1084,7 @@ static int stm32_getvideoinfo(FAR struct lcd_dev_s *dev,
   lcdinfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
           g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres, g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1101,7 +1101,7 @@ static int stm32_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(dev && pinfo && planeno == 0);
   lcdinfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1139,7 +1139,7 @@ static int stm32_poweroff(FAR struct stm32_dev_s *priv)
   /* Remember the power off state */
 
   priv->power = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1242,7 +1242,7 @@ static int stm32_setpower(struct lcd_dev_s *dev, int power)
       stm32_poweroff(priv);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1747,7 +1747,7 @@ static inline void stm32_lcd1505init(FAR struct stm32_dev_s *priv)
 static inline int stm32_lcdinitialize(FAR struct stm32_dev_s *priv)
 {
   uint16_t id;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check LCD ID */
 
@@ -1874,7 +1874,7 @@ int board_lcd_initialize(void)
 
   up_mdelay(50);
   ret = stm32_lcdinitialize(priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Clear the display (setting it to the color 0=black) */
 

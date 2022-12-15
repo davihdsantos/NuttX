@@ -370,7 +370,7 @@ static void spi_semtake(struct sam_spidev_s *priv)
   do
     {
       ret = nxsem_wait(&priv->spisem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -418,7 +418,7 @@ static int spi_interrupt(int irq, void *context, FAR void *arg)
 
       if (pending == 0)
         {
-          return OK;
+          return OKK;
         }
 
       /* TThe SPI waits until NSS goes active before receiving the serial
@@ -547,7 +547,7 @@ static int spi_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -947,7 +947,7 @@ static int spi_enqueue(struct spi_sctrlr_s *sctrlr, uint16_t data)
 
       priv->outq[priv->head] = data;
       priv->head = next;
-      ret = OK;
+      ret = OKK;
 
       /* Enable TX interrupts if we have begun the transfer */
 

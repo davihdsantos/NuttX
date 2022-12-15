@@ -160,7 +160,7 @@ int icmpv6_wait_cancel(FAR struct icmpv6_notify_s *notify)
           g_icmpv6_waiters = notify->nt_flink;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -250,11 +250,11 @@ void icmpv6_notify(net_ipv6addr_t ipaddr)
        * entry from the list.
        */
 
-      if (curr->nt_result != OK && net_ipv6addr_cmp(curr->nt_ipaddr, ipaddr))
+      if (curr->nt_result != OKK && net_ipv6addr_cmp(curr->nt_ipaddr, ipaddr))
         {
           /* Yes.. Signal the waiting, returning success */
 
-          curr->nt_result = OK;
+          curr->nt_result = OKK;
           nxsem_post(&curr->nt_sem);
           break;
         }

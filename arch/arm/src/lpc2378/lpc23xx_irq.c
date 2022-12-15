@@ -244,7 +244,7 @@ int up_prioritize_irq(int irq, int priority)
     {
       int offset = irq << 2;
       vic_putreg(priority, VIC_VECTPRIORITY0_OFFSET + offset);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

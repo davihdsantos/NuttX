@@ -228,7 +228,7 @@ static int dbgu_setup(struct uart_dev_s *dev)
 
   dbgu_configure();
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -288,7 +288,7 @@ static int dbgu_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(SAM_IRQ_DBGU, dbgu_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the DBGU
@@ -380,7 +380,7 @@ static int dbgu_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -397,7 +397,7 @@ static int dbgu_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {

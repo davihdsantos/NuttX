@@ -98,10 +98,10 @@ int nx_drawline(NXWINDOW hwnd, FAR struct nxgl_vector_s *vector,
 
       case 0:
         ret = nx_filltrapezoid(hwnd, NULL, &trap[0], color);
-        if (ret == OK)
+        if (ret == OKK)
           {
             ret = nx_filltrapezoid(hwnd, NULL, &trap[1], color);
-            if (ret == OK)
+            if (ret == OKK)
               {
                 ret = nx_filltrapezoid(hwnd, NULL, &trap[2], color);
               }
@@ -139,7 +139,7 @@ int nx_drawline(NXWINDOW hwnd, FAR struct nxgl_vector_s *vector,
 
       /* Draw a circle at pt1 */
 
-      ret = OK;
+      ret = OKK;
       if ((caps & NX_LINECAP_PT1) != 0)
         {
           ret = nx_fillcircle(hwnd, &vector->pt1, radius, color);
@@ -147,7 +147,7 @@ int nx_drawline(NXWINDOW hwnd, FAR struct nxgl_vector_s *vector,
 
       /* Draw a circle at pt2 */
 
-      if (ret == OK && (caps & NX_LINECAP_PT2) != 0)
+      if (ret == OKK && (caps & NX_LINECAP_PT2) != 0)
         {
           ret = nx_fillcircle(hwnd, &vector->pt2, radius, color);
         }

@@ -358,7 +358,7 @@ static int stm32_start(FAR struct watchdog_lowerhalf_s *lower)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -415,7 +415,7 @@ static int stm32_keepalive(FAR struct watchdog_lowerhalf_s *lower)
   priv->lastreset = clock_systimer();
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -474,7 +474,7 @@ static int stm32_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n", status->timeout);
   wdinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -619,7 +619,7 @@ static int stm32_settimeout(FAR struct watchdog_lowerhalf_s *lower,
 
   wdinfo("prescaler=%d fiwdg=%d reload=%d\n", prescaler, fiwdg, reload);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -95,5 +95,5 @@ int setgid(gid_t gid)
 
   DEBUGASSERT(group != NULL);
   rgroup->tg_gid = gid;
-  return OK;
+  return OKK;
 }

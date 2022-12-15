@@ -446,7 +446,7 @@ static int tiva_pwm_setup(FAR struct pwm_lowerhalf_s *dev)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -478,7 +478,7 @@ static int tiva_pwm_shutdown(FAR struct pwm_lowerhalf_s *dev)
 
   tiva_pwm_stop(dev);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -650,7 +650,7 @@ static inline int tiva_pwm_timer(FAR struct tiva_pwm_chan_s *chan,
   enable |= (1 << chan->channel_id);
   putreg32(enable, chan->controller_base + TIVA_PWM_ENABLE_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -683,7 +683,7 @@ static int tiva_pwm_stop(FAR struct pwm_lowerhalf_s *dev)
   value &= ~(1 << chan->channel_id);
   putreg32(value, chan->controller_base + TIVA_PWM_ENABLE_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

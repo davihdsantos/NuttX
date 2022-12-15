@@ -84,7 +84,7 @@ int timer_delete(timer_t timerid)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DISABLE_POSIX_TIMERS */

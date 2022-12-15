@@ -150,7 +150,7 @@ int mq_unlink(FAR const char *mq_name)
   mq_inode_release(inode);
   RELEASE_SEARCH(&desc);
   sched_unlock();
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   inode_semgive();

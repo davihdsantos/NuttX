@@ -455,7 +455,7 @@ static int lib_find_answer(FAR const char *name, FAR struct hostent *host,
   /* Set the address to h_name */
 
   host->h_name = ptr;
-  return OK;
+  return OKK;
 }
 #endif
 #endif /* CONFIG_NETDB_DNSCLIENT */
@@ -616,7 +616,7 @@ static int lib_dns_lookup(FAR const char *name, FAR struct hostent *host,
 
   host->h_name = ptr;
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NETDB_DNSCLIENT */
 
@@ -701,7 +701,7 @@ static int lib_hostfile_lookup(FAR const char *name, FAR struct hostent *host,
                /* We have a match */
 
                fclose(stream);
-               return OK;
+               return OKK;
             }
 
           /* For a match with any host alias */
@@ -719,7 +719,7 @@ static int lib_hostfile_lookup(FAR const char *name, FAR struct hostent *host,
                       /* We have a match */
 
                       fclose(stream);
-                      return OK;
+                      return OKK;
                     }
                 }
             }
@@ -803,7 +803,7 @@ int gethostbyname_r(FAR const char *name, FAR struct hostent *host,
     {
       /* Yes.. we are done */
 
-      return OK;
+      return OKK;
     }
 
 #ifdef CONFIG_NET_LOOPBACK
@@ -813,7 +813,7 @@ int gethostbyname_r(FAR const char *name, FAR struct hostent *host,
     {
       /* Yes.. we are done */
 
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -829,7 +829,7 @@ int gethostbyname_r(FAR const char *name, FAR struct hostent *host,
     {
       /* Found the address mapping in the cache */
 
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -840,7 +840,7 @@ int gethostbyname_r(FAR const char *name, FAR struct hostent *host,
     {
       /* Successful DNS lookup! */
 
-      return OK;
+      return OKK;
     }
 #endif /* CONFIG_NETDB_DNSCLIENT */
 

@@ -103,5 +103,5 @@ int fs_getfilep(int fd, FAR struct file **filep)
   /* And return the file pointer from the list */
 
   *filep = &list->fl_files[fd];
-  return OK;
+  return OKK;
 }

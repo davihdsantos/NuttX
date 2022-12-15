@@ -132,7 +132,7 @@ static inline int usbhost_devdesc(FAR const struct usb_devdesc_s *devdesc,
 
   uinfo("class:%d subclass:%04x protocol:%04x vid:%d pid:%d\n",
         id->base, id->subclass, id->proto, id->vid, id->pid);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -189,7 +189,7 @@ static inline int usbhost_configdesc(const uint8_t *configdesc, int cfglen,
           id->proto    = ifdesc->protocol;
           uinfo("class:%d subclass:%d protocol:%d\n",
                 id->base, id->subclass, id->proto);
-          return OK;
+          return OKK;
         }
 
      /* Increment the address of the next descriptor */

@@ -55,5 +55,5 @@ int board_uniqueid(uint8_t *uniqueid)
     }
 
   cxd56_get_uniqueid(uniqueid);
-  return OK;
+  return OKK;
 }

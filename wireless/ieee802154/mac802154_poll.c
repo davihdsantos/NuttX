@@ -166,7 +166,7 @@ int mac802154_req_poll(MACHANDLE mac, FAR struct ieee802154_poll_req_s *req)
 
   priv->radio->txnotify(priv->radio, false);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

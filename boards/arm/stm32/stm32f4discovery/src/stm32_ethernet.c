@@ -247,7 +247,7 @@ int arch_phy_irq(FAR const char *intf, xcpt_t handler, void *arg,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

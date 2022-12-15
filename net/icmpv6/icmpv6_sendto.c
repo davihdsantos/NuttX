@@ -275,7 +275,7 @@ static uint16_t sendto_eventhandler(FAR struct net_driver_s *dev,
           ninfo("Send ICMPv6 ECHO request\n");
 
           sendto_request(dev, pstate);
-          pstate->snd_result = OK;
+          pstate->snd_result = OKK;
           goto end_wait;
         }
 

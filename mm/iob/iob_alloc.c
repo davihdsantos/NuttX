@@ -115,7 +115,7 @@ static FAR struct iob_s *iob_allocwait(bool throttled,
   FAR struct iob_s *iob;
   irqstate_t flags;
   FAR sem_t *sem;
-  int ret = OK;
+  int ret = OKK;
 
 #if CONFIG_IOB_THROTTLE > 0
   /* Select the semaphore count to check. */
@@ -138,7 +138,7 @@ static FAR struct iob_s *iob_allocwait(bool throttled,
    */
 
   iob = iob_tryalloc(throttled, consumerid);
-  while (ret == OK && iob == NULL)
+  while (ret == OKK && iob == NULL)
     {
       /* If not successful, then the semaphore count was less than or equal
        * to zero (meaning that there are no free buffers).  We need to wait
@@ -162,7 +162,7 @@ static FAR struct iob_s *iob_allocwait(bool throttled,
             {
               /* Force a success indication so that we will continue looping. */
 
-              ret = OK;
+              ret = OKK;
             }
         }
       else

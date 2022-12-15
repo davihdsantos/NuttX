@@ -881,7 +881,7 @@ MD_STATUS r_sci0_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci0_rx_address = rx_buf;
   SCI0.SCR.BIT.RIE  = 1u;
   SCI0.SCR.BIT.RE   = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -905,7 +905,7 @@ MD_STATUS r_sci0_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI0.SCR.BIT.TIE = 1u;
   SCI0.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1010,7 +1010,7 @@ MD_STATUS r_sci1_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci1_rx_address = rx_buf;
   SCI1.SCR.BIT.RIE  = 1u;
   SCI1.SCR.BIT.RE   = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1034,7 +1034,7 @@ MD_STATUS r_sci1_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI1.SCR.BIT.TIE = 1u;
   SCI1.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1138,7 +1138,7 @@ MD_STATUS r_sci2_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci2_rx_address = rx_buf;
   SCI2.SCR.BIT.RIE = 1u;
   SCI2.SCR.BIT.RE  = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1162,7 +1162,7 @@ MD_STATUS r_sci2_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI2.SCR.BIT.TIE = 1u;
   SCI2.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1267,7 +1267,7 @@ MD_STATUS r_sci3_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci3_rx_address = rx_buf;
   SCI3.SCR.BIT.RIE = 1u;
   SCI3.SCR.BIT.RE  = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1291,7 +1291,7 @@ MD_STATUS r_sci3_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI3.SCR.BIT.TIE = 1u;
   SCI3.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1398,7 +1398,7 @@ MD_STATUS r_sci4_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci4_rx_address = rx_buf;
   SCI4.SCR.BIT.RIE = 1u;
   SCI4.SCR.BIT.RE  = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1422,7 +1422,7 @@ MD_STATUS r_sci4_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI4.SCR.BIT.TIE = 1u;
   SCI4.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1527,7 +1527,7 @@ MD_STATUS r_sci5_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci5_rx_address = rx_buf;
   SCI5.SCR.BIT.RIE = 1u;
   SCI5.SCR.BIT.RE  = 1u;
-  return OK;
+  return OKK;
 }
 /****************************************************************************
  * Name: r_sci5_serial_send
@@ -1550,7 +1550,7 @@ MD_STATUS r_sci5_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI5.SCR.BIT.TIE      = 1u;
   SCI5.SCR.BIT.TE       = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1655,7 +1655,7 @@ MD_STATUS r_sci6_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci6_rx_address = rx_buf;
   SCI6.SCR.BIT.RIE = 1u;
   SCI6.SCR.BIT.RE  = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1679,7 +1679,7 @@ MD_STATUS r_sci6_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI6.SCR.BIT.TIE = 1u;
   SCI6.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1785,7 +1785,7 @@ MD_STATUS r_sci7_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci7_rx_address = rx_buf;
   SCI7.SCR.BIT.RIE   = 1u;
   SCI7.SCR.BIT.RE    = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1809,7 +1809,7 @@ MD_STATUS r_sci7_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI7.SCR.BIT.TIE = 1u;
   SCI7.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1915,7 +1915,7 @@ MD_STATUS r_sci8_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci8_rx_address = rx_buf;
   SCI8.SCR.BIT.RIE   = 1u;
   SCI8.SCR.BIT.RE    = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1939,7 +1939,7 @@ MD_STATUS r_sci8_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI8.SCR.BIT.TIE = 1u;
   SCI8.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2045,7 +2045,7 @@ MD_STATUS r_sci9_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci9_rx_address = rx_buf;
   SCI9.SCR.BIT.RIE   = 1u;
   SCI9.SCR.BIT.RE    = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2069,7 +2069,7 @@ MD_STATUS r_sci9_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI9.SCR.BIT.TIE = 1u;
   SCI9.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2175,7 +2175,7 @@ MD_STATUS r_sci10_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci10_rx_address = rx_buf;
   SCI10.SCR.BIT.RIE  = 1u;
   SCI10.SCR.BIT.RE   = 1u;
-  return OK;
+  return OKK;
 }
 /****************************************************************************
  * Name: r_sci10_serial_send
@@ -2198,7 +2198,7 @@ MD_STATUS r_sci10_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI10.SCR.BIT.TIE = 1u;
   SCI10.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2303,7 +2303,7 @@ MD_STATUS r_sci11_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci11_rx_address = rx_buf;
   SCI11.SCR.BIT.RIE  = 1u;
   SCI11.SCR.BIT.RE   = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2327,7 +2327,7 @@ MD_STATUS r_sci11_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI11.SCR.BIT.TIE = 1u;
   SCI11.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2431,7 +2431,7 @@ MD_STATUS r_sci12_serial_receive(uint8_t * const rx_buf, uint16_t rx_num)
   gp_sci12_rx_address = rx_buf;
   SCI12.SCR.BIT.RIE = 1u;
   SCI12.SCR.BIT.RE  = 1u;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2455,6 +2455,6 @@ MD_STATUS r_sci12_serial_send(uint8_t * const tx_buf, uint16_t tx_num)
 
   SCI12.SCR.BIT.TIE = 1u;
   SCI12.SCR.BIT.TE  = 1u;
-  return OK;
+  return OKK;
 }
 #endif

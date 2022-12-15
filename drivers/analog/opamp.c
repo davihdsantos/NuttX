@@ -125,7 +125,7 @@ static int opamp_open(FAR struct file *filep)
 
               irqstate_t flags = enter_critical_section();
               ret = dev->ad_ops->ao_setup(dev);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* Save the new open count on success */
 

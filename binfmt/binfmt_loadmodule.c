@@ -133,7 +133,7 @@ static int load_absmodule(FAR struct binary_s *bin)
       /* Use this handler to try to load the format */
 
       ret = binfmt->load(bin);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Successfully loaded -- break out with ret == 0 */
 
@@ -221,9 +221,9 @@ int load_module(FAR struct binary_s *bin)
 
                   kmm_free(fullpath);
 
-                  /* Break out of the loop with ret == OK on success */
+                  /* Break out of the loop with ret == OKK on success */
 
-                  if (ret == OK)
+                  if (ret == OKK)
                     {
                       break;
                     }

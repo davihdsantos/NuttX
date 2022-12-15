@@ -77,7 +77,7 @@
 
 int net_clone(FAR struct socket *psock1, FAR struct socket *psock2)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Parts of this operation need to be atomic */
 

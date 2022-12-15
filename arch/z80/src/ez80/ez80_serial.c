@@ -403,7 +403,7 @@ static int ez80_setup(FAR struct uart_dev_s *dev)
   reg |= EZ80_UARTTRIG_4;
   ez80_serialout(priv, EZ80_UART_FCTL, reg);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -501,7 +501,7 @@ static int ez80_interrupt(int irq, FAR void *context, FAR void *arg)
       uart_xmitchars(dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

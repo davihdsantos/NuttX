@@ -110,7 +110,7 @@ static int board_button_irqx(gpio_pinset_t pinset, int irq,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

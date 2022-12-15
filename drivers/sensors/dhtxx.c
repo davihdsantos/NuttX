@@ -354,7 +354,7 @@ static bool dht_check_data(FAR struct dhtxx_sensor_data_s *data,
 static int dht_parse_data(FAR struct dhtxx_dev_s *priv, 
                           FAR struct dhtxx_sensor_data_s *data)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (priv->config->type)
   {
@@ -447,7 +447,7 @@ static int dhtxx_open(FAR struct file *filep)
   /* Sensor ready. */
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -460,7 +460,7 @@ static int dhtxx_open(FAR struct file *filep)
 
 static int dhtxx_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -562,7 +562,7 @@ static ssize_t dhtxx_write(FAR struct file *filep, FAR const char *buffer,
 
 static int dhtxx_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

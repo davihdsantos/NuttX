@@ -327,7 +327,7 @@ static int cdcecm_transmit(FAR struct cdcecm_driver_s *self)
    * available.
    */
 
-  while (nxsem_wait(&self->wrreq_idle) != OK)
+  while (nxsem_wait(&self->wrreq_idle) != OKK)
     {
     }
 
@@ -788,7 +788,7 @@ static int cdcecm_ifup(FAR struct net_driver_s *dev)
                  (wdparm_t)priv);
 
   priv->bifup = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -831,7 +831,7 @@ static int cdcecm_ifdown(FAR struct net_driver_s *dev)
 
   priv->bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -909,7 +909,7 @@ static int cdcecm_txavail(FAR struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, cdcecm_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -937,7 +937,7 @@ static int cdcecm_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
   UNUSED(priv); /* Not yet implemented */
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -966,7 +966,7 @@ static int cdcecm_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
   UNUSED(priv); /* Not yet implemented */
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1076,7 +1076,7 @@ static int cdcecm_ioctl(FAR struct net_driver_s *dev, int cmd,
         return -ENOTTY;  /* Special return value for this case */
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1162,7 +1162,7 @@ static void cdcecm_wrcomplete(FAR struct usbdev_ep_s *ep,
 
   rc = nxsem_post(&self->wrreq_idle);
 
-  if (rc != OK)
+  if (rc != OKK)
     {
       nerr("nxsem_post failed! rc: %d\n", rc);
     }
@@ -1269,18 +1269,18 @@ static void cdcecm_resetconfig(FAR struct cdcecm_driver_s *self)
 static int cdcecm_setconfig(FAR struct cdcecm_driver_s *self, uint8_t config)
 {
   struct usb_epdesc_s epdesc;
-  int ret = OK;
+  int ret = OKK;
 
   if (config == self->config)
     {
-      return OK;
+      return OKK;
     }
 
   cdcecm_resetconfig(self);
 
   if (config == CDCECM_CONFIGID_NONE)
     {
-      return OK;
+      return OKK;
     }
 
   if (config != CDCECM_CONFIGID)
@@ -1324,7 +1324,7 @@ static int cdcecm_setconfig(FAR struct cdcecm_driver_s *self, uint8_t config)
 
   self->rdreq->callback = cdcecm_rdcomplete,
   ret = EP_SUBMIT(self->epbulkout, self->rdreq);
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("EP_SUBMIT failed. ret %d\n", ret);
       goto error;
@@ -1346,7 +1346,7 @@ static int cdcecm_setconfig(FAR struct cdcecm_driver_s *self, uint8_t config)
       self->dev.d_flags |= IFF_UP;
     }
 
-  return OK;
+  return OKK;
 
 error:
   cdcecm_resetconfig(self);
@@ -1362,7 +1362,7 @@ static int cdcecm_setinterface(FAR struct cdcecm_driver_s *self,
                                uint16_t interface, uint16_t altsetting)
 {
   uinfo("interface: %hu, altsetting: %hu\n", interface, altsetting);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1795,7 +1795,7 @@ static int cdcecm_bind(FAR struct usbdevclass_driver_s *driver,
                        FAR struct usbdev_s *dev)
 {
   FAR struct cdcecm_driver_s *self = (FAR struct cdcecm_driver_s *)driver;
-  int ret = OK;
+  int ret = OKK;
 
   uinfo("\n");
 
@@ -1861,7 +1861,7 @@ static int cdcecm_bind(FAR struct usbdevclass_driver_s *driver,
 
   ret = nxsem_init(&self->wrreq_idle, 0, 1);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("nxsem_init failed. ret: %d\n", ret);
       goto error;
@@ -1881,7 +1881,7 @@ static int cdcecm_bind(FAR struct usbdevclass_driver_s *driver,
 
   DEV_CONNECT(dev);
 #endif
-  return OK;
+  return OKK;
 
 error:
   uerr("cdcecm_bind failed! ret: %d\n", ret);
@@ -2025,7 +2025,7 @@ static int cdcecm_setup(FAR struct usbdevclass_driver_s *driver,
             uinfo("ECM_SET_PACKET_FILTER. wValue: 0x%04hx, wIndex: 0x%04hx\n",
                   GETUINT16(ctrl->value), GETUINT16(ctrl->index));
 
-            ret = OK;
+            ret = OKK;
             break;
 
           default:
@@ -2050,7 +2050,7 @@ static int cdcecm_setup(FAR struct usbdevclass_driver_s *driver,
 
       if (ret < 0)
         {
-          ctrlreq->result = OK;
+          ctrlreq->result = OKK;
           cdcecm_ep0incomplete(dev->ep0, ctrlreq);
         }
     }

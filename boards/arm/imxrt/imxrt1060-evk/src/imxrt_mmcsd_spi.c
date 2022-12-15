@@ -94,7 +94,7 @@ int imxrt_lpspi1register(struct spi_dev_s *dev, spi_mediachange_t callback,
                        void *arg)
 {
   spiinfo("INFO: Registering spi1 device\n");
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -129,7 +129,7 @@ int imxrt_mmcsd_spi_initialize(int minor)
     }
 
   spiinfo("INFO: mmcsd card has been initialized successfully\n");
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_MMCSD_SPI */

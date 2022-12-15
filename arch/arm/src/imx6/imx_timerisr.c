@@ -145,7 +145,7 @@ static int imx_timerisr(int irq, uint32_t *regs, FAR void *arg)
   imx_output_compare(sr, GPT_INT_OF1);
   imx_output_compare(sr, GPT_INT_OF2);
   imx_output_compare(sr, GPT_INT_OF3);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

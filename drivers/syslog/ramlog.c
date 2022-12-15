@@ -187,7 +187,7 @@ static struct ramlog_dev_s g_sysdev =
 #ifdef CONFIG_RAMLOG_SYSLOG
 static int ramlog_flush(void)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -282,7 +282,7 @@ static ssize_t ramlog_addchar(FAR struct ramlog_dev_s *priv, char ch)
   priv->rl_buffer[priv->rl_head] = ch;
   priv->rl_head = nexthead;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

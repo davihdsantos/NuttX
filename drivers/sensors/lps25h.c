@@ -478,7 +478,7 @@ static int lps25h_int_handler(int irq, FAR void *context, FAR void *arg)
 
   lps25h_notify(dev);
   lps25h_dbg("lps25h interrupt\n");
-  return OK;
+  return OKK;
 }
 
 static int lps25h_configure_dev(FAR struct lps25h_dev_s *dev)
@@ -597,7 +597,7 @@ static int lps25h_one_shot(FAR struct lps25h_dev_s *dev)
                 {
                   /* One-shot completed. */
 
-                  ret = OK;
+                  ret = OKK;
                   break;
                 }
             }
@@ -618,7 +618,7 @@ static int lps25h_one_shot(FAR struct lps25h_dev_s *dev)
       lps25h_dbg("Retrying one-shot measurement: retries=%d\n", retries);
     }
 
-  if (ret != OK)
+  if (ret != OKK)
     {
        return -ETIMEDOUT;
     }
@@ -830,5 +830,5 @@ int lps25h_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
   dev->config->irq_attach(config, lps25h_int_handler, dev);
   dev->config->irq_enable(config, false);
   dev->irqenabled = false;
-  return OK;
+  return OKK;
 }

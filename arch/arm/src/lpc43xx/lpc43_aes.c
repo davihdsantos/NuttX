@@ -185,7 +185,7 @@ int aes_cypher(void *out, const void *in, uint32_t size, const void *iv,
 
   ret = aes_init(iv, key, keysize, mode, encrypt);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }

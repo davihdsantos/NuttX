@@ -125,7 +125,7 @@ int aio_suspend(FAR const struct aiocb *const list[], int nent,
           /* Yes, return success */
 
           sched_unlock();
-          return OK;
+          return OKK;
         }
     }
 

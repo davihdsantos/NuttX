@@ -384,7 +384,7 @@ static int lpc2378_i2c_interrupt(int irq, FAR void *context, FAR void *arg)
 
   putreg32(I2C_CONCLR_SIC, priv->base + I2C_CONCLR_OFFSET); /* clear interrupt */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -447,7 +447,7 @@ static int lpc2378_i2c_transfer(FAR struct i2c_master_s *dev,
 #ifdef CONFIG_I2C_RESET
 static int lpc2378_i2c_reset(FAR struct i2c_master_s * dev)
 {
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_I2C_RESET */
 
@@ -642,7 +642,7 @@ int lpc2378_i2cbus_uninitialize(FAR struct i2c_master_s * dev)
   /* Detach Interrupt Handler */
 
   irq_detach(priv->irqid);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LPC2378_I2C0 || CONFIG_LPC2378_I2C1 || CONFIG_LPC2378_I2C2 */

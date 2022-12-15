@@ -112,7 +112,7 @@
 
 /* "SOC Register. The SOC register is a read-only register that displays the
  *  state of charge of the cell as calculated by the ModelGauge algorithm. The
- *  result is displayed as a percentage of the cell’s full capacity...
+ *  result is displayed as a percentage of the cellï¿½s full capacity...
  *
  * "...Units of % can be directly determined by observing only the high byte
  *  of the SOC register. The low byte provides additional resolution in units
@@ -330,7 +330,7 @@ static inline int max1704x_getvcell(FAR struct max1704x_dev_s *priv,
   int ret;
 
   ret = max1704x_getreg16(priv, MAX1407X_VCELL_ADDR, &regval);
-  if (ret == OK)
+  if (ret == OKK)
     {
       *vcell = MAX1407X_VCELL(regval);
     }
@@ -353,7 +353,7 @@ static inline int max1704x_getsoc(FAR struct max1704x_dev_s *priv,
   int ret;
 
   ret = max1704x_getreg16(priv, MAX1407X_VCELL_ADDR, &regval);
-  if (ret == OK)
+  if (ret == OKK)
     {
       *soc = MAX1407X_SOC(regval);
     }
@@ -455,7 +455,7 @@ static int max1704x_state(struct battery_gauge_dev_s *dev, int *status)
       *status = BATTERY_IDLE;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -471,7 +471,7 @@ static int max1704x_online(struct battery_gauge_dev_s *dev, bool *status)
   /* There is no concept of online/offline in this driver */
 
   *status = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

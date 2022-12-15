@@ -221,7 +221,7 @@ int dsxxxx_rtc_initialize(FAR struct i2c_master_s *i2c)
 
   g_ds3231.i2c  = i2c;
   g_rtc_enabled = true;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -377,7 +377,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
 #endif
 
   rtc_dumptime(tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -543,7 +543,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
   while ((buffer[1] & DSXXXX_TIME_SEC_BCDMASK) >
          (seconds & DSXXXX_TIME_SEC_BCDMASK));
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_RTC_DSXXXX */

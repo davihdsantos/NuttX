@@ -139,7 +139,7 @@ int ipv4_getsockname(FAR struct socket *psock, FAR struct sockaddr *addr,
        outaddr->sin_addr.s_addr = 0;
        *addrlen = sizeof(struct sockaddr_in);
 
-       return OK;
+       return OKK;
     }
 
   net_lock();
@@ -172,7 +172,7 @@ int ipv4_getsockname(FAR struct socket *psock, FAR struct sockaddr *addr,
 
   /* Return success */
 
-  return OK;
+  return OKK;
 #else
   return -EOPNOTSUPP;
 #endif

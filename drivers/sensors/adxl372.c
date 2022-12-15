@@ -536,7 +536,7 @@ static int adxl372_dvr_open(FAR void *instance_handle, int32_t arg)
     }
 
   priv->seek_address = (uint8_t) ADXL372_XDATA_H;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -557,7 +557,7 @@ static int adxl372_dvr_close(FAR void *instance_handle, int32_t arg)
   /* Release the sensor */
 
   nxsem_post(&priv->devicesem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -677,7 +677,7 @@ static off_t adxl372_dvr_seek(FAR void *instance_handle, off_t offset,
 static int adxl372_dvr_ioctl(FAR void *instance_handle, int cmd,
                              unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -897,7 +897,7 @@ int adxl372_register(FAR const char *devpath,
   config->leaf_handle = (void *) priv;
   config->sc_ops      = &g_adxl372_dops;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_SENSORS_ADXL372 && CONFIG_SPI_EXCHANGE */

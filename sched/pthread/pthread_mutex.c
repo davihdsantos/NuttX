@@ -204,7 +204,7 @@ int pthread_mutex_take(FAR struct pthread_mutex_s *mutex,
            */
 
           ret = pthread_sem_take(&mutex->sem, abs_timeout, intr);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Check if the holder of the mutex has terminated without
                * releasing.  In that case, the state of the mutex is

@@ -155,7 +155,7 @@ int board_app_initialize(uintptr_t arg)
   /* Register the LED driver */
 
   ret = userled_lower_initialize("/dev/userleds");
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: userled_lower_initialize() failed: %d\n",
              ret);
@@ -164,7 +164,7 @@ int board_app_initialize(uintptr_t arg)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_LIB_BOARDCTL */
 
@@ -177,6 +177,6 @@ int board_uniqueid(uint8_t *uniqueid)
     }
 
   stm32l4_get_uniqueid(uniqueid);
-  return OK;
+  return OKK;
 }
 #endif

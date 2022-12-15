@@ -156,7 +156,7 @@ static int i2cdrvr_open(FAR struct file *filep)
   DEBUGASSERT(priv->crefs > 0);
 
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -200,11 +200,11 @@ static int i2cdrvr_close(FAR struct file *filep)
     {
       nxsem_destroy(&priv->exclsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -337,7 +337,7 @@ static int i2cdrvr_unlink(FAR struct inode *inode)
     {
       nxsem_destroy(&priv->exclsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   /* No... just mark the driver as unlinked and free the resouces when the
@@ -414,7 +414,7 @@ int i2c_register(FAR struct i2c_master_s *i2c, int bus)
 
       /* Return the result of the registration */
 
-      return OK;
+      return OKK;
     }
 
 

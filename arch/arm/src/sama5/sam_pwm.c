@@ -841,7 +841,7 @@ static int pwm_interrupt(int irq, void *context, FAR void *arg)
   /* No PWM interrupts are used in the current design */
 
 #warning Missing logic
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -886,7 +886,7 @@ static int pwm_setup(FAR struct pwm_lowerhalf_s *dev)
       (void)sam_configpio(chan->fipincfg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -918,7 +918,7 @@ static int pwm_shutdown(FAR struct pwm_lowerhalf_s *dev)
   /* Then put the GPIO pins back to the default, input state */
 
   pwm_resetpins(chan);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1040,7 +1040,7 @@ static int pwm_start(FAR struct pwm_lowerhalf_s *dev,
 
   pwm_putreg(chan, SAM_PWM_ENA_OFFSET, PWM_CHID(chan->channel));
   pwm_dumpregs(chan, "After start");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1077,7 +1077,7 @@ static int pwm_stop(FAR struct pwm_lowerhalf_s *dev)
 
   pwm_putreg(chan, SAM_PWM_DIS_OFFSET, PWM_CHID(chan->channel));
   pwm_dumpregs(chan, "After stop");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

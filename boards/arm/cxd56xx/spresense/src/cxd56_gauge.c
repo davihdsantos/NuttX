@@ -72,7 +72,7 @@ int board_gauge_initialize(FAR const char *devpath, FAR int16_t *gaugemeter)
       g_gaugeinitialized = 1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -98,7 +98,7 @@ int board_gauge_uninitialize(FAR const char *devpath)
       g_gaugeinitialized = 0;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif

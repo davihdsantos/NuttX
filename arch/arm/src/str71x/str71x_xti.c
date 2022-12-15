@@ -135,7 +135,7 @@ static int str71x_xtiinterrupt(int irq, FAR void *context, FAR void *arg)
 
   putreg8(0, STR71X_XTI_PRH);
   putreg8(0, STR71X_XTI_PRL);
-  return OK;
+  return OKK;
 }
 
 /********************************************************************************
@@ -169,7 +169,7 @@ int str71x_xtiinitialize(void)
   /* Attach the XTI interrupt */
 
   ret = irq_attach(STR71X_IRQ_XTI, str71x_xtiinterrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the XTI interrupt at the XTI */
 
@@ -232,7 +232,7 @@ int str71x_xticonfig(int irq, bool rising)
 
       /* Return success */
 
-      ret = OK;
+      ret = OKK;
     }
   return ret;
 }

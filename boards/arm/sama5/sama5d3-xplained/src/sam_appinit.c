@@ -141,7 +141,7 @@ int board_app_initialize(uintptr_t arg)
    */
 
   ret = sam_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -153,7 +153,7 @@ int board_app_initialize(uintptr_t arg)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to start USB monitor: %d\n", ret);
     }
@@ -175,7 +175,7 @@ int board_app_initialize(uintptr_t arg)
   /* Initialize and register the joystick driver */
 
   ret = sam_ajoy_initialization();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the joystick driver: %d\n",
@@ -221,5 +221,5 @@ int board_app_initialize(uintptr_t arg)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

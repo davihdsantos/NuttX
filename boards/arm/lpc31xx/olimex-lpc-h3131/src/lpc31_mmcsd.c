@@ -88,7 +88,7 @@ int lpc31_mmcsd_initialize(int slot, int minor)
 
   finfo("Bind SDIO to the MMC/SD driver, minor=%d\n", minor);
   ret = mmcsd_slotinitialize(minor, sdio);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n", ret);
       return ret;
@@ -102,7 +102,7 @@ int lpc31_mmcsd_initialize(int slot, int minor)
    */
 
   sdio_mediachange(sdio, true);
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_MMCSD */

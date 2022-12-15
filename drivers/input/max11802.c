@@ -332,7 +332,7 @@ static int max11802_sample(FAR struct max11802_dev_s *priv,
        }
 
       priv->penchange = false;
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -459,7 +459,7 @@ static int max11802_schedule(FAR struct max11802_dev_s *priv)
       ierr("ERROR: Failed to queue work: %d\n", ret);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -521,7 +521,7 @@ static void max11802_worker(FAR void *arg)
        * (and the worker thread will receive a lot of signals).
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -793,7 +793,7 @@ errout_with_sem:
   return ret;
 #else
   iinfo("Opening\n");
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -839,7 +839,7 @@ static int max11802_close(FAR struct file *filep)
   nxsem_post(&priv->devsem);
 #endif
   iinfo("Closing\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1298,7 +1298,7 @@ int max11802_register(FAR struct spi_dev_s *spi,
 
   /* And return success (?) */
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->devsem);

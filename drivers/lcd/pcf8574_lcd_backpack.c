@@ -1085,7 +1085,7 @@ static int pcf8574_lcd_open(FAR struct file *filep)
     }
 
   nxsem_post(&priv->sem_excl);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1123,7 +1123,7 @@ static int pcf8574_lcd_close(FAR struct file *filep)
         {
           /* We have no real teardown at present */
         }
-      ret = OK;
+      ret = OKK;
     }
 
   nxsem_post(&priv->sem_excl);
@@ -1556,7 +1556,7 @@ static int pcf8574_lcd_ioctl(FAR struct file *filep, int cmd,
       return -ENOTTY;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1577,7 +1577,7 @@ static int pcf8574lcd_poll(FAR struct file *filep, FAR struct pollfd *fds,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1589,7 +1589,7 @@ static int pcf8574_lcd_unlink(FAR struct inode *inode)
 {
   FAR struct pcf8574_lcd_dev_s *priv =
     (FAR struct pcf8574_lcd_dev_s *)inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   nxsem_wait(&priv->sem_excl);
 
@@ -1601,7 +1601,7 @@ static int pcf8574_lcd_unlink(FAR struct inode *inode)
     {
       /* We have no real teardown at present */
 
-      ret = OK;
+      ret = OKK;
     }
 
   nxsem_post(&priv->sem_excl);

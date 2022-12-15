@@ -139,7 +139,7 @@ int stm32_adc_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ADC && CONFIG_STM32F0L0G0_ADC1 */

@@ -210,7 +210,7 @@ int sam_watchdog_initialize(void)
 
   sched_unlock();
 #endif
-  return OK;
+  return OKK;
 errout_with_dev:
   file_close(&filestruct);
 errout:

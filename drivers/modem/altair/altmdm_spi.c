@@ -2133,7 +2133,7 @@ again:
                             ALTMDM_SYS_FLAG_WMODEOR,
                             &ptn,
                             WRITE_WAIT_TIMEOUT);
-  if (ret != OK)
+  if (ret != OKK)
     {
       m_err("wait failed:%d\n", ret);
       wsize = -ETIME;
@@ -2191,7 +2191,7 @@ int altmdm_spi_readabort(FAR struct altmdm_dev_s *priv)
 
   abort_get_rxbufffifo(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2231,7 +2231,7 @@ int altmdm_spi_sleepmodem(FAR struct altmdm_dev_s *priv)
       ret = altmdm_sys_waitflag(&spidev->sleep_param.done_flag,
                                 EVENT_SLEEP_DONE, ALTMDM_SYS_FLAG_WMODEOR,
                                 &ptn, SREQ_WAIT_TIMEOUT);
-      if (ret != OK)
+      if (ret != OKK)
         {
           m_err("wait failed:%d\n", ret);
         }

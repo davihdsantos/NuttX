@@ -187,7 +187,7 @@ void hostfs_semtake(FAR struct hostfs_mountpt_s *fs)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -348,7 +348,7 @@ static int hostfs_open(FAR struct file *filep, FAR const char *relpath,
   hf->oflags = oflags;
   fs->fs_head = hf;
 
-  ret = OK;
+  ret = OKK;
   goto errout_with_semaphore;
 
 errout_with_buffer:
@@ -445,7 +445,7 @@ static int hostfs_close(FAR struct file *filep)
 
 okout:
   hostfs_semgive(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -658,7 +658,7 @@ static int hostfs_sync(FAR struct file *filep)
   host_sync(hf->fd);
 
   hostfs_semgive(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -689,7 +689,7 @@ static int hostfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   sf->crefs++;
   newp->f_priv = (FAR void *)sf;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -706,7 +706,7 @@ static int hostfs_fstat(FAR const struct file *filep, FAR struct stat *buf)
   FAR struct inode *inode;
   FAR struct hostfs_mountpt_s *fs;
   FAR struct hostfs_ofile_s *hf;
-  int ret = OK;
+  int ret = OKK;
 
   /* Sanity checks */
 
@@ -747,7 +747,7 @@ static int hostfs_ftruncate(FAR struct file *filep, off_t length)
   FAR struct inode *inode;
   FAR struct hostfs_mountpt_s *fs;
   FAR struct hostfs_ofile_s *hf;
-  int ret = OK;
+  int ret = OKK;
 
   /* Sanity checks */
 
@@ -813,7 +813,7 @@ static int hostfs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
       goto errout_with_semaphore;
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
 
@@ -850,7 +850,7 @@ static int hostfs_closedir(FAR struct inode *mountpt,
   host_closedir(dir->u.hostfs.fs_dir);
 
   hostfs_semgive(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -904,7 +904,7 @@ static int hostfs_rewinddir(FAR struct inode *mountpt,
 
   host_rewinddir(dir->u.hostfs.fs_dir);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1012,7 +1012,7 @@ static int hostfs_bind(FAR struct inode *blkdriver, FAR const void *data,
 
   *handle = (FAR void *)fs;
   hostfs_semgive(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1036,7 +1036,7 @@ static int hostfs_unbind(FAR void *handle, FAR struct inode **blkdriver,
 
   /* Check if there are sill any files opened on the filesystem. */
 
-  ret = OK; /* Assume success */
+  ret = OKK; /* Assume success */
   hostfs_semtake(fs);
   if (fs->fs_head != NULL)
     {

@@ -1213,7 +1213,7 @@ static int stm32_sdma_interrupt(int irq, void *context, FAR void *arg)
       dmachan->callback(dmachan, status, dmachan->arg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

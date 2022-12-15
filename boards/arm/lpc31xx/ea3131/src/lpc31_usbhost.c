@@ -196,7 +196,7 @@ int lpc31_usbhost_initialize(void)
   /* Register the USB host Mass Storage Class */
 
   ret = usbhost_msc_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       usyslog(LOG_ERR,
               "ERROR: Failed to register the mass storage class: %d\n", ret);
@@ -207,7 +207,7 @@ int lpc31_usbhost_initialize(void)
   /* Register the CDC/ACM serial class */
 
   ret = usbhost_cdcacm_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("ERROR: Failed to register the CDC/ACM serial class\n");
     }
@@ -217,7 +217,7 @@ int lpc31_usbhost_initialize(void)
   /* Register the USB host HID keyboard class driver */
 
   ret = usbhost_kbdinit();
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("ERROR: Failed to register the KBD class\n");
     }
@@ -243,7 +243,7 @@ int lpc31_usbhost_initialize(void)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -323,7 +323,7 @@ int lpc31_setup_overcurrent(xcpt_t handler, void *arg)
 #warning Missing logic
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif /* 0 */
 

@@ -103,7 +103,7 @@ int pthread_mutex_trylock(FAR pthread_mutex_t *mutex)
       /* Try to get the semaphore. */
 
       status = pthread_mutex_trytake(mutex);
-      if (status == OK)
+      if (status == OKK)
         {
           /* If we successfully obtained the semaphore, then indicate
            * that we own it.
@@ -118,7 +118,7 @@ int pthread_mutex_trylock(FAR pthread_mutex_t *mutex)
             }
 #endif
 
-          ret = OK;
+          ret = OKK;
         }
 
       /* pthread_mutex_trytake failed.  Did it fail because the semaphore
@@ -137,7 +137,7 @@ int pthread_mutex_trylock(FAR pthread_mutex_t *mutex)
               if (mutex->nlocks < INT16_MAX)
                 {
                   mutex->nlocks++;
-                  ret = OK;
+                  ret = OKK;
                 }
               else
                 {

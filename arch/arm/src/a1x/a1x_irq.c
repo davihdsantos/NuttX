@@ -437,7 +437,7 @@ int up_prioritize_irq(int irq, int priority)
 
       a1x_dumpintc("prioritize", irq);
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

@@ -372,7 +372,7 @@ static int t67xx_check_status(FAR struct t67xx_dev_s *priv,
   *warming_up  = status & T67XX_STATUS_WARMUP;
   *calibrating = status & T67XX_STATUS_SPCAL;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -403,7 +403,7 @@ static int t67xx_read_fwrev(FAR struct t67xx_dev_s *priv, uint16_t *rev)
       *rev = fwrev;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -454,7 +454,7 @@ static int t67xx_read_gas_ppm(FAR struct t67xx_dev_s *priv,
   /* Check sensor status. */
 
   ret = t67xx_check_status(priv, &warming_up, &calibrating);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -491,7 +491,7 @@ static int t67xx_read_gas_ppm(FAR struct t67xx_dev_s *priv,
   sninfo("ppm %d, warming up %d, calibrating %d\n",
          (int)ppm, warming_up, calibrating);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -596,7 +596,7 @@ static int t67xx_open(FAR struct file *filep)
   FAR struct t67xx_dev_s *priv = inode->i_private;
 
   UNUSED(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -615,7 +615,7 @@ static int t67xx_close(FAR struct file *filep)
   FAR struct t67xx_dev_s *priv = inode->i_private;
 
   UNUSED(priv);
-  return OK;
+  return OKK;
 }
 #endif
 

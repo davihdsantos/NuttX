@@ -152,7 +152,7 @@ static int local_sockif_alloc(FAR struct socket *psock)
   /* Save the pre-allocated connection in the socket structure */
 
   psock->s_conn = conn;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -376,7 +376,7 @@ static int local_getsockname(FAR struct socket *psock,
       /* This is apparently not an error */
 
       *addrlen = 0;
-      return OK;
+      return OKK;
     }
 
   conn = (FAR struct local_conn_s *)psock->s_conn;
@@ -420,7 +420,7 @@ static int local_getsockname(FAR struct socket *psock,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -827,7 +827,7 @@ static int local_close(FAR struct socket *psock)
              conn->lc_crefs--;
            }
 
-          return OK;
+          return OKK;
         }
 #endif /* CONFIG_NET_LOCAL_STREAM || CONFIG_NET_LOCAL_DGRAM */
 

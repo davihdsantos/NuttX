@@ -87,5 +87,5 @@ int esp32_bringup(void)
    */
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

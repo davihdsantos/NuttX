@@ -173,7 +173,7 @@ static inline int userfs_open_dispatch(FAR struct userfs_info_s *info,
   /* REVISIT: Partial sends are not supported */
 
   DEBUGASSERT(nsent == sizeof(struct userfs_open_response_s));
-  return OK;
+  return OKK;
 }
 
 static inline int userfs_close_dispatch(FAR struct userfs_info_s *info,
@@ -1129,7 +1129,7 @@ int userfs_run(FAR const char *mountpt,
             break;
         }
     }
-  while (ret == OK);
+  while (ret == OKK);
 
   /* Close the LocalHost socket */
 

@@ -107,7 +107,7 @@ static int nxterm_erasetoeol(FAR struct nxterm_state_s *priv)
 {
   /* Does nothing yet (other than consume the sequence) */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

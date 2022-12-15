@@ -153,7 +153,7 @@ int usrsock_close(FAR struct usrsock_conn_s *conn)
 
       ninfo("usockid=%d; already closed.\n", conn->usockid);
 
-      ret = OK;
+      ret = OKK;
       goto close_out;
     }
 
@@ -173,7 +173,7 @@ int usrsock_close(FAR struct usrsock_conn_s *conn)
   ret = do_close_request(conn);
   if (ret < 0)
     {
-      ret = OK; /* Error? return OK for close. */
+      ret = OKK; /* Error? return OK for close. */
     }
   else
     {
@@ -193,7 +193,7 @@ int usrsock_close(FAR struct usrsock_conn_s *conn)
           ninfo("user-space daemon reported error %d for usockid=%d\n",
                 state.result, conn->usockid);
 
-          ret = OK;
+          ret = OKK;
         }
     }
 

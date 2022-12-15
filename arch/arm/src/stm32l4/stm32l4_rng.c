@@ -124,7 +124,7 @@ static int stm32l4_rng_initialize(void)
       return -EAGAIN;
     }
 
-  return OK;
+  return OKK;
 }
 
 static void stm32l4_rngenable(void)
@@ -166,7 +166,7 @@ static int stm32l4_rnginterrupt(int irq, void *context, FAR void *arg)
       /* Clear it, we will try again. */
 
       putreg32(rngsr & ~RNG_SR_CEIS, STM32L4_RNG_SR);
-      return OK;
+      return OKK;
     }
 
   if (rngsr & RNG_SR_SEIS) /* Check for seed error in int stat */
@@ -181,14 +181,14 @@ static int stm32l4_rnginterrupt(int irq, void *context, FAR void *arg)
       putreg32(crval, STM32L4_RNG_CR);
       crval |= RNG_CR_RNGEN;
       putreg32(crval, STM32L4_RNG_CR);
-      return OK;
+      return OKK;
     }
 
   if (!(rngsr & RNG_SR_DRDY)) /* Data ready must be set */
     {
       /* This random value is not valid, we will try again. */
 
-      return OK;
+      return OKK;
     }
 
   data = getreg32(STM32L4_RNG_DR);
@@ -205,14 +205,14 @@ static int stm32l4_rnginterrupt(int irq, void *context, FAR void *arg)
     {
       g_rngdev.rd_first = false;
       g_rngdev.rd_lastval = data;
-      return OK;
+      return OKK;
     }
 
   if (g_rngdev.rd_lastval == data)
     {
       /* Two subsequent same numbers, we will try again. */
 
-      return OK;
+      return OKK;
     }
 
   /* If we get here, the random number is valid. */
@@ -241,7 +241,7 @@ static int stm32l4_rnginterrupt(int irq, void *context, FAR void *arg)
       nxsem_post(&g_rngdev.rd_readsem);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

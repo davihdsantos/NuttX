@@ -244,7 +244,7 @@ int icmpv6_rwait_cancel(FAR struct icmpv6_rnotify_s *notify)
           g_icmpv6_rwaiters = notify->rn_flink;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -339,7 +339,7 @@ void icmpv6_rnotify(FAR struct net_driver_s *dev, const net_ipv6addr_t draddr,
        * entry from the list.
        */
 
-      if (curr->rn_result != OK &&
+      if (curr->rn_result != OKK &&
           strncmp(curr->rn_ifname, dev->d_ifname, IFNAMSIZ) == 0)
         {
           /* Yes.. Set the new network addresses. */
@@ -348,7 +348,7 @@ void icmpv6_rnotify(FAR struct net_driver_s *dev, const net_ipv6addr_t draddr,
 
           /* And signal the waiting, returning success */
 
-          curr->rn_result = OK;
+          curr->rn_result = OKK;
           nxsem_post(&curr->rn_sem);
           break;
         }

@@ -366,7 +366,7 @@ int tm4c_bringup(void)
   /* Register the LED driver */
 
   ret = userled_lower_initialize("/dev/userleds");
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: userled_lower_initialize() failed: %d\n",
              ret);
@@ -375,5 +375,5 @@ int tm4c_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

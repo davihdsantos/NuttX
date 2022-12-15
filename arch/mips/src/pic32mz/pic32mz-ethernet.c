@@ -1115,7 +1115,7 @@ static int pic32mz_transmit(struct pic32mz_driver_s *priv)
   (void)wd_start(priv->pd_txtimeout, PIC32MZ_TXTIMEOUT, pic32mz_txtimeout_expiry,
                  1, (uint32_t)priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1146,7 +1146,7 @@ static int pic32mz_transmit(struct pic32mz_driver_s *priv)
 static int pic32mz_txpoll(struct net_driver_s *dev)
 {
   struct pic32mz_driver_s *priv = (struct pic32mz_driver_s *)dev->d_private;
-  int ret = OK;
+  int ret = OKK;
 
   /* If the polling resulted in data that should be sent out on the network,
    * the field d_len is set to a value > 0.
@@ -1732,7 +1732,7 @@ static void pic32mz_interrupt_work(void *arg)
       /* Receive Errors *****************************************************/
       /* RXOVFLW: Receive FIFO Over Flow Error.  RXOVFLW is set by the RXBM
        * Logic for an RX FIFO Overflow condition. It is cleared by either a
-       * Reset or CPU write of a ‘1’ to the CLR register.
+       * Reset or CPU write of a ï¿½1ï¿½ to the CLR register.
        */
 
       if ((status & ETH_INT_RXOVFLW) != 0)
@@ -1743,7 +1743,7 @@ static void pic32mz_interrupt_work(void *arg)
 
       /* RXBUFNA: Receive Buffer Not Available Interrupt.  This bit is set by
        * a RX Buffer Descriptor Overrun condition. It is cleared by either a
-       * Reset or a CPU write of a ‘1’ to the CLR register.
+       * Reset or a CPU write of a ï¿½1ï¿½ to the CLR register.
        */
 
       if ((status & ETH_INT_RXBUFNA) != 0)
@@ -1754,7 +1754,7 @@ static void pic32mz_interrupt_work(void *arg)
 
       /* RXBUSE: Receive BVCI Bus Error Interrupt.  This bit is set when the
        * RX DMA encounters a BVCI Bus error during a memory access. It is
-       * cleared by either a Reset or CPU write of a ‘1’ to the CLR register.
+       * cleared by either a Reset or CPU write of a ï¿½1ï¿½ to the CLR register.
        */
 
       if ((status & ETH_INT_RXBUSE) != 0)
@@ -1766,18 +1766,18 @@ static void pic32mz_interrupt_work(void *arg)
       /* Receive Normal Events **********************************************/
       /* RXACT: Receive Activity Interrupt.  This bit is set whenever RX packet
        * data is stored in the RXBM FIFO. It is cleared by either a Reset or CPU
-       * write of a ‘1’ to the CLR register.
+       * write of a ï¿½1ï¿½ to the CLR register.
        */
 
       /* PKTPEND: Packet Pending Interrupt.  This bit is set when the BUFCNT
-       * counter has a value other than ‘0’. It is cleared by either a Reset
+       * counter has a value other than ï¿½0ï¿½. It is cleared by either a Reset
        * or by writing the BUFCDEC bit to decrement the BUFCNT counter.
-       * Writing a ‘0’ or a ‘1’ has no effect.
+       * Writing a ï¿½0ï¿½ or a ï¿½1ï¿½ has no effect.
        */
 
       /* RXDONE: Receive Done Interrupt.  This bit is set whenever an RX packet
        * is successfully received. It is cleared by either a Reset or CPU
-       * write of a ‘1’ to the CLR register.
+       * write of a ï¿½1ï¿½ to the CLR register.
        */
 
       if ((status & ETH_INT_RXDONE) != 0)
@@ -1796,7 +1796,7 @@ static void pic32mz_interrupt_work(void *arg)
        * - Excessive defer abort
        * - Late collision abort
        * - Excessive collisions abort
-       * This bit is cleared by either a Reset or CPU write of a ‘1’ to the
+       * This bit is cleared by either a Reset or CPU write of a ï¿½1ï¿½ to the
        * CLR register.
        */
 
@@ -1808,7 +1808,7 @@ static void pic32mz_interrupt_work(void *arg)
 
       /* TXBUSE: Transmit BVCI Bus Error Interrupt. This bit is set when the
        * TX DMA encounters a BVCI Bus error during a memory access. It is
-       * cleared by either a Reset or CPU write of a ‘1’ to the CLR register.
+       * cleared by either a Reset or CPU write of a ï¿½1ï¿½ to the CLR register.
        */
 
       if ((status & ETH_INT_TXBUSE) != 0)
@@ -1820,7 +1820,7 @@ static void pic32mz_interrupt_work(void *arg)
       /* TXDONE: Transmit Done Interrupt.  This bit is set when the currently
        * transmitted TX packet completes transmission, and the Transmit
        * Status Vector is loaded into the first descriptor used for the
-       * packet. It is cleared by either a Reset or CPU write of a ‘1’ to
+       * packet. It is cleared by either a Reset or CPU write of a ï¿½1ï¿½ to
        * the CLR register.
        */
 
@@ -1837,15 +1837,15 @@ static void pic32mz_interrupt_work(void *arg)
       /* EWMARK: Empty Watermark Interrupt.  This bit is set when the RX
        * Descriptor Buffer Count is less than or equal to the value in the
        * RXEWM bit (ETHRXWM:0-7) value. It is cleared by BUFCNT bit
-       * (ETHSTAT:16-23) being incremented by hardware. Writing a ‘0’ or a ‘1’
+       * (ETHSTAT:16-23) being incremented by hardware. Writing a ï¿½0ï¿½ or a ï¿½1ï¿½
        * has no effect.
        */
 
       /* FWMARK: Full Watermark Interrupt.  This bit is set when the RX
        * escriptor Buffer Count is greater than or equal to the value in the
        * RXFWM bit (ETHRXWM:16-23) field. It is cleared by writing the BUFCDEC
-       * (ETHCON1:0) bit to decrement the BUFCNT counter. Writing a ‘0’ or a
-       * ‘1’ has no effect.
+       * (ETHCON1:0) bit to decrement the BUFCNT counter. Writing a ï¿½0ï¿½ or a
+       * ï¿½1ï¿½ has no effect.
        */
     }
 
@@ -1925,7 +1925,7 @@ static int pic32mz_interrupt(int irq, void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->pd_irqwork, pic32mz_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2387,7 +2387,7 @@ static int pic32mz_ifup(struct net_driver_s *dev)
   up_enable_irq(PIC32MZ_IRQ_ETH);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2430,7 +2430,7 @@ static int pic32mz_ifdown(struct net_driver_s *dev)
   pic32mz_ethreset(priv);
   priv->pd_ifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2509,7 +2509,7 @@ static int pic32mz_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pd_pollwork, pic32mz_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2538,7 +2538,7 @@ static int pic32mz_addmac(struct net_driver_s *dev, const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
 #warning "Not implemented"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2568,7 +2568,7 @@ static int pic32mz_rmmac(struct net_driver_s *dev, const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
 #warning "Not implemented"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2757,7 +2757,7 @@ static inline int pic32mz_phyreset(uint8_t phyaddr)
       phyreg = pic32mz_phyread(phyaddr, MII_MCR);
       if ((phyreg & MII_MCR_RESET) == 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -2804,7 +2804,7 @@ static inline int pic32mz_phyautoneg(uint8_t phyaddr)
         {
           /* Yes.. return success */
 
-          return OK;
+          return OKK;
         }
     }
 
@@ -2874,7 +2874,7 @@ static int pic32mz_phymode(uint8_t phyaddr, uint8_t mode)
         {
           /* Yes.. return success */
 
-          return OK;
+          return OKK;
         }
 #else
       phyreg = pic32mz_phyread(phyaddr, MII_MSR);
@@ -2882,7 +2882,7 @@ static int pic32mz_phymode(uint8_t phyaddr, uint8_t mode)
         {
           /* Yes.. return success */
 
-          return OK;
+          return OKK;
         }
 #endif
     }
@@ -3187,7 +3187,7 @@ static inline int pic32mz_phyinit(struct pic32mz_driver_s *priv)
 static inline int pic32mz_phyinit(struct pic32mz_driver_s *priv)
 {
   priv->pd_mode = PIC32MZ_MODE_DEFLT;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -3419,7 +3419,7 @@ static inline int pic32mz_ethinitialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->pd_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

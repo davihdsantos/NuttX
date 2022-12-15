@@ -134,7 +134,7 @@ int tms570_esm_initialize(void)
 
   putreg32(0, TMS570_ESM_IESR1);
   putreg32(0, TMS570_ESM_IESR4);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -157,5 +157,5 @@ int tms570_esm_interrupt(int irq, void *context, FAR void *arg)
 
   _err("ERROR: ESM Interrupt. PC: %08x\n", CURRENT_REGS[REG_PC]);
   PANIC();
-  return OK; /* To keep the compiler happy */
+  return OKK; /* To keep the compiler happy */
 }

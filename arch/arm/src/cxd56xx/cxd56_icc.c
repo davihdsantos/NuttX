@@ -201,7 +201,7 @@ static int icc_irqhandler(int cpuid, uint32_t word[2])
       /* Nobody waits this message... */
 
       iccerr("nobody waits %08x %08x\n", word[0], word[1]);
-      return OK;
+      return OKK;
     }
 
   /* If handler has been registered, then call it. */
@@ -212,9 +212,9 @@ static int icc_irqhandler(int cpuid, uint32_t word[2])
 
       ret = priv->u.handler(cpuid, protoid, word[0] & 0xffffff, word[1],
                             priv->userdata);
-      if (ret == OK)
+      if (ret == OKK)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -226,7 +226,7 @@ static int icc_irqhandler(int cpuid, uint32_t word[2])
       if (!priv)
         {
           iccerr("nobody waits from CPU %d\n", cpuid);
-          return OK;
+          return OKK;
         }
     }
 
@@ -261,7 +261,7 @@ static int icc_irqhandler(int cpuid, uint32_t word[2])
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 static int icc_sighandler(int cpuid, int protoid, uint32_t pdata,
@@ -274,7 +274,7 @@ static int icc_sighandler(int cpuid, int protoid, uint32_t pdata,
       /* Nobody waits this message... */
 
       iccerr("nobody waits %08x %08x\n", word[0], word[1]);
-      return OK;
+      return OKK;
     }
 
   iccinfo("Caught signal\n");
@@ -290,7 +290,7 @@ static int icc_sighandler(int cpuid, int protoid, uint32_t pdata,
       iccinfo("Call signal handler with No %d.\n", signo);
       priv->u.sighandler(signo, sigdata, data, priv->userdata);
     }
-  return OK;
+  return OKK;
 }
 
 static int icc_msghandler(int cpuid, int protoid, uint32_t pdata,
@@ -314,7 +314,7 @@ static int icc_recv(FAR struct iccdev_s *priv, FAR iccmsg_t *msg, int32_t ms)
 {
   FAR struct iccreq_s *req;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   if (ms)
     {
@@ -394,7 +394,7 @@ int cxd56_iccregisterhandler(int protoid, cxd56_icchandler_t handler,
 {
   FAR struct iccdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   flags = enter_critical_section();
   priv = icc_getprotocol(protoid);
@@ -417,7 +417,7 @@ int cxd56_iccregistersighandler(int cpuid, cxd56_iccsighandler_t handler,
 {
   FAR struct iccdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   flags = enter_critical_section();
   priv = icc_getcpu(cpuid);
@@ -535,7 +535,7 @@ int cxd56_iccnotify(int cpuid, int signo, FAR void *sigdata)
   priv->signo   = signo;
   priv->sigdata = sigdata;
 
-  return OK;
+  return OKK;
 }
 
 int cxd56_iccinit(int protoid)
@@ -549,7 +549,7 @@ int cxd56_iccinit(int protoid)
 
   if (g_protocol[protoid])
     {
-      return OK;
+      return OKK;
     }
 
   priv = icc_devnew();
@@ -559,7 +559,7 @@ int cxd56_iccinit(int protoid)
     }
   g_protocol[protoid] = priv;
 
-  return OK;
+  return OKK;
 }
 
 int cxd56_iccinitmsg(int cpuid)
@@ -573,7 +573,7 @@ int cxd56_iccinitmsg(int cpuid)
 
   if (g_cpumsg[cpuid])
     {
-      return OK;
+      return OKK;
     }
 
   priv = icc_devnew();
@@ -583,7 +583,7 @@ int cxd56_iccinitmsg(int cpuid)
     }
   g_cpumsg[cpuid] = priv;
 
-  return OK;
+  return OKK;
 }
 
 void cxd56_iccuninit(int protoid)

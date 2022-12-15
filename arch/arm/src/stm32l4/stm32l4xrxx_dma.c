@@ -644,7 +644,7 @@ static int stm32l4_dma12_interrupt(int irq, void *context, FAR void *arg)
   else
     {
       DEBUGPANIC();
-      return OK;
+      return OKK;
     }
 
   /* Get the channel structure from the stream and controller numbers */
@@ -668,7 +668,7 @@ static int stm32l4_dma12_interrupt(int irq, void *context, FAR void *arg)
 
   dmabase_putreg(dmachan, STM32L4_DMA_IFCR_OFFSET, isr);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

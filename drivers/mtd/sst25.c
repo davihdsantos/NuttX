@@ -347,12 +347,12 @@ static inline int sst25_readid(struct sst25_dev_s *priv)
            case SST25_JEDEC_VF032_CAPACITY:
               priv->sectorshift = SST25_VF032_SECTOR_SHIFT;
               priv->nsectors    = SST25_VF032_NSECTORS;
-              return OK;
+              return OKK;
 
            case SST25_JEDEC_VF016_CAPACITY:
               priv->sectorshift = SST25_VF016_SECTOR_SHIFT;
               priv->nsectors    = SST25_VF016_NSECTORS;
-              return OK;
+              return OKK;
 
             /* Support for this part is not implemented yet */
 
@@ -539,7 +539,7 @@ static inline int sst25_chiperase(struct sst25_dev_s *priv)
   sst25_cmd(priv, SST25_CE);
 
   finfo("Return: OK\n");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1126,7 +1126,7 @@ static int sst25_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 #endif
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -1204,7 +1204,7 @@ FAR struct mtd_dev_s *sst25_initialize(FAR struct spi_dev_s *dev)
       /* Identify the FLASH chip and get its capacity */
 
       ret = sst25_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

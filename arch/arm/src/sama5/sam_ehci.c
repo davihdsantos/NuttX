@@ -1012,7 +1012,7 @@ static int sam_qh_foreach(struct sam_qh_s *qh, uint32_t **bp, foreach_qh_t handl
       qh = next;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1093,7 +1093,7 @@ static int sam_qtd_foreach(struct sam_qh_s *qh, foreach_qtd_t handler, void *arg
       qtd = next;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1119,7 +1119,7 @@ static int sam_qtd_discard(struct sam_qtd_s *qtd, uint32_t **bp, void *arg)
   /* Then free the qTD */
 
   sam_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1176,7 +1176,7 @@ static int sam_qtd_invalidate(struct sam_qtd_s *qtd, uint32_t **bp, void *arg)
 
   up_invalidate_dcache((uintptr_t)&qtd->hw,
                        (uintptr_t)&qtd->hw + sizeof(struct ehci_qtd_s));
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1228,7 +1228,7 @@ static int sam_qtd_flush(struct sam_qtd_s *qtd, uint32_t **bp, void *arg)
                        (uintptr_t)&qtd->hw + sizeof(struct ehci_qtd_s));
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1341,7 +1341,7 @@ static void sam_qh_print(struct sam_qh_s *qh)
 static int sam_qtd_dump(struct sam_qtd_s *qtd, uint32_t **bp, void *arg)
 {
   sam_qtd_print(qtd);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1418,7 +1418,7 @@ static int sam_ioc_setup(struct sam_rhport_s *rhport, struct sam_epinfo_s *epinf
       epinfo->callback = NULL;   /* No asynchronous callback */
       epinfo->arg      = NULL;
 #endif
-      ret              = OK;     /* We are good to go */
+      ret              = OKK;     /* We are good to go */
     }
 
   leave_critical_section(flags);
@@ -1703,7 +1703,7 @@ static int sam_qtd_addbpl(struct sam_qtd_s *qtd, const void *buffer, size_t bufl
       return -EFBIG;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2133,7 +2133,7 @@ static int sam_async_setup(struct sam_rhport_s *rhport,
   /* Add the new QH to the head of the asynchronous queue list */
 
   sam_qh_enqueue(&g_asynchead, qh);
-  return OK;
+  return OKK;
 
   /* Clean-up after an error */
 
@@ -2270,7 +2270,7 @@ static int sam_intr_setup(struct sam_rhport_s *rhport,
 
   regval |= EHCI_USBCMD_PSEN;
   sam_putreg(regval, &HCOR->usbcmd);
-  return OK;
+  return OKK;
 
   /* Clean-up after an error */
 
@@ -2405,7 +2405,7 @@ static inline int sam_ioc_async_setup(struct sam_rhport_s *rhport,
       epinfo->result   = -EBUSY;   /* Transfer in progress */
       epinfo->callback = callback; /* Asynchronous callback */
       epinfo->arg      = arg;      /* Argument that accompanies the callback */
-      ret              = OK;       /* We are good to go */
+      ret              = OKK;       /* We are good to go */
     }
 
   leave_critical_section(flags);
@@ -2452,7 +2452,7 @@ static void sam_asynch_completion(struct sam_epinfo_s *epinfo)
 
   epinfo->callback = NULL;
   epinfo->arg      = NULL;
-  epinfo->result   = OK;
+  epinfo->result   = OKK;
   epinfo->iocwait  = false;
 
   /* Then perform the callback.  Provide the number of bytes successfully
@@ -2516,7 +2516,7 @@ static int sam_qtd_ioccheck(struct sam_qtd_s *qtd, uint32_t **bp, void *arg)
   /* Release this QH by returning it to the free list */
 
   sam_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2572,7 +2572,7 @@ static int sam_qh_ioccheck(struct sam_qh_s *qh, uint32_t **bp, void *arg)
        * zero to visit the next QH in the list.
        */
       *bp = &qh->hw.hlp;
-      return OK;
+      return OKK;
     }
 
   /* Remove all active, attached qTD structures from the inactive QH */
@@ -2607,7 +2607,7 @@ static int sam_qh_ioccheck(struct sam_qh_s *qh, uint32_t **bp, void *arg)
           /* Report success */
 
           epinfo->status  = 0;
-          epinfo->result  = OK;
+          epinfo->result  = OKK;
         }
       else
         {
@@ -2675,7 +2675,7 @@ static int sam_qh_ioccheck(struct sam_qh_s *qh, uint32_t **bp, void *arg)
       *bp = &qh->hw.hlp;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2712,7 +2712,7 @@ static int sam_qtd_cancel(struct sam_qtd_s *qtd, uint32_t **bp, void *arg)
   /* Release this QH by returning it to the free list */
 
   sam_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2746,7 +2746,7 @@ static int sam_qh_cancel(struct sam_qh_s *qh, uint32_t **bp, void *arg)
     {
       /* No... keep looking */
 
-      return OK;
+      return OKK;
     }
 
   /* Disable both the asynchronous and period schedules */
@@ -3221,7 +3221,7 @@ static int sam_ehci_tophalf(int irq, FAR void *context, FAR void *arg)
       sam_putreg(usbsts & EHCI_INT_ALLINTS, &HCOR->usbsts);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3315,7 +3315,7 @@ static int sam_wait(FAR struct usbhost_connection_s *conn,
 
               usbhost_vtrace2(EHCI_VTRACE2_MONWAKEUP,
                               rhpndx + 1, rhport->connected);
-              return OK;
+              return OKK;
             }
         }
 
@@ -3336,7 +3336,7 @@ static int sam_wait(FAR struct usbhost_connection_s *conn,
 
           usbhost_vtrace2(EHCI_VTRACE2_MONWAKEUP,
                           connport->port + 1, connport->connected);
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -3597,7 +3597,7 @@ static int sam_rh_enumerate(FAR struct usbhost_connection_s *conn,
       return -EPERM;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int sam_enumerate(FAR struct usbhost_connection_s *conn,
@@ -3688,7 +3688,7 @@ static int sam_ep0configure(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
   epinfo->maxpacket = maxpacketsize;
 
   sam_givesem(&g_ehci.exclsem);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3773,7 +3773,7 @@ static int sam_epalloc(FAR struct usbhost_driver_s *drvr,
    */
 
   *ep = (usbhost_ep_t)epinfo;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3807,7 +3807,7 @@ static int sam_epfree(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
   /* Free the container */
 
   kmm_free(epinfo);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3857,7 +3857,7 @@ static int sam_alloc(FAR struct usbhost_driver_s *drvr,
   if (*buffer)
     {
       *maxlen = SAMA5_EHCI_BUFSIZE;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -3893,7 +3893,7 @@ static int sam_free(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffer)
   /* No special action is require to free the transfer/descriptor buffer memory */
 
   kmm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3969,7 +3969,7 @@ static int sam_iofree(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffer)
   /* No special action is require to free the I/O buffer memory */
 
   kumm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4038,7 +4038,7 @@ static int sam_ctrlin(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
   /* Set the request for the IOC event well BEFORE initiating the transfer. */
 
   ret = sam_ioc_setup(rhport, ep0info);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4132,7 +4132,7 @@ static ssize_t sam_transfer(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep,
   /* Set the request for the IOC event well BEFORE initiating the transfer. */
 
   ret = sam_ioc_setup(rhport, epinfo);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4237,7 +4237,7 @@ static int sam_asynch(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep,
   /* Set the request for the callback well BEFORE initiating the transfer. */
 
   ret = sam_ioc_async_setup(rhport, epinfo, callback, arg);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4278,7 +4278,7 @@ static int sam_asynch(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep,
   /* The transfer is in progress */
 
   sam_givesem(&g_ehci.exclsem);
-  return OK;
+  return OKK;
 
 errout_with_callback:
   epinfo->callback = NULL;
@@ -4361,7 +4361,7 @@ static int sam_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
   if (!iocwait)
 #endif
     {
-      ret = OK;
+      ret = OKK;
       goto errout_with_sem;
     }
 
@@ -4388,7 +4388,7 @@ static int sam_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
             {
               /* Claim that we successfully cancelled the transfer */
 
-              ret = OK;
+              ret = OKK;
               goto exit_terminate;
             }
         }
@@ -4409,7 +4409,7 @@ static int sam_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
                * cancelled the transfer.
                */
 
-              ret = OK;
+              ret = OKK;
               goto exit_terminate;
             }
         }
@@ -4522,7 +4522,7 @@ static int sam_connect(FAR struct usbhost_driver_s *drvr,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -4938,18 +4938,18 @@ FAR struct usbhost_connection_s *sam_ehci_initialize(int controller)
   /* "In order to initialize the host controller, software should perform the
    *  following steps:
    *
-   *  • "Program the CTRLDSSEGMENT register with 4-Gigabyte segment where all
+   *  ï¿½ "Program the CTRLDSSEGMENT register with 4-Gigabyte segment where all
    *     of the interface data structures are allocated. [64-bit mode]
-   *  • "Write the appropriate value to the USBINTR register to enable the
+   *  ï¿½ "Write the appropriate value to the USBINTR register to enable the
    *     appropriate interrupts.
-   *  • "Write the base address of the Periodic Frame List to the PERIODICLIST
+   *  ï¿½ "Write the base address of the Periodic Frame List to the PERIODICLIST
    *     BASE register. If there are no work items in the periodic schedule,
    *     all elements of the Periodic Frame List should have their T-Bits set
    *     to a one.
-   *  • "Write the USBCMD register to set the desired interrupt threshold,
+   *  ï¿½ "Write the USBCMD register to set the desired interrupt threshold,
    *     frame list size (if applicable) and turn the host controller ON via
    *     setting the Run/Stop bit.
-   *  •  Write a 1 to CONFIGFLAG register to route all ports to the EHCI controller
+   *  ï¿½  Write a 1 to CONFIGFLAG register to route all ports to the EHCI controller
    *     ...
    *
    * "At this point, the host controller is up and running and the port registers

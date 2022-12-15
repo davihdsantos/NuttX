@@ -97,7 +97,7 @@ int stm32_max7219init(FAR const char *devpath)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_LEDS_MAX7219 */

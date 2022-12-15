@@ -325,7 +325,7 @@ static void twi_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -522,7 +522,7 @@ static int twi_wait(struct twi_dev_s *priv, unsigned int size)
        * transfer has failed and should be repeated.
        */
 
-     if (priv->result == OK)
+     if (priv->result == OKK)
        {
           priv->result = -EIO;
        }
@@ -754,7 +754,7 @@ static int twi_interrupt(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -939,7 +939,7 @@ static int twi_transfer(FAR struct i2c_master_s *dev,
       if (((sr & TWIHS_INT_SDA) == 0) || ((sr & TWIHS_INT_SCL) == 0))
         {
           ret = twi_reset_internal(&priv->dev);
-          if (ret != OK)
+          if (ret != OKK)
             {
               goto errout;
             }
@@ -1093,7 +1093,7 @@ static int twi_reset_internal(FAR struct i2c_master_s *dev)
   /* Re-initialize the port hardware */
 
   twi_hw_initialize(priv, priv->frequency);
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -1514,7 +1514,7 @@ int sam_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAMV7_TWIHS0 || CONFIG_SAMV7_TWIHS1 || CONFIG_SAMV7_TWIHS2 */

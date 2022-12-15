@@ -335,7 +335,7 @@ static pthread_addr_t work_usrthread(pthread_addr_t arg)
     }
 
 #ifdef CONFIG_BUILD_PROTECTED
-  return OK; /* To keep some compilers happy */
+  return OKK; /* To keep some compilers happy */
 #else
   return NULL; /* To keep some compilers happy */
 #endif

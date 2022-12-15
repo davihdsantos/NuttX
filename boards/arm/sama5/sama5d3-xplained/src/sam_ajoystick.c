@@ -245,7 +245,7 @@ static int ajoy_sample(FAR const struct ajoy_lowerhalf_s *lower,
 
   sample->as_buttons = ajoy_buttons(lower);
   iinfo("Returning: %02x\n", AJOY_SUPPORTED);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -385,7 +385,7 @@ static int ajoy_interrupt(int irq, FAR void *context, FAR void *arg)
       g_ajoyhandler(&g_ajoylower, g_ajoyarg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

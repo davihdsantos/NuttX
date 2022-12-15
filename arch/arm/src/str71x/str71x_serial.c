@@ -570,7 +570,7 @@ static int up_setup(struct uart_dev_s *dev)
 
   priv->ier = up_serialin(priv, STR71X_UART_IER_OFFSET);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -611,7 +611,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, up_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the UART
@@ -699,7 +699,7 @@ static int up_interrupt(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -716,7 +716,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {

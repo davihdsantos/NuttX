@@ -111,7 +111,7 @@ void pthread_exit(FAR void *exit_value)
   /* Complete pending join operations */
 
   status = pthread_completejoin(getpid(), exit_value);
-  if (status != OK)
+  if (status != OKK)
     {
       /* Assume that the join completion failured because this
        * not really a pthread.  Exit by calling exit().

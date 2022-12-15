@@ -81,7 +81,7 @@
 
 int syslog_initialize(enum syslog_init_e phase)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #if defined(CONFIG_SYSLOG_CHAR)
   if (phase == SYSLOG_INIT_LATE)

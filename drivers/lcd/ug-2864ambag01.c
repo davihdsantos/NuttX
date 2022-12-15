@@ -492,7 +492,7 @@ static int ug2864ambag01_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_
 
   if (pixlen <= 0 || row > UG2864AMBAG01_YRES)
     {
-      return OK;
+      return OKK;
     }
 
   /* Perform coordinate conversion for reverse landscape mode.
@@ -650,7 +650,7 @@ static int ug2864ambag01_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_
 
   SPI_SELECT(priv->spi, SPIDEV_DISPLAY(0), false);
   ug2864ambag01_unlock(priv->spi);
-  return OK;
+  return OKK;
 }
 #else
 #  error "Configuration not implemented"
@@ -814,7 +814,7 @@ static int ug2864ambag01_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buf
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 #else
 #  error "Configuration not implemented"
@@ -835,7 +835,7 @@ static int ug2864ambag01_getvideoinfo(FAR struct lcd_dev_s *dev,
   lcdinfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
           g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres, g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -852,7 +852,7 @@ static int ug2864ambag01_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int pl
   DEBUGASSERT(pinfo && planeno == 0);
   lcdinfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -913,7 +913,7 @@ static int ug2864ambag01_setpower(struct lcd_dev_s *dev, int power)
 
   SPI_SELECT(priv->spi, SPIDEV_DISPLAY(0), false);
   ug2864ambag01_unlock(priv->spi);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -987,7 +987,7 @@ static int ug2864ambag01_setcontrast(struct lcd_dev_s *dev, unsigned int contras
 
   SPI_SELECT(priv->spi, SPIDEV_DISPLAY(0), false);
   ug2864ambag01_unlock(priv->spi);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************

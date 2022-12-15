@@ -125,7 +125,7 @@ int zkit_can_setup(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 #else
   return -ENODEV;
 #endif

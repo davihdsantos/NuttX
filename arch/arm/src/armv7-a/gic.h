@@ -658,7 +658,7 @@ static inline int arm_cpu_sgi(int sgi, unsigned int cpuset)
 #endif
 
   putreg32(regval, GIC_ICDSGIR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

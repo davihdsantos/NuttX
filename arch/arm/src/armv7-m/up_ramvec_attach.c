@@ -101,7 +101,7 @@ int up_ramvec_attach(int irq, up_vector_t vector)
 
       g_ram_vectors[irq] = vector;
       leave_critical_section(flags);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

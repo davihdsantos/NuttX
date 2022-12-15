@@ -208,7 +208,7 @@ static int pwm_open(FAR struct file *filep)
   /* Save the new open count on success */
 
   upper->crefs = tmp;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nxsem_post(&upper->exclsem);
@@ -265,7 +265,7 @@ static int pwm_close(FAR struct file *filep)
       lower->ops->shutdown(lower);
     }
 
-  ret = OK;
+  ret = OKK;
   nxsem_post(&upper->exclsem);
 
 errout:
@@ -315,7 +315,7 @@ static int pwm_start(FAR struct pwm_upperhalf_s *upper, unsigned int oflags)
 {
   FAR struct pwm_lowerhalf_s *lower;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(upper != NULL);
   lower = upper->dev;
@@ -348,7 +348,7 @@ static int pwm_start(FAR struct pwm_upperhalf_s *upper, unsigned int oflags)
        * successfully.
        */
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Should we wait for the pulse output to complete?  Loop in
            * in case the wakeup form nxsem_wait() is a false alarm.
@@ -362,7 +362,7 @@ static int pwm_start(FAR struct pwm_upperhalf_s *upper, unsigned int oflags)
                */
 
               int tmp = nxsem_wait(&upper->waitsem);
-              DEBUGASSERT(tmp == OK || tmp == -EINTR);
+              DEBUGASSERT(tmp == OKK || tmp == -EINTR);
             }
         }
       else
@@ -383,7 +383,7 @@ static int pwm_start(FAR struct pwm_upperhalf_s *upper, unsigned int oflags)
 static int pwm_start(FAR struct pwm_upperhalf_s *upper, unsigned int oflags)
 {
   FAR struct pwm_lowerhalf_s *lower;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(upper != NULL);
   lower = upper->dev;
@@ -401,7 +401,7 @@ static int pwm_start(FAR struct pwm_upperhalf_s *upper, unsigned int oflags)
        * successfully.
        */
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Indicate that the pulse train has started */
 

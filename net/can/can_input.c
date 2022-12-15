@@ -154,7 +154,7 @@ const uint8_t len_to_can_dlc[65] =
 int can_input(struct net_driver_s *dev)
 {
   FAR struct can_conn_s *conn = NULL;
-  int ret = OK;
+  int ret = OKK;
 
   do
     {

@@ -150,7 +150,7 @@ static int sam_interrupt(int irq, void *context, FAR void *arg)
         {
           /* No?  Then return and continue processing on the next interrupt. */
 
-          return OK;
+          return OKK;
         }
 
       /* As required by the FIPS PUB (Federal Information Processing Standard
@@ -222,7 +222,7 @@ static int sam_interrupt(int irq, void *context, FAR void *arg)
           /* And wakeup the waiting read thread. */
 
           nxsem_post(&g_trngdev.waitsem);
-          return OK;
+          return OKK;
         }
     }
 }
@@ -388,7 +388,7 @@ static int sam_rng_initialize(void)
   /* Enable the TRNG interrupt at the AIC */
 
   up_enable_irq(SAM_IRQ_TRNG);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

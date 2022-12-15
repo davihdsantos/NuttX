@@ -372,7 +372,7 @@ static int spwm_start(FAR struct spwm_s *spwm)
 #  error
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -402,7 +402,7 @@ static int spwm_stop(FAR struct spwm_s *spwm)
 #  error
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_NUCLEOF334R8_SPWM_USE_HRTIM1
@@ -553,7 +553,7 @@ static void hrtim_master_handler(void)
 static int spwm_hrtim_setup(FAR struct spwm_s *spwm)
 {
   FAR struct hrtim_dev_s *pwm = NULL;
-  int ret = OK;
+  int ret = OKK;
 
   /* Configure HRTIM */
 
@@ -654,7 +654,7 @@ static int spwm_hrtim_start(FAR struct spwm_s *spwm)
 
   HRTIM_TIM_ENABLE(hrtim, timers, true);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -694,7 +694,7 @@ static int spwm_hrtim_stop(FAR struct spwm_s *spwm)
 
   HRTIM_TIM_ENABLE(hrtim, timers, false);
 
-  return OK;
+  return OKK;
 }
 
 #endif  /* CONFIG_NUCLEOF334R8_SPWM_USE_HRTIM1 */
@@ -742,7 +742,7 @@ static int spwm_tim6_setup(FAR struct spwm_s *spwm)
   FAR struct stm32_tim_dev_s *tim = NULL;
   uint64_t freq = 0;
   uint32_t per = 0;
-  int ret = OK;
+  int ret = OKK;
 
   /* Get TIM6 interface */
 
@@ -814,7 +814,7 @@ static int spwm_tim6_start(FAR struct spwm_s *spwm)
   up_enable_irq(STM32_IRQ_TIM6);
   STM32_TIM_ENABLEINT(tim, BTIM_DIER_UIE);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -830,7 +830,7 @@ static int spwm_tim6_stop(FAR struct spwm_s *spwm)
   up_disable_irq(STM32_IRQ_TIM6);
   STM32_TIM_DISABLEINT(tim, BTIM_DIER_UIE);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -840,7 +840,7 @@ static int spwm_tim6_stop(FAR struct spwm_s *spwm)
 static int spwm_tim1_setup(FAR struct spwm_s *spwm)
 {
   FAR struct stm32_pwm_dev_s *pwm = NULL;
-  int ret = OK;
+  int ret = OKK;
 
   /* Get TIM1 PWM interface */
 
@@ -909,7 +909,7 @@ static int spwm_tim1_start(FAR struct spwm_s *spwm)
 
   PWM_TIM_ENABLE(pwm, true);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -937,7 +937,7 @@ static int spwm_tim1_stop(FAR struct spwm_s *spwm)
 
   PWM_TIM_ENABLE(pwm, false);
 
-  return OK;
+  return OKK;
 }
 
 #endif  /* CONFIG_NUCLEOF334R8_SPWM_USE_TIM1 */
@@ -948,7 +948,7 @@ static int spwm_tim1_stop(FAR struct spwm_s *spwm)
 
 static int spwm_setup(FAR struct spwm_s *spwm)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #if defined(CONFIG_NUCLEOF334R8_SPWM_USE_HRTIM1)
   /* HRTIM setup */
@@ -999,7 +999,7 @@ errout:
 int spwm_main(int argc, char *argv[])
 {
   FAR struct spwm_s *spwm = NULL;
-  int ret = OK;
+  int ret = OKK;
   int i = 0;
 
   spwm = &g_spwm;

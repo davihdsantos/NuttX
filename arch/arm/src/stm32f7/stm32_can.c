@@ -720,7 +720,7 @@ static int stm32can_setup(FAR struct can_dev_s *dev)
   up_enable_irq(priv->canrx[0]);
   up_enable_irq(priv->canrx[1]);
   up_enable_irq(priv->cantx);
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************
@@ -885,7 +885,7 @@ static int stm32can_ioctl(FAR struct can_dev_s *dev, int cmd,
           brp          = ((regval & CAN_BTR_BRP_MASK) >> CAN_BTR_BRP_SHIFT) + 1;
           bt->bt_baud  = STM32_PCLK1_FREQUENCY /
                          (brp * (bt->bt_tseg1 + bt->bt_tseg2 + 1));
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -1004,7 +1004,7 @@ static int stm32can_ioctl(FAR struct can_dev_s *dev, int cmd,
 
           bm->bm_loopback = ((regval & CAN_BTR_LBKM) == CAN_BTR_LBKM);
           bm->bm_silent   = ((regval & CAN_BTR_SILM) == CAN_BTR_SILM);
-          ret = OK;
+          ret = OKK;
           break;
         }
 
@@ -1383,7 +1383,7 @@ static int stm32can_send(FAR struct can_dev_s *dev,
   stm32can_putreg(priv, STM32_CAN_TIR_OFFSET(txmb), regval);
 
   stm32can_dumpmbregs(priv, "After send");
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************
@@ -1481,7 +1481,7 @@ static int stm32can_rxinterrupt(FAR struct can_dev_s *dev, int rxmb)
   if (npending < 1)
     {
       canwarn("WARNING: No messages pending\n");
-      return OK;
+      return OKK;
     }
 
   if (rxmb == 0)
@@ -1679,7 +1679,7 @@ static int stm32can_txinterrupt(int irq, FAR void *context, FAR void *arg)
       (void)can_txdone(dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************
@@ -1818,7 +1818,7 @@ static int stm32can_bittiming(FAR struct stm32_can_s *priv)
 #endif
 
   stm32can_putreg(priv, STM32_CAN_BTR_OFFSET, tmp);
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************
@@ -1871,7 +1871,7 @@ static int stm32can_enterinitmode(FAR struct stm32_can_s *priv)
       return -ETIMEDOUT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************
@@ -1921,7 +1921,7 @@ static int stm32can_exitinitmode(FAR struct stm32_can_s *priv)
       return -ETIMEDOUT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************
@@ -2087,7 +2087,7 @@ static int stm32can_filterinit(FAR struct stm32_can_s *priv)
   regval  = stm32can_getfreg(priv, STM32_CAN_FMR_OFFSET);
   regval &= ~CAN_FMR_FINIT;
   stm32can_putfreg(priv, STM32_CAN_FMR_OFFSET, regval);
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************

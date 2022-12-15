@@ -487,7 +487,7 @@ s32k1xx_set_sysclk_configuration(enum scg_system_clock_mode_e mode,
   uint32_t busfreq_mul  = (uint32_t)config->divcore * (uint32_t)config->divbus;
   uint32_t slowfreq_mul = (uint32_t)config->divcore * (uint32_t)config->divslow;
   uint32_t regval;
-  int ret               = OK;
+  int ret               = OKK;
 
   DEBUGASSERT(mode != SCG_SYSTEM_CLOCK_MODE_CURRENT);
 
@@ -604,7 +604,7 @@ s32k1xx_transition_systemclock(const struct scg_system_clock_config_s *cfg)
 {
   enum scg_system_clock_mode_e run_mode;
   uint32_t timeout;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(cfg != NULL && cfg->src != SCG_SYSTEM_CLOCK_SRC_NONE);
 
@@ -619,7 +619,7 @@ s32k1xx_transition_systemclock(const struct scg_system_clock_config_s *cfg)
   /* Update run mode configuration */
 
   ret = s32k1xx_set_sysclk_configuration(run_mode, cfg);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Wait for system clock to transition.
        *
@@ -670,7 +670,7 @@ static int s32k1xx_firc_config(bool enable,
 {
   uint32_t regval;
   int32_t timeout;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(firccfg != NULL);
 
@@ -698,7 +698,7 @@ static int s32k1xx_firc_config(bool enable,
 
   /* Configure FIRC. */
 
-  if (enable && (ret == OK))
+  if (enable && (ret == OKK))
     {
       /* Now start to set up FIRC clock. */
 
@@ -772,7 +772,7 @@ static int s32k1xx_firc_config(bool enable,
 static int s32k11_firc_clocksource(void)
 {
   struct scg_system_clock_config_s firccfg;
-  int ret = OK;
+  int ret = OKK;
 
   /* If the current system clock source is not FIRC:
    * 1. Enable FIRC (if it's not enabled)
@@ -792,7 +792,7 @@ static int s32k11_firc_clocksource(void)
 
       /* FIRC is enabled, transition the system clock source to FIRC. */
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           firccfg.src     = SCG_SYSTEM_CLOCK_SRC_FIRC;
           firccfg.divcore = g_tmp_sysclk[TMP_FIRC_CLK][TMP_SYS_DIV];
@@ -825,7 +825,7 @@ static int s32k1xx_sirc_config(bool enable,
 {
   uint32_t regval;
   uint32_t timeout;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(sirccfg != NULL);
 
@@ -853,7 +853,7 @@ static int s32k1xx_sirc_config(bool enable,
 
   /* Configure SIRC. */
 
-  if (enable  && (ret == OK))
+  if (enable  && (ret == OKK))
     {
       /* Now start to set up SIRC clock. */
 
@@ -936,7 +936,7 @@ static int s32k1xx_sosc_config(bool enable,
 {
   uint32_t regval;
   uint32_t timeout;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(sosccfg != NULL);
 
@@ -964,7 +964,7 @@ static int s32k1xx_sosc_config(bool enable,
 
   /* Configure the SOSC */
 
-  if (enable && (ret == OK))
+  if (enable && (ret == OKK))
     {
       /* Now start to set up OSC clock */
 
@@ -1068,7 +1068,7 @@ static int s32k1xx_spll_config(bool enable,
   uint32_t regval;
   uint32_t srcfreq;
   uint32_t timeout;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(spllcfg != NULL);
 
@@ -1096,7 +1096,7 @@ static int s32k1xx_spll_config(bool enable,
 
   /* Configure SPLL */
 
-  if (enable && (ret == OK))
+  if (enable && (ret == OKK))
     {
       /* Get clock source frequency. */
 
@@ -1196,18 +1196,18 @@ static int s32k1xx_configure_scgmodules(const struct scg_config_s *scgcfg)
 {
   struct scg_system_clock_config_s sysclkcfg;
   const struct scg_system_clock_config_s *next;
-  int ret = OK;
+  int ret = OKK;
 
   /* Configure all clock sources that are different from the current system
    * clock source FIRC (SIRC, SOSC, SPLL).
    */
 
   ret = s32k1xx_sirc_config(scgcfg->sirc.initialize, &scgcfg->sirc);
-  if (ret == OK)
+  if (ret == OKK)
     {
       ret = s32k1xx_sosc_config(scgcfg->sosc.initialize, &scgcfg->sosc);
 #ifdef CONFIG_S32K1XX_HAVE_SPLL
-      if (ret == OK)
+      if (ret == OKK)
         {
           ret = s32k1xx_spll_config(scgcfg->spll.initialize, &scgcfg->spll);
         }
@@ -1244,7 +1244,7 @@ static int s32k1xx_configure_scgmodules(const struct scg_config_s *scgcfg)
         break;
     }
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* The current system clock source is FIRC.  Verify whether the next
        * system clock source is FIRC.
@@ -1296,13 +1296,13 @@ static int s32k1xx_configure_scgmodules(const struct scg_config_s *scgcfg)
 
           /* Transitioned to a temporary system clock source. */
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Configure the remaining clock source (FIRC). */
 
               ret = s32k1xx_firc_config(scgcfg->firc.initialize,
                                         &scgcfg->firc);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* Transition to the next system clock source. */
 
@@ -1324,7 +1324,7 @@ static int s32k1xx_configure_scgmodules(const struct scg_config_s *scgcfg)
           sysclkcfg.divslow = next->divslow;
           ret = s32k1xx_transition_systemclock(&sysclkcfg);
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Configure the remaining clock source (FIRC) */
 
@@ -1355,21 +1355,21 @@ static int s32k1xx_configure_scgmodules(const struct scg_config_s *scgcfg)
 static int s32k1xx_scg_config(const struct scg_config_s *scgcfg)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(scgcfg != NULL);
 
   /* Configure a temporary system clock source: FIRC */
 
   ret = s32k11_firc_clocksource();
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Configure clock sources from SCG */
 
       ret = s32k1xx_configure_scgmodules(scgcfg);
     }
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Configure RTC. */
 
@@ -1402,14 +1402,14 @@ static int s32k1xx_scg_config(const struct scg_config_s *scgcfg)
 
           ret = s32k1xx_set_sysclk_configuration(SCG_SYSTEM_CLOCK_MODE_RUN,
                                                  &scgcfg->clockmode.rccr);
-          if (ret == OK)
+          if (ret == OKK)
             {
               ret = s32k1xx_set_sysclk_configuration(SCG_SYSTEM_CLOCK_MODE_VLPR,
                                                      &scgcfg->clockmode.vccr);
             }
 
 #ifdef CONFIG_S32K1XX_HAVE_HSRUN
-          if (ret == OK)
+          if (ret == OKK)
             {
               ret = s32k1xx_set_sysclk_configuration(SCG_SYSTEM_CLOCK_MODE_HSRUN,
                                                      &scgcfg->clockmode.hccr);

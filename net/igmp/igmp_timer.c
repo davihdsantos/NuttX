@@ -209,7 +209,7 @@ void igmp_startticks(FAR struct igmp_group_s *group, unsigned int ticks)
 
   ret = wd_start(group->wdog, ticks, igmp_timeout, 1, (uint32_t)group);
 
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 }
 

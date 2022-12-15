@@ -164,7 +164,7 @@ static inline int sam_gpio_enableclk(gpio_pinset_t cfgset)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -348,7 +348,7 @@ static inline int sam_configoutput(uintptr_t base, uint32_t pin,
 
   putreg32(pin, base + SAM_PIO_OER_OFFSET);
   putreg32(pin, base + SAM_PIO_PER_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -462,7 +462,7 @@ static inline int sam_configperiph(uintptr_t base, uint32_t pin,
   /* Disable PIO functionality */
 
   putreg32(pin, base + SAM_PIO_PDR_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -639,6 +639,6 @@ int sam_dumpgpio(uint32_t pinset, const char *msg)
 #endif
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif

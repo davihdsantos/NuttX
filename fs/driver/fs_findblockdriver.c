@@ -124,7 +124,7 @@ int find_blockdriver(FAR const char *pathname, int mountflags,
 
   *ppinode = inode;
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
 errout_with_inode:
   inode_release(inode);

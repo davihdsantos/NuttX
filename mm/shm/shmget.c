@@ -215,7 +215,7 @@ static int shm_extend(int shmid, size_t size)
   /* Set the new region size and return success */
 
   region->sr_ds.shm_segsz = size;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

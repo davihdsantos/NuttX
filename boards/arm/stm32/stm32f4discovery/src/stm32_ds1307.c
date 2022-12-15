@@ -122,7 +122,7 @@ int stm32_ds1307_init(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_I2C && CONFIG_RTC_DS1307 */

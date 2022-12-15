@@ -87,7 +87,7 @@
 int pthread_barrier_init(FAR pthread_barrier_t *barrier,
                          FAR const pthread_barrierattr_t *attr, unsigned int count)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (!barrier || count == 0)
     {

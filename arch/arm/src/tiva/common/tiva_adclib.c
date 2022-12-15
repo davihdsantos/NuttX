@@ -473,7 +473,7 @@ int tiva_adc_enable(uint8_t adc, bool state)
 #else
       modifyreg32(TIVA_SYSCON_RCGC0, 0, SYSCON_RCGC0_ADC0);
 #endif
-      return OK;
+      return OKK;
     }
   else if (state == false)
     {
@@ -484,7 +484,7 @@ int tiva_adc_enable(uint8_t adc, bool state)
 #else
       modifyreg32(TIVA_SYSCON_RCGC0, SYSCON_RCGC0_ADC0, 0);
 #endif
-      return OK;
+      return OKK;
     }
 
   /* ERROR! */

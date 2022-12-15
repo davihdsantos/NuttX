@@ -75,7 +75,7 @@
 
 int board_app_initialize(uintptr_t arg)
 {
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LIB_BOARDCTL */

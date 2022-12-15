@@ -188,7 +188,7 @@ static int ft80x_attach(FAR const struct ft80x_config_s *lower, xcpt_t isr,
       priv->arg     = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static void ft80x_enable(FAR const struct ft80x_config_s *lower,
@@ -304,7 +304,7 @@ int stm32_ft80x_setup(void)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_VIEWTOOL_FT80X_SPI1 || CONFIG_VIEWTOOL_FT80X_SPI2 */

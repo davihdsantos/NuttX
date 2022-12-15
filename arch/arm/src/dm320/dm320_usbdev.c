@@ -953,7 +953,7 @@ static int dm320_wrrequest(struct dm320_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_DEVERROR(DM320_TRACEERR_NULLREQUEST), 0);
-      return OK;
+      return OKK;
     }
 
   /* Otherwise send the data in the packet (in the DMA on case, we
@@ -1015,11 +1015,11 @@ static int dm320_wrrequest(struct dm320_ep_s *privep)
           usbtrace(TRACE_COMPLETE(privep->epphy), privreq->req.xfrd);
           privep->txnullpkt = 0;
           dm320_reqcomplete(privep, OK);
-          return OK;
+          return OKK;
         }
     }
 
-  return OK; /* Won't get here */
+  return OKK; /* Won't get here */
 }
 
 /****************************************************************************
@@ -1042,7 +1042,7 @@ static int dm320_rdrequest(struct dm320_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_DEVERROR(DM320_TRACEERR_NULLREQUEST), 0);
-      return OK;
+      return OKK;
     }
 
   usbtrace(TRACE_READ(privep->epphy), privreq->req.xfrd);
@@ -1068,7 +1068,7 @@ static int dm320_rdrequest(struct dm320_ep_s *privep)
       dm320_reqcomplete(privep, OK);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1189,7 +1189,7 @@ static inline void dm320_ep0setup(struct dm320_usbdev_s *priv)
 
   while (!dm320_rqempty(ep0))
     {
-      int16_t result = OK;
+      int16_t result = OKK;
       if (privreq->req.xfrd != privreq->req.len)
         {
           result = -EPROTO;
@@ -1669,7 +1669,7 @@ static int dm320_ctlrinterrupt(int irq, FAR void *context, FAR void *arg)
 
     }
   while (intstatus != USB_INT_NOINTERRUPT);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1727,7 +1727,7 @@ static int dm320_attachinterrupt(int irq, FAR void *context, FAR void *arg)
       priv->paddr         = 0;
       priv->attached      = 1;
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1927,7 +1927,7 @@ static int dm320_epconfigure(FAR struct usbdev_ep_s *ep,
   usbtrace(TRACE_EPCONFIGURE, privep->epphy);
   UNUSED(privep);
   DEBUGASSERT(desc->addr == ep->eplog);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1959,7 +1959,7 @@ static int dm320_epdisable(FAR struct usbdev_ep_s *ep)
   dm320_epreset(privep->epphy);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2073,7 +2073,7 @@ static int dm320_epsubmit(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s *r
   FAR struct dm320_ep_s *privep = (FAR struct dm320_ep_s *)ep;
   FAR struct dm320_usbdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -2184,7 +2184,7 @@ static int dm320_epcancel(struct usbdev_ep_s *ep, FAR struct usbdev_req_s *req)
   flags = enter_critical_section();
   dm320_cancelrequests(privep);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2328,7 +2328,7 @@ static int dm320_wakeup(struct usbdev_s *dev)
   flags = enter_critical_section();
   dm320_putreg8(USB_POWER_RESUME, DM320_USB_POWER);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2354,7 +2354,7 @@ static int dm320_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2383,7 +2383,7 @@ static int dm320_pullup(struct usbdev_s *dev, bool enable)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2585,7 +2585,7 @@ int usbdev_register(FAR struct usbdevclass_driver_s *driver)
 
   up_enable_irq(IRQ_USBATTACH);
   up_enable_irq(DM320_IRQ_USB1);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2622,7 +2622,7 @@ int usbdev_unregister(FAR struct usbdevclass_driver_s *driver)
   /* Unhook the driver */
 
   g_usbdev.driver = NULL;
-  return OK;
+  return OKK;
 }
 
 

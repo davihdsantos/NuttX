@@ -514,7 +514,7 @@ static inline int ramtron_readid(struct ramtron_dev_s *priv)
       priv->pageshift   = RAMTRON_EMULATE_PAGE_SHIFT;
       priv->npages      = priv->part->size / (1 << RAMTRON_EMULATE_PAGE_SHIFT);
       priv->speed       = priv->part->speed;
-      return OK;
+      return OKK;
     }
 
   finfo("RAMTRON device not found\n");
@@ -560,7 +560,7 @@ static int ramtron_waitwritecomplete(struct ramtron_dev_s *priv)
   if (retries > 0)
     {
       finfo("Complete\n");
-      retries = OK;
+      retries = OKK;
     }
   else
     {
@@ -662,7 +662,7 @@ static inline int ramtron_pagewrite(struct ramtron_dev_s *priv,
 
   return ramtron_waitwritecomplete(priv);
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -914,7 +914,7 @@ static int ramtron_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = (1 << priv->pageshift);
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -924,7 +924,7 @@ static int ramtron_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
 
       case MTDIOC_BULKERASE:
         finfo("BULDERASE: Makes no sense in ramtron. Let's confirm operation as OK\n");
-        ret = OK;
+        ret = OKK;
         break;
 
 #ifdef CONFIG_RAMTRON_SETSPEED
@@ -934,7 +934,7 @@ static int ramtron_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
             {
               priv->speed = arg;
               finfo("set bus speed to %lu\n", priv->speed);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -998,7 +998,7 @@ FAR struct mtd_dev_s *ramtron_initialize(FAR struct spi_dev_s *dev)
 
       /* Identify the FLASH chip and get its capacity */
 
-      if (ramtron_readid(priv) != OK)
+      if (ramtron_readid(priv) != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

@@ -80,7 +80,7 @@ FAR struct i2c_master_s* g_i2c1_dev;
 
 void k28_i2cdev_initialize(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_KINETIS_I2C0
   g_i2c0_dev = kinetis_i2cbus_initialize(0);

@@ -134,7 +134,7 @@ int bcmf_core_set_backplane_window(FAR struct bcmf_sdio_dev_s *sbus,
           ret = bcmf_write_reg(sbus, 1, SBSDIO_FUNC1_SBADDRLOW + i - 1,
                   addr_part);
 
-          if (ret != OK)
+          if (ret != OKK)
             {
               return ret;
             }
@@ -144,7 +144,7 @@ int bcmf_core_set_backplane_window(FAR struct bcmf_sdio_dev_s *sbus,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 int bcmf_upload_binary(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
@@ -163,7 +163,7 @@ int bcmf_upload_binary(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
       /* Set the backplane window to include the start address */
 
       int ret = bcmf_core_set_backplane_window(sbus, address);
-      if (ret != OK)
+      if (ret != OKK)
         {
           wlerr("Backplane setting failed at %08x\n", address);
           return ret;
@@ -182,7 +182,7 @@ int bcmf_upload_binary(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
 
       ret = bcmf_transfer_bytes(sbus, true, 1,
                                 address & SBSDIO_SB_OFT_ADDR_MASK, buf, size);
-      if (ret != OK)
+      if (ret != OKK)
         {
           wlerr("transfer failed %d %x %d\n", ret, address, size);
           return ret;
@@ -200,7 +200,7 @@ int bcmf_upload_binary(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
       /* Set the backplane window to include the start address */
 
       int ret = bcmf_core_set_backplane_window(sbus, validate_address);
-      if (ret != OK)
+      if (ret != OKK)
         {
           wlerr("Backplane setting failed at %08x\n", validate_address);
           return ret;
@@ -220,7 +220,7 @@ int bcmf_upload_binary(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
       ret = bcmf_transfer_bytes(sbus, false, 1,
                                 validate_address & SBSDIO_SB_OFT_ADDR_MASK,
                                 compare_buffer, size);
-      if (ret != OK)
+      if (ret != OKK)
         {
           wlerr("validate transfer failed %d %x %d\n", ret, validate_address,
                 size);
@@ -241,7 +241,7 @@ int bcmf_upload_binary(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
   wlwarn("Validation passed\n");
   #endif
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_IEEE80211_BROADCOM_FWFILES
@@ -323,7 +323,7 @@ int bcmf_upload_file(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
   kmm_free(buf);
 
   wlinfo("Upload complete\n");
-  return OK;
+  return OKK;
 
 errout_with_buf:
   kmm_free(buf);
@@ -352,7 +352,7 @@ int bcmf_upload_nvram(FAR struct bcmf_sdio_dev_s *sbus)
   ret = bcmf_upload_binary(sbus, sbus->chip->ram_size - 4 - nvram_sz,
                            sbus->chip->nvram_image,
                            *sbus->chip->nvram_image_size);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -366,12 +366,12 @@ int bcmf_upload_nvram(FAR struct bcmf_sdio_dev_s *sbus)
 
   ret = bcmf_write_sbreg(sbus, sbus->chip->ram_size - 4,
                          (FAR uint8_t *)&token, 4);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -386,7 +386,7 @@ int bcmf_read_sbreg(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
                     FAR uint8_t *reg, unsigned int len)
 {
   int ret = bcmf_core_set_backplane_window(sbus, address);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -411,7 +411,7 @@ int bcmf_write_sbreg(FAR struct bcmf_sdio_dev_s *sbus, uint32_t address,
                      FAR uint8_t *reg, unsigned int len)
 {
   int ret = bcmf_core_set_backplane_window(sbus, address);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -498,7 +498,7 @@ int bcmf_core_upload_firmware(FAR struct bcmf_sdio_dev_s *sbus)
       return -ETIMEDOUT;
     }
 
-  return OK;
+  return OKK;
 }
 
 bool bcmf_core_isup(FAR struct bcmf_sdio_dev_s *sbus, unsigned int core)

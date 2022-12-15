@@ -215,7 +215,7 @@ static void mlx90393_read_measurement_data(FAR struct mlx90393_dev_s *dev)
   /* Aquire the semaphore before the data is copied */
 
   ret = nxsem_wait(&dev->datasem);
-  if (ret != OK)
+  if (ret != OKK)
     {
       snerr("ERROR: Could not aquire dev->datasem: %d\n", ret);
       return;
@@ -390,7 +390,7 @@ static int mlx90393_interrupt_handler(int irq, FAR void *context)
     }
   else
     {
-      return OK;
+      return OKK;
     }
 }
 
@@ -440,7 +440,7 @@ static int mlx90393_open(FAR struct file *filep)
 
   mlx90393_start_burst_mode(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -458,7 +458,7 @@ static int mlx90393_close(FAR struct file *filep)
 
   mlx90393_reset(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -525,7 +525,7 @@ static ssize_t mlx90393_write(FAR struct file *filep, FAR const char *buffer,
 
 static int mlx90393_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -621,7 +621,7 @@ int mlx90393_register(FAR const char *devpath, FAR struct spi_dev_s *spi,
   priv->flink = g_mlx90393_list;
   g_mlx90393_list = priv;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_SENSORS_MLX90393 */

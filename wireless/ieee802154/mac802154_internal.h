@@ -691,7 +691,7 @@ static inline int mac802154_timercancel(FAR struct ieee802154_privmac_s *priv)
 {
   work_cancel(HPWORK, &priv->timer_work);
   wlinfo("Timer cancelled\n");
-  return OK;
+  return OKK;
 }
 
 static inline void mac802154_rxenable(FAR struct ieee802154_privmac_s *priv)

@@ -99,7 +99,7 @@ int stm32_dma_alloc_init(void)
       return -ENOMEM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /* DMA-aware allocator stubs for the FAT filesystem. */

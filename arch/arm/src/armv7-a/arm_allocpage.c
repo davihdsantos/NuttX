@@ -228,7 +228,7 @@ int arm_allocpage(FAR struct tcb_s *tcb, FAR void **vpage)
   /* Finally, return the virtual address of allocated page */
 
   *vpage = (void *)(vaddr & ~PAGEMASK);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_PAGING */

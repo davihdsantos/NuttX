@@ -227,7 +227,7 @@ int stm32_dumpgpio(uint32_t pinset, const char *msg)
 # error "Unsupported STM32 chip"
 #endif
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DEBUG_FEATURES */

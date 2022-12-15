@@ -109,7 +109,7 @@ static int cpufifo_txhandler(int irq, FAR void *context, FAR void *arg)
       up_disable_irq(CXD56_IRQ_FIFO_TO);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int cpufifo_rxhandler(int irq, FAR void *context, FAR void *arg)
@@ -131,7 +131,7 @@ static int cpufifo_rxhandler(int irq, FAR void *context, FAR void *arg)
       g_cfrxhandler(cpuid, word);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int cpufifo_trypush(uint32_t data[2])
@@ -145,7 +145,7 @@ static int cpufifo_trypush(uint32_t data[2])
   putreg32(data[1], CXD56_FIF_PUSH_WRD1);
   putreg32(1, CXD56_FIF_PUSH_CMP);
 
-  return OK;
+  return OKK;
 }
 
 static int cpufifo_reserve(uint32_t data[2])
@@ -166,7 +166,7 @@ static int cpufifo_reserve(uint32_t data[2])
   pd->data[0] = data[0];
   pd->data[1] = data[1];
   sq_addlast(&pd->entry, &g_pushqueue);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -194,7 +194,7 @@ int cxd56_cfpush(uint32_t data[2])
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 int cxd56_cfpull(uint32_t data[2])
@@ -214,7 +214,7 @@ int cxd56_cfpull(uint32_t data[2])
 int cxd56_cfregrxhandler(cpufifo_handler_t handler)
 {
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   flags = enter_critical_section();
   if (g_cfrxhandler)
@@ -263,5 +263,5 @@ int cxd56_cfinitialize(void)
 
   g_cfrxhandler = NULL;
 
-  return OK;
+  return OKK;
 }

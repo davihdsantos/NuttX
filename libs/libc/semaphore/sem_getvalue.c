@@ -80,7 +80,7 @@ int nxsem_getvalue(FAR sem_t *sem, FAR int *sval)
   if (sem != NULL && sval != NULL)
     {
       *sval = sem->semcount;
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

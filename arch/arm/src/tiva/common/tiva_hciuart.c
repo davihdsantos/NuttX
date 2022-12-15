@@ -1073,7 +1073,7 @@ static int hciuart_configure(const struct hciuart_config_s *config)
   tiva_gpiowrite(config->rts_gpio, false);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1219,7 +1219,7 @@ static int hciuart_interrupt(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1345,7 +1345,7 @@ static int hciuart_setbaud(const struct btuart_lowerhalf_s *lower,
 
   config->state->baud = baud;
   hciuart_line_configure(config);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1752,7 +1752,7 @@ static int hciuart_pm_prepare(struct pm_callback_s *cb, int domain,
 {
   /* Logic to prepare for a reduced power state goes here. */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1800,7 +1800,7 @@ hciuart_instantiate(enum hciuart_devno_e uart)
 
 #ifdef CONFIG_PM
   ret = pm_register(&g_serialcb);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 #endif
 
@@ -1861,7 +1861,7 @@ void hciuart_initialize(void)
           /* Attach and enable the HCI UART IRQ */
 
           ret = irq_attach(config->irq, hciuart_interrupt, (void *)config);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable the interrupt (RX and TX interrupts are still disabled
                * in the UART)

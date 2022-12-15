@@ -111,6 +111,6 @@ int register_mtdpartition(FAR const char *partition,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 

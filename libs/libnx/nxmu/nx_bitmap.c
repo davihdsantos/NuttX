@@ -131,7 +131,7 @@ int nx_bitmap(NXWINDOW hwnd, FAR const struct nxgl_rect_s *dest,
 
   /* Wait that the command is completed, so that caller can release the buffer. */
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       ret = _SEM_WAIT(&sem_done);
     }

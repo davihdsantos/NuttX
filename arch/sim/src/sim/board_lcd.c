@@ -237,7 +237,7 @@ static int sim_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buffer,
                        size_t npixels)
 {
   lcdinfo("row: %d col: %d npixels: %d\n", row, col, npixels);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -276,7 +276,7 @@ static int sim_getvideoinfo(FAR struct lcd_dev_s *dev,
   ginfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
          g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres, g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -293,7 +293,7 @@ static int sim_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(dev && pinfo && planeno == 0);
   ginfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -329,7 +329,7 @@ static int sim_setpower(struct lcd_dev_s *dev, int power)
   /* Set new power level */
 
   g_lcddev.power = power;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -377,7 +377,7 @@ static int sim_setcontrast(struct lcd_dev_s *dev, unsigned int contrast)
 int board_lcd_initialize(void)
 {
   ginfo("Initializing\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -209,7 +209,7 @@ static int lc823450_wdt_interrupt(int irq, FAR void *context, FAR void *arg)
       priv->handler(irq, context);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -233,7 +233,7 @@ static int lc823450_wdt_start(FAR struct watchdog_lowerhalf_s *lower)
   modifyreg32(WDT_PT0CTL, 0, 1 << WDT_PT0CTL_WT0ACT);
 
   wdinfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -256,7 +256,7 @@ static int lc823450_wdt_stop(FAR struct watchdog_lowerhalf_s *lower)
   modifyreg32(WDT_PT0CTL, 1 << WDT_PT0CTL_WT0ACT, 0);
 
   wdinfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -285,7 +285,7 @@ static int lc823450_wdt_keepalive(FAR struct watchdog_lowerhalf_s *lower)
 
   putreg32(priv->reload, WDT_WT0PST);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -348,7 +348,7 @@ static int lc823450_wdt_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n", status->timeout);
   wdinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -412,7 +412,7 @@ static int lc823450_wdt_settimeout(FAR struct watchdog_lowerhalf_s *lower,
 
   wdinfo("Entry: timeout=%d\n", timeout);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -558,7 +558,7 @@ int lc823450_wdt_initialize(void)
 
   (void)watchdog_register("/dev/watchdog0",
                          (FAR struct watchdog_lowerhalf_s *)priv);
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_WATCHDOG_WORK

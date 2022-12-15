@@ -166,7 +166,7 @@ int lpc54_bringup(void)
       /* Dind the SDIO interface to the MMC/SD driver */
 
       ret = mmcsd_slotinitialize(MMCSD_MINOR, sdmmc);
-      if (ret != OK)
+      if (ret != OKK)
         {
           syslog(LOG_ERR,
                  "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n",
@@ -186,5 +186,5 @@ int lpc54_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

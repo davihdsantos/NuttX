@@ -332,7 +332,7 @@ int lib_hostfile_lookup(FAR const void *addr, socklen_t len, int type,
                   /* We have a match */
 
                   fclose(stream);
-                  return OK;
+                  return OKK;
                 }
             }
         }
@@ -411,7 +411,7 @@ int gethostbyaddr_r(FAR const void *addr, socklen_t len, int type,
     {
       /* Yes.. we are done */
 
-      return OK;
+      return OKK;
     }
 #endif
 

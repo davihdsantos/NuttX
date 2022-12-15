@@ -253,7 +253,7 @@ static int charger_get_status(FAR enum battery_charger_status_e *status)
         break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -303,7 +303,7 @@ static int charger_get_health(FAR enum battery_charger_health_e *health)
       *health = BATTERY_HEALTH_GOOD;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -317,7 +317,7 @@ static int charger_online(FAR bool *online)
       return -EINVAL;
     }
   *online = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -347,7 +347,7 @@ static int charger_get_current(FAR int *current)
   *current = (gauge.current - 0x800) * 2929 / 10000;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -375,7 +375,7 @@ static int charger_get_voltage(FAR int *voltage)
   *voltage = gauge.voltage * 112 / 100;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -398,7 +398,7 @@ static int charger_get_temptable(FAR struct battery_temp_table_s *table)
   table->T10 = buf.T10;
   table->T00 = buf.T00;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -427,7 +427,7 @@ static int charger_set_temptable(FAR struct battery_temp_table_s *table)
 
 static int charger_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -440,7 +440,7 @@ static int charger_open(FAR struct file *filep)
 
 static int charger_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -515,7 +515,7 @@ static int charger_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         {
           /* Not supported */
 
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -661,7 +661,7 @@ int cxd56_charger_initialize(FAR const char *devpath)
       return -EFAULT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -682,7 +682,7 @@ int cxd56_charger_uninitialize(FAR const char *devpath)
 {
   (void) unregister_driver(devpath);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CXD56_CHARGER */

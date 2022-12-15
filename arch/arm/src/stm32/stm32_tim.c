@@ -742,7 +742,7 @@ static int stm32_tim_setmode(FAR struct stm32_tim_dev_s *dev, stm32_tim_mode_t m
       }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1486,7 +1486,7 @@ static int stm32_tim_setchannel(FAR struct stm32_tim_dev_s *dev, uint8_t channel
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1515,7 +1515,7 @@ static int stm32_tim_setcompare(FAR struct stm32_tim_dev_s *dev, uint8_t channel
       default:
         return -EINVAL;
     }
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1651,7 +1651,7 @@ static int stm32_tim_setisr(FAR struct stm32_tim_dev_s *dev, xcpt_t handler,
     {
       up_disable_irq(vectorno);
       irq_detach(vectorno);
-      return OK;
+      return OKK;
     }
 
   /* Otherwise set callback and enable interrupt */
@@ -1659,7 +1659,7 @@ static int stm32_tim_setisr(FAR struct stm32_tim_dev_s *dev, xcpt_t handler,
   irq_attach(vectorno, handler ,arg);
   up_enable_irq(vectorno);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1943,7 +1943,7 @@ int stm32_tim_deinit(FAR struct stm32_tim_dev_s * dev)
 
   ((struct stm32_tim_priv_s *)dev)->mode = STM32_TIM_MODE_UNUSED;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* defined(CONFIG_STM32_TIM1 || ... || TIM17) */

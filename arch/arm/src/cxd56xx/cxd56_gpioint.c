@@ -656,7 +656,7 @@ int cxd56_gpioint_status(uint32_t pin, cxd56_gpioint_status_t *stat)
 
   stat->enable = enabled_irq(stat->irq);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CXD56_GPIO_IRQ */

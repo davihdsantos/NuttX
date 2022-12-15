@@ -528,7 +528,7 @@ static int s32k1xx_setup(struct uart_dev_s *dev)
 
 #else
   priv->ie = s32k1xx_serialin(priv, S32K1XX_LPUART_CTRL_OFFSET) & LPUART_ALL_INTS;
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -574,7 +574,7 @@ static int s32k1xx_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, s32k1xx_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the UART
@@ -679,7 +679,7 @@ static int s32k1xx_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -696,7 +696,7 @@ static int s32k1xx_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int ret   = OK;
+  int ret   = OKK;
 
   switch (cmd)
     {
@@ -802,7 +802,7 @@ static int s32k1xx_ioctl(struct file *filep, int cmd, unsigned long arg)
 
         /* Decode baud. */
 
-        ret = OK;
+        ret = OKK;
         baud = cfgetispeed(termiosp);
 
         /* Decode number of bits */
@@ -851,7 +851,7 @@ static int s32k1xx_ioctl(struct file *filep, int cmd, unsigned long arg)
 
         /* Verify that all settings are valid before committing */
 
-        if (ret == OK)
+        if (ret == OKK)
           {
             /* Commit */
 
@@ -1199,7 +1199,7 @@ static int up_pm_prepare(struct pm_callback_s *cb, int domain,
 {
   /* Logic to prepare for a reduced power state goes here. */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1251,7 +1251,7 @@ void up_serialinit(void)
   /* Register to receive power management callbacks */
 
   ret = pm_register(&g_serial_pmcb);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 #endif
 

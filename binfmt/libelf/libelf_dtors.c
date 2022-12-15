@@ -210,7 +210,7 @@ int elf_loaddtors(FAR struct elf_loadinfo_s *loadinfo)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_BINFMT_CONSTRUCTORS */

@@ -499,7 +499,7 @@ int nxffs_dump(FAR struct mtd_dev_s *mtd, bool verbose)
   syslog(LOG_NOTICE, "%d blocks analyzed\n", blkinfo.nblocks);
 
   kmm_free(blkinfo.buffer);
-  return OK;
+  return OKK;
 
 #else
   return -ENOSYS;

@@ -1289,7 +1289,7 @@ inline static int stm32_wrrequest_ep0(struct stm32_usbdev_s *priv,
 {
   int ret;
   ret = stm32_wrrequest(priv, privep);
-  priv->ep0state = ((ret == OK) ? EP0STATE_WRREQUEST : EP0STATE_IDLE);
+  priv->ep0state = ((ret == OKK) ? EP0STATE_WRREQUEST : EP0STATE_IDLE);
   return ret;
 }
 
@@ -1393,7 +1393,7 @@ static int stm32_wrrequest(struct stm32_usbdev_s *priv, struct stm32_ep_s *prive
       stm32_reqcomplete(privep, OK);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1437,7 +1437,7 @@ static inline int stm32_ep0_rdrequest(struct stm32_usbdev_s *priv)
   stm32_ep0setup(priv);
   priv->ep0datlen = 0; /* mark the date consumed */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1476,7 +1476,7 @@ static int stm32_rdrequest(struct stm32_usbdev_s *priv, struct stm32_ep_s *prive
     {
       usbtrace(TRACE_DEVERROR(STM32_TRACEERR_EPOUTNULLPACKET), 0);
       stm32_reqcomplete(privep, OK);
-      return OK;
+      return OKK;
     }
 
   usbtrace(TRACE_READ(USB_EPNO(privep->ep.eplog)), privreq->req.xfrd);
@@ -1508,7 +1508,7 @@ static int stm32_rdrequest(struct stm32_usbdev_s *priv, struct stm32_ep_s *prive
       stm32_reqcomplete(privep, OK);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1693,7 +1693,7 @@ static void stm32_ep0setup(struct stm32_usbdev_s *priv)
 
   while (!stm32_rqempty(ep0))
     {
-      int16_t result = OK;
+      int16_t result = OKK;
       if (privreq->req.xfrd != privreq->req.len)
         {
           result = -EPROTO;
@@ -2183,7 +2183,7 @@ static void stm32_ep0out(struct stm32_usbdev_s *priv)
       case EP0STATE_RDREQUEST:           /* Read request in progress */
       case EP0STATE_IDLE:                /* No transfer in progress */
         ret = stm32_rdrequest(priv, privep);
-        priv->ep0state = ((ret == OK) ? EP0STATE_RDREQUEST : EP0STATE_IDLE);
+        priv->ep0state = ((ret == OKK) ? EP0STATE_RDREQUEST : EP0STATE_IDLE);
         break;
 
       case EP0STATE_SETUP_OUT:           /* SETUP was waiting for data */
@@ -2478,7 +2478,7 @@ static int stm32_usb_interrupt(int irq, void *context, FAR void *arg)
 
 exit_interrupt:
   usbtrace(TRACE_INTEXIT(STM32_TRACEINTID_INTERRUPT), 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2858,7 +2858,7 @@ static int stm32_epconfigure(struct usbdev_ep_s *ep,
     }
 
    stm32_dumpep(epno);
-   return OK;
+   return OKK;
 }
 
 /****************************************************************************
@@ -2895,7 +2895,7 @@ static int stm32_epdisable(struct usbdev_ep_s *ep)
   stm32_seteptxstatus(epno, USB_EPR_STATTX_DIS);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2957,7 +2957,7 @@ static int stm32_epsubmit(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   struct stm32_usbdev_s *priv;
   irqstate_t flags;
   uint8_t epno;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -3084,7 +3084,7 @@ static int stm32_epcancel(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   flags = enter_critical_section();
   stm32_cancelrequests(privep);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3222,7 +3222,7 @@ static int stm32_epstall(struct usbdev_ep_s *ep, bool resume)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3396,7 +3396,7 @@ static int stm32_wakeup(struct usbdev_s *dev)
   stm32_setimask(priv, USB_CNTR_ESOFM, USB_CNTR_WKUPM | USB_CNTR_SUSPM);
   stm32_putreg(~USB_ISTR_ESOF, STM32_USB_ISTR);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3418,7 +3418,7 @@ static int stm32_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3858,7 +3858,7 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
 
   priv->driver = NULL;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_USBDEV && CONFIG_STM32F0L0G0_USB */

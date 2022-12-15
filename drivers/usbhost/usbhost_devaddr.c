@@ -79,7 +79,7 @@ static void usbhost_takesem(FAR struct usbhost_devaddr_s *devgen)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }

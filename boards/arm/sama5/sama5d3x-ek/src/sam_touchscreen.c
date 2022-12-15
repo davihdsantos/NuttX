@@ -113,7 +113,7 @@ int sam_tsc_setup(int minor)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_INPUT_ADS7843E */

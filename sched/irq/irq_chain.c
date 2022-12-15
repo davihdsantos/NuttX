@@ -201,7 +201,7 @@ int irqchain_attach(int ndx, xcpt_t isr, FAR void *arg)
       irqchain_detach_all(ndx);
     }
 
-  return OK;
+  return OKK;
 }
 
 int irqchain_detach(int irq, xcpt_t isr, FAR void *arg)
@@ -267,7 +267,7 @@ int irqchain_detach(int irq, xcpt_t isr, FAR void *arg)
                                  &g_irqchainfreelist);
                     }
 
-                  ret = OK;
+                  ret = OKK;
                   break;
                 }
             }
@@ -282,6 +282,6 @@ int irqchain_detach(int irq, xcpt_t isr, FAR void *arg)
 
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }

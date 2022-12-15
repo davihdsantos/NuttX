@@ -120,7 +120,7 @@ static int work_qqueue(FAR struct usr_wqueue_s *wqueue,
   kill(wqueue->pid, SIGWORK);   /* Wake up the worker thread */
 
   work_unlock();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

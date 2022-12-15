@@ -225,7 +225,7 @@ static void pic32mz_dma_takesem(struct pic32mz_dmac_s *dmac)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -573,7 +573,7 @@ static int pic32mz_dma_interrupt(int irq, void *context, FAR void *arg)
       dmach->callback(dmach, status, dmach->arg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -913,7 +913,7 @@ int pic32mz_dma_xfrsetup(DMA_HANDLE handle,
   pic32mz_dma_destsize(dmach, cfg->destsize);
   pic32mz_dma_cellsize(dmach, cfg->cellsize);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -946,7 +946,7 @@ int pic32mz_dma_start(DMA_HANDLE handle, dma_callback_t callback, void *arg)
       pic32mz_dma_forcestart(dmach);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

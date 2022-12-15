@@ -369,7 +369,7 @@ static int tun_fd_transmit(FAR struct tun_device_s *priv)
     }
 
   tun_pollnotify(priv, POLLIN);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -933,7 +933,7 @@ static int tun_ifup(FAR struct net_driver_s *dev)
                  1, (wdparm_t)priv);
 
   priv->bifup = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -968,7 +968,7 @@ static int tun_ifdown(FAR struct net_driver_s *dev)
   priv->bifup = false;
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1047,7 +1047,7 @@ static int tun_txavail(FAR struct net_driver_s *dev)
       work_queue(TUNWORK, &priv->work, tun_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1073,7 +1073,7 @@ static int tun_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 {
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1100,7 +1100,7 @@ static int tun_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 {
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1183,7 +1183,7 @@ static int tun_dev_init(FAR struct tun_device_s *priv, FAR struct file *filep,
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   ret = netdev_register(&priv->dev, tun ? NET_LL_TUN : NET_LL_ETHERNET);
-  if (ret != OK)
+  if (ret != OKK)
     {
       nxsem_destroy(&priv->waitsem);
       nxsem_destroy(&priv->read_wait_sem);
@@ -1213,7 +1213,7 @@ static int tun_dev_uninit(FAR struct tun_device_s *priv)
   nxsem_destroy(&priv->waitsem);
   nxsem_destroy(&priv->read_wait_sem);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1224,7 +1224,7 @@ static int tun_open(FAR struct file *filep)
 {
   filep->f_priv = 0;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1240,7 +1240,7 @@ static int tun_close(FAR struct file *filep)
 
   if (priv == NULL)
     {
-      return OK;
+      return OKK;
     }
 
   intf = priv - g_tun_devices;
@@ -1251,7 +1251,7 @@ static int tun_close(FAR struct file *filep)
 
   tundev_unlock(tun);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1387,7 +1387,7 @@ int tun_poll(FAR struct file *filep, FAR struct pollfd *fds, bool setup)
 {
   FAR struct tun_device_s *priv = filep->f_priv;
   pollevent_t eventset;
-  int ret = OK;
+  int ret = OKK;
 
   /* Some sanity checking */
 
@@ -1451,7 +1451,7 @@ static int tun_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
   FAR struct inode *inode       = filep->f_inode;
   FAR struct tun_driver_s *tun  = inode->i_private;
   FAR struct tun_device_s *priv = filep->f_priv;
-  int ret = OK;
+  int ret = OKK;
 
   if (cmd == TUNSETIFF && priv == NULL)
     {
@@ -1483,7 +1483,7 @@ static int tun_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
       ret = tun_dev_init(&g_tun_devices[intf], filep,
                          *ifr->ifr_name ? ifr->ifr_name : 0,
                          (ifr->ifr_flags & IFF_MASK) == IFF_TUN);
-      if (ret != OK)
+      if (ret != OKK)
         {
           tundev_unlock(tun);
           return ret;
@@ -1495,7 +1495,7 @@ static int tun_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
       strncpy(ifr->ifr_name, priv->dev.d_ifname, IFNAMSIZ);
       tundev_unlock(tun);
 
-      return OK;
+      return OKK;
     }
 
   return -EBADFD;
@@ -1527,7 +1527,7 @@ int tun_initialize(void)
   g_tun.free_tuns = (1 << CONFIG_TUN_NINTERFACES) - 1;
 
   (void)register_driver("/dev/tun", &g_tun_file_ops, 0644, &g_tun);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_TUN */

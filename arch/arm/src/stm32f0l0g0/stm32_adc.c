@@ -847,14 +847,14 @@ static int adccmn_lock(FAR struct stm32_dev_s *priv, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->cmn->lock);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1035,7 +1035,7 @@ static int adc_bind(FAR struct adc_dev_s *dev,
   priv->cb = callback;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1402,7 +1402,7 @@ static int adc_setup(FAR struct adc_dev_s *dev)
      defined(ADC_HAVE_TIMER) || !defined(CONFIG_STM32F0L0G0_ADC_NO_STARTUP_CONV)
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
   /* Attach the ADC interrupt */
 
@@ -1583,7 +1583,7 @@ static void adc_rxint(FAR struct adc_dev_s *dev, bool enable)
 static int adc_resolution_set(FAR struct adc_dev_s *dev, uint8_t res)
 {
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check input */
 
@@ -1641,7 +1641,7 @@ static int adc_extcfg_set(FAR struct adc_dev_s *dev, uint32_t extcfg)
       adc_modifyreg(priv, STM32_ADC_EXTREG_OFFSET, clrbits, setbits);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1719,7 +1719,7 @@ static void adc_enable_vbat_channel(FAR struct adc_dev_s *dev, bool enable)
 static int adc_ioc_change_sleep_between_opers(FAR struct adc_dev_s *dev,
                                               int cmd, bool arg)
 {
-  int ret = OK;
+  int ret = OKK;
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
 
   adc_enable(priv, false);
@@ -1848,7 +1848,7 @@ static void adc_ioc_enable_ovr_int(FAR struct stm32_dev_s *priv, bool enable)
 
 static int adc_ioc_change_ints(FAR struct adc_dev_s *dev, int cmd, bool arg)
 {
-  int ret = OK;
+  int ret = OKK;
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
 
   switch (cmd)
@@ -1928,7 +1928,7 @@ static int adc_set_ch(FAR struct adc_dev_s *dev, uint8_t ch)
 
   adc_modifyreg(priv, STM32_ADC_CHSELR_OFFSET, 0, bits);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1949,7 +1949,7 @@ static int adc_set_ch(FAR struct adc_dev_s *dev, uint8_t ch)
 static int adc_ioctl(FAR struct adc_dev_s *dev, int cmd, unsigned long arg)
 {
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
-  int ret                      = OK;
+  int ret                      = OKK;
 
   switch (cmd)
     {
@@ -2076,7 +2076,7 @@ static int adc_interrupt(FAR struct adc_dev_s *dev)
   pending = regval & ADC_ISR_ALLINTS;
   if (pending == 0)
     {
-      return OK;
+      return OKK;
     }
 
   /* Identifies the interruption AWD, OVR or EOC */
@@ -2135,7 +2135,7 @@ static int adc_interrupt(FAR struct adc_dev_s *dev)
 
   adc_putreg(priv, STM32_ADC_ISR_OFFSET, pending);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2156,7 +2156,7 @@ static int adc1_interrupt(int irq, FAR void *context, FAR void *arg)
 {
   adc_interrupt(&g_adcdev1);
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_STM32F0L0G0_ADC_NOIRQ */
 
@@ -2267,7 +2267,7 @@ static int adc_llops_regbufregister(FAR struct stm32_adc_dev_s *dev,
 
   stm32_dmastart(priv->dma, NULL, dev, false);
 
-  return OK;
+  return OKK;
 }
 #endif  /* ADC_HAVE_DMA */
 
@@ -2386,7 +2386,7 @@ struct adc_dev_s *stm32_adcinitialize(int intf, FAR const uint8_t *chanlist,
   memcpy(priv->r_chanlist, chanlist, channels);
 
 #ifdef CONFIG_PM
-  if (pm_register(&priv->pm_callback) != OK)
+  if (pm_register(&priv->pm_callback) != OKK)
     {
       aerr("Power management registration failed\n");
       return NULL;

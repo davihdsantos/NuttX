@@ -127,7 +127,7 @@ int elf_addrenv_alloc(FAR struct elf_loadinfo_s *loadinfo, size_t textsize,
 
   loadinfo->textalloc = (uintptr_t)vtext;
   loadinfo->dataalloc = (uintptr_t)vdata;
-  return OK;
+  return OKK;
 #else
   /* Allocate memory to hold the ELF image */
 
@@ -138,7 +138,7 @@ int elf_addrenv_alloc(FAR struct elf_loadinfo_s *loadinfo, size_t textsize,
     }
 
   loadinfo->dataalloc = loadinfo->textalloc + textsize;
-  return OK;
+  return OKK;
 #endif
 }
 

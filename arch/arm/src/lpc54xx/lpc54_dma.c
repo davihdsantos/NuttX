@@ -209,7 +209,7 @@ static int lpc54_dma_interrupt(int irq, FAR void *context, FAR void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -260,7 +260,7 @@ void weak_function up_dma_initialize(void)
   /* Attach and enable the DMA interrupt handler */
 
   ret = irq_attach(LPC54_IRQ_DMA, lpc54_dma_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(LPC54_IRQ_DMA);
     }
@@ -450,7 +450,7 @@ int lpc54_dma_setup(int ch, uint32_t cfg, uint32_t xfrcfg, uint8_t trigsrc,
   xfrcfg |= (DMA_XFERCFG_CFGVALID | DMA_XFERCFG_CLRTRIG | DMA_XFERCFG_SETINTA);
   xfrcfg |= DMA_XFERCFG_XFERCOUNT(nxfrs);
   putreg32(xfrcfg, base + LPC54_DMA_XFERCFG_OFFSET);
-  ret = OK;
+  ret = OKK;
 
 errout_with_exclsem:
   nxsem_post(&g_dma.exclsem);
@@ -496,7 +496,7 @@ int lpc54_dmastart(int ch, dma_callback_t callback, void *arg)
 
   regaddr = LPC54_DMA_CTLSTAT(ch);
   modifyreg32(regaddr, 0, DMA_CTLSTAT_TRIG);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

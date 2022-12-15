@@ -161,7 +161,7 @@ static inline void apa102_write32(FAR struct apa102_dev_s *priv,
 
 static int apa102_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -174,7 +174,7 @@ static int apa102_open(FAR struct file *filep)
 
 static int apa102_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

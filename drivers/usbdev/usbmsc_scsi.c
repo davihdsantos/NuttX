@@ -492,7 +492,7 @@ static inline int usbmsc_cmdrequestsense(FAR struct usbmsc_dev_s *priv,
       response->qual2 = (uint8_t)sd;
 
       priv->nreqbytes = SCSIRESP_FIXEDSENSEDATA_SIZEOF;
-      ret             = OK;
+      ret             = OKK;
     }
 
   return ret;
@@ -775,7 +775,7 @@ static int usbmsc_modepage(FAR struct usbmsc_dev_s *priv, FAR uint8_t *buf,
        /* Return the mode data length */
 
       *mdlen = 12; /* Only the first 12-bytes of caching mode page sent */
-      return OK;
+      return OKK;
     }
   else
     {
@@ -1451,7 +1451,7 @@ static inline int usbmsc_cmdwrite12(FAR struct usbmsc_dev_s *priv)
         {
           usbtrace(TRACE_CLASSSTATE(USBMSC_CLASSSTATE_CMDPARSECMDWRITE12), priv->cdb[0]);
           priv->thstate = USBMSC_STATE_CMDWRITE;
-          return OK;
+          return OKK;
         }
     }
 
@@ -1480,7 +1480,7 @@ static int inline usbmsc_setupcmd(FAR struct usbmsc_dev_s *priv,
   FAR struct usbmsc_lun_s *lun = NULL;
   uint32_t datlen;
   uint8_t dir;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify the LUN and set up the current LUN reference in the
    * device structure
@@ -1760,12 +1760,12 @@ static int usbmsc_idlestate(FAR struct usbmsc_dev_s *priv)
 
       usbtrace(TRACE_CLASSSTATE(USBMSC_CLASSSTATE_IDLECMDPARSE), priv->cdb[0]);
       priv->thstate = USBMSC_STATE_CMDPARSE;
-      ret = OK;
+      ret = OKK;
     }
 
   /* In any event, return the request to be refilled */
 
-  if (EP_SUBMIT(priv->epbulkout, req) != OK)
+  if (EP_SUBMIT(priv->epbulkout, req) != OKK)
     {
       usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_IDLERDSUBMIT), (uint16_t)-ret);
     }
@@ -2081,7 +2081,7 @@ static int usbmsc_cmdparsestate(FAR struct usbmsc_dev_s *priv)
 
       usbtrace(TRACE_CLASSSTATE(USBMSC_CLASSSTATE_CMDPARSECMDFINISH), priv->cdb[0]);
       priv->thstate = USBMSC_STATE_CMDFINISH;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -2212,7 +2212,7 @@ static int usbmsc_cmdreadstate(FAR struct usbmsc_dev_s *priv)
           req->flags    = 0;
 
           ret           = EP_SUBMIT(priv->epbulkin, req);
-          if (ret != OK)
+          if (ret != OKK)
             {
               usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_CMDREADSUBMIT), (uint16_t)-ret);
               lun->sd     = SCSI_KCQME_UNRRE1;
@@ -2231,7 +2231,7 @@ static int usbmsc_cmdreadstate(FAR struct usbmsc_dev_s *priv)
 
   usbtrace(TRACE_CLASSSTATE(USBMSC_CLASSSTATE_CMDREADCMDFINISH), priv->u.xfrlen);
   priv->thstate  = USBMSC_STATE_CMDFINISH;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2356,7 +2356,7 @@ static int usbmsc_cmdwritestate(FAR struct usbmsc_dev_s *priv)
       req->callback = usbmsc_rdcomplete;
 
       ret = EP_SUBMIT(priv->epbulkout, req);
-      if (ret != OK)
+      if (ret != OKK)
         {
           usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_CMDWRITERDSUBMIT), (uint16_t)-ret);
         }
@@ -2373,7 +2373,7 @@ static int usbmsc_cmdwritestate(FAR struct usbmsc_dev_s *priv)
 errout:
   usbtrace(TRACE_CLASSSTATE(USBMSC_CLASSSTATE_CMDWRITECMDFINISH), priv->u.xfrlen);
   priv->thstate  = USBMSC_STATE_CMDFINISH;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2396,7 +2396,7 @@ static int usbmsc_cmdfinishstate(FAR struct usbmsc_dev_s *priv)
 {
   FAR struct usbmsc_req_s *privreq;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if there is a request in the wrreqlist that we will be able to
    * use for data transfer.
@@ -2516,7 +2516,7 @@ static int usbmsc_cmdfinishstate(FAR struct usbmsc_dev_s *priv)
 
   usbtrace(TRACE_CLASSSTATE(USBMSC_CLASSSTATE_CMDFINISHCMDSTATUS), 0);
   priv->thstate = USBMSC_STATE_CMDSTATUS;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2622,7 +2622,7 @@ static int usbmsc_cmdstatusstate(FAR struct usbmsc_dev_s *priv)
 
   usbtrace(TRACE_CLASSSTATE(USBMSC_CLASSSTATE_CMDSTATUSIDLE), 0);
   priv->thstate = USBMSC_STATE_IDLE;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2802,7 +2802,7 @@ int usbmsc_scsi_main(int argc, char *argv[])
             default:
               usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_INVALIDSTATE), priv->thstate);
               priv->thstate = USBMSC_STATE_IDLE;
-              ret           = OK;
+              ret           = OKK;
               break;
             }
         }

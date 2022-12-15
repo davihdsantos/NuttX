@@ -632,7 +632,7 @@ static inline int n25qxxx_readid(struct n25qxxx_dev_s *priv)
         return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -680,7 +680,7 @@ static int n25qxxx_protect(FAR struct n25qxxx_dev_s *priv,
       return -EACCES;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -728,7 +728,7 @@ static int n25qxxx_unprotect(FAR struct n25qxxx_dev_s *priv,
       return -EACCES;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -826,7 +826,7 @@ static int n25qxxx_erase_sector(struct n25qxxx_dev_s *priv, off_t sector)
 
   while ((n25qxxx_read_status(priv) & STATUS_BUSY_MASK) != 0);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -860,7 +860,7 @@ static int n25qxxx_erase_chip(struct n25qxxx_dev_s *priv)
       status = n25qxxx_read_status(priv);
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -946,7 +946,7 @@ static int n25qxxx_write_page(struct n25qxxx_dev_s *priv, FAR const uint8_t *buf
 
   DEBUGASSERT(buflen == 0);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -956,7 +956,7 @@ static int n25qxxx_write_page(struct n25qxxx_dev_s *priv, FAR const uint8_t *buf
 #ifdef CONFIG_N25QXXX_SECTOR512
 static int n25qxxx_flush_cache(struct n25qxxx_dev_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* If the cache is dirty (meaning that it no longer matches the old FLASH contents)
    * or was erased (with the cache containing the correct FLASH contents), then write
@@ -1332,7 +1332,7 @@ static int n25qxxx_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 #endif
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -1447,7 +1447,7 @@ FAR struct mtd_dev_s *n25qxxx_initialize(FAR struct qspi_dev_s *qspi, bool unpro
       /* Identify the FLASH chip and get its capacity */
 
       ret = n25qxxx_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

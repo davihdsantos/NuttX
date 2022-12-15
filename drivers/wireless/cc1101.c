@@ -338,7 +338,7 @@ static int cc1101_takesem(FAR sem_t *sem)
    * was awakened by a signal
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -437,7 +437,7 @@ static int cc1101_file_close(FAR struct file *filep)
   dev->nopens--;
 
   nxsem_post(&dev->devsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -853,7 +853,7 @@ uint8_t cc1101_strobe(struct cc1101_dev_s *dev, uint8_t command)
 int cc1101_reset(struct cc1101_dev_s *dev)
 {
   cc1101_strobe(dev, CC1101_SRES);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -878,7 +878,7 @@ int cc1101_checkpart(struct cc1101_dev_s *dev)
 
   if (partnum == CC1101_PARTNUM_VALUE && version == CC1101_VERSION_VALUE)
     {
-      return OK;
+      return OKK;
     }
 
   return -ENOTSUP;
@@ -1241,7 +1241,7 @@ int cc1101_setrf(FAR struct cc1101_dev_s *dev,
   cc1101_setchannel(dev, dev->channel);
   cc1101_setpower(dev, dev->power);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1499,7 +1499,7 @@ int cc1101_unregister(FAR struct cc1101_dev_s *dev)
 
   kmm_free(dev->rx_buffer);
   kmm_free(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

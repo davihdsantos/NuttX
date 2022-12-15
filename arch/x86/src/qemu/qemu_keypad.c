@@ -268,12 +268,12 @@ static const struct file_operations g_keypadops =
 
 static int keypad_open(struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 static int keypad_close(struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 static ssize_t keypad_read(struct file *filep, FAR char *buf, size_t buflen)

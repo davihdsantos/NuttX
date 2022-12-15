@@ -776,7 +776,7 @@ int udp_bind(FAR struct udp_conn_s *conn, FAR const struct sockaddr *addr)
       /* Yes.. Select any unused local port number */
 
       conn->lport = htons(udp_select_port(conn->domain, &conn->u));
-      ret         = OK;
+      ret         = OKK;
     }
   else
     {
@@ -791,7 +791,7 @@ int udp_bind(FAR struct udp_conn_s *conn, FAR const struct sockaddr *addr)
           /* No.. then bind the socket to the port */
 
           conn->lport = portno;
-          ret         = OK;
+          ret         = OKK;
         }
       else
         {
@@ -899,7 +899,7 @@ int udp_connect(FAR struct udp_conn_s *conn, FAR const struct sockaddr *addr)
 #endif /* CONFIG_NET_IPv6 */
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_UDP */

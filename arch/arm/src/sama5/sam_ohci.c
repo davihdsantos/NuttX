@@ -864,7 +864,7 @@ static int sam_addctrled(struct sam_ed_s *ed)
   sam_putreg(regval, SAM_USBHOST_CTRL);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -940,7 +940,7 @@ static inline int sam_remctrled(struct sam_ed_s *ed)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -982,7 +982,7 @@ static inline int sam_addbulked(struct sam_ed_s *ed)
   sam_putreg(regval, SAM_USBHOST_CTRL);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -1062,7 +1062,7 @@ static inline int sam_rembulked(struct sam_ed_s *ed)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -1249,7 +1249,7 @@ static inline int sam_addinted(const struct usbhost_epdesc_s *epdesc,
   sam_putreg(regval, SAM_USBHOST_CTRL);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -1404,7 +1404,7 @@ static inline int sam_reminted(struct sam_ed_s *ed)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -1526,7 +1526,7 @@ static int sam_enqueuetd(struct sam_rhport_s *rhport, struct sam_eplist_s *eplis
       ed->hw.ctrl      &= ~ED_CONTROL_K;
       up_clean_dcache((uintptr_t)ed,
                       (uintptr_t)ed + sizeof(struct ohci_ed_s));
-      ret               = OK;
+      ret               = OKK;
     }
 
   return ret;
@@ -1767,7 +1767,7 @@ static int sam_wdhwait(struct sam_rhport_s *rhport, struct sam_ed_s *ed,
 #endif
       eplist->buffer   = buffer;
       eplist->buflen   = buflen;
-      ret              = OK;
+      ret              = OKK;
     }
 
   leave_critical_section(flags);
@@ -1813,7 +1813,7 @@ static int sam_wdhasynch(struct sam_rhport_s *rhport, struct sam_ed_s *ed,
       eplist->arg      = arg;
       eplist->buffer   = buffer;
       eplist->buflen   = buflen;
-      ret              = OK;
+      ret              = OKK;
     }
 
   leave_critical_section(flags);
@@ -1849,7 +1849,7 @@ static int sam_ctrltd(struct sam_rhport_s *rhport, struct sam_eplist_s *eplist,
 
   edctrl = eplist->ed;
   ret = sam_wdhwait(rhport, edctrl, buffer, buflen);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(OHCI_TRACE1_DEVDISCONN, RHPORT(rhport));
       return ret;
@@ -1911,7 +1911,7 @@ static int sam_ctrltd(struct sam_rhport_s *rhport, struct sam_eplist_s *eplist,
 
       if (edctrl->tdstatus == TD_CC_NOERROR)
         {
-          ret = OK;
+          ret = OKK;
         }
       else
         {
@@ -2380,7 +2380,7 @@ static int sam_wait(struct usbhost_connection_s *conn,
 
               connport->connected  = rhport->connected;
               *hport = connport;
-              return OK;
+              return OKK;
             }
         }
 
@@ -2401,7 +2401,7 @@ static int sam_wait(struct usbhost_connection_s *conn,
 
           usbhost_vtrace2(OHCI_VTRACE2_HUBWAKEUP,
                           HPORT(connport), connport->connected);
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -2507,7 +2507,7 @@ static int sam_rh_enumerate(struct usbhost_connection_s *conn,
 
   sam_putreg(OHCI_RHPORTST_PRSC, regaddr);
   up_mdelay(200);
-  return OK;
+  return OKK;
 }
 
 static int sam_enumerate(struct usbhost_connection_s *conn,
@@ -2610,7 +2610,7 @@ static int sam_ep0configure(struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
 
   usbhost_vtrace2(OHCI_VTRACE2_EP0CTRLED, RHPORT(rhport), (uint16_t)edctrl->hw.ctrl);
   UNUSED(rhport);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2795,7 +2795,7 @@ static int sam_epalloc(struct usbhost_driver_s *drvr,
 
   /* Was the ED successfully added? */
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* No.. destroy it and report the error */
 
@@ -2807,7 +2807,7 @@ static int sam_epalloc(struct usbhost_driver_s *drvr,
 
   *ep = (usbhost_ep_t)eplist;
   sam_givesem(&g_ohci.exclsem);
-  return OK;
+  return OKK;
 
 errout_with_td:
   sam_tdfree(td);
@@ -2947,7 +2947,7 @@ static int sam_alloc(struct usbhost_driver_s *drvr,
   if (*buffer)
     {
       *maxlen = CONFIG_SAMA5_OHCI_TDBUFSIZE;
-      ret = OK;
+      ret = OKK;
     }
 
   sam_givesem(&g_ohci.exclsem);
@@ -2986,7 +2986,7 @@ static int sam_free(struct usbhost_driver_s *drvr, uint8_t *buffer)
   sam_takesem(&g_ohci.exclsem);
   sam_tbfree(buffer);
   sam_givesem(&g_ohci.exclsem);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3057,7 +3057,7 @@ static int sam_iofree(struct usbhost_driver_s *drvr, uint8_t *buffer)
   /* kumm_free is all that is required */
 
   kumm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3338,7 +3338,7 @@ static ssize_t sam_transfer(struct usbhost_driver_s *drvr, usbhost_ep_t ep,
    */
 
   ret = sam_wdhwait(rhport, ed, buffer, buflen);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(OHCI_TRACE1_DEVDISCONN, RHPORT(rhport));
       goto errout;
@@ -3589,7 +3589,7 @@ static int sam_asynch(struct usbhost_driver_s *drvr, usbhost_ep_t ep,
    */
 
   ret = sam_wdhasynch(rhport, ed, callback, arg, buffer, buflen);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(OHCI_TRACE1_DEVDISCONN, RHPORT(rhport));
       goto errout;
@@ -3609,7 +3609,7 @@ static int sam_asynch(struct usbhost_driver_s *drvr, usbhost_ep_t ep,
    */
 
   sam_givesem(&g_ohci.exclsem);
-  return OK;
+  return OKK;
 
 errout:
   /* Make sure that there is no outstanding request on this endpoint */
@@ -3761,7 +3761,7 @@ static int sam_cancel(struct usbhost_driver_s *drvr, usbhost_ep_t ep)
   eplist->buflen   = 0;
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3810,7 +3810,7 @@ static int sam_connect(struct usbhost_driver_s *drvr,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -4232,7 +4232,7 @@ int sam_ohci_tophalf(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAMA5_OHCI */

@@ -146,7 +146,7 @@ static int adc_open(FAR struct file *filep)
 
               irqstate_t flags = enter_critical_section();
               ret = dev->ad_ops->ao_setup(dev);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* Mark the FIFOs empty */
 
@@ -447,7 +447,7 @@ static int adc_receive(FAR struct adc_dev_s *dev, uint8_t ch, int32_t data)
 
       adc_notify(dev);
 
-      errcode = OK;
+      errcode = OKK;
     }
 
   return errcode;

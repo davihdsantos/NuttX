@@ -290,7 +290,7 @@ static int nrf52_start(FAR struct watchdog_lowerhalf_s *lower)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -350,7 +350,7 @@ static int nrf52_keepalive(FAR struct watchdog_lowerhalf_s *lower)
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -410,7 +410,7 @@ static int nrf52_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n", status->timeout);
   wdinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -462,7 +462,7 @@ static int nrf52_settimeout(FAR struct watchdog_lowerhalf_s *lower,
 
   wdinfo(" mode=%d  priority=%d\n", WDT_CONFIG_MODE, WDT_CONFIG_IRQ_PRIORITY);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

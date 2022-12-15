@@ -143,7 +143,7 @@ static int farapi_semtake(sem_t *id)
     {
       ASSERT(errno == EINTR);
     }
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_CXD56_FARAPI_DEBUG
@@ -191,7 +191,7 @@ static int cxd56_farapidonehandler(int cpuid, int protoid,
       sem_post(&g_farwait);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

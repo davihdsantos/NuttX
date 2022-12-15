@@ -662,7 +662,7 @@ static int tc_sample(FAR struct tc_dev_s *priv,
         }
 
       priv->penchange = false;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1148,7 +1148,7 @@ errout_with_sem:
   nxsem_post(&priv->devsem);
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -1192,7 +1192,7 @@ static int tc_close(FAR struct file *filep)
 
   nxsem_post(&priv->devsem);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1495,7 +1495,7 @@ int stm32_tsc_setup(int minor)
 #ifndef CONFIG_TOUCHSCREEN_MULTIPLE
   if (g_touchinitdone)
     {
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -1560,7 +1560,7 @@ int stm32_tsc_setup(int minor)
   g_touchinitdone = true;
 #endif
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->devsem);

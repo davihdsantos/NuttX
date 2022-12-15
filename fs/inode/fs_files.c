@@ -74,7 +74,7 @@ static void _files_semtake(FAR struct filelist *list)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -99,7 +99,7 @@ static void _files_semtake(FAR struct filelist *list)
 static int _files_close(FAR struct file *filep)
 {
   struct inode *inode = filep->f_inode;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if the struct file is open (i.e., assigned an inode) */
 
@@ -288,7 +288,7 @@ int file_dup2(FAR struct file *filep1, FAR struct file *filep2)
       _files_semgive(list);
     }
 
-  return OK;
+  return OKK;
 
   /* Handle various error conditions */
 

@@ -71,5 +71,5 @@ int pthread_attr_getaffinity_np(FAR const pthread_attr_t *attr,
   DEBUGASSERT(attr != NULL && cpusetsize == sizeof(cpu_set_t) && cpuset != NULL);
 
   *cpuset = attr->affinity;
-  return OK;
+  return OKK;
 }

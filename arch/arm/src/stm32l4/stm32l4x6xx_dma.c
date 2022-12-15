@@ -231,7 +231,7 @@ static void stm32l4_dmatake(FAR struct stm32l4_dma_s *dmach)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -320,7 +320,7 @@ static int stm32l4_dmainterrupt(int irq, void *context, FAR void *arg)
 
   dmabase_putreg(dmach, STM32L4_DMA_IFCR_OFFSET, isr);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

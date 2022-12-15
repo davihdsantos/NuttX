@@ -609,7 +609,7 @@ static int nrf24l01_irqhandler(int irq, FAR void *context, FAR void *arg)
   nxsem_post(&dev->sem_tx);  /* Wake up the send function */
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -880,7 +880,7 @@ static int dosend(FAR struct nrf24l01_dev_s *dev, FAR const uint8_t *data,
     {
       /* Transmit OK */
 
-      ret = OK;
+      ret = OKK;
       dev->lastxmitcount = (obsvalue & NRF24L01_ARC_CNT_MASK)
           >> NRF24L01_ARC_CNT_SHIFT;
 
@@ -1026,7 +1026,7 @@ static int nrf24l01_close(FAR struct file *filep)
   dev->nopens--;
 
   nxsem_post(&dev->devsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1477,7 +1477,7 @@ static int nrf24l01_unregister(FAR struct nrf24l01_dev_s *dev)
 #endif
   kmm_free(dev);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1492,7 +1492,7 @@ int nrf24l01_register(FAR struct spi_dev_s *spi,
                       FAR struct nrf24l01_config_s *cfg)
 {
   FAR struct nrf24l01_dev_s *dev;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_WL_NRF24L01_RXSUPPORT
   FAR uint8_t *rx_fifo;
@@ -1557,7 +1557,7 @@ int nrf24l01_register(FAR struct spi_dev_s *spi,
 
 int nrf24l01_init(FAR struct nrf24l01_dev_s *dev)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t features;
 
   CHECK_ARGS(dev);
@@ -1688,7 +1688,7 @@ int nrf24l01_setpipeconfig(FAR struct nrf24l01_dev_s *dev,
   nrf24l01_unlock(dev->spi);
 
   dev->pipedatalen[pipeno] = pipecfg->payload_length;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1736,7 +1736,7 @@ int nrf24l01_getpipeconfig(FAR struct nrf24l01_dev_s *dev,
 
   nrf24l01_unlock(dev->spi);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1773,7 +1773,7 @@ int nrf24l01_enablepipe(FAR struct nrf24l01_dev_s *dev, unsigned int pipeno,
 
   dev->en_pipes = rxaddrval;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1789,7 +1789,7 @@ int nrf24l01_settxaddr(FAR struct nrf24l01_dev_s *dev,
 
   nrf24l01_writereg(dev, NRF24L01_TX_ADDR, txaddr, dev->addrlen);
   nrf24l01_unlock(dev->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1804,7 +1804,7 @@ int nrf24l01_gettxaddr(FAR struct nrf24l01_dev_s *dev, FAR uint8_t *txaddr)
 
   nrf24l01_readreg(dev, NRF24L01_TX_ADDR, txaddr, dev->addrlen);
   nrf24l01_unlock(dev->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1825,7 +1825,7 @@ int nrf24l01_setretransmit(FAR struct nrf24l01_dev_s *dev,
 
   nrf24l01_writeregbyte(dev, NRF24L01_SETUP_RETR, val);
   nrf24l01_unlock(dev->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1876,7 +1876,7 @@ int nrf24l01_settxpower(FAR struct nrf24l01_dev_s *dev, int outpower)
 
   nrf24l01_writeregbyte(dev, NRF24L01_RF_SETUP, value);
   nrf24l01_unlock(dev->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1927,7 +1927,7 @@ int nrf24l01_setdatarate(FAR struct nrf24l01_dev_s *dev,
 
   nrf24l01_writeregbyte(dev, NRF24L01_RF_SETUP, value);
   nrf24l01_unlock(dev->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1944,7 +1944,7 @@ int nrf24l01_setradiofreq(FAR struct nrf24l01_dev_s *dev, uint32_t freq)
   nrf24l01_lock(dev->spi);
   nrf24l01_writeregbyte(dev, NRF24L01_RF_CH, value);
   nrf24l01_unlock(dev->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1977,7 +1977,7 @@ int nrf24l01_setaddrwidth(FAR struct nrf24l01_dev_s *dev, uint32_t width)
   nrf24l01_writeregbyte(dev, NRF24L01_SETUP_AW, width - 2);
   nrf24l01_unlock(dev->spi);
   dev->addrlen = width;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1990,7 +1990,7 @@ int nrf24l01_changestate(FAR struct nrf24l01_dev_s *dev,
   nrf24l01_lock(dev->spi);
   nrf24l01_tostate(dev, state);
   nrf24l01_unlock(dev->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

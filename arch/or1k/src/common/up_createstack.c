@@ -253,7 +253,7 @@ int up_create_stack(FAR struct tcb_s *tcb, size_t stack_size, uint8_t ttype)
 #endif /* CONFIG_TLS */
 
       board_autoled_on(LED_STACKCREATED);
-      return OK;
+      return OKK;
     }
 
   return ERROR;

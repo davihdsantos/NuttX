@@ -318,7 +318,7 @@ void nand_lock(void)
   do
     {
       ret = nxsem_wait(&g_nand.exclsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -439,7 +439,7 @@ static int nand_operation_complete(struct sam_nandcs_s *priv)
       return -EBUSY;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -689,7 +689,7 @@ static void nand_wait_cmddone(struct sam_nandcs_s *priv)
   do
     {
       ret = nxsem_wait(&g_nand.waitsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (!g_nand.cmddone);
 
@@ -777,7 +777,7 @@ static void nand_wait_xfrdone(struct sam_nandcs_s *priv)
   do
     {
       ret = nxsem_wait(&g_nand.waitsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (!g_nand.xfrdone);
 
@@ -865,7 +865,7 @@ static void nand_wait_rbedge(struct sam_nandcs_s *priv)
   do
     {
       ret = nxsem_wait(&g_nand.waitsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (!g_nand.rbedge);
 
@@ -1106,7 +1106,7 @@ static int hsmc_interrupt(int irq, void *context, FAR void *arg)
       nand_putreg(SAM_HSMC_IDR, HSMC_NFCINT_RBEDGE0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_SAMA5_NAND_HSMCINTERRUPTS */
 
@@ -1218,7 +1218,7 @@ static int nand_wait_dma(struct sam_nandcs_s *priv)
   while (!priv->dmadone)
     {
       ret = nxsem_wait(&priv->waitsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
 
   finfo("Awakened: result=%d\n", priv->result);
@@ -1486,7 +1486,7 @@ static int nand_nfcsram_read(struct sam_nandcs_s *priv, uint8_t *buffer,
           *dest8++ = *src8++;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   nand_dump("NFS SRAM Read", buffer, buflen);
@@ -1575,7 +1575,7 @@ static int nand_read(struct sam_nandcs_s *priv, uint8_t *buffer,
             }
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   nand_dump("NAND Read", buffer, buflen);
@@ -1727,7 +1727,7 @@ static int nand_read_pmecc(struct sam_nandcs_s *priv, off_t block,
   /* Wait until the kernel of the PMECC is not busy */
 
   while ((nand_getreg(SAM_HSMC_PMECCSR) & HSMC_PMECCSR_BUSY) != 0);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1788,7 +1788,7 @@ static int nand_nfcsram_write(struct sam_nandcs_s *priv, uint8_t *buffer,
           *dest8++ = *buffer++;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1876,7 +1876,7 @@ static int nand_write(struct sam_nandcs_s *priv, uint8_t *buffer,
             }
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1996,7 +1996,7 @@ static int nand_readpage_noecc(struct sam_nandcs_s *priv, off_t block,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2145,7 +2145,7 @@ static int nand_writepage_noecc(struct sam_nandcs_s *priv, off_t block,
   uint16_t pagesize;
   uint16_t sparesize;
   off_t rowaddr;
-  int ret = OK;
+  int ret = OKK;
 
   finfo("block=%d page=%d data=%p spare=%p\n", (int)block, page, data, spare);
 
@@ -2534,7 +2534,7 @@ static int nand_eraseblock(struct nand_raw_s *raw, off_t block)
 {
   struct sam_nandcs_s *priv = (struct sam_nandcs_s *)raw;
   int retries = NAND_ERASE_NRETRIES;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(priv);
 
@@ -2551,10 +2551,10 @@ static int nand_eraseblock(struct nand_raw_s *raw, off_t block)
   while (retries > 0)
     {
       ret = nand_tryeraseblock(priv, block);
-      if (ret == OK)
+      if (ret == OKK)
         {
           nand_unlock();
-          return OK;
+          return OKK;
         }
 
       retries--;

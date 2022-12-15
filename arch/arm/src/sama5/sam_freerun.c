@@ -194,7 +194,7 @@ int sam_freerun_initialize(struct sam_freerun_s *freerun, int chan,
   /* Start the counter */
 
   sam_tc_start(freerun->tch);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -282,7 +282,7 @@ int sam_freerun_counter(struct sam_freerun_s *freerun, struct timespec *ts)
   tmrinfo("usec=%llu ts=(%lu, %lu)\n",
           usec, (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -315,7 +315,7 @@ int sam_freerun_uninitialize(struct sam_freerun_s *freerun)
 
   sam_tc_free(freerun->tch);
   freerun->tch = NULL;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAMA5_FREERUN */

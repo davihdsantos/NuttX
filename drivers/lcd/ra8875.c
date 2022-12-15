@@ -687,7 +687,7 @@ static int ra8875_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buff
   priv->shadow_w_curh += curhinc;
   priv->shadow_w_curv += curvinc;
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -787,7 +787,7 @@ static int ra8875_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
 
   lcd->pread_finish(lcd);
 
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -812,7 +812,7 @@ static int ra8875_getvideoinfo(FAR struct lcd_dev_s *dev,
   vinfo->xres    = RA8875_XRES;        /* Horizontal resolution in pixel columns */
   vinfo->yres    = RA8875_YRES;        /* Vertical resolution in pixel rows */
   vinfo->nplanes = 1;                  /* Number of color planes supported */
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -835,7 +835,7 @@ static int ra8875_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   pinfo->getrun = ra8875_getrun;                  /* Get a run from LCD memory */
   pinfo->buffer = (FAR uint8_t *)priv->runbuffer; /* Run scratch buffer */
   pinfo->bpp    = RA8875_BPP;                     /* Bits-per-pixel */
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -876,7 +876,7 @@ static int ra8875_poweroff(FAR struct ra8875_lcd_s *lcd)
   /* Remember the power off state */
 
   g_lcddev.power = 0;
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -923,7 +923,7 @@ static int ra8875_setpower(FAR struct lcd_dev_s *dev, int power)
       ra8875_poweroff(lcd);
     }
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -1053,7 +1053,7 @@ static inline int ra8875_hwinitialize(FAR struct ra8875_dev_s *priv)
   priv->shadow_w_curv = 0;
 
   lcdinfo("hwinitialize done\n");
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -1096,7 +1096,7 @@ FAR struct lcd_dev_s *ra8875_lcdinitialize(FAR struct ra8875_lcd_s *lcd)
   /* Configure and enable LCD */
 
   ret = ra8875_hwinitialize(priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Clear the display (setting it to the color 0=black) */
 

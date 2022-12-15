@@ -607,5 +607,5 @@ int edid_parse(FAR const uint8_t *data, FAR struct edid_info_s *edid)
       edid->edid_range.er_max_clock = mhz;
     }
 
-  return OK;
+  return OKK;
 }

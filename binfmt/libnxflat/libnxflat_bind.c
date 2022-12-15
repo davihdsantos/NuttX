@@ -113,7 +113,7 @@ static inline int nxflat_bindrel32i(FAR struct nxflat_loadinfo_s *loadinfo,
       binfo("  Before: %08x\n", *addr);
      *addr += (uint32_t)(loadinfo->ispace + sizeof(struct nxflat_hdr_s));
       binfo("  After: %08x\n", *addr);
-      return OK;
+      return OKK;
     }
   else
     {
@@ -152,7 +152,7 @@ static inline int nxflat_bindrel32d(FAR struct nxflat_loadinfo_s *loadinfo,
       binfo("  Before: %08x\n", *addr);
      *addr += (uint32_t)(loadinfo->dspace->region);
       binfo("  After: %08x\n", *addr);
-      return OK;
+      return OKK;
     }
   else
     {
@@ -194,7 +194,7 @@ static inline int nxflat_bindrel32id(FAR struct nxflat_loadinfo_s *loadinfo,
       binfo("  Before: %08x\n", *addr);
      *addr += ((uint32_t)loadinfo->ispace - (uint32_t)(loadinfo->dspace->region));
       binfo("  After: %08x\n", *addr);
-      return OK;
+      return OKK;
     }
   else
     {
@@ -272,7 +272,7 @@ static inline int nxflat_gotrelocs(FAR struct nxflat_loadinfo_s *loadinfo)
 
   /* Now, traverse the relocation list of and bind each GOT relocation. */
 
-  ret = OK; /* Assume success */
+  ret = OKK; /* Assume success */
   for (i = 0; i < nrelocs; i++)
     {
       /* Handle the relocation by the relocation type */
@@ -284,7 +284,7 @@ static inline int nxflat_gotrelocs(FAR struct nxflat_loadinfo_s *loadinfo)
       relocs++;
 #endif
 
-      result = OK;
+      result = OKK;
       switch (NXFLAT_RELOC_TYPE(reloc.r_info))
         {
         /* NXFLAT_RELOC_TYPE_REL32I  Meaning: Object file contains a 32-bit offset
@@ -337,7 +337,7 @@ static inline int nxflat_gotrelocs(FAR struct nxflat_loadinfo_s *loadinfo)
 
       /* Check for failures */
 
-      if (result < 0 && ret == OK)
+      if (result < 0 && ret == OKK)
         {
           ret = result;
         }
@@ -346,7 +346,7 @@ static inline int nxflat_gotrelocs(FAR struct nxflat_loadinfo_s *loadinfo)
   /* Dump the relocation got */
 
 #ifdef CONFIG_NXFLAT_DUMPBUFFER
-  if (ret == OK && nrelocs > 0)
+  if (ret == OKK && nrelocs > 0)
     {
       relocs = (FAR struct nxflat_reloc_s *)(offset - loadinfo->isize + loadinfo->dspace->region);
       nxflat_dumpbuffer("GOT", (FAR const uint8_t *)relocs, nrelocs * sizeof(struct nxflat_reloc_s));
@@ -509,7 +509,7 @@ static inline int nxflat_bindimports(FAR struct nxflat_loadinfo_s *loadinfo,
 
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -563,7 +563,7 @@ static inline int nxflat_clearbss(FAR struct nxflat_loadinfo_s *loadinfo)
 
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -595,12 +595,12 @@ int nxflat_bind(FAR struct nxflat_loadinfo_s *loadinfo,
    */
 
   int ret = nxflat_bindimports(loadinfo, exports, nexports);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Then bind all GOT relocations */
 
       ret = nxflat_gotrelocs(loadinfo);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Zero the BSS area, trashing the relocations that lived in that
            * space in the loaded file.

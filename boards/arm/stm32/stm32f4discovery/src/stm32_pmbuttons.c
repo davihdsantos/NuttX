@@ -106,7 +106,7 @@ static int button_handler(int irq, FAR void *context, FAR void *arg)
    */
 
   pm_activity(PM_IDLE_DOMAIN, CONFIG_PM_BUTTON_ACTIVITY);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_ARCH_IRQBUTTONS */
 

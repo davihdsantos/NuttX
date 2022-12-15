@@ -313,7 +313,7 @@ int efm32_configgpio(gpio_pinset_t cfgset)
   /* Finally, set the pin mode */
 
   efm32_setmode(base, pin, mode);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

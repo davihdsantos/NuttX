@@ -67,5 +67,5 @@ int posix_spawnattr_setflags(FAR posix_spawnattr_t *attr, short flags)
 {
   DEBUGASSERT(attr && (flags & ~0xff) == 0);
   attr->flags = (uint8_t)flags;
-  return OK;
+  return OKK;
 }

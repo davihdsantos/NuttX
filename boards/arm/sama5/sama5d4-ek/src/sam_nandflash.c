@@ -157,7 +157,7 @@ int board_nandflash_config(int cs)
       sam_configpio(PIO_HSMC_NANDALE);
       sam_configpio(PIO_HSMC_NANDCLE);
 
-      return OK;
+      return OKK;
     }
 
   return -ENODEV;
@@ -225,7 +225,7 @@ int sam_nand_automount(int minor)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

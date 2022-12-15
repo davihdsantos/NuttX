@@ -718,7 +718,7 @@ static int isx012_putreglist(isx012_dev_t *priv,
                              FAR const isx012_reg_t *reglist, size_t nentries)
 {
   FAR const isx012_reg_t *entry;
-  int ret = OK;
+  int ret = OKK;
 
   for (entry = reglist; nentries > 0; nentries--, entry++)
     {
@@ -785,7 +785,7 @@ static int isx012_replace_fmt_v4l2val_to_regval(uint32_t v4l2val,
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_set_mode_param(isx012_dev_t *priv,
@@ -1016,7 +1016,7 @@ static int isx012_change_camera_mode(isx012_dev_t *priv, uint8_t mode)
     }
 #endif /* ISX012_FRAME_SKIP_EN */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1097,7 +1097,7 @@ static int isx012_change_device_state(isx012_dev_t *priv,
 
   priv->mode = REGVAL_MODESEL_MON;
 
-  return OK;
+  return OKK;
 }
 
 int init_isx012(FAR struct isx012_dev_s *priv)
@@ -1129,7 +1129,7 @@ int init_isx012(FAR struct isx012_dev_s *priv)
 
   ret = isx012_chk_int_state(priv, OM_CHANGED_STS, DEVICE_STATE_DELAY_TIME,
                              DEVICE_STATE_WAIT_TIME, DEVICE_STATE_TIMEOUT);
-  if (ret != OK)
+  if (ret != OKK)
     {
       imagererr("OM_CHANGED_STS(PreSleep) is Not occured: %d\n", ret);
       return ret;
@@ -1143,7 +1143,7 @@ int init_isx012(FAR struct isx012_dev_s *priv)
   /* Write INCK_SET register ISX012 change state PreSleep -> Sleep */
 
   ret = isx012_putreglist(priv, g_isx012_presleep, ISX012_PRESLEEP_NENTRIES);
-  if (ret != OK)
+  if (ret != OKK)
     {
       imagererr("isx012_putreglist(INCK_SET) failed: %d\n", ret);
       return ret;
@@ -1153,7 +1153,7 @@ int init_isx012(FAR struct isx012_dev_s *priv)
 
   ret = isx012_chk_int_state(priv, OM_CHANGED_STS, DEVICE_STATE_DELAY_TIME,
                              DEVICE_STATE_WAIT_TIME, DEVICE_STATE_TIMEOUT);
-  if (ret != OK)
+  if (ret != OKK)
     {
       imagererr("OM_CHANGED_STS(Sleep) is Not occured: %d\n", ret);
       return ret;
@@ -1312,7 +1312,7 @@ static int isx012_do_halfpush(bool enable)
       if (priv->mode == REGVAL_MODESEL_MON)
         {
           mode = REGVAL_MODESEL_HREL;
-          ret = OK;
+          ret = OKK;
         }
     }
   else
@@ -1322,7 +1322,7 @@ static int isx012_do_halfpush(bool enable)
       if (priv->mode == REGVAL_MODESEL_HREL)
         {
           mode = REGVAL_MODESEL_MON;
-          ret = OK;
+          ret = OKK;
         }
     }
 
@@ -1342,7 +1342,7 @@ static int isx012_set_buftype(enum v4l2_buf_type type)
 {
   FAR struct isx012_dev_s *priv = &g_isx012_private;
   uint8_t                 mode;
-  int                     ret = OK;
+  int                     ret = OKK;
 
   if (type == V4L2_BUF_TYPE_VIDEO_CAPTURE)
     {
@@ -1444,7 +1444,7 @@ static int isx012_set_buf(uint32_t bufaddr, uint32_t bufsize)
       cis_param.comp_func = isx012_callback;
 
       ret = cxd56_cisifstartcapture(&cis_param, &sarea);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -1461,7 +1461,7 @@ static int isx012_cancel_dma(void)
   FAR struct isx012_dev_s *priv = &g_isx012_private;
 
   ret =  cxd56_cisifstopcapture();
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -1502,7 +1502,7 @@ static int isx012_check_fmt(enum v4l2_buf_type buf_type,
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_get_range_of_fmt(FAR struct v4l2_fmtdesc *format)
@@ -1569,7 +1569,7 @@ static int isx012_get_range_of_fmt(FAR struct v4l2_fmtdesc *format)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_get_range_of_framesize(FAR struct v4l2_frmsizeenum *frmsize)
@@ -1587,7 +1587,7 @@ static int isx012_get_range_of_framesize(FAR struct v4l2_frmsizeenum *frmsize)
     }
 
   ret = isx012_check_fmt(frmsize->buf_type, frmsize->pixel_format);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -1647,7 +1647,7 @@ static int isx012_get_range_of_framesize(FAR struct v4l2_frmsizeenum *frmsize)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_try_format(FAR struct v4l2_format *format)
@@ -1668,7 +1668,7 @@ static int isx012_try_format(FAR struct v4l2_format *format)
   support.subimg_pixel_format = format->fmt.pix.subimg_pixelformat;
 
   ret = isx012_get_range_of_framesize(&support);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -1696,7 +1696,7 @@ static int isx012_try_format(FAR struct v4l2_format *format)
                   support.subimg.stepwise.step_height);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_set_format(FAR struct v4l2_format *format)
@@ -1759,14 +1759,14 @@ static int isx012_set_format(FAR struct v4l2_format *format)
   ret = isx012_set_mode_param(priv,
                               format->type,
                               &mode_param);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
   memcpy(current_param, &mode_param, sizeof(mode_param));
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_set_supported_frminterval(uint32_t fps_index,
@@ -1820,7 +1820,7 @@ static int isx012_set_supported_frminterval(uint32_t fps_index,
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int8_t isx012_get_maximum_fps(FAR struct v4l2_frmivalenum *frmival)
@@ -1834,7 +1834,7 @@ static int8_t isx012_get_maximum_fps(FAR struct v4l2_frmivalenum *frmival)
     }
 
   ret = isx012_check_fmt(frmival->buf_type, frmival->pixel_format);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -2065,7 +2065,7 @@ static int isx012_set_frameinterval(FAR struct v4l2_streamparm *parm)
 
   modeparam->fps = fps;
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_get_range_of_ctrlval(FAR struct v4l2_query_ext_ctrl *range)
@@ -2399,7 +2399,7 @@ static int isx012_get_range_of_ctrlval(FAR struct v4l2_query_ext_ctrl *range)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_get_menu_of_ctrlval(FAR struct v4l2_querymenu *menu)
@@ -2476,7 +2476,7 @@ static int isx012_get_menu_of_ctrlval(FAR struct v4l2_querymenu *menu)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_get_ctrlval(uint16_t ctrl_class,
@@ -2653,12 +2653,12 @@ static int isx012_get_ctrlval(uint16_t ctrl_class,
                 {
                   if (g_isx012_supported_colorfx[cnt].regval == readvalue)
                     {
-                      ret = OK;
+                      ret = OKK;
                       break;
                     }
                 }
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return ret;
                 }
@@ -2709,12 +2709,12 @@ static int isx012_get_ctrlval(uint16_t ctrl_class,
                 {
                   if (g_isx012_supported_presetwb[cnt].regval == readvalue)
                     {
-                      ret = OK;
+                      ret = OKK;
                       break;
                     }
                 }
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return ret;
                 }
@@ -2747,12 +2747,12 @@ static int isx012_get_ctrlval(uint16_t ctrl_class,
                 {
                   if (g_isx012_supported_iso[cnt].regval == readvalue)
                     {
-                      ret = OK;
+                      ret = OKK;
                       break;
                     }
                 }
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return ret;
                 }
@@ -2784,12 +2784,12 @@ static int isx012_get_ctrlval(uint16_t ctrl_class,
                 {
                   if (g_isx012_supported_photometry[cnt].regval == readvalue)
                     {
-                      ret = OK;
+                      ret = OKK;
                       break;
                     }
                 }
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return ret;
                 }
@@ -2824,7 +2824,7 @@ static int isx012_get_ctrlval(uint16_t ctrl_class,
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_set_ctrlval(uint16_t ctrl_class,
@@ -3119,12 +3119,12 @@ static int isx012_set_ctrlval(uint16_t ctrl_class,
                 {
                   if (g_isx012_supported_colorfx[cnt].v4l2 == control->value)
                     {
-                      ret = OK;
+                      ret = OKK;
                       break;
                     }
                 }
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return ret;
                 }
@@ -3238,12 +3238,12 @@ static int isx012_set_ctrlval(uint16_t ctrl_class,
                   if (g_isx012_supported_iso[cnt].v4l2
                        == control->value)
                     {
-                      ret = OK;
+                      ret = OKK;
                       break;
                     }
                 }
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return ret;
                 }
@@ -3289,12 +3289,12 @@ static int isx012_set_ctrlval(uint16_t ctrl_class,
                   if (g_isx012_supported_photometry[cnt].v4l2
                        == control->value)
                     {
-                      ret = OK;
+                      ret = OKK;
                       break;
                     }
                 }
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return ret;
                 }
@@ -3311,12 +3311,12 @@ static int isx012_set_ctrlval(uint16_t ctrl_class,
                 {
                   if (g_isx012_supported_presetwb[cnt].v4l2 == control->value)
                     {
-                      ret = OK;
+                      ret = OKK;
                       break;
                     }
                 }
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return ret;
                 }
@@ -3403,7 +3403,7 @@ static int isx012_refresh(void)
     {
       /* In inactive state, setting is reflected in activated timing */
 
-      return OK;
+      return OKK;
     }
 
   if (priv->mode != REGVAL_MODESEL_MON)
@@ -3447,7 +3447,7 @@ static int isx012_refresh(void)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 static int isx012_set_shd(FAR isx012_dev_t *priv)
@@ -3639,7 +3639,7 @@ static int isx012_set_shd(FAR isx012_dev_t *priv)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3659,14 +3659,14 @@ int isx012_register(FAR struct i2c_master_s *i2c)
 
   priv->state      = STATE_ISX012_POWEROFF;
 
-  return OK;
+  return OKK;
 }
 
 int isx012_unregister(void)
 {
   /* no procedure */
 
-  return OK;
+  return OKK;
 }
 
 FAR struct video_devops_s *isx012_initialize(void)
@@ -3680,5 +3680,5 @@ int isx012_uninitialize(void)
 {
   /* No procedure */
 
-  return OK;
+  return OKK;
 }

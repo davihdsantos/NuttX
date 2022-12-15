@@ -366,7 +366,7 @@ static int rpr0521rs_checkid(FAR struct rpr0521rs_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -456,7 +456,7 @@ static int rpr0521rsals_seqinit(FAR struct rpr0521rs_dev_s *priv)
   seq_setsample(priv->seq, RPR0521RS_ALS_BYTESPERSAMPLE, 0, RPR0521RS_ELEMENTSIZE,
                 false);
 
-  return OK;
+  return OKK;
 }
 
 #ifndef CONFIG_RPR0521RS_PROXIMITY_INTERRUPT
@@ -489,7 +489,7 @@ static int rpr0521rsps_seqinit(FAR struct rpr0521rs_dev_s *priv)
   seq_setsample(priv->seq, RPR0521RS_PS_BYTESPERSAMPLE, 0, RPR0521RS_ELEMENTSIZE,
                 false);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -527,7 +527,7 @@ static int rpr0521rs_open_als(FAR struct file *filep)
 
   g_als_refcnt++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -565,7 +565,7 @@ static int rpr0521rs_open_ps(FAR struct file *filep)
   g_ps_refcnt++;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -597,7 +597,7 @@ static int rpr0521rs_close_als(FAR struct file *filep)
       (void) seq_ioctl(priv->seq, priv->minor, SCUIOC_FREEFIFO, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -634,7 +634,7 @@ static int rpr0521rs_close_ps(FAR struct file *filep)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -697,7 +697,7 @@ static int rpr0521rs_ioctl_als(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct rpr0521rs_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -730,7 +730,7 @@ static int rpr0521rs_ioctl_ps(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct rpr0521rs_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 #ifdef CONFIG_RPR0521RS_PROXIMITY_INTERRUPT
   uint8_t val;
 #endif
@@ -873,7 +873,7 @@ int rpr0521rs_init(FAR struct i2c_master_s *i2c, int port)
   val = RPR0521RS_INTERRUPT_INT_TRIG_INACTIVE;
   rpr0521rs_putreg8(priv, RPR0521RS_INTERRUPT, val);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -93,7 +93,7 @@ int pthread_key_delete(pthread_key_t key)
       group->tg_keyset &= ~mask;
       spin_unlock_irqrestore(flags);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

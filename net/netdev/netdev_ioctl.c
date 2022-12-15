@@ -674,7 +674,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev)
             {
               ioctl_get_ipv4addr(&req->ifr_addr, dev->d_ipaddr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -687,7 +687,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev)
             {
               ioctl_set_ipv4addr(&dev->d_ipaddr, &req->ifr_addr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -700,7 +700,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev)
             {
               ioctl_get_ipv4addr(&req->ifr_dstaddr, dev->d_draddr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -713,7 +713,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev)
             {
               ioctl_set_ipv4addr(&dev->d_draddr, &req->ifr_dstaddr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -727,7 +727,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
             {
               ioctl_get_ipv4broadcast(&req->ifr_broadaddr, dev->d_ipaddr,
                                       dev->d_netmask);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -748,7 +748,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev)
             {
               ioctl_get_ipv4addr(&req->ifr_addr, dev->d_netmask);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -761,7 +761,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev)
             {
               ioctl_set_ipv4addr(&dev->d_netmask, &req->ifr_addr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -776,7 +776,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
               FAR struct lifreq *lreq = (FAR struct lifreq *)req;
 
               ioctl_get_ipv6addr(&lreq->lifr_addr, dev->d_ipv6addr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -791,7 +791,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
               FAR struct lifreq *lreq = (FAR struct lifreq *)req;
 
               ioctl_set_ipv6addr(dev->d_ipv6addr, &lreq->lifr_addr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -806,7 +806,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
               FAR struct lifreq *lreq = (FAR struct lifreq *)req;
 
               ioctl_get_ipv6addr(&lreq->lifr_dstaddr, dev->d_ipv6draddr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -821,7 +821,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
               FAR struct lifreq *lreq = (FAR struct lifreq *)req;
 
               ioctl_set_ipv6addr(dev->d_ipv6draddr, &lreq->lifr_dstaddr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -845,7 +845,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
               FAR struct lifreq *lreq = (FAR struct lifreq *)req;
 
               ioctl_get_ipv6addr(&lreq->lifr_addr, dev->d_ipv6netmask);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -859,7 +859,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
             {
               FAR struct lifreq *lreq = (FAR struct lifreq *)req;
               ioctl_set_ipv6addr(dev->d_ipv6netmask, &lreq->lifr_addr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -872,7 +872,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev)
             {
               req->ifr_mtu = NETDEV_PKTSIZE(dev);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -913,7 +913,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
                 }
             }
 
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -925,7 +925,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
               req->ifr_flags = dev->d_flags;
             }
 
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -946,7 +946,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
                   req->ifr_hwaddr.sa_family = AF_INETX;
                   memcpy(req->ifr_hwaddr.sa_data,
                          dev->d_mac.ether.ether_addr_octet, IFHWADDRLEN);
-                  ret = OK;
+                  ret = OKK;
                 }
               else
 #endif
@@ -959,7 +959,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
                   memcpy(req->ifr_hwaddr.sa_data,
                          dev->d_mac.radio.nv_addr,
                          dev->d_mac.radio.nv_addrlen);
-                  ret = OK;
+                  ret = OKK;
                 }
                else
 #endif
@@ -980,7 +980,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
                 {
                   memcpy(dev->d_mac.ether.ether_addr_octet,
                          req->ifr_hwaddr.sa_data, IFHWADDRLEN);
-                  ret = OK;
+                  ret = OKK;
                 }
               else
 #endif
@@ -1026,7 +1026,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
 #ifdef CONFIG_NET_IPv6
               memset(&dev->d_ipv6addr, 0, sizeof(net_ipv6addr_t));
 #endif
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -1107,7 +1107,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev != NULL)
             {
               strncpy(req->ifr_name, dev->d_ifname, IFNAMSIZ);
-              ret = OK;
+              ret = OKK;
             }
           else
             {
@@ -1122,7 +1122,7 @@ static int netdev_ifr_ioctl(FAR struct socket *psock, int cmd,
           if (dev != NULL)
             {
               req->ifr_ifindex = dev->d_ifindex;
-              ret = OK;
+              ret = OKK;
             }
           else
             {
@@ -1299,7 +1299,7 @@ static int netdev_arp_ioctl(FAR struct socket *psock, int cmd,
                    */
 
                   entry->at_ipaddr = 0;
-                  ret = OK;
+                  ret = OKK;
                 }
               else
                 {
@@ -1331,7 +1331,7 @@ static int netdev_arp_ioctl(FAR struct socket *psock, int cmd,
                   /* Return the mapped hardware address. */
 
                   req->arp_ha.sa_family = ARPHRD_ETHER;
-                  ret = OK;
+                  ret = OKK;
                 }
             }
           else
@@ -1803,7 +1803,7 @@ void netdev_ifup(FAR struct net_driver_s *dev)
         {
           /* No, bring the interface up now */
 
-          if (dev->d_ifup(dev) == OK)
+          if (dev->d_ifup(dev) == OKK)
             {
               /* Mark the interface as up */
 
@@ -1825,7 +1825,7 @@ void netdev_ifdown(FAR struct net_driver_s *dev)
         {
           /* No, take the interface down now */
 
-          if (dev->d_ifdown(dev) == OK)
+          if (dev->d_ifdown(dev) == OKK)
             {
               /* Mark the interface as down */
 

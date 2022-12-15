@@ -748,7 +748,7 @@ static int kinetis_transmit(FAR struct kinetis_driver_s *priv)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1043,7 +1043,7 @@ static int kinetis_flexcan_interrupt(int irq, FAR void *context,
       }
 
   }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1238,7 +1238,7 @@ static int kinetis_ifup(struct net_driver_s *dev)
 
   up_enable_irq(priv->config->mb_irq);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1265,7 +1265,7 @@ static int kinetis_ifdown(struct net_driver_s *dev)
   kinetis_reset(priv);
 
   priv->bifup = false;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1347,7 +1347,7 @@ static int kinetis_txavail(struct net_driver_s *dev)
       kinetis_txavail_work(priv);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1392,7 +1392,7 @@ static int kinetis_ioctl(struct net_driver_s *dev, int cmd,
           req->data_bitrate = 0;
           req->data_samplep = 0;
 #endif
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -1407,7 +1407,7 @@ static int kinetis_ioctl(struct net_driver_s *dev, int cmd,
 
           if (kinetis_bitratetotimeseg(&arbi_timing, 10, 0))
             {
-              ret = OK;
+              ret = OKK;
             }
           else
             {
@@ -1419,9 +1419,9 @@ static int kinetis_ioctl(struct net_driver_s *dev, int cmd,
           data_timing.bitrate = req->data_bitrate * 1000;
           data_timing.samplep = req->data_samplep;
 
-          if (ret == OK && kinetis_bitratetotimeseg(&data_timing, 10, 1))
+          if (ret == OKK && kinetis_bitratetotimeseg(&data_timing, 10, 1))
             {
-              ret = OK;
+              ret = OKK;
             }
           else
             {
@@ -1429,7 +1429,7 @@ static int kinetis_ioctl(struct net_driver_s *dev, int cmd,
             }
 #endif
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Reset CAN controller and start with new timings */
 
@@ -1855,7 +1855,7 @@ int kinetis_caninitialize(int intf)
   netdev_register(&priv->dev, NET_LL_CAN);
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

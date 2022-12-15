@@ -152,7 +152,7 @@ int stm32_dumpgpio(uint32_t pinset, const char *msg)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32F7_STM32F74XX || CONFIG_STM32F7_STM32F75XX */

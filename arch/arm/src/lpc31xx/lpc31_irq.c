@@ -220,6 +220,6 @@ void up_ack_irq(int irq)
 int up_prioritize_irq(int irq, int priority)
 {
 #warning "Not implemented"
-  return OK;
+  return OKK;
 }
 #endif

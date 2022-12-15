@@ -334,7 +334,7 @@ int up_cpu_start(int cpu)
       DEBUGASSERT(g_appcpu_started);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

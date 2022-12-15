@@ -137,7 +137,7 @@ uint16_t can_callback(FAR struct net_driver_s *dev,
 
       /* Try to lock the network when successfull send data to the listener */
 
-      if(net_trylock() == OK)
+      if(net_trylock() == OKK)
         {
           flags = devif_conn_event(dev, conn, flags, conn->list);
           net_unlock();

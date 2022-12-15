@@ -147,7 +147,7 @@ int stm32l4_dumpgpio(uint32_t pinset, const char *msg)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DEBUG_FEATURES */

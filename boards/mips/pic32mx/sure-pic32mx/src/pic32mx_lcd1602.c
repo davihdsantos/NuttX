@@ -1007,7 +1007,7 @@ static int lcd_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         return -ENOTTY;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1027,7 +1027,7 @@ static int lcd_poll(FAR struct file *filep, FAR struct pollfd *fds,
           nxsem_post(fds->sem);
         }
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1045,7 +1045,7 @@ static int lcd_poll(FAR struct file *filep, FAR struct pollfd *fds,
 
 int up_lcd1602_initialize(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Only initialize the driver once. */
 

@@ -66,7 +66,7 @@ int board_composite_initialize(int port)
 {
   syslog(LOG_INFO, "board_composite_initialize(port: %d)\n", port);
 
-  return OK;
+  return OKK;
 }
 
 /*****************************************************************************

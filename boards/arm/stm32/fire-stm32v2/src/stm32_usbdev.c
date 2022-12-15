@@ -98,7 +98,7 @@ int stm32_usbpullup(FAR struct usbdev_s *dev, bool enable)
 #if 0 /* REVISIT */
   stm32_gpiowrite(GPIO_USB_PULLUP, !enable);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

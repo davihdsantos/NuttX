@@ -175,7 +175,7 @@ static int audio_open(FAR struct file *filep)
 
   upper->crefs = tmp;
   upper->usermq = NULL;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nxsem_post(&upper->exclsem);
@@ -233,7 +233,7 @@ static int audio_close(FAR struct file *filep)
       lower->ops->shutdown(lower);
     }
 
-  ret = OK;
+  ret = OKK;
 
   nxsem_post(&upper->exclsem);
 
@@ -308,7 +308,7 @@ static int audio_start(FAR struct audio_upperhalf_s *upper)
 #endif
 {
   FAR struct audio_lowerhalf_s *lower = upper->dev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(upper != NULL && lower->ops->start != NULL);
 
@@ -328,7 +328,7 @@ static int audio_start(FAR struct audio_upperhalf_s *upper)
        * successfully.
        */
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Indicate that the audio stream has started */
 
@@ -589,7 +589,7 @@ static int audio_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           audinfo("AUDIOIOC_REGISTERMQ\n");
 
           upper->usermq = (mqd_t) arg;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -603,7 +603,7 @@ static int audio_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           audinfo("AUDIOIOC_UNREGISTERMQ\n");
 
           upper->usermq = NULL;
-          ret = OK;
+          ret = OKK;
         }
         break;
 

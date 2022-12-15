@@ -161,13 +161,13 @@ static int hcsr04_open(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
   nxsem_post(&priv->devsem);
   hcsr04_dbg("OPENED\n");
-  return OK;
+  return OKK;
 }
 
 static int hcsr04_close(FAR struct file *filep)
@@ -186,7 +186,7 @@ static int hcsr04_close(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -214,7 +214,7 @@ static ssize_t hcsr04_read(FAR struct file *filep, FAR char *buffer,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -234,7 +234,7 @@ static ssize_t hcsr04_read(FAR struct file *filep, FAR char *buffer,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -281,7 +281,7 @@ static int hcsr04_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -368,7 +368,7 @@ static int hcsr04_poll(FAR struct file *filep, FAR struct pollfd *fds,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -471,7 +471,7 @@ static int hcsr04_int_handler(int irq, FAR void *context, FAR void *arg)
   hcsr04_dbg("HC-SR04 interrupt\n");
   hcsr04_notify(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -511,5 +511,5 @@ int hcsr04_register(FAR const char *devpath,
 
   priv->config->irq_attach(priv->config, hcsr04_int_handler, priv);
   priv->config->irq_enable(priv->config, false);
-  return OK;
+  return OKK;
 }

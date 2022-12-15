@@ -573,7 +573,7 @@ static int sai_dma_setup(struct stm32l4_sai_s *priv)
 
   if (!sq_empty(&priv->act))
     {
-      return OK;
+      return OKK;
     }
 
   /* If there are no pending transfer, then bail returning success */
@@ -581,7 +581,7 @@ static int sai_dma_setup(struct stm32l4_sai_s *priv)
   if (sq_empty(&priv->pend))
     {
       priv->txenab = priv->rxenab = false;
-      return OK;
+      return OKK;
     }
 
   /* Remove the pending transfer at the head of the pending queue. */
@@ -682,7 +682,7 @@ static int sai_dma_setup(struct stm32l4_sai_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1030,10 +1030,10 @@ static int sai_receive(struct i2s_dev_s *dev, struct ap_buffer_s *apb,
 #ifdef CONFIG_STM32L4_SAI_DMA
   ret = sai_dma_setup(priv);
 #endif
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   leave_critical_section(flags);
   sai_exclsem_give(priv);
-  return OK;
+  return OKK;
 
 errout_with_exclsem:
   sai_exclsem_give(priv);
@@ -1130,10 +1130,10 @@ static int sai_send(struct i2s_dev_s *dev, struct ap_buffer_s *apb,
 #ifdef CONFIG_STM32L4_SAI_DMA
   ret = sai_dma_setup(priv);
 #endif
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   leave_critical_section(flags);
   sai_exclsem_give(priv);
-  return OK;
+  return OKK;
 
 errout_with_exclsem:
   sai_exclsem_give(priv);

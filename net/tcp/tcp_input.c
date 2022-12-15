@@ -591,7 +591,7 @@ found:
 
             /* Wake up any listener waiting for a connection on this port */
 
-            if (tcp_accept_connection(dev, conn, tcp->destport) != OK)
+            if (tcp_accept_connection(dev, conn, tcp->destport) != OKK)
               {
                 /* No more listener for current port.  We can free conn here
                  * because it has not been shared with upper layers yet as

@@ -610,7 +610,7 @@ static void stm32_takesem(struct stm32_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1378,7 +1378,7 @@ static int stm32_rdyinterrupt(int irq, void *context, FAR void *arg)
 {
   struct stm32_dev_s *priv = (struct stm32_dev_s *)arg;
   stm32_endwait(priv, SDIOWAIT_WRCOMPLETE);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1606,7 +1606,7 @@ static int stm32_interrupt(int irq, void *context, FAR void *arg)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1637,7 +1637,7 @@ static int stm32_lock(FAR struct sdio_dev_s *dev, bool lock)
    */
 
   stm32_muxbus_sdio_lock(lock);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1860,7 +1860,7 @@ static int stm32_attach(FAR struct sdio_dev_s *dev)
   /* Attach the SDIO interrupt handler */
 
   ret = irq_attach(STM32_IRQ_SDIO, stm32_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Disable all interrupts at the SDIO controller and clear static
        * interrupt flags
@@ -1945,7 +1945,7 @@ static int stm32_sendcmd(FAR struct sdio_dev_s *dev, uint32_t cmd,
 
   putreg32(SDIO_RESPDONE_ICR | SDIO_CMDDONE_ICR, STM32_SDIO_ICR);
   putreg32(regval, STM32_SDIO_CMD);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2040,7 +2040,7 @@ static int stm32_recvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
 
   stm32_configxfrints(priv, SDIO_RECV_MASK);
   stm32_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2104,7 +2104,7 @@ static int stm32_sendsetup(FAR struct sdio_dev_s *dev,
 
   stm32_configxfrints(priv, SDIO_SEND_MASK);
   stm32_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2160,7 +2160,7 @@ static int stm32_cancel(FAR struct sdio_dev_s *dev)
   /* Mark no transfer in progress */
 
   priv->remaining = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2224,7 +2224,7 @@ static int stm32_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
     }
 
   putreg32(SDIO_CMDDONE_ICR, STM32_SDIO_ICR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2256,7 +2256,7 @@ static int stm32_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd,
   uint32_t respcmd;
 #endif
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R1  Command response (48-bit)
    *     47        0               Start bit
@@ -2339,7 +2339,7 @@ static int stm32_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd,
                           uint32_t rlong[4])
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R2  CID, CSD register (136-bit)
    *     135       0               Start bit
@@ -2394,7 +2394,7 @@ static int stm32_recvshort(FAR struct sdio_dev_s *dev, uint32_t cmd,
                            uint32_t *rshort)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R3  OCR (48-bit)
    *     47        0               Start bit
@@ -2721,7 +2721,7 @@ static int stm32_registercallback(FAR struct sdio_dev_s *dev,
   priv->cbevents = 0;
   priv->cbarg    = arg;
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2845,7 +2845,7 @@ static int stm32_dmarecvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
   stm32_dmastart(priv->dma, stm32_dmacallback, priv, false);
   stm32_sample(priv, SAMPLENDX_AFTER_SETUP);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2927,7 +2927,7 @@ static int stm32_dmasendsetup(FAR struct sdio_dev_s *dev,
 
   stm32_configxfrints(priv, SDIO_DMASEND_MASK);
 
-  return OK;
+  return OKK;
 }
 #endif
 

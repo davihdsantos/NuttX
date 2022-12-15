@@ -67,7 +67,7 @@
  #ifdef CONFIG_TIMER
 int stm32l4_timer_driver_setup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_STM32L4_TIM1
   ret = stm32l4_timer_initialize("/dev/timer0", 1);

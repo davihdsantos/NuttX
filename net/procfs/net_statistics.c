@@ -469,7 +469,7 @@ ssize_t netprocfs_read_netstats(FAR struct netprocfs_file_s *priv,
 ssize_t netprocfs_read_netstats(FAR struct netprocfs_file_s *priv,
                                 FAR char *buffer, size_t buflen)
 {
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_IPv4 || CONFIG_NET_IPv6 || CONFIG_NET_TCP || \

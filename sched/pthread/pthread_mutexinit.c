@@ -85,7 +85,7 @@ int pthread_mutex_init(FAR pthread_mutex_t *mutex,
   uint8_t robust = PTHREAD_MUTEX_ROBUST;
 #endif
 #endif
-  int ret = OK;
+  int ret = OKK;
   int status;
 
   sinfo("mutex=0x%p attr=0x%p\n", mutex, attr);

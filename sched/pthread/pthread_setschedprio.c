@@ -103,5 +103,5 @@ int pthread_setschedprio(pthread_t thread, int prio)
       return -ret;
     }
 
-  return OK;
+  return OKK;
 }

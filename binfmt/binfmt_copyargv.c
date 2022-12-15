@@ -151,13 +151,13 @@ int binfmt_copyargv(FAR struct binary_s *bin, FAR char * const *argv)
         }
     }
 
-  return OK;
+  return OKK;
 
 #else
   /* Just save the caller's argv pointer */
 
   bin->argv = argv;
-  return OK;
+  return OKK;
 #endif
 }
 

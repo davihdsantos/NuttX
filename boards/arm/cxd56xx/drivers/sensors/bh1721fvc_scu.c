@@ -187,7 +187,7 @@ static int bh1721fvc_seqinit(FAR struct bh1721fvc_dev_s *priv)
   seq_setsample(priv->seq, BH1721FVC_BYTESPERSAMPLE, 0, BH1721FVC_ELEMENTSIZE,
                 false);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -218,7 +218,7 @@ static int bh1721fvc_open(FAR struct file *filep)
     }
   g_refcnt++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -250,7 +250,7 @@ static int bh1721fvc_close(FAR struct file *filep)
       (void) seq_ioctl(priv->seq, priv->minor, SCUIOC_FREEFIFO, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -288,7 +288,7 @@ static int bh1721fvc_ioctl(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct bh1721fvc_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -334,7 +334,7 @@ static int bh1721fvc_ioctl(FAR struct file *filep, int cmd,
 
 int bh1721fvc_init(FAR struct i2c_master_s *i2c, int port)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

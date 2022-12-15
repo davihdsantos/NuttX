@@ -65,7 +65,7 @@
 
 int pthread_cond_destroy(FAR pthread_cond_t *cond)
 {
-  int ret = OK;
+  int ret = OKK;
 
   sinfo("cond=0x%p\n", cond);
 
@@ -76,7 +76,7 @@ int pthread_cond_destroy(FAR pthread_cond_t *cond)
 
   /* Destroy the semaphore contained in the structure */
 
-  else if (sem_destroy((FAR sem_t *)&cond->sem) != OK)
+  else if (sem_destroy((FAR sem_t *)&cond->sem) != OKK)
     {
       ret = EINVAL;
     }

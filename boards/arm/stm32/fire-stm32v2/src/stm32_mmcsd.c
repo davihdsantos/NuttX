@@ -102,7 +102,7 @@ int stm32_sdinitialize(int minor)
   /* Now bind the SDIO interface to the MMC/SD driver */
 
   ret = mmcsd_slotinitialize(minor, sdio);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: Failed to bind SDIO slot %d to the MMC/SD driver, minor=%d\n",
               STM32_MMCSDSLOTNO, minor);
@@ -118,5 +118,5 @@ int stm32_sdinitialize(int minor)
 
   sdio_mediachange(sdio, true);
 #endif
-  return OK;
+  return OKK;
 }

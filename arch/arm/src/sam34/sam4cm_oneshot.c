@@ -218,7 +218,7 @@ int sam_oneshot_initialize(struct sam_oneshot_s *oneshot, int chan,
   oneshot->start_count = 0;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -233,7 +233,7 @@ int sam_oneshot_max_delay(struct sam_oneshot_s *oneshot, uint64_t *usec)
 {
   DEBUGASSERT(oneshot && usec);
   *usec = (0xffffull * USEC_PER_SEC) / (uint64_t)sam_tc_divfreq(oneshot->tch);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -347,7 +347,7 @@ int sam_oneshot_start(struct sam_oneshot_s *oneshot,
 
   oneshot->running = true;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -398,7 +398,7 @@ int sam_oneshot_cancel(struct sam_oneshot_s *oneshot,
       ts->tv_sec  = 0;
       ts->tv_nsec = 0;
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   /* Yes.. Get the timer counter and rc registers and stop the counter.  If
@@ -500,7 +500,7 @@ int sam_oneshot_cancel(struct sam_oneshot_s *oneshot,
               (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAM34_ONESHOT */

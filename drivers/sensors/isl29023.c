@@ -241,7 +241,7 @@ static int isl29023_read_reg(FAR struct isl29023_dev_s *dev,
 
 static int isl29023_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -254,7 +254,7 @@ static int isl29023_open(FAR struct file *filep)
 
 static int isl29023_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -323,7 +323,7 @@ static int isl29023_read_lux(FAR struct isl29023_dev_s *dev,
 
   sninfo("raw value %8x, lux: %5u\n", data->raw, data->lux);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -432,7 +432,7 @@ static int isl29023_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode            *inode = filep->f_inode;
   FAR struct isl29023_dev_s   *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

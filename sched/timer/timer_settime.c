@@ -272,7 +272,7 @@ int timer_settime(timer_t timerid, int flags,
   FAR struct posix_timer_s *timer = (FAR struct posix_timer_s *)timerid;
   irqstate_t intflags;
   sclock_t delay;
-  int ret = OK;
+  int ret = OKK;
 
   /* Some sanity checks */
 
@@ -308,7 +308,7 @@ int timer_settime(timer_t timerid, int flags,
 
   if (value->it_value.tv_sec <= 0 && value->it_value.tv_nsec <= 0)
     {
-      return OK;
+      return OKK;
     }
 
   /* Setup up any repetitive timer */
@@ -380,7 +380,7 @@ int timer_settime(timer_t timerid, int flags,
         }
       else
         {
-          ret = OK;
+          ret = OKK;
         }
     }
 

@@ -134,5 +134,5 @@ int stm32_at45dbinitialize(int minor)
       initialized = true;    
     }
 
-  return OK;
+  return OKK;
 }

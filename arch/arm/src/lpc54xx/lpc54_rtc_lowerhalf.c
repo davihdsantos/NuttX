@@ -238,7 +238,7 @@ static int lpc54_rdtime(FAR struct rtc_lowerhalf_s *lower,
       return -errcode;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -537,7 +537,7 @@ static int lpc54_periodic_callback(void)
       cb(priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_RTC_PERIODIC */
 

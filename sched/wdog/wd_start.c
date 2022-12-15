@@ -358,7 +358,7 @@ int wd_start(WDOG_ID wdog, int32_t delay, wdentry_t wdentry,  int argc, ...)
 #endif
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -498,7 +498,7 @@ static void sam_takechsem(struct sam_dmac_s *dmac)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -530,7 +530,7 @@ static void sam_takedsem(struct sam_dmac_s *dmac)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1558,7 +1558,7 @@ static int sam_txbuffer(struct sam_dmach_s *dmach, uint32_t paddr,
    */
 
   dmach->cfg = sam_txcfg(dmach);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1607,7 +1607,7 @@ static int sam_rxbuffer(struct sam_dmach_s *dmach, uint32_t paddr,
    */
 
   dmach->cfg = sam_rxcfg(dmach);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1659,7 +1659,7 @@ static inline int sam_single(struct sam_dmach_s *dmach)
 
   sam_putdmach(dmach, dmach->cfg, SAM_DMAC_CH_CFG_OFFSET);
 
-  /* Enable the channel by writing a ‘1’ to the CHER enable bit */
+  /* Enable the channel by writing a ï¿½1ï¿½ to the CHER enable bit */
 
   sam_putdmac(dmac, DMAC_CHER_ENA(dmach->chan), SAM_DMAC_CHER_OFFSET);
 
@@ -1673,7 +1673,7 @@ static inline int sam_single(struct sam_dmach_s *dmach)
    */
 
   sam_putdmac(dmac, DMAC_EBC_CBTCINTS(dmach->chan), SAM_DMAC_EBCIER_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1719,7 +1719,7 @@ static inline int sam_multiple(struct sam_dmach_s *dmach)
 
   sam_putdmach(dmach, (uint32_t)llhead, SAM_DMAC_CH_DSCR_OFFSET);
 
-  /* Finally, enable the channel by writing a ‘1’ to the CHER enable */
+  /* Finally, enable the channel by writing a ï¿½1ï¿½ to the CHER enable */
 
   sam_putdmac(dmac, DMAC_CHER_ENA(dmach->chan), SAM_DMAC_CHER_OFFSET);
 
@@ -1737,7 +1737,7 @@ static inline int sam_multiple(struct sam_dmach_s *dmach)
    */
 
   sam_putdmac(dmac, DMAC_EBC_CHANINTS(dmach->chan), SAM_DMAC_EBCIER_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1858,7 +1858,7 @@ static int sam_dmac_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2128,7 +2128,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
   struct sam_dmach_s *dmach = (struct sam_dmach_s *)handle;
   size_t maxtransfer;
   size_t remaining;
-  int ret = OK;
+  int ret = OKK;
 
   dmainfo("dmach: %p paddr: %08x maddr: %08x nbytes: %d\n",
           dmach, (int)paddr, (int)maddr, (int)nbytes);
@@ -2149,7 +2149,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
       /* Set up the maximum size transfer */
 
       ret = sam_txbuffer(dmach, paddr, maddr, maxtransfer);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Decrement the number of bytes left to transfer */
 
@@ -2173,7 +2173,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
 
   /* Then set up the final buffer transfer */
 
-  if (ret == OK && remaining > 0)
+  if (ret == OKK && remaining > 0)
     {
       ret = sam_txbuffer(dmach, paddr, maddr, remaining);
     }
@@ -2207,7 +2207,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
   struct sam_dmach_s *dmach = (struct sam_dmach_s *)handle;
   size_t maxtransfer;
   size_t remaining;
-  int ret = OK;
+  int ret = OKK;
 
   dmainfo("dmach: %p paddr: %08x maddr: %08x nbytes: %d\n",
           dmach, (int)paddr, (int)maddr, (int)nbytes);
@@ -2228,7 +2228,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
       /* Set up the maximum size transfer */
 
       ret = sam_rxbuffer(dmach, paddr, maddr, maxtransfer);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Decrement the number of bytes left to transfer */
 
@@ -2252,7 +2252,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
 
   /* Then set up the final buffer transfer */
 
-  if (ret == OK && remaining > 0)
+  if (ret == OKK && remaining > 0)
     {
       ret = sam_rxbuffer(dmach, paddr, maddr, remaining);
     }

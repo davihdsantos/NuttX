@@ -299,7 +299,7 @@ static int xbeenet_set_ipaddress(FAR struct net_driver_s *dev)
       dev->d_ipv6addr[4] ^= HTONS(0x0200);
 
       dev->d_mac.radio.nv_addrlen = IEEE802154_EADDRSIZE;
-      return OK;
+      return OKK;
     }
 
 #else
@@ -337,7 +337,7 @@ static int xbeenet_set_ipaddress(FAR struct net_driver_s *dev)
       dev->d_ipv6addr[5]  = HTONS(0x00ff);
       dev->d_ipv6addr[6]  = HTONS(0xfe00);
       dev->d_ipv6addr[7]  = HTONS((uint16_t)saddr[0] << 8 |  (uint16_t)saddr[1]);
-      return OK;
+      return OKK;
     }
 #endif
 }
@@ -433,7 +433,7 @@ static int xbeenet_notify(FAR struct xbee_maccb_s *maccb,
         }
 
       nxsem_post(&priv->xd_exclsem);
-      return OK;
+      return OKK;
     }
 
   /* By returning a negative value, we let the MAC know that we don't want the
@@ -539,7 +539,7 @@ static int xbeenet_rxframe(FAR struct xbeenet_driver_s *priv,
    */
 
   ieee802154_primitive_free((FAR struct ieee802154_primitive_s *)ind);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -680,7 +680,7 @@ static int xbeenet_coord_eaddr(FAR struct radio_driver_s *radio,
     }
 
   IEEE802154_EADDRCOPY(eaddr, arg.getreq.attrval.mac.eaddr);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -717,7 +717,7 @@ static int xbeenet_coord_saddr(FAR struct radio_driver_s *radio,
     }
 
   IEEE802154_SADDRCOPY(saddr, arg.getreq.attrval.mac.saddr);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -772,7 +772,7 @@ static int xbeenet_ifup(FAR struct net_driver_s *dev)
       /* The interface is now up */
 
       priv->xd_bifup = true;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -816,7 +816,7 @@ static int xbeenet_ifdown(FAR struct net_driver_s *dev)
 
   priv->xd_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -905,7 +905,7 @@ static int xbeenet_txavail(FAR struct net_driver_s *dev)
       work_queue(XBEENET_WORK, &priv->xd_pollwork, xbeenet_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1031,7 +1031,7 @@ static int xbeenet_ioctl(FAR struct net_driver_s *dev, int cmd,
                   priv->xd_notify_event       = netmac->u.event;
                   priv->xd_notify_pid         = getpid();
                   priv->xd_notify_registered  = true;
-                  ret = OK;
+                  ret = OKK;
                 }
                 break;
 
@@ -1058,7 +1058,7 @@ static int xbeenet_ioctl(FAR struct net_driver_s *dev, int cmd,
                           /* Free the primitive */
 
                           ieee802154_primitive_free(primitive);
-                          ret = OK;
+                          ret = OKK;
                           break;
                         }
 
@@ -1099,7 +1099,7 @@ static int xbeenet_ioctl(FAR struct net_driver_s *dev, int cmd,
               case MAC802154IOC_ENABLE_EVENTS:
                 {
                   priv->xd_enableevents = netmac->u.enable;
-                  ret = OK;
+                  ret = OKK;
                 }
                 break;
               default:
@@ -1224,7 +1224,7 @@ static int xbeenet_req_data(FAR struct radio_driver_s *netdev,
       NETDEV_TXDONE(&priv->xd_dev.r_dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1296,7 +1296,7 @@ static int xbeenet_properties(FAR struct radio_driver_s *netdev,
 #endif
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1430,7 +1430,7 @@ int xbee_netdev_register(XBEEHANDLE xbee)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->xd_dev.r_dev, NET_LL_IEEE802154);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_6LOWPAN */

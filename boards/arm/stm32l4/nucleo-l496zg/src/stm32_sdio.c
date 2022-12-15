@@ -101,7 +101,7 @@ static int stm32l4_ncd_interrupt(int irq, FAR void *context)
       g_sd_inserted = present;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -153,7 +153,7 @@ int stm32l4_sdio_initialize(void)
   finfo("Bind SDIO to the MMC/SD driver, minor=%d\n", SDIO_MINOR);
 
   ret = mmcsd_slotinitialize(SDIO_MINOR, g_sdio_dev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n", ret);
       return ret;
@@ -174,7 +174,7 @@ int stm32l4_sdio_initialize(void)
   sdio_mediachange(g_sdio_dev, true);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_SDIO */

@@ -362,7 +362,7 @@ static inline void kinetis_i2c_sem_wait(FAR struct kinetis_i2cdev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -464,7 +464,7 @@ static int kinetis_i2c_init(FAR struct kinetis_i2cdev_s *priv)
   /* Enable I2C */
 
   kinetis_i2c_putreg(priv, I2C_C1_IICEN, KINETIS_I2C_C1_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -494,7 +494,7 @@ static int kinetis_i2c_deinit(FAR struct kinetis_i2cdev_s *priv)
   /* Disable clocking */
 
   modifyreg32(priv->config->clk_reg, priv->config->clk_bit, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -863,7 +863,7 @@ static int kinetis_i2c_start(struct kinetis_i2cdev_s *priv)
                      I2C_READADDR8(msg->addr) : I2C_WRITEADDR8(msg->addr),
                      KINETIS_I2C_D_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1118,7 +1118,7 @@ static int kinetis_i2c_interrupt(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1345,7 +1345,7 @@ static int kinetis_i2c_reset(struct i2c_master_s *dev)
 
   kinetis_pinconfig(MKI2C_INPUT(sda_gpio));
   kinetis_pinconfig(MKI2C_INPUT(scl_gpio));
-  ret = OK;
+  ret = OKK;
 
   /* Re-init the port (even on error to enable clock) */
 
@@ -1464,7 +1464,7 @@ int kinetis_i2cbus_uninitialize(struct i2c_master_s *dev)
   if (--priv->refs)
     {
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(flags);
@@ -1474,7 +1474,7 @@ int kinetis_i2cbus_uninitialize(struct i2c_master_s *dev)
   kinetis_i2c_deinit(priv);
   kinetis_i2c_sem_destroy(priv);
   wd_delete(priv->timeout);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_KINETIS_I2C0 || CONFIG_KINETIS_I2C1 || CONFIG_KINETIS_I2C2 */

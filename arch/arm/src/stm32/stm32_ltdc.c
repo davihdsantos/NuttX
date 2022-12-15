@@ -1490,7 +1490,7 @@ static int stm32_ltdcirq(int irq, void *context, FAR void *arg)
 
       reginfo("Register reloaded\n");
       putreg32(LTDC_ICR_CRRIF, STM32_LTDC_ICR);
-      priv->error = OK;
+      priv->error = OKK;
     }
   else if (regval & LTDC_IER_LIE)
     {
@@ -1500,7 +1500,7 @@ static int stm32_ltdcirq(int irq, void *context, FAR void *arg)
 
       reginfo("Line interrupt\n");
       putreg32(LTDC_ICR_CLIF, STM32_LTDC_ICR);
-      priv->error = OK;
+      priv->error = OKK;
     }
   else if (regval & LTDC_IER_TERRIE)
     {
@@ -1536,7 +1536,7 @@ static int stm32_ltdcirq(int irq, void *context, FAR void *arg)
       lcderr("ERROR: nxsem_post() failed\n");
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1554,7 +1554,7 @@ static int stm32_ltdcirq(int irq, void *context, FAR void *arg)
 
 static int stm32_ltdc_waitforirq(void)
 {
-  int ret = OK;
+  int ret = OKK;
   FAR struct stm32_interrupt_s *priv = &g_interrupt;
 
   ret = nxsem_wait(priv->sem);
@@ -1585,7 +1585,7 @@ static int stm32_ltdc_waitforirq(void)
 
 static int stm32_ltdc_reload(uint8_t value, bool waitvblank)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Reloads the shadow register.
    * Note! This will not trigger an register reload interrupt if
@@ -2339,7 +2339,7 @@ static int stm32_getvideoinfo(struct fb_vtable_s *vtable,
   DEBUGASSERT(vtable != NULL && priv == &g_vtable && vinfo != NULL);
 
   memcpy(vinfo, &priv->vinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2370,7 +2370,7 @@ static int stm32_getplaneinfo(struct fb_vtable_s *vtable, int planeno,
   if (planeno == 0)
     {
       memcpy(pinfo, &priv->pinfo, sizeof(struct fb_planeinfo_s));
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -2433,7 +2433,7 @@ static int stm32_getcmap(struct fb_vtable_s *vtable,
       stm32_ltdc_lgetclut(layer, cmap);
       nxsem_post(layer->lock);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -2520,7 +2520,7 @@ static int stm32_putcmap(struct fb_vtable_s *vtable,
 #  endif
       nxsem_post(&g_lock);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -2568,7 +2568,7 @@ static int stm32_getoverlayinfo(FAR struct fb_vtable_s *vtable,
     {
       FAR struct stm32_ltdc_s * layer = &priv->layer[overlayno];
       memcpy(oinfo, &layer->oinfo, sizeof(struct fb_overlayinfo_s));
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -2624,7 +2624,7 @@ static int stm32_settransp(FAR struct fb_vtable_s *vtable,
         }
 
       nxsem_post(layer->lock);
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -2679,7 +2679,7 @@ static int stm32_setchromakey(FAR struct fb_vtable_s *vtable,
           /* Set chromakey */
 
           stm32_ltdc_lchromakey(layer, layer->oinfo.chromakey);
-          ret = OK;
+          ret = OKK;
         }
 
       nxsem_post(layer->lock);
@@ -2769,14 +2769,14 @@ static int stm32_setblank(FAR struct fb_vtable_s *vtable,
       stm32_ltdc_lenable(layer, (layer->oinfo.blank == 0));
       nxsem_post(layer->lock);
 
-      return OK;
+      return OKK;
     }
 #  ifdef CONFIG_STM32_DMA2D
   else if (oinfo->overlay < LTDC_NOVERLAYS)
     {
       /* DMA2D overlays are non visible */
 
-      return OK;
+      return OKK;
     }
 #  endif
 
@@ -2814,7 +2814,7 @@ static int stm32_setarea(FAR struct fb_vtable_s *vtable,
       memcpy(&layer->oinfo.sarea, &oinfo->sarea, sizeof(struct fb_area_s));
       nxsem_post(layer->lock);
 
-      return OK;
+      return OKK;
     }
 #  endif
 
@@ -2977,7 +2977,7 @@ void stm32_ltdcreset(void)
 
 int stm32_ltdcinitialize(void)
 {
-  int   ret = OK;
+  int   ret = OKK;
 
   lcdinfo("Initialize LTDC driver\n");
 
@@ -3012,7 +3012,7 @@ int stm32_ltdcinitialize(void)
 
   ret = stm32_dma2dinitialize();
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }

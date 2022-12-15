@@ -408,13 +408,13 @@ static void _dmac_intc_handler(int ch)
 static int intr_handler_admac0(int irq, FAR void *context, FAR void *arg)
 {
     _dmac_intc_handler(0);
-    return OK;
+    return OKK;
 }
 
 static int intr_handler_admac1(int irq, FAR void *context, FAR void *arg)
 {
     _dmac_intc_handler(1);
-    return OK;
+    return OKK;
 }
 
 static int intr_handler_idmac(int irq, FAR void *context, FAR void *arg)
@@ -428,19 +428,19 @@ static int intr_handler_idmac(int irq, FAR void *context, FAR void *arg)
             _dmac_intc_handler(i);
     }
 
-    return OK;
+    return OKK;
 }
 
 static int intr_handler_skdmac0(int irq, FAR void *context, FAR void *arg)
 {
     _dmac_intc_handler(7);
-    return OK;
+    return OKK;
 }
 
 static int intr_handler_skdmac1(int irq, FAR void *context, FAR void *arg)
 {
     _dmac_intc_handler(8);
-    return OK;
+    return OKK;
 }
 
 static void controller_power_on(int ch)

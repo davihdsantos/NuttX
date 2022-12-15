@@ -503,7 +503,7 @@ int board_lcd_initialize(void)
   /* Turn the display off */
 
   g_stm32f4_lcd.drvr->setpower(g_stm32f4_lcd.drvr, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

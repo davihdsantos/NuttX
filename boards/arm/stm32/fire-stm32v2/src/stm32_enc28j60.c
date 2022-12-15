@@ -156,7 +156,7 @@ static int up_attach(FAR const struct enc_lower_s *lower, xcpt_t handler,
 
   priv->handler = handler;
   priv->arg     = arg;
-  return OK;
+  return OKK;
 }
 
 static void up_enable(FAR const struct enc_lower_s *lower)

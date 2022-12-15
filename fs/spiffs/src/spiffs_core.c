@@ -85,7 +85,7 @@ static int spiffs_page_data_check(FAR struct spiffs_s *fs,
 #ifdef CONFIG_SPIFFS_PAGE_CHECK
   struct spiffs_page_header_s ph;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
   if (pgndx == (int16_t)-1)
     {
@@ -197,7 +197,7 @@ static int spiffs_page_index_check(FAR struct spiffs_s *fs,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -268,7 +268,7 @@ static int spiffs_objlu_find_id_and_span_callback(FAR struct spiffs_s *fs,
         (ph.flags & SPIFFS_PH_FLAG_NDXDELE) == 0 && ph.spndx == 0) &&
       (user_const == NULL || *((FAR const int16_t *)user_const) != pgndx))
     {
-      return OK;
+      return OKK;
     }
   else
     {
@@ -317,7 +317,7 @@ static int spiffs_find_objhdr_pgndx_callback(FAR struct spiffs_s *fs, int16_t ob
     {
       if (strcmp((FAR const char *)user_const, (FAR char *)objhdr.name) == 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -462,7 +462,7 @@ spiffs_objlu_find_free_objid_compact_callback(FAR struct spiffs_s *fs,
 int spiffs_validate_objndx(FAR struct spiffs_page_header_s *ph,
                            int16_t objid, int16_t spndx)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if ((ph->flags & SPIFFS_PH_FLAG_USED) != 0)
     {
@@ -529,7 +529,7 @@ int spiffs_phys_cpy(FAR struct spiffs_s *fs,
       dest += chunk_size;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -588,7 +588,7 @@ int spiffs_foreach_objlu(FAR struct spiffs_s *fs, int16_t starting_block,
   objlu_buf        = (FAR int16_t *)fs->lu_work;
   cur_entry        = starting_lu_entry;
   entries_per_page = (SPIFFS_GEO_PAGE_SIZE(fs) / sizeof(int16_t));
-  ret              = OK;
+  ret              = OKK;
 
   /* Wrap initial */
 
@@ -684,7 +684,7 @@ int spiffs_foreach_objlu(FAR struct spiffs_s *fs, int16_t starting_block,
                                 }
                             }
 
-                          ret = OK;
+                          ret = OKK;
                           cur_entry++;
                           entry_count--;
                           continue;
@@ -696,7 +696,7 @@ int spiffs_foreach_objlu(FAR struct spiffs_s *fs, int16_t starting_block,
                     }
                   else
                     {
-                      return OK;
+                      return OKK;
                     }
                 }
 
@@ -860,7 +860,7 @@ int spiffs_objlu_scan(FAR struct spiffs_s *fs)
 
   if (ret == SPIFFS_VIS_END)
     {
-      ret = OK;
+      ret = OKK;
     }
   else if (ret < 0)
     {
@@ -893,7 +893,7 @@ int spiffs_objlu_find_free(FAR struct spiffs_s *fs, int16_t starting_block,
 
       if (ret == -ENODATA)
         {
-          ret = OK;
+          ret = OKK;
         }
       else if (ret < 0)
         {
@@ -1059,7 +1059,7 @@ int spiffs_page_allocate_data(FAR struct spiffs_s *fs, int16_t objid,
 {
   int16_t blkndx;
   int entry;
-  int ret = OK;
+  int ret = OKK;
 
   /* Find free entry */
 
@@ -1327,7 +1327,7 @@ int spiffs_fobj_create(FAR struct spiffs_s *fs,
   struct spiffs_pgobj_ndxheader_s objndx_hdr;
   int16_t blkndx;
   int entry;
-  int ret = OK;
+  int ret = OKK;
 
   ret = spiffs_gc_check(fs, SPIFFS_DATA_PAGE_SIZE(fs));
   if (ret < 0)
@@ -1423,7 +1423,7 @@ int spiffs_fobj_update_ndxhdr(FAR struct spiffs_s *fs,
 {
   FAR struct spiffs_pgobj_ndxheader_s *objhdr;
   int16_t new_objhdr_pgndx;
-  int ret = OK;
+  int ret = OKK;
 
   objid |= SPIFFS_OBJID_NDXFLAG;
 
@@ -1644,7 +1644,7 @@ int spiffs_fobj_open_bypage(FAR struct spiffs_s *fs, int16_t pgndx,
   int16_t objid;
   int16_t blkndx;
   int entry;
-  int ret = OK;
+  int ret = OKK;
 
   physoff = SPIFFS_PAGE_TO_PADDR(fs, pgndx);
   ret     = spiffs_cache_read(fs, SPIFFS_OP_T_OBJNDX | SPIFFS_OP_C_READ,
@@ -1710,7 +1710,7 @@ ssize_t spiffs_fobj_append(FAR struct spiffs_s *fs,
   int16_t new_objhdr_page;
   int16_t data_spndx;
   int16_t data_page;
-  int ret = OK;
+  int ret = OKK;
   int ret2;
 
   finfo("Append %d bytes @ offs=%d of size=%d\n", len, offset, fobj->size);
@@ -2112,7 +2112,7 @@ ssize_t spiffs_fobj_append(FAR struct spiffs_s *fs,
 
   /* Finalize updated object indices */
 
-  ret2 = OK;
+  ret2 = OKK;
   if (cur_objndx_spndx != 0)
     {
       /* Wrote beyond object index header page.  Write last modified object
@@ -2253,7 +2253,7 @@ ssize_t spiffs_fobj_modify(FAR struct spiffs_s *fs,
   int16_t new_objhdr_pgndx;
   int16_t data_spndx;
   int16_t data_pgndx;
-  int ret = OK;
+  int ret = OKK;
   int ret2;
 
   ret = spiffs_gc_check(fs, len + SPIFFS_DATA_PAGE_SIZE(fs));
@@ -2608,7 +2608,7 @@ ssize_t spiffs_fobj_modify(FAR struct spiffs_s *fs,
 
   /* Finalize updated object indices */
 
-  ret2 = OK;
+  ret2 = OKK;
   if (cur_objndx_spndx != 0)
     {
       int16_t new_objndx_pgndx;
@@ -2730,7 +2730,7 @@ int spiffs_fobj_truncate(FAR struct spiffs_s *fs,
   int16_t prev_objndx_spndx;
   int16_t data_pgndx;
   int16_t new_objhdr_pgndx;
-  int ret = OK;
+  int ret = OKK;
 
   /* If the file has zero (or undefined) length and we were not asked to
    * remove the file, then there is nothing to do.
@@ -2967,7 +2967,7 @@ int spiffs_fobj_truncate(FAR struct spiffs_s *fs,
           else if (ret == SPIFFS_ERR_DELETED ||
                    ret == SPIFFS_ERR_INDEX_REF_FREE)
             {
-              ret = OK;
+              ret = OKK;
             }
 
           /* Update current size */
@@ -3239,7 +3239,7 @@ ssize_t spiffs_object_read(FAR struct spiffs_s *fs,
   int16_t data_spndx;
   int16_t cur_objndx_spndx;
   int16_t prev_objndx_spndx;
-  int ret = OK;
+  int ret = OKK;
 
   objhdr            = (FAR struct spiffs_pgobj_ndxheader_s *)fs->work;
   objndx            = (FAR struct spiffs_page_objndx_s *)fs->work;
@@ -3403,7 +3403,7 @@ int spiffs_objlu_find_free_objid(FAR struct spiffs_s *fs, int16_t *objid,
   uint32_t max_objects;
   struct spiffs_free_objid_s state;
   int16_t free_objid;
-  int ret = OK;
+  int ret = OKK;
 
   max_objects = (SPIFFS_GEO_BLOCK_COUNT(fs) * SPIFFS_OBJ_LOOKUP_MAX_ENTRIES(fs)) / 2;
   free_objid = SPIFFS_OBJID_FREE;
@@ -3439,7 +3439,7 @@ int spiffs_objlu_find_free_objid(FAR struct spiffs_s *fs, int16_t *objid,
                                      0, 0);
           if (ret == SPIFFS_VIS_END)
             {
-              ret = OK;
+              ret = OKK;
             }
           else if (ret < 0)
             {
@@ -3463,7 +3463,7 @@ int spiffs_objlu_find_free_objid(FAR struct spiffs_s *fs, int16_t *objid,
                   if ((mask & (1 << j)) == 0)
                     {
                       *objid = (i << 3) + j + state.min_objid;
-                      return OK;
+                      return OKK;
                     }
                 }
             }
@@ -3524,7 +3524,7 @@ int spiffs_objlu_find_free_objid(FAR struct spiffs_s *fs, int16_t *objid,
                   /* No objid in this range, skip compacting and use directly */
 
                   *objid = min_i * state.compaction + state.min_objid;
-                  return OK;
+                  return OKK;
                 }
               else
                 {
@@ -3568,7 +3568,7 @@ int spiffs_objlu_find_free_objid(FAR struct spiffs_s *fs, int16_t *objid,
                                      &state, 0, 0, 0);
           if (ret == SPIFFS_VIS_END)
             {
-              ret = OK;
+              ret = OKK;
             }
           else if (ret < 0)
             {

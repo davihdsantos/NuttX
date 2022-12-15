@@ -112,7 +112,7 @@ int nxffs_truncate(FAR struct file *filep, off_t length)
   oldsize = wrfile->ofile.entry.datlen;
   if (oldsize == length)
     {
-      ret = OK;
+      ret = OKK;
       goto errout_with_semaphore;
     }
   else if (oldsize > length)

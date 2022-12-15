@@ -196,7 +196,7 @@ static void s32k1xx_takechsem(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR || ret == -ECANCELED);
+      DEBUGASSERT(ret == OKK || ret == -EINTR || ret == -ECANCELED);
     }
   while (ret == -EINTR);
 }
@@ -229,7 +229,7 @@ static void s32k1xx_takedsem(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR || ret == -ECANCELED);
+      DEBUGASSERT(ret == OKK || ret == -EINTR || ret == -ECANCELED);
     }
   while (ret == -EINTR);
 }
@@ -620,7 +620,7 @@ static int s32k1xx_edma_interrupt(int irq, void *context, FAR void *arg)
 
           regval8 = EDMA_CDNE(chan);
           putreg8(regval8, S32K1XX_EDMA_CDNE);
-          result = OK;
+          result = OKK;
         }
       else
         {
@@ -696,7 +696,7 @@ static int s32k1xx_error_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1157,7 +1157,7 @@ int s32k1xx_dmach_xfrsetup(DMACH_HANDLE *handle,
     }
 
   dmach->state = S32K1XX_DMA_CONFIGURED;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1229,7 +1229,7 @@ int s32k1xx_dmach_start(DMACH_HANDLE handle, edma_callback_t callback, void *arg
     }
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

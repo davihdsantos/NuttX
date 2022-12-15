@@ -95,7 +95,7 @@ static int pic32mz_freerun_handler(int irq, void *context, void *arg)
 
   PIC32MZ_TIMER_ACKINT(freerun->timer);
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_CLOCK_TIMEKEEPING */
 
@@ -190,7 +190,7 @@ int pic32mz_freerun_initialize(struct pic32mz_freerun_s *freerun, int chan,
   PIC32MZ_TIMER_START(freerun->timer);
   freerun->running = true;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -282,7 +282,7 @@ int pic32mz_freerun_counter(struct pic32mz_freerun_s *freerun,
   tmrinfo("usec=%llu ts=(%u, %lu)\n",
           usec, (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
 
-  return OK;
+  return OKK;
 }
 
 #else /* CONFIG_CLOCK_TIMEKEEPING */
@@ -292,7 +292,7 @@ int pic32mz_freerun_counter(struct pic32mz_freerun_s *freerun,
 {
   *counter = (uint64_t)PIC32MZ_TIMER_GETCOUNTER(freerun->timer) &
               freerun->counter_mask;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CLOCK_TIMEKEEPING */
@@ -329,7 +329,7 @@ int pic32mz_freerun_uninitialize(struct pic32mz_freerun_s *freerun)
   freerun->running = false;
   freerun->timer = NULL;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_PIC32MZ_FREERUN */

@@ -408,7 +408,7 @@ static int max326_setup(struct uart_dev_s *dev)
   /* Make sure that all interrupts are disabled */
 
   max326_int_disableall(priv, NULL);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -458,7 +458,7 @@ static int max326_attach(struct uart_dev_s *dev)
    */
 
   ret = irq_attach(priv->irq, max326_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(priv->irq);
     }
@@ -577,7 +577,7 @@ static int max326_interrupt(int irq, void *context, void *arg)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -594,7 +594,7 @@ static int max326_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode *inode;
   struct uart_dev_s *dev;
   struct max326_dev_s *priv;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(filep, filep->f_inode);
   inode = filep->f_inode;

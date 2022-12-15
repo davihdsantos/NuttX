@@ -236,7 +236,7 @@ int timer_create(clockid_t clockid, FAR struct sigevent *evp,
   /* Return the timer */
 
   *timerid = ret;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DISABLE_POSIX_TIMERS */

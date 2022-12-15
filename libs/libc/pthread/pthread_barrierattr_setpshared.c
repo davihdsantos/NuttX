@@ -97,7 +97,7 @@
 
 int pthread_barrierattr_setpshared(FAR pthread_barrierattr_t *attr, int pshared)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (!attr || (pshared != PTHREAD_PROCESS_SHARED && pshared != PTHREAD_PROCESS_PRIVATE))
     {

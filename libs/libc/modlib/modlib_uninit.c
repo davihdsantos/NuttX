@@ -78,7 +78,7 @@ int modlib_uninitialize(struct mod_loadinfo_s *loadinfo)
       close(loadinfo->filfd);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -110,5 +110,5 @@ int modlib_freebuffers(struct mod_loadinfo_s *loadinfo)
       loadinfo->buflen    = 0;
     }
 
-  return OK;
+  return OKK;
 }

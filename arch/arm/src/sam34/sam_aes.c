@@ -177,7 +177,7 @@ static int samaes_setup_mr(uint32_t keysize, int mode, int encrypt)
     }
 
   putreg32(regval, SAM_AES_MR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -189,19 +189,19 @@ static int samaes_initialize(void)
   nxsem_init(&g_samaes_lock, 0, 1);
   sam_aes_enableclk();
   putreg32(AES_CR_SWRST, SAM_AES_CR);
-  return OK;
+  return OKK;
 }
 
 int aes_cypher(FAR void *out, FAR const void *in, uint32_t size,
                FAR const void *iv, FAR const void *key, uint32_t keysize,
                int mode, int encrypt)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (!g_samaes_initdone)
     {
       ret = samaes_initialize();
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }

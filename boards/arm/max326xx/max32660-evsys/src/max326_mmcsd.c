@@ -110,7 +110,7 @@ int max326_spi1register(struct spi_dev_s *dev, spi_mediachange_t callback,
 #endif
 {
   spiinfo("INFO:  SPI callback\n");
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -145,7 +145,7 @@ int max326_mmcsd_initialize(int minor)
     }
 
   spiinfo("INFO: mmcsd card has been initialized successfully\n");
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_MMCSD_SPI */

@@ -149,7 +149,7 @@ int nxsig_nanosleep(FAR const struct timespec *rqtp,
       /* The timeout "error" is the normal, successful result */
 
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   /* If we get there, the wait has failed because we were awakened by a

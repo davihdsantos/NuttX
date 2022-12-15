@@ -94,7 +94,7 @@ int nxsem_setprotocol(FAR sem_t *sem, int protocol)
   switch (protocol)
     {
       case SEM_PRIO_NONE:
-        return OK;
+        return OKK;
 
       case SEM_PRIO_INHERIT:
       case SEM_PRIO_PROTECT:

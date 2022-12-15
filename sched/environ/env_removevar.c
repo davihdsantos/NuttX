@@ -108,7 +108,7 @@ int env_removevar(FAR struct task_group_s *group, FAR char *pvar)
        */
 
       group->tg_envsize -= len;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

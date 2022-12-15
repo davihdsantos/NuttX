@@ -96,5 +96,5 @@ int setuid(uid_t uid)
 
   DEBUGASSERT(group != NULL);
   rgroup->tg_uid = uid;
-  return OK;
+  return OKK;
 }

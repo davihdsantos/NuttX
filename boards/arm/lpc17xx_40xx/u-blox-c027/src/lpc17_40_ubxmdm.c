@@ -205,7 +205,7 @@ static int lpc17_40_poweron(FAR struct ubxmdm_lower* lower)
   lpc17_40_configgpio(priv->pins->shifter_en_n | GPIO_VALUE_ZERO); /* UART shifter enabled */
 /* lpc17_40_configgpio(priv->pins->power_on_n  | GPIO_VALUE_ONE);    Stop current through switch */
 
-  return OK;
+  return OKK;
 }
 
 static int lpc17_40_poweroff(FAR struct ubxmdm_lower* lower)
@@ -219,7 +219,7 @@ static int lpc17_40_poweroff(FAR struct ubxmdm_lower* lower)
   lpc17_40_configgpio(priv->pins->shifter_en_n | GPIO_VALUE_ONE);  /* UART shifter disabled */
   lpc17_40_configgpio(priv->pins->usb_detect   | GPIO_VALUE_ZERO); /* USB sense off */
 
-  return OK;
+  return OKK;
 }
 
 static int lpc17_40_reset(FAR struct ubxmdm_lower* lower)
@@ -231,7 +231,7 @@ static int lpc17_40_reset(FAR struct ubxmdm_lower* lower)
   nxsig_usleep(75 * 1000);  /* The minimum reset_n low time is 50 ms */
   lpc17_40_configgpio(priv->pins->reset_n | GPIO_VALUE_ONE);  /* Modem not in reset */
 
-  return OK;
+  return OKK;
 }
 
 static int lpc17_40_getstatus(FAR struct ubxmdm_lower* lower,
@@ -258,7 +258,7 @@ static int lpc17_40_getstatus(FAR struct ubxmdm_lower* lower,
         lpc17_40_gpioread(lpc17_40_ubxmdm_name_pins[i].pin);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int lpc17_40_ioctl(FAR struct ubxmdm_lower* lower,

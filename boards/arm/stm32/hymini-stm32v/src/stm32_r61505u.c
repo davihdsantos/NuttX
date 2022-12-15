@@ -459,7 +459,7 @@ static int lcd_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buffer,
       write_data(*src++);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -500,7 +500,7 @@ static int lcd_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
       *dest++ = read_data();
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -519,7 +519,7 @@ static int lcd_getvideoinfo(FAR struct lcd_dev_s *dev,
         g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres, g_videoinfo.nplanes);
 
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -537,7 +537,7 @@ static int lcd_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   ginfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
 
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -568,7 +568,7 @@ static int lcd_setpower(struct lcd_dev_s *dev, int power)
 {
   if (g_lcddev.power == power)
     {
-      return OK;
+      return OKK;
     }
 
   ginfo("power: %d\n", power);
@@ -606,7 +606,7 @@ static int lcd_setpower(struct lcd_dev_s *dev, int power)
     }
 
   g_lcddev.power = power;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -906,7 +906,7 @@ int board_lcd_initialize(void)
   /* Configure the backlight */
 
   lcd_backlight();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

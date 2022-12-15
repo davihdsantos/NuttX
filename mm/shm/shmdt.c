@@ -161,7 +161,7 @@ int shmdt(FAR const void *shmaddr)
       if ((region->sr_flags & SRFLAG_UNLINKED) != 0)
         {
           shm_destroy(shmid);
-          return OK;
+          return OKK;
         }
     }
   else
@@ -184,7 +184,7 @@ int shmdt(FAR const void *shmaddr)
   /* Release our lock on the entry */
 
   nxsem_post(&region->sr_sem);
-  return OK;
+  return OKK;
 
 errout_with_errno:
   set_errno(-ret);

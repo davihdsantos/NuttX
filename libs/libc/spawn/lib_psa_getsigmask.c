@@ -70,5 +70,5 @@ int posix_spawnattr_getsigmask(FAR const posix_spawnattr_t *attr,
 {
   DEBUGASSERT(attr && sigmask);
   *sigmask = attr->sigmask;
-  return OK;
+  return OKK;
 }

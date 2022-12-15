@@ -367,6 +367,6 @@ void up_enable_irq(int irq)
 int up_prioritize_irq(int irq, int priority)
 {
 #warning "Missing Logic"
-  return OK;
+  return OKK;
 }
 #endif

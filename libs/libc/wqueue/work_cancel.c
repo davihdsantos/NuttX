@@ -105,7 +105,7 @@ static int work_qcancel(FAR struct usr_wqueue_s *wqueue, FAR struct work_s *work
 
       dq_rem((FAR dq_entry_t *)work, &wqueue->q);
       work->worker = NULL;
-      ret = OK;
+      ret = OKK;
     }
 
   work_unlock();

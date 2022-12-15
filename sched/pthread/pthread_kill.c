@@ -120,7 +120,7 @@ int pthread_kill(pthread_t thread, int signo)
   info.si_value.sival_ptr = NULL;
 #ifdef CONFIG_SCHED_HAVE_PARENT
   info.si_pid             = rtcb->pid;
-  info.si_status          = OK;
+  info.si_status          = OKK;
 #endif
 
   /* Get the TCB associated with the thread */
@@ -144,7 +144,7 @@ int pthread_kill(pthread_t thread, int signo)
       goto errout;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_lock:
   sched_unlock();

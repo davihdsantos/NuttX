@@ -155,7 +155,7 @@ int lpc17_40_romfs_initialize(void)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LPC17_40_ROMFS */

@@ -603,7 +603,7 @@ static int sam_lcd_get(FAR struct sam_dev_s *priv, uint8_t cmd,
 
   /* If the command was sent successfully, then receive any accompanying data */
 
-  if (ret == OK && buflen > 0)
+  if (ret == OKK && buflen > 0)
     {
       ret = sam_lcd_rxtransfer(priv, buffer, buflen);
     }
@@ -633,7 +633,7 @@ static int sam_lcd_getreg(FAR struct sam_dev_s *priv, uint8_t cmd,
    */
 
   ret = sam_lcd_get(priv, cmd, (FAR uint16_t *)tmp, nbytes << 2);
-  if (ret == OK)
+  if (ret == OKK)
     {
       for (i = 0; i < nbytes; i++)
         {
@@ -773,7 +773,7 @@ static int sam_set_backlight(unsigned int power)
       sam_gpiowrite(GPIO_ILI9488_BKL, false);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -998,7 +998,7 @@ static int sam_lcd_dmawait(FAR struct sam_dev_s *priv, uint32_t timeout)
 
       /* The only expected failure is EINTR */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
 
   /* Dump the collect DMA sample data */
@@ -1057,14 +1057,14 @@ static int sam_lcd_txtransfer(FAR struct sam_dev_s *priv,
 
   ret = sam_dmatxsetup(priv->dmach, (uint32_t)SAM_LCD_BASE,
                       (uint32_t)buffer, buflen);
-  if (ret == OK)
+  if (ret == OKK)
     {
       flags = enter_critical_section();
 
       /* The setup was successful, start the DMA */
 
       ret = sam_dmastart(priv->dmach, sam_lcd_dmacallback, priv);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Started ... Wait for the DMA (or timeout) to complete */
 
@@ -1099,14 +1099,14 @@ static int sam_lcd_rxtransfer(FAR struct sam_dev_s *priv,
 
   ret = sam_dmarxsetup(priv->dmach, (uint32_t)SAM_LCD_BASE,
                       (uint32_t)buffer, buflen);
-  if (ret == OK)
+  if (ret == OKK)
     {
       flags = enter_critical_section();
 
       /* The setup was successful, start the DMA */
 
       ret = sam_dmastart(priv->dmach, sam_lcd_dmacallback, priv);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Started ... Wait for the DMA (or timeout) to complete */
 
@@ -1218,7 +1218,7 @@ static int sam_getvideoinfo(FAR struct lcd_dev_s *dev,
           g_videoinfo.nplanes);
 
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1235,7 +1235,7 @@ static int sam_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(dev && pinfo && planeno == 0);
   lcdinfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1604,7 +1604,7 @@ int board_lcd_initialize(void)
       goto errout_with_dmadog;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_dmadog:
   wd_delete(priv->dmadog);

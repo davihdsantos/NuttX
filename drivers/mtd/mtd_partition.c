@@ -420,7 +420,7 @@ static int part_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = priv->blocksize;
               geo->erasesize    = priv->blocksize * priv->blkpererase;
               geo->neraseblocks = priv->neraseblocks;
-              ret               = OK;
+              ret               = OKK;
           }
         }
         break;
@@ -436,7 +436,7 @@ static int part_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
 
               ret = priv->parent->ioctl(priv->parent, MTDIOC_XIPBASE,
                                         (unsigned long)((uintptr_t)&base));
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* Add the offset of this partion to the XIP base and
                    * return the sum to the caller.
@@ -511,7 +511,7 @@ static int part_procfs_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the index as the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)attr;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -531,7 +531,7 @@ static int part_procfs_close(FAR struct file *filep)
 
   kmm_free(attr);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -700,7 +700,7 @@ static int part_procfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new attributes in the new file structure */
 
   newp->f_priv = (FAR void *)newattr;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -718,7 +718,7 @@ static int part_procfs_stat(const char *relpath, struct stat *buf)
   buf->st_size    = 0;
   buf->st_blksize = 0;
   buf->st_blocks  = 0;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -890,7 +890,7 @@ int mtd_setpartitionname(FAR struct mtd_dev_s *mtd, FAR const char *name)
   /* Allocate space for the name */
 
   strncpy(priv->name, name, sizeof(priv->name));
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -302,7 +302,7 @@ int group_allocate(FAR struct task_tcb_s *tcb, uint8_t ttype)
   (void)nxsem_setprotocol(&group->tg_exitsem, SEM_PRIO_NONE);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -381,6 +381,6 @@ int group_initialize(FAR struct task_tcb_s *tcb)
   /* Mark that there is one member in the group, the main task */
 
   group->tg_nmembers = 1;
-  return OK;
+  return OKK;
 }
 

@@ -234,7 +234,7 @@ static int gplh_attach(FAR struct gpio_dev_s *gpio, pin_interrupt_t callback)
    */
 
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -250,7 +250,7 @@ static int gplh_attach(FAR struct gpio_dev_s *gpio, pin_interrupt_t callback)
 static int gplh_enable(FAR struct gpio_dev_s *gpio, bool enable)
 {
   FAR struct gplh_dev_s *priv = (FAR struct gplh_dev_s *)gpio;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(priv != NULL && priv->ioe != NULL);
 
@@ -374,7 +374,7 @@ static int gplh_setpintype(FAR struct gpio_dev_s *gpio,
     }
 
   gpio->gp_pintype = pintype;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

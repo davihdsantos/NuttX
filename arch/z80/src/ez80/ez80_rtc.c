@@ -406,7 +406,7 @@ static int ez80_alarm_interrupt(int irq, FAR void *context, FAR void *arg)
       cb(cb_arg);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -450,7 +450,7 @@ int up_rtc_initialize(void)
 
   rtc_dumpregs("After Initialization");
   g_rtc_enabled = true;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -533,7 +533,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
   tp->tm_year = (uint16_t)timeregs.cen * 100 + (uint16_t)timeregs.yr - 1900;
 
   rtc_dumptime((FAR const struct tm *)tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -577,7 +577,7 @@ int ez80_rtc_setdatetime(FAR const struct tm *tp)
   set_raw_time(&timeregs);
 
   rtc_dumpregs("New time setting");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -663,7 +663,7 @@ int ez80_rtc_setalarm(FAR struct alm_setalarm_s *alminfo)
   /* Enable the alarm interrupt at the interrupt controller */
 
   up_enable_irq(EZ80_RTC_IRQ);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -702,7 +702,7 @@ int ez80_rtc_cancelalarm(void)
   rtc_lock();
 
   up_disable_irq(EZ80_RTC_IRQ);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -752,7 +752,7 @@ int ez80_rtc_rdalarm(FAR struct tm *almtime)
 #endif
 
   rtc_dumptime((FAR const struct tm *)almtime, "Returning");
-  return OK;
+  return OKK;
 }
 #endif
 

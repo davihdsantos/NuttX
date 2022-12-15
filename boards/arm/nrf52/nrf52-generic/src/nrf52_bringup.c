@@ -93,5 +93,5 @@ int nrf52_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

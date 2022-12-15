@@ -139,7 +139,7 @@ static void stm32_i2ctool(void)
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 #ifdef HAVE_RTC_DRIVER
   struct rtc_lowerhalf_s *lower;
 #endif
@@ -281,5 +281,5 @@ int stm32_bringup(void)
     }
 #endif  /* CONFIG_CDCACM & !CONFIG_CDCACM_CONSOLE */
 
-  return OK;
+  return OKK;
 }

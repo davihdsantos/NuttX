@@ -295,5 +295,5 @@ int nxtk_drawframe(FAR struct nxtk_framedwindow_s *fwnd,
     }
 #endif
 
-  return OK;
+  return OKK;
 }

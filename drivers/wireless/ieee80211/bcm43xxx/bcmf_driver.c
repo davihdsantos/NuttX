@@ -187,29 +187,29 @@ FAR struct bcmf_dev_s *bcmf_allocate_device(void)
 
   /* Init control frames mutex and timeout signal */
 
-  if ((ret = nxsem_init(&priv->control_mutex, 0, 1)) != OK)
+  if ((ret = nxsem_init(&priv->control_mutex, 0, 1)) != OKK)
     {
       goto exit_free_priv;
     }
 
-  if ((ret = nxsem_init(&priv->control_timeout, 0, 0)) != OK)
+  if ((ret = nxsem_init(&priv->control_timeout, 0, 0)) != OKK)
     {
       goto exit_free_priv;
     }
 
-  if ((ret = nxsem_setprotocol(&priv->control_timeout, SEM_PRIO_NONE)) != OK)
+  if ((ret = nxsem_setprotocol(&priv->control_timeout, SEM_PRIO_NONE)) != OKK)
     {
       goto exit_free_priv;
     }
 
   /* Init authentication signal semaphore */
 
-  if ((ret = nxsem_init(&priv->auth_signal, 0, 0)) != OK)
+  if ((ret = nxsem_init(&priv->auth_signal, 0, 0)) != OKK)
     {
       goto exit_free_priv;
     }
 
-  if ((ret = nxsem_setprotocol(&priv->auth_signal, SEM_PRIO_NONE)) != OK)
+  if ((ret = nxsem_setprotocol(&priv->auth_signal, SEM_PRIO_NONE)) != OKK)
     {
       goto exit_free_priv;
     }
@@ -247,7 +247,7 @@ int bcmf_wl_set_mac_address(FAR struct bcmf_dev_s *priv, struct ifreq *req)
                               IOVAR_STR_CUR_ETHERADDR,
                               (uint8_t *)req->ifr_hwaddr.sa_data,
                               &out_len);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -260,7 +260,7 @@ int bcmf_wl_set_mac_address(FAR struct bcmf_dev_s *priv, struct ifreq *req)
   memcpy(priv->bc_dev.d_mac.ether.ether_addr_octet,
          req->ifr_hwaddr.sa_data, ETHER_ADDR_LEN);
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_IEEE80211_BROADCOM_HAVE_CLM
@@ -434,7 +434,7 @@ int bcmf_driver_initialize(FAR struct bcmf_dev_s *priv)
   /* Download CLM blob if needed */
 
   ret = bcmf_driver_download_clm(priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return -EIO;
     }
@@ -447,7 +447,7 @@ int bcmf_driver_initialize(FAR struct bcmf_dev_s *priv)
   ret = bcmf_cdc_iovar_request(priv, interface, true,
                                IOVAR_STR_TX_GLOM, tmp_buf,
                                &out_len);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return -EIO;
     }
@@ -458,7 +458,7 @@ int bcmf_driver_initialize(FAR struct bcmf_dev_s *priv)
   value   = 0;
   ret     = bcmf_cdc_ioctl(priv, interface, true, WLC_SET_PM,
                            (uint8_t *)&value, &out_len);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -469,7 +469,7 @@ int bcmf_driver_initialize(FAR struct bcmf_dev_s *priv)
   value = GMODE_AUTO;
   ret = bcmf_cdc_ioctl(priv, interface, true, WLC_SET_GMODE,
                        (uint8_t *)&value, &out_len);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -502,7 +502,7 @@ int bcmf_driver_initialize(FAR struct bcmf_dev_s *priv)
   ret     = bcmf_cdc_iovar_request(priv, interface, false,
                                    IOVAR_STR_VERSION, tmp_buf,
                                    &out_len);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return -EIO;
     }
@@ -586,7 +586,7 @@ void bcmf_wl_auth_event_handler(FAR struct bcmf_dev_s *priv,
     {
       /* Auth complete */
 
-      priv->auth_status = OK;
+      priv->auth_status = OKK;
 
       nxsem_post(&priv->auth_signal);
     }
@@ -967,7 +967,7 @@ int bcmf_sdio_initialize(int minor, FAR struct sdio_dev_s *dev)
   /* Init sdio bus */
 
   ret = bcmf_bus_sdio_initialize(priv, minor, dev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ret = -EIO;
       goto exit_free_device;
@@ -1119,7 +1119,7 @@ int bcmf_wl_start_scan(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
   (void)wd_start(priv->scan_timeout, BCMF_SCAN_TIMEOUT_TICK,
                  bcmf_wl_scan_timeout, (wdparm_t)priv);
 
-  return OK;
+  return OKK;
 
 exit_sem_post:
   priv->scan_status = BCMF_SCAN_DISABLED;
@@ -1132,7 +1132,7 @@ exit_failed:
 
 int bcmf_wl_get_scan_results(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (priv->scan_status == BCMF_SCAN_RUN)
     {
@@ -1157,7 +1157,7 @@ int bcmf_wl_get_scan_results(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
     {
       /* Result have already been requested */
 
-      ret = OK;
+      ret = OKK;
       iwr->u.data.length = 0;
       goto exit_sem_post;
     }
@@ -1175,7 +1175,7 @@ int bcmf_wl_get_scan_results(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
 
   if (priv->scan_result_size <= 0)
     {
-      ret = OK;
+      ret = OKK;
       iwr->u.data.length = 0;
       goto exit_free_buffer;
     }
@@ -1270,7 +1270,7 @@ int bcmf_wl_set_auth_param(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
             }
         }
 
-        return OK;
+        return OKK;
 
       case IW_AUTH_CIPHER_PAIRWISE:
       case IW_AUTH_CIPHER_GROUP:
@@ -1316,7 +1316,7 @@ int bcmf_wl_set_auth_param(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
             }
         }
 
-        return OK;
+        return OKK;
 
       case IW_AUTH_KEY_MGMT:
       case IW_AUTH_TKIP_COUNTERMEASURES:
@@ -1355,7 +1355,7 @@ int bcmf_wl_set_mode(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
       return -EIO;
     }
 
-  return OK;
+  return OKK;
 }
 
 int bcmf_wl_set_encode_ext(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
@@ -1444,5 +1444,5 @@ int bcmf_wl_set_ssid(FAR struct bcmf_dev_s *priv, struct iwreq *iwr)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }

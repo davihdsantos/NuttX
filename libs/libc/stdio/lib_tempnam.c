@@ -92,7 +92,7 @@ FAR char *tempnam(FAR const char *dir, FAR const char *pfx)
   if (path)
     {
       ret = mktemp(path);
-      if (ret == OK)
+      if (ret == OKK)
         {
           return path;
         }

@@ -103,7 +103,7 @@ int register_blockdriver(FAR const char *path,
       node->i_mode    = mode;
 #endif
       node->i_private = priv;
-      ret             = OK;
+      ret             = OKK;
     }
 
   inode_semgive();

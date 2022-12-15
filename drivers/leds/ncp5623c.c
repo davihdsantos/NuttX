@@ -106,7 +106,7 @@ static int ncp5623c_i2c_write_byte(FAR struct ncp5623c_dev_s *priv,
                                    uint8_t const reg_val)
 {
   struct i2c_config_s config;
-  int ret = OK;
+  int ret = OKK;
 
   /* Assemble the 1 byte message comprised of reg_val */
 
@@ -127,13 +127,13 @@ static int ncp5623c_i2c_write_byte(FAR struct ncp5623c_dev_s *priv,
           buffer[0]);
 
   ret = i2c_write(priv->i2c, &config, buffer, BUFFER_SIZE);
-  if (ret != OK)
+  if (ret != OKK)
     {
       lcderr("ERROR: i2c_write returned error code %d\n", ret);
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -154,7 +154,7 @@ static int ncp5623c_open(FAR struct file *filep)
   /* Shutdown the NCP5623C */
 
   ret = ncp5623c_i2c_write_byte(priv, NCP5623C_SHUTDOWN, 0x00);
-  if (ret != OK)
+  if (ret != OKK)
     {
       lcderr("ERROR: Could not shut down the NCP5623C\n");
       return ret;
@@ -163,7 +163,7 @@ static int ncp5623c_open(FAR struct file *filep)
   /* Set up Max current */
 
   ret = ncp5623c_i2c_write_byte(priv, NCP5623C_ILED, 0x1F);
-  if (ret != OK)
+  if (ret != OKK)
     {
       lcderr("ERROR: Could not set up max current\n");
       return ret;
@@ -172,7 +172,7 @@ static int ncp5623c_open(FAR struct file *filep)
   /* Let the chip settle a bit */
 
   nxsig_usleep(1);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -192,12 +192,12 @@ static int ncp5623c_close(FAR struct file *filep)
   /* Shut down NCP5623C */
 
   ret = ncp5623c_i2c_write_byte(priv, NCP5623C_SHUTDOWN, 0x00);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -212,7 +212,7 @@ static int ncp5623c_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct ncp5623c_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   lcdinfo("cmd: %d arg: %ld\n", cmd, arg);
 
@@ -296,14 +296,14 @@ int ncp5623c_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
   /* Register the character driver */
 
   int const ret = register_driver(devpath, &g_ncp5623c_fileops, 666, priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       lcderr("ERROR: Failed to register driver: %d\n", ret);
       kmm_free(priv);
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -335,7 +335,7 @@ static ssize_t ncp5623c_write(FAR struct file *filep, FAR const char *buffer,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct ncp5623c_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   unsigned int red;
   unsigned int green;
@@ -405,7 +405,7 @@ static ssize_t ncp5623c_write(FAR struct file *filep, FAR const char *buffer,
 
   ret = ncp5623c_i2c_write_byte(priv, NCP5623C_PWM1,
                                  red);
-  if (ret != OK)
+  if (ret != OKK)
     {
       lcderr("ERROR: Could not set red led\n");
       return ret;
@@ -415,7 +415,7 @@ static ssize_t ncp5623c_write(FAR struct file *filep, FAR const char *buffer,
 
   ret = ncp5623c_i2c_write_byte(priv, NCP5623C_PWM2,
                                  green);
-  if (ret != OK)
+  if (ret != OKK)
     {
       lcderr("ERROR: Could not set green led\n");
       return ret;
@@ -425,7 +425,7 @@ static ssize_t ncp5623c_write(FAR struct file *filep, FAR const char *buffer,
 
   ret = ncp5623c_i2c_write_byte(priv, NCP5623C_PWM3,
                                  blue);
-  if (ret != OK)
+  if (ret != OKK)
     {
       lcderr("ERROR: Could not set blue led\n");
       return ret;

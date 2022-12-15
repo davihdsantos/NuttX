@@ -96,7 +96,7 @@ int nxflat_load(struct nxflat_loadinfo_s *loadinfo)
   uint32_t dreadsize;   /* Total number of bytes of .data to be read */
   uint32_t relocsize;   /* Memory needed to hold relocations */
   uint32_t extrasize;   /* MAX(BSS size, relocsize) */
-  int      ret = OK;
+  int      ret = OKK;
 
   /* Calculate the extra space we need to allocate.  This extra space will be
    * the size of the BSS section.  This extra space will also be used
@@ -211,7 +211,7 @@ int nxflat_load(struct nxflat_loadinfo_s *loadinfo)
     }
 #endif
 
-  return OK;
+  return OKK;
 
 errout:
 #ifdef CONFIG_ARCH_ADDRENV

@@ -331,7 +331,7 @@ static int mx35_readid(struct mx35_dev_s *priv)
           priv->sectorshift = MX35_MX35LF1GE4AB_SECTOR_SHIFT;
           priv->nsectors    = MX35_MX35LF1GE4AB_NSECTORS;
           priv->pageshift   = MX35_MX35LF1GE4AB_PAGE_SHIFT;
-          return OK;
+          return OKK;
         }
       else if (capacity == MX35_MX35LF2GE4AB_CAPACITY)
         {
@@ -341,7 +341,7 @@ static int mx35_readid(struct mx35_dev_s *priv)
           priv->sectorshift = MX35_MX35LF2GE4AB_SECTOR_SHIFT;
           priv->nsectors    = MX35_MX35LF2GE4AB_NSECTORS;
           priv->pageshift   = MX35_MX35LF2GE4AB_PAGE_SHIFT;
-          return OK;
+          return OKK;
         }
     }
 
@@ -783,7 +783,7 @@ static int mx35_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 
-              ret = OK;
+              ret = OKK;
 
               mx35info("blocksize: %d erasesize: %d neraseblocks: %d\n",
                        geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -805,7 +805,7 @@ static int mx35_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
           *result =
               (priv->eccstatus & MX35_FEATURE_ECC_MASK) >> MX35_FEATURE_ECC_OFFSET;
 
-          ret = OK;
+          ret = OKK;
         }
       break;
 
@@ -932,7 +932,7 @@ FAR struct mtd_dev_s *mx35_initialize(FAR struct spi_dev_s *dev)
       /* Identify the FLASH chip and get its capacity */
 
       ret = mx35_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

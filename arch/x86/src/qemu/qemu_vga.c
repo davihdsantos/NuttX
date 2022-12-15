@@ -346,14 +346,14 @@ static int vga_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buffer,
                       size_t npixels)
 {
   memcpy(&g_pscreen[row*VGA_XRES + col],buffer, npixels);
-  return OK;
+  return OKK;
 }
 
 static int vga_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
                       size_t npixels)
 {
   memcpy(buffer,&g_pscreen[row*VGA_XRES + col],npixels);
-  return OK;
+  return OKK;
 }
 
 static int vga_getvideoinfo(FAR struct lcd_dev_s *dev,
@@ -363,7 +363,7 @@ static int vga_getvideoinfo(FAR struct lcd_dev_s *dev,
   vinfo->xres    = VGA_XRES;        /* Horizontal resolution in pixel columns */
   vinfo->yres    = VGA_YRES;        /* Vertical resolution in pixel rows */
   vinfo->nplanes = 1;               /* Number of color planes supported */
-  return OK;
+  return OKK;
 }
 
 static int vga_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
@@ -374,7 +374,7 @@ static int vga_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   pinfo->buffer  = g_runbuffer;     /* Run scratch buffer */
   pinfo->display = 0;
   pinfo->bpp     = VGA_BPP;         /* Bits-per-pixel */
-  return OK;
+  return OKK;
 }
 
 static int vga_getpower(struct lcd_dev_s *dev)
@@ -384,7 +384,7 @@ static int vga_getpower(struct lcd_dev_s *dev)
 
 static int vga_setpower(struct lcd_dev_s *dev, int power)
 {
-  return OK;
+  return OKK;
 }
 
 static int vga_getcontrast(struct lcd_dev_s *dev)
@@ -399,12 +399,12 @@ static int vga_setcontrast(struct lcd_dev_s *dev, unsigned int contrast)
 
 static int vga_open(struct file * filep)
 {
-  return OK;
+  return OKK;
 }
 
 static int vga_close(struct file * filep)
 {
-  return OK;
+  return OKK;
 }
 
 static ssize_t vga_read(struct file *filep, FAR char *buf, size_t buflen)

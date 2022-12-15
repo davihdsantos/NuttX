@@ -424,7 +424,7 @@ static int pwm_timer(FAR struct efm32_pwmtimer_s *priv,
 
   pwm_putreg(priv, EFM32_TIMER_CMD_OFFSET, TIMER_CMD_START);
   pwm_dumpregs(priv, "After starting");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -516,7 +516,7 @@ static int pwm_interrupt(int irq, void *context, FAR void *arg)
   pwminfo("Update interrupt SR: %04x prev: %d curr: %d count: %d\n",
           regval, priv->prev, priv->curr, priv->count);
 
-  return OK;
+  return OKK;
 #else
   return -ENODEV;
 #endif
@@ -632,7 +632,7 @@ static int pwm_setup(FAR struct pwm_lowerhalf_s *dev)
   efm32_configgpio(priv->pincfg);
   pwm_putreg(priv, EFM32_TIMER_ROUTE_OFFSET, BOARD_PWM_TIMER0_PINLOC);
   pwm_dumpgpio(priv->pincfg, "PWM setup");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -669,7 +669,7 @@ static int pwm_shutdown(FAR struct pwm_lowerhalf_s *dev)
   pincfg |= (_GPIO_DISABLE);
 
   efm32_configgpio(pincfg);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -752,7 +752,7 @@ static int pwm_stop(FAR struct pwm_lowerhalf_s *dev)
   leave_critical_section(flags);
 
   pwm_dumpregs(priv, "After stop");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

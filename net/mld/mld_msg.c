@@ -90,7 +90,7 @@ int mld_schedmsg(FAR struct mld_group_s *group, uint8_t msgtype)
   /* Notify the device that we have a packet to send */
 
   netdev_txnotify_dev(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -139,7 +139,7 @@ int mld_waitmsg(FAR struct mld_group_s *group, uint8_t msgtype)
               break;
             }
 
-          ret = OK;
+          ret = OKK;
         }
     }
 

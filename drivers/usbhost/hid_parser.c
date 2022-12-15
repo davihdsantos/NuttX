@@ -381,7 +381,7 @@ int hid_parsereport(FAR const uint8_t *report, int rptlen,
       return -ENOENT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -439,7 +439,7 @@ int hid_getitem(FAR const uint8_t *report, FAR struct hid_rptitem_s *item)
       mask <<= 1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

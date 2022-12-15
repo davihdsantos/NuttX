@@ -319,7 +319,7 @@ static int lo_ifup(FAR struct net_driver_s *dev)
                  1, (wdparm_t)priv);
 
   priv->lo_bifup = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -349,7 +349,7 @@ static int lo_ifdown(FAR struct net_driver_s *dev)
   /* Mark the device "down" */
 
   priv->lo_bifup = false;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -426,7 +426,7 @@ static int lo_txavail(FAR struct net_driver_s *dev)
       work_queue(LPWORK, &priv->lo_work, lo_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -452,7 +452,7 @@ static int lo_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 {
   /* There is no multicast support in the loopback driver */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -479,7 +479,7 @@ static int lo_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 {
   /* There is no multicast support in the loopback driver */
 
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -91,7 +91,7 @@
 
 int board_app_initialize(uintptr_t arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_USBMSC
 #if !defined(CONFIG_NSH_BUILTIN_APPS) && !defined(CONFIG_SYSTEM_USBMSC)

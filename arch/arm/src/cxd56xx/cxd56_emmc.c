@@ -344,7 +344,7 @@ static int emmc_checkresponse(void)
       ferr("Response error %08x\n", resp);
       return -EIO;
     }
-  return OK;
+  return OKK;
 }
 
 static void emmc_send(int datatype, uint32_t opcode, uint32_t arg,
@@ -480,7 +480,7 @@ static int emmc_switchcmd(uint8_t index, uint8_t val)
       return -EIO;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -577,7 +577,7 @@ static int emmc_interrupt(int irq, FAR void *context, FAR void *arg)
 
   emmc_givesem(&g_waitsem);
 
-  return OK;
+  return OKK;
 }
 
 static void emmc_pincontrol(bool on)
@@ -594,7 +594,7 @@ static void emmc_pincontrol(bool on)
 
 static int emmc_hwinitialize(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
   cxd56_emmc_clock_enable(1, 1, 0);
 
@@ -658,7 +658,7 @@ static int emmc_hwinitialize(void)
       goto errout;
     }
 
-  return OK;
+  return OKK;
 
 errout:
   up_disable_irq(CXD56_IRQ_EMMC);
@@ -675,7 +675,7 @@ static int cxd56_emmc_readsectors(FAR struct cxd56_emmc_state_s *priv,
 {
   struct emmc_dma_desc_s *descs;
   uint32_t idsts;
-  int ret = OK;
+  int ret = OKK;
 
   descs = emmc_setupdma(buf, nsectors * SECTOR_SIZE);
   if (!descs)
@@ -733,7 +733,7 @@ static int cxd56_emmc_writesectors(FAR struct cxd56_emmc_state_s *priv,
 {
   struct emmc_dma_desc_s *descs;
   uint32_t idsts;
-  int ret = OK;
+  int ret = OKK;
 
   descs = emmc_setupdma((void *)buf, nsectors * SECTOR_SIZE);
   if (!descs)
@@ -810,7 +810,7 @@ static int cxd56_emmc_open(FAR struct inode *inode)
   emmc_takesem(&priv->excsem);
   priv->crefs++;
   emmc_givesem(&priv->excsem);
-  return OK;
+  return OKK;
 }
 
 static int cxd56_emmc_close(FAR struct inode *inode)
@@ -826,7 +826,7 @@ static int cxd56_emmc_close(FAR struct inode *inode)
   emmc_takesem(&priv->excsem);
   priv->crefs--;
   emmc_givesem(&priv->excsem);
-  return OK;
+  return OKK;
 }
 
 static ssize_t cxd56_emmc_read(FAR struct inode *inode, unsigned char *buffer,
@@ -895,7 +895,7 @@ static int cxd56_emmc_geometry(FAR struct inode *inode,
   geometry->geo_nsectors = priv->total_sectors;
   geometry->geo_sectorsize = SECTOR_SIZE;
 
-  return OK;
+  return OKK;
 }
 
 int cxd56_emmcinitialize(void)
@@ -912,7 +912,7 @@ int cxd56_emmcinitialize(void)
   sem_init(&g_waitsem, 0, 0);
 
   ret = emmc_hwinitialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       return -EIO;
     }
@@ -943,7 +943,7 @@ int cxd56_emmcinitialize(void)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 int emmc_uninitialize(void)

@@ -104,7 +104,7 @@ int nxsem_trywait(FAR sem_t *sem)
 
           sem->semcount--;
           rtcb->waitsem = NULL;
-          ret = OK;
+          ret = OKK;
         }
       else
         {

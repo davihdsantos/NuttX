@@ -118,7 +118,7 @@ int clock_systimespec(FAR struct timespec *ts)
         }
 
       ts->tv_nsec -= g_basetime.tv_nsec;
-      return OK;
+      return OKK;
     }
   else
 #endif
@@ -153,7 +153,7 @@ int clock_systimespec(FAR struct timespec *ts)
 
       ts->tv_sec  = (time_t)secs;
       ts->tv_nsec = (long)nsecs;
-      return OK;
+      return OKK;
 
 #else
       /* We know that the clock rate is in units of milliseconds
@@ -192,7 +192,7 @@ int clock_systimespec(FAR struct timespec *ts)
 
       ts->tv_sec  = (time_t)secs;
       ts->tv_nsec = (long)nsecs;
-      return OK;
+      return OKK;
 #endif
     }
 }

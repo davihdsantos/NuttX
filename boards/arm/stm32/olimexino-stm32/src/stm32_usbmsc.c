@@ -133,7 +133,7 @@ int board_usbmsc_initialize(int port)
 
   syslog(LOG_INFO, "Successfully bound SPI to the MMC/SD driver\n");
 
-  return OK;
+  return OKK;
 
 }
 

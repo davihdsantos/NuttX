@@ -103,7 +103,7 @@ int ez80_mmcsd_initialize(void)
     }
 
   mcinfo("INFO: mmcsd card has been initialized successfully\n");
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_MMCSD */

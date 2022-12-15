@@ -151,7 +151,7 @@ int bcmf_oob_irq(FAR void *arg)
       nxsem_post(&sbus->thread_signal);
     }
 
-  return OK;
+  return OKK;
 }
 
 int bcmf_sdio_bus_sleep(FAR struct bcmf_sdio_dev_s *sbus, bool sleep)
@@ -162,7 +162,7 @@ int bcmf_sdio_bus_sleep(FAR struct bcmf_sdio_dev_s *sbus, bool sleep)
 
   if (sbus->sleeping == sleep)
     {
-      return OK;
+      return OKK;
     }
 
   if (sleep)
@@ -179,7 +179,7 @@ int bcmf_sdio_bus_sleep(FAR struct bcmf_sdio_dev_s *sbus, bool sleep)
 
           ret = bcmf_write_reg(sbus, 1, SBSDIO_FUNC1_CHIPCLKCSR,
                                SBSDIO_HT_AVAIL_REQ | SBSDIO_FORCE_HT);
-          if (ret != OK)
+          if (ret != OKK)
             {
               wlerr("HT Avail request failed %d\n", ret);
               return ret;
@@ -190,7 +190,7 @@ int bcmf_sdio_bus_sleep(FAR struct bcmf_sdio_dev_s *sbus, bool sleep)
           up_mdelay(100);
           ret = bcmf_read_reg(sbus, 1, SBSDIO_FUNC1_CHIPCLKCSR, &value);
 
-          if (ret != OK)
+          if (ret != OKK)
             {
               return ret;
             }
@@ -212,7 +212,7 @@ int bcmf_sdio_bus_sleep(FAR struct bcmf_sdio_dev_s *sbus, bool sleep)
       sbus->sleeping = false;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -226,7 +226,7 @@ int bcmf_probe(FAR struct bcmf_sdio_dev_s *sbus)
   /* Probe sdio card compatible device */
 
   ret = sdio_probe(sbus->sdio_dev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_error;
     }
@@ -234,19 +234,19 @@ int bcmf_probe(FAR struct bcmf_sdio_dev_s *sbus)
   /* Set FN0 / FN1 / FN2 default block size */
 
   ret = sdio_set_blocksize(sbus->sdio_dev, 0, 64);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_error;
     }
 
   ret = sdio_set_blocksize(sbus->sdio_dev, 1, 64);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_error;
     }
 
   ret = sdio_set_blocksize(sbus->sdio_dev, 2, 64);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_error;
     }
@@ -255,7 +255,7 @@ int bcmf_probe(FAR struct bcmf_sdio_dev_s *sbus)
 
   ret = bcmf_write_reg(sbus, 0, SDIO_CCCR_INTEN,
                        (1 << 0) | (1 << 1) | (1 << 2));
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_error;
     }
@@ -270,12 +270,12 @@ int bcmf_probe(FAR struct bcmf_sdio_dev_s *sbus)
   /* Enable bus FN1 */
 
   ret = sdio_enable_function(sbus->sdio_dev, 1);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_error;
     }
 
-  return OK;
+  return OKK;
 
 exit_error:
 
@@ -300,7 +300,7 @@ int bcmf_businitialize(FAR struct bcmf_sdio_dev_s *sbus)
                        SBSDIO_ALP_AVAIL_REQ |
                        SBSDIO_FORCE_ALP);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -311,7 +311,7 @@ int bcmf_businitialize(FAR struct bcmf_sdio_dev_s *sbus)
       up_mdelay(10);
       ret = bcmf_read_reg(sbus, 1, SBSDIO_FUNC1_CHIPCLKCSR, &value);
 
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -333,7 +333,7 @@ int bcmf_businitialize(FAR struct bcmf_sdio_dev_s *sbus)
   /* Clear Active Low-Power clock request */
 
   ret = bcmf_write_reg(sbus, 1, SBSDIO_FUNC1_CHIPCLKCSR, 0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -341,7 +341,7 @@ int bcmf_businitialize(FAR struct bcmf_sdio_dev_s *sbus)
   /* Disable pull-ups on SDIO cmd, d0-2 lines */
 
   ret = bcmf_write_reg(sbus, 1, SBSDIO_FUNC1_SDIOPULLUP, 0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -349,7 +349,7 @@ int bcmf_businitialize(FAR struct bcmf_sdio_dev_s *sbus)
   /* Do chip specific initialization */
 
   ret = bcmf_chipinitialize(sbus);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -357,7 +357,7 @@ int bcmf_businitialize(FAR struct bcmf_sdio_dev_s *sbus)
   /* Upload firmware */
 
   ret = bcmf_core_upload_firmware(sbus);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -365,12 +365,12 @@ int bcmf_businitialize(FAR struct bcmf_sdio_dev_s *sbus)
   /* Enable FN2 (frame transfers) */
 
   ret = sdio_enable_function(sbus->sdio_dev, 2);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 int bcmf_bus_setup_interrupts(FAR struct bcmf_sdio_dev_s *sbus)
@@ -384,13 +384,13 @@ int bcmf_bus_setup_interrupts(FAR struct bcmf_sdio_dev_s *sbus)
   /* Enable function 2 interrupt */
 
   ret = sdio_enable_interrupt(sbus->sdio_dev, 0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
   ret = sdio_enable_interrupt(sbus->sdio_dev, 2);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -401,7 +401,7 @@ int bcmf_bus_setup_interrupts(FAR struct bcmf_sdio_dev_s *sbus)
   ret = bcmf_write_reg(sbus, 0, SDIO_CCCR_BRCM_SEPINT,
                        SDIO_SEPINT_MASK | SDIO_SEPINT_OE |
                        SDIO_SEPINT_ACT_HI);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -410,7 +410,7 @@ int bcmf_bus_setup_interrupts(FAR struct bcmf_sdio_dev_s *sbus)
   /* Wake up chip to be sure function 2 is running */
 
   ret = bcmf_sdio_bus_sleep(sbus, false);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -428,7 +428,7 @@ int bcmf_bus_setup_interrupts(FAR struct bcmf_sdio_dev_s *sbus)
   /* Lower F2 Watermark to avoid DMA Hang in F2 when SD Clock is stopped. */
 
   bcmf_write_reg(sbus, 1, SBSDIO_WATERMARK, 8);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -460,7 +460,7 @@ int bcmf_hwinitialize(FAR struct bcmf_sdio_dev_s *sbus)
 
   up_mdelay(BCMF_DEVICE_START_DELAY_MS);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -530,7 +530,7 @@ static int bcmf_sdio_sr_init(FAR struct bcmf_sdio_dev_s *sbus)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /* Check if the firmware supports save restore feature.
@@ -545,7 +545,7 @@ static bool brcm_chip_sr_capable(FAR struct bcmf_sdio_dev_s *sbus)
   /* Check if fw initialized sr engine */
 
   ret = bcmf_read_sbregw(sbus, CHIPCOMMON_SR_CONTROL1, &srctrl);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return false;
     }
@@ -666,7 +666,7 @@ int bcmf_bus_sdio_initialize(FAR struct bcmf_dev_s *priv,
 
   /* Init transmit frames queue */
 
-  if ((ret = nxsem_init(&sbus->queue_mutex, 0, 1)) != OK)
+  if ((ret = nxsem_init(&sbus->queue_mutex, 0, 1)) != OKK)
     {
       goto exit_free_bus;
     }
@@ -686,12 +686,12 @@ int bcmf_bus_sdio_initialize(FAR struct bcmf_dev_s *priv,
 
   /* Init thread semaphore */
 
-  if ((ret = nxsem_init(&sbus->thread_signal, 0, 0)) != OK)
+  if ((ret = nxsem_init(&sbus->thread_signal, 0, 0)) != OKK)
     {
       goto exit_free_bus;
     }
 
-  if ((ret = nxsem_setprotocol(&sbus->thread_signal, SEM_PRIO_NONE)) != OK)
+  if ((ret = nxsem_setprotocol(&sbus->thread_signal, SEM_PRIO_NONE)) != OKK)
     {
       goto exit_free_bus;
     }
@@ -708,7 +708,7 @@ int bcmf_bus_sdio_initialize(FAR struct bcmf_dev_s *priv,
   /* Initialize device hardware */
 
   ret = bcmf_hwinitialize(sbus);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_free_waitdog;
     }
@@ -716,7 +716,7 @@ int bcmf_bus_sdio_initialize(FAR struct bcmf_dev_s *priv,
   /* Probe device */
 
   ret = bcmf_probe(sbus);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_uninit_hw;
     }
@@ -724,7 +724,7 @@ int bcmf_bus_sdio_initialize(FAR struct bcmf_dev_s *priv,
   /* Initialize device bus */
 
   ret = bcmf_businitialize(sbus);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_uninit_hw;
     }
@@ -734,13 +734,13 @@ int bcmf_bus_sdio_initialize(FAR struct bcmf_dev_s *priv,
   sbus->ready = true;
 
   ret = bcmf_bus_setup_interrupts(sbus);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_uninit_hw;
     }
 
   ret = bcmf_sdio_sr_init(sbus);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto exit_uninit_hw;
     }
@@ -775,7 +775,7 @@ int bcmf_bus_sdio_initialize(FAR struct bcmf_dev_s *priv,
 
   /* SDIO bus is up and running */
 
-  return OK;
+  return OKK;
 
 exit_uninit_hw:
   bcmf_hwuninitialize(sbus);
@@ -796,7 +796,7 @@ int bcmf_chipinitialize(FAR struct bcmf_sdio_dev_s *sbus)
   int ret;
 
   ret = bcmf_read_sbregw(sbus, SI_ENUM_BASE, &value);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -825,7 +825,7 @@ int bcmf_chipinitialize(FAR struct bcmf_sdio_dev_s *sbus)
         return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 void bcmf_sdio_waitdog_timeout(int argc, wdparm_t arg1, ...)

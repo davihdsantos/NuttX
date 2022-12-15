@@ -185,7 +185,7 @@ int rmdir(FAR const char *pathname)
 
   inode_release(inode);
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
 errout_with_inode:
   inode_release(inode);

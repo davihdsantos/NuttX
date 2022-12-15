@@ -76,7 +76,7 @@ static int nxsig_queue_action(FAR struct tcb_s *stcb, siginfo_t *info)
   FAR sigactq_t *sigact;
   FAR sigq_t    *sigq;
   irqstate_t     flags;
-  int            ret = OK;
+  int            ret = OKK;
 
   sched_lock();
   DEBUGASSERT(stcb != NULL && stcb->group != NULL);
@@ -301,7 +301,7 @@ static void nxsig_add_pendingsignal(FAR struct tcb_s *stcb,
 int nxsig_tcbdispatch(FAR struct tcb_s *stcb, siginfo_t *info)
 {
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   sinfo("TCB=0x%08x signo=%d code=%d value=%d mask=%08x\n",
         stcb, info->si_signo, info->si_code,

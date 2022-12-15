@@ -275,7 +275,7 @@ static int misoc_net_transmit(FAR struct misoc_net_driver_s *priv)
 
   (void)wd_start(priv->misoc_net_txtimeout, MISOC_NET_TXTIMEOUT,
                  misoc_net_txtimeout_expiry, 1, (wdparm_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -664,7 +664,7 @@ static int misoc_net_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(HPWORK, &priv->misoc_net_irqwork, misoc_net_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -865,7 +865,7 @@ static int misoc_net_ifup(FAR struct net_driver_s *dev)
 
   ethmac_sram_writer_ev_enable_write(1);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -911,7 +911,7 @@ static int misoc_net_ifdown(FAR struct net_driver_s *dev)
 
   priv->misoc_net_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -988,7 +988,7 @@ static int misoc_net_txavail(FAR struct net_driver_s *dev)
       work_queue(HPWORK, &priv->misoc_net_pollwork, misoc_net_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1016,7 +1016,7 @@ static int misoc_net_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1045,7 +1045,7 @@ static int misoc_net_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1204,7 +1204,7 @@ int misoc_net_initialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->misoc_net_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_MISOC_NET_ETHERNET */

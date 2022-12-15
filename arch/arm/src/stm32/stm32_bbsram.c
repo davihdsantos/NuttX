@@ -230,7 +230,7 @@ static void stm32_bbsram_semtake(FAR struct stm32_bbsram_s *priv)
   do
     {
       ret = nxsem_wait(&priv->exclsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -322,7 +322,7 @@ static int stm32_bbsram_open(FAR struct file *filep)
     }
 
   stm32_bbsram_semgive(bbr);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -354,7 +354,7 @@ static int stm32_bbsram_close(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct stm32_bbsram_s *bbr;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(inode && inode->i_private);
   bbr = (FAR struct stm32_bbsram_s *)inode->i_private;
@@ -553,7 +553,7 @@ static int stm32_bbsram_poll(FAR struct file *filep, FAR struct pollfd *fds,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -590,7 +590,7 @@ static int stm32_bbsram_ioctl(FAR struct file *filep, int cmd,
           bbrr->flags = ((bbr->bbf->crc == stm32_bbsram_crc(bbr->bbf))
                           ? BBSRAM_CRC_VALID : 0);
           bbrr->flags |= ((bbr->bbf->dirty) ? BBSRAM_DIRTY : 0);
-          ret = OK;
+          ret = OKK;
         }
 
       stm32_bbsram_semgive(bbr);
@@ -735,7 +735,7 @@ int stm32_bbsraminitialize(char *devpath, int *sizes)
   char path[32];
   char devname[32];
 
-  int ret = OK;
+  int ret = OKK;
 
   if (devpath == NULL)
     {
@@ -775,7 +775,7 @@ int stm32_bbsraminitialize(char *devpath, int *sizes)
   strncpy(path, devpath, sizeof(path));
   strcat(path, "%d");
 
-  for (i = 0; i < fcnt && ret >= OK; i++)
+  for (i = 0; i < fcnt && ret >= OKK; i++)
     {
       snprintf(devname, sizeof(devname), path, i);
       ret = register_driver(devname, &stm32_bbsram_fops, 0666, &g_bbsram[i]);

@@ -147,7 +147,7 @@ int closedir(FAR DIR *dirp)
   /* Then release the container */
 
   kumm_free(idir);
-  return OK;
+  return OKK;
 
 #ifndef CONFIG_DISABLE_MOUNTPOINT
 errout_with_inode:

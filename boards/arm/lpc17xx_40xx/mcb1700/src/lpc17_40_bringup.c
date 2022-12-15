@@ -229,7 +229,7 @@ static int nsh_sdinitialize(void)
   syslog(LOG_INFO, "Successfully bound SSP port %d to MMC/SD slot %d\n",
          CONFIG_NSH_MMCSDSPIPORTNO,
          CONFIG_NSH_MMCSDSLOTNO);
-  return OK;
+  return OKK;
 
   /* Disable power to the SD/MMC via a GPIO. HIGH disables SD/MMC. */
 
@@ -277,7 +277,7 @@ static int nsh_usbhostinitialize(void)
   /* Initialize mass storage support */
 
   ret = usbhost_msc_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the mass storage class: %d\n", ret);
@@ -288,7 +288,7 @@ static int nsh_usbhostinitialize(void)
   /* Register the CDC/ACM serial class */
 
   ret = usbhost_cdcacm_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the CDC/ACM serial class: %d\n", ret);

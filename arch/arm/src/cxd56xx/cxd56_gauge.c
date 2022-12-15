@@ -173,7 +173,7 @@ static int gauge_get_status(FAR enum battery_gauge_status_e *status)
         break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -199,7 +199,7 @@ static int gauge_get_vol(FAR b16_t *voltage)
     }
 
   *voltage = gauge.voltage * 112 / 100;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -256,7 +256,7 @@ static int gauge_get_capacity(FAR b16_t *capacity)
       *capacity = 0;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -271,7 +271,7 @@ static int gauge_online(FAR bool *online)
     }
 
   *online = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -284,7 +284,7 @@ static int gauge_online(FAR bool *online)
 
 static int gauge_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -297,7 +297,7 @@ static int gauge_open(FAR struct file *filep)
 
 static int gauge_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -413,7 +413,7 @@ int cxd56_gauge_initialize(FAR const char *devpath)
       return -EFAULT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -434,7 +434,7 @@ int cxd56_gauge_uninitialize(FAR const char *devpath)
 {
   (void) unregister_driver(devpath);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CXD56_GAUGE */

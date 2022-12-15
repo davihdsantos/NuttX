@@ -254,7 +254,7 @@ static int lis3dh_ident(FAR struct lis3dh_dev_s *dev)
 
   if (reg == LIS3DH_DEVICE_ID)
     {
-      return OK;
+      return OKK;
     }
 
   return -ENODEV;
@@ -326,7 +326,7 @@ static int lis3dh_queue_push(FAR struct lis3dh_dev_s *dev,
   dev->queue_count++;
   lis3dh_queue_unlock(dev);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -361,7 +361,7 @@ static int lis3dh_queue_pop(FAR struct lis3dh_dev_s *dev,
 
   lis3dh_queue_unlock(dev);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -477,13 +477,13 @@ static int lis3dh_read_fifo(FAR struct lis3dh_dev_s *dev)
             return -EINVAL;
         }
 
-      if (lis3dh_queue_push(dev, &data) == OK)
+      if (lis3dh_queue_push(dev, &data) == OKK)
         {
           nxsem_post(&dev->readsem);
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -521,7 +521,7 @@ static int lis3dh_interrupt_handler(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -613,7 +613,7 @@ static int lis3dh_set_power_mode(FAR struct lis3dh_dev_s *dev,
   dev->power_mode = power_mode;
   sninfo("Power mode set to %d\n", power_mode);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -650,7 +650,7 @@ static int lis3dh_set_odr(FAR struct lis3dh_dev_s *dev, uint8_t odr)
   dev->odr = odr;
   sninfo("Output data rate set to %d\n", odr);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -680,7 +680,7 @@ static int lis3dh_irq_enable(FAR struct lis3dh_dev_s *dev, bool enable)
     }
 
   lis3dh_write_register(dev, LIS3DH_CTRL_REG3, reg);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -708,7 +708,7 @@ static int lis3dh_fifo_enable(FAR struct lis3dh_dev_s *dev)
   reg |= LIS3DH_CTRL_REG5_FIFO_EN;
   lis3dh_write_register(dev, LIS3DH_CTRL_REG5, reg);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -748,7 +748,7 @@ static int lis3dh_enable(FAR struct lis3dh_dev_s *priv)
   reg |= LIS3DH_CTRL_REG1_ZEN | LIS3DH_CTRL_REG1_YEN | LIS3DH_CTRL_REG1_XEN;
   lis3dh_write_register(priv, LIS3DH_CTRL_REG1, reg);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -798,7 +798,7 @@ static int lis3dh_open(FAR struct file *filep)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -830,7 +830,7 @@ static int lis3dh_close(FAR struct file *filep)
 
   (priv->config->irq_detach)(priv->config);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -935,7 +935,7 @@ static int lis3dh_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct lis3dh_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1024,7 +1024,7 @@ int lis3dh_register(FAR const char *devpath, FAR struct spi_dev_s *spi,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_LIS3DH */

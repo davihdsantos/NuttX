@@ -278,7 +278,7 @@ static void misoc_disableuartint(struct uart_dev_s *dev, uint8_t *im)
 static int misoc_setup(struct uart_dev_s *dev)
 {
   uart_ev_pending_write(uart_ev_pending_read());
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -316,7 +316,7 @@ static int misoc_attach(struct uart_dev_s *dev)
   (void)irq_attach(priv->irq, misoc_uart_interrupt, dev);
   up_enable_irq(priv->irq);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -377,7 +377,7 @@ static int misoc_uart_interrupt(int irq, void *context, FAR void *arg)
       uart_xmitchars(dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

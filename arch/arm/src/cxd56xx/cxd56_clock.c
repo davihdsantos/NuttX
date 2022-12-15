@@ -1911,7 +1911,7 @@ int cxd56_scuseq_clock_enable(void)
 
   cxd56_scu_clock_enable();
 
-  return OK;
+  return OKK;
 }
 
 void cxd56_scuseq_release_reset(void)
@@ -2353,7 +2353,7 @@ int up_pmramctrl(int cmd, uintptr_t addr, size_t size)
       putreg32(val, CXD56_CRG_APP_TILE_CLK_GATING_ENB);
     }
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_DEBUG_PM

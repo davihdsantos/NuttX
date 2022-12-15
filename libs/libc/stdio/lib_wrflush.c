@@ -74,7 +74,7 @@ int lib_wrflush(FAR FILE *stream)
 
   if (stream->fs_bufstart == NULL)
     {
-      return OK;
+      return OKK;
     }
 
   /* Verify that the stream is opened for writing... lib_fflush will
@@ -89,7 +89,7 @@ int lib_wrflush(FAR FILE *stream)
        * read-only stream.
        */
 
-      return OK;
+      return OKK;
     }
 
   /* Flush the stream.   Return success if there is no buffered write data
@@ -109,6 +109,6 @@ int lib_wrflush(FAR FILE *stream)
     }
 #endif
 
-  return OK;
+  return OKK;
 #endif
 }

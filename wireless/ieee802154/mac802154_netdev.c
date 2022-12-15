@@ -278,7 +278,7 @@ static int macnet_update_nvaddr(FAR struct net_driver_s *dev)
     {
       IEEE802154_EADDRCOPY(dev->d_mac.radio.nv_addr, arg.getreq.attrval.mac.eaddr);
       dev->d_mac.radio.nv_addrlen = IEEE802154_EADDRSIZE;
-      return OK;
+      return OKK;
     }
 
 #else
@@ -306,7 +306,7 @@ static int macnet_update_nvaddr(FAR struct net_driver_s *dev)
       dev->d_mac.radio.nv_addr[1] = saddr[0];
 
       dev->d_mac.radio.nv_addrlen = IEEE802154_SADDRSIZE;
-      return OK;
+      return OKK;
     }
 #endif
 }
@@ -402,7 +402,7 @@ static int macnet_notify(FAR struct mac802154_maccb_s *maccb,
         }
 
       nxsem_post(&priv->md_exclsem);
-      return OK;
+      return OKK;
     }
 
   /* By returning a negative value, we let the MAC know that we don't want the
@@ -507,7 +507,7 @@ static int macnet_rxframe(FAR struct macnet_driver_s *priv,
    */
 
   ieee802154_primitive_free((FAR struct ieee802154_primitive_s *)ind);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -648,7 +648,7 @@ static int macnet_coord_eaddr(FAR struct radio_driver_s *radio,
     }
 
   IEEE802154_EADDRCOPY(eaddr, arg.getreq.attrval.mac.eaddr);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -685,7 +685,7 @@ static int macnet_coord_saddr(FAR struct radio_driver_s *radio,
     }
 
   IEEE802154_SADDRCOPY(saddr, arg.getreq.attrval.mac.saddr);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -718,7 +718,7 @@ static int macnet_ifup(FAR struct net_driver_s *dev)
   int ret;
 
   ret = macnet_update_nvaddr(dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       uint8_t *nvaddr = dev->d_mac.radio.nv_addr;
 
@@ -767,7 +767,7 @@ static int macnet_ifup(FAR struct net_driver_s *dev)
       (void)wd_start(priv->md_txpoll, TXPOLL_WDDELAY, macnet_txpoll_expiry,
                      1, (wdparm_t)priv);
 
-      ret = OK;
+      ret = OKK;
     }
 
   /* The interface is now up */
@@ -814,7 +814,7 @@ static int macnet_ifdown(FAR struct net_driver_s *dev)
 
   priv->md_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -903,7 +903,7 @@ static int macnet_txavail(FAR struct net_driver_s *dev)
       work_queue(WPANWORK, &priv->md_pollwork, macnet_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1029,7 +1029,7 @@ static int macnet_ioctl(FAR struct net_driver_s *dev, int cmd,
                   priv->md_notify_event       = netmac->u.event;
                   priv->md_notify_pid         = getpid();
                   priv->md_notify_registered  = true;
-                  ret = OK;
+                  ret = OKK;
                 }
                 break;
 
@@ -1056,7 +1056,7 @@ static int macnet_ioctl(FAR struct net_driver_s *dev, int cmd,
                           /* Free the event */
 
                           ieee802154_primitive_free(primitive);
-                          ret = OK;
+                          ret = OKK;
                           break;
                         }
 
@@ -1098,7 +1098,7 @@ static int macnet_ioctl(FAR struct net_driver_s *dev, int cmd,
               case MAC802154IOC_ENABLE_EVENTS:
                 {
                   priv->md_enableevents = netmac->u.enable;
-                  ret = OK;
+                  ret = OKK;
                 }
                 break;
 
@@ -1230,7 +1230,7 @@ static int macnet_req_data(FAR struct radio_driver_s *netdev,
       NETDEV_TXDONE(&priv->md_dev.r_dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1302,7 +1302,7 @@ static int macnet_properties(FAR struct radio_driver_s *netdev,
 #endif
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

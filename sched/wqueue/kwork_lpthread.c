@@ -152,7 +152,7 @@ static int work_lpthread(int argc, char *argv[])
         }
     }
 
-  return OK; /* To keep some compilers happy */
+  return OKK; /* To keep some compilers happy */
 }
 
 /****************************************************************************

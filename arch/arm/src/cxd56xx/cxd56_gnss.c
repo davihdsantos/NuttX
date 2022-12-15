@@ -1351,7 +1351,7 @@ static int cxd56_gnss_stop_test(FAR struct file *filep, unsigned long arg)
   /* term test */
 
   ret = GD_StopGpsTest();
-  if(ret == OK)
+  if(ret == OKK)
     {
       /* stop test */
 
@@ -2291,7 +2291,7 @@ static int cxd56_gnss_cpufifo_api(FAR struct file *filep, unsigned int api,
   FAR struct inode            *inode;
   FAR struct cxd56_gnss_dev_s *priv;
   unsigned int                 type;
-  int                          ret = OK;
+  int                          ret = OKK;
 
   inode = filep->f_inode;
   priv  = (FAR struct cxd56_gnss_dev_s *)inode->i_private;
@@ -2430,7 +2430,7 @@ static int cxd56_gnss_open(FAR struct file *filep)
 {
   FAR struct inode *           inode;
   FAR struct cxd56_gnss_dev_s *priv;
-  int                          ret = OK;
+  int                          ret = OKK;
 
   inode = filep->f_inode;
   priv  = (FAR struct cxd56_gnss_dev_s *)inode->i_private;
@@ -2519,7 +2519,7 @@ static int cxd56_gnss_close(FAR struct file *filep)
 {
   FAR struct inode *          inode;
   FAR struct cxd56_gnss_dev_s *priv;
-  int                         ret = OK;
+  int                         ret = OKK;
 
   inode = filep->f_inode;
   priv  = (FAR struct cxd56_gnss_dev_s *)inode->i_private;
@@ -2706,7 +2706,7 @@ static int cxd56_gnss_poll(FAR struct file *filep, FAR struct pollfd *fds,
 {
   FAR struct inode            *inode;
   FAR struct cxd56_gnss_dev_s *priv;
-  int                          ret = OK;
+  int                          ret = OKK;
   int                          i;
 
   inode = filep->f_inode;

@@ -120,5 +120,5 @@ int or1k_print_cpuinfo(void)
   syslog(LOG_INFO, "  AE[CS]R Present:   %s\n",
          (cpucfg & SPR_CPUCFGR_AECSRP) ? "yes" : "no");
 
-  return OK;
+  return OKK;
 }

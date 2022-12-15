@@ -284,7 +284,7 @@ int dns_find_answer(FAR const char *hostname, FAR union dns_addr_u *addr,
               memcpy(addr, &entry->addr, *naddr * sizeof(*addr));
 
               dns_semgive();
-              return OK;
+              return OKK;
             }
         }
     }

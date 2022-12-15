@@ -75,7 +75,7 @@
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Configure SPI-based devices */
 
@@ -120,7 +120,7 @@ int stm32_bringup(void)
   /* Now bind the SDIO interface to the MMC/SD driver */
 
   ret = mmcsd_slotinitialize(CONFIG_NSH_MMCSDMINOR, g_sdio);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n",
@@ -151,7 +151,7 @@ int stm32_bringup(void)
   /* Initialize and register the qencoder driver */
 
   ret = stm32_qencoder_initialize("/dev/qe0", CONFIG_NUCLEO_F401RE_QETIMER);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",
@@ -164,7 +164,7 @@ int stm32_bringup(void)
   /* Initialize and register the joystick driver */
 
   ret = board_ajoy_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the joystick driver: %d\n",

@@ -68,7 +68,7 @@
 
 int pthread_barrierattr_destroy(FAR pthread_barrierattr_t *attr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (!attr)
     {

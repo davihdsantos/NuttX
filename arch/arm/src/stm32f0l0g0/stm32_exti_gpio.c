@@ -98,7 +98,7 @@ static int stm32_exti_multiisr(int irq, void *context, void *arg,
 {
   uint32_t pr;
   int pin;
-  int ret = OK;
+  int ret = OKK;
 
   /* Examine the state of each pin in the group */
 
@@ -143,7 +143,7 @@ static int stm32_exti_multiisr(int irq, void *context, void *arg,
   uint32_t rpr;
   uint32_t fpr;
   int pin;
-  int ret = OK;
+  int ret = OKK;
 
   /* Examine the state of each pin in the group.
    * NOTE: We don't distinguish rising/falling edge!
@@ -322,5 +322,5 @@ int stm32_gpiosetevent(uint32_t pinset, bool risingedge, bool fallingedge,
               func ? 0 : exti,
               func ? exti : 0);
 
-  return OK;
+  return OKK;
 }

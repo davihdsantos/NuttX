@@ -549,7 +549,7 @@ static int imx_setup(struct uart_dev_s *dev)
   /* Initialize the UCR1 shadow register */
 
   priv->ucr1 = imx_serialin(priv, UART_UCR1_OFFSET);
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -597,7 +597,7 @@ static int imx_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, imx_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Configure as a (high) level interrupt */
 
@@ -666,7 +666,7 @@ static int imx_interrupt(int irq, void *context, FAR void *arg)
 
       if (usr1 == 0 || passes > 256)
         {
-          return OK;
+          return OKK;
         }
 
       /* Handle incoming, receive bytes */
@@ -706,7 +706,7 @@ static int imx_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int ret   = OK;
+  int ret   = OKK;
 
   switch (cmd)
     {

@@ -166,7 +166,7 @@ int lpc43_gpio_config(uint16_t gpiocfg)
   unsigned int port  = ((gpiocfg & GPIO_PORT_MASK) >> GPIO_PORT_SHIFT);
   unsigned int pin   = ((gpiocfg & GPIO_PIN_MASK) >> GPIO_PIN_SHIFT);
   irqstate_t   flags;
-  int          ret   = OK;
+  int          ret   = OKK;
 
   DEBUGASSERT(port < NUM_GPIO_PORTS && pin < NUM_GPIO_PINS);
 

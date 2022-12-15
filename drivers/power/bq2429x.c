@@ -241,7 +241,7 @@ static int bq2429x_getreg8(FAR struct bq2429x_dev_s *priv, uint8_t regaddr,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -360,7 +360,7 @@ static int bq2429x_reset(FAR struct bq2429x_dev_s *priv)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -404,7 +404,7 @@ static int bq2429x_watchdog(FAR struct bq2429x_dev_s *priv, bool enable)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -492,7 +492,7 @@ static int bq2429x_en_term(FAR struct bq2429x_dev_s *priv, bool state)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -536,7 +536,7 @@ static int bq2429x_en_hiz(FAR struct bq2429x_dev_s *priv, bool state)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -580,7 +580,7 @@ static int bq2429x_en_stat(FAR struct bq2429x_dev_s *priv, bool state)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -630,7 +630,7 @@ static int bq2429x_setboost_otg_config(FAR struct bq2429x_dev_s *priv,
   batdbg("otg_config: REG01 %02X Boost=%d\n", regval,
       ((BQ2429XR1_OTG_CONFIG == (regval & BST_CONFIG_MASK)) ? 1 : 0));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -711,7 +711,7 @@ static int bq2429x_state(FAR struct battery_charger_dev_s *dev,
       *status = BATTERY_IDLE;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -744,17 +744,17 @@ static int bq2429x_health(FAR struct battery_charger_dev_s *dev,
       case BQ2429XR9_CHRG_FAULT_TIMER:
         *health = BATTERY_HEALTH_SAFE_TMR_EXP;
         batinfo("battery safety timer expiration!\n");
-        return OK;
+        return OKK;
 
       case BQ2429XR9_CHRG_FAULT_INPUT:
         *health = BATTERY_HEALTH_DISCONNECTED;
         batinfo("input disconnect/fault!\n");
-        return OK;
+        return OKK;
 
       case BQ2429XR9_CHRG_FAULT_THERMAL:
         *health = BATTERY_HEALTH_OVERHEAT;
         batinfo("thermal shutdown!\n");
-        return OK;
+        return OKK;
 
       case BQ2429XR9_CHRG_FAULT_NORMAL:
         *health = BATTERY_HEALTH_GOOD;
@@ -763,7 +763,7 @@ static int bq2429x_health(FAR struct battery_charger_dev_s *dev,
       default:
         DEBUGASSERT(false);
         *health = BATTERY_HEALTH_UNKNOWN;
-        return OK;
+        return OKK;
     }
 
   if (regval & BQ2429XR9_BAT_FAULT)
@@ -792,7 +792,7 @@ static int bq2429x_health(FAR struct battery_charger_dev_s *dev,
       batinfo("VBUS overload or OVP!\n");
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -828,7 +828,7 @@ static int bq2429x_online(FAR struct battery_charger_dev_s *dev,
       *status = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -906,7 +906,7 @@ static int bq2429x_powersupply(FAR struct bq2429x_dev_s *priv, int current)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -955,7 +955,7 @@ static inline int bq2429x_setvolt(FAR struct bq2429x_dev_s *priv, int req_volts)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1047,7 +1047,7 @@ static inline int bq2429x_setcurr(FAR struct bq2429x_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1072,7 +1072,7 @@ static int bq2429x_voltage(FAR struct battery_charger_dev_s *dev, int value)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1096,7 +1096,7 @@ static int bq2429x_current(FAR struct battery_charger_dev_s *dev, int value)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1121,7 +1121,7 @@ static int bq2429x_input_current(FAR struct battery_charger_dev_s *dev,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1171,7 +1171,7 @@ static int bq2429x_operate(FAR struct battery_charger_dev_s *dev,
   FAR struct batio_operate_msg_s *msg = (FAR struct batio_operate_msg_s *)param;
   int op;
   int value;
-  int ret = OK;
+  int ret = OKK;
 
   bq2429x_dump_regs(priv);
 

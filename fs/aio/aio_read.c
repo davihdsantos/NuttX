@@ -283,7 +283,7 @@ int aio_read(FAR struct aiocb *aiocbp)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_FS_AIO */

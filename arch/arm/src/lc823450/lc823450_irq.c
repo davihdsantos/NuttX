@@ -336,7 +336,7 @@ static int lc823450_extint_isr(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /***********************************************************************
@@ -352,22 +352,22 @@ static void lc823450_extint_initialize(void)
   int ret;
 
   ret = irq_attach(LC823450_IRQ_EXTINT0, lc823450_extint_isr, NULL);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   ret = irq_attach(LC823450_IRQ_EXTINT1, lc823450_extint_isr, NULL);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   ret = irq_attach(LC823450_IRQ_EXTINT2, lc823450_extint_isr, NULL);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   ret = irq_attach(LC823450_IRQ_EXTINT3, lc823450_extint_isr, NULL);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   ret = irq_attach(LC823450_IRQ_EXTINT4, lc823450_extint_isr, NULL);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   ret = irq_attach(LC823450_IRQ_EXTINT5, lc823450_extint_isr, NULL);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 
   up_enable_irq(LC823450_IRQ_EXTINT0);
@@ -452,7 +452,7 @@ static int lc823450_irqinfo(int irq, uintptr_t *regaddr, uint32_t *bit,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -787,7 +787,7 @@ int up_prioritize_irq(int irq, int priority)
   putreg32(regval, regaddr);
 
   /* lc823450_dumpnvic("prioritize", irq); */
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -819,7 +819,7 @@ int lc823450_irq_srctype(int irq, enum lc823450_srctype_e srctype)
           return ops->srctype(irq, srctype);
         }
 
-      return OK;
+      return OKK;
     }
 #endif /* CONFIG_LC823450_VIRQ */
 
@@ -843,7 +843,7 @@ int lc823450_irq_srctype(int irq, enum lc823450_srctype_e srctype)
 
   spin_unlock_irqrestore(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -869,6 +869,6 @@ int lc823450_irq_register(int irq, struct lc823450_irq_ops *ops)
     {
       return -1;
     }
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_LC823450_VIRQ */

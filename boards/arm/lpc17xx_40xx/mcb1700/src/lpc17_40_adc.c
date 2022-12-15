@@ -108,7 +108,7 @@ int mcb1700_adc_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ADC */

@@ -1200,7 +1200,7 @@ static int stm32serial_setup(FAR struct uart_dev_s *dev)
   /* Set up the cached interrupt enables value */
 
   priv->ie    = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1224,7 +1224,7 @@ static int stm32serial_dmasetup(FAR struct uart_dev_s *dev)
   if (!dev->isconsole)
     {
       result = stm32serial_setup(dev);
-      if (result != OK)
+      if (result != OKK)
         {
           return result;
         }
@@ -1292,7 +1292,7 @@ static int stm32serial_dmasetup(FAR struct uart_dev_s *dev)
                        (void *)priv, true);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1409,7 +1409,7 @@ static int stm32serial_attach(FAR struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, up_interrupt, priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the USART
@@ -1551,7 +1551,7 @@ static int up_interrupt(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1572,7 +1572,7 @@ static int stm32serial_ioctl(FAR struct file *filep, int cmd,
 #if defined(CONFIG_SERIAL_TERMIOS)
   FAR struct stm32_serial_s   *priv  = (FAR struct stm32_serial_s *)dev->priv;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {
@@ -2352,7 +2352,7 @@ static int stm32serial_pmprepare(FAR struct pm_callback_s *cb, int domain,
 {
   /* Logic to prepare for a reduced power state goes here. */
 
-  return OK;
+  return OKK;
 }
 #endif
 #endif /* HAVE_USART */
@@ -2422,7 +2422,7 @@ void up_serialinit(void)
 
 #ifdef CONFIG_PM
   ret = pm_register(&g_serialcb);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 #endif
 

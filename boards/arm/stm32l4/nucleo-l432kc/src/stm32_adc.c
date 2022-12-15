@@ -140,7 +140,7 @@ int stm32l4_adc_setup(void)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32L4_ADC1 */

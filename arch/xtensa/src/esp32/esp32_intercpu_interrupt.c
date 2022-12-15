@@ -117,7 +117,7 @@ static int esp32_fromcpu_interrupt(int fromcpu)
         break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -188,7 +188,7 @@ int xtensa_intercpu_interrupt(int tocpu, int intcode)
       putreg32(DPORT_CPU_INTR_FROM_CPU_1, DPORT_CPU_INTR_FROM_CPU_1_REG);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

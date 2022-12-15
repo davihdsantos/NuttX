@@ -193,7 +193,7 @@ int spirit_csma_getinfo(FAR struct spirit_library_s *spirit,
 
   csmainit->csmapersistent =
     (enum spirit_functional_state_e)((regval[4] >> 1) & 0x01);
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************

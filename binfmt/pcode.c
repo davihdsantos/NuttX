@@ -181,7 +181,7 @@ static int pcode_run(FAR char *exepath, size_t varsize, size_t strsize)
 {
   FAR struct pexec_s *st;
   int errcode;
-  int ret = OK;
+  int ret = OKK;
 
   /* Load the POFF file into memory */
 
@@ -276,7 +276,7 @@ static int pcode_mount_testfs(void)
   (void)setenv("PATH", CONFIG_BINFMT_PCODE_TEST_MOUNTPOINT, 1);
 #endif
 
-  return OK;
+  return OKK;
 }
 #else
 #  define pcode_mount_testfs() (OK)
@@ -454,7 +454,7 @@ static int pcode_load(struct binary_s *binp)
   do
     {
       ret = nxsem_wait(&g_pcode_handoff.exclsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -480,7 +480,7 @@ static int pcode_load(struct binary_s *binp)
 
   /* Successfully identified (but not really loaded) a p-code binary */
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_fd:
   close(fd);
@@ -507,7 +507,7 @@ static int pcode_unload(struct binary_s *binp)
       nxsem_post(&g_pcode_handoff.exclsem);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

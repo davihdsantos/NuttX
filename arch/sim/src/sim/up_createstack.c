@@ -187,7 +187,7 @@ int up_create_stack(FAR struct tcb_s *tcb, size_t stack_size, uint8_t ttype)
 #endif /* CONFIG_STACK_COLORATION */
 #endif /* CONFIG_TLS */
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

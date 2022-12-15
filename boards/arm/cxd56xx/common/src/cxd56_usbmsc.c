@@ -73,5 +73,5 @@ int board_usbmsc_initialize(int port)
    * In this case, there is nothing further to be done here.
    */
 
-  return OK;
+  return OKK;
 }

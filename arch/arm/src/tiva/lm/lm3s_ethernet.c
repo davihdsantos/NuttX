@@ -581,7 +581,7 @@ static int tiva_transmit(struct tiva_driver_s *priv)
 
       (void)wd_start(priv->ld_txtimeout, TIVA_TXTIMEOUT,
                      tiva_txtimeout_expiry, 1, (uint32_t)priv);
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -612,7 +612,7 @@ static int tiva_transmit(struct tiva_driver_s *priv)
 static int tiva_txpoll(struct net_driver_s *dev)
 {
   struct tiva_driver_s *priv = (struct tiva_driver_s *)dev->d_private;
-  int ret = OK;
+  int ret = OKK;
 
   /* If the polling resulted in data that should be sent out on the network,
    * the field d_len is set to a value > 0.
@@ -1101,7 +1101,7 @@ static int tiva_interrupt(int irq, void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->ld_irqwork, tiva_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1412,7 +1412,7 @@ static int tiva_ifup(struct net_driver_s *dev)
 
   priv->ld_bifup = true;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1495,7 +1495,7 @@ static int tiva_ifdown(struct net_driver_s *dev)
 
   priv->ld_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1575,7 +1575,7 @@ static int tiva_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->ld_pollwork, tiva_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1604,7 +1604,7 @@ static int tiva_addmac(struct net_driver_s *dev, const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
 #warning "Multicast MAC support not implemented"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1634,7 +1634,7 @@ static int tiva_rmmac(struct net_driver_s *dev, const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
 #warning "Multicast MAC support not implemented"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1736,7 +1736,7 @@ static inline int tiva_ethinitialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->ld_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 

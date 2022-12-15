@@ -370,7 +370,7 @@ static inline int m25p_readid(struct m25p_dev_s *priv)
            priv->nsectors       = M25P_M25P1_NSECTORS;
            priv->pageshift      = M25P_M25P1_PAGE_SHIFT;
            priv->npages         = M25P_M25P1_NPAGES;
-           return OK;
+           return OKK;
         }
       else if (capacity == M25P_EN25F80_CAPACITY)
         {
@@ -383,7 +383,7 @@ static inline int m25p_readid(struct m25p_dev_s *priv)
 #ifdef CONFIG_M25P_SUBSECTOR_ERASE
            priv->subsectorshift = M25P_EN25F80_SUBSECT_SHIFT;
 #endif
-           return OK;
+           return OKK;
         }
       else if (capacity == M25P_M25P16_CAPACITY)
         {
@@ -396,7 +396,7 @@ static inline int m25p_readid(struct m25p_dev_s *priv)
 #ifdef CONFIG_M25P_SUBSECTOR_ERASE
            priv->subsectorshift = M25P_M25PX16_SUBSECT_SHIFT;
 #endif
-           return OK;
+           return OKK;
         }
       else if (capacity == M25P_M25P32_CAPACITY)
         {
@@ -409,7 +409,7 @@ static inline int m25p_readid(struct m25p_dev_s *priv)
 #ifdef CONFIG_M25P_SUBSECTOR_ERASE
            priv->subsectorshift = M25P_M25PX32_SUBSECT_SHIFT;
 #endif
-           return OK;
+           return OKK;
         }
       else if (capacity == M25P_M25P64_CAPACITY)
         {
@@ -419,7 +419,7 @@ static inline int m25p_readid(struct m25p_dev_s *priv)
            priv->nsectors       = M25P_M25P64_NSECTORS;
            priv->pageshift      = M25P_M25P64_PAGE_SHIFT;
            priv->npages         = M25P_M25P64_NPAGES;
-           return OK;
+           return OKK;
         }
       else if (capacity == M25P_M25P128_CAPACITY)
         {
@@ -429,7 +429,7 @@ static inline int m25p_readid(struct m25p_dev_s *priv)
            priv->nsectors       = M25P_M25P128_NSECTORS;
            priv->pageshift      = M25P_M25P128_PAGE_SHIFT;
            priv->npages         = M25P_M25P128_NPAGES;
-           return OK;
+           return OKK;
         }
     }
   else if (manufacturer == M25P_MANUFACTURER && memory == MT25Q_MEMORY_TYPE)
@@ -450,7 +450,7 @@ static inline int m25p_readid(struct m25p_dev_s *priv)
 #ifdef CONFIG_M25P_SUBSECTOR_ERASE
            priv->subsectorshift = M25P_MT25Q128_SUBSECT_SHIFT;
 #endif
-           return OK;
+           return OKK;
         }
     }
 
@@ -612,7 +612,7 @@ static inline int m25p_bulkerase(struct m25p_dev_s *priv)
 
   SPI_SELECT(priv->dev, SPIDEV_FLASH(0), false);
   finfo("Return: OK\n");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -994,7 +994,7 @@ static int m25p_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
                   geo->neraseblocks = priv->nsectors;
                 }
 
-              ret = OK;
+              ret = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -1075,7 +1075,7 @@ FAR struct mtd_dev_s *m25p_initialize(FAR struct spi_dev_s *dev)
       /* Identify the FLASH chip and get its capacity */
 
       ret = m25p_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

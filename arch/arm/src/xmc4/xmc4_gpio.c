@@ -434,7 +434,7 @@ int xmc4_gpio_config(gpioconfig_t pinconfig)
   xmc4_gpio_pps(portbase, pin, false);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

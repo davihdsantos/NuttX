@@ -82,7 +82,7 @@ static int poll_semtake(FAR sem_t *sem)
    * awakened by a signal.
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -133,7 +133,7 @@ static inline int poll_setup(FAR struct pollfd *fds, nfds_t nfds,
 {
   unsigned int i;
   unsigned int j;
-  int ret = OK;
+  int ret = OKK;
 
   /* Process each descriptor in the list */
 
@@ -229,7 +229,7 @@ static inline int poll_setup(FAR struct pollfd *fds, nfds_t nfds,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -245,7 +245,7 @@ static inline int poll_teardown(FAR struct pollfd *fds, nfds_t nfds,
                                 FAR int *count, int ret)
 {
   unsigned int i;
-  int status = OK;
+  int status = OKK;
 
   /* Process each descriptor in the list */
 
@@ -364,7 +364,7 @@ int file_poll(FAR struct file *filep, FAR struct pollfd *fds, bool setup)
                 }
             }
 
-          ret = OK;
+          ret = OKK;
         }
     }
 
@@ -468,7 +468,7 @@ int poll(FAR struct pollfd *fds, nfds_t nfds, int timeout)
         {
           /* Poll returns immediately whether we have a poll event or not. */
 
-          ret = OK;
+          ret = OKK;
         }
       else if (timeout > 0)
         {
@@ -508,7 +508,7 @@ int poll(FAR struct pollfd *fds, nfds_t nfds, int timeout)
                 {
                   /* Return zero (OK) in the event of a timeout */
 
-                  ret = OK;
+                  ret = OKK;
                 }
 
               /* EINTR is the only other error expected in normal operation */

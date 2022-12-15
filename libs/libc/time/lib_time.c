@@ -81,7 +81,7 @@ time_t time(time_t *tloc)
   /* Get the current time from the system */
 
   ret = clock_gettime(CLOCK_REALTIME, &ts);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Return the seconds since the epoch */
 

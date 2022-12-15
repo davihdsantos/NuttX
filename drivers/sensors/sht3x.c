@@ -208,7 +208,7 @@ static int sht3x_do_transfer(FAR struct i2c_master_s *i2c,
   int ret = ret = I2C_TRANSFER(i2c, msgv, nmsg);
   if (ret >= 0)
     {
-      return OK;
+      return OKK;
     }
 
   sht3x_dbg("transfer failed: %d\n", ret);
@@ -436,7 +436,7 @@ static int sht3x_read_values(FAR struct sht3x_dev_s *priv,
   priv->valid = true;
 
   *out = priv->data;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -464,7 +464,7 @@ static int sht3x_open(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -474,7 +474,7 @@ static int sht3x_open(FAR struct file *filep)
   DEBUGASSERT(priv->crefs > 0);
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -503,7 +503,7 @@ static int sht3x_close(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -520,11 +520,11 @@ static int sht3x_close(FAR struct file *filep)
     {
       nxsem_destroy(&priv->devsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -570,7 +570,7 @@ static int sht3x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -655,7 +655,7 @@ static int sht3x_unlink(FAR struct inode *inode)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -665,7 +665,7 @@ static int sht3x_unlink(FAR struct inode *inode)
     {
       nxsem_destroy(&priv->devsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   /* No... just mark the driver as unlinked and free the resources when

@@ -140,7 +140,7 @@ int bcmf_sdpcm_process_header(FAR struct bcmf_sdio_dev_s *sbus,
 
   sbus->max_seq = header->credit;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -171,7 +171,7 @@ int bcmf_sdpcm_readframe(FAR struct bcmf_dev_s *priv)
   /* Read header */
 
   ret = bcmf_transfer_bytes(sbus, false, 2, 0, (uint8_t *)header, 4);
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlinfo("failread size\n");
       ret = -EIO;
@@ -206,7 +206,7 @@ int bcmf_sdpcm_readframe(FAR struct bcmf_dev_s *priv)
   /* Read remaining frame data */
 
   ret = bcmf_transfer_bytes(sbus, false, 2, 0, (uint8_t *)header + 4, len - 4);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ret = -EIO;
       goto exit_abort;
@@ -221,7 +221,7 @@ int bcmf_sdpcm_readframe(FAR struct bcmf_dev_s *priv)
   /* Process and validate header */
 
   ret = bcmf_sdpcm_process_header(sbus, header);
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("Error while processing header %d\n", ret);
       ret = -EINVAL;
@@ -246,7 +246,7 @@ int bcmf_sdpcm_readframe(FAR struct bcmf_dev_s *priv)
           {
             /* Empty event, ignore */
 
-            ret = OK;
+            ret = OKK;
           }
         else
           {
@@ -271,7 +271,7 @@ int bcmf_sdpcm_readframe(FAR struct bcmf_dev_s *priv)
 
         /* Upper layer have to free all received frames */
 
-        ret = OK;
+        ret = OKK;
         break;
 
       default:
@@ -335,7 +335,7 @@ int bcmf_sdpcm_sendframe(FAR struct bcmf_dev_s *priv)
 
   ret = bcmf_transfer_bytes(sbus, true, 2, 0, sframe->header.base,
                             sframe->header.len);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* TODO handle retry count and remove frame from queue + abort TX */
 
@@ -361,7 +361,7 @@ int bcmf_sdpcm_sendframe(FAR struct bcmf_dev_s *priv)
       bcmf_netdev_notify_tx_done(priv);
     }
 
-  return OK;
+  return OKK;
 
 exit_abort:
 #if 0
@@ -410,7 +410,7 @@ int bcmf_sdpcm_queue_frame(FAR struct bcmf_dev_s *priv,
 
   nxsem_post(&sbus->thread_signal);
 
-  return OK;
+  return OKK;
 }
 
 struct bcmf_frame_s *bcmf_sdpcm_alloc_frame(FAR struct bcmf_dev_s *priv,

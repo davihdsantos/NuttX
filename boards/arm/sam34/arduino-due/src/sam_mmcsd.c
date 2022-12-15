@@ -205,7 +205,7 @@ static uint8_t spi_status(FAR struct spi_bitbang_s *priv, uint32_t devid)
 static int spi_cmddata(FAR struct spi_bitbang_s *priv, uint32_t devid,
                        bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -283,7 +283,7 @@ int sam_sdinitialize(int minor)
   finfo("Successfuly bound  bit bang SPI device to MMC/SD slot %d\n",
         SAM34_MMCSDSLOTNO);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ARDUINO_ITHEAD_TFT && CONFIG_SPI_BITBANG && CONFIG_MMC_SPI */

@@ -383,7 +383,7 @@ int up_rtc_initialize(void)
 
   g_rtc_enabled = true;
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -441,7 +441,7 @@ int up_rtc_gettime(FAR struct timespec *tp)
 
   rtcinfo("Get RTC %u.%09u\n", tp->tv_sec, tp->tv_nsec);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -496,7 +496,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
   putreg32(cnt      , __CNT_ZERO_REG);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -550,7 +550,7 @@ int efm32_rtc_setalarm(FAR const struct timespec *tp, alarmcb_t callback)
       stm32_rtc_endwr();
       leave_critical_section(flags);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -593,7 +593,7 @@ int efm32_rtc_cancelalarm(void)
       stm32_rtc_endwr();
       leave_critical_section(flags);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

@@ -273,7 +273,7 @@ int clock_cpuload(int pid, FAR struct cpuload_s *cpuload)
     {
       cpuload->total  = g_cpuload_total;
       cpuload->active = g_pidhash[hash_index].ticks;
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);

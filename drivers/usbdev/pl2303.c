@@ -596,7 +596,7 @@ static int usbclass_sndpacket(FAR struct pl2303_dev_s *priv)
   uint16_t reqlen;
   irqstate_t flags;
   int len;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (priv == NULL)
@@ -648,7 +648,7 @@ static int usbclass_sndpacket(FAR struct pl2303_dev_s *priv)
           req->priv    = reqcontainer;
           req->flags   = USBDEV_REQFLAGS_NULLPKT;
           ret          = EP_SUBMIT(ep, req);
-          if (ret != OK)
+          if (ret != OKK)
             {
               usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_SUBMITFAIL), (uint16_t)-ret);
               break;
@@ -769,7 +769,7 @@ static inline int usbclass_recvpacket(FAR struct pl2303_dev_s *priv,
       usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_RXOVERRUN), 0);
       return -ENOSPC;
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1142,7 +1142,7 @@ static int usbclass_setconfig(FAR struct pl2303_dev_s *priv, uint8_t config)
       req           = priv->rdreqs[i].req;
       req->callback = usbclass_rdcomplete;
       ret           = EP_SUBMIT(priv->epbulkout, req);
-      if (ret != OK)
+      if (ret != OKK)
         {
           usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_RDSUBMIT), (uint16_t)-ret);
           goto errout;
@@ -1161,7 +1161,7 @@ static int usbclass_setconfig(FAR struct pl2303_dev_s *priv, uint8_t config)
   uart_connected(&priv->serdev, true);
 #endif
 
-  return OK;
+  return OKK;
 
 errout:
   usbclass_resetconfig(priv);
@@ -1240,7 +1240,7 @@ static void usbclass_rdcomplete(FAR struct usbdev_ep_s *ep,
 
   req->len = ep->maxpacket;
   ret      = EP_SUBMIT(ep, req);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_RDSUBMIT), (uint16_t)-req->result);
     }
@@ -1464,7 +1464,7 @@ static int usbclass_bind(FAR struct usbdevclass_driver_s *driver,
   /* And pull-up the data line for the soft connect function */
 
   DEV_CONNECT(dev);
-  return OK;
+  return OKK;
 
 errout:
   usbclass_unbind(driver, dev);
@@ -1851,7 +1851,7 @@ static int usbclass_setup(FAR struct usbdevclass_driver_s *driver,
       if (ret < 0)
         {
           usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_EPRESPQ), (uint16_t)-ret);
-          ctrlreq->result = OK;
+          ctrlreq->result = OKK;
           usbclass_ep0incomplete(dev->ep0, ctrlreq);
         }
     }
@@ -2037,7 +2037,7 @@ static int usbser_setup(FAR struct uart_dev_s *dev)
       return -ENOTCONN;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2077,7 +2077,7 @@ static void usbser_shutdown(FAR struct uart_dev_s *dev)
 static int usbser_attach(FAR struct uart_dev_s *dev)
 {
   usbtrace(PL2303_CLASSAPI_ATTACH, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2370,7 +2370,7 @@ int usbdev_serialinitialize(int minor)
       usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_UARTREGISTER), (uint16_t)-ret);
       goto errout_with_class;
     }
-  return OK;
+  return OKK;
 
 errout_with_class:
   usbdev_unregister(&drvr->drvr);

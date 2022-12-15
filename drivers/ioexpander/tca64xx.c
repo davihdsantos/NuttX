@@ -209,7 +209,7 @@ static void tca64_lock(FAR struct tca64_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -357,7 +357,7 @@ static int tca64_getreg(FAR struct tca64_dev_s *priv, uint8_t regaddr,
     {
       gpioinfo("I2C addr=%02x regaddr=%02x: read %02x\n",
                priv->config->address, regaddr, *regval);
-      return OK;
+      return OKK;
     }
 }
 
@@ -405,7 +405,7 @@ static int tca64_putreg(struct tca64_dev_s *priv, uint8_t regaddr,
     {
       gpioinfo("claddr=%02x, regaddr=%02x, regval=%02x\n",
                priv->config->address, regaddr, regval);
-      return OK;
+      return OKK;
     }
 }
 
@@ -591,7 +591,7 @@ static int tca64_option(FAR struct ioexpander_dev_s *dev, uint8_t pin,
       unsigned int ival = (unsigned int)((uintptr_t)value);
       ioe_pinset_t bit = ((ioe_pinset_t)1 << pin);
 
-      ret = OK;
+      ret = OKK;
       tca64_lock(priv);
       switch (ival)
         {
@@ -774,7 +774,7 @@ static int tca64_readpin(FAR struct ioexpander_dev_s *dev, uint8_t pin,
   /* Return 0 or 1 to indicate the state of pin */
 
   *value = (bool)((regval >> (pin & 7)) & 1);
-  ret = OK;
+  ret = OKK;
 
 errout_with_lock:
   tca64_unlock(priv);
@@ -1029,7 +1029,7 @@ static int tca64_detach(FAR struct ioexpander_dev_s *dev, FAR void *handle)
   cb->pinset = 0;
   cb->cbfunc = NULL;
   cb->cbarg  = NULL;
-  return OK;
+  return OKK;
 }
 #endif
 

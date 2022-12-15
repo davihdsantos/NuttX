@@ -1032,9 +1032,9 @@ static int sam_req_write(struct sam_usbdev_s *priv, struct sam_ep_s *privep)
           privreq->inflight = 0;
 
           /* Set TXPKTRDY to notify the USB hardware that there is (null)
-           * TX packet available.  We will be notified that the endpoint’s
+           * TX packet available.  We will be notified that the endpointï¿½s
            * FIFO has been released by the USB device when TXCOMP in the
-           * endpoint’s UDPEP_CSRx register has been set.
+           * endpointï¿½s UDPEP_CSRx register has been set.
            */
 
           usbtrace(TRACE_WRITE(epno), 0);
@@ -1066,7 +1066,7 @@ static int sam_req_write(struct sam_usbdev_s *priv, struct sam_ep_s *privep)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1205,7 +1205,7 @@ static int sam_req_read(struct sam_usbdev_s *priv, struct sam_ep_s *privep,
 
   usbtrace(TRACE_COMPLETE(epno), privreq->req.xfrd);
   sam_req_complete(privep, OK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1271,8 +1271,8 @@ static void sam_ep0_wrstatus(const uint8_t *buffer, size_t buflen)
     }
 
   /* Set TXPKTRDY to notify the USB hardware that there is TX data in the
-   * endpoint FIFO.  We will be notified that the endpoint’s FIFO has been
-   * released by the USB device when TXCOMP in the endpoint’s UDPEP_CSRx
+   * endpoint FIFO.  We will be notified that the endpointï¿½s FIFO has been
+   * released by the USB device when TXCOMP in the endpointï¿½s UDPEP_CSRx
    * register has been set.
    */
 
@@ -2371,7 +2371,7 @@ static int sam_udp_interrupt(int irq, void *context, FAR void *arg)
     }
 
   usbtrace(TRACE_INTEXIT(SAM_TRACEINTID_INTERRUPT), isr);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2633,7 +2633,7 @@ static int sam_ep_stall(struct sam_ep_s *privep)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2711,7 +2711,7 @@ static int sam_ep_resume(struct sam_ep_s *privep)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2931,7 +2931,7 @@ static int sam_ep_configure_internal(struct sam_ep_s *privep,
 
   sam_putreg(UDP_INT_EP(epno), SAM_UDP_IER);
   sam_dumpep(privep->dev, epno);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2970,7 +2970,7 @@ static int sam_ep_configure(struct usbdev_ep_s *ep,
    * configured.
    */
 
-  if (ret == OK && last)
+  if (ret == OKK && last)
     {
       struct sam_usbdev_s *priv = privep->dev;
       uint32_t regval;
@@ -3027,7 +3027,7 @@ static int sam_ep_disable(struct usbdev_ep_s *ep)
 
   sam_setdevaddr(priv, priv->devaddr);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3136,7 +3136,7 @@ static int sam_ep_submit(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   struct sam_usbdev_s *priv;
   irqstate_t flags;
   uint8_t epno;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_USB
   if (!req || !req->callback || !req->buf || !ep)
@@ -3186,7 +3186,7 @@ static int sam_ep_submit(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
           uinfo("Pending stall clear\n");
           sam_req_enqueue(&privep->pendq, privreq);
           usbtrace(TRACE_INREQQUEUED(epno), req->len);
-          ret = OK;
+          ret = OKK;
         }
 
       else
@@ -3260,7 +3260,7 @@ static int sam_ep_cancel(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   flags = enter_critical_section();
   sam_req_cancel(privep, -EAGAIN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3315,7 +3315,7 @@ static int sam_ep_stallresume(struct usbdev_ep_s *ep, bool resume)
 
               privep->pending = true;
               leave_critical_section(flags);
-              return OK;
+              return OKK;
             }
         }
 
@@ -3532,7 +3532,7 @@ static int sam_wakeup(struct usbdev_s *dev)
   regval |= UDP_GLBSTAT_ESR;
   sam_putreg(regval, SAM_UDP_GLBSTAT);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3558,7 +3558,7 @@ static int sam_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3601,7 +3601,7 @@ static int sam_pullup(FAR struct usbdev_s *dev, bool enable)
     }
 
   sam_putreg(regval, SAM_UDP_TXVC);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4104,7 +4104,7 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
 
   priv->driver = NULL;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_USBDEV && CONFIG_SAM34_UDP */

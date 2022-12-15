@@ -365,7 +365,7 @@ static int sht21_read_values(FAR struct sht21_dev_s *priv, FAR int *temp,
 
   *temp = priv->temperature;
   *rh = priv->humidity;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -393,7 +393,7 @@ static int sht21_open(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -403,7 +403,7 @@ static int sht21_open(FAR struct file *filep)
   DEBUGASSERT(priv->crefs > 0);
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -432,7 +432,7 @@ static int sht21_close(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -449,11 +449,11 @@ static int sht21_close(FAR struct file *filep)
     {
       nxsem_destroy(&priv->devsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -480,7 +480,7 @@ static ssize_t sht21_read(FAR struct file *filep, FAR char *buffer, size_t bufle
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -546,7 +546,7 @@ static int sht21_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -638,7 +638,7 @@ static int sht21_unlink(FAR struct inode *inode)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -648,7 +648,7 @@ static int sht21_unlink(FAR struct inode *inode)
     {
       nxsem_destroy(&priv->devsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   /* No... just mark the driver as unlinked and free the resources when

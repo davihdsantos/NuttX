@@ -277,7 +277,7 @@ int sched_lock(void)
                              TSTATE_TASK_PENDING);
     }
 
-  return OK;
+  return OKK;
 }
 
 #else /* CONFIG_SMP */
@@ -323,7 +323,7 @@ int sched_lock(void)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

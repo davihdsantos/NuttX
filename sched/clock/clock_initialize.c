@@ -136,7 +136,7 @@ int clock_basetime(FAR struct timespec *tp)
 
   tp->tv_sec  = up_rtc_time();
   tp->tv_nsec = 0;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_RTC_HIRES */
@@ -157,7 +157,7 @@ int clock_basetime(FAR struct timespec *tp)
 
   tp->tv_sec  = jdn * SEC_PER_DAY;
   tp->tv_nsec = 0;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_RTC */

@@ -115,7 +115,7 @@ static int local_fifo_write(FAR struct file *filep, FAR const uint8_t *buf,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -148,14 +148,14 @@ int local_send_packet(FAR struct file *filep, FAR const uint8_t *buf,
   /* Send the packet preamble */
 
   ret = local_fifo_write(filep, g_preamble, LOCAL_PREAMBLE_SIZE);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Send the packet length */
 
       len16 = len;
       ret = local_fifo_write(filep, (FAR const uint8_t *)&len16,
                              sizeof(uint16_t));
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Send the packet data */
 

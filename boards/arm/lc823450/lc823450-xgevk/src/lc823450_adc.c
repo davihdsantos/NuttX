@@ -73,5 +73,5 @@ int lc823450_adc_setup(void)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }

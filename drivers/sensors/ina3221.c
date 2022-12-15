@@ -287,7 +287,7 @@ static int ina3221_readpower(FAR struct ina3221_dev_s *priv,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -304,7 +304,7 @@ static int ina3221_open(FAR struct file *filep)
   FAR struct ina3221_dev_s *priv = inode->i_private;
 
   UNUSED(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -321,7 +321,7 @@ static int ina3221_close(FAR struct file *filep)
   FAR struct ina3221_dev_s *priv = inode->i_private;
 
   UNUSED(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

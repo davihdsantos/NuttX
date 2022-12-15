@@ -155,7 +155,7 @@ int video_framebuff_realloc_container(video_framebuff_t *fbuf, int sz)
 
   cleanup_container(fbuf);
 
-  return OK;
+  return OKK;
 }
 
 vbuf_container_t *video_framebuff_get_container(video_framebuff_t *fbuf)

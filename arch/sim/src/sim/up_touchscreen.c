@@ -253,7 +253,7 @@ static int up_sample(FAR struct up_dev_s *priv,
       iinfo("penchange=%d contact=%d id=%d\n",
              priv->penchange, priv->sample.contact, priv->id);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -344,7 +344,7 @@ errout:
 static int up_open(FAR struct file *filep)
 {
   iinfo("Opening...\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -354,7 +354,7 @@ static int up_open(FAR struct file *filep)
 static int up_close(FAR struct file *filep)
 {
   iinfo("Closing...\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -669,7 +669,7 @@ int sim_tsc_initialize(int minor)
 
   /* And return success */
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->waitsem);
@@ -707,7 +707,7 @@ void sim_tsc_uninitialize(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -761,7 +761,7 @@ int up_buttonevent(int x, int y, int buttons)
 
       if (priv->sample.contact == CONTACT_NONE)
         {
-          return OK;
+          return OKK;
         }
 
       /* Not yet reported */
@@ -797,5 +797,5 @@ int up_buttonevent(int x, int y, int buttons)
   /* Notify any waiters that new touchscreen data is available */
 
   up_notify(priv);
-  return OK;
+  return OKK;
 }

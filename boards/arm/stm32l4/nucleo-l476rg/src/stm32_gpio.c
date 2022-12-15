@@ -163,7 +163,7 @@ static int stm32gpio_interrupt(int irq, void *context, void *arg)
   gpioinfo("Interrupt! callback=%p\n", stm32gpint->callback);
 
   stm32gpint->callback(&stm32gpint->stm32gpio.gpio, tm32gpint->stm32gpio.id);
-  return OK;
+  return OKK;
 }
 
 static int gpin_read(FAR struct gpio_dev_s *dev, FAR bool *value)
@@ -175,7 +175,7 @@ static int gpin_read(FAR struct gpio_dev_s *dev, FAR bool *value)
   gpioinfo("Reading...\n");
 
   *value = stm32l4_gpioread(g_gpioinputs[stm32gpio->id]);
-  return OK;
+  return OKK;
 }
 
 static int gpout_read(FAR struct gpio_dev_s *dev, FAR bool *value)
@@ -187,7 +187,7 @@ static int gpout_read(FAR struct gpio_dev_s *dev, FAR bool *value)
   gpioinfo("Reading...\n");
 
   *value = stm32l4_gpioread(g_gpiooutputs[stm32gpio->id]);
-  return OK;
+  return OKK;
 }
 
 static int gpout_write(FAR struct gpio_dev_s *dev, bool value)
@@ -199,7 +199,7 @@ static int gpout_write(FAR struct gpio_dev_s *dev, bool value)
   gpioinfo("Writing %d\n", (int)value);
 
   stm32l4_gpiowrite(g_gpiooutputs[stm32gpio->id], value);
-  return OK;
+  return OKK;
 }
 
 static int gpint_read(FAR struct gpio_dev_s *dev, FAR bool *value)
@@ -211,7 +211,7 @@ static int gpint_read(FAR struct gpio_dev_s *dev, FAR bool *value)
   gpioinfo("Reading int pin...\n");
 
   *value = stm32l4_gpioread(g_gpiointinputs[stm32gpint->stm32gpio.id]);
-  return OK;
+  return OKK;
 }
 
 static int gpint_attach(FAR struct gpio_dev_s *dev,
@@ -228,7 +228,7 @@ static int gpint_attach(FAR struct gpio_dev_s *dev,
 
   gpioinfo("Attach %p\n", callback);
   stm32gpint->callback = callback;
-  return OK;
+  return OKK;
 }
 
 static int gpint_enable(FAR struct gpio_dev_s *dev, bool enable)
@@ -256,7 +256,7 @@ static int gpint_enable(FAR struct gpio_dev_s *dev, bool enable)
                                false, false, false, NULL, NULL);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

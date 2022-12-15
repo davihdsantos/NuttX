@@ -186,7 +186,7 @@ int up_fbinitialize(int display)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_LCD */

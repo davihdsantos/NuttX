@@ -197,7 +197,7 @@ static int conn_tx_kthread(int argc, FAR char *argv[])
        */
 
       ret = mq_getattr(conn->tx_queue, &attr);
-      if (ret != OK)
+      if (ret != OKK)
         {
           break;
         }

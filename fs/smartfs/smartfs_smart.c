@@ -297,7 +297,7 @@ static int smartfs_open(FAR struct file *filep, const char *relpath,
           ret = smartfs_createentry(fs, parentdirsector, filename,
                                     SMARTFS_DIRENT_TYPE_FILE, mode,
                                     &sf->entry, 0xffff, sf);
-          if (ret != OK)
+          if (ret != OKK)
             {
               goto errout_with_buffer;
             }
@@ -371,7 +371,7 @@ static int smartfs_open(FAR struct file *filep, const char *relpath,
   sf->fnext = fs->fs_head;
   fs->fs_head = sf;
 
-  ret = OK;
+  ret = OKK;
   goto errout_with_semaphore;
 
 errout_with_buffer:
@@ -491,7 +491,7 @@ static int smartfs_close(FAR struct file *filep)
 
 okout:
   smartfs_semgive(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -505,7 +505,7 @@ static ssize_t smartfs_read(FAR struct file *filep, char *buffer, size_t buflen)
   struct smartfs_ofile_s   *sf;
   struct smart_read_write_s readwrite;
   struct smartfs_chain_header_s *header;
-  int                       ret = OK;
+  int                       ret = OKK;
   uint32_t                  bytesread;
   uint16_t                  bytestoread;
   uint16_t                  bytesinsector;
@@ -846,7 +846,7 @@ static ssize_t smartfs_write(FAR struct file *filep, const char *buffer,
           /* Now sync the file to write this sector out */
 
           ret = smartfs_sync_internal(fs, sf);
-          if (ret != OK)
+          if (ret != OKK)
             {
               goto errout_with_semaphore;
             }
@@ -875,7 +875,7 @@ static ssize_t smartfs_write(FAR struct file *filep, const char *buffer,
           /* Sync the file to write this sector out */
 
           ret = smartfs_sync_internal(fs, sf);
-          if (ret != OK)
+          if (ret != OKK)
             {
               goto errout_with_semaphore;
             }
@@ -1051,7 +1051,7 @@ static int smartfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   sf->crefs++;
   newp->f_priv = (FAR void *)sf;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1088,7 +1088,7 @@ static int smartfs_fstat(FAR const struct file *filep, FAR struct stat *buf)
 
   smartfs_stat_common(fs, &sf->entry, buf);
   smartfs_semgive(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1139,7 +1139,7 @@ static int smartfs_truncate(FAR struct file *filep, off_t length)
     {
       /* Let's not and say we did */
 
-      ret = OK;
+      ret = OKK;
     }
   else if (oldsize > length)
     {
@@ -1209,7 +1209,7 @@ static int smartfs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
   dir->u.smartfs.fs_currsector = entry.firstsector;
   dir->u.smartfs.fs_curroffset = sizeof(struct smartfs_chain_header_s);
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
 
@@ -1333,7 +1333,7 @@ static int smartfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
 
           /* Now exit */
 
-          ret = OK;
+          ret = OKK;
           goto errout_with_semaphore;
         }
 
@@ -1365,7 +1365,7 @@ errout_with_semaphore:
 
 static int smartfs_rewinddir(struct inode *mountpt, struct fs_dirent_s *dir)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Sanity checks */
 
@@ -1404,7 +1404,7 @@ static int smartfs_bind(FAR struct inode *blkdriver, const void *data,
     }
 
   if (blkdriver->u.i_bops->open &&
-      blkdriver->u.i_bops->open(blkdriver) != OK)
+      blkdriver->u.i_bops->open(blkdriver) != OKK)
     {
       return -ENODEV;
     }
@@ -1454,7 +1454,7 @@ static int smartfs_bind(FAR struct inode *blkdriver, const void *data,
 
   *handle = (FAR void *)fs;
   smartfs_semgive(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1478,7 +1478,7 @@ static int smartfs_unbind(FAR void *handle, FAR struct inode **blkdriver,
 
   /* Check if there are sill any files opened on the filesystem. */
 
-  ret = OK; /* Assume success */
+  ret = OKK; /* Assume success */
   smartfs_semtake(fs);
   if (fs->fs_head != NULL)
     {
@@ -1606,7 +1606,7 @@ static int smartfs_unlink(struct inode *mountpt, const char *relpath)
       goto errout_with_semaphore;
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   if (entry.name != NULL)
@@ -1680,12 +1680,12 @@ static int smartfs_mkdir(struct inode *mountpt, const char *relpath, mode_t mode
 
       ret = smartfs_createentry(fs, parentdirsector, filename,
           SMARTFS_DIRENT_TYPE_DIR, mode, &entry, 0xffff, NULL);
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto errout_with_semaphore;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
 errout_with_semaphore:
@@ -1777,7 +1777,7 @@ int smartfs_rmdir(struct inode *mountpt, const char *relpath)
       goto errout_with_semaphore;
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   if (entry.name != NULL)
@@ -1858,7 +1858,7 @@ int smartfs_rename(struct inode *mountpt, const char *oldrelpath,
       type = oldentry.flags & SMARTFS_DIRENT_TYPE;
       ret = smartfs_createentry(fs, newparentdirsector, newfilename,
                                 type, mode, &newentry, oldentry.firstsector, NULL);
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto errout_with_semaphore;
         }
@@ -1905,7 +1905,7 @@ int smartfs_rename(struct inode *mountpt, const char *oldrelpath,
       goto errout_with_semaphore;
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   if (oldentry.name != NULL)
@@ -2009,7 +2009,7 @@ static int smartfs_stat(FAR struct inode *mountpt, FAR const char *relpath,
   /* Return information about the directory entry in the stat structure */
 
   smartfs_stat_common(fs, &entry, buf);
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   if (entry.name != NULL)

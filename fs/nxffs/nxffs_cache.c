@@ -107,7 +107,7 @@ int nxffs_rdcache(FAR struct nxffs_volume_s *volume, off_t block)
       volume->cblock  = block;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -139,7 +139,7 @@ int nxffs_wrcache(FAR struct nxffs_volume_s *volume)
 
   /* Write was successful */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -262,7 +262,7 @@ int nxffs_getc(FAR struct nxffs_volume_s *volume, uint16_t reserve)
 #endif
         }
     }
-  while (ret != OK);
+  while (ret != OKK);
 
   /* Return the character at this offset.  Note that on return,
    * iooffset could point to the byte outside of the current block.

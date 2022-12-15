@@ -98,7 +98,7 @@ int register_driver(FAR const char *path, FAR const struct file_operations *fops
       node->i_mode    = mode;
 #endif
       node->i_private = priv;
-      ret             = OK;
+      ret             = OKK;
     }
 
   inode_semgive();

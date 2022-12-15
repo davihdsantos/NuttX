@@ -449,7 +449,7 @@ int udp_pollsetup(FAR struct socket *psock, FAR struct pollfd *fds)
 #endif
 
   net_unlock();
-  return OK;
+  return OKK;
 
 errout_with_lock:
   kmm_free(info);
@@ -519,7 +519,7 @@ int udp_pollteardown(FAR struct socket *psock, FAR struct pollfd *fds)
       kmm_free(info);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* !HAVE_UDP_POLL */

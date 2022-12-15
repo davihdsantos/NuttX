@@ -121,7 +121,7 @@ int atexit(void (*func)(void))
           if (!group->tg_atexitfunc[index])
             {
               group->tg_atexitfunc[index] = func;
-              ret = OK;
+              ret = OKK;
               break;
             }
         }
@@ -143,7 +143,7 @@ int atexit(void (*func)(void))
   if (func && !group->tg_atexitfunc)
     {
       group->tg_atexitfunc = func;
-      ret = OK;
+      ret = OKK;
     }
 
   sched_unlock();

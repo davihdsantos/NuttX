@@ -143,7 +143,7 @@ int up_cpu_idlestack(int cpu, FAR struct tcb_s *tcb, size_t stack_size)
   tcb->adj_stack_ptr   = (FAR uint32_t *)top_of_stack;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

@@ -372,7 +372,7 @@ static void sam_takesem(struct sam_chan_s *chan)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -579,7 +579,7 @@ static int sam_tc_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1262,7 +1262,7 @@ int sam_tc_divisor(uint32_t frequency, uint32_t *div, uint32_t *tcclks)
       *tcclks = TC_CMR_TCCLKS(ndx);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif

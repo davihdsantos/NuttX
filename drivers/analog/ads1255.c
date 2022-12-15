@@ -261,7 +261,7 @@ static int adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -314,7 +314,7 @@ static int adc_setup(FAR struct adc_dev_s *dev)
   spi = priv->spi;
 
   ret = irq_attach(priv->irq, adc_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       adc_lock(spi);
 
@@ -489,7 +489,7 @@ static int adc_interrupt(int irq, void *context, FAR void *arg)
    */
 
   DEBUGVERIFY(work_queue(HPWORK, &priv->work, adc_worker, priv, 0));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

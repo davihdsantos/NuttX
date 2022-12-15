@@ -97,7 +97,7 @@ int stm32_apa102init(FAR const char *devpath)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_CAN_APA102 */

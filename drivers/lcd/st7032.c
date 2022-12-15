@@ -730,7 +730,7 @@ static void lcd_curpos_to_fpos(FAR struct st7032_dev_s *priv,
 
 static int st7032_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -743,7 +743,7 @@ static int st7032_open(FAR struct file *filep)
 
 static int st7032_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1044,7 +1044,7 @@ static int st7032_ioctl(FAR struct file *filep, int cmd,
         return -ENOTTY;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

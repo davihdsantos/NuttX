@@ -284,7 +284,7 @@ static int video_unlock(FAR sem_t *sem)
 
   sem_post(sem);
 
-  return OK;
+  return OKK;
 }
 
 static FAR video_type_inf_t *get_video_type_inf
@@ -485,7 +485,7 @@ static int video_open(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR video_mng_t  *priv  = (FAR video_mng_t *)inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   video_lock(&priv->lock_open_num);
   if (priv->open_num == 0)
@@ -519,7 +519,7 @@ static int video_close(FAR struct file *filep)
   video_lock(&priv->lock_open_num);
   if (priv->open_num == 0)
     {
-      return OK;
+      return OKK;
     }
 
   priv->open_num--;
@@ -537,7 +537,7 @@ static int video_close(FAR struct file *filep)
 static int video_reqbufs(FAR struct video_mng_s         *vmng,
                          FAR struct v4l2_requestbuffers *reqbufs)
 {
-  int ret = OK;
+  int ret = OKK;
   FAR video_type_inf_t *type_inf;
   irqstate_t           flags;
 
@@ -639,7 +639,7 @@ static int video_qbuf(FAR struct video_mng_s *vmng,
 
   video_unlock(&type_inf->lock_state);
 
-  return OK;
+  return OKK;
 }
 
 static int video_dqbuf(FAR struct video_mng_s *vmng,
@@ -711,7 +711,7 @@ static int video_dqbuf(FAR struct video_mng_s *vmng,
 
   video_framebuff_free_container(&type_inf->bufinf, container);
 
-  return OK;
+  return OKK;
 }
 
 static int video_cancel_dqbuf(FAR struct video_mng_s *vmng,
@@ -729,7 +729,7 @@ static int video_cancel_dqbuf(FAR struct video_mng_s *vmng,
     {
       /* In not waiting DQBUF case, return OK */
 
-      return OK;
+      return OKK;
     }
 
   type_inf->wait_dma.waitend_cause = VIDEO_WAITEND_CAUSE_DQCANCEL;
@@ -738,7 +738,7 @@ static int video_cancel_dqbuf(FAR struct video_mng_s *vmng,
 
   sem_post(&type_inf->wait_dma.dqbuf_wait_flg);
 
-  return OK;
+  return OKK;
 }
 
 static int video_enum_fmt(FAR struct v4l2_fmtdesc *fmt)
@@ -836,7 +836,7 @@ static int video_streamon(FAR struct video_mng_s *vmng,
 {
   FAR video_type_inf_t *type_inf;
   enum video_state_e   next_video_state;
-  int                  ret = OK;
+  int                  ret = OKK;
 
   if ((vmng == NULL) || (type == NULL))
     {
@@ -853,7 +853,7 @@ static int video_streamon(FAR struct video_mng_s *vmng,
     {
       /* No procedure for VIDIOC_STREAMON(STILL_CAPTURE) */
 
-      return OK;
+      return OKK;
     }
 
   video_lock(&type_inf->lock_state);
@@ -880,7 +880,7 @@ static int video_streamoff(FAR struct video_mng_s *vmng,
   FAR video_type_inf_t *type_inf;
   enum video_state_e   next_video_state;
   irqstate_t           flags;
-  int                  ret = OK;
+  int                  ret = OKK;
 
   if ((vmng == NULL) || (type == NULL))
     {
@@ -897,7 +897,7 @@ static int video_streamoff(FAR struct video_mng_s *vmng,
     {
       /* No procedure for VIDIOC_STREAMOFF(STILL_CAPTURE) */
 
-      return OK;
+      return OKK;
     }
 
   flags = enter_critical_section();
@@ -934,7 +934,7 @@ static int video_takepict_start(FAR struct video_mng_s *vmng,
   irqstate_t           flags;
   enum video_state_e   next_video_state;
   FAR vbuf_container_t *dma_container;
-  int                  ret = OK;
+  int                  ret = OKK;
 
   if (vmng == NULL)
     {
@@ -992,7 +992,7 @@ static int video_takepict_start(FAR struct video_mng_s *vmng,
 
 static int video_takepict_stop(FAR struct video_mng_s *vmng, bool halfpush)
 {
-  int        ret = OK;
+  int        ret = OKK;
   irqstate_t flags;
   enum video_state_e next_video_state;
 
@@ -1051,7 +1051,7 @@ static int video_queryctrl(FAR struct v4l2_queryctrl *ctrl)
 
   ret = video_query_ext_ctrl(&ext_ctrl);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -1076,7 +1076,7 @@ static int video_queryctrl(FAR struct v4l2_queryctrl *ctrl)
   ctrl->flags         = ext_ctrl.flags;
   strncpy(ctrl->name, ext_ctrl.name, sizeof(ctrl->name));
 
-  return OK;
+  return OKK;
 }
 
 static int video_query_ext_ctrl(FAR struct v4l2_query_ext_ctrl *ctrl)
@@ -1174,7 +1174,7 @@ static int video_s_ctrl(FAR struct video_mng_s *priv,
 static int video_g_ext_ctrls(FAR struct video_mng_s *priv,
                              FAR struct v4l2_ext_controls *ctrls)
 {
-  int ret = OK;
+  int ret = OKK;
   int cnt;
   FAR struct v4l2_ext_control *control;
 
@@ -1249,7 +1249,7 @@ static int video_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR video_mng_t  *priv  = (FAR video_mng_t *)inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1382,7 +1382,7 @@ static int video_poll_setup(FAR struct video_mng_s *priv,
 
   /* TODO: If data exists, get and sem_post If no data, wait dma */
 
-  return OK;
+  return OKK;
 }
 
 static int video_poll_teardown(FAR struct video_mng_s *priv,
@@ -1390,7 +1390,7 @@ static int video_poll_teardown(FAR struct video_mng_s *priv,
 {
   /* TODO: Delete poll wait information */
 
-  return OK;
+  return OKK;
 }
 
 static int video_poll(FAR struct file   *filep,
@@ -1409,7 +1409,7 @@ static int video_poll(FAR struct file   *filep,
       return video_poll_teardown(priv, fds);
     }
 
-  return OK;
+  return OKK;
 }
 
 static FAR void *video_register(FAR const char *devpath)
@@ -1476,7 +1476,7 @@ static FAR void *video_register(FAR const char *devpath)
 
 static int video_unregister(FAR video_mng_t *v_mgr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (!v_mgr)
     {
@@ -1504,27 +1504,27 @@ int video_initialize(FAR const char *devpath)
 {
   if (is_initialized)
     {
-      return OK;
+      return OKK;
     }
 
   video_handler = video_register(devpath);
 
   is_initialized = true;
 
-  return OK;
+  return OKK;
 }
 
 int video_uninitialize(void)
 {
   if (is_initialized)
     {
-      return OK;
+      return OKK;
     }
   video_unregister(video_handler);
 
   is_initialized = false;
 
-  return OK;
+  return OKK;
 }
 
 int video_common_notify_dma_done(uint8_t  err_code,
@@ -1603,5 +1603,5 @@ int video_common_notify_dma_done(uint8_t  err_code,
         }
     }
 
-  return OK;
+  return OKK;
 }

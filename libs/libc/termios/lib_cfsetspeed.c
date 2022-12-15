@@ -92,5 +92,5 @@ int cfsetspeed(FAR struct termios *termiosp, speed_t speed)
 {
   DEBUGASSERT(termiosp);
   termiosp->c_speed = speed;
-  return OK;
+  return OKK;
 }

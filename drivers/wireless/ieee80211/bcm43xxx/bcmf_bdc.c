@@ -179,7 +179,7 @@ int bcmf_bdc_process_event_frame(FAR struct bcmf_dev_s *priv,
       handler(priv, &event_msg->event, data_size);
     }
 
-  return OK;
+  return OKK;
 
 exit_invalid_frame:
   wlerr("Invalid event frame\n");
@@ -198,7 +198,7 @@ int bcmf_event_register(FAR struct bcmf_dev_s *priv, event_handler_t handler,
     }
 
   priv->event_handlers[event_id] = handler;
-  return OK;
+  return OKK;
 }
 
 int bcmf_event_unregister(FAR struct bcmf_dev_s *priv,
@@ -233,7 +233,7 @@ int bcmf_event_push_config(FAR struct bcmf_dev_s *priv)
       return -EIO;
     }
 
-  return OK;
+  return OKK;
 }
 
 int bcmf_bdc_transmit_frame(FAR struct bcmf_dev_s *priv,

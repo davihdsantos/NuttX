@@ -69,7 +69,7 @@ void bchlib_semtake(FAR struct bchlib_s *bch)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }

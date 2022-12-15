@@ -72,7 +72,7 @@ int task_spawnattr_getstacksize(FAR const posix_spawnattr_t *attr,
 {
   DEBUGASSERT(attr && stacksize);
   *stacksize = attr->stacksize;
-  return OK;
+  return OKK;
 }
 
 #endif /* !CONFIG_BUILD_KERNEL */

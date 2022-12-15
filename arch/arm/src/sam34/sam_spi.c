@@ -827,7 +827,7 @@ static void spi_txcallback(DMA_HANDLE handle, void *arg, int result)
    * complete until the RX callback is received.
    */
 
-  if (result != OK && spics->result == -EBUSY)
+  if (result != OKK && spics->result == -EBUSY)
     {
       /* Save the result of the transfer if an error is reported */
 
@@ -895,14 +895,14 @@ static int spi_lock(struct spi_dev_s *dev, bool lock)
            * awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&spi->spisem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

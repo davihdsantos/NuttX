@@ -79,6 +79,6 @@ int board_app_initialize(uintptr_t arg)
 #ifndef CONFIG_BOARD_LATE_INITIALIZE
   return tm4c_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }

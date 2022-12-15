@@ -73,14 +73,14 @@ int raise(int signo)
 {
 #ifndef CONFIG_DISABLE_PTHREAD
   int errcode = pthread_kill(pthread_self(), signo);
-  if (errcode != OK)
+  if (errcode != OKK)
     {
       DEBUGASSERT(errcode > 0);
       set_errno(errcode);
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 
 #else
   return kill(getpid(), signo);

@@ -151,7 +151,7 @@ pid_t up_vfork(const struct vfork_s *context)
 
   ret = up_create_stack((FAR struct tcb_s *)child, stacksize + argsize,
                         parent->flags & TCB_FLAG_TTYPE_MASK);
-  if (ret != OK)
+  if (ret != OKK)
     {
       serr("ERROR: up_create_stack failed: %d\n", ret);
       nxtask_vforkabort(child, -ret);

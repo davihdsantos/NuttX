@@ -106,7 +106,7 @@ int nxsig_procmask(int how, FAR const sigset_t *set, FAR sigset_t *oset)
   FAR struct tcb_s *rtcb = this_task();
   sigset_t   oldsigprocmask;
   irqstate_t flags;
-  int        ret = OK;
+  int        ret = OKK;
 
   sched_lock();
 

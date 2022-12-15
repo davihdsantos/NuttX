@@ -113,7 +113,7 @@ static void nxsched_releasepid(pid_t pid)
 
 int sched_releasetcb(FAR struct tcb_s *tcb, uint8_t ttype)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (tcb)
     {

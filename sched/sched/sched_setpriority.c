@@ -391,5 +391,5 @@ int nxsched_setpriority(FAR struct tcb_s *tcb, int sched_priority)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }

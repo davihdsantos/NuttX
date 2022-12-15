@@ -80,7 +80,7 @@ int pthread_attr_setstack(FAR pthread_attr_t *attr,
     {
       attr->stackaddr = stackaddr;
       attr->stacksize = stacksize;
-      ret = OK;
+      ret = OKK;
     }
 
   linfo("Returning %d\n", ret);

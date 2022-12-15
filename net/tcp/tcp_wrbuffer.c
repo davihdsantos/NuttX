@@ -207,7 +207,7 @@ FAR struct tcp_wrbuffer_s *tcp_wrbuffer_tryalloc(void)
    * buffer
    */
 
-  if (tcp_wrbuffer_test() == OK)
+  if (tcp_wrbuffer_test() == OKK)
     {
       DEBUGVERIFY(net_lockedwait(&g_wrbuffer.sem));
     }

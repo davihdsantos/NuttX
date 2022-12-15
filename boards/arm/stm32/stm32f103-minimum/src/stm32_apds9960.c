@@ -123,7 +123,7 @@ static int apds9960_irq_attach(FAR struct apds9960_config_s *state, xcpt_t isr,
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

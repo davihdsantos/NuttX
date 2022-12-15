@@ -75,7 +75,7 @@ int inode_checkflags(FAR struct inode *inode, int oflags)
     }
   else
     {
-      return OK;
+      return OKK;
     }
 }
 
@@ -226,7 +226,7 @@ int nx_vopen(FAR const char *path, int oflags, va_list ap)
    * because it may also be closed that many times.
    */
 
-  ret = OK;
+  ret = OKK;
   if (inode->u.i_ops->open)
     {
 #ifndef CONFIG_DISABLE_MOUNTPOINT

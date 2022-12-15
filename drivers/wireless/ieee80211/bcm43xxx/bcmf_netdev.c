@@ -161,7 +161,7 @@ int bcmf_netdev_alloc_tx_frame(FAR struct bcmf_dev_s *priv)
     {
       /* Frame available */
 
-      return OK;
+      return OKK;
     }
 
   /* Allocate frame for TX */
@@ -173,7 +173,7 @@ int bcmf_netdev_alloc_tx_frame(FAR struct bcmf_dev_s *priv)
       return -ENOMEM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -213,7 +213,7 @@ static int bcmf_transmit(FAR struct bcmf_dev_s *priv,
 
   NETDEV_TXPACKETS(&priv->bc_dev);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -704,7 +704,7 @@ static int bcmf_ifup(FAR struct net_driver_s *dev)
   /* Enable the hardware interrupt */
 
   priv->bc_bifup = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -746,7 +746,7 @@ static int bcmf_ifdown(FAR struct net_driver_s *dev)
 
   priv->bc_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -835,7 +835,7 @@ static int bcmf_txavail(FAR struct net_driver_s *dev)
       work_queue(BCMFWORK, &priv->bc_pollwork, bcmf_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -863,7 +863,7 @@ static int bcmf_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -892,7 +892,7 @@ static int bcmf_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1141,7 +1141,7 @@ int bcmf_netdev_register(FAR struct bcmf_dev_s *priv)
 
   /* Enable chip */
 
-  if (bcmf_wl_enable(priv, true) != OK)
+  if (bcmf_wl_enable(priv, true) != OKK)
     {
       return -EIO;
     }
@@ -1152,7 +1152,7 @@ int bcmf_netdev_register(FAR struct bcmf_dev_s *priv)
   if (bcmf_cdc_iovar_request(priv, CHIP_STA_INTERFACE, false,
                              IOVAR_STR_CUR_ETHERADDR,
                              priv->bc_dev.d_mac.ether.ether_addr_octet,
-                             &out_len) != OK)
+                             &out_len) != OKK)
     {
       return -EIO;
     }
@@ -1160,7 +1160,7 @@ int bcmf_netdev_register(FAR struct bcmf_dev_s *priv)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->bc_dev, NET_LL_IEEE80211);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_IEEE80211_BROADCOM_FULLMAC */

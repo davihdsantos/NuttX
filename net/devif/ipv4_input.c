@@ -499,7 +499,7 @@ int ipv4_input(FAR struct net_driver_s *dev)
                * it was received on.
                */
 
-              return OK;
+              return OKK;
             }
           else
 #endif
@@ -581,7 +581,7 @@ int ipv4_input(FAR struct net_driver_s *dev)
 
   /* Return and let the caller do any pending transmission. */
 
-  return OK;
+  return OKK;
 
   /* Drop the packet.  NOTE that OK is returned meaning that the
    * packet has been processed (although processed unsuccessfully).
@@ -589,6 +589,6 @@ int ipv4_input(FAR struct net_driver_s *dev)
 
 drop:
   dev->d_len = 0;
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_IPv4 */

@@ -140,7 +140,7 @@ static int gpio_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Dispatch pending interrupts in the lower GPIO status register */
 
   gpio_dispatch(ESP32_FIRST_GPIOIRQ + 32, status, (uint32_t *)context);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -237,7 +237,7 @@ int esp32_configgpio(int pin, gpio_pinattr_t attr)
 
   regaddr = GPIO_REG(pin);
   putreg32(cntrl, regaddr);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

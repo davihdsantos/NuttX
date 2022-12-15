@@ -168,7 +168,7 @@ int adxl345_interrupt(int irq, FAR void *context)
       g_adxl345config.handler(&g_adxl345config.config, g_adxl345config.arg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /* IRQ/GPIO access callbacks.  These operations all hidden behind
@@ -195,7 +195,7 @@ static int adxl345_attach(FAR struct adxl345_config_s *state,
 
   priv->handler = handler;
   priv->arg = arg;
-  return OK;
+  return OKK;
 }
 
 static void adxl345_enable(FAR struct adxl345_config_s *state, bool enable)
@@ -304,7 +304,7 @@ int adxl345_archinitialize(int minor)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SENSORS_ADXL345 */

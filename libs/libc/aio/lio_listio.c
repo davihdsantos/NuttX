@@ -98,7 +98,7 @@ static int lio_checkio(FAR struct aiocb * const *list, int nent)
   int ret;
   int i;
 
-  ret = OK; /* Assume success */
+  ret = OKK; /* Assume success */
 
   /* Check each entry in the list.  Break out of the loop if any entry
    * has not completed.
@@ -276,7 +276,7 @@ static int lio_sigsetup(FAR struct aiocb * const *list, int nent,
   (void)sigemptyset(&set);
   (void)sigaddset(&set, SIGPOLL);
   status = sigprocmask(SIG_UNBLOCK, &set, &sighand->oprocmask);
-  if (status != OK)
+  if (status != OKK)
     {
       int errcode = get_errno();
       ferr("ERROR sigprocmask failed: %d\n", errcode);
@@ -295,7 +295,7 @@ static int lio_sigsetup(FAR struct aiocb * const *list, int nent,
   (void)sigdelset(&act.sa_mask, SIGPOLL);
 
   status = sigaction(SIGPOLL, &act, &sighand->oact);
-  if (status != OK)
+  if (status != OKK)
     {
       int errcode = get_errno();
 
@@ -305,7 +305,7 @@ static int lio_sigsetup(FAR struct aiocb * const *list, int nent,
       return -errcode;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -533,7 +533,7 @@ int lio_listio(int mode, FAR struct aiocb *const list[], int nent,
   DEBUGASSERT(list);
 
   nqueued = 0;    /* No I/O operations yet queued */
-  ret     = OK;   /* Assume success */
+  ret     = OKK;   /* Assume success */
 
   /* Lock the scheduler so that no I/O events can complete on the worker
    * thread until we set our wait set up.  Pre-emption will, of course, be
@@ -555,14 +555,14 @@ int lio_listio(int mode, FAR struct aiocb *const list[], int nent,
         {
           /* Submit the operation according to its opcode */
 
-          status = OK;
+          status = OKK;
           switch (aiocbp->aio_lio_opcode)
             {
             case LIO_NOP:
               {
                 /* Mark the do-nothing operation complete */
 
-                aiocbp->aio_result = OK;
+                aiocbp->aio_result = OKK;
               }
               break;
 
@@ -702,7 +702,7 @@ int lio_listio(int mode, FAR struct aiocb *const list[], int nent,
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_FS_AIO */

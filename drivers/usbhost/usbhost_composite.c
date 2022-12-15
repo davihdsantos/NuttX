@@ -258,7 +258,7 @@ static int usbhost_disconnected(struct usbhost_class_s *usbclass)
   /* The destroy the composite container itself */
 
   kmm_free(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -857,7 +857,7 @@ int usbhost_composite(FAR struct usbhost_hubport_s *hport,
   /* Return our USB class structure */
 
   *usbclass = &priv->usbclass;
-  return OK;
+  return OKK;
 
 errout_with_cfgbuffer:
   kmm_free(cfgbuffer);

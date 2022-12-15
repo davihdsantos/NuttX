@@ -713,7 +713,7 @@ static void lpc54_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1010,7 +1010,7 @@ static inline int lpc54_addctrled(struct lpc54_usbhost_s *priv,
   lpc54_putreg(regval, LPC54_OHCI_CTRL);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1092,7 +1092,7 @@ static inline int lpc54_remctrled(struct lpc54_usbhost_s *priv,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1131,7 +1131,7 @@ static inline int lpc54_addbulked(struct lpc54_usbhost_s *priv,
   lpc54_putreg(regval, LPC54_OHCI_CTRL);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -1211,7 +1211,7 @@ static inline int lpc54_rembulked(struct lpc54_usbhost_s *priv,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -1379,7 +1379,7 @@ static inline int lpc54_addinted(struct lpc54_usbhost_s *priv,
   regval  = lpc54_getreg(LPC54_OHCI_CTRL);
   regval |= OHCI_CTRL_PLE;
   lpc54_putreg(regval, LPC54_OHCI_CTRL);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -1520,7 +1520,7 @@ static inline int lpc54_reminted(struct lpc54_usbhost_s *priv,
       lpc54_putreg(regval, LPC54_OHCI_CTRL);
     }
 
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -1602,7 +1602,7 @@ static int lpc54_enqueuetd(struct lpc54_usbhost_s *priv,
       ed->hw.headp        = (uint32_t)td | ((ed->hw.headp) & ED_HEADP_C);
       ed->hw.tailp        = (uint32_t)TDTAIL;
 
-      ret                 = OK;
+      ret                 = OKK;
     }
 
   return ret;
@@ -1637,7 +1637,7 @@ static int lpc54_wdhwait(struct lpc54_usbhost_s *priv, struct lpc54_ed_s *ed)
        */
 
       xfrinfo->wdhwait = true;
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -1713,7 +1713,7 @@ static int lpc54_ctrltd(struct lpc54_usbhost_s *priv, struct lpc54_ed_s *ed,
 
   xfrinfo->tdstatus = TD_CC_NOERROR;
   ret = lpc54_enqueuetd(priv, ed, dirpid, toggle, buffer, buflen);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Set ControlListFilled.  This bit is used to indicate whether there are
        * TDs on the Control list.
@@ -1731,7 +1731,7 @@ static int lpc54_ctrltd(struct lpc54_usbhost_s *priv, struct lpc54_ed_s *ed,
 
       if (xfrinfo->tdstatus == TD_CC_NOERROR)
         {
-          ret = OK;
+          ret = OKK;
         }
       else
         {
@@ -2031,7 +2031,7 @@ static int lpc54_usbinterrupt(int irq, void *context, FAR void *arg)
       lpc54_putreg(intst, LPC54_OHCI_INTST);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2098,7 +2098,7 @@ static int lpc54_wait(struct usbhost_connection_s *conn,
               uinfo("RHport Connected: %s\n",
                     connport->connected ? "YES" : "NO");
 
-              return OK;
+              return OKK;
             }
         }
 
@@ -2116,7 +2116,7 @@ static int lpc54_wait(struct usbhost_connection_s *conn,
           leave_critical_section(flags);
 
           uinfo("Hub port Connected: %s\n", connport->connected ? "YES" : "NO");
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -2189,7 +2189,7 @@ static int lpc54_rh_enumerate(struct usbhost_connection_s *conn,
 
   lpc54_putreg(OHCI_RHPORTST_PRSC, LPC54_OHCI_RHPORTST1);
   (void)nxsig_usleep(200*1000);
-  return OK;
+  return OKK;
 }
 
 static int lpc54_enumerate(FAR struct usbhost_connection_s *conn,
@@ -2284,7 +2284,7 @@ static int lpc54_ep0configure(struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
   lpc54_givesem(&priv->exclsem);
 
   uinfo("EP0 CTRL:%08x\n", ed->hw.ctrl);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2564,7 +2564,7 @@ static int lpc54_alloc(struct usbhost_driver_s *drvr,
   if (*buffer)
     {
       *maxlen = CONFIG_LPC54_OHCI_TDBUFSIZE;
-      ret = OK;
+      ret = OKK;
     }
 
   lpc54_givesem(&priv->exclsem);
@@ -2604,7 +2604,7 @@ static int lpc54_free(struct usbhost_driver_s *drvr, uint8_t *buffer)
   lpc54_takesem(&priv->exclsem);
   lpc54_tbfree(buffer);
   lpc54_givesem(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2646,7 +2646,7 @@ static int lpc54_ioalloc(struct usbhost_driver_s *drvr,
       if (alloc)
         {
           *buffer = alloc;
-          return OK;
+          return OKK;
         }
     }
 
@@ -2685,7 +2685,7 @@ static int lpc54_iofree(struct usbhost_driver_s *drvr, uint8_t *buffer)
 
 #if LPC54_IOBUFFERS > 0
   lpc54_freeio(buffer);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -2748,14 +2748,14 @@ static int lpc54_ctrlin(struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
 
   len = lpc54_getle16(req->len);
   ret = lpc54_ctrltd(priv, ed, GTD_STATUS_DP_SETUP, (uint8_t *)req, USB_SIZEOF_CTRLREQ);
-  if (ret == OK)
+  if (ret == OKK)
     {
       if (len)
         {
           ret = lpc54_ctrltd(priv, ed, GTD_STATUS_DP_IN, buffer, len);
         }
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           ret = lpc54_ctrltd(priv, ed, GTD_STATUS_DP_OUT, NULL, 0);
         }
@@ -2786,14 +2786,14 @@ static int lpc54_ctrlout(struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
 
   len = lpc54_getle16(req->len);
   ret = lpc54_ctrltd(priv, ed, GTD_STATUS_DP_SETUP, (uint8_t *)req, USB_SIZEOF_CTRLREQ);
-  if (ret == OK)
+  if (ret == OKK)
     {
       if (len)
         {
           ret = lpc54_ctrltd(priv, ed, GTD_STATUS_DP_OUT, (uint8_t *)buffer, len);
         }
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           ret = lpc54_ctrltd(priv, ed, GTD_STATUS_DP_IN, NULL, 0);
         }
@@ -2864,7 +2864,7 @@ static int lpc54_transfer_common(struct lpc54_usbhost_s *priv,
 
   xfrinfo->tdstatus = TD_CC_NOERROR;
   ret = lpc54_enqueuetd(priv, ed, dirpid, GTD_STATUS_T_TOGGLE, buffer, buflen);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* BulkListFilled. This bit is used to indicate whether there are any
        * TDs on the Bulk list.
@@ -2950,7 +2950,7 @@ static int lpc54_dma_alloc(struct lpc54_usbhost_s *priv,
       *alloc = newbuffer;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3390,7 +3390,7 @@ static int lpc54_asynch(struct usbhost_driver_s *drvr, usbhost_ep_t ep,
    */
 
   lpc54_givesem(&priv->exclsem);
-  return OK;
+  return OKK;
 
 errout_with_asynch:
 #if LPC54_IOBUFFERS > 0
@@ -3550,7 +3550,7 @@ static int lpc54_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
   /* Determine the return value */
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3599,7 +3599,7 @@ static int lpc54_connect(FAR struct usbhost_driver_s *drvr,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -152,7 +152,7 @@ static int sim_interrupt(int argc, wdparm_t arg1, ...)
   gpioinfo("Interrupt! callback=%p\n", simgpint->callback);
 
   simgpint->callback(&simgpint->simgpio.gpio, simgpint->simgpio.id);
-  return OK;
+  return OKK;
 }
 
 static int gpin_read(FAR struct gpio_dev_s *dev, FAR bool *value)
@@ -165,7 +165,7 @@ static int gpin_read(FAR struct gpio_dev_s *dev, FAR bool *value)
 
   *value = simgpio->value;
   simgpio->value = !simgpio->value;
-  return OK;
+  return OKK;
 }
 
 static int gpout_write(FAR struct gpio_dev_s *dev, bool value)
@@ -176,7 +176,7 @@ static int gpout_write(FAR struct gpio_dev_s *dev, bool value)
   gpioinfo("Writing %d\n", (int)value);
 
   simgpio->value = value;
-  return OK;
+  return OKK;
 }
 
 static int gpint_attach(FAR struct gpio_dev_s *dev,
@@ -189,7 +189,7 @@ static int gpint_attach(FAR struct gpio_dev_s *dev,
 
   gpioinfo("Attach %p\n", callback);
   simgpint->callback = callback;
-  return OK;
+  return OKK;
 }
 
 static int gpint_enable(FAR struct gpio_dev_s *dev, bool enable)
@@ -211,7 +211,7 @@ static int gpint_enable(FAR struct gpio_dev_s *dev, bool enable)
       (void)wd_cancel(simgpint->wdog);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

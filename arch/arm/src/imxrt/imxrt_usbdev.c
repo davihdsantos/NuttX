@@ -918,7 +918,7 @@ static int imxrt_progressep(struct imxrt_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_INTDECODE(IMXRT_TRACEINTID_EPINQEMPTY), 0);
-      return OK;
+      return OKK;
     }
 
   /* Ignore any attempt to send a zero length packet */
@@ -947,7 +947,7 @@ static int imxrt_progressep(struct imxrt_ep_s *privep)
         }
 
       imxrt_reqcomplete(privep, imxrt_rqdequeue(privep), OK);
-      return OK;
+      return OKK;
     }
 
   if (privep->epphy == IMXRT_EP0_IN)
@@ -978,7 +978,7 @@ static int imxrt_progressep(struct imxrt_ep_s *privep)
 
   imxrt_queuedtd(privep->epphy, dtd);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1925,7 +1925,7 @@ static int imxrt_usbinterrupt(int irq, FAR void *context, FAR void *arg)
       imxrt_usbreset(priv);
 
       usbtrace(TRACE_INTEXIT(IMXRT_TRACEINTID_USB), 0);
-      return OK;
+      return OKK;
     }
 
   /* When the device controller enters a suspend state from an active state,
@@ -2089,7 +2089,7 @@ static int imxrt_usbinterrupt(int irq, FAR void *context, FAR void *arg)
     }
 
   usbtrace(TRACE_INTEXIT(IMXRT_TRACEINTID_USB), 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2203,7 +2203,7 @@ static int imxrt_epconfigure(FAR struct usbdev_ep_s *ep,
                      IMXRT_USBDEV_ENDPTCTRL(privep->epphy >> 1));
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2251,7 +2251,7 @@ static int imxrt_epdisable(FAR struct usbdev_ep_s *ep)
   imxrt_cancelrequests(privep, -ESHUTDOWN);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2377,7 +2377,7 @@ static int imxrt_epsubmit(FAR struct usbdev_ep_s *ep,
   FAR struct imxrt_ep_s *privep = (FAR struct imxrt_ep_s *)ep;
   FAR struct imxrt_usbdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -2471,7 +2471,7 @@ static int imxrt_epcancel(FAR struct usbdev_ep_s *ep,
 
   imxrt_cancelrequests(privep, -ESHUTDOWN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2514,7 +2514,7 @@ static int imxrt_epstall(FAR struct usbdev_ep_s *ep, bool resume)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2723,7 +2723,7 @@ static int imxrt_wakeup(struct usbdev_s *dev)
   flags = enter_critical_section();
   imxrt_setbits(USBDEV_PRTSC1_FPR, IMXRT_USBDEV_PORTSC1);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2749,7 +2749,7 @@ static int imxrt_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2782,7 +2782,7 @@ static int imxrt_pullup(struct usbdev_s *dev, bool enable)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3054,6 +3054,6 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   /* Unhook the driver */
 
   g_usbdev.driver = NULL;
-  return OK;
+  return OKK;
 }
 

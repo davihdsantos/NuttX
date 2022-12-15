@@ -64,7 +64,7 @@
 
 int xmc4_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_SENSORS_MAX6675
   ret = xmc4_max6675initialize("/dev/temp0");

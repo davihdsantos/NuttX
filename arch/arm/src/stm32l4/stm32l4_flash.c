@@ -132,7 +132,7 @@ static inline void sem_lock(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -385,7 +385,7 @@ ssize_t up_progmem_write(size_t addr, const void *buf, size_t buflen)
   size_t offset;
   size_t page;
   int i;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check for valid address range. */
 
@@ -508,7 +508,7 @@ out:
    * error bits).
    */
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("flash write error: %d, status: 0x%x\n", ret, getreg32(STM32L4_FLASH_SR));
       modifyreg32(STM32L4_FLASH_SR, 0, FLASH_SR_ALLERRS);
@@ -516,5 +516,5 @@ out:
 
   flash_lock();
   sem_unlock();
-  return (ret == OK) ? written : ret;
+  return (ret == OKK) ? written : ret;
 }

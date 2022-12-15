@@ -92,5 +92,5 @@ int stm32l4_dac_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }

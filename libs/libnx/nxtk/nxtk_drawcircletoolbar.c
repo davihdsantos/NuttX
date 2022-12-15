@@ -117,7 +117,7 @@ int nxtk_drawcircletoolbar(NXTKWINDOW hfwnd, FAR const struct nxgl_point_s *cent
       vector.pt2.y = pts[i+1].y;
 
       ret = nxtk_drawlinetoolbar(hfwnd, &vector, width, color, NX_LINECAP_PT1);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }

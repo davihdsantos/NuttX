@@ -168,7 +168,7 @@ static int binfs_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the index as the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)((uintptr_t)index);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -178,7 +178,7 @@ static int binfs_open(FAR struct file *filep, FAR const char *relpath,
 static int binfs_close(FAR struct file *filep)
 {
   finfo("Closing\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -220,7 +220,7 @@ static int binfs_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
       else
         {
           *ptr = builtin_getname((int)((uintptr_t)filep->f_priv));
-          ret = OK;
+          ret = OKK;
         }
     }
   else
@@ -246,7 +246,7 @@ static int binfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Copy the index from the old to the new file structure */
 
   newp->f_priv = oldp->f_priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -268,7 +268,7 @@ static int binfs_fstat(FAR const struct file *filep, FAR struct stat *buf)
   buf->st_size    = 0;
   buf->st_blksize = 0;
   buf->st_blocks  = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -294,7 +294,7 @@ static int binfs_opendir(struct inode *mountpt, const char *relpath,
   /* Set the index to the first entry */
 
   dir->u.binfs.fb_index = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -342,7 +342,7 @@ static int binfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
        */
 
       dir->u.binfs.fb_index = index;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -360,7 +360,7 @@ static int binfs_rewinddir(struct inode *mountpt, struct fs_dirent_s *dir)
   finfo("Entry\n");
 
   dir->u.binfs.fb_index = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -378,7 +378,7 @@ static int binfs_bind(FAR struct inode *blkdriver, const void *data,
                       void **handle)
 {
   finfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -393,7 +393,7 @@ static int binfs_unbind(FAR void *handle, FAR struct inode **blkdriver,
                         unsigned int flags)
 {
   finfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -416,7 +416,7 @@ static int binfs_statfs(struct inode *mountpt, struct statfs *buf)
   buf->f_bfree   = 0;
   buf->f_bavail  = 0;
   buf->f_namelen = NAME_MAX;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -458,7 +458,7 @@ static int binfs_stat(struct inode *mountpt, const char *relpath, struct stat *b
   buf->st_size    = 0;
   buf->st_blksize = 0;
   buf->st_blocks  = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

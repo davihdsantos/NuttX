@@ -174,7 +174,7 @@ ssize_t psock_pkt_send(FAR struct socket *psock, FAR const void *buf,
 {
   FAR struct net_driver_s *dev;
   struct send_s state;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify that the sockfd corresponds to valid, allocated socket */
 

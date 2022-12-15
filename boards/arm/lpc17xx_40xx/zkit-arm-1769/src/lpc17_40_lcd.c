@@ -97,7 +97,7 @@ int board_lcd_initialize(void)
   lpc17_40_gpiowrite(ZKITARM_OLED_RST, 0);
   up_mdelay(1);
   lpc17_40_gpiowrite(ZKITARM_OLED_RST, 1);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -163,7 +163,7 @@ int lpc17_40_ssp0cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
       /* Set GPIO to 1 for data, 0 for command */
 
       lpc17_40_gpiowrite(ZKITARM_OLED_RS, !cmd);
-      return OK;
+      return OKK;
     }
 
   return -ENODEV;

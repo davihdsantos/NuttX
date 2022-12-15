@@ -74,7 +74,7 @@
 int spi_transfer(FAR struct spi_dev_s *spi, FAR struct spi_sequence_s *seq)
 {
   FAR struct spi_trans_s *trans;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   DEBUGASSERT(spi != NULL && seq != NULL && seq->trans != NULL);

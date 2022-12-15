@@ -254,7 +254,7 @@ int __ramfunc__ msc_load_verify_address(uint32_t *address)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

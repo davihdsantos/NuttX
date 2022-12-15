@@ -286,7 +286,7 @@ int hcs12_dumpgpio(uint16_t pinset, const char *msg)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DEBUG_GPIO_INFO */

@@ -447,7 +447,7 @@ int netdev_register(FAR struct net_driver_s *dev, enum net_lltype_e lltype)
 #else
       ninfo("Registered dev: %s\n", dev->d_ifname);
 #endif
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

@@ -155,7 +155,7 @@ int up_cpu_paused(int cpu)
       up_longjmp(rtcb->xcp.regs, 1);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

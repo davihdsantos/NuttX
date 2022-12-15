@@ -92,6 +92,6 @@ int bchlib_teardown(FAR void *handle)
 
   nxsem_destroy(&bch->sem);
   kmm_free(bch);
-  return OK;
+  return OKK;
 }
 

@@ -550,7 +550,7 @@ int board_lcd_initialize(void)
   /* Turn the display off */
 
   priv->drvr->setpower(priv->drvr, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

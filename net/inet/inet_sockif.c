@@ -156,7 +156,7 @@ static int inet_tcp_alloc(FAR struct socket *psock)
   /* Save the pre-allocated connection in the socket structure */
 
   psock->s_conn = conn;
-  return OK;
+  return OKK;
 }
 #endif /* NET_TCP_HAVE_STACK */
 
@@ -192,7 +192,7 @@ static int inet_udp_alloc(FAR struct socket *psock)
   /* Save the pre-allocated connection in the socket structure */
 
   psock->s_conn = conn;
-  return OK;
+  return OKK;
 }
 #endif /* NET_UDP_HAVE_STACK */
 
@@ -931,7 +931,7 @@ static int inet_accept(FAR struct socket *psock, FAR struct sockaddr *addr,
       return ret;
     }
 
-  return OK;
+  return OKK;
 
 #else
   nwarn("WARNING: SOCK_STREAM not supported in this configuration\n");

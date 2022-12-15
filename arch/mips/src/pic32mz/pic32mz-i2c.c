@@ -633,7 +633,7 @@ static inline void pic32mz_i2c_sem_wait(FAR struct pic32mz_i2c_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1289,7 +1289,7 @@ static int pic32mz_i2c_isr_process(struct pic32mz_i2c_priv_s *priv)
 
   priv->status = status;
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1354,7 +1354,7 @@ static inline int pic32mz_i2c_setbaudrate(FAR struct pic32mz_i2c_priv_s *priv,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1551,7 +1551,7 @@ static int pic32mz_i2c_init(FAR struct pic32mz_i2c_priv_s *priv)
 
   pic32mz_i2c_putreg(priv, PIC32MZ_I2C_CONSET_OFFSET, I2C_CON_ON);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1577,7 +1577,7 @@ static int pic32mz_i2c_deinit(FAR struct pic32mz_i2c_priv_s *priv)
   irq_detach(priv->config->er_irq);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1596,7 +1596,7 @@ static int pic32mz_i2c_transfer(FAR struct i2c_master_s *dev,
                                 FAR struct i2c_msg_s *msgs, int count)
 {
   FAR struct pic32mz_i2c_priv_s *priv = (struct pic32mz_i2c_priv_s *)dev;
-  int ret = OK;
+  int ret = OKK;
   uint32_t status = 0;
 
   /* Acquire the semaphore. */
@@ -1814,7 +1814,7 @@ static int pic32mz_i2c_reset(FAR struct i2c_master_s *dev)
   /* Restore the frequency */
 
   pic32mz_i2c_setclock(priv, frequency);
-  ret = OK;
+  ret = OKK;
 
 out:
 
@@ -1918,7 +1918,7 @@ int pic32mz_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   if (--priv->refs)
     {
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(flags);
@@ -1930,7 +1930,7 @@ int pic32mz_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   /* Release unused resources */
 
   pic32mz_i2c_sem_destroy(priv);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_PIC32MZ_I2C */

@@ -186,7 +186,7 @@ int shmctl(int shmid, int cmd, struct shmid_ds *buf)
 
               /* Don't try anything further on the deleted region */
 
-              return OK;
+              return OKK;
             }
         }
         break;

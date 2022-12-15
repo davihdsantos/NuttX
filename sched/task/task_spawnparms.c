@@ -88,7 +88,7 @@ static inline int nxspawn_close(FAR struct spawn_close_file_action_s *action)
   sinfo("Closing fd=%d\n", action->fd);
 
   (void)close(action->fd);
-  return OK;
+  return OKK;
 }
 
 static inline int nxspawn_dup2(FAR struct spawn_dup2_file_action_s *action)
@@ -108,13 +108,13 @@ static inline int nxspawn_dup2(FAR struct spawn_dup2_file_action_s *action)
       return -errcode;
     }
 
-  return OK;
+  return OKK;
 }
 
 static inline int nxspawn_open(FAR struct spawn_open_file_action_s *action)
 {
   int fd;
-  int ret = OK;
+  int ret = OKK;
 
   /* Open the file */
 
@@ -293,7 +293,7 @@ int spawn_execattrs(pid_t pid, FAR const posix_spawnattr_t *attr)
       (void)nxsched_setscheduler(pid, attr->policy, &param);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -318,7 +318,7 @@ int spawn_proxyattrs(FAR const posix_spawnattr_t *attr,
                      FAR const posix_spawn_file_actions_t *file_actions)
 {
   FAR struct spawn_general_file_action_s *entry;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if we need to change the signal mask */
 
@@ -334,7 +334,7 @@ int spawn_proxyattrs(FAR const posix_spawnattr_t *attr,
       /* Yes.. Execute each file action */
 
       for (entry = (FAR struct spawn_general_file_action_s *)file_actions;
-           entry && ret == OK;
+           entry && ret == OKK;
            entry = entry->flink)
         {
           switch (entry->action)

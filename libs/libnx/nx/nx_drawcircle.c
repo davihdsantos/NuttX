@@ -117,7 +117,7 @@ int nx_drawcircle(NXWINDOW hwnd, FAR const struct nxgl_point_s *center,
       vector.pt2.y = pts[i+1].y;
 
       ret = nx_drawline(hwnd, &vector, width, color, NX_LINECAP_PT1);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }

@@ -125,7 +125,7 @@ static int cc13xx_gpio_interrupt)(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -159,7 +159,7 @@ int tiva_gpioirqinitialize(void)
   irq_attach(TIVA_IRQ_AON_GPIO_EDGE, cc13xx_gpio_interrupt, NULL);
   up_enable_irq(TIVA_IRQ_AON_GPIO_EDGE);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -216,7 +216,7 @@ int tiva_gpioirqattach(pinconfig_t pinconfig, xcpt_t isr, void *arg)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

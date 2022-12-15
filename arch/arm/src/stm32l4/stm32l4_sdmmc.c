@@ -722,7 +722,7 @@ static void stm32_takesem(struct stm32_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1482,7 +1482,7 @@ static int stm32_sdmmc_rdyinterrupt(int irq, void *context, void *arg)
   struct stm32_dev_s *priv = (struct stm32_dev_s *)arg;
 
   stm32_endwait(priv, SDIOWAIT_WRCOMPLETE);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1686,7 +1686,7 @@ static int stm32_sdmmc_interrupt(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1711,7 +1711,7 @@ static int stm32_lock(FAR struct sdio_dev_s *dev, bool lock)
   /* The multiplex bus is part of board support package. */
 
   stm32_muxbus_sdio_lock(dev, lock);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1939,7 +1939,7 @@ static int stm32_attach(FAR struct sdio_dev_s *dev)
   /* Attach the SDIO interrupt handler */
 
   ret = irq_attach(priv->nirq, stm32_sdmmc_interrupt, priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Disable all interrupts at the SDIO controller and clear static
        * interrupt flags
@@ -2029,7 +2029,7 @@ static int stm32_sendcmd(FAR struct sdio_dev_s *dev, uint32_t cmd,
   sdmmc_putreg32(priv, STM32_SDMMC_RESPDONE_ICR | STM32_SDMMC_CMDDONE_ICR,
                  STM32_SDMMC_ICR_OFFSET);
   sdmmc_putreg32(priv, regval, STM32_SDMMC_CMD_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2087,7 +2087,7 @@ static int stm32_recvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
 
   stm32_configxfrints(priv, STM32_SDMMC_RECV_MASK);
   stm32_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2141,7 +2141,7 @@ static int stm32_sendsetup(FAR struct sdio_dev_s *dev, FAR const
 
   stm32_configxfrints(priv, STM32_SDMMC_SEND_MASK);
   stm32_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2197,7 +2197,7 @@ static int stm32_cancel(FAR struct sdio_dev_s *dev)
   /* Mark no transfer in progress */
 
   priv->remaining = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2264,7 +2264,7 @@ static int stm32_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
     }
 
   sdmmc_putreg32(priv, STM32_SDMMC_CMDDONE_ICR, STM32_SDMMC_ICR_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2297,7 +2297,7 @@ static int stm32_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd,
   uint32_t respcmd;
 #endif
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R1  Command response (48-bit)
    *     47        0               Start bit
@@ -2384,7 +2384,7 @@ static int stm32_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd,
 {
   struct stm32_dev_s *priv = (struct stm32_dev_s *)dev;
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R2  CID, CSD register (136-bit)
    *     135       0               Start bit
@@ -2441,7 +2441,7 @@ static int stm32_recvshort(FAR struct sdio_dev_s *dev, uint32_t cmd,
 {
   struct stm32_dev_s *priv = (struct stm32_dev_s *)dev;
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R3  OCR (48-bit)
    *     47        0               Start bit
@@ -2779,7 +2779,7 @@ static int stm32_registercallback(FAR struct sdio_dev_s *dev,
   priv->cbevents = 0;
   priv->cbarg    = arg;
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2883,7 +2883,7 @@ static int stm32_dmarecvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
   stm32l4_dmastart(priv->dma, stm32_dmacallback, priv, false);
   stm32_sample(priv, SAMPLENDX_AFTER_SETUP);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2955,7 +2955,7 @@ static int stm32_dmasendsetup(FAR struct sdio_dev_s *dev,
 
   stm32_configxfrints(priv, STM32_SDMMC_DMASEND_MASK);
 
-  return OK;
+  return OKK;
 }
 #endif
 

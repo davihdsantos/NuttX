@@ -84,7 +84,7 @@ int board_app_initialize(uintptr_t arg)
 
   return k66_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }
 

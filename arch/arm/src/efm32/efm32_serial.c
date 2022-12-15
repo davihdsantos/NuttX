@@ -593,7 +593,7 @@ static int efm32_setup(struct uart_dev_s *dev)
   regval = efm32_serialin(priv, EFM32_USART_CTRL_OFFSET);
   regval |= USART_CTRL_TXBIL_HALFFULL;
   efm32_serialout(priv, EFM32_USART_CTRL_OFFSET, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -743,7 +743,7 @@ static int efm32_rxinterrupt(int irq, void *context, void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -793,7 +793,7 @@ static int efm32_txinterrupt(int irq, void *context, void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -812,7 +812,7 @@ static int efm32_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct efm32_usart_s *priv;
 #endif
 
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(filep);
   DEBUGASSERT(filep->f_inode);

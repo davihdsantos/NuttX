@@ -168,7 +168,7 @@ static int altmdm_uninitialize(FAR struct altmdm_dev_s *priv)
 
 static int altmdm_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -181,7 +181,7 @@ static int altmdm_open(FAR struct file *filep)
 
 static int altmdm_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

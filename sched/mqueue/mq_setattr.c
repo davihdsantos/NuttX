@@ -91,7 +91,7 @@ int mq_setattr(mqd_t mqdes, const struct mq_attr *mq_stat,
 
       mqdes->oflags = ((mq_stat->mq_flags & O_NONBLOCK) |
                        (mqdes->oflags & (~O_NONBLOCK)));
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

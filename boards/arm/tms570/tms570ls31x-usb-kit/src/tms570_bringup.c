@@ -75,7 +75,7 @@
 
 int tms570_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_MMCSD
   tms570_spidev_initialize();
@@ -88,5 +88,5 @@ int tms570_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

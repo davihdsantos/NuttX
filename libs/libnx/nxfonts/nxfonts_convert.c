@@ -286,5 +286,5 @@ int NXF_FUNCNAME(nxf_convert,NXFONTS_SUFFIX)
       line += stride;
     }
 #endif
-  return OK;
+  return OKK;
 }

@@ -146,7 +146,7 @@
 #ifdef CONFIG_CXD56_CPUFIFO
 static int nsh_cpucom_initialize(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
   cxd56_cfinitialize();
 

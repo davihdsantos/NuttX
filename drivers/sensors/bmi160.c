@@ -576,7 +576,7 @@ static int bmi160_open(FAR struct file *filep)
 
   bmi160_set_normal_imu(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -600,7 +600,7 @@ static int bmi160_close(FAR struct file *filep)
   bmi160_putreg8(priv, BMI160_CMD, GYRO_PM_SUSPEND);
   up_mdelay(30);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -664,7 +664,7 @@ static int bmi160_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode        *inode = filep->f_inode;
   FAR struct bmi160_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -721,7 +721,7 @@ static int bmi160_checkid(FAR struct bmi160_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -791,7 +791,7 @@ int bmi160_register(FAR const char *devpath, FAR struct spi_dev_s *dev)
     }
 
   sninfo("BMI160 driver loaded successfully!\n");
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SENSORS_BMI160 */

@@ -104,14 +104,14 @@ int nxsem_setprotocol(FAR sem_t *sem, int protocol)
         /* Remove any current holders */
 
         nxsem_destroyholder(sem);
-        return OK;
+        return OKK;
 
       case SEM_PRIO_INHERIT:
 
         /* Enable priority inheritance (dangerous) */
 
         sem->flags &= ~PRIOINHERIT_FLAGS_DISABLE;
-        return OK;
+        return OKK;
 
       case SEM_PRIO_PROTECT:
 

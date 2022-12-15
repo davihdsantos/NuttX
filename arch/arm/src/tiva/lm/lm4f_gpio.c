@@ -802,7 +802,7 @@ int tiva_configgpio(uint32_t pinconfig)
 #endif
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

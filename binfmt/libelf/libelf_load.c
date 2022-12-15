@@ -223,7 +223,7 @@ static inline int elf_loadfile(FAR struct elf_loadinfo_s *loadinfo)
       *pptr += ELF_ALIGNUP(shdr->sh_size);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -362,7 +362,7 @@ int elf_load(FAR struct elf_loadinfo_s *loadinfo)
     }
 #endif
 
-  return OK;
+  return OKK;
 
   /* Error exits */
 

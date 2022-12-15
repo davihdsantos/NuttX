@@ -148,7 +148,7 @@ static int veml6070_read8(FAR struct veml6070_dev_s *priv, int offset,
   *regval = data[0];
 
   sninfo("value: %08x ret: %d\n", *regval, ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -193,7 +193,7 @@ static int veml6070_write8(FAR struct veml6070_dev_s *priv, uint8_t regval)
 
 static int veml6070_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -206,7 +206,7 @@ static int veml6070_open(FAR struct file *filep)
 
 static int veml6070_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

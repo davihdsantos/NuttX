@@ -148,7 +148,7 @@ static int nand_lock(FAR struct nand_dev_s *nand)
   int ret;
 
   ret = nxsem_wait(&nand->exclsem);
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -319,7 +319,7 @@ static int nand_devscan(FAR struct nand_dev_s *nand)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_MTD_NAND_BLOCKCHECK &&  CONFIG_DEBUG_INFO && CONFIG_DEBUG_FS */
 
@@ -804,7 +804,7 @@ static int nand_ioctl(struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = model->pagesize;
               geo->erasesize    = nandmodel_getbyteblocksize(model);
               geo->neraseblocks = nandmodel_getdevblocks(model);
-              ret               = OK;
+              ret               = OKK;
           }
         }
         break;

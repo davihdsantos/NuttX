@@ -237,7 +237,7 @@ FAR char *envpath_next(ENVPATH_HANDLE handle, FAR const char *relpath)
       /* Verify that a regular file exists at this path */
 
       ret = stat(fullpath, &buf);
-      if (ret == OK && S_ISREG(buf.st_mode))
+      if (ret == OKK && S_ISREG(buf.st_mode))
         {
           return fullpath;
         }

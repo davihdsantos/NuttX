@@ -104,7 +104,7 @@ static FAR char *unique_blkdev(void)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
 

@@ -156,7 +156,7 @@ int board_app_initialize(uintptr_t arg)
    */
 
   ret = sam_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -167,7 +167,7 @@ int board_app_initialize(uintptr_t arg)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Start USB monitor: %d\n", ret);
     }
@@ -187,7 +187,7 @@ int board_app_initialize(uintptr_t arg)
   /* Configure WM8904 audio */
 
   ret = sam_wm8904_initialize(0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize WM8904 audio: %d\n",
              ret);
@@ -236,5 +236,5 @@ int board_app_initialize(uintptr_t arg)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

@@ -483,7 +483,7 @@ static void sam_takesem(struct sam_tc_s *tc)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -746,7 +746,7 @@ static int sam_tc_interrupt(struct sam_tc_s *tc)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1523,7 +1523,7 @@ int sam_tc_divisor(uint32_t frequency, uint32_t *div, uint32_t *tcclks)
       *tcclks = TC_CMR_TCCLKS(ndx);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAMA5_TC0 || CONFIG_SAMA5_TC1 || CONFIG_SAMA5_TC2 */

@@ -167,7 +167,7 @@ int tiva_ssicmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
       /* Set GPIO to 1 for data, 0 for command */
 
       tiva_gpiowrite(OLEDDC_GPIO, !cmd);
-      return OK;
+      return OKK;
     }
 
   return -ENODEV;

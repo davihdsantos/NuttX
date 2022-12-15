@@ -725,7 +725,7 @@ static int u16550_setup(FAR struct uart_dev_s *dev)
 #endif /* defined(CONFIG_SERIAL_IFLOWCONTROL) || defined(CONFIG_SERIAL_OFLOWCONTROL) */
 
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -767,7 +767,7 @@ static int u16550_attach(struct uart_dev_s *dev)
 
   ret = irq_attach(priv->irq, u16550_interrupt, dev);
 #ifndef CONFIG_ARCH_NOINTC
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the UART
@@ -898,7 +898,7 @@ static int u16550_interrupt(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -925,7 +925,7 @@ static int u16550_ioctl(struct file *filep, int cmd, unsigned long arg)
     }
 
 #else
-  ret = OK;
+  ret = OKK;
 #endif
 
   switch (cmd)

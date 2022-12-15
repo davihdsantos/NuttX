@@ -68,7 +68,7 @@
 
 int am335x_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_USERLED
   /* Register the LED driver */

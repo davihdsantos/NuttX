@@ -301,7 +301,7 @@ static int djoy_interrupt(int irq, FAR void *context, FAR void *arg)
       g_djoyhandler(&g_djoylower, g_djoyarg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

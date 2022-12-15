@@ -167,7 +167,7 @@ static int sporadic_set_lowpriority(FAR struct tcb_s *tcb)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -225,7 +225,7 @@ static int sporadic_set_hipriority(FAR struct tcb_s *tcb)
            */
 
           tcb->base_priority = sporadic->hi_priority;
-          return OK;
+          return OKK;
         }
     }
 
@@ -245,7 +245,7 @@ static int sporadic_set_hipriority(FAR struct tcb_s *tcb)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -428,7 +428,7 @@ static int sporadic_replenish_delay(FAR struct replenishment_s *repl,
 
   DEBUGVERIFY(wd_start(&repl->timer, period, sporadic_delay_expire,
                        1, (wdentry_t)repl));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -810,7 +810,7 @@ int sched_sporadic_initialize(FAR struct tcb_s *tcb)
   /* Hook the sporadic add-on into the TCB */
 
   tcb->sporadic = sporadic;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -901,7 +901,7 @@ int sched_sporadic_stop(FAR struct tcb_s *tcb)
 
   sched_kfree(tcb->sporadic);
   tcb->sporadic = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -965,7 +965,7 @@ int sched_sporadic_reset(FAR struct tcb_s *tcb)
   sporadic->budget       = 0;
   sporadic->eventtime    = 0;
   sporadic->active       = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1009,7 +1009,7 @@ int sched_sporadic_resume(FAR struct tcb_s *tcb)
 
   if (!sporadic->suspended)
     {
-      return OK;
+      return OKK;
     }
 
   /* This is the first time */
@@ -1054,7 +1054,7 @@ int sched_sporadic_resume(FAR struct tcb_s *tcb)
                * No point in starting more timers.
                */
 
-              return OK;
+              return OKK;
             }
 
           DEBUGASSERT(sporadic->active);
@@ -1108,7 +1108,7 @@ int sched_sporadic_resume(FAR struct tcb_s *tcb)
     }
 
   sporadic->eventtime = now;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1154,7 +1154,7 @@ int sched_sporadic_suspend(FAR struct tcb_s *tcb)
       sporadic->eventtime = clock_systimer();
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

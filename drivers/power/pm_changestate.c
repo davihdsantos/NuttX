@@ -79,14 +79,14 @@
 static int pm_prepall(int domain, enum pm_state_e newstate)
 {
   FAR dq_entry_t *entry;
-  int ret = OK;
+  int ret = OKK;
 
   if (newstate <= g_pmglobals.domain[domain].state)
     {
       /* Visit each registered callback structure in normal order. */
 
       for (entry = dq_peek(&g_pmglobals.registry);
-           entry && ret == OK;
+           entry && ret == OKK;
            entry = dq_next(entry))
         {
           /* Is the prepare callback supported? */
@@ -105,7 +105,7 @@ static int pm_prepall(int domain, enum pm_state_e newstate)
       /* Visit each registered callback structure in reverse order. */
 
       for (entry = dq_tail(&g_pmglobals.registry);
-           entry && ret == OK;
+           entry && ret == OKK;
            entry = dq_prev(entry))
         {
           /* Is the prepare callback supported? */
@@ -236,7 +236,7 @@ int pm_changestate(int domain, enum pm_state_e newstate)
    */
 
   ret = pm_prepall(domain, newstate);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* One or more drivers is not ready for this state change.  Revert to
        * the preceding state.

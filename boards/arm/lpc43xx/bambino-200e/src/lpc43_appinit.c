@@ -133,7 +133,7 @@ static int nsh_spifi_initialize(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #else
 #  define nsh_spifi_initialize() (OK)
@@ -190,7 +190,7 @@ int board_app_initialize(uintptr_t arg)
       /* Bind the SDIO interface to the MMC/SD driver */
 
       ret = mmcsd_slotinitialize(MMCSD_MINOR, sdmmc);
-      if (ret != OK)
+      if (ret != OKK)
         {
           syslog(LOG_ERR,
                  "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n",

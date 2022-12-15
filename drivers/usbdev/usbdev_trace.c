@@ -218,7 +218,7 @@ int usbtrace_enumerate(trace_callback_t callback, void *arg)
 {
   uint16_t ndx;
   uint32_t idset;
-  int ret = OK;
+  int ret = OKK;
 
   /* Temporarily disable tracing */
 
@@ -231,7 +231,7 @@ int usbtrace_enumerate(trace_callback_t callback, void *arg)
       /* Call the user provided callback */
 
       ret = callback(&g_trace[ndx], arg);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Abort the enumeration */
 

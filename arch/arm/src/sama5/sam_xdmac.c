@@ -656,7 +656,7 @@ static void sam_takechsem(struct sam_xdmac_s *xdmac)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -688,7 +688,7 @@ static void sam_takedsem(struct sam_xdmac_s *xdmac)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1499,7 +1499,7 @@ static int sam_txbuffer(struct sam_xdmach_s *xdmach, uint32_t paddr,
       return -ENOMEM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1539,7 +1539,7 @@ static int sam_rxbuffer(struct sam_xdmach_s *xdmach, uint32_t paddr,
       return -ENOMEM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1635,7 +1635,7 @@ static inline int sam_single(struct sam_xdmach_s *xdmach)
    *     The channel bit will be cleared in the GS register by hardware.
    */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1760,7 +1760,7 @@ static inline int sam_multiple(struct sam_xdmach_s *xdmach)
    *    The channel bit will be cleared in the GS register by hardware.
    */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1889,7 +1889,7 @@ static int sam_xdmac_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2164,7 +2164,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
   struct sam_xdmach_s *xdmach = (struct sam_xdmach_s *)handle;
   size_t maxtransfer;
   size_t remaining;
-  int ret = OK;
+  int ret = OKK;
 
   dmainfo("xdmach: %p paddr: %08x maddr: %08x nbytes: %d\n",
           xdmach, (int)paddr, (int)maddr, (int)nbytes);
@@ -2185,7 +2185,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
       /* Set up the maximum size transfer */
 
       ret = sam_txbuffer(xdmach, paddr, maddr, maxtransfer);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Decrement the number of bytes left to transfer */
 
@@ -2209,7 +2209,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
 
   /* Then set up the final buffer transfer */
 
-  if (ret == OK && remaining > 0)
+  if (ret == OKK && remaining > 0)
     {
       ret = sam_txbuffer(xdmach, paddr, maddr, remaining);
     }
@@ -2243,7 +2243,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
   struct sam_xdmach_s *xdmach = (struct sam_xdmach_s *)handle;
   size_t maxtransfer;
   size_t remaining;
-  int ret = OK;
+  int ret = OKK;
 
   dmainfo("xdmach: %p paddr: %08x maddr: %08x nbytes: %d\n",
           xdmach, (int)paddr, (int)maddr, (int)nbytes);
@@ -2264,7 +2264,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
       /* Set up the maximum size transfer */
 
       ret = sam_rxbuffer(xdmach, paddr, maddr, maxtransfer);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Decrement the number of bytes left to transfer */
 
@@ -2288,7 +2288,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
 
   /* Then set up the final buffer transfer */
 
-  if (ret == OK && remaining > 0)
+  if (ret == OKK && remaining > 0)
     {
       ret = sam_rxbuffer(xdmach, paddr, maddr, remaining);
     }

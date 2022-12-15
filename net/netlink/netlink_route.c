@@ -498,7 +498,7 @@ static int netlink_get_devlist(FAR struct socket *psock,
 
   netlink_add_response(psock, (FAR struct netlink_response_s *)alloc);
   net_unlock();
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -581,7 +581,7 @@ static int netlink_get_arptable(FAR struct socket *psock,
   /* Finally, add the data to the list of pending responses */
 
   netlink_add_response(psock, (FAR struct netlink_response_s *)entry);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -665,7 +665,7 @@ static int netlink_get_nbtable(FAR struct socket *psock,
   /* Finally, add the response to the list of pending responses */
 
   netlink_add_response(psock, (FAR struct netlink_response_s *)entry);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -710,7 +710,7 @@ static int netlink_route_terminator(FAR struct socket *psock,
   netlink_add_response(psock, (FAR struct netlink_response_s *)alloc);
   net_unlock();
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -772,7 +772,7 @@ static int netlink_ipv4_route(FAR struct net_route_ipv4_s *route,
   /* Finally, add the response to the list of pending responses */
 
   netlink_add_response(routeinfo->psock, (FAR struct netlink_response_s *)alloc);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -869,7 +869,7 @@ static int netlink_ipv6_route(FAR struct net_route_ipv6_s *route,
   /* Finally, add the response to the list of pending responses */
 
   netlink_add_response(routeinfo->psock, (FAR struct netlink_response_s *)alloc);
-  return OK;
+  return OKK;
 }
 #endif
 

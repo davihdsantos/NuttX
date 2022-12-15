@@ -240,14 +240,14 @@ int stm32_spi1cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 #ifdef CONFIG_STM32_SPI2
 int stm32_spi2cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
 #ifdef CONFIG_STM32_SPI3
 int stm32_spi3cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 #endif /* CONFIG_SPI_CMDDATA */

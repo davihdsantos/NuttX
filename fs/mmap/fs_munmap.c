@@ -202,7 +202,7 @@ int munmap(FAR void *start, size_t length)
     }
 
   nxsem_post(&g_rammaps.exclsem);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   nxsem_post(&g_rammaps.exclsem);

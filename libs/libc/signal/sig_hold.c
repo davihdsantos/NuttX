@@ -61,7 +61,7 @@ int sighold(int signo)
 
   (void)sigemptyset(&set);
   ret = sigaddset(&set, signo);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Block the signal */
 

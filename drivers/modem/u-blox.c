@@ -261,7 +261,7 @@ static int ubxmdm_poll(FAR struct file* filep,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

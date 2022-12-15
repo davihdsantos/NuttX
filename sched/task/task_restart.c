@@ -215,14 +215,14 @@ int task_restart(pid_t pid)
   /* Activate the task. */
 
   ret = task_activate((FAR struct tcb_s *)tcb);
-  if (ret != OK)
+  if (ret != OKK)
     {
       (void)nxtask_terminate(pid, true);
       errcode = -ret;
       goto errout_with_lock;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_lock:
   leave_critical_section(flags);

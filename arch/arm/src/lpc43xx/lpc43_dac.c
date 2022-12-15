@@ -145,7 +145,7 @@ static void dac_reset(FAR struct dac_dev_s *dev)
 
 static int  dac_setup(FAR struct dac_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /* Disable the DAC.  This method is called when the DAC device is closed.

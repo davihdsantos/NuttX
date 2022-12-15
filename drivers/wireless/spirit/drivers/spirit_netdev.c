@@ -498,7 +498,7 @@ static void spirit_rxlock(FAR struct spirit_driver_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -550,7 +550,7 @@ static void spirit_txlock(FAR struct spirit_driver_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1966,7 +1966,7 @@ static int spirit_ifup(FAR struct net_driver_s *dev)
       priv->ifup = true;
   }
 
-  return OK;
+  return OKK;
 
 error_with_ifalmostup:
   priv->ifup = true;
@@ -1997,7 +1997,7 @@ static int spirit_ifdown(FAR struct net_driver_s *dev)
 {
   FAR struct spirit_driver_s *priv = (FAR struct spirit_driver_s *)dev->d_private;
   FAR struct spirit_library_s *spirit;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(priv != NULL);
   spirit = &priv->spirit;
@@ -2093,7 +2093,7 @@ static int spirit_txavail(FAR struct net_driver_s *dev)
   /* Schedule to serialize the poll on the LP worker thread. */
 
   work_queue(LPWORK, &priv->pollwork, spirit_txpoll_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2218,7 +2218,7 @@ static int spirit_ioctl(FAR struct net_driver_s *dev, int cmd,
 #if CONFIG_PKTRADIO_ADDRLEN > 1
               memset(&devaddr->pa_addr[1], 0, CONFIG_PKTRADIO_ADDRLEN - 1);
 #endif
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -2242,7 +2242,7 @@ static int spirit_ioctl(FAR struct net_driver_s *dev, int cmd,
 #if CONFIG_PKTRADIO_ADDRLEN > 1
           memset(&addr->pa_addr[1], 0, CONFIG_PKTRADIO_ADDRLEN - 1);
 #endif
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2395,7 +2395,7 @@ static int spirit_req_data(FAR struct radio_driver_s *netdev,
       spirit_schedule_transmit_work(priv);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2445,7 +2445,7 @@ static int spirit_properties(FAR struct radio_driver_s *netdev,
   properties->sp_hubnode.nv_addr[0] = CONFIG_SPIRIT_HUBNODE;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2767,7 +2767,7 @@ int spirit_hw_initialize(FAR struct spirit_driver_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2887,7 +2887,7 @@ int spirit_netdev_initialize(FAR struct spi_dev_s *spi,
   /* Enable Radio IRQ */
 
   lower->enable(lower, true);
-  return OK;
+  return OKK;
 
 errout_with_attach:
   (void)lower->attach(lower, NULL, NULL);

@@ -106,7 +106,7 @@ int pthread_setspecific(pthread_key_t key, FAR const void *value)
 
       /* Return success. */
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

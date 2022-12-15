@@ -193,7 +193,7 @@ static int fat_open(FAR struct file *filep, FAR const char *relpath,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -383,7 +383,7 @@ static int fat_open(FAR struct file *filep, FAR const char *relpath,
         }
     }
 
-  return OK;
+  return OKK;
 
   /* Error exits -- goto's are nasty things, but they sure can make error
    * handling a lot simpler.
@@ -408,7 +408,7 @@ static int fat_close(FAR struct file *filep)
   FAR struct fat_file_s *currff;
   FAR struct fat_file_s *prevff;
   FAR struct fat_mountpt_s *fs;
-  int ret = OK;
+  int ret = OKK;
 
   /* Sanity checks */
 
@@ -520,7 +520,7 @@ static ssize_t fat_read(FAR struct file *filep, FAR char *buffer,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -766,7 +766,7 @@ static ssize_t fat_write(FAR struct file *filep, FAR const char *buffer,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -1085,14 +1085,14 @@ static off_t fat_seek(FAR struct file *filep, off_t offset, int whence)
   if (position / fs->fs_hwsectorsize == filep->f_pos / fs->fs_hwsectorsize)
     {
       filep->f_pos = position;
-      return OK;
+      return OKK;
     }
 
   /* Make sure that the mount is still healthy */
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -1259,7 +1259,7 @@ static off_t fat_seek(FAR struct file *filep, off_t offset, int whence)
     }
 
   fat_semgive(fs);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   fat_semgive(fs);
@@ -1300,7 +1300,7 @@ static int fat_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       fat_semgive(fs);
       return ret;
@@ -1352,7 +1352,7 @@ static int fat_sync(FAR struct file *filep)
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -1460,7 +1460,7 @@ static int fat_dup(FAR const struct file *oldp, FAR struct file *newp)
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -1529,7 +1529,7 @@ static int fat_dup(FAR const struct file *oldp, FAR struct file *newp)
   fs->fs_head = newff;
 
   fat_semgive(fs);
-  return OK;
+  return OKK;
 
   /* Error exits -- goto's are nasty things, but they sure can make error
    * handling a lot simpler.
@@ -1570,7 +1570,7 @@ static int fat_opendir(FAR struct inode *mountpt, FAR const char *relpath,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -1622,7 +1622,7 @@ static int fat_opendir(FAR struct inode *mountpt, FAR const char *relpath,
         }
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   fat_semgive(fs);
@@ -1663,7 +1663,7 @@ static int fat_fstat(FAR const struct file *filep, FAR struct stat *buf)
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -1738,7 +1738,7 @@ static int fat_truncate(FAR struct file *filep, off_t length)
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -1758,7 +1758,7 @@ static int fat_truncate(FAR struct file *filep, off_t length)
     {
       /* Do nothing but say that we did */
 
-      ret = OK;
+      ret = OKK;
     }
   else if (oldsize > length)
     {
@@ -1807,7 +1807,7 @@ static int fat_truncate(FAR struct file *filep, off_t length)
            */
 
           ff->ff_size = length;
-          ret = OK;
+          ret = OKK;
         }
     }
   else
@@ -1825,7 +1825,7 @@ static int fat_truncate(FAR struct file *filep, off_t length)
            */
 
           ff->ff_size = length;
-          ret = OK;
+          ret = OKK;
         }
     }
 
@@ -1865,7 +1865,7 @@ static int fat_readdir(FAR struct inode *mountpt, FAR struct fs_dirent_s *dir)
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -1965,7 +1965,7 @@ static int fat_readdir(FAR struct inode *mountpt, FAR struct fs_dirent_s *dir)
 
       /* Set up the next directory index */
 
-      if (fat_nextdirentry(fs, &dir->u.fat) != OK)
+      if (fat_nextdirentry(fs, &dir->u.fat) != OKK)
         {
           ret = -ENOENT;
           goto errout_with_semaphore;
@@ -1973,7 +1973,7 @@ static int fat_readdir(FAR struct inode *mountpt, FAR struct fs_dirent_s *dir)
     }
 
   fat_semgive(fs);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   fat_semgive(fs);
@@ -2007,7 +2007,7 @@ static int fat_rewinddir(FAR struct inode *mountpt,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -2047,7 +2047,7 @@ static int fat_rewinddir(FAR struct inode *mountpt,
     }
 
   fat_semgive(fs);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   fat_semgive(fs);
@@ -2079,7 +2079,7 @@ static int fat_bind(FAR struct inode *blkdriver, FAR const void *data,
     }
 
   if (blkdriver->u.i_bops->open &&
-      blkdriver->u.i_bops->open(blkdriver) != OK)
+      blkdriver->u.i_bops->open(blkdriver) != OKK)
     {
       return -ENODEV;
     }
@@ -2114,7 +2114,7 @@ static int fat_bind(FAR struct inode *blkdriver, FAR const void *data,
 
   *handle = (FAR void *)fs;
   fat_semgive(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2206,7 +2206,7 @@ static int fat_unbind(FAR void *handle, FAR struct inode **blkdriver,
 
   nxsem_destroy(&fs->fs_sem);
   kmm_free(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2343,7 +2343,7 @@ static int fat_mkdir(FAR struct inode *mountpt, FAR const char *relpath,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -2388,7 +2388,7 @@ static int fat_mkdir(FAR struct inode *mountpt, FAR const char *relpath,
   /* Allocate a directory entry for the new directory in this directory */
 
   ret = fat_allocatedirentry(fs, &dirinfo);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -2521,7 +2521,7 @@ static int fat_mkdir(FAR struct inode *mountpt, FAR const char *relpath,
     }
 
   fat_semgive(fs);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   fat_semgive(fs);
@@ -2600,7 +2600,7 @@ int fat_rename(FAR struct inode *mountpt, FAR const char *oldrelpath,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -2610,7 +2610,7 @@ int fat_rename(FAR struct inode *mountpt, FAR const char *oldrelpath,
    */
 
   ret = fat_finddirentry(fs, &dirinfo, oldrelpath);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* Some error occurred -- probably -ENOENT */
 
@@ -2670,7 +2670,7 @@ int fat_rename(FAR struct inode *mountpt, FAR const char *oldrelpath,
    */
 
   ret = fat_allocatedirentry(fs, &dirinfo);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -2713,7 +2713,7 @@ int fat_rename(FAR struct inode *mountpt, FAR const char *oldrelpath,
     }
 
   fat_semgive(fs);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   fat_semgive(fs);
@@ -2761,7 +2761,7 @@ static int fat_stat_common(FAR struct fat_mountpt_s *fs,
   buf->st_blksize   = fs->fs_fatsecperclus * fs->fs_hwsectorsize;
   buf->st_blocks    = (buf->st_size + buf->st_blksize - 1) / buf->st_blksize;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2833,7 +2833,7 @@ static int fat_stat_root(FAR struct fat_mountpt_s *fs, FAR struct stat *buf)
   buf->st_mode = S_IFDIR | S_IROTH | S_IRGRP | S_IRUSR | S_IWOTH |
                  S_IWGRP | S_IWUSR;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2863,7 +2863,7 @@ static int fat_stat(FAR struct inode *mountpt, FAR const char *relpath,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }

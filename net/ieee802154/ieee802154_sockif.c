@@ -153,7 +153,7 @@ static int ieee802154_sockif_alloc(FAR struct socket *psock)
   /* Save the pre-allocated connection in the socket structure */
 
   psock->s_conn = conn;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -298,7 +298,7 @@ static int ieee802154_connect(FAR struct socket *psock,
       /* Mark the socket as connected. */
 
       psock->s_flags |= _SF_CONNECTED;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -451,7 +451,7 @@ static int ieee802154_bind(FAR struct socket *psock,
   /* Mark the socket bound */
 
   psock->s_flags |= _SF_BOUND;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -513,7 +513,7 @@ static int ieee802154_getsockname(FAR struct socket *psock,
   /* Return the actual size transferred */
 
   *addrlen = copylen;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -575,7 +575,7 @@ static int ieee802154_getpeername(FAR struct socket *psock,
   /* Return the actual size transferred */
 
   *addrlen = copylen;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -795,7 +795,7 @@ static int ieee802154_close(FAR struct socket *psock)
               conn->crefs--;
             }
 
-          return OK;
+          return OKK;
         }
 
       default:

@@ -253,7 +253,7 @@ int up_addrenv_create(size_t textsize, size_t datasize, size_t heapsize,
       /* No address environment... but I suppose that is not an error */
 
       serr("ERROR: npages is zero\n");
-      return OK;
+      return OKK;
     }
 
   /* Allocate a structure in the common .bss to hold information about the
@@ -293,7 +293,7 @@ int up_addrenv_create(size_t textsize, size_t datasize, size_t heapsize,
   *addrenv     = (group_addrenv_t)cbr;
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 
 errout_with_cbr:
   z180_mmu_freecbr(cbr);
@@ -332,7 +332,7 @@ int up_addrenv_destroy(FAR group_addrenv_t *addrenv)
   /* And make the CBR structure available for re-use */
 
   z180_mmu_freecbr(cbr);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -456,7 +456,7 @@ int up_addrenv_select(FAR const group_addrenv_t *addrenv,
 
   outp(Z180_MMU_CBR, cbr->cbr);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -479,7 +479,7 @@ int up_addrenv_select(FAR const group_addrenv_t *addrenv,
 int up_addrenv_restore(FAR const save_addrenv_t *oldenv)
 {
   outp(Z180_MMU_CBR, (uint8_t)*oldenv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -502,7 +502,7 @@ int up_addrenv_coherent(FAR const group_addrenv_t *addrenv)
 {
   /* There are no caches */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -532,7 +532,7 @@ int up_addrenv_clone(FAR const group_addrenv_t *src,
    */
 
   *dest = *src;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -556,7 +556,7 @@ int up_addrenv_attach(FAR struct task_group_s *group, FAR struct tcb_s *tcb)
 {
   /* There is nothing that needs to be done */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -587,5 +587,5 @@ int up_addrenv_detach(FAR struct task_group_s *group, FAR struct tcb_s *tcb)
 {
   /* There is nothing that needs to be done */
 
-  return OK;
+  return OKK;
 }

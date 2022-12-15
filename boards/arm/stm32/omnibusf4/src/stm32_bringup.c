@@ -170,7 +170,7 @@ int stm32_bringup(void)
 #ifdef HAVE_RTC_DRIVER
   FAR struct rtc_lowerhalf_s *lower;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
 #if defined(CONFIG_I2C) && defined(CONFIG_SYSTEM_I2CTOOL)
   stm32_i2ctool();
@@ -182,7 +182,7 @@ int stm32_bringup(void)
    */
 
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -193,7 +193,7 @@ int stm32_bringup(void)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("ERROR: Failed to start USB monitor: %d\n", ret);
       return ret;

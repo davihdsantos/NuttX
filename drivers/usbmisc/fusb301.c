@@ -231,11 +231,11 @@ static int fusb301_putreg(FAR struct fusb301_dev_s *priv, uint8_t regaddr,
   for (retries = 0; retries < FUSB301_I2C_RETRIES; retries++)
     {
       ret = I2C_TRANSFER(priv->i2c, &msg, 1);
-      if (ret == OK)
+      if (ret == OKK)
         {
           fusb301_info("reg:%02X, value:%02X\n", regaddr, regval);
 
-          return OK;
+          return OKK;
         }
       else
         {
@@ -283,7 +283,7 @@ static int fusb301_read_device_id(FAR struct fusb301_dev_s * priv,
     }
 
   *arg = ret;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -296,7 +296,7 @@ static int fusb301_read_device_id(FAR struct fusb301_dev_s * priv,
 
 static int fusb301_clear_interrupts(FAR struct fusb301_dev_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
 
   ret = fusb301_getreg(priv, FUSB301_INTERRUPT_REG);
   if (ret < 0)
@@ -319,7 +319,7 @@ static int fusb301_clear_interrupts(FAR struct fusb301_dev_s *priv)
 static int fusb301_setup(FAR struct fusb301_dev_s *priv,
                          struct fusb301_setup_s *setup)
 {
-  int ret = OK;
+  int ret = OKK;
 
   fusb301_info("drp_tgl:%02X, host_curr:%02X, global_int:%X, mask:%02X\n",
     setup->drp_toggle_timing, setup->host_current, setup->global_int_mask,
@@ -355,7 +355,7 @@ err_out:
 static int fusb301_set_mode(FAR struct fusb301_dev_s *priv,
                             enum fusb301_mode_e mode)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (mode > MODE_DRP_ACC)
     {
@@ -383,7 +383,7 @@ static int fusb301_set_mode(FAR struct fusb301_dev_s *priv,
 static int fusb301_set_state(FAR struct fusb301_dev_s *priv,
                              enum fusb301_manual_e state)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (state > MANUAL_UNATT_SNK)
     {
@@ -421,7 +421,7 @@ static int fusb301_read_status(FAR struct fusb301_dev_s *priv,
     }
 
   *arg = ret;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -445,7 +445,7 @@ static int fusb301_read_devtype(FAR struct fusb301_dev_s *priv,
     }
 
   *arg = ret;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -458,7 +458,7 @@ static int fusb301_read_devtype(FAR struct fusb301_dev_s *priv,
 
 static int fusb301_reset(FAR struct fusb301_dev_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
 
   ret = fusb301_putreg(priv, FUSB301_RESET_REG, RESET_SW_RES);
   if (ret < 0)
@@ -482,7 +482,7 @@ static int fusb301_open(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct fusb301_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   /* Probe device */
 
@@ -520,7 +520,7 @@ static int fusb301_close(FAR struct file *filep)
 
   priv->config->irq_enable(priv->config, false);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -665,7 +665,7 @@ static int fusb301_poll(FAR struct file *filep, FAR struct pollfd *fds, bool set
   FAR struct inode *inode;
   FAR struct fusb301_dev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   DEBUGASSERT(filep && fds);
@@ -794,7 +794,7 @@ static int fusb301_int_handler(int irq, FAR void *context, FAR void *arg)
   fusb301_notify(priv);
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -846,7 +846,7 @@ int fusb301_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
   priv->config->irq_attach(config, fusb301_int_handler, priv);
   priv->config->irq_enable(config, false);
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->devsem);

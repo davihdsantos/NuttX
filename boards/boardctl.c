@@ -100,7 +100,7 @@
 #ifdef CONFIG_BOARDCTL_USBDEVCTRL
 static inline int boardctl_usbdevctrl(FAR struct boardioc_usbdev_ctrl_s *ctrl)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (ctrl->usbdev)
     {
@@ -252,7 +252,7 @@ static inline int boardctl_usbdevctrl(FAR struct boardioc_usbdev_ctrl_s *ctrl)
 #ifdef CONFIG_PM
 static inline int boardctl_pmctrl(FAR struct boardioc_pm_ctrl_s *ctrl)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (ctrl->action)
     {
@@ -496,7 +496,7 @@ int boardctl(unsigned int cmd, uintptr_t arg)
 
          DEBUGASSERT(symdesc != NULL);
          exec_setsymtab(symdesc->symtab, symdesc->nsymbols);
-         ret = OK;
+         ret = OKK;
         }
         break;
 #endif
@@ -518,7 +518,7 @@ int boardctl(unsigned int cmd, uintptr_t arg)
 
          DEBUGASSERT(symdesc != NULL);
          modlib_setsymtab(symdesc->symtab, symdesc->nsymbols);
-         ret = OK;
+         ret = OKK;
         }
         break;
 #endif
@@ -552,7 +552,7 @@ int boardctl(unsigned int cmd, uintptr_t arg)
          DEBUGASSERT(builtin != NULL);
          builtin_setlist(builtin->builtins, builtin->count);
 #endif
-         ret = OK;
+         ret = OKK;
         }
         break;
 #endif
@@ -747,7 +747,7 @@ int boardctl(unsigned int cmd, uintptr_t arg)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LIB_BOARDCTL */

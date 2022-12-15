@@ -97,7 +97,7 @@ int dac_devinit(void)
     initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DAC */

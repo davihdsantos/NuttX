@@ -81,7 +81,7 @@ int fclose(FAR FILE *stream)
        * file.
        */
 
-      ret = OK;
+      ret = OKK;
       if (stream->fs_fd >= 0)
         {
           /* If the stream was opened for writing, then flush the stream */
@@ -144,7 +144,7 @@ int fclose(FAR FILE *stream)
    * EOF.
    */
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       set_errno(errcode);
       return EOF;
@@ -152,5 +152,5 @@ int fclose(FAR FILE *stream)
 
   /* Return success */
 
-  return OK;
+  return OKK;
 }

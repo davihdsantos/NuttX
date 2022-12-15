@@ -135,7 +135,7 @@ int bchlib_setup(const char *blkdev, bool readonly, FAR void **handle)
     }
 
   *handle = bch;
-  return OK;
+  return OKK;
 
 errout_with_bch:
   kmm_free(bch);

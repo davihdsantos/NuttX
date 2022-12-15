@@ -152,7 +152,7 @@ static int bh1750fvi_read16(FAR struct bh1750fvi_dev_s *priv,
   *regval = (uint16_t)((buffer[0]<<8) | (buffer[1]));
 
   sninfo("value: %08x ret: %d\n", *regval, ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -197,7 +197,7 @@ static int bh1750fvi_write8(FAR struct bh1750fvi_dev_s *priv, uint8_t regval)
 
 static int bh1750fvi_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -210,7 +210,7 @@ static int bh1750fvi_open(FAR struct file *filep)
 
 static int bh1750fvi_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -273,7 +273,7 @@ static int bh1750fvi_ioctl(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct bh1750fvi_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

@@ -108,7 +108,7 @@ int aio_error(FAR const struct aiocb *aiocbp)
       return -aiocbp->aio_result;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_FS_AIO */

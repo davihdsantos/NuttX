@@ -176,7 +176,7 @@ static int mxt_attach(FAR const struct mxt_lower_s *lower, mxt_handler_t isr,
       g_mxtinfo.arg = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static void mxt_enable(FAR const struct mxt_lower_s *lower, bool enable)
@@ -212,7 +212,7 @@ static int mxt_interrupt(int irq, FAR void *context, FAR void *arg)
    */
 
   sam_gpioirqdisable(IRQ_MXT_CHG);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -275,7 +275,7 @@ int sam_tsc_setup(int minor)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_MAXTOUCH */

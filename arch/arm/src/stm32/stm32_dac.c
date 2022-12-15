@@ -877,7 +877,7 @@ static void tim_modifyreg(FAR struct stm32_chan_s *chan, int offset,
 static int dac_interrupt(int irq, FAR void *context, FAR void *arg)
 {
 #warning "Missing logic"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -931,7 +931,7 @@ static void dac_reset(FAR struct dac_dev_s *dev)
 static int dac_setup(FAR struct dac_dev_s *dev)
 {
 #warning "Missing logic"
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1071,7 +1071,7 @@ static int dac_send(FAR struct dac_dev_s *dev, FAR struct dac_msg_s *msg)
       tim_modifyreg(chan, STM32_BTIM_EGR_OFFSET, 0, ATIM_EGR_UG);
     }
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1090,7 +1090,7 @@ static int dac_send(FAR struct dac_dev_s *dev, FAR struct dac_msg_s *msg)
 static int dac_ioctl(FAR struct dac_dev_s *dev, int cmd, unsigned long arg)
 {
   FAR struct stm32_chan_s *chan = dev->ad_priv;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1198,7 +1198,7 @@ static int dma_remap(FAR struct stm32_chan_s *chan)
 
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1367,7 +1367,7 @@ static int dac_timinit(FAR struct stm32_chan_s *chan)
   /* Enable the counter */
 
   tim_modifyreg(chan, STM32_BTIM_CR1_OFFSET, 0, ATIM_CR1_CEN);
-  return OK;
+  return OKK;
 }
 #endif
 #endif  /* HAVE_DMA */
@@ -1482,7 +1482,7 @@ static int dac_chaninit(FAR struct stm32_chan_s *chan)
   /* Mark the DAC channel "in-use" */
 
   chan->inuse = 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1509,7 +1509,7 @@ static int dac_blockinit(void)
     {
       /* Yes.. then return success  We only have to do this once */
 
-      return OK;
+      return OKK;
     }
 
   /* Put the entire DAC block in reset state */
@@ -1538,7 +1538,7 @@ static int dac_blockinit(void)
   /* Mark the DAC block as initialized */
 
   g_dacblock.init = 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -474,7 +474,7 @@ static int st7565_putrun(fb_coord_t row, fb_coord_t col,
 
   if (pixlen <= 0 || row > ST7565_YRES)
     {
-      return OK;
+      return OKK;
     }
 
   /* Get the page number.  The range of 64 lines is divided up into eight pages
@@ -577,7 +577,7 @@ static int st7565_putrun(fb_coord_t row, fb_coord_t col,
 
   st7565_deselect(priv);
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -705,7 +705,7 @@ static int st7565_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t * buffer,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -724,7 +724,7 @@ static int st7565_getvideoinfo(FAR struct lcd_dev_s *dev,
         g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres,
         g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -741,7 +741,7 @@ static int st7565_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(dev && pinfo && planeno == 0);
   ginfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -813,7 +813,7 @@ static int st7565_setpower(struct lcd_dev_s *dev, int power)
   st7565_cmddata(priv, false);
   st7565_deselect(priv);
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -872,7 +872,7 @@ static int st7565_setcontrast(struct lcd_dev_s *dev, unsigned int contrast)
   /* Unlock and de-select the device */
 
   st7565_deselect(priv);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************

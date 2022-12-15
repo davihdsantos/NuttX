@@ -227,7 +227,7 @@ ssize_t nxmq_timedreceive(mqd_t mqdes, FAR char *msg, size_t msglen,
 
       /* Handle any time-related errors */
 
-      if (result != OK)
+      if (result != OKK)
         {
           leave_critical_section(flags);
           sched_unlock();

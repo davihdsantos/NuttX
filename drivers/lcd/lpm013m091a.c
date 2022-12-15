@@ -284,7 +284,7 @@ static int lpm013m091a_hwinitialize(FAR struct lpm013m091a_dev_s *dev)
   lcd->sendcmd(lcd, LPM013M091A_DISPON);
   up_mdelay(120);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -345,7 +345,7 @@ static int lpm013m091a_putrun(fb_coord_t row, fb_coord_t col,
 
   lcd->deselect(lcd);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -405,7 +405,7 @@ static int lpm013m091a_getvideoinfo(FAR struct lcd_dev_s *dev,
       lcdinfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
               vinfo->fmt, vinfo->xres, vinfo->yres, vinfo->nplanes);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -439,7 +439,7 @@ static int lpm013m091a_getplaneinfo(FAR struct lcd_dev_s *dev,
 
       lcdinfo("planeno: %d bpp: %d\n", planeno, pinfo->bpp);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -520,7 +520,7 @@ static int lpm013m091a_setpower(FAR struct lcd_dev_s *dev, int power)
 
   priv->power = power;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -602,7 +602,7 @@ FAR struct lcd_dev_s *
 
           ret = lpm013m091a_hwinitialize(priv);
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               return &priv->dev;
             }

@@ -223,7 +223,7 @@ static int imxrt_rdtime(FAR struct rtc_lowerhalf_s *lower,
       return -errcode;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -445,7 +445,7 @@ static int imxrt_cancelalarm(FAR struct rtc_lowerhalf_s *lower, int alarmid)
    */
 
   imxrt_hprtc_alarmdisable();
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -486,7 +486,7 @@ static int imxrt_rdalarm(FAR struct rtc_lowerhalf_s *lower,
 
       /* Convert the one second epoch time to a struct tm */
 
-      ret = OK;
+      ret = OKK;
       if (gmtime_r(&alarm, (FAR struct tm *)alarminfo->time) == 0)
         {
           int errcode = get_errno();

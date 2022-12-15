@@ -97,5 +97,5 @@ int nxflat_verifyheader(const struct nxflat_hdr_s *header)
       return -ENOEXEC;
     }
 
-  return OK;
+  return OKK;
 }

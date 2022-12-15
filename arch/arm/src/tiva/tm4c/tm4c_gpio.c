@@ -854,7 +854,7 @@ int tiva_configgpio(pinconfig_t pinconfig)
 #endif
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

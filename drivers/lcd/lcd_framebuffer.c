@@ -245,7 +245,7 @@ static int lcdfb_update(FAR struct lcdfb_dev_s *priv,
       run += priv->stride;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -305,7 +305,7 @@ static int lcdfb_getplaneinfo(FAR struct fb_vtable_s *vtable, int planeno,
       pinfo->display = priv->display;
       pinfo->bpp     = priv->pinfo.bpp;
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -590,7 +590,7 @@ int up_fbinitialize(int display)
   /* Turn the LCD on at 75% power */
 
   (void)priv->lcd->setpower(priv->lcd, ((3*CONFIG_LCD_MAXPOWER + 3)/4));
-  return OK;
+  return OKK;
 
 errout_with_lcd:
 #ifndef CONFIG_LCD_EXTERNINIT

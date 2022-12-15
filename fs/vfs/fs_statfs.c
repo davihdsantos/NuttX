@@ -60,7 +60,7 @@ static int statpseudofs(FAR struct inode *inode, FAR struct statfs *buf)
   memset(buf, 0, sizeof(struct statfs));
   buf->f_type    = PROC_SUPER_MAGIC;
   buf->f_namelen = NAME_MAX;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -88,7 +88,7 @@ int statfs(FAR const char *path, FAR struct statfs *buf)
 {
   struct inode_search_s desc;
   FAR struct inode *inode;
-  int ret = OK;
+  int ret = OKK;
 
   /* Sanity checks */
 
@@ -169,7 +169,7 @@ int statfs(FAR const char *path, FAR struct statfs *buf)
 
   inode_release(inode);
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
   /* Failure conditions always set the errno appropriately */
 

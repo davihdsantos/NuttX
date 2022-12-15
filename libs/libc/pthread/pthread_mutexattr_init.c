@@ -65,7 +65,7 @@
 
 int pthread_mutexattr_init(FAR pthread_mutexattr_t *attr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   linfo("attr=0x%p\n", attr);
 

@@ -108,7 +108,7 @@ int tms570_gio_initialize(void)
 
   putreg32(0xffffffff, TMS570_GIO_ENACLR);
   putreg32(0xffffffff, TMS570_GIO_LVLCLR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -229,7 +229,7 @@ int tms570_configgio(gio_pinset_t cfgset)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -326,6 +326,6 @@ int tms570_dumpgio(uint32_t pinset, const char *msg)
         getreg32(base + TMS570_GIO_PULDIS_OFFSET), getreg32(base + TMS570_GIO_PSL_OFFSET));
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif

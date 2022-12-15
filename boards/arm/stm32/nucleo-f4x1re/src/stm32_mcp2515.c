@@ -142,7 +142,7 @@ int mcp2515_interrupt(int irq, FAR void *context, FAR void *arg)
       priv->handler(&priv->config, priv->arg);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int mcp2515_attach(FAR struct mcp2515_config_s *state,
@@ -166,7 +166,7 @@ static int mcp2515_attach(FAR struct mcp2515_config_s *state,
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -247,7 +247,7 @@ int stm32_mcp2515initialize(FAR const char *devpath)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_CAN_MCP2515 */

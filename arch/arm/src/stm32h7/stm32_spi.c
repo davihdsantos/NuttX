@@ -1013,7 +1013,7 @@ static int spi_dmarxwait(FAR struct stm32_spidev_s *priv)
 
   if (priv->config == SIMPLEX_TX)
     {
-      return OK;
+      return OKK;
     }
 
   /* Take the semaphore (perhaps waiting).  If the result is zero, then the
@@ -1028,9 +1028,9 @@ static int spi_dmarxwait(FAR struct stm32_spidev_s *priv)
        * calling thread were canceled.
        */
 
-      DEBUGASSERT(ret == OK || ret == -ECANCELED);
+      DEBUGASSERT(ret == OKK || ret == -ECANCELED);
     }
-  while (priv->rxresult == 0 && ret == OK);
+  while (priv->rxresult == 0 && ret == OKK);
 
   return ret;
 }
@@ -1053,7 +1053,7 @@ static int spi_dmatxwait(FAR struct stm32_spidev_s *priv)
 
   if (priv->config == SIMPLEX_RX)
     {
-      return OK;
+      return OKK;
     }
 
   /* Take the semaphore (perhaps waiting).  If the result is zero, then the
@@ -1068,9 +1068,9 @@ static int spi_dmatxwait(FAR struct stm32_spidev_s *priv)
        * calling thread were canceled.
        */
 
-      DEBUGASSERT(ret == OK || ret == -ECANCELED);
+      DEBUGASSERT(ret == OKK || ret == -ECANCELED);
     }
-  while (priv->txresult == 0 && ret == OK);
+  while (priv->txresult == 0 && ret == OKK);
 
   return ret;
 }
@@ -1366,7 +1366,7 @@ static int spi_lock(FAR struct spi_dev_s *dev, bool lock)
 
 static inline int spi_enable(FAR struct stm32_spidev_s *priv, bool state)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (state == true)
     {
@@ -2164,7 +2164,7 @@ static int spi_trigger(FAR struct spi_dev_s *dev)
   spi_dmatxstart(priv);
   spi_enable(priv, true);
   spi_modifyreg(priv, STM32_SPI_CR1_OFFSET, 0, SPI_CR1_CSTART);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -2306,7 +2306,7 @@ static int spi_pm_prepare(FAR struct pm_callback_s *cb, int domain,
       break;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2442,7 +2442,7 @@ static void spi_bus_initialize(struct stm32_spidev_s *priv)
   /* Register to receive power management callbacks */
 
   ret = pm_register(&priv->pm_cb);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 #endif
 

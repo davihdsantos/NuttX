@@ -213,7 +213,7 @@ static int onewire_pm_prepare(FAR struct pm_callback_s *cb, int domain,
       break;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -258,7 +258,7 @@ void onewire_sem_wait(FAR struct onewire_master_s *master)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
 
@@ -673,7 +673,7 @@ int onewire_addslave(FAR struct onewire_master_s *master,
 
   master->nslaves++;
   slave->master = master;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -693,7 +693,7 @@ int onewire_removeslave(FAR struct onewire_master_s *master,
 
   master->nslaves--;
   slave->master = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -765,5 +765,5 @@ int onewire_uninitialize(FAR struct onewire_master_s *master)
 
   onewire_sem_destroy(&master->devsem);
   kmm_free(master);
-  return OK;
+  return OKK;
 }

@@ -104,13 +104,13 @@
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef HAVE_USBMONITOR
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to start USB monitor: %d\n", ret);
     }
@@ -130,7 +130,7 @@ int stm32_bringup(void)
   /* Initialize and register the qencoder driver */
 
   ret = stm32_qencoder_initialize("/dev/qe0", CONFIG_STM32F3DISCO_QETIMER);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",

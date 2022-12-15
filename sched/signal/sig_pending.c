@@ -77,7 +77,7 @@ int sigpending(FAR sigset_t *set)
   if (set)
     {
       *set = nxsig_pendingset(rtcb);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

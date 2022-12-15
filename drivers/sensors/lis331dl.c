@@ -225,7 +225,7 @@ static int lis331dl_readregs(FAR struct lis331dl_dev_s *dev)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -267,7 +267,7 @@ FAR struct lis331dl_dev_s *lis331dl_init(FAR struct i2c_master_s *i2c,
         {
           /* Copy LIS331DL registers to our private structure and power-up device */
 
-          if (lis331dl_readregs(dev) == OK && lis331dl_powerup(dev) == OK)
+          if (lis331dl_readregs(dev) == OKK && lis331dl_powerup(dev) == OKK)
             {
               /* Normal exit point */
 
@@ -293,7 +293,7 @@ int lis331dl_deinit(FAR struct lis331dl_dev_s * dev)
   lis331dl_powerdown(dev);
   kmm_free(dev);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -309,7 +309,7 @@ int lis331dl_powerup(FAR struct lis331dl_dev_s * dev)
 
   if (lis331dl_access(dev, ST_LIS331DL_CTRL_REG1, &dev->cr1, -3) == 3)
     {
-      return OK;
+      return OKK;
     }
 
   return ERROR;
@@ -327,7 +327,7 @@ int lis331dl_powerdown(FAR struct lis331dl_dev_s * dev)
 
   if (lis331dl_access(dev, ST_LIS331DL_CTRL_REG1, &dev->cr1, -3) == 3)
    {
-     return OK;
+     return OKK;
    }
 
   return ERROR;
@@ -345,7 +345,7 @@ int lis331dl_setconversion(FAR struct lis331dl_dev_s * dev, bool full, bool fast
 
   if (lis331dl_access(dev, ST_LIS331DL_CTRL_REG1, &dev->cr1, -1) == 1)
     {
-      return OK;
+      return OKK;
     }
 
   return ERROR;

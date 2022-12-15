@@ -136,7 +136,7 @@ static int elf_symname(FAR struct elf_loadinfo_s *loadinfo,
         {
           /* Yes, the buffer contains a NUL terminator. */
 
-          return OK;
+          return OKK;
         }
 
       /* No.. then we have to read more */
@@ -151,7 +151,7 @@ static int elf_symname(FAR struct elf_loadinfo_s *loadinfo,
 
   /* We will not get here */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -194,7 +194,7 @@ int elf_findsymtab(FAR struct elf_loadinfo_s *loadinfo)
       return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -282,7 +282,7 @@ int elf_symvalue(FAR struct elf_loadinfo_s *loadinfo, FAR Elf32_Sym *sym,
         /* st_value already holds the correct value */
 
         binfo("SHN_ABS: st_value=%08lx\n", (long)sym->st_value);
-        return OK;
+        return OKK;
       }
 
     case SHN_UNDEF:
@@ -337,5 +337,5 @@ int elf_symvalue(FAR struct elf_loadinfo_s *loadinfo, FAR Elf32_Sym *sym,
       break;
     }
 
-  return OK;
+  return OKK;
 }

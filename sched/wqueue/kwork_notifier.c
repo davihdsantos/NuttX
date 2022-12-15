@@ -272,7 +272,7 @@ int work_notifier_teardown(int key)
       /* Free the notification */
 
       kmm_free(notifier);
-      ret = OK;
+      ret = OKK;
     }
 
   (void)nxsem_post(&g_notifier_sem);

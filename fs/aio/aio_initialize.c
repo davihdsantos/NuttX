@@ -170,7 +170,7 @@ void aio_lock(void)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
 
@@ -241,7 +241,7 @@ FAR struct aio_container_s *aioc_alloc(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 

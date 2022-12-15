@@ -66,5 +66,5 @@
 int posix_spawn_file_actions_init(FAR posix_spawn_file_actions_t *file_actions)
 {
   *file_actions = NULL;
-  return OK;
+  return OKK;
 }

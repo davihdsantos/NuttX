@@ -217,7 +217,7 @@ static int lsm303agr_readreg8(FAR struct lsm303agr_dev_s *priv,
     }
 
   sninfo("addr: %02x value: %02x\n", regaddr, *regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -260,7 +260,7 @@ static int lsm303agr_writereg8(FAR struct lsm303agr_dev_s *priv,
     }
 
   sninfo("addr: %02x value: %02x\n", regaddr, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -299,7 +299,7 @@ static int lsm303agr_modifyreg8(FAR struct lsm303agr_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -391,7 +391,7 @@ static int lsm303agr_sensor_config(FAR struct lsm303agr_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -452,7 +452,7 @@ static int lsm303agr_sensor_start(FAR struct lsm303agr_dev_s *priv)
   lsm303agr_writereg8(priv, LSM303AGR_CFG_REG_A_M, 0x8C);
   g_magnetofactor = 1.5;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -473,7 +473,7 @@ static int lsm303agr_sensor_stop(FAR struct lsm303agr_dev_s *priv)
 
   /* Stop magneto: not implemented [datasheet] */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -860,7 +860,7 @@ static int lsm303agr_selftest(FAR struct lsm303agr_dev_s *priv, uint32_t mode)
       break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -956,7 +956,7 @@ static int lsm303agr_sensor_read(FAR struct lsm303agr_dev_s *priv,
   sensor_data->m_y_data = y_valg;
   sensor_data->m_z_data = z_valg;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -970,7 +970,7 @@ static int lsm303agr_sensor_read(FAR struct lsm303agr_dev_s *priv,
 static int lsm303agr_open(FAR struct file *filep)
 {
   sninfo("Device LSM303AGR opened!!\r\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -983,7 +983,7 @@ static int lsm303agr_open(FAR struct file *filep)
 
 static int lsm303agr_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1248,7 +1248,7 @@ static int lsm303agr_register(FAR const char *devpath,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

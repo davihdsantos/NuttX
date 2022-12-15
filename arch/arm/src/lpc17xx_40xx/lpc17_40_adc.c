@@ -184,7 +184,7 @@ static int adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -311,7 +311,7 @@ static int adc_setup(FAR struct adc_dev_s *dev)
   int i;
 
   int ret = irq_attach(priv->irq, adc_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       for (i = 0; i < 8; i++)
         {
@@ -445,7 +445,7 @@ static int adc_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 
 #else
 
@@ -468,7 +468,7 @@ static int adc_interrupt(int irq, void *context, FAR void *arg)
       priv->count[ch]  = 0;
     }
 
-  return OK;
+  return OKK;
 
 #endif
 #else /* CONFIG_LPC17_40_ADC_BURSTMODE */
@@ -629,7 +629,7 @@ static int adc_interrupt(int irq, void *context, FAR void *arg)
 
 //lpc17_40_gpiowrite(LPCXPRESSO_GPIO0_21, 0); /* Reset pin P0.21 */
 //leave_critical_section(saved_state);
-  return OK;
+  return OKK;
 #endif /* CONFIG_LPC17_40_ADC_BURSTMODE */
 }
 

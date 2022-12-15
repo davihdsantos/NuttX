@@ -823,7 +823,7 @@ static int up_setup(struct uart_dev_s *dev)
 
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -873,7 +873,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, up_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the USART
@@ -965,7 +965,7 @@ static int up_interrupt(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -982,7 +982,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {
@@ -1081,7 +1081,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
 
         /* Decode baud. */
 
-        ret = OK;
+        ret = OKK;
         baud = cfgetispeed(termiosp);
 
         /* Decode number of bits */
@@ -1135,7 +1135,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
 #endif
         /* Verify that all settings are valid before committing */
 
-        if (ret == OK)
+        if (ret == OKK)
           {
             /* Commit */
 

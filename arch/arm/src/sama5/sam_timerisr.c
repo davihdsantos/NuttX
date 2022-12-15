@@ -106,7 +106,7 @@ static int sam_timerisr(int irq, uint32_t *regs, void *arg)
       nxsched_process_timer();
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

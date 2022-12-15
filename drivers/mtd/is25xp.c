@@ -285,7 +285,7 @@ static inline int is25xp_readid(struct is25xp_dev_s *priv)
            priv->nsectors    = IS25_IS25LP064_NSECTORS;
            priv->pageshift   = IS25_IS25LP064_PAGE_SHIFT;
            priv->npages      = IS25_IS25LP064_NPAGES;
-           return OK;
+           return OKK;
         }
       else if (capacity == IS25_IS25LP128_CAPACITY)
         {
@@ -295,7 +295,7 @@ static inline int is25xp_readid(struct is25xp_dev_s *priv)
            priv->nsectors    = IS25_IS25LP128_NSECTORS;
            priv->pageshift   = IS25_IS25LP128_PAGE_SHIFT;
            priv->npages      = IS25_IS25LP128_NPAGES;
-           return OK;
+           return OKK;
         }
     }
 
@@ -513,7 +513,7 @@ static inline int is25xp_bulkerase(struct is25xp_dev_s *priv)
   is25xp_waitwritecomplete(priv);
 
   finfo("Return: OK\n");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -901,7 +901,7 @@ static int is25xp_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 
-              ret = OK;
+              ret = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -983,7 +983,7 @@ FAR struct mtd_dev_s *is25xp_initialize(FAR struct spi_dev_s *dev)
       /* Identify the FLASH chip and get its capacity */
 
       ret = is25xp_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

@@ -70,5 +70,5 @@ int clock_ticks2time(sclock_t ticks, FAR struct timespec *reltime)
   reltime->tv_sec  = ticks / TICK_PER_SEC;
   remainder        = ticks - TICK_PER_SEC * reltime->tv_sec;
   reltime->tv_nsec = remainder * NSEC_PER_TICK;
-  return OK;
+  return OKK;
 }

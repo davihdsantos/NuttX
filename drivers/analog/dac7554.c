@@ -161,7 +161,7 @@ static void dac7554_reset(FAR struct dac_dev_s *dev)
 
 static int  dac7554_setup(FAR struct dac_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

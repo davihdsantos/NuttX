@@ -169,7 +169,7 @@ int daemon(int nochdir, int noclose)
        }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_BUILD_FLAT=y || !__KERNEL__ */

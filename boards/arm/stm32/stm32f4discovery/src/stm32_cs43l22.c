@@ -168,7 +168,7 @@ static int cs43l22_attach(FAR const struct cs43l22_lower_s *lower,
       g_cs43l22info.arg = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static bool cs43l22_enable(FAR const struct cs43l22_lower_s *lower, bool enable)
@@ -219,7 +219,7 @@ static int cs43l22_interrupt(int irq, FAR void *context)
    happen.
 
    TODO: stm32_pioirqdisable(IRQ_INT_CS43L22);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -366,7 +366,7 @@ int stm32_cs43l22_initialize(int minor)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 
   /* Error exits.  Unfortunately there is no mechanism in place now to
    * recover resources from most errors on initialization failures.

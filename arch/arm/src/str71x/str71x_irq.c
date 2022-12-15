@@ -214,7 +214,7 @@ int up_prioritize_irq(int irq, int priority)
       reg32 &= ~STR71X_EICSIR_SIPLMASK;
       reg32 |= priority;
       putreg32(reg32, addr);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

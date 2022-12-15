@@ -115,7 +115,7 @@ int shm_group_initialize(FAR struct task_group_s *group)
       return -ENOMEM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

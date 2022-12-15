@@ -351,7 +351,7 @@ int stm32_configgpio(uint32_t cfgset)
           /* Its an alternate function pin... we can return early */
 
           leave_critical_section(flags);
-          return OK;
+          return OKK;
         }
     }
   else
@@ -378,7 +378,7 @@ int stm32_configgpio(uint32_t cfgset)
           /* Neither... we can return early */
 
           leave_critical_section(flags);
-          return OK;
+          return OKK;
         }
     }
 
@@ -405,7 +405,7 @@ int stm32_configgpio(uint32_t cfgset)
   putreg32(regval, regaddr);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -637,7 +637,7 @@ int stm32_configgpio(uint32_t cfgset)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -258,7 +258,7 @@ static int can_setup(FAR struct socket *psock, int protocol)
       /* Attach the connection instance to the socket */
 
       psock->s_conn = conn;
-      return OK;
+      return OKK;
     }
 
   return -EPROTONOSUPPORT;
@@ -366,7 +366,7 @@ static int can_bind(FAR struct socket *psock,
 #endif
 
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -569,7 +569,7 @@ static int can_poll_local(FAR struct socket *psock, FAR struct pollfd *fds,
   FAR struct can_conn_s *conn;
   FAR struct can_poll_s *info;
   FAR struct devif_callback_s *cb;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(psock != NULL && psock->s_conn != NULL);
   conn = (FAR struct can_conn_s *)psock->s_conn;
@@ -817,7 +817,7 @@ static ssize_t can_sendmsg(FAR struct socket *psock, FAR struct msghdr *msg,
 static int can_close(FAR struct socket *psock)
 {
   FAR struct can_conn_s *conn = psock->s_conn;
-  int ret = OK;
+  int ret = OKK;
 
   /* Perform some pre-close operations for the CAN socket type. */
 

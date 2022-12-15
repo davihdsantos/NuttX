@@ -145,7 +145,7 @@ int ipv4_getpeername(FAR struct socket *psock, FAR struct sockaddr *addr,
 
   /* Return success */
 
-  return OK;
+  return OKK;
 #else
   return -EOPNOTSUPP;
 #endif

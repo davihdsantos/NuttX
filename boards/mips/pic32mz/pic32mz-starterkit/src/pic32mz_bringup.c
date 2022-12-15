@@ -98,7 +98,7 @@ static int nsh_sdinitialize(void)
 
   syslog(LOG_INFO, "Successfully bound SPI port %d to MMC/SD slot %d\n",
          PIC32MZ_MMCSDSPIPORTNO, PIC32MZ_MMCSLOTNO);
-  return OK;
+  return OKK;
 
 errout:
   return ret;

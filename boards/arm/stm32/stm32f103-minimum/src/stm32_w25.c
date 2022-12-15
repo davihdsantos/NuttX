@@ -297,5 +297,5 @@ int stm32_w25initialize(int minor)
 
 #endif /* CONFIG_RAMMTD && CONFIG_STM32F103MINIMUM_RAMMTD */
 
-  return OK;
+  return OKK;
 }

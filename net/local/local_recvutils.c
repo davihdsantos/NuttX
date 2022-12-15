@@ -117,7 +117,7 @@ int local_fifo_read(FAR struct file *filep, FAR uint8_t *buf, size_t *len)
         }
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout:
   *len -= remaining;
@@ -242,7 +242,7 @@ int local_getaddr(FAR struct local_conn_s *conn, FAR struct sockaddr *addr,
   /* Return the Unix domain address size */
 
   *addrlen = totlen;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_LOCAL */

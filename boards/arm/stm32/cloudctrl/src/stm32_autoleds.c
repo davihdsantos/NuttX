@@ -337,7 +337,7 @@ static int led_pm_prepare(struct pm_callback_s *cb, int domain,
    * We always accept the state change by returning OK.
    */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -388,7 +388,7 @@ void up_ledpminitialize(void)
   /* Register to receive power management callbacks */
 
   int ret = pm_register(&g_ledscb);
-  if (ret != OK)
+  if (ret != OKK)
   {
       board_autoled_on(LED_ASSERTION);
     }

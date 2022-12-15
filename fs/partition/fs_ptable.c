@@ -102,7 +102,7 @@ int parse_ptable_partition(FAR struct partition_state_s *state,
   FAR struct ptable_s *ptable;
   size_t blkpererase;
   size_t block;
-  int ret = OK;
+  int ret = OKK;
 
   /* Allocate one erase block memory */
 

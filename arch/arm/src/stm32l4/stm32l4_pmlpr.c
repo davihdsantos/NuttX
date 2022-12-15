@@ -103,5 +103,5 @@ int stm32l4_pmlpr(void)
   regval |= PWR_CR1_LPR;
   putreg32(regval, STM32L4_PWR_CR1);
 
-  return OK;
+  return OKK;
 }

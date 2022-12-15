@@ -147,7 +147,7 @@ int board_app_initialize(uintptr_t arg)
 
 #ifdef HAVE_USBHOST
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -166,5 +166,5 @@ int board_app_initialize(uintptr_t arg)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

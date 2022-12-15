@@ -102,7 +102,7 @@ int nxtk_bitmapwindow(NXTKWINDOW hfwnd, FAR const struct nxgl_rect_s *dest,
 
   if (nxgl_nullrect(&clipdest))
     {
-      return OK;
+      return OKK;
     }
 
   /* Now, move the bitmap origin so that it is relative to the containing
@@ -122,5 +122,5 @@ int nxtk_bitmapwindow(NXTKWINDOW hfwnd, FAR const struct nxgl_rect_s *dest,
   /* Then copy the bitmap */
 
   nx_bitmap((NXWINDOW)hfwnd, &clipdest, src, &wndorigin, stride);
-  return OK;
+  return OKK;
 }

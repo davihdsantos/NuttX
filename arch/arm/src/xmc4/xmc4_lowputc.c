@@ -432,6 +432,6 @@ int xmc4_uart_configure(enum usic_channel_e channel,
     }
 
   putreg32(regval, base + XMC4_USIC_INPR_OFFSET);
-  return OK;
+  return OKK;
 }
 #endif

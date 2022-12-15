@@ -81,7 +81,7 @@ int shutdown(int sockfd, int how)
 {
   /* REVISIT: Not implemented. */
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET */

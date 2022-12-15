@@ -260,7 +260,7 @@ reuse_buffer:
 
   stream->fs_flags    = flags;
   lib_give_semaphore(stream);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   lib_give_semaphore(stream);

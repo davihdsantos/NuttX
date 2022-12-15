@@ -83,7 +83,7 @@ static int stm32l4_freerun_handler(int irq, FAR void *context, void *arg)
   freerun->overflow++;
 
   STM32L4_TIM_ACKINT(freerun->tch, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -153,7 +153,7 @@ int stm32l4_freerun_initialize(FAR struct stm32l4_freerun_s *freerun, int chan,
   STM32L4_TIM_ACKINT(freerun->tch, 0);
   STM32L4_TIM_ENABLEINT(freerun->tch, 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -247,7 +247,7 @@ int stm32l4_freerun_counter(FAR struct stm32l4_freerun_s *freerun,
   tmrinfo("usec=%llu ts=(%u, %lu)\n",
           usec, (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -282,7 +282,7 @@ int stm32l4_freerun_uninitialize(FAR struct stm32l4_freerun_s *freerun)
   stm32l4_tim_deinit(freerun->tch);
   freerun->tch = NULL;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32L4_FREERUN */

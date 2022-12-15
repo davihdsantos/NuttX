@@ -140,7 +140,7 @@ int fstatfs(int fd, FAR struct statfs *buf)
       memset(buf, 0, sizeof(struct statfs));
       buf->f_type    = PROC_SUPER_MAGIC;
       buf->f_namelen = NAME_MAX;
-      ret            = OK;
+      ret            = OKK;
     }
 
   /* Check if the fstat operation was successful */
@@ -149,7 +149,7 @@ int fstatfs(int fd, FAR struct statfs *buf)
     {
       /* Successfully statfs'ed the file */
 
-      return OK;
+      return OKK;
     }
 
 errout:

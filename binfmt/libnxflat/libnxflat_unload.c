@@ -93,5 +93,5 @@ int nxflat_unload(FAR struct nxflat_loadinfo_s *loadinfo)
   /* Release the D-Space address environment */
 
   nxflat_addrenv_free(loadinfo);
-  return OK;
+  return OKK;
 }

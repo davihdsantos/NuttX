@@ -90,7 +90,7 @@ static int fat_checkfsinfo(struct fat_mountpt_s *fs)
         {
           fs->fs_fsifreecount = FSI_GETFREECOUNT(fs->fs_buffer);
           fs->fs_fsinextfree  = FSI_GETNXTFREE(fs->fs_buffer);
-          return OK;
+          return OKK;
         }
     }
 
@@ -275,7 +275,7 @@ static int fat_checkbootrecord(struct fat_mountpt_s *fs)
                         DIRSEC_NDIRS(fs);
   fs->fs_fsifreecount = 0xffffffff;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -530,7 +530,7 @@ int fat_mount(struct fat_mountpt_s *fs, bool writeable)
 
   inode = fs->fs_blkdriver;
   if (!inode || !inode->u.i_bops || !inode->u.i_bops->geometry ||
-      inode->u.i_bops->geometry(inode, &geo) != OK || !geo.geo_available)
+      inode->u.i_bops->geometry(inode, &geo) != OKK || !geo.geo_available)
     {
       ret = -ENODEV;
       goto errout;
@@ -578,7 +578,7 @@ int fat_mount(struct fat_mountpt_s *fs, bool writeable)
    */
 
   ret = fat_checkbootrecord(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* The contents of sector 0 is not a boot record.  It could be have
        * DOS partitions, however.  Get the offset into the partition table.
@@ -657,7 +657,7 @@ int fat_mount(struct fat_mountpt_s *fs, bool writeable)
   if (fs->fs_type == FSTYPE_FAT32)
     {
       ret = fat_checkfsinfo(fs);
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto errout_with_buffer;
         }
@@ -682,7 +682,7 @@ int fat_mount(struct fat_mountpt_s *fs, bool writeable)
   finfo("\tFSI free count       %d\n", fs->fs_fsifreecount);
   finfo("\t    next free        %d\n", fs->fs_fsinextfree);
 
-  return OK;
+  return OKK;
 
 errout_with_buffer:
   fat_io_free(fs->fs_buffer, fs->fs_hwsectorsize);
@@ -724,7 +724,7 @@ int fat_checkmount(struct fat_mountpt_s *fs)
               int errcode = inode->u.i_bops->geometry(inode, &geo);
               if (errcode == OK && geo.geo_available && !geo.geo_mediachanged)
                 {
-                  return OK;
+                  return OKK;
                 }
             }
         }
@@ -758,7 +758,7 @@ int fat_hwread(struct fat_mountpt_s *fs, uint8_t *buffer,  off_t sector,
                                                        sector, nsectors);
           if (nsectorsread == nsectors)
             {
-              ret = OK;
+              ret = OKK;
             }
           else if (nsectorsread < 0)
             {
@@ -792,7 +792,7 @@ int fat_hwwrite(struct fat_mountpt_s *fs, uint8_t *buffer, off_t sector,
 
           if (nsectorswritten == nsectors)
             {
-              ret = OK;
+              ret = OKK;
             }
           else if (nsectorswritten < 0)
             {
@@ -1115,7 +1115,7 @@ int fat_putcluster(struct fat_mountpt_s *fs, uint32_t clusterno,
       /* Mark the modified sector as "dirty" and return success */
 
       fs->fs_dirty = true;
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -1169,7 +1169,7 @@ int fat_removechain(struct fat_mountpt_s *fs, uint32_t cluster)
       cluster = nextcluster;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1427,7 +1427,7 @@ int fat_nextdirentry(struct fat_mountpt_s *fs, struct fs_fatdir_s *dir)
   /* Save the new index into dir->fd_currsector */
 
   dir->fd_index = ndx;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1593,7 +1593,7 @@ int fat_dirshrink(struct fat_mountpt_s *fs, FAR uint8_t *direntry,
       remaining  -= clustersize;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1765,7 +1765,7 @@ int fat_dirextend(FAR struct fat_mountpt_s *fs, FAR struct fat_file_s *ff,
   /* The truncation has completed without error.  Update the file size */
 
   ff->ff_size = length;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1819,7 +1819,7 @@ int fat_fscacheflush(struct fat_mountpt_s *fs)
       fs->fs_dirty = false;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1865,7 +1865,7 @@ int fat_fscacheread(struct fat_mountpt_s *fs, off_t sector)
       fs->fs_currentsector = sector;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1901,7 +1901,7 @@ int fat_ffcacheflush(struct fat_mountpt_s *fs, struct fat_file_s *ff)
       ff->ff_bflags &= ~FFBUFF_DIRTY;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1948,7 +1948,7 @@ int fat_ffcacheread(struct fat_mountpt_s *fs, struct fat_file_s *ff, off_t secto
       ff->ff_bflags |= FFBUFF_VALID;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1981,7 +1981,7 @@ int fat_ffcacheinvalidate(struct fat_mountpt_s *fs, struct fat_file_s *ff)
       ff->ff_cachesector = 0;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2051,7 +2051,7 @@ int fat_nfreeclusters(struct fat_mountpt_s *fs, off_t *pfreeclusters)
   if (fs->fs_fsifreecount <= fs->fs_nclusters - 2)
     {
       *pfreeclusters = fs->fs_fsifreecount;
-      return OK;
+      return OKK;
     }
 
   /* Otherwise, we will have to count the number of free clusters */
@@ -2137,7 +2137,7 @@ int fat_nfreeclusters(struct fat_mountpt_s *fs, off_t *pfreeclusters)
     }
 
   *pfreeclusters = nfreeclusters;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2175,7 +2175,7 @@ int fat_currentsector(struct fat_mountpt_s *fs, struct fat_file_s *ff,
       finfo("position=%d currentsector=%d sectorsincluster=%d\n",
             position, ff->ff_currentsector, ff->ff_sectorsincluster);
 
-      return OK;
+      return OKK;
     }
 
   /* The position does not lie within the file */

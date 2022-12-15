@@ -465,7 +465,7 @@ int altmdm_sys_waitflag(FAR struct altmdm_sys_flag_s *handle,
                         uint32_t wait_pattern, uint32_t wait_mode,
                         FAR uint32_t * pattern, uint32_t timeout_ms)
 {
-  int ret = OK;
+  int ret = OKK;
   int ret2;
   int l_errno;
   struct timespec abs_time;
@@ -498,7 +498,7 @@ int altmdm_sys_waitflag(FAR struct altmdm_sys_flag_s *handle,
       /* Get current time. */
 
       ret = clock_gettime(CLOCK_REALTIME, &curr_time);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -547,7 +547,7 @@ int altmdm_sys_waitflag(FAR struct altmdm_sys_flag_s *handle,
 
               leave_critical_section(flags);
 
-              ret = OK;
+              ret = OKK;
               break;
             }
 
@@ -578,7 +578,7 @@ int altmdm_sys_waitflag(FAR struct altmdm_sys_flag_s *handle,
 
               leave_critical_section(flags);
 
-              ret = OK;
+              ret = OKK;
               break;
             }
 
@@ -681,7 +681,7 @@ int altmdm_sys_clearflag(FAR struct altmdm_sys_flag_s *handle,
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -710,7 +710,7 @@ int altmdm_sys_referflag(FAR struct altmdm_sys_flag_s *handle,
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -743,7 +743,7 @@ timer_t altmdm_sys_starttimer(int first_ms, int interval_ms,
   sigaddset(&mask, MY_TIMER_SIGNAL);
 
   ret = sigprocmask(SIG_UNBLOCK, &mask, NULL);
-  if (ret != OK)
+  if (ret != OKK)
     {
       m_err("sigprocmask() failed:%d\n", ret);
       return NULL;
@@ -755,7 +755,7 @@ timer_t altmdm_sys_starttimer(int first_ms, int interval_ms,
   sigdelset(&sa.sa_mask, MY_TIMER_SIGNAL);
 
   ret = sigaction(MY_TIMER_SIGNAL, &sa, NULL);
-  if (ret != OK)
+  if (ret != OKK)
     {
       m_err("sigaction() failed:%d\n", ret);
       return NULL;
@@ -767,7 +767,7 @@ timer_t altmdm_sys_starttimer(int first_ms, int interval_ms,
   sev.sigev_value.sival_ptr = ptr_param;
 
   ret = timer_create(CLOCK_REALTIME, &sev, &timerid);
-  if (ret != OK)
+  if (ret != OKK)
     {
       m_err("timer_create() failed:%d\n", ret);
       return NULL;
@@ -779,7 +779,7 @@ timer_t altmdm_sys_starttimer(int first_ms, int interval_ms,
   timer.it_interval.tv_nsec = (interval_ms % 1000) * 1000 * 1000;
 
   ret = timer_settime(timerid, 0, &timer, NULL);
-  if (ret != OK)
+  if (ret != OKK)
     {
       m_err("timer_settime() failed:%d\n", ret);
       return NULL;
@@ -807,7 +807,7 @@ int altmdm_sys_restarttimer(timer_t timerid, int first_ms, int interval_ms)
   timer.it_interval.tv_nsec = (interval_ms % 1000) * 1000 * 1000;
 
   ret = timer_settime(timerid, 0, &timer, NULL);
-  if (ret != OK)
+  if (ret != OKK)
     {
       m_err("timer_settime() failed:%d\n", ret);
       return ret;

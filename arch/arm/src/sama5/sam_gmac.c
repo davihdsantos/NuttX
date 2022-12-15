@@ -607,7 +607,7 @@ static int sam_buffer_initialize(struct sam_gmac_s *priv)
               ((uintptr_t)priv->rxbuffer & 7) == 0 &&
               ((uintptr_t)priv->txdesc   & 7) == 0 &&
               ((uintptr_t)priv->txbuffer & 7) == 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -770,7 +770,7 @@ static int sam_transmit(struct sam_gmac_s *priv)
       sam_putreg(priv, SAM_GMAC_IDR, GMAC_INT_RCOMP);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1099,7 +1099,7 @@ static int sam_recvframe(struct sam_gmac_s *priv)
                   return -E2BIG;
                 }
 
-              return OK;
+              return OKK;
             }
         }
 
@@ -1177,7 +1177,7 @@ static void sam_receive(struct sam_gmac_s *priv)
    * GMAC frames.
    */
 
-  while (sam_recvframe(priv) == OK)
+  while (sam_recvframe(priv) == OKK)
     {
       sam_dumppacket("Received packet", dev->d_buf, dev->d_len);
 
@@ -1656,7 +1656,7 @@ static int sam_gmac_interrupt(int irq, void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->irqwork, sam_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1873,7 +1873,7 @@ static int sam_ifup(struct net_driver_s *dev)
 
   priv->ifup = true;
   up_enable_irq(SAM_IRQ_GMAC);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1920,7 +1920,7 @@ static int sam_ifdown(struct net_driver_s *dev)
 
   priv->ifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1994,7 +1994,7 @@ static int sam_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, sam_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2195,7 +2195,7 @@ static int sam_addmac(struct net_driver_s *dev, const uint8_t *mac)
   regval |= GMAC_NCFGR_MTIHEN;   /* Enable multicast matching */
   sam_putreg(priv, SAM_GMAC_NCFGR, regval);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2277,7 +2277,7 @@ static int sam_rmmac(struct net_driver_s *dev, const uint8_t *mac)
       sam_putreg(priv, SAM_GMAC_NCFGR, regval);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2333,7 +2333,7 @@ static int sam_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
           struct mii_ioctl_notify_s *req = (struct mii_ioctl_notify_s *)((uintptr_t)arg);
 
           ret = phy_notify_subscribe(dev->d_ifname, req->pid, &req->event);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable PHY link up/down interrupts */
 
@@ -2347,7 +2347,7 @@ static int sam_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
         {
           struct mii_ioctl_data_s *req = (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = priv->phyaddr;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2477,7 +2477,7 @@ static int sam_phyintenable(struct sam_gmac_s *priv)
    */
 
   ret = sam_phyread(priv, priv->phyaddr, GMII_KSZ90x1_ICS, &phyval);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable link up/down interrupts */
 
@@ -2589,7 +2589,7 @@ static int sam_phywait(struct sam_gmac_s *priv)
 
       if ((sam_getreg(priv, SAM_GMAC_NSR) & GMAC_NSR_IDLE) != 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -2646,7 +2646,7 @@ static int sam_phyreset(struct sam_gmac_s *priv)
         }
       else if ((mcr & GMII_MCR_RESET) == 0)
         {
-          ret = OK;
+          ret = OKK;
           break;
         }
     }
@@ -2691,10 +2691,10 @@ static int sam_phyfind(struct sam_gmac_s *priv, uint8_t *phyaddr)
   candidate = *phyaddr;
 
   ret = sam_phyread(priv, candidate, GMII_PHYID1, &phyval);
-  if (ret == OK && phyval == GMII_OUI_MSB)
+  if (ret == OKK && phyval == GMII_OUI_MSB)
     {
       *phyaddr = candidate;
-      ret = OK;
+      ret = OKK;
     }
 
   /* The current address does not work... try another */
@@ -2713,15 +2713,15 @@ static int sam_phyfind(struct sam_gmac_s *priv, uint8_t *phyaddr)
           /* Try reading the PHY ID from the candidate PHY address */
 
           ret = sam_phyread(priv, candidate, GMII_PHYID1, &phyval);
-          if (ret == OK && phyval == GMII_OUI_MSB)
+          if (ret == OKK && phyval == GMII_OUI_MSB)
             {
-              ret = OK;
+              ret = OKK;
               break;
             }
         }
     }
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       ninfo("  PHYID1: %04x PHY addr: %d\n", phyval, candidate);
       *phyaddr = candidate;
@@ -2785,7 +2785,7 @@ static int sam_phyread(struct sam_gmac_s *priv, uint8_t phyaddr,
   /* Return the PHY data */
 
   *phyval = (uint16_t)(sam_getreg(priv, SAM_GMAC_MAN) & GMAC_MAN_DATA_MASK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2837,7 +2837,7 @@ static int sam_phywrite(struct sam_gmac_s *priv, uint8_t phyaddr,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3272,7 +3272,7 @@ static int sam_phyinit(struct sam_gmac_s *priv)
   /* We have a PHY address.  Reset the PHY */
 
   sam_phyreset(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3724,7 +3724,7 @@ static int sam_gmac_configure(struct sam_gmac_s *priv)
            GMAC_INT_DRQFT | GMAC_INT_SFT | GMAC_INT_PDRQFR | GMAC_INT_PDRSFR |
            GMAC_INT_PDRQFT | GMAC_INT_PDRSFT;
   sam_putreg(priv, SAM_GMAC_IER, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

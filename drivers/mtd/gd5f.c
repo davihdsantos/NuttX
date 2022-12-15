@@ -296,7 +296,7 @@ static int gd5f_readid(FAR struct gd5f_dev_s *priv)
 
       priv->sectorshift = GD5F_SECTOR_SHIFT;
       priv->pageshift   = GD5F_PAGE_SHIFT;
-      return OK;
+      return OKK;
     }
 
   return -ENODEV;
@@ -729,7 +729,7 @@ static int gd5f_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 
-              ret = OK;
+              ret = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                        geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -751,7 +751,7 @@ static int gd5f_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
           *result =
               (priv->eccstatus & GD5F_FEATURE_ECC_MASK) >> GD5F_FEATURE_ECC_OFFSET;
 
-          ret = OK;
+          ret = OKK;
         }
       break;
 
@@ -873,7 +873,7 @@ FAR struct mtd_dev_s *gd5f_initialize(FAR struct spi_dev_s *dev,
       /* Identify the FLASH chip and get its capacity */
 
       ret = gd5f_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

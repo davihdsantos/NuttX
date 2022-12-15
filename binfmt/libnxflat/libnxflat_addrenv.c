@@ -166,7 +166,7 @@ int nxflat_addrenv_alloc(FAR struct nxflat_loadinfo_s *loadinfo, size_t envsize)
   loadinfo->dspace = dspace;
   dspace->crefs    = 1;
   dspace->region   = (FAR uint8_t *)vdata;
-  return OK;
+  return OKK;
 
 errout_with_addrenv:
   (void)up_addrenv_destroy(&loadinfo->addrenv);
@@ -187,7 +187,7 @@ errout_with_dspace:
 
   loadinfo->dspace = dspace;
   dspace->crefs    = 1;
-  return OK;
+  return OKK;
 #endif
 }
 

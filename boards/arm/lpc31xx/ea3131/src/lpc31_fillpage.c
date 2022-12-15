@@ -261,7 +261,7 @@ static inline void lpc31_initsrc(void)
       /* Then bind the SDIO interface to the SD driver */
 
       ret = mmcsd_slotinitialize(CONFIG_EA3131_PAGING_MINOR, sdio);
-      DEBUGASSERT(ret == OK);
+      DEBUGASSERT(ret == OKK);
 
       /* Then let's guess and say that there is a card in the slot.
        * (We are basically jodido anyway if there is no card in the slot).
@@ -274,7 +274,7 @@ static inline void lpc31_initsrc(void)
       snprintf(devname, 16, "/dev/mmcsd%d", CONFIG_EA3131_PAGING_MINOR);
       ret = mount(devname, CONFIG_EA3131_PAGING_MOUNTPT, "vfat", MS_RDONLY,
                   NULL);
-      DEBUGASSERT(ret == OK);
+      DEBUGASSERT(ret == OKK);
 
 #endif /* CONFIG_EA3131_PAGING_SDSLOT */
 
@@ -447,7 +447,7 @@ int up_fillpage(FAR struct tcb_s *tcb, FAR void *vpage)
 
   nbytes = nx_read(g_pgsrc.fd, vpage, PAGESIZE);
   DEBUGASSERT(nbytes == PAGESIZE);
-  return OK;
+  return OKK;
 
 #elif defined(CONFIG_PAGING_M25PX) || defined(CONFIG_PAGING_AT45DB) /* !CONFIG_PAGING_BINPATH */
 
@@ -465,7 +465,7 @@ int up_fillpage(FAR struct tcb_s *tcb, FAR void *vpage)
 
   nbytes = MTD_READ(g_pgsrc.mtd, offset, PAGESIZE, (FAR uint8_t *)vpage);
   DEBUGASSERT(nbytes == PAGESIZE);
-  return OK;
+  return OKK;
 
 #else /* !CONFIG_PAGING_BINPATH && !CONFIG_PAGING_M25PX && !CONFIG_PAGING_AT45DB */
 

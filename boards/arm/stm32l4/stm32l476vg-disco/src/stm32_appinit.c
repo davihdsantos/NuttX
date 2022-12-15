@@ -233,7 +233,7 @@ FAR struct mtd_dev_s *mtd_temp;
       /* Configure the device with no partition support */
 
       ret = smart_initialize(N25QXXX_SMART_MINOR, g_mtd_fs, NULL);
-      if (ret != OK)
+      if (ret != OKK)
         {
           _err("ERROR: Failed to initialize SmartFS: %d\n", ret);
         }
@@ -297,7 +297,7 @@ FAR struct mtd_dev_s *mtd_temp;
    */
 
   ret = stm32l4_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       udbg("ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -308,14 +308,14 @@ FAR struct mtd_dev_s *mtd_temp;
   /* Start the USB Monitor */
 
   ret = usbmonitor_start(0, NULL);
-  if (ret != OK)
+  if (ret != OKK)
     {
       udbg("ERROR: Failed to start USB monitor: %d\n", ret);
       return ret;
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_LIB_BOARDCTL */
 
@@ -360,7 +360,7 @@ int board_ioctl(unsigned int cmd, uintptr_t arg)
         return -EINVAL;
     }
 
-    return OK;
+    return OKK;
 }
 #endif
 
@@ -373,6 +373,6 @@ int board_uniqueid(uint8_t *uniqueid)
     }
 
   stm32l4_get_uniqueid(uniqueid);
-  return OK;
+  return OKK;
 }
 #endif

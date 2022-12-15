@@ -76,7 +76,7 @@ static void  *g_callback_arg;
 
 static int stm32l4_exti_wakeup_isr(int irq, void *context, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Dispatch the interrupt to the handler */
 
@@ -149,5 +149,5 @@ int stm32l4_exti_wakeup(bool risingedge, bool fallingedge, bool event,
               func ? 0 : EXTI1_RTC_WAKEUP,
               func ? EXTI1_RTC_WAKEUP : 0);
 
-  return OK;
+  return OKK;
 }

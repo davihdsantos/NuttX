@@ -177,7 +177,7 @@ int mkdir(const char *pathname, mode_t mode)
   /* Directory successfully created */
 
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
 errout_with_inode:
   inode_release(inode);

@@ -162,7 +162,7 @@ static int adc_bind(FAR struct adc_dev_s *dev,
 {
   FAR struct ltc1867l_dev_s *priv = (FAR struct ltc1867l_dev_s *)dev->ad_priv;
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -191,7 +191,7 @@ static void adc_reset(FAR struct adc_dev_s *dev)
 
 static int adc_setup(FAR struct adc_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -235,7 +235,7 @@ static int adc_ioctl(FAR struct adc_dev_s *dev, int cmd, unsigned long arg)
   uint16_t command;
   uint16_t data;
   int32_t dataToPost;
-  int ret = OK;
+  int ret = OKK;
 
   if (cmd == ANIOC_TRIGGER)
     {

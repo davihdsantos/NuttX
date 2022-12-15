@@ -234,7 +234,7 @@ static void lis3mdl_read_measurement_data(FAR struct lis3mdl_dev_s *dev)
   /* Aquire the semaphore before the data is copied */
 
   int ret = nxsem_wait(&dev->datasem);
-  if (ret != OK)
+  if (ret != OKK)
     {
       snerr("ERROR: Could not aquire dev->datasem: %d\n", ret);
       return;
@@ -363,7 +363,7 @@ static int lis3mdl_interrupt_handler(int irq, FAR void *context)
     }
   else
     {
-      return OK;
+      return OKK;
     }
 }
 
@@ -450,7 +450,7 @@ static int lis3mdl_open(FAR struct file *filep)
   lis3mdl_read_register(priv, LIS3MDL_STATUS_REG, &reg_content);
   sninfo("STATUS_REG = %04x\n", reg_content);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -468,7 +468,7 @@ static int lis3mdl_close(FAR struct file *filep)
 
   lis3mdl_reset(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -535,7 +535,7 @@ static ssize_t lis3mdl_write(FAR struct file *filep, FAR const char *buffer,
 
 static int lis3mdl_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -632,7 +632,7 @@ int lis3mdl_register(FAR const char *devpath, FAR struct spi_dev_s *spi,
   priv->flink    = g_lis3mdl_list;
   g_lis3mdl_list = priv;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_SENSORS_LIS3MDL */

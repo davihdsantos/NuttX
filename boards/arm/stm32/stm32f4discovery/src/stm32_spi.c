@@ -253,7 +253,7 @@ int stm32_spi1cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 
       (void)stm32_gpiowrite(STM32_LCD_RS, !cmd);
 
-      return OK;
+      return OKK;
     }
 #endif
 #if defined(CONFIG_LCD_UG2864AMBAG01) || defined(CONFIG_LCD_UG2864HSWEG01) || \
@@ -274,7 +274,7 @@ int stm32_spi1cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 # if defined(CONFIG_LCD_UG2864HSWEG01) || defined(CONFIG_LCD_SSD1351)
       (void)stm32_gpiowrite(GPIO_OLED_DC, !cmd);
 # endif
-      return OK;
+      return OKK;
     }
 #endif
 

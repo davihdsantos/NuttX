@@ -86,7 +86,7 @@ static int hcs12_mapirq(int irq, uint16_t *regaddr, uint8_t *pin)
         {
           *regaddr = HCS12_PIM_PORTG_IE;
           *pin     = irq - HCC12_IRQ_PGFIRST;
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -97,7 +97,7 @@ static int hcs12_mapirq(int irq, uint16_t *regaddr, uint8_t *pin)
         {
           *regaddr = HCS12_PIM_PORTH_IE;
           *pin     = irq - HCC12_IRQ_PHFIRST;
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -114,7 +114,7 @@ static int hcs12_mapirq(int irq, uint16_t *regaddr, uint8_t *pin)
 
           *regaddr = HCS12_PIM_PORTJ_IE;
           *pin     = pjpin;
-          return OK;
+          return OKK;
         }
 #endif
     }
@@ -177,7 +177,7 @@ static int hcs12_interrupt(uint16_t base, int irq0, uint8_t valid, void *context
           irq++;
         }
     }
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_HCS12_PORTG_INTS
@@ -255,7 +255,7 @@ void hcs12_gpioirqenable(int irq)
   uint16_t regaddr;
   uint8_t  pin;
 
-  if (hcs12_mapirq(irq, &regaddr, &pin) == OK)
+  if (hcs12_mapirq(irq, &regaddr, &pin) == OKK)
     {
        irqstate_t flags  = enter_critical_section();
        uint8_t    regval = getreg8(regaddr);
@@ -280,7 +280,7 @@ void hcs12_gpioirqdisable(int irq)
   uint16_t regaddr;
   uint8_t  pin;
 
-  if (hcs12_mapirq(irq, &regaddr, &pin) == OK)
+  if (hcs12_mapirq(irq, &regaddr, &pin) == OKK)
     {
        irqstate_t flags  = enter_critical_section();
        uint8_t    regval = getreg8(regaddr);

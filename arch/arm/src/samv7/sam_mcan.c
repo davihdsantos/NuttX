@@ -1381,7 +1381,7 @@ static void mcan_dev_lock(FAR struct sam_mcan_s *priv)
   do
     {
       ret = nxsem_wait(&priv->locksem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1549,7 +1549,7 @@ static void mcan_buffer_reserve(FAR struct sam_mcan_s *priv)
 
       ret = nxsem_wait(&priv->txfsem);
       leave_critical_section(flags);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret < 0);
 }
@@ -1973,7 +1973,7 @@ static int mcan_del_extfilter(FAR struct sam_mcan_s *priv, int ndx)
   *extfilter   = 0;
 
   mcan_dev_unlock(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2221,7 +2221,7 @@ static int mcan_del_stdfilter(FAR struct sam_mcan_s *priv, int ndx)
   *stdfilter = 0;
 
   mcan_dev_unlock(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2278,7 +2278,7 @@ static int mcan_start_busoff_recovery_sequence(FAR struct sam_mcan_s *priv)
   mcan_putreg(priv, SAM_MCAN_CCCR_OFFSET, regval);
 
   mcan_dev_unlock(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2412,7 +2412,7 @@ static int mcan_setup(FAR struct can_dev_s *dev)
   up_enable_irq(config->irq0);
   up_enable_irq(config->irq1);
   mcan_dev_unlock(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2608,7 +2608,7 @@ static int mcan_ioctl(FAR struct can_dev_s *dev, int cmd, unsigned long arg)
           brp          = ((regval & MCAN_BTP_BRP_MASK) >> MCAN_BTP_BRP_SHIFT) + 1;
           bt->bt_baud  = SAMV7_MCANCLK_FREQUENCY / brp /
                          (bt->bt_tseg1 + bt->bt_tseg2 + 1);
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2674,7 +2674,7 @@ static int mcan_ioctl(FAR struct can_dev_s *dev, int cmd, unsigned long arg)
           /* Reset the MCAN */
 
           mcan_reset(dev);
-          ret = OK;
+          ret = OKK;
 
           /* If we have previously been setup, then setup again */
 
@@ -2690,7 +2690,7 @@ static int mcan_ioctl(FAR struct can_dev_s *dev, int cmd, unsigned long arg)
            * activity was lost.  Should we disable TX interrupts?
            */
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               mcan_putreg(priv, SAM_MCAN_IE_OFFSET, ie & ~priv->txints);
             }
@@ -2976,7 +2976,7 @@ static int mcan_send(FAR struct can_dev_s *dev, FAR struct can_msg_s *msg)
    */
 
   (void)can_txdone(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3981,7 +3981,7 @@ static int mcan_hw_initialize(struct sam_mcan_s *priv)
   regval  = mcan_getreg(priv, SAM_MCAN_CCCR_OFFSET);
   regval &= ~MCAN_CCCR_INIT;
   mcan_putreg(priv, SAM_MCAN_CCCR_OFFSET, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

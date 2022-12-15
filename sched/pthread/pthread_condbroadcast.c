@@ -68,7 +68,7 @@
 
 int pthread_cond_broadcast(FAR pthread_cond_t *cond)
 {
-  int ret = OK;
+  int ret = OKK;
   int sval;
 
   sinfo("cond=0x%p\n", cond);
@@ -88,7 +88,7 @@ int pthread_cond_broadcast(FAR pthread_cond_t *cond)
 
       /* Get the current value of the semaphore */
 
-      if (nxsem_getvalue((FAR sem_t *)&cond->sem, &sval) != OK)
+      if (nxsem_getvalue((FAR sem_t *)&cond->sem, &sval) != OKK)
         {
           ret = EINVAL;
         }

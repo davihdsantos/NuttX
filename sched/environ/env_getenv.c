@@ -77,7 +77,7 @@ FAR char *getenv(FAR const char *name)
   FAR struct task_group_s *group;
   FAR char *pvar;
   FAR char *pvalue = NULL;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify that a string was passed */
 

@@ -69,7 +69,7 @@ int clock_gettime(clockid_t clock_id, struct timespec *tp)
 {
   struct timespec ts;
   uint32_t carry;
-  int ret = OK;
+  int ret = OKK;
 
   sinfo("clock_id=%d\n", clock_id);
   DEBUGASSERT(tp != NULL);
@@ -116,7 +116,7 @@ int clock_gettime(clockid_t clock_id, struct timespec *tp)
       ret = clock_timekeeping_get_wall_time(tp);
 #else
       ret = clock_systimespec(&ts);
-      if (ret == OK)
+      if (ret == OKK)
         {
           irqstate_t flags;
 

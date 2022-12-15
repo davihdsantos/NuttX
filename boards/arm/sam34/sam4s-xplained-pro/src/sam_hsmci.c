@@ -117,7 +117,7 @@ static int sam_hsmci_cardetect_int(int irq, void *regs, FAR void *arg)
       sdio_mediachange(g_hsmci.hsmci, inserted);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -156,7 +156,7 @@ int sam_hsmci_initialize(void)
       /* Now bind the SDIO interface to the MMC/SD driver */
 
       ret = mmcsd_slotinitialize(CONFIG_NSH_MMCSDMINOR, g_hsmci.hsmci);
-      if (ret != OK)
+      if (ret != OKK)
         {
           ferr("ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n", ret);
           return ret;
@@ -190,7 +190,7 @@ int sam_hsmci_initialize(void)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

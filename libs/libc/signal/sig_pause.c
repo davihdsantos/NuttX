@@ -65,7 +65,7 @@ int sigpause(int signo)
 
   sched_lock();
   ret = sigprocmask(SIG_SETMASK, NULL, &set);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Remove the 'signo' from the set of blocked signals */
 
@@ -74,7 +74,7 @@ int sigpause(int signo)
 
   /* Let sigsuspend do the rest of the job */
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       ret = sigsuspend(&set);
     }

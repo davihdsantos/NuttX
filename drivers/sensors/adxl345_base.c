@@ -96,7 +96,7 @@ static const struct file_operations g_adxl345fops =
 
 static int adxl345_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -109,7 +109,7 @@ static int adxl345_open(FAR struct file *filep)
 
 static int adxl345_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -343,7 +343,7 @@ static int adxl345_checkid(FAR struct adxl345_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

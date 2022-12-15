@@ -181,7 +181,7 @@ static int netlink_setup(FAR struct socket *psock, int protocol)
       /* Attach the connection instance to the socket */
 
       psock->s_conn = conn;
-      return OK;
+      return OKK;
     }
 
   return -EPROTONOSUPPORT;
@@ -281,7 +281,7 @@ static int netlink_bind(FAR struct socket *psock,
   conn->groups    = nladdr->nl_groups;
 
   psock->s_flags |= _SF_BOUND;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -332,7 +332,7 @@ static int netlink_getsockname(FAR struct socket *psock,
     }
 
   *addrlen = sizeof(struct sockaddr_nl);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -703,7 +703,7 @@ static ssize_t netlink_recvfrom(FAR struct socket *psock, FAR void *buf,
 static int netlink_close(FAR struct socket *psock)
 {
   FAR struct netlink_conn_s *conn = psock->s_conn;
-  int ret = OK;
+  int ret = OKK;
 
   /* Perform some pre-close operations for the NETLINK socket type. */
 

@@ -328,7 +328,7 @@ static int dns_send_query(int sd, FAR const char *name,
       return -errcode;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -539,7 +539,7 @@ static int dns_recv_response(int sd, FAR union dns_addr_u *addr, int *naddr,
 
   nameptr += sizeof(struct dns_question_s);
 
-  ret = OK;
+  ret = OKK;
   naddr_read = 0;
 
   for (; nanswers > 0; nanswers--)
@@ -647,7 +647,7 @@ static int dns_recv_response(int sd, FAR union dns_addr_u *addr, int *naddr,
     {
       ret = -EADDRNOTAVAIL;
     }
-  else if (naddr_read > 0 && ret != OK)
+  else if (naddr_read > 0 && ret != OKK)
     {
       nwarn("Got an IP, but further parse returned %d\n", ret);
     }
@@ -922,7 +922,7 @@ int dns_query(int sd, FAR const char *hostname, FAR union dns_addr_u *addr,
     {
       /* The lookup was successful */
 
-      ret = OK;
+      ret = OKK;
     }
   else if (ret == 0)
     {

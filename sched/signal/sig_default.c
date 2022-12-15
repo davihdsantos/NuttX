@@ -635,5 +635,5 @@ int nxsig_default_initialize(FAR struct tcb_s *tcb)
       nxsig_setup_default_action(group, &g_defactions[i]);
     }
 
-  return OK;
+  return OKK;
 }

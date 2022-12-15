@@ -69,7 +69,7 @@
 int stm32_lsm303agr_initialize(char *devpath)
 {
   FAR struct i2c_master_s *i2c;
-  int ret = OK;
+  int ret = OKK;
 
   sninfo("INFO: Initializing LMS303AGR sensor over I2C\n");
 

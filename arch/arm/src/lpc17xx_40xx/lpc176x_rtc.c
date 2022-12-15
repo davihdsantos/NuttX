@@ -184,7 +184,7 @@ static int rtc_setup(void)
   /* Enable counters */
 
   putreg32((uint32_t)0x01, LPC17_40_RTC_CCR);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -208,7 +208,7 @@ static int rtc_resume(void)
 
 #ifdef CONFIG_RTC_ALARM
 #endif
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -230,7 +230,7 @@ static int rtc_resume(void)
 static int rtc_interrupt(int irq, void *context, FAR void *arg)
 {
 #warning "Missing logic"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -263,7 +263,7 @@ int up_rtc_initialize(void)
 
 #ifdef CONFIG_RTC_ALARM
   ret = irq_attach(LPC17_40_IRQ_RTC, rtc_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(LPC17_40_IRQ_RTC);
     }
@@ -285,7 +285,7 @@ int up_rtc_initialize(void)
 
   g_rtc_enabled = true;
   rtc_dumpregs("After Initialization");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -338,7 +338,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
   tp->tm_year = ((getreg32(LPC17_40_RTC_YEAR) & RTC_YEAR_MASK)-1900);
 
   rtc_dumptime(tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -374,7 +374,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
   putreg32((((newtime.tm_mon)+1) & RTC_MONTH_MASK), LPC17_40_RTC_MONTH);
   putreg32(((newtime.tm_year) & RTC_YEAR_MASK)+1900, LPC17_40_RTC_YEAR);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -411,7 +411,7 @@ int lpc17_40_rtc_setalarm(FAR const struct timespec *tp, alarmcb_t callback)
       /* The set the alarm */
 #warning "Missing logic"
 
-      ret = OK;
+      ret = OKK;
     }
   return ret;
 }

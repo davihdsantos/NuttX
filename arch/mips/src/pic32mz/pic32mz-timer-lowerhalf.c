@@ -295,7 +295,7 @@ static int pic32mz_timer_handler(int irq, FAR void *context, FAR void *arg)
       pic32mz_stop((struct timer_lowerhalf_s *)lower);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -329,7 +329,7 @@ static int pic32mz_start(FAR struct timer_lowerhalf_s *lower)
 
       priv->started = true;
 
-      return OK;
+      return OKK;
     }
 
   /* Return EBUSY to indicate that the timer was already running */
@@ -363,7 +363,7 @@ static int pic32mz_stop(FAR struct timer_lowerhalf_s *lower)
       PIC32MZ_TIMER_SETISR(priv->timer, NULL, NULL);
       priv->started = false;
 
-      return OK;
+      return OKK;
     }
 
   /* Return ENODEV to indicate that the timer was not running */
@@ -421,7 +421,7 @@ static int  pic32mz_getstatus(FAR struct timer_lowerhalf_s *lower,
 
   status->timeleft = pic32mz_ticks2usec(priv, remainingticks);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -488,7 +488,7 @@ static int pic32mz_settimeout(FAR struct timer_lowerhalf_s *lower,
       PIC32MZ_TIMER_SETPERIOD(priv->timer, priv->ticks);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -588,7 +588,7 @@ static int  pic32mz_maxtimeout(FAR struct timer_lowerhalf_s *lower,
 
   *maxtimeout = pic32mz_ticks2usec(priv, priv->maxticks);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -708,7 +708,7 @@ int pic32mz_timer_initialize(FAR const char *devpath, int timer)
 
   tmrinfo("Timer registered successfuly\n");
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_TIMER && CONFIG_PIC32MZ_TIMER */

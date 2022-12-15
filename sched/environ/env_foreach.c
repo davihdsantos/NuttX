@@ -79,7 +79,7 @@ int env_foreach(FAR struct task_group_s *group, env_foreach_t cb, FAR void *arg)
 {
   FAR char *ptr;
   FAR char *end;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify input parameters */
 

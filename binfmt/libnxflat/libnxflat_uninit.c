@@ -80,6 +80,6 @@ int nxflat_uninit(struct nxflat_loadinfo_s *loadinfo)
     {
       close(loadinfo->filfd);
     }
-  return OK;
+  return OKK;
 }
 

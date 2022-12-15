@@ -1207,7 +1207,7 @@ static int lpc31_qh_foreach(struct lpc31_qh_s *qh, uint32_t **bp, foreach_qh_t h
       qh = next;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1288,7 +1288,7 @@ static int lpc31_qtd_foreach(struct lpc31_qh_s *qh, foreach_qtd_t handler, void 
       qtd = next;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1314,7 +1314,7 @@ static int lpc31_qtd_discard(struct lpc31_qtd_s *qtd, uint32_t **bp, void *arg)
   /* Then free the qTD */
 
   lpc31_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1371,7 +1371,7 @@ static int lpc31_qtd_invalidate(struct lpc31_qtd_s *qtd, uint32_t **bp, void *ar
 
   up_invalidate_dcache((uintptr_t)&qtd->hw,
                        (uintptr_t)&qtd->hw + sizeof(struct ehci_qtd_s));
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1416,7 +1416,7 @@ static int lpc31_qtd_flush(struct lpc31_qtd_s *qtd, uint32_t **bp, void *arg)
   up_flush_dcache((uintptr_t)&qtd->hw,
                   (uintptr_t)&qtd->hw + sizeof(struct ehci_qtd_s));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1522,7 +1522,7 @@ static void lpc31_qh_print(struct lpc31_qh_s *qh)
 static int lpc31_qtd_dump(struct lpc31_qtd_s *qtd, uint32_t **bp, void *arg)
 {
   lpc31_qtd_print(qtd);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1599,7 +1599,7 @@ static int lpc31_ioc_setup(struct lpc31_rhport_s *rhport, struct lpc31_epinfo_s 
       epinfo->callback = NULL;   /* No asynchronous callback */
       epinfo->arg      = NULL;
 #endif
-      ret              = OK;     /* We are good to go */
+      ret              = OKK;     /* We are good to go */
     }
 
   leave_critical_section(flags);
@@ -1879,7 +1879,7 @@ static int lpc31_qtd_addbpl(struct lpc31_qtd_s *qtd, const void *buffer, size_t 
       return -EFBIG;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2310,7 +2310,7 @@ static int lpc31_async_setup(struct lpc31_rhport_s *rhport,
   /* Add the new QH to the head of the asynchronous queue list */
 
   lpc31_qh_enqueue(&g_asynchead, qh);
-  return OK;
+  return OKK;
 
   /* Clean-up after an error */
 
@@ -2447,7 +2447,7 @@ static int lpc31_intr_setup(struct lpc31_rhport_s *rhport,
 
   regval |= EHCI_USBCMD_PSEN;
   lpc31_putreg(regval, &HCOR->usbcmd);
-  return OK;
+  return OKK;
 
   /* Clean-up after an error */
 
@@ -2582,7 +2582,7 @@ static inline int lpc31_ioc_async_setup(struct lpc31_rhport_s *rhport,
       epinfo->result   = -EBUSY;   /* Transfer in progress */
       epinfo->callback = callback; /* Asynchronous callback */
       epinfo->arg      = arg;      /* Argument that accompanies the callback */
-      ret              = OK;       /* We are good to go */
+      ret              = OKK;       /* We are good to go */
     }
 
   leave_critical_section(flags);
@@ -2629,7 +2629,7 @@ static void lpc31_asynch_completion(struct lpc31_epinfo_s *epinfo)
 
   epinfo->callback = NULL;
   epinfo->arg      = NULL;
-  epinfo->result   = OK;
+  epinfo->result   = OKK;
   epinfo->iocwait  = false;
 
   /* Then perform the callback.  Provide the number of bytes successfully
@@ -2693,7 +2693,7 @@ static int lpc31_qtd_ioccheck(struct lpc31_qtd_s *qtd, uint32_t **bp, void *arg)
   /* Release this QH by returning it to the free list */
 
   lpc31_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2749,7 +2749,7 @@ static int lpc31_qh_ioccheck(struct lpc31_qh_s *qh, uint32_t **bp, void *arg)
        * zero to visit the next QH in the list.
        */
       *bp = &qh->hw.hlp;
-      return OK;
+      return OKK;
     }
 
   /* Remove all active, attached qTD structures from the inactive QH */
@@ -2784,7 +2784,7 @@ static int lpc31_qh_ioccheck(struct lpc31_qh_s *qh, uint32_t **bp, void *arg)
           /* Report success */
 
           epinfo->status  = 0;
-          epinfo->result  = OK;
+          epinfo->result  = OKK;
         }
       else
         {
@@ -2852,7 +2852,7 @@ static int lpc31_qh_ioccheck(struct lpc31_qh_s *qh, uint32_t **bp, void *arg)
       *bp = &qh->hw.hlp;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2890,7 +2890,7 @@ static int lpc31_qtd_cancel(struct lpc31_qtd_s *qtd, uint32_t **bp, void *arg)
   /* Release this QH by returning it to the free list */
 
   lpc31_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_USBHOST_ASYNCH */
 
@@ -2926,7 +2926,7 @@ static int lpc31_qh_cancel(struct lpc31_qh_s *qh, uint32_t **bp, void *arg)
     {
       /* No... keep looking */
 
-      return OK;
+      return OKK;
     }
 
   /* Disable both the asynchronous and period schedules */
@@ -3403,7 +3403,7 @@ static int lpc31_ehci_interrupt(int irq, FAR void *context, FAR void *arg)
       lpc31_putreg(usbsts & EHCI_INT_ALLINTS, &HCOR->usbsts);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3470,7 +3470,7 @@ static int lpc31_wait(FAR struct usbhost_connection_s *conn,
 
               usbhost_vtrace2(EHCI_VTRACE2_MONWAKEUP,
                               rhpndx + 1, rhport->connected);
-              return OK;
+              return OKK;
             }
         }
 
@@ -3491,7 +3491,7 @@ static int lpc31_wait(FAR struct usbhost_connection_s *conn,
 
           usbhost_vtrace2(EHCI_VTRACE2_MONWAKEUP,
                           connport->port + 1, connport->connected);
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -3769,7 +3769,7 @@ static int lpc31_rh_enumerate(FAR struct usbhost_connection_s *conn,
       DEBUGASSERT((regval & USBDEV_PRTSC1_PSPD_MASK) == USBDEV_PRTSC1_PSPD_LS);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int lpc31_enumerate(FAR struct usbhost_connection_s *conn,
@@ -3859,7 +3859,7 @@ static int lpc31_ep0configure(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep
   epinfo->maxpacket = maxpacketsize;
 
   lpc31_givesem(&g_ehci.exclsem);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3944,7 +3944,7 @@ static int lpc31_epalloc(FAR struct usbhost_driver_s *drvr,
    */
 
   *ep = (usbhost_ep_t)epinfo;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3978,7 +3978,7 @@ static int lpc31_epfree(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
   /* Free the container */
 
   kmm_free(epinfo);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4028,7 +4028,7 @@ static int lpc31_alloc(FAR struct usbhost_driver_s *drvr,
   if (*buffer)
     {
       *maxlen = LPC31_EHCI_BUFSIZE;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -4064,7 +4064,7 @@ static int lpc31_free(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffer)
   /* No special action is require to free the transfer/descriptor buffer memory */
 
   kmm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -4140,7 +4140,7 @@ static int lpc31_iofree(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffer)
   /* No special action is require to free the I/O buffer memory */
 
   kumm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4210,7 +4210,7 @@ static int lpc31_ctrlin(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
   /* Set the request for the IOC event well BEFORE initiating the transfer. */
 
   ret = lpc31_ioc_setup(rhport, ep0info);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4304,7 +4304,7 @@ static ssize_t lpc31_transfer(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep
   /* Set the request for the IOC event well BEFORE initiating the transfer. */
 
   ret = lpc31_ioc_setup(rhport, epinfo);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4408,7 +4408,7 @@ static int lpc31_asynch(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep,
   /* Set the request for the callback well BEFORE initiating the transfer. */
 
   ret = lpc31_ioc_async_setup(rhport, epinfo, callback, arg);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4449,7 +4449,7 @@ static int lpc31_asynch(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep,
   /* The transfer is in progress */
 
   lpc31_givesem(&g_ehci.exclsem);
-  return OK;
+  return OKK;
 
 errout_with_callback:
   epinfo->callback = NULL;
@@ -4540,7 +4540,7 @@ static int lpc31_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
   if (!iocwait)
 #endif
     {
-      ret = OK;
+      ret = OKK;
       goto errout_with_sem;
     }
 
@@ -4567,7 +4567,7 @@ static int lpc31_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
             {
               /* Claim that we successfully cancelled the transfer */
 
-              ret = OK;
+              ret = OKK;
               goto exit_terminate;
             }
         }
@@ -4588,7 +4588,7 @@ static int lpc31_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
                * cancelled the transfer.
                */
 
-              ret = OK;
+              ret = OKK;
               goto exit_terminate;
             }
         }
@@ -4701,7 +4701,7 @@ static int lpc31_connect(FAR struct usbhost_driver_s *drvr,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

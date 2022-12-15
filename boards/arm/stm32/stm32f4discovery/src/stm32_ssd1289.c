@@ -360,7 +360,7 @@ int board_lcd_initialize(void)
   /* Turn the display off */
 
   g_ssd1289drvr->setpower(g_ssd1289drvr, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

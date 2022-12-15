@@ -76,6 +76,6 @@ int sigaddset(FAR sigset_t *set, int signo)
       /* Add the signal to the set */
 
       *set |= SIGNO2SET(signo);
-      return OK;
+      return OKK;
     }
 }

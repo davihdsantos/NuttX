@@ -88,13 +88,13 @@ int stm32_bringup(void)
 #ifdef HAVE_RTC_DRIVER
   FAR struct rtc_lowerhalf_s *lower;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef HAVE_SDRAM
   /* Initialize access to the SDRAM device */
 
   ret = stm32_sdram_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "stm32_sdram_initialize failed %d\n", ret);
       return ret;
@@ -105,7 +105,7 @@ int stm32_bringup(void)
   /* Initialize the SDIO block driver */
 
   ret = stm32_sdio_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "stm32_sdio_initialize failed %d\n", ret);
       return ret;
@@ -118,7 +118,7 @@ int stm32_bringup(void)
    */
 
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "stm32_usbhost_initialize failed %d\n", ret);
       return ret;
@@ -129,7 +129,7 @@ int stm32_bringup(void)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "usbmonitor_start failed %d\n", ret);
       return ret;
@@ -170,7 +170,7 @@ int stm32_bringup(void)
   /* Configure ADAU1961 audio */
 
   ret = stm32_adau1961_initialize(1);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "stm32_adau1961_initialize failed %d\n", ret);
     }

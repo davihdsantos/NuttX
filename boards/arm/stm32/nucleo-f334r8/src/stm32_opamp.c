@@ -93,7 +93,7 @@ int stm32_opamp_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_OPAMP && CONFIG_STM32_OPAMP2 */

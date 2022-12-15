@@ -116,7 +116,7 @@ int pthread_detach(pthread_t thread)
 
       /* Either case is successful */
 
-      ret = OK;
+      ret = OKK;
     }
 
   (void)pthread_sem_give(&group->tg_joinsem);

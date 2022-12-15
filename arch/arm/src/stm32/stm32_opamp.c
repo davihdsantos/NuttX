@@ -550,7 +550,7 @@ static int stm32_opamplock(FAR struct stm32_opamp_s *priv, bool lock)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1132,7 +1132,7 @@ static int stm32_opampconfig(FAR struct stm32_opamp_s *priv)
         stm32_opamplock(priv, true);
       }
 
-    return OK;
+    return OKK;
 }
 
 /****************************************************************************
@@ -1180,7 +1180,7 @@ static int stm32_opampenable(FAR struct stm32_opamp_s *priv, bool enable)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1257,7 +1257,7 @@ static int stm32_opampgain_set(FAR struct stm32_opamp_s *priv, uint8_t gain)
 
   priv->gain = gain;
 
-  return OK;
+  return OKK;
 
 }
 
@@ -1265,7 +1265,7 @@ static int stm32_opampgain_set(FAR struct stm32_opamp_s *priv, uint8_t gain)
 static int stm32_opampcalibrate(FAR struct stm32_opamp_s *priv)
 {
 #warning "Missing logic"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1307,7 +1307,7 @@ static void opamp_shutdown(FAR struct opamp_dev_s *dev)
 static int opamp_setup(FAR struct opamp_dev_s *dev)
 {
 #warning "Missing logic"
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

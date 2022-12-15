@@ -70,7 +70,7 @@
 int nxmu_sendwindow(FAR struct nxbe_window_s *wnd, FAR const void *msg,
                     size_t msglen)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Sanity checking */
 

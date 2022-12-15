@@ -103,7 +103,7 @@ int register_mtddriver(FAR const char *path, FAR struct mtd_dev_s *mtd,
       node->i_mode    = mode;
 #endif
       node->i_private = priv;
-      ret             = OK;
+      ret             = OKK;
     }
 
   inode_semgive();

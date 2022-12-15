@@ -125,5 +125,5 @@ int board_usbmsc_initialize(int port)
 
   syslog(LOG_INFO, "Successfully bound SPI port %d to MMC/SD slot %d\n",
          LPC214X_MMCSDSPIPORTNO, LPC214X_MMCSDSLOTNO);
-  return OK;
+  return OKK;
 }

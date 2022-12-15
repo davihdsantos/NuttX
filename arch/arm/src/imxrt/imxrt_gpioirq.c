@@ -236,7 +236,7 @@ static int imxrt_gpio_info(int irq, uintptr_t *regaddr, unsigned int *pin)
       return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -280,7 +280,7 @@ static int imxrt_gpio1_0_15_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -317,7 +317,7 @@ static int imxrt_gpio1_16_31_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -354,7 +354,7 @@ static int imxrt_gpio2_0_15_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -391,7 +391,7 @@ static int imxrt_gpio2_16_31_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -428,7 +428,7 @@ static int imxrt_gpio3_0_15_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -465,7 +465,7 @@ static int imxrt_gpio3_16_31_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -503,7 +503,7 @@ static int imxrt_gpio4_0_15_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -540,7 +540,7 @@ static int imxrt_gpio4_16_31_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 #endif
@@ -578,7 +578,7 @@ static int imxrt_gpio5_0_15_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -615,7 +615,7 @@ static int imxrt_gpio5_16_31_interrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 /****************************************************************************
@@ -774,7 +774,7 @@ int imxrt_gpioirq_configure(gpio_pinset_t pinset)
   regval |= GPIO_ICR(icr, pin);
   putreg32(regval, regaddr);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

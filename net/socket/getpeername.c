@@ -173,7 +173,7 @@ int getpeername(int sockfd, FAR struct sockaddr *addr, FAR socklen_t *addrlen)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET */

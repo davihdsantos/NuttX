@@ -254,7 +254,7 @@ static int netprocfs_open(FAR struct file *filep, FAR const char *relpath,
    */
 
   filep->f_priv = (FAR void *)priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -274,7 +274,7 @@ static int netprocfs_close(FAR struct file *filep)
 
   kmm_free(priv);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -380,7 +380,7 @@ static int netprocfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new attributes in the new file structure */
 
   newp->f_priv = (FAR void *)newpriv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -461,7 +461,7 @@ static int netprocfs_opendir(FAR const char *relpath,
     }
 
   dir->u.procfs = (FAR void *)level1;
-  return OK;
+  return OKK;
 
 errout_with_alloc:
   kmm_free(level1);
@@ -488,7 +488,7 @@ static int netprocfs_closedir(FAR struct fs_dirent_s *dir)
     }
 
   dir->u.procfs = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -612,7 +612,7 @@ static int netprocfs_readdir(FAR struct fs_dirent_s *dir)
        */
 
       level1->base.index = index + 1;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -644,7 +644,7 @@ static int netprocfs_rewinddir(FAR struct fs_dirent_s *dir)
   priv = dir->u.procfs;
 
   priv->base.index = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -725,7 +725,7 @@ static int netprocfs_stat(FAR const char *relpath, FAR struct stat *buf)
   buf->st_blksize = 0;
   buf->st_blocks  = 0;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

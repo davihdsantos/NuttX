@@ -117,7 +117,7 @@ static int stm32l4_oneshot_handler(int irq, void *context, void *arg)
   oneshot->arg     = NULL;
 
   oneshot_handler(oneshot_arg);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -154,7 +154,7 @@ static inline int stm32l4_allocate_handler(struct stm32l4_oneshot_s *oneshot)
 
           g_oneshot[i]   = oneshot;
           oneshot->cbndx = i;
-          ret            = OK;
+          ret            = OKK;
           break;
         }
     }
@@ -166,7 +166,7 @@ static inline int stm32l4_allocate_handler(struct stm32l4_oneshot_s *oneshot)
   if (g_oneshot[0] == NULL)
     {
       g_oneshot[0] = oneshot;
-      return OK;
+      return OKK;
     }
 
   return -EBUSY;
@@ -245,7 +245,7 @@ int stm32l4_oneshot_max_delay(FAR struct stm32l4_oneshot_s *oneshot,
 
   *usec = (uint64_t)(UINT32_MAX / oneshot->frequency) *
           (uint64_t)USEC_PER_SEC;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -337,7 +337,7 @@ int stm32l4_oneshot_start(FAR struct stm32l4_oneshot_s *oneshot,
 
   oneshot->running = true;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -388,7 +388,7 @@ int stm32l4_oneshot_cancel(FAR struct stm32l4_oneshot_s *oneshot,
       ts->tv_sec  = 0;
       ts->tv_nsec = 0;
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   /* Yes.. Get the timer counter and period registers and stop the counter.
@@ -469,7 +469,7 @@ int stm32l4_oneshot_cancel(FAR struct stm32l4_oneshot_s *oneshot,
              (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32L4_ONESHOT */

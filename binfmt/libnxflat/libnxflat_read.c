@@ -164,6 +164,6 @@ int nxflat_read(struct nxflat_loadinfo_s *loadinfo, char *buffer,
   while (bytesread < readsize);
 
   nxflat_dumpreaddata(buffer, readsize);
-  return OK;
+  return OKK;
 }
 

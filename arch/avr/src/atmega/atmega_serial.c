@@ -314,7 +314,7 @@ static int usart0_setup(struct uart_dev_s *dev)
   usart0_configure();
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -327,7 +327,7 @@ static int usart1_setup(struct uart_dev_s *dev)
   usart1_configure();
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -391,7 +391,7 @@ static int usart0_attach(struct uart_dev_s *dev)
   (void)irq_attach(ATMEGA_IRQ_U0RX, usart0_rxinterrupt, NULL);
   (void)irq_attach(ATMEGA_IRQ_U0DRE, usart0_txinterrupt, NULL);
 //(void)irq_attach(ATMEGA_IRQ_U0TX, usart0_txinterrupt, NULL);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -413,7 +413,7 @@ static int usart1_attach(struct uart_dev_s *dev)
   (void)irq_attach(ATMEGA_IRQ_U1RX, usart1_rxinterrupt, NULL);
   (void)irq_attach(ATMEGA_IRQ_U1DRE, usart1_txinterrupt, NULL);
 //(void)irq_attach(ATMEGA_IRQ_U1TX, usart1_txinterrupt, NULL);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -481,7 +481,7 @@ static int usart0_rxinterrupt(int irq, void *context, FAR void *arg)
       uart_recvchars(&g_usart0port);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -499,7 +499,7 @@ static int usart1_rxinterrupt(int irq, void *context, FAR void *arg)
       uart_recvchars(&g_usart1port);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -529,7 +529,7 @@ static int usart0_txinterrupt(int irq, void *context, FAR void *arg)
       uart_xmitchars(&g_usart0port);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -549,7 +549,7 @@ static int usart1_txinterrupt(int irq, void *context, FAR void *arg)
       uart_xmitchars(&g_usart1port);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -565,7 +565,7 @@ static int usart1_txinterrupt(int irq, void *context, FAR void *arg)
 static int usart0_ioctl(struct file *filep, int cmd, unsigned long arg)
 {
 #ifdef CONFIG_SERIAL_TERMIOS
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -589,7 +589,7 @@ static int usart0_ioctl(struct file *filep, int cmd, unsigned long arg)
 static int usart1_ioctl(struct file *filep, int cmd, unsigned long arg)
 {
 #ifdef CONFIG_SERIAL_TERMIOS
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

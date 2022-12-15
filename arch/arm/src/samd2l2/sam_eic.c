@@ -155,7 +155,7 @@ int sam_eic_initialize(uint8_t gclkgen)
 
   up_enable_irq(SAM_IRQ_EIC);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -183,7 +183,7 @@ int sam_eic_irq_enable(int irq)
 
   putreg32(EIC_EXTINT(eirq), SAM_EIC_INTENSET);
   sam_eic_dumpregs();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -272,5 +272,5 @@ int sam_eic_config(uint8_t eirq, port_pinset_t pinset)
   putreg32(EIC_EXTINT(eirq), SAM_EIC_INTENSET);
 
   sam_eic_dumpregs();
-  return OK;
+  return OKK;
 }

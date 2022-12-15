@@ -169,7 +169,7 @@ static int wm8904_attach(FAR const struct wm8904_lower_s *lower,
       g_wm8904info.arg = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static bool wm8904_enable(FAR const struct wm8904_lower_s *lower, bool enable)
@@ -219,7 +219,7 @@ static int wm8904_interrupt(int irq, FAR void *context, FAR void *arg)
    */
 
   sam_pioirqdisable(IRQ_INT_WM8904);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -364,7 +364,7 @@ int sam_wm8904_initialize(int minor)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 
   /* Error exits.  Unfortunately there is no mechanism in place now to
    * recover resources from most errors on initialization failures.

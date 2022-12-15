@@ -87,7 +87,7 @@ static inline int statroot(FAR struct stat *buf)
 
   RESET_BUF(buf);
   buf->st_mode = S_IFDIR | S_IROTH | S_IRGRP | S_IRUSR;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -172,7 +172,7 @@ int stat_recursive(FAR const char *path, FAR struct stat *buf)
 
   inode_release(inode);
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
   /* Failure conditions always set the errno appropriately */
 
@@ -402,5 +402,5 @@ int inode_stat(FAR struct inode *inode, FAR struct stat *buf)
       buf->st_mode |= S_IFDIR | S_IROTH | S_IRGRP | S_IRUSR;
     }
 
-  return OK;
+  return OKK;
 }

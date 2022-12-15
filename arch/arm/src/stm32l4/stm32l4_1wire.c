@@ -579,7 +579,7 @@ static int stm32_1wire_init(FAR struct stm32_1wire_priv_s *priv)
   stm32l4_configgpio(config->data_pin);
 
   ret = irq_attach(config->irq, stm32_1wire_isr, priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(config->irq);
     }
@@ -629,7 +629,7 @@ static int stm32_1wire_deinit(FAR struct stm32_1wire_priv_s *priv)
 
   stm32_1wire_set_apb_clock(priv, false);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -688,7 +688,7 @@ static inline void stm32_1wire_sem_wait(FAR struct stm32_1wire_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -733,7 +733,7 @@ static int stm32_1wire_process(struct stm32_1wire_priv_s *priv,
       switch (msgs[indx].task)
         {
         case ONEWIRETASK_NONE:
-          priv->result = OK;
+          priv->result = OKK;
           break;
 
         case ONEWIRETASK_RESET:
@@ -803,7 +803,7 @@ static int stm32_1wire_process(struct stm32_1wire_priv_s *priv,
           break;
         }
 
-      if (priv->result != OK) /* break if error */
+      if (priv->result != OKK) /* break if error */
         {
           break;
         }
@@ -868,7 +868,7 @@ static int stm32_1wire_isr(int irq, void *context, void *arg)
                   if (++priv->byte >= (priv->msgs->buffer + priv->msgs->buflen)) /* Done? */
                     {
                       priv->msgs = NULL;
-                      priv->result = OK;
+                      priv->result = OKK;
                       nxsem_post(&priv->sem_isr);
                       break;
                     }
@@ -895,7 +895,7 @@ static int stm32_1wire_isr(int irq, void *context, void *arg)
                   if (++priv->byte >= (priv->msgs->buffer + priv->msgs->buflen)) /* Done? */
                     {
                       priv->msgs = NULL;
-                      priv->result = OK;
+                      priv->result = OKK;
                       nxsem_post(&priv->sem_isr);
                       break;
                     }
@@ -913,7 +913,7 @@ static int stm32_1wire_isr(int irq, void *context, void *arg)
 
             case ONEWIRETASK_WRITEBIT:
               priv->msgs = NULL;
-              priv->result = OK;
+              priv->result = OKK;
               nxsem_post(&priv->sem_isr);
               break;
             }
@@ -953,7 +953,7 @@ static int stm32_1wire_isr(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1186,7 +1186,7 @@ static int stm32_1wire_pm_prepare(FAR struct pm_callback_s *cb, int domain,
       break;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1286,7 +1286,7 @@ FAR struct onewire_dev_s *stm32l4_1wireinitialize(int port)
       /* Register to receive power management callbacks */
 
       ret = pm_register(&priv->pm_cb);
-      DEBUGASSERT(ret == OK);
+      DEBUGASSERT(ret == OKK);
       UNUSED(ret);
 #endif
     }
@@ -1330,7 +1330,7 @@ int stm32l4_1wireuninitialize(FAR struct onewire_dev_s *dev)
     {
       leave_critical_section(irqs);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(irqs);
@@ -1352,5 +1352,5 @@ int stm32l4_1wireuninitialize(FAR struct onewire_dev_s *dev)
   /* Free instance */
 
   kmm_free(dev);
-  return OK;
+  return OKK;
 }

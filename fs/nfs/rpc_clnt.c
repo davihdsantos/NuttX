@@ -162,7 +162,7 @@ static int rpcclnt_send(FAR struct rpcclnt *rpc, int procid, int prog,
                         FAR void *call, int reqlen)
 {
   ssize_t nbytes;
-  int ret = OK;
+  int ret = OKK;
 
   /* Send the call message
    *
@@ -565,7 +565,7 @@ int rpcclnt_connect(struct rpcclnt *rpc)
       goto bad;
     }
 
-  return OK;
+  return OKK;
 
 bad:
   rpcclnt_disconnect(rpc);
@@ -677,7 +677,7 @@ int rpcclnt_umount(struct rpcclnt *rpc)
       goto bad;
     }
 
-  return OK;
+  return OKK;
 
 bad:
   rpcclnt_disconnect(rpc);
@@ -740,7 +740,7 @@ int rpcclnt_request(FAR struct rpcclnt *rpc, int procnum, int prog,
       /* Send the RPC CALL message */
 
       error = rpcclnt_send(rpc, procnum, prog, request, reqlen);
-      if (error != OK)
+      if (error != OKK)
         {
           finfo("ERROR rpcclnt_send failed: %d\n", error);
         }
@@ -750,7 +750,7 @@ int rpcclnt_request(FAR struct rpcclnt *rpc, int procnum, int prog,
       else
         {
           error = rpcclnt_reply(rpc, procnum, prog, response, resplen);
-          if (error != OK)
+          if (error != OKK)
             {
               finfo("ERROR rpcclnt_reply failed: %d\n", error);
             }
@@ -760,7 +760,7 @@ int rpcclnt_request(FAR struct rpcclnt *rpc, int procnum, int prog,
     }
   while (rpc->rc_timeout && retries <= rpc->rc_retry);
 
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: RPC failed: %d\n", error);
       return error;
@@ -809,5 +809,5 @@ int rpcclnt_request(FAR struct rpcclnt *rpc, int procnum, int prog,
       return EOPNOTSUPP;
     }
 
-  return OK;
+  return OKK;
 }

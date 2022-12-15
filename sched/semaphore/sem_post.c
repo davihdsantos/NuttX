@@ -184,7 +184,7 @@ int nxsem_post(FAR sem_t *sem)
       nxsem_restorebaseprio(stcb, sem);
       sched_unlock();
 #endif
-      ret = OK;
+      ret = OKK;
 
       /* Interrupts may now be enabled. */
 

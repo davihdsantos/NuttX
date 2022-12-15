@@ -445,7 +445,7 @@ static int mio283qt9a_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *
   /* De-select the LCD */
 
   lcd->deselect(lcd);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -501,7 +501,7 @@ static int mio283qt9a_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer
   /* De-select the LCD */
 
   lcd->deselect(lcd);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -526,7 +526,7 @@ static int mio283qt9a_getvideoinfo(FAR struct lcd_dev_s *dev,
   vinfo->xres    = MIO283QT9A_XRES;      /* Horizontal resolution in pixel columns */
   vinfo->yres    = MIO283QT9A_YRES;      /* Vertical resolution in pixel rows */
   vinfo->nplanes = 1;                    /* Number of color planes supported */
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -550,7 +550,7 @@ static int mio283qt9a_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int plane
   pinfo->buffer = (FAR uint8_t *)priv->runbuffer;  /* Run scratch buffer */
   pinfo->bpp    = MIO283QT9A_BPP;                  /* Bits-per-pixel */
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -599,7 +599,7 @@ static int mio283qt9a_poweroff(FAR struct mio283qt9a_lcd_s *lcd)
   /* Remember the power off state */
 
   g_lcddev.power = 0;
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -650,7 +650,7 @@ static int mio283qt9a_setpower(FAR struct lcd_dev_s *dev, int power)
       mio283qt9a_poweroff(lcd);
     }
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -790,7 +790,7 @@ static inline int mio283qt9a_hwinitialize(FAR struct mio283qt9a_dev_s *priv)
       id_b = lcd->read(lcd);
       lcdinfo("Self diag %02x, %02x\n", id_a, id_b);
 #endif
-      ret = OK;
+      ret = OKK;
     }
 #ifndef CONFIG_LCD_NOGETRUN
   else
@@ -847,7 +847,7 @@ FAR struct lcd_dev_s *mio283qt9a_lcdinitialize(FAR struct mio283qt9a_lcd_s *lcd)
   /* Configure and enable LCD */
 
   ret = mio283qt9a_hwinitialize(priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Clear the display (setting it to the color 0=black) */
 

@@ -242,7 +242,7 @@ int lpc54_ft5x06_register(void)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_FT5x06*/

@@ -506,7 +506,7 @@ int btnet_ioctl(FAR struct net_driver_s *netdev, int cmd, unsigned long arg)
           else
             {
               wlinfo("Connection pending\n");
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -533,7 +533,7 @@ int btnet_ioctl(FAR struct net_driver_s *netdev, int cmd, unsigned long arg)
                   /* Release reference taken in bt_conn_create_le */
 
                   bt_conn_release(conn);
-                  ret = OK;
+                  ret = OKK;
                 }
 
               /* Release reference taken in bt_conn_lookup_addr_le */
@@ -560,7 +560,7 @@ int btnet_ioctl(FAR struct net_driver_s *netdev, int cmd, unsigned long arg)
            btreq->btr_acl_mtu = BLUETOOTH_MAX_MTU;
            btreq->btr_sco_mtu = BLUETOOTH_MAX_MTU;
            btreq->btr_max_acl = CONFIG_IOB_NBUFFERS;
-           ret                = OK;
+           ret                = OKK;
          }
          break;
 
@@ -589,7 +589,7 @@ int btnet_ioctl(FAR struct net_driver_s *netdev, int cmd, unsigned long arg)
              }
 
            memcpy(btreq->btr_features0, src, 8);
-           ret = OK;
+           ret = OKK;
          }
          break;
 
@@ -612,7 +612,7 @@ int btnet_ioctl(FAR struct net_driver_s *netdev, int cmd, unsigned long arg)
         {
           wlinfo("Stop advertising\n");
           bt_stop_advertising();
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -663,7 +663,7 @@ int btnet_ioctl(FAR struct net_driver_s *netdev, int cmd, unsigned long arg)
           if (ret >= 0)
             {
               btreq->btr_nrsp = ret;
-              ret = OK;
+              ret = OKK;
             }
         }
         break;

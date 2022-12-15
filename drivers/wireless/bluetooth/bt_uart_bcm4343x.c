@@ -159,7 +159,7 @@ static int uartwriteconf(FAR const struct btuart_lowerhalf_s *lower,
 
   if ((cmp == NULL) || (maxl == 0))
     {
-      ret = OK;
+      ret = OKK;
       goto exit_uartwriteconf_nofree;
     }
 
@@ -275,7 +275,7 @@ static int load_bcm4343x_firmware(FAR const struct btuart_lowerhalf_s *lower)
 
 {
   FAR uint8_t *rp = (FAR uint8_t *)g_bt_firmware_hcd;
-  int ret = OK;
+  int ret = OKK;
   sem_t rxsem;
   uint8_t command;
   uint8_t txlen;
@@ -324,7 +324,7 @@ static int load_bcm4343x_firmware(FAR const struct btuart_lowerhalf_s *lower)
   ret = uartwriteconf(lower, &rxsem,
                       enter_download_mode, sizeof(enter_download_mode),
                       download_resp, sizeof(download_resp));
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("Failed to enter download mode\n");
       ret = -ECOMM;

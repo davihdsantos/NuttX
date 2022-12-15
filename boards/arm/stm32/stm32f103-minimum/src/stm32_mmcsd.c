@@ -92,7 +92,7 @@ int stm32_spi1register(struct spi_dev_s *dev, spi_mediachange_t callback,
                        void *arg)
 {
   spiinfo("INFO: Registering spi1 device\n");
-  return OK;
+  return OKK;
 }
 
 /*****************************************************************************
@@ -125,5 +125,5 @@ int stm32_mmcsd_initialize(int minor)
     }
 
   spiinfo("INFO: mmcsd card has been initialized successfully\n");
-  return OK;
+  return OKK;
 }

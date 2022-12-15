@@ -246,7 +246,7 @@ static int nfs_filecreate(FAR struct nfsmount *nmp, FAR struct nfsnode *np,
   /* Find the NFS node of the directory containing the file to be created */
 
   error = nfs_finddir(nmp, relpath, &fhandle, &fattr, filename);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_finddir returned: %d\n", error);
       return error;
@@ -458,7 +458,7 @@ static int nfs_filetruncate(FAR struct nfsmount *nmp,
   error = nfs_request(nmp, NFSPROC_SETATTR,
                       (FAR void *)&nmp->nm_msgbuffer.setattr, reqlen,
                       (FAR void *)nmp->nm_iobuffer, nmp->nm_buflen);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_request failed: %d\n", error);
       return error;
@@ -467,7 +467,7 @@ static int nfs_filetruncate(FAR struct nfsmount *nmp,
   /* Indicate that the file now has zero length */
 
   np->n_size = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -493,7 +493,7 @@ static int nfs_fileopen(FAR struct nfsmount *nmp, FAR struct nfsnode *np,
   /* Find the NFS node associate with the path */
 
   error = nfs_findnode(nmp, relpath, &fhandle, &fattr, NULL);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_findnode returned: %d\n", error);
       return error;
@@ -564,7 +564,7 @@ static int nfs_fileopen(FAR struct nfsmount *nmp, FAR struct nfsnode *np,
       return nfs_filetruncate(nmp, np, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -610,7 +610,7 @@ static int nfs_open(FAR struct file *filep, FAR const char *relpath,
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -619,7 +619,7 @@ static int nfs_open(FAR struct file *filep, FAR const char *relpath,
   /* Try to open an existing file at that path */
 
   error = nfs_fileopen(nmp, np, relpath, oflags, mode);
-  if (error != OK)
+  if (error != OKK)
     {
       /* An error occurred while trying to open the existing file. Check if
        * the open failed because the file does not exist.  That is not
@@ -652,7 +652,7 @@ static int nfs_open(FAR struct file *filep, FAR const char *relpath,
       /* Create the file */
 
       error = nfs_filecreate(nmp, np, relpath, mode);
-      if (error != OK)
+      if (error != OKK)
         {
           ferr("ERROR: nfs_filecreate failed: %d\n", error);
           goto errout_with_semaphore;
@@ -680,7 +680,7 @@ static int nfs_open(FAR struct file *filep, FAR const char *relpath,
 
   np->n_flags |= (NFSNODE_OPEN | NFSNODE_MODIFIED);
   nfs_semgive(nmp);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   if (np)
@@ -733,7 +733,7 @@ static int nfs_close(FAR struct file *filep)
   if (np->n_crefs > 1)
     {
       np->n_crefs--;
-      ret = OK;
+      ret = OKK;
     }
 
   /* There are no more references to the file structure.  Now we need to
@@ -775,7 +775,7 @@ static int nfs_close(FAR struct file *filep)
               /* Then deallocate the file structure and return success */
 
               kmm_free(np);
-              ret = OK;
+              ret = OKK;
               break;
             }
         }
@@ -823,7 +823,7 @@ static ssize_t nfs_read(FAR struct file *filep, char *buffer, size_t buflen)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -999,7 +999,7 @@ static ssize_t nfs_write(FAR struct file *filep, const char *buffer,
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -1185,7 +1185,7 @@ static int nfs_dup(FAR const struct file *oldp, FAR struct file *newp)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       nfs_semgive(nmp);
@@ -1211,7 +1211,7 @@ static int nfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   nmp->nm_head = np;
 
   nfs_semgive(nmp);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1247,7 +1247,7 @@ static int nfs_fstat(FAR const struct file *filep, FAR struct stat *buf)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -1281,7 +1281,7 @@ static int nfs_fstat(FAR const struct file *filep, FAR struct stat *buf)
   /* Then update the stat buffer with this information */
 
   nfs_stat_common(&info, buf);
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   nfs_semgive(nmp);
@@ -1317,7 +1317,7 @@ static int nfs_truncate(FAR struct file *filep, off_t length)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -1370,7 +1370,7 @@ static int nfs_opendir(struct inode *mountpt, const char *relpath,
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -1379,7 +1379,7 @@ static int nfs_opendir(struct inode *mountpt, const char *relpath,
   /* Find the NFS node associate with the path */
 
   error = nfs_findnode(nmp, relpath, &fhandle, &obj_attributes, NULL);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_findnode failed: %d\n", error);
       goto errout_with_semaphore;
@@ -1403,7 +1403,7 @@ static int nfs_opendir(struct inode *mountpt, const char *relpath,
   DEBUGASSERT(fhandle.length <= DIRENT_NFS_MAXHANDLE);
 
   memcpy(dir->u.nfs.nfs_fhandle, &fhandle.handle, DIRENT_NFS_MAXHANDLE);
-  error = OK;
+  error = OKK;
 
 errout_with_semaphore:
   nfs_semgive(nmp);
@@ -1447,7 +1447,7 @@ static int nfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -1498,7 +1498,7 @@ static int nfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
   error = nfs_request(nmp, NFSPROC_READDIR,
                       (FAR void *)&nmp->nm_msgbuffer.readdir, reqlen,
                       (FAR void *)nmp->nm_iobuffer, nmp->nm_buflen);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_request failed: %d\n", error);
       goto errout_with_semaphore;
@@ -1614,7 +1614,7 @@ static int nfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
   memcpy(&fhandle.handle, dir->u.nfs.nfs_fhandle, DIRENT_NFS_MAXHANDLE);
 
   error = nfs_lookup(nmp, dir->fd_dir.d_name, &fhandle, &obj_attributes, NULL);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_lookup failed: %d\n", error);
       goto errout_with_semaphore;
@@ -1683,7 +1683,7 @@ static int nfs_rewinddir(FAR struct inode *mountpt, FAR struct fs_dirent_s *dir)
   memset(&dir->u.nfs.nfs_verifier, 0, DIRENT_NFS_VERFLEN);
   dir->u.nfs.nfs_cookie[0] = 0;
   dir->u.nfs.nfs_cookie[1] = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1961,7 +1961,7 @@ static int nfs_bind(FAR struct inode *blkdriver, FAR const void *data,
       nmp->nm_rpcclnt    = rpc;
 
       error = rpcclnt_connect(nmp->nm_rpcclnt);
-      if (error != OK)
+      if (error != OKK)
         {
           ferr("ERROR: nfs_connect failed: %d\n", error);
           goto bad;
@@ -1997,7 +1997,7 @@ static int nfs_bind(FAR struct inode *blkdriver, FAR const void *data,
   nfs_semgive(nmp);
 
   finfo("Successfully mounted\n");
-  return OK;
+  return OKK;
 
 bad:
   if (nmp)
@@ -2182,7 +2182,7 @@ int nfs_fsinfo(FAR struct nfsmount *nmp)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2216,7 +2216,7 @@ static int nfs_statfs(FAR struct inode *mountpt, FAR struct statfs *sbp)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -2294,7 +2294,7 @@ static int nfs_remove(struct inode *mountpt, const char *relpath)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -2303,7 +2303,7 @@ static int nfs_remove(struct inode *mountpt, const char *relpath)
   /* Find the NFS node of the directory containing the file to be deleted */
 
   error = nfs_finddir(nmp, relpath, &fhandle, &fattr, filename);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_finddir returned: %d\n", error);
       goto errout_with_semaphore;
@@ -2380,7 +2380,7 @@ static int nfs_mkdir(struct inode *mountpt, const char *relpath, mode_t mode)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount: %d\n", error);
       goto errout_with_semaphore;
@@ -2389,7 +2389,7 @@ static int nfs_mkdir(struct inode *mountpt, const char *relpath, mode_t mode)
   /* Find the NFS node of the directory containing the directory to be created */
 
   error = nfs_finddir(nmp, relpath, &fhandle, &fattr, dirname);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_finddir returned: %d\n", error);
       return error;
@@ -2506,7 +2506,7 @@ static int nfs_rmdir(struct inode *mountpt, const char *relpath)
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -2515,7 +2515,7 @@ static int nfs_rmdir(struct inode *mountpt, const char *relpath)
   /* Find the NFS node of the directory containing the directory to be removed */
 
   error = nfs_finddir(nmp, relpath, &fhandle, &fattr, dirname);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_finddir returned: %d\n", error);
       return error;
@@ -2594,7 +2594,7 @@ static int nfs_rename(struct inode *mountpt, const char *oldrelpath,
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount returned: %d\n", error);
       goto errout_with_semaphore;
@@ -2603,7 +2603,7 @@ static int nfs_rename(struct inode *mountpt, const char *oldrelpath,
   /* Find the NFS node of the directory containing the 'from' object */
 
   error = nfs_finddir(nmp, oldrelpath, &from_handle, &fattr, from_name);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_finddir returned: %d\n", error);
       return error;
@@ -2612,7 +2612,7 @@ static int nfs_rename(struct inode *mountpt, const char *oldrelpath,
   /* Find the NFS node of the directory containing the 'from' object */
 
   error = nfs_finddir(nmp, newrelpath, &to_handle, &fattr, to_name);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_finddir returned: %d\n", error);
       return error;
@@ -2791,7 +2791,7 @@ static int nfs_stat(struct inode *mountpt, const char *relpath,
 
   nfs_semtake(nmp);
   error = nfs_checkmount(nmp);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_checkmount failed: %d\n", error);
       goto errout_with_semaphore;
@@ -2800,7 +2800,7 @@ static int nfs_stat(struct inode *mountpt, const char *relpath,
   /* Get the file handle attributes of the requested node */
 
   error = nfs_findnode(nmp, relpath, &fhandle, &obj_attributes, NULL);
-  if (error != OK)
+  if (error != OKK)
     {
       ferr("ERROR: nfs_findnode failed: %d\n", error);
       goto errout_with_semaphore;

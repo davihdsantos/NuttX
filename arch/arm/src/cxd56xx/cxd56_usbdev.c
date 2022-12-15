@@ -921,7 +921,7 @@ static int cxd56_wrrequest(FAR struct cxd56_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_DEVERROR(CXD56_TRACEERR_NULLREQUEST), 0);
-      return OK;
+      return OKK;
     }
 
   /* Ignore any attempt to send a zero length packet on anything but EP0IN */
@@ -936,7 +936,7 @@ static int cxd56_wrrequest(FAR struct cxd56_ep_s *privep)
         {
           usbtrace(TRACE_DEVERROR(CXD56_TRACEERR_NULLPACKET), 0);
         }
-      return OK;
+      return OKK;
     }
 
   /* Get the number of bytes left to be sent in the packet */
@@ -974,7 +974,7 @@ static int cxd56_wrrequest(FAR struct cxd56_ep_s *privep)
       cxd56_epwrite(privep, buf, nbytes);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1042,14 +1042,14 @@ static int cxd56_rdrequest(FAR struct cxd56_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_INTDECODE(CXD56_TRACEINTID_EPOUTQEMPTY), 0);
-      return OK;
+      return OKK;
     }
 
   /* Receive the next packet */
 
   if (!IS_BS_HOST_BUSY(desc))
     {
-      return OK;
+      return OKK;
     }
 
   usbtrace(TRACE_READ(privep->epphy), privep->ep.maxpacket);
@@ -1063,7 +1063,7 @@ static int cxd56_rdrequest(FAR struct cxd56_ep_s *privep)
   putreg32(ctrl | USB_RRDY | USB_CNAK,
            CXD56_USB_OUT_EP_CONTROL(privep->epphy));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1246,7 +1246,7 @@ static inline void cxd56_ep0setup(FAR struct cxd56_usbdev_s *priv)
 
   while (!cxd56_rqempty(ep0))
     {
-      int16_t result = OK;
+      int16_t result = OKK;
       if (privreq->req.xfrd != privreq->req.len)
         {
           result = -EPROTO;
@@ -1790,7 +1790,7 @@ static int cxd56_epinterrupt(int irq, FAR void *context)
       }
   }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1945,7 +1945,7 @@ static int cxd56_usbinterrupt(int irq, FAR void *context, FAR void *arg)
 
   usbtrace(TRACE_INTEXIT(CXD56_TRACEINTID_USB), 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1974,7 +1974,7 @@ static int cxd56_sysinterrupt(int irq, FAR void *context, FAR void *arg)
 
   usbtrace(TRACE_INTEXIT(CXD56_TRACEINTID_SYS), 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2233,7 +2233,7 @@ static int cxd56_epconfigure(FAR struct usbdev_ep_s *ep,
                CXD56_USB_OUT_EP_DATADESC(privep->epphy));
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2265,7 +2265,7 @@ static int cxd56_epdisable(FAR struct usbdev_ep_s *ep)
   cxd56_epstall(&privep->ep, false);
   cxd56_cancelrequests(privep);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2380,7 +2380,7 @@ static int cxd56_epsubmit(FAR struct usbdev_ep_s *ep,
   FAR struct cxd56_usbdev_s *priv;
   uint32_t ctrl;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -2533,7 +2533,7 @@ static int cxd56_epcancel(FAR struct usbdev_ep_s *ep,
   flags = enter_critical_section();
   cxd56_cancelrequests(privep);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2568,7 +2568,7 @@ static int cxd56_epstall(FAR struct usbdev_ep_s *ep, bool resume)
       privep->stalled = 1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2796,7 +2796,7 @@ static int cxd56_wakeup(FAR struct usbdev_s *dev)
   flags = enter_critical_section();
   putreg32(getreg32(CXD56_USB_DEV_CONTROL) | 1, CXD56_USB_DEV_CONTROL);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2822,7 +2822,7 @@ static int cxd56_selfpowered(FAR struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2857,7 +2857,7 @@ static int cxd56_pullup(FAR struct usbdev_s *dev, bool enable)
   putreg32(ctrl, CXD56_USB_DEV_CONTROL);
   putreg32(ep, CXD56_USB_OUT_EP_CONTROL(0));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2987,7 +2987,7 @@ static int cxd56_vbusinterrupt(int irq, FAR void *context, FAR void *arg)
       cxd56_notify_signal(USBDEV_STATE_ATTACH, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3036,7 +3036,7 @@ static int cxd56_vbusninterrupt(int irq, FAR void *context, FAR void *arg)
   priv->power = 0;
   cxd56_notify_signal(USBDEV_STATE_DETACH, priv->power);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3196,7 +3196,7 @@ int usbdev_register(FAR struct usbdevclass_driver_s *driver)
 
   up_enable_irq(CXD56_IRQ_USB_VBUS);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3253,7 +3253,7 @@ int usbdev_unregister(FAR struct usbdevclass_driver_s *driver)
   up_pm_release_freqlock(&g_hv_lock);
   up_pm_release_wakelock(&g_wake_lock);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3328,7 +3328,7 @@ int cxd56_usbdev_setsigno(int signo)
   priv->signo = signo;
   priv->pid   = getpid();
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3395,7 +3395,7 @@ static int cxd56_usbdev_open(FAR struct file *filep, FAR const char *relpath,
    */
 
   filep->f_priv = (FAR void *)priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3415,7 +3415,7 @@ static int cxd56_usbdev_close(FAR struct file *filep)
 
   kmm_free(priv);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3490,7 +3490,7 @@ static int cxd56_usbdev_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new attributes in the new file structure */
 
   newp->f_priv = (FAR void *)newattr;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3503,7 +3503,7 @@ static int cxd56_usbdev_stat(FAR const char *relpath, FAR struct stat *buf)
   buf->st_size    = 0;
   buf->st_blksize = 0;
   buf->st_blocks  = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

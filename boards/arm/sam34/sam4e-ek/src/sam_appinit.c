@@ -127,7 +127,7 @@ int board_app_initialize(uintptr_t arg)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to start USB monitor: %d\n", ret);
       return ret;
@@ -135,5 +135,5 @@ int board_app_initialize(uintptr_t arg)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

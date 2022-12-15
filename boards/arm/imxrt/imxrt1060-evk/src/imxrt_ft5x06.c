@@ -252,7 +252,7 @@ int imxrt_ft5x06_register(void)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_INPUT_FT5X06*/

@@ -114,5 +114,5 @@ int nxtk_bitmaptoolbar(NXTKWINDOW hfwnd, FAR const struct nxgl_rect_s *dest,
   /* Then copy the bitmap */
 
   nx_bitmap((NXWINDOW)hfwnd, &clipdest, src, &wndorigin, stride);
-  return OK;
+  return OKK;
 }

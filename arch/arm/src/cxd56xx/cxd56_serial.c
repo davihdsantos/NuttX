@@ -429,7 +429,7 @@ static int up_setup(FAR struct uart_dev_s *dev)
   up_serialout(priv, CXD56_UART_CR, cr);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -487,7 +487,7 @@ static int up_attach(FAR struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, up_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the UART
@@ -585,7 +585,7 @@ static int up_interrupt(int irq, FAR void *context, FAR void *arg)
       status = up_serialin(priv, CXD56_UART_MIS);
       if (status == 0)
         {
-          return OK;
+          return OKK;
         }
 
       up_serialout(priv, CXD56_UART_ICR, status);
@@ -632,7 +632,7 @@ static int up_interrupt(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -648,7 +648,7 @@ static int up_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
   FAR struct inode *inode    = filep->f_inode;
   FAR struct uart_dev_s *dev = inode->i_private;
   FAR struct up_dev_s *priv  = (FAR struct up_dev_s *)dev->priv;
-  int ret                = OK;
+  int ret                = OKK;
 
   switch (cmd)
     {

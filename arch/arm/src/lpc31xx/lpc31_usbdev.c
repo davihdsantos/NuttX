@@ -810,7 +810,7 @@ static int lpc31_progressep(struct lpc31_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_INTDECODE(LPC31_TRACEINTID_EPINQEMPTY), 0);
-      return OK;
+      return OKK;
     }
 
   /* Ignore any attempt to send a zero length packet */
@@ -837,7 +837,7 @@ static int lpc31_progressep(struct lpc31_ep_s *privep)
         }
 
       lpc31_reqcomplete(privep, lpc31_rqdequeue(privep), OK);
-      return OK;
+      return OKK;
     }
 
   if (privep->epphy == LPC31_EP0_IN)
@@ -859,7 +859,7 @@ static int lpc31_progressep(struct lpc31_ep_s *privep)
   /* then queue onto the DQH */
   lpc31_queuedtd(privep->epphy, dtd);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1696,7 +1696,7 @@ static int lpc31_usbinterrupt(int irq, FAR void *context, FAR void *arg)
       lpc31_usbreset(priv);
 
       usbtrace(TRACE_INTEXIT(LPC31_TRACEINTID_USB), 0);
-      return OK;
+      return OKK;
     }
 
   /* When the device controller enters a suspend state from an active state,
@@ -1836,7 +1836,7 @@ static int lpc31_usbinterrupt(int irq, FAR void *context, FAR void *arg)
     }
 
   usbtrace(TRACE_INTEXIT(LPC31_TRACEINTID_USB), 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1923,7 +1923,7 @@ static int lpc31_epconfigure(FAR struct usbdev_ep_s *ep,
   else
     lpc31_setbits (USBDEV_ENDPTCTRL_RXE, LPC31_USBDEV_ENDPTCTRL(privep->epphy));
 
-   return OK;
+   return OKK;
 }
 
 /****************************************************************************
@@ -1962,7 +1962,7 @@ static int lpc31_epdisable(FAR struct usbdev_ep_s *ep)
   lpc31_cancelrequests(privep, -ESHUTDOWN);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2077,7 +2077,7 @@ static int lpc31_epsubmit(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s *r
   FAR struct lpc31_ep_s *privep = (FAR struct lpc31_ep_s *)ep;
   FAR struct lpc31_usbdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -2164,7 +2164,7 @@ static int lpc31_epcancel(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s *r
 
   lpc31_cancelrequests(privep, -ESHUTDOWN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2205,7 +2205,7 @@ static int lpc31_epstall(FAR struct usbdev_ep_s *ep, bool resume)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2406,7 +2406,7 @@ static int lpc31_wakeup(struct usbdev_s *dev)
   flags = enter_critical_section();
   lpc31_setbits(USBDEV_PRTSC1_FPR, LPC31_USBDEV_PORTSC1);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2432,7 +2432,7 @@ static int lpc31_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2453,7 +2453,7 @@ static int lpc31_pullup(struct usbdev_s *dev, bool enable)
   else
     lpc31_clrbits (USBDEV_USBCMD_RS, LPC31_USBDEV_USBCMD);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2735,5 +2735,5 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   /* Unhook the driver */
 
   g_usbdev.driver = NULL;
-  return OK;
+  return OKK;
 }

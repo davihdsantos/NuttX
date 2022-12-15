@@ -150,7 +150,7 @@ static inline int elf_sectname(FAR struct elf_loadinfo_s *loadinfo,
         {
           /* Yes, the buffer contains a NUL terminator. */
 
-          return OK;
+          return OKK;
         }
 
       /* No.. then we have to read more */
@@ -165,7 +165,7 @@ static inline int elf_sectname(FAR struct elf_loadinfo_s *loadinfo,
 
   /* We will not get here */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

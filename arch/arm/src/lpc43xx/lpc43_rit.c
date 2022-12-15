@@ -105,7 +105,7 @@ static int lpc43_RIT_isr(int irq, FAR void *context, FAR void *arg)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 static inline void lpc43_load_RIT_timer(uint32_t value)
@@ -225,7 +225,7 @@ int up_timer_gettime(FAR struct timespec *ts)
   ts->tv_sec = (uint32_t)(internal_timer / 1000000000);
   ts->tv_nsec = (uint32_t)(internal_timer % 1000000000);
 
-  return OK;
+  return OKK;
 }
 
 int up_alarm_cancel(FAR struct timespec *ts)
@@ -233,7 +233,7 @@ int up_alarm_cancel(FAR struct timespec *ts)
   ts->tv_sec = (uint32_t)(internal_timer / 1000000000);
   ts->tv_nsec = (uint32_t)(internal_timer % 1000000000);
   alarm = 0;
-  return OK;
+  return OKK;
 }
 
 int up_alarm_start(FAR const struct timespec *ts)
@@ -244,7 +244,7 @@ int up_alarm_start(FAR const struct timespec *ts)
    */
 
   alarm = (uint64_t)ts->tv_sec * (uint64_t)1000000000 + (uint64_t)ts->tv_nsec;
-  return OK;
+  return OKK;
 }
 
 int up_timer_cancel(FAR struct timespec *ts)
@@ -267,7 +267,7 @@ int up_timer_start(FAR const struct timespec *ts)
 
   alarm = internal_timer;
   alarm += (uint64_t)ts->tv_sec * (uint64_t)1000000000 + (uint64_t)ts->tv_nsec;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LPC43_RIT */

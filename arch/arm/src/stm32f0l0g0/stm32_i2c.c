@@ -720,7 +720,7 @@ static inline void stm32_i2c_sem_wait(FAR struct i2c_master_s *dev)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -2161,7 +2161,7 @@ static int stm32_i2c_isr_process(struct stm32_i2c_priv_s *priv)
   status = stm32_i2c_getreg32(priv, STM32_I2C_ISR_OFFSET);
   i2cinfo("EXIT: status = 0x%08x\n", status);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2230,7 +2230,7 @@ static int stm32_i2c_init(FAR struct stm32_i2c_priv_s *priv)
   priv->frequency = 0;
   stm32_i2c_setclock(priv, 100000);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2264,7 +2264,7 @@ static int stm32_i2c_deinit(FAR struct stm32_i2c_priv_s *priv)
 
   modifyreg32(STM32_RCC_APB1ENR, priv->config->clk_bit, 0);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2633,7 +2633,7 @@ static int stm32_i2c_reset(FAR struct i2c_master_s * dev)
   /* Restore the frequency */
 
   stm32_i2c_setclock(priv, frequency);
-  ret = OK;
+  ret = OKK;
 
 out:
 
@@ -2715,7 +2715,7 @@ static int stm32_i2c_pm_prepare(FAR struct pm_callback_s *cb, int domain,
       break;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2802,7 +2802,7 @@ FAR struct i2c_master_s *stm32_i2cbus_initialize(int port)
       /* Register to receive power management callbacks */
 
       ret = pm_register(&priv->pm_cb);
-      DEBUGASSERT(ret == OK);
+      DEBUGASSERT(ret == OKK);
       UNUSED(ret);
 #endif
     }
@@ -2838,7 +2838,7 @@ int stm32_i2cbus_uninitialize(FAR struct i2c_master_s * dev)
     {
       leave_critical_section(irqs);
       kmm_free(dev);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(irqs);
@@ -2858,7 +2858,7 @@ int stm32_i2cbus_uninitialize(FAR struct i2c_master_s * dev)
   stm32_i2c_sem_destroy((struct i2c_master_s *)dev);
 
   kmm_free(dev);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32F0L0G0_I2C1 || CONFIG_STM32F0L0G0_I2C2 || \

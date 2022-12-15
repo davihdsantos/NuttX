@@ -258,7 +258,7 @@ int pic32mz_configgpio(pinset_t cfgset)
         }
 
       sched_unlock();
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

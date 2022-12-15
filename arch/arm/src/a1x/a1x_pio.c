@@ -335,7 +335,7 @@ int a1x_pio_config(pio_pinset_t cfgset)
   putreg32(regval, dataddr);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

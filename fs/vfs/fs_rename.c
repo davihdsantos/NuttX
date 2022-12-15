@@ -146,7 +146,7 @@ next_subdir:
 
       if (oldinode == newinode)
         {
-          ret = OK;
+          ret = OKK;
           goto errout; /* Bad naming, this is not an error case. */
         }
 
@@ -281,7 +281,7 @@ next_subdir:
   /* Remove all of the children from the unlinked inode */
 
   oldinode->i_child = NULL;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   inode_semgive();
@@ -461,7 +461,7 @@ next_subdir:
    * stat'ed above to assure that it exists.
    */
 
-  ret = OK;
+  ret = OKK;
   if (strcmp(oldrelpath, newrelpath) != 0)
     {
       /* Perform the rename operation using the relative paths at the common
@@ -563,7 +563,7 @@ errout:
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* FS_HAVE_RENAME */

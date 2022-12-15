@@ -105,7 +105,7 @@ static int work_qcancel(FAR struct kwork_wqueue_s *wqueue,
 
       dq_rem((FAR dq_entry_t *)work, &wqueue->q);
       work->worker = NULL;
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);

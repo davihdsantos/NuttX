@@ -160,7 +160,7 @@ int psock_socket(int domain, int type, int protocol, FAR struct socket *psock)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

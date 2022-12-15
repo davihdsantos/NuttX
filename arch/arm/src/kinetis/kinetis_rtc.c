@@ -284,7 +284,7 @@ int up_rtc_irq_attach(void)
       up_enable_irq(KINETIS_IRQ_RTC);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -391,7 +391,7 @@ int up_rtc_initialize(void)
 
   g_rtc_enabled = true;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -463,7 +463,7 @@ int up_rtc_gettime(FAR struct timespec *tp)
 
   tp->tv_sec = seconds;
   tp->tv_nsec = prescaler * (1000000000 / CONFIG_RTC_FREQUENCY);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -502,7 +502,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -543,7 +543,7 @@ int kinetis_rtc_setalarm(FAR const struct timespec *tp, alarmcb_t callback)
 
       rtc_dumpregs("set alarmtime");
 
-      return OK;
+      return OKK;
     }
   else
     {
@@ -578,7 +578,7 @@ int kinetis_rtc_cancelalarm(void)
       /* Unset the alarm */
 
       putreg32(0, KINETIS_RTC_IER);     /* Disable alarm interrupt */
-      return OK;
+      return OKK;
     }
   else
     {
@@ -608,7 +608,7 @@ int kinetis_rtc_rdalarm(FAR struct timespec *tp)
 
   tp->tv_sec = getreg32(KINETIS_RTC_TAR);
   tp->tv_nsec = 0;
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -254,7 +254,7 @@ int up_cpu_paused(int cpu)
   up_restorestate(tcb->xcp.regs);
   spin_unlock(&g_cpu_wait[cpu]);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -285,7 +285,7 @@ int arm_pause_handler(int irq, void *c, FAR void *arg)
 
   if (handle_irqreq(cpu))
     {
-      return OK;
+      return OKK;
     }
 
   /* Check for false alarms.  Such false could occur as a consequence of
@@ -298,7 +298,7 @@ int arm_pause_handler(int irq, void *c, FAR void *arg)
       return up_cpu_paused(cpu);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -361,7 +361,7 @@ int up_cpu_pause(int cpu)
    * called.  g_cpu_paused will be unlocked in any case.
    */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -404,7 +404,7 @@ int up_cpu_resume(int cpu)
               !spin_islocked(&g_cpu_paused[cpu]));
 
   spin_unlock(&g_cpu_wait[cpu]);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

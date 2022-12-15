@@ -134,7 +134,7 @@ int mld_leavegroup(FAR const struct ipv6_mreq *mrec)
 
       if (group->njoins > 0)
         {
-          return OK;
+          return OKK;
         }
 
       /* Perform actions that would be performed only when the number of
@@ -207,7 +207,7 @@ int mld_leavegroup(FAR const struct ipv6_mreq *mrec)
             }
         }
 
-      return OK;
+      return OKK;
     }
 
   /* Return ENOENT if the address is not a member of the group */

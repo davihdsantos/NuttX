@@ -157,7 +157,7 @@ uint8_t lpc17_40_ssp1status(FAR struct spi_dev_s *dev, uint32_t devid)
 int weak_function lpc17_40_ssp1cmddata(FAR struct spi_dev_s *dev,
                                     uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI_CMDDATA */

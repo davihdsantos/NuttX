@@ -67,7 +67,7 @@
 
 int pthread_barrierattr_getpshared(FAR const pthread_barrierattr_t *attr, FAR int *pshared)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (!attr || !pshared)
     {

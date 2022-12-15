@@ -97,7 +97,7 @@ int sam_hsmciinit(void)
 #ifdef GPIO_MCI_WP
   sam_configgpio(GPIO_MCI_WP);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

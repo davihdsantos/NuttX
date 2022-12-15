@@ -1210,7 +1210,7 @@ static int sam_req_write(struct sam_usbdev_s *priv, struct sam_ep_s *privep)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1329,7 +1329,7 @@ static int sam_req_read(struct sam_usbdev_s *priv, struct sam_ep_s *privep,
   packetsize       |=  USBDEV_PKTSIZE_MPKTSIZE(privreq->inflight);
   sam_putreg8(USBDEV_EPSTATUS_BK0RDY, SAM_USBDEV_EPSTATUSCLR(epno));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1525,7 +1525,7 @@ static int sam_ep_configure_internal(struct sam_ep_s *privep,
   usbtrace(TRACE_INTDECODE(SAM_TRACEINTID_EPINTEN), epno << 8 | intflags);
 
   sam_dumpep(privep->dev, epno);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1639,7 +1639,7 @@ static int sam_ep_configure(struct usbdev_ep_s *ep,
    * configured.
    */
 
-  if (ret == OK && last)
+  if (ret == OKK && last)
     {
       struct sam_usbdev_s *priv = privep->dev;
 
@@ -1691,7 +1691,7 @@ static int sam_ep_disable(struct usbdev_ep_s *ep)
 
   sam_setdevaddr(priv, priv->devaddr);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1800,7 +1800,7 @@ static int sam_ep_submit(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   struct sam_usbdev_s *priv;
   irqstate_t flags;
   uint8_t epno;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_USB
   if (!req || !req->callback || !req->buf || !ep)
@@ -1850,7 +1850,7 @@ static int sam_ep_submit(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
           uinfo("Pending stall clear\n");
           sam_req_enqueue(&privep->pendq, privreq);
           usbtrace(TRACE_INREQQUEUED(epno), req->len);
-          ret = OK;
+          ret = OKK;
         }
 
       else
@@ -1925,7 +1925,7 @@ static int sam_ep_cancel(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   flags = enter_critical_section();
   sam_req_cancel(privep, -EAGAIN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1980,7 +1980,7 @@ static int sam_ep_stallresume(struct usbdev_ep_s *ep, bool resume)
 
               privep->pending = true;
               leave_critical_section(flags);
-              return OK;
+              return OKK;
             }
         }
 
@@ -2170,7 +2170,7 @@ static int sam_wakeup(struct usbdev_s *dev)
   sam_putreg16(regval, SAM_USBDEV_CTRLB);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2196,7 +2196,7 @@ static int sam_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3427,7 +3427,7 @@ static int sam_usb_interrupt(int irq, void *context, void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 void up_usbuninitialize(void)
@@ -3591,7 +3591,7 @@ static int sam_ep_stall(struct sam_ep_s *privep)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3661,7 +3661,7 @@ static int sam_ep_resume(struct sam_ep_s *privep)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3705,7 +3705,7 @@ static int sam_pullup(struct usbdev_s *dev, bool enable)
 
   sam_putreg8((uint8_t)regval, SAM_USBDEV_CTRLB);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4061,7 +4061,7 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
 
   priv->driver = NULL;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_USBDEV && CONFIG_SAMD5E5_USB */

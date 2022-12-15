@@ -175,7 +175,7 @@ int lpc17_40_dumpgpio(lpc17_40_pinset_t pinset, const char *msg)
            base+LPC17_40_GPIOINT_INTENF_OFFSET,   getreg32(base+LPC17_40_GPIOINT_INTENF_OFFSET));
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_DEBUG_GPIO_INFO */
 

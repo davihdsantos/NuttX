@@ -137,7 +137,7 @@ static int builtin_loadbinary(struct binary_s *binp)
   binp->stacksize = builtin->stacksize;
   binp->priority  = builtin->priority;
   close(fd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

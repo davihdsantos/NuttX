@@ -154,7 +154,7 @@ static const struct uart_ops_s g_uart_rpmsg_ops =
 
 static int uart_rpmsg_setup(FAR struct uart_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 static void uart_rpmsg_shutdown(FAR struct uart_dev_s *dev)
@@ -163,7 +163,7 @@ static void uart_rpmsg_shutdown(FAR struct uart_dev_s *dev)
 
 static int uart_rpmsg_attach(FAR struct uart_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 static void uart_rpmsg_detach(FAR struct uart_dev_s *dev)
@@ -188,7 +188,7 @@ static int uart_rpmsg_ioctl(FAR struct file *filep, int cmd,
         if (termiosp)
           {
             *termiosp = priv->termios;
-            ret = OK;
+            ret = OKK;
           }
         else
           {
@@ -204,7 +204,7 @@ static int uart_rpmsg_ioctl(FAR struct file *filep, int cmd,
         if (termiosp)
           {
             priv->termios = *termiosp;
-            ret = OK;
+            ret = OKK;
           }
         else
           {
@@ -519,7 +519,7 @@ int uart_rpmsg_init(FAR const char *cpuname, FAR const char *devname,
       uart_register(UART_RPMSG_DEV_CONSOLE, dev);
     }
 
-  return OK;
+  return OKK;
 
 fail:
   kmm_free(dev->recv.buffer);

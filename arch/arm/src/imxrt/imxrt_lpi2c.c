@@ -530,7 +530,7 @@ static inline void imxrt_lpi2c_sem_wait(FAR struct imxrt_lpi2c_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1442,7 +1442,7 @@ static int imxrt_lpi2c_isr_process(struct imxrt_lpi2c_priv_s *priv)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1592,7 +1592,7 @@ static int imxrt_lpi2c_init(FAR struct imxrt_lpi2c_priv_s *priv)
   /* Enable I2C */
 
   imxrt_lpi2c_modifyreg(priv, IMXRT_LPI2C_MCR_OFFSET, 0, LPI2C_MCR_MEN);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1625,7 +1625,7 @@ static int imxrt_lpi2c_deinit(FAR struct imxrt_lpi2c_priv_s *priv)
 
   imxrt_lpi2c_clock_disable(priv->config->base);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1855,7 +1855,7 @@ static int imxrt_lpi2c_reset(FAR struct i2c_master_s *dev)
   /* Restore the frequency */
 
   imxrt_lpi2c_setclock(priv, frequency);
-  ret = OK;
+  ret = OKK;
 
 out:
 
@@ -1955,7 +1955,7 @@ int imxrt_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   if (--priv->refs > 0)
     {
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(flags);
@@ -1967,7 +1967,7 @@ int imxrt_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   /* Release unused resources */
 
   imxrt_lpi2c_sem_destroy(priv);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_IMXRT_LPI2C1 || CONFIG_IMXRT_LPI2C2 || \

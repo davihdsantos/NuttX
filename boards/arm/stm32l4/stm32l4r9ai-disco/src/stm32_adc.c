@@ -316,5 +316,5 @@ int stm32l4_adc_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }

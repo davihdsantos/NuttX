@@ -129,7 +129,7 @@ int lx_cpu_can_setup(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 #else
   return -ENODEV;
 #endif

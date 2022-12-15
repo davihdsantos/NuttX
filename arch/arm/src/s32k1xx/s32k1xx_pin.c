@@ -202,7 +202,7 @@ int s32k1xx_pinconfig(uint32_t cfgset)
             }
         }
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -245,7 +245,7 @@ int s32k1xx_pinfilter(unsigned int port, bool lpo, unsigned int width)
 
       DEBUGASSERT(width < 32);
       putreg32(width, base + S32K1XX_PORT_DFWR_OFFSET);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

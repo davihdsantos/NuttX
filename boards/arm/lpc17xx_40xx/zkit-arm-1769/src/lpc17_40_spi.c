@@ -169,7 +169,7 @@ uint8_t lpc17_40_spistatus(FAR struct spi_dev_s *dev, uint32_t devid)
 
 int lpc17_40_spicmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI_CMDDATA */

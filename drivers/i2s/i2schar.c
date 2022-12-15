@@ -444,7 +444,7 @@ int i2schar_register(FAR struct i2s_dev_s *i2s, int minor)
 
       /* Return the result of the registration */
 
-      return OK;
+      return OKK;
     }
 
 

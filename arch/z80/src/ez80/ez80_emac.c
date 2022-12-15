@@ -609,7 +609,7 @@ static int ez80emac_miiconfigure(FAR struct ez80emac_driver_s *priv)
 {
   uint16_t phyval;
   bool bauto;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   /* Verify that the detect PHY is an AMD Am87c874 as expected */
@@ -887,7 +887,7 @@ static int ez80emac_miiconfigure(FAR struct ez80emac_driver_s *priv)
   ninfo("  MII_LPA:       %04x\n", ez80emac_miiread(priv, MII_LPA));
   ninfo("  MII_EXPANSION: %04x\n", ez80emac_miiread(priv, MII_EXPANSION));
   ninfo("EMAC CFG1:         %02x\n", inp(EZ80_EMAC_CFG11));
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1089,7 +1089,7 @@ static int ez80emac_transmit(struct ez80emac_driver_s *priv)
 
   (void)wd_start(priv->txtimeout, EMAC_TXTIMEOUT,
                  ez80emac_txtimeout_expiry, 1, (uint32_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1614,7 +1614,7 @@ static int ez80emac_txinterrupt(int irq, FAR void *context, FAR void *arg)
 
   work_queue(ETHWORK, &priv->txwork, ez80emac_txinterrupt_work, priv, 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1701,7 +1701,7 @@ static int ez80emac_rxinterrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the Rx interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->rxwork,  ez80emac_rxinterrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1822,7 +1822,7 @@ static int ez80emac_sysinterrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->syswork,  ez80emac_sysinterrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2071,7 +2071,7 @@ static int ez80emac_ifup(FAR struct net_driver_s *dev)
       up_enable_irq(EZ80_EMACRX_IRQ);
       up_enable_irq(EZ80_EMACTX_IRQ);
       up_enable_irq(EZ80_EMACSYS_IRQ);
-      ret = OK;
+      ret = OKK;
     }
   return ret;
 }
@@ -2122,7 +2122,7 @@ static int ez80emac_ifdown(struct net_driver_s *dev)
 
   priv->bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2196,7 +2196,7 @@ static int ez80emac_txavail(FAR struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->syswork, ez80emac_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2225,7 +2225,7 @@ static int ez80emac_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
   /* MISSING LOGIC!!! */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2255,7 +2255,7 @@ static int ez80emac_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
   /* MISSING LOGIC!!! */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2469,7 +2469,7 @@ static int ez80_emacinitialize(void)
 
   outp(EZ80_EMAC_TPTV_L, EMAC_TPTV & 0xff);
   outp(EZ80_EMAC_TPTV_H, EMAC_TPTV >> 8);
-  return OK;
+  return OKK;
 
 errout:
   return ret;
@@ -2551,7 +2551,7 @@ int up_netinitialize(void)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 
 errout:
   up_netuninitialize();
@@ -2609,7 +2609,7 @@ int up_multicastfilter(FAR struct net_driver_s *dev, FAR uint8_t *mac, bool enab
        regval &= ~(1 << bit);
     }
   outp(EZ80_EMAC_HTBL_0 + ndx, regval);
-  return OK;
+  return OKK;
 }
 #endif
 

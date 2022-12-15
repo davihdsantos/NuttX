@@ -300,7 +300,7 @@ int spirit_reg_read(FAR struct spirit_library_s *spirit, uint8_t regaddr,
   spirit_unlock(spirit->spi);
 
   spirit_regdebug("READ", header, buffer, buflen);
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -354,7 +354,7 @@ int spirit_reg_write(FAR struct spirit_library_s *spirit, uint8_t regaddr,
 
   SPI_SELECT(spirit->spi, SPIDEV_WIRELESS(0), false);
   spirit_unlock(spirit->spi);
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -433,7 +433,7 @@ int spirit_reg_modify(FAR struct spirit_library_s *spirit, uint8_t regaddr,
 
   SPI_SELECT(spirit->spi, SPIDEV_WIRELESS(0), false);
   spirit_unlock(spirit->spi);
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -480,7 +480,7 @@ int spirit_command(FAR struct spirit_library_s *spirit, uint8_t cmd)
 
   SPI_SELECT(spirit->spi, SPIDEV_WIRELESS(0), false);
   spirit_unlock(spirit->spi);
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -534,7 +534,7 @@ int spirit_fifo_read(FAR struct spirit_library_s *spirit, FAR uint8_t *buffer,
   spirit_unlock(spirit->spi);
 
   spirit_fifodebug("FIFO IN", header, buffer, buflen);
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -587,7 +587,7 @@ int spirit_fifo_write(FAR struct spirit_library_s *spirit,
 
   SPI_SELECT(spirit->spi, SPIDEV_WIRELESS(0), false);
   spirit_unlock(spirit->spi);
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -688,7 +688,7 @@ int spirit_waitstatus(FAR struct spirit_library_s *spirit,
 
   if (spirit->u.state.MC_STATE == state)
     {
-      return OK;
+      return OKK;
     }
 
   /* This is probably not an error.  In a busy radio environment, there

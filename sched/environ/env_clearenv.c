@@ -74,7 +74,7 @@ int clearenv(void)
   DEBUGASSERT(tcb->group);
 
   env_release(tcb->group);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DISABLE_ENVIRON */

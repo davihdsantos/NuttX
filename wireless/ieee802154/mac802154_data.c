@@ -356,7 +356,7 @@ int mac802154_req_data(MACHANDLE mac,
         }
     }
 
-  return OK;
+  return OKK;
 
 errout_with_txdesc:
   /* Free TX the descriptor, but preserve the IOB. */

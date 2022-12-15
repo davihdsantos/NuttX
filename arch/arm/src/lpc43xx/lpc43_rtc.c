@@ -192,7 +192,7 @@ static int rtc_setup(void)
   /* Enable counters */
 
   putreg32((uint32_t)0x01, LPC43_RTC_CCR);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -214,7 +214,7 @@ static int rtc_setup(void)
 static int rtc_interrupt(int irq, void *context)
 {
 #warning "Missing logic"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -247,7 +247,7 @@ int up_rtc_initialize(void)
   /* Attach the RTC interrupt handler */
 
   ret = irq_attach(LPC43M4_IRQ_RTC, rtc_interrupt);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(LPC43M4_IRQ_RTC);
     }
@@ -317,7 +317,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
 #endif
 
   rtc_dumptime(tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -358,7 +358,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
   putreg32(((newtime.tm_yday) & RTC_DOY_MASK), LPC43_RTC_DOY);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -395,7 +395,7 @@ int lpc43_rtc_setalarm(FAR const struct timespec *tp, alarmcb_t callback)
       /* The set the alarm */
 #warning "Missing logic"
 
-      ret = OK;
+      ret = OKK;
     }
   return ret;
 }

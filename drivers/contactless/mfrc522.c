@@ -400,7 +400,7 @@ int mfrc522_calc_crc(FAR struct mfrc522_dev_s *dev, uint8_t *buffer,
   result[0] = mfrc522_readu8(dev, MFRC522_CRC_RESULT_REGL);
   result[1] = mfrc522_readu8(dev, MFRC522_CRC_RESULT_REGH);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -595,7 +595,7 @@ int mfrc522_comm_picc(FAR struct mfrc522_dev_s *dev, uint8_t command,
       /* Verify CRC_A */
 
       ret = mfrc522_calc_crc(dev, &back_data[0], *back_len - 2, &ctrlbuf[0]);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -607,7 +607,7 @@ int mfrc522_comm_picc(FAR struct mfrc522_dev_s *dev, uint8_t command,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -668,7 +668,7 @@ int mfrc522_picc_reqa_wupa(FAR struct mfrc522_dev_s *dev, uint8_t command,
 
   /* For REQA and WUPA we need to transmit only 7 bits */
 
-  if (status != OK)
+  if (status != OKK)
     {
       return status;
     }
@@ -681,7 +681,7 @@ int mfrc522_picc_reqa_wupa(FAR struct mfrc522_dev_s *dev, uint8_t command,
     }
 
   ctlsinfo("buffer[0]=0x%02X | buffer[1]=0x%02X\n", buffer[0], buffer[1]);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -906,7 +906,7 @@ int mfrc522_picc_select(FAR struct mfrc522_dev_s *dev,
               /* Calculate CRC_A */
 
               result = mfrc522_calc_crc(dev, buffer, 7, &buffer[7]);
-              if (result != OK)
+              if (result != OKK)
                 {
                   return result;
                 }
@@ -997,7 +997,7 @@ int mfrc522_picc_select(FAR struct mfrc522_dev_s *dev,
               i = 1 + (curr_level_known_bits / 8) + (count ? 1 : 0);
               buffer[i] |= (1 << count);
             }
-          else if (result != OK)
+          else if (result != OKK)
             {
               return result;
             }
@@ -1050,7 +1050,7 @@ int mfrc522_picc_select(FAR struct mfrc522_dev_s *dev,
        */
 
       result = mfrc522_calc_crc(dev, resp_buf, 1, &buffer[2]);
-      if (result != OK)
+      if (result != OKK)
         {
           return result;
         }
@@ -1079,7 +1079,7 @@ int mfrc522_picc_select(FAR struct mfrc522_dev_s *dev,
 
   uid->size = 3 * cascade_level + 1;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1221,7 +1221,7 @@ int mfrc522_mifare_read(FAR struct mfrc522_dev_s *dev,
   uint8_t command[4];
   uint8_t length    = 18;
   uint8_t validbits = 0;
-  int     ret       = OK;
+  int     ret       = OKK;
 
   /* Read block from address */
 
@@ -1231,7 +1231,7 @@ int mfrc522_mifare_read(FAR struct mfrc522_dev_s *dev,
   /* Get CRC */
 
   ret = mfrc522_calc_crc(dev, command, 2, &command[2]);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout;
     }
@@ -1402,7 +1402,7 @@ int mfrc522_selftest(FAR struct mfrc522_dev_s *dev)
     }
 
   ctlsinfo("Done!\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1431,7 +1431,7 @@ static int mfrc522_open(FAR struct file *filep)
   mfrc522_getfwversion(dev);
 
   dev->state = MFRC522_STATE_IDLE;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1455,7 +1455,7 @@ static int mfrc522_close(FAR struct file *filep)
 
   dev->state = MFRC522_STATE_NOT_INIT;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1507,7 +1507,7 @@ static ssize_t mfrc522_read(FAR struct file *filep, FAR char *buffer,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1539,7 +1539,7 @@ static int mfrc522_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode;
   FAR struct mfrc522_dev_s *dev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(filep);
   inode = filep->f_inode;

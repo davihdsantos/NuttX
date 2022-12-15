@@ -508,7 +508,7 @@ static void ssi_semtake(sem_t *sem)
   do
     {
       ret = nxsem_wait(sem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -938,7 +938,7 @@ static int ssi_transfer(struct tiva_ssidev_s *priv, const void *txbuffer,
   while (priv->nrxwords < priv->nwords);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1056,7 +1056,7 @@ static int ssi_interrupt(int irq, void *context, FAR void *arg)
       ssi_semgive(&priv->xfrsem);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1098,14 +1098,14 @@ static int ssi_lock(FAR struct spi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

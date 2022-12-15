@@ -142,11 +142,11 @@ int irq_attach(int irq, xcpt_t isr, FAR void *arg)
 #endif
 
       leave_critical_section(flags);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }

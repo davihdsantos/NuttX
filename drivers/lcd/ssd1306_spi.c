@@ -91,7 +91,7 @@ int ssd1306_sendbyte(FAR struct ssd1306_dev_s *priv, uint8_t regval)
   /* Send byte value to display */
 
   (void)SPI_SEND(priv->spi, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -107,7 +107,7 @@ int ssd1306_sendblk(FAR struct ssd1306_dev_s *priv, uint8_t *data, uint8_t len)
   /* Send byte value to display */
 
   (void)SPI_SNDBLOCK(priv->spi, data, len);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -294,7 +294,7 @@ static int hrt_interrupt(int irq, FAR void *context, FAR void *arg)
 
   hrt_queue_refresh();
   hrt_usleep_setup();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -736,5 +736,5 @@ int up_rtc_gettime(FAR struct timespec *tp)
   tp->tv_nsec = (long)nsecs;
 
   tmrinfo("Returning tp=(%d,%d)\n", (int)tp->tv_sec, (int)tp->tv_nsec);
-  return OK;
+  return OKK;
 }

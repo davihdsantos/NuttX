@@ -83,5 +83,5 @@ int fgetpos(FAR FILE *stream, FAR fpos_t *pos)
     }
 
   *pos = (fpos_t)position;
-  return OK;
+  return OKK;
 }

@@ -122,7 +122,7 @@ int group_addrenv(FAR struct tcb_s *tcb)
        * intact.
        */
 
-      return OK;
+      return OKK;
     }
 
   /* Get the ID of the group that needs the address environment */
@@ -173,7 +173,7 @@ int group_addrenv(FAR struct tcb_s *tcb)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ARCH_ADDRENV */

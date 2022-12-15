@@ -77,7 +77,7 @@ int pm_unregister(FAR struct pm_callback_s *callbacks)
   /* Remove entry from the list of registered callbacks. */
 
   ret = pm_lock();
-  if (ret == OK)
+  if (ret == OKK)
     {
       dq_rem(&callbacks->entry, &g_pmglobals.registry);
       pm_unlock();

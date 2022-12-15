@@ -69,7 +69,7 @@ int board_uniqueid(FAR uint8_t *uniqueid)
     }
 
   kinetis_get_uniqueid(uniqueid);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_BOARDCTL_UNIQUEID */

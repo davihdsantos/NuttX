@@ -633,7 +633,7 @@ static inline int lpc17_40_configinput(lpc17_40_pinset_t cfgset, unsigned int po
 
   lpc17_40_setpinfunction(port, pin, IOCON_FUNC_GPIO);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -659,7 +659,7 @@ static inline int lpc17_40_configinterrupt(lpc17_40_pinset_t cfgset, unsigned in
 #ifdef CONFIG_LPC17_40_GPIOIRQ
   lpc17_40_setintedge(port, pin, (cfgset & GPIO_EDGE_MASK) >> GPIO_EDGE_SHIFT);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -712,7 +712,7 @@ static inline int lpc17_40_configoutput(lpc17_40_pinset_t cfgset, unsigned int p
 
   lpc17_40_gpiowrite(cfgset, ((cfgset & GPIO_VALUE) != GPIO_VALUE_ZERO));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -783,7 +783,7 @@ static int lpc17_40_configalternate(lpc17_40_pinset_t cfgset, unsigned int port,
 
   lpc17_40_setpinfunction(port, pin, alt);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

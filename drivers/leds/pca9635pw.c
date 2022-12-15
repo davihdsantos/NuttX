@@ -133,7 +133,7 @@ static int pca9635pw_i2c_write_byte(FAR struct pca9635pw_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -159,7 +159,7 @@ static int pca9635pw_set_led_mode(FAR struct pca9635pw_dev_s *priv,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -228,7 +228,7 @@ static int pca9635pw_open(FAR struct file *filep)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -265,7 +265,7 @@ static int pca9635pw_close(FAR struct file *filep)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -280,7 +280,7 @@ static int pca9635pw_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct pca9635pw_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   lcdinfo("cmd: %d arg: %ld\n", cmd, arg);
 
@@ -364,14 +364,14 @@ int pca9635pw_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
   /* Register the character driver */
 
   int const ret = register_driver(devpath, &g_pca9635pw_fileops, 666, priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       lcderr("ERROR: Failed to register driver: %d\n", ret);
       kmm_free(priv);
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_I2C && CONFIG_I2C_PCA9635PW */

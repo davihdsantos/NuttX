@@ -297,7 +297,7 @@ static inline int sst25xx_readid(struct sst25xx_dev_s *priv)
            priv->nsectors    = SST25_SST25064_NSECTORS;
            priv->pageshift   = SST25_SST25064_PAGE_SHIFT;
            priv->npages      = SST25_SST25064_NPAGES;
-           return OK;
+           return OKK;
         }
     }
 
@@ -491,7 +491,7 @@ static inline int sst25xx_bulkerase(struct sst25xx_dev_s *priv)
   sst25xx_waitwritecomplete(priv);
 
   finfo("Return: OK\n");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -879,7 +879,7 @@ static int sst25xx_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 
-              ret = OK;
+              ret = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -961,7 +961,7 @@ FAR struct mtd_dev_s *sst25xx_initialize(FAR struct spi_dev_s *dev)
       /* Identify the FLASH chip and get its capacity */
 
       ret = sst25xx_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

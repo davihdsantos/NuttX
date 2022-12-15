@@ -583,7 +583,7 @@ static int c5471_mdrxbit (void)
     }
   else
     {
-      return OK;
+      return OKK;
     }
 }
 
@@ -991,7 +991,7 @@ static int c5471_transmit(struct c5471_driver_s *priv)
 
   (void)wd_start(priv->c_txtimeout, C5471_TXTIMEOUT,
                  c5471_txtimeout_expiry, 1, (wdparm_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1668,7 +1668,7 @@ static int c5471_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->c_irqwork, c5471_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1877,7 +1877,7 @@ static int c5471_ifup(struct net_driver_s *dev)
 
   priv->c_bifup = true;
   up_enable_irq(C5471_IRQ_ETHER);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1930,7 +1930,7 @@ static int c5471_ifdown(struct net_driver_s *dev)
 
   priv->c_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2011,7 +2011,7 @@ static int c5471_txavail(FAR struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->c_pollwork, c5471_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2040,7 +2040,7 @@ static int c5471_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
 #warning "Multicast MAC support not implemented"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2070,7 +2070,7 @@ static int c5471_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
 #warning "Multicast MAC support not implemented"
-  return OK;
+  return OKK;
 }
 #endif
 

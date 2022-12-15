@@ -652,7 +652,7 @@ static int stm3240g_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *bu
       col++;
     }
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -791,7 +791,7 @@ static int stm3240g_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -809,7 +809,7 @@ static int stm3240g_getvideoinfo(FAR struct lcd_dev_s *dev,
   lcdinfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
           g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres, g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -826,7 +826,7 @@ static int stm3240g_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno
   DEBUGASSERT(dev && pinfo && planeno == 0);
   lcdinfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -862,7 +862,7 @@ static int stm3240g_poweroff(void)
   /* Remember the power off state */
 
   g_lcddev.power = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -897,7 +897,7 @@ static int stm3240g_setpower(struct lcd_dev_s *dev, int power)
       stm3240g_poweroff();
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1128,7 +1128,7 @@ int board_lcd_initialize(void)
   /* Turn the display off */
 
   stm3240g_poweroff();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

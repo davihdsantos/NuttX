@@ -800,7 +800,7 @@ static int unionfs_unbind_child(FAR struct unionfs_mountpt_s *um)
       inode_release(bdinode);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -920,7 +920,7 @@ static int unionfs_open(FAR struct file *filep, FAR const char *relpath,
   /* Save our private data in the file structure */
 
   filep->f_priv = (FAR void *)uf;
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   unionfs_semgive(ui);
@@ -937,7 +937,7 @@ static int unionfs_close(FAR struct file *filep)
   FAR struct unionfs_file_s *uf;
   FAR struct unionfs_mountpt_s *um;
   FAR const struct mountpt_operations *ops;
-  int ret = OK;
+  int ret = OKK;
 
   /* Recover the open file data from the struct file instance */
 
@@ -1309,7 +1309,7 @@ static int unionfs_dup(FAR const struct file *oldp, FAR struct file *newp)
 
       /* Then perform the lower lowel dup operation */
 
-      ret = OK;
+      ret = OKK;
       if (ops->dup != NULL)
         {
           ret = ops->dup(&oldpriv->uf_file, &newpriv->uf_file);
@@ -1574,7 +1574,7 @@ static int unionfs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
   DEBUGASSERT(ui->ui_nopen > 0);
 
   unionfs_semgive(ui);
-  return OK;
+  return OKK;
 
 errout_with_fs2open:
   ops = ui->ui_fs[1].um_node->u.i_mops;
@@ -1608,7 +1608,7 @@ static int unionfs_closedir(FAR struct inode *mountpt,
   FAR struct unionfs_mountpt_s *um;
   FAR const struct mountpt_operations *ops;
   FAR struct fs_unionfsdir_s *fu;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   finfo("mountpt=%p dir=%p\n", mountpt, dir);
@@ -1755,7 +1755,7 @@ static int unionfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
           fu->fu_eod = true;
         }
 
-      return OK;
+      return OKK;
     }
 
   /* This is a normal, mediated file system readdir() */
@@ -1850,7 +1850,7 @@ static int unionfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
                         }
                     }
 
-                  return OK;
+                  return OKK;
                 }
 
               /* No.. check for a normal directory access */
@@ -2091,7 +2091,7 @@ static int unionfs_unbind(FAR void *handle, FAR struct inode **blkdriver,
     }
 
   unionfs_semgive(ui);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2231,7 +2231,7 @@ static int unionfs_statfs(FAR struct inode *mountpt, FAR struct statfs *buf)
   buf->f_bfree          = buf1.f_bfree  + buf2.f_bfree;
   buf->f_bavail         = buf1.f_bavail + buf2.f_bavail;
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   unionfs_semgive(ui);
@@ -2372,7 +2372,7 @@ static int unionfs_mkdir(FAR struct inode *mountpt, FAR const char *relpath,
 
   if (ret1 >= 0 || ret2 >= 0)
     {
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -2511,7 +2511,7 @@ static int unionfs_rename(FAR struct inode *mountpt,
            */
 
           unionfs_semgive(ui);
-          return OK;
+          return OKK;
         }
     }
 
@@ -2574,7 +2574,7 @@ static int unionfs_stat(FAR struct inode *mountpt, FAR const char *relpath,
        */
 
       unionfs_semgive(ui);
-      return OK;
+      return OKK;
     }
 
   /* stat failed on the file system 1.  Try again on file system 2. */
@@ -2588,7 +2588,7 @@ static int unionfs_stat(FAR struct inode *mountpt, FAR const char *relpath,
        */
 
       unionfs_semgive(ui);
-      return OK;
+      return OKK;
     }
 
   /* Special case the unionfs root directory when both file systems are
@@ -2612,7 +2612,7 @@ static int unionfs_stat(FAR struct inode *mountpt, FAR const char *relpath,
       if (unionfs_ispartprefix(relpath, ui->ui_fs[0].um_prefix) ||
           unionfs_ispartprefix(relpath, ui->ui_fs[1].um_prefix))
         {
-          ret = OK;
+          ret = OKK;
         }
       else
         {
@@ -2670,7 +2670,7 @@ static int unionfs_getmount(FAR const char *path, FAR struct inode **inode)
 
   *inode = minode;
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
 errout_with_inode:
   inode_release(minode);
@@ -2758,7 +2758,7 @@ static int unionfs_dobind(FAR const char *fspath1, FAR const char *prefix1,
   (void)inode_remove(fspath2);
 
   *handle = ui;
-  return OK;
+  return OKK;
 
 errout_with_prefix1:
   if (ui->ui_fs[0].um_prefix != NULL)
@@ -2858,7 +2858,7 @@ int unionfs_mount(FAR const char *fspath1, FAR const char *prefix1,
     }
 
   inode_semgive();
-  return OK;
+  return OKK;
 
 errout_with_mountpt:
   inode_release(mpinode);

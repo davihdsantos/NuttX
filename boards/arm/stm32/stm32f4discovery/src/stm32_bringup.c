@@ -156,7 +156,7 @@ int stm32_bringup(void)
 #ifdef HAVE_RTC_DRIVER
   FAR struct rtc_lowerhalf_s *lower;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
 #if defined(CONFIG_I2C) && defined(CONFIG_SYSTEM_I2CTOOL)
   stm32_i2ctool();
@@ -226,7 +226,7 @@ int stm32_bringup(void)
   /* Initialize the SDIO block driver */
 
   ret = stm32_sdio_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: Failed to initialize MMC/SD driver: %d\n", ret);
       return ret;
@@ -250,7 +250,7 @@ int stm32_bringup(void)
    */
 
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -261,7 +261,7 @@ int stm32_bringup(void)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("ERROR: Failed to start USB monitor: %d\n", ret);
       return ret;
@@ -321,7 +321,7 @@ int stm32_bringup(void)
   /* Initialize and register the qencoder driver */
 
   ret = stm32_qencoder_initialize("/dev/qe0", CONFIG_STM32F4DISCO_QETIMER);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",
@@ -377,7 +377,7 @@ int stm32_bringup(void)
   /* Configure CS43L22 audio */
 
   ret = stm32_cs43l22_initialize(1);
-  if (ret != OK)
+  if (ret != OKK)
     {
       serr("Failed to initialize CS43L22 audio: %d\n", ret);
     }

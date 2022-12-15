@@ -215,7 +215,7 @@ static void slip_semtake(FAR struct slip_driver_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -373,7 +373,7 @@ static int slip_transmit(FAR struct slip_driver_s *priv)
   slip_putc(priv, SLIP_END);
   NETDEV_TXDONE(&priv->dev);
   priv->txnodelay = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -778,7 +778,7 @@ static int slip_rxtask(int argc, FAR char *argv[])
 
   /* We won't get here */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -817,7 +817,7 @@ static int slip_ifup(FAR struct net_driver_s *dev)
   /* Mark the interface up */
 
   priv->bifup = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -843,7 +843,7 @@ static int slip_ifdown(FAR struct net_driver_s *dev)
   /* Mark the device "down" */
 
   priv->bifup = false;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -876,7 +876,7 @@ static int slip_txavail(FAR struct net_driver_s *dev)
       (void)nxsig_kill(priv->txpid, SIGALRM);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -904,7 +904,7 @@ static int slip_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -933,7 +933,7 @@ static int slip_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1046,7 +1046,7 @@ int slip_initialize(int intf, FAR const char *devname)
    */
 
   close(priv->fd);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_SLIP */

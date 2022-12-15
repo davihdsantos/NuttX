@@ -271,7 +271,7 @@ static int sam_xbee_devsetup(FAR struct sam_priv_s *priv)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -315,6 +315,6 @@ int sam_xbee_initialize(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 #endif /* HAVE_XBEE */

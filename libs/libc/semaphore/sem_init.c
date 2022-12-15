@@ -100,7 +100,7 @@ int nxsem_init(FAR sem_t *sem, int pshared, unsigned int value)
       sem->holder[1].counts = 0;
 #  endif
 #endif
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

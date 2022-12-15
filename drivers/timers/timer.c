@@ -183,7 +183,7 @@ static int timer_open(FAR struct file *filep)
   /* Save the new open count */
 
   upper->crefs = tmp;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nxsem_post(&upper->exclsem);
@@ -226,7 +226,7 @@ static int timer_close(FAR struct file *filep)
     }
 
   nxsem_post(&upper->exclsem);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -618,7 +618,7 @@ int timer_setcallback(FAR void *handle, tccb_t callback, FAR void *arg)
       /* Yes.. Defer the hander attachment to the lower half driver */
 
       lower->ops->setcallback(lower, callback, arg);
-      return OK;
+      return OKK;
     }
 
   return -ENOSYS;

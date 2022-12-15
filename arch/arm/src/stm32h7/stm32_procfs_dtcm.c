@@ -190,7 +190,7 @@ static int dtcm_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the index as the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -210,7 +210,7 @@ static int dtcm_close(FAR struct file *filep)
 
   kmm_free(priv);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -309,7 +309,7 @@ static int dtcm_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new attributes in the new file structure */
 
   newp->f_priv = (FAR void *)newpriv;
-  return OK;
+  return OKK;
 }
 
 static int dtcm_stat(const char *relpath, struct stat *buf)
@@ -325,7 +325,7 @@ static int dtcm_stat(const char *relpath, struct stat *buf)
   buf->st_blksize = 0;
   buf->st_blocks  = 0;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

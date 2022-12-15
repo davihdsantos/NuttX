@@ -103,7 +103,7 @@ static inline void _local_semtake(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -230,7 +230,7 @@ static int inline local_stream_connect(FAR struct local_conn_s *client,
 
   DEBUGASSERT(client->lc_infile.f_inode != NULL);
   client->lc_state = LOCAL_STATE_CONNECTED;
-  return OK;
+  return OKK;
 
 errout_with_outfd:
   (void)file_close(&client->lc_outfile);
@@ -306,7 +306,7 @@ int psock_local_connect(FAR struct socket *psock,
           {
 #warning Missing logic
             net_unlock();
-            return OK;
+            return OKK;
           }
           break;
 
@@ -315,7 +315,7 @@ int psock_local_connect(FAR struct socket *psock,
             if (strncmp(conn->lc_path, unaddr->sun_path, UNIX_PATH_MAX - 1)
                 == 0)
               {
-                int ret = OK;
+                int ret = OKK;
 
                 /* Bind the address and protocol */
 

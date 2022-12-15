@@ -67,7 +67,7 @@
 
 int pthread_barrierattr_init(FAR pthread_barrierattr_t *attr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (!attr)
     {

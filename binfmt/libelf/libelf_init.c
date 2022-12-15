@@ -121,7 +121,7 @@ static inline int elf_filelen(FAR struct elf_loadinfo_s *loadinfo,
   /* Return the size of the file in the loadinfo structure */
 
   loadinfo->filelen = buf.st_size;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -197,6 +197,6 @@ int elf_init(FAR const char *filename, FAR struct elf_loadinfo_s *loadinfo)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 

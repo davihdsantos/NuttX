@@ -568,7 +568,7 @@ static inline int imxrt_gpio_select(int port, int pin)
     }
 
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -648,7 +648,7 @@ static inline int imxrt_gpio_configoutput(gpio_pinset_t pinset)
   /* Convert the configured input GPIO to an output */
 
   imxrt_gpio_dirout(port, pin);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -754,7 +754,7 @@ int imxrt_config_gpio(gpio_pinset_t pinset)
           /* Configure the pin as a GPIO input */
 
           ret = imxrt_gpio_configinput(pinset);
-          if (ret == OK)
+          if (ret == OKK)
             {
               ret = imxrt_gpioirq_configure(pinset);
             }

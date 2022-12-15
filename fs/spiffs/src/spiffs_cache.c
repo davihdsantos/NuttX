@@ -125,7 +125,7 @@ static int spiffs_cache_page_free(FAR struct spiffs_s *fs, int cpndx,
 {
   FAR struct spiffs_cache_s *cache;
   FAR struct spiffs_cache_page_s *cp;
-  int ret = OK;
+  int ret = OKK;
 
   cache = spiffs_get_cache(fs);
   cp    = spiffs_get_cache_page_hdr(fs, cache, cpndx);
@@ -188,7 +188,7 @@ static int spiffs_cache_page_remove_oldest(FAR struct spiffs_s *fs,
   FAR struct spiffs_cache_s *cache = spiffs_get_cache(fs);
   uint32_t oldest_val = 0;
   int cpndx = -1;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   /* Don't remove any cache pages unless there are no free cache pages */
@@ -197,7 +197,7 @@ static int spiffs_cache_page_remove_oldest(FAR struct spiffs_s *fs,
     {
       /* At least one free cpage */
 
-      return OK;
+      return OKK;
     }
 
   /* All busy, scan through all to find the cache page which has oldest
@@ -399,7 +399,7 @@ ssize_t spiffs_cache_read(FAR struct spiffs_s *fs, uint8_t op, int16_t objid,
 {
   FAR struct spiffs_cache_s *cache;
   FAR struct spiffs_cache_page_s *cp;
-  int ret = OK;
+  int ret = OKK;
 
   spiffs_cacheinfo("op=%02x, objid=%04x addr=%ld len=%lu\n",
                    op, objid, (long)addr, (unsigned long)len);
@@ -514,7 +514,7 @@ size_t spiffs_cache_write(FAR struct spiffs_s *fs, uint8_t op, int16_t objid,
   FAR struct spiffs_cache_s *cache;
   FAR struct spiffs_cache_page_s *cp;
   int16_t pgndx;
-  int ret = OK;
+  int ret = OKK;
 
   spiffs_cacheinfo("op=%02x, objid=%04x addr=%ld len=%lu\n",
                    op, objid, (long)addr, (unsigned long)len);
@@ -555,7 +555,7 @@ size_t spiffs_cache_write(FAR struct spiffs_s *fs, uint8_t op, int16_t objid,
             }
           else
             {
-              ret = OK;
+              ret = OKK;
             }
         }
     }

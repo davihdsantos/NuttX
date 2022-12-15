@@ -809,7 +809,7 @@ static int qspi_setupxctnfromcmd(struct qspi_xctnspec_s *xctn,
   xctn->idxnow = 0;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -938,7 +938,7 @@ static int qspi_setupxctnfrommem(struct qspi_xctnspec_s *xctn,
   xctn->idxnow = 0;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1178,7 +1178,7 @@ static int qspi0_interrupt(int irq, void *context, FAR void *arg)
 
     /* Set success status */
 
-    g_qspi0dev.xctn->disposition = OK;
+    g_qspi0dev.xctn->disposition = OKK;
 
     /* Signal complete */
 
@@ -1205,7 +1205,7 @@ static int qspi0_interrupt(int irq, void *context, FAR void *arg)
 
           /* Set success status */
 
-          g_qspi0dev.xctn->disposition = OK;
+          g_qspi0dev.xctn->disposition = OKK;
 
           /* Signal complete */
 
@@ -1265,7 +1265,7 @@ static int qspi0_interrupt(int irq, void *context, FAR void *arg)
        */
     }
 
-  return OK;
+  return OKK;
 }
 
 #elif defined(CONFIG_STM32L4_QSPI_DMA)
@@ -1347,7 +1347,7 @@ static void qspi_dma_callback(DMA_HANDLE handle, uint8_t isr, void *arg)
 
       if (isr & DMA_CHAN_TCIF_BIT)
         {
-          priv->result = OK;
+          priv->result = OKK;
         }
       else if (isr & DMA_CHAN_TEIF_BIT)
         {
@@ -1355,7 +1355,7 @@ static void qspi_dma_callback(DMA_HANDLE handle, uint8_t isr, void *arg)
         }
       else
         {
-          priv->result = OK;
+          priv->result = OKK;
         }
     }
 
@@ -1550,7 +1550,7 @@ static int qspi_memory_dma(struct stm32l4_qspidev_s *priv,
 static int qspi_receive_blocking(struct stm32l4_qspidev_s *priv,
                                  struct qspi_xctnspec_s *xctn)
 {
-  int ret = OK;
+  int ret = OKK;
   volatile uint32_t *datareg =
     (volatile uint32_t *)(priv->base + STM32L4_QUADSPI_DR_OFFSET);
   uint8_t *dest = (uint8_t *)xctn->buffer;
@@ -1588,7 +1588,7 @@ static int qspi_receive_blocking(struct stm32l4_qspidev_s *priv,
           remaining--;
         }
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Wait for transfer complete, then clear it */
 
@@ -1626,7 +1626,7 @@ static int qspi_receive_blocking(struct stm32l4_qspidev_s *priv,
 static int qspi_transmit_blocking(struct stm32l4_qspidev_s *priv,
                                  struct qspi_xctnspec_s *xctn)
 {
-  int ret = OK;
+  int ret = OKK;
   volatile uint32_t *datareg =
     (volatile uint32_t *)(priv->base + STM32L4_QUADSPI_DR_OFFSET);
   uint8_t *src = (uint8_t *)xctn->buffer;
@@ -1649,7 +1649,7 @@ static int qspi_transmit_blocking(struct stm32l4_qspidev_s *priv,
           remaining--;
         }
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Wait for transfer complete, then clear it */
 
@@ -1710,14 +1710,14 @@ static int qspi_lock(struct qspi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1954,7 +1954,7 @@ static int qspi_command(struct qspi_dev_s *dev,
   /* Set up the transaction descriptor as per command info */
 
   ret = qspi_setupxctnfromcmd(&xctn, cmdinfo);
-  if (OK != ret)
+  if (OKK != ret)
   {
     return ret;
   }
@@ -2087,7 +2087,7 @@ static int qspi_command(struct qspi_dev_s *dev,
     }
   else
     {
-      ret = OK;
+      ret = OKK;
     }
 
   /* Wait for Transfer complete, and not busy */
@@ -2135,7 +2135,7 @@ static int qspi_memory(struct qspi_dev_s *dev,
   /* Set up the transaction descriptor as per command info */
 
   ret = qspi_setupxctnfrommem(&xctn, meminfo);
-  if (OK != ret)
+  if (OKK != ret)
   {
     return ret;
   }
@@ -2424,7 +2424,7 @@ static int qspi_hw_initialize(struct stm32l4_qspidev_s *priv)
   qspi_dumpregs(priv, "After initialization");
   qspi_dumpgpioconfig("GPIO");
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

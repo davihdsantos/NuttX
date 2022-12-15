@@ -165,7 +165,7 @@ static void dat31r5sp_set_attenuation(FAR struct dat31r5sp_dev_s *priv,
 
 static int dat31r5sp_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -179,7 +179,7 @@ static int dat31r5sp_open(FAR struct file *filep)
 
 static int dat31r5sp_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -222,7 +222,7 @@ static int dat31r5sp_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct dat31r5sp_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

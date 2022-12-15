@@ -218,7 +218,7 @@ static int up_addrenv_initdata(uintptr_t l2table)
   mmu_l1_restore(ARCH_SCRATCH_VBASE, l1save);
 #endif
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_BUILD_KERNEL */
 
@@ -329,7 +329,7 @@ int up_addrenv_create(size_t textsize, size_t datasize, size_t heapsize,
 
   addrenv->heapsize = (size_t)ret << MM_PGSHIFT;
 #endif
-  return OK;
+  return OKK;
 
 errout:
   up_addrenv_destroy(addrenv);
@@ -383,7 +383,7 @@ int up_addrenv_destroy(FAR group_addrenv_t *addrenv)
 #endif
 
   memset(addrenv, 0, sizeof(group_addrenv_t));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -412,7 +412,7 @@ int up_addrenv_vtext(FAR group_addrenv_t *addrenv, FAR void **vtext)
 
   DEBUGASSERT(addrenv && vtext);
   *vtext = (FAR void *)CONFIG_ARCH_TEXT_VBASE;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -447,7 +447,7 @@ int up_addrenv_vdata(FAR group_addrenv_t *addrenv, uintptr_t textsize,
 
   DEBUGASSERT(addrenv && vdata);
   *vdata = (FAR void *)(CONFIG_ARCH_DATA_VBASE + ARCH_DATA_RESERVE_SIZE);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -612,7 +612,7 @@ int up_addrenv_select(FAR const group_addrenv_t *addrenv,
 #endif
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -681,7 +681,7 @@ int up_addrenv_restore(FAR const save_addrenv_t *oldenv)
 #endif
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -730,7 +730,7 @@ int up_addrenv_coherent(FAR const group_addrenv_t *addrenv)
                   CONFIG_ARCH_HEAP_VBASE + addrenv->heapsize);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -759,7 +759,7 @@ int up_addrenv_clone(FAR const group_addrenv_t *src,
   /* Just copy the address environment from the source to the destination */
 
   memcpy(dest, src, sizeof(group_addrenv_t));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -789,7 +789,7 @@ int up_addrenv_attach(FAR struct task_group_s *group, FAR struct tcb_s *tcb)
 
   /* Nothing needs to be done in this implementation */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -822,7 +822,7 @@ int up_addrenv_detach(FAR struct task_group_s *group, FAR struct tcb_s *tcb)
 
   /* Nothing needs to be done in this implementation */
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ARCH_ADDRENV */

@@ -673,7 +673,7 @@ static int lsm9ds1_readreg8(FAR struct lsm9ds1_dev_s *priv, uint8_t regaddr,
     }
 
   sninfo("addr: %02x value: %02x\n", regaddr, *regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -716,7 +716,7 @@ static int lsm9ds1_writereg8(FAR struct lsm9ds1_dev_s *priv, uint8_t regaddr,
     }
 
   sninfo("addr: %02x value: %02x\n", regaddr, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -754,7 +754,7 @@ static int lsm9ds1_modifyreg8(FAR struct lsm9ds1_dev_s *priv, uint8_t regaddr,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -802,7 +802,7 @@ static int lsm9ds1accelgyro_config(FAR struct lsm9ds1_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -885,7 +885,7 @@ static int lsm9ds1accelgyro_setsamplerate(FAR struct lsm9ds1_dev_s *priv,
   DEBUGASSERT(priv != NULL);
 
   priv->samplerate = samplerate;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1056,7 +1056,7 @@ static int lsm9ds1mag_config(FAR struct lsm9ds1_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1204,7 +1204,7 @@ static int lsm9ds1mag_setsamplerate(FAR struct lsm9ds1_dev_s *priv,
 
 static int lsm9ds1_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1217,7 +1217,7 @@ static int lsm9ds1_open(FAR struct file *filep)
 
 static int lsm9ds1_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1491,7 +1491,7 @@ static int lsm9ds1_register(FAR const char *devpath,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

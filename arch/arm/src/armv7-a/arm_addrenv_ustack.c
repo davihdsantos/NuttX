@@ -168,7 +168,7 @@ int up_addrenv_ustackalloc(FAR struct tcb_s *tcb, size_t stacksize)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -199,7 +199,7 @@ int up_addrenv_ustackfree(FAR struct tcb_s *tcb)
                              CONFIG_ARCH_STACK_VBASE, false);
 
   memset(tcb->xcp.ustack, 0, ARCH_STACK_NSECTS * sizeof(uintptr_t *));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -227,7 +227,7 @@ int up_addrenv_vustack(FAR const struct tcb_s *tcb, FAR void **vstack)
 
   DEBUGASSERT(tcb);
   *vstack = (FAR void *)CONFIG_ARCH_STACK_VBASE;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -274,7 +274,7 @@ int up_addrenv_ustackselect(FAR const struct tcb_s *tcb)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ARCH_ADDRENV && CONFIG_ARCH_STACK_DYNAMIC */

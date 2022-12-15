@@ -288,7 +288,7 @@ static int psock_socketlevel_option(FAR struct socket *psock, int option,
         return -ENOPROTOOPT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -448,7 +448,7 @@ int getsockopt(int sockfd, int level, int option, void *value, socklen_t *value_
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_SOCKOPTS */

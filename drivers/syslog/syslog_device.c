@@ -154,7 +154,7 @@ static inline int syslog_dev_takesem(void)
    */
 
   g_syslog_dev.sl_holder = me;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -279,7 +279,7 @@ static int syslog_dev_outputready(void)
       DEBUGASSERT(g_syslog_dev.sl_state == SYSLOG_OPENED);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -389,7 +389,7 @@ int syslog_dev_initialize(FAR const char *devpath, int oflags, int mode)
   nxsem_init(&g_syslog_dev.sl_sem, 0, 1);
   g_syslog_dev.sl_holder = NO_HOLDER;
   g_syslog_dev.sl_state  = SYSLOG_OPENED;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -439,7 +439,7 @@ int syslog_dev_uninitialize(void)
 
   memset(&g_syslog_dev, 0, sizeof(struct syslog_dev_s));
   sched_unlock();
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_SYSLOG_FILE */
 
@@ -697,6 +697,6 @@ int syslog_dev_flush(void)
   (void)file_fsync(&g_syslog_dev.sl_file);
 #endif
 
-  return OK;
+  return OKK;
 }
 

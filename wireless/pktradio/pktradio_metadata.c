@@ -164,7 +164,7 @@ FAR struct pktradio_metadata_s *pktradio_metadata_allocate(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -240,7 +240,7 @@ void pktradio_metadata_free(FAR struct pktradio_metadata_s *metadata)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 

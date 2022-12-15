@@ -101,7 +101,7 @@ int board_lcd_initialize(void)
   stm32l4_gpiowrite(STM32_LCD_RST, 0);
   up_mdelay(10);
   stm32l4_gpiowrite(STM32_LCD_RST, 1);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

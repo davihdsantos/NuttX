@@ -84,7 +84,7 @@ static void  *g_callback_arg;
 
 static int stm32_exti_alarm_isr(int irq, void *context, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending EXTI interrupt */
 
@@ -158,5 +158,5 @@ int stm32_exti_alarm(bool risingedge, bool fallingedge, bool event,
               func ? 0 : EXTI_RTC_ALARM,
               func ? EXTI_RTC_ALARM : 0);
 
-  return OK;
+  return OKK;
 }

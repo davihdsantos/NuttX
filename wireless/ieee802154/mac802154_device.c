@@ -189,7 +189,7 @@ static inline int mac802154dev_takesem(sem_t *sem)
    * awakened by a signal.
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -243,7 +243,7 @@ static int mac802154dev_open(FAR struct file *filep)
   /* Attach the open struct to the file structure */
 
   filep->f_priv = (FAR void *)opriv;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   mac802154dev_givesem(&dev->md_exclsem);
@@ -294,7 +294,7 @@ static int mac802154dev_close(FAR struct file *filep)
     {
       /* Another thread is doing the close */
 
-      return OK;
+      return OKK;
     }
 
   /* Get exclusive access to the driver structure */
@@ -354,7 +354,7 @@ static int mac802154dev_close(FAR struct file *filep)
         }
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_exclsem:
   mac802154dev_givesem(&dev->md_exclsem);
@@ -466,7 +466,7 @@ static ssize_t mac802154dev_read(FAR struct file *filep, FAR char *buffer,
       req.attr = IEEE802154_ATTR_PHY_FCS_LEN;
       ret = mac802154_ioctl(dev->md_mac, MAC802154IOC_MLME_GET_REQUEST,
                             (unsigned long)&req);
-      if (ret == OK)
+      if (ret == OKK)
         {
           rx->length = ind->frame->io_len + req.attrval.phy.fcslen;
           rx->offset = ind->frame->io_offset;
@@ -502,7 +502,7 @@ static ssize_t mac802154dev_read(FAR struct file *filep, FAR char *buffer,
 
  ieee802154_primitive_free((FAR struct ieee802154_primitive_s *)ind);
 
- return OK;
+ return OKK;
 }
 
 /****************************************************************************
@@ -576,7 +576,7 @@ static ssize_t mac802154dev_write(FAR struct file *filep,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -629,7 +629,7 @@ static int mac802154dev_ioctl(FAR struct file *filep, int cmd,
           dev->md_notify_pid        = getpid();
           dev->md_notify_registered = true;
 
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -655,7 +655,7 @@ static int mac802154dev_ioctl(FAR struct file *filep, int cmd,
                   /* Free the notification */
 
                   ieee802154_primitive_free(primitive);
-                  ret = OK;
+                  ret = OKK;
                   break;
                 }
 
@@ -703,7 +703,7 @@ static int mac802154dev_ioctl(FAR struct file *filep, int cmd,
       case MAC802154IOC_ENABLE_EVENTS:
         {
           dev->enableevents = macarg->enable;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -771,7 +771,7 @@ static int mac802154dev_notify(FAR struct mac802154_maccb_s *maccb,
         }
 
       mac802154dev_givesem(&dev->md_exclsem);
-      return OK;
+      return OKK;
     }
 
   /* By returning a negative value, we let the MAC know that we don't want the
@@ -818,7 +818,7 @@ static int mac802154dev_rxframe(FAR struct mac802154_chardevice_s *dev,
   /* Release the driver */
 
   mac802154dev_givesem(&dev->md_exclsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -912,7 +912,7 @@ int mac802154dev_register(MACHANDLE mac, int minor)
       goto errout_with_priv;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&dev->md_exclsem);

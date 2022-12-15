@@ -234,7 +234,7 @@ int mcp794xx_rtc_initialize(FAR struct i2c_master_s *i2c, uint8_t addr)
   g_mcp794xx.i2c  = i2c;
   g_mcp794xx.addr = addr;
   g_rtc_enabled   = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -381,7 +381,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
   tp->tm_year += 101;
 
   rtc_dumptime(tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -607,7 +607,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
     }
   while ((wkday & MCP794XX_RTCWKDAY_OSCRUN) == 0 && retries > 0);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_RTC_MCP794XX */

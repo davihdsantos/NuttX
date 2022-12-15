@@ -96,7 +96,7 @@ static int mld_group_startup(FAR const struct ipv6_mreq *mrec,
   /* Add the group (MAC) address to the Ethernet drivers MAC filter list */
 
   mld_addmcastmac(dev, mrec->ipv6mr_multiaddr.s6_addr16);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -248,7 +248,7 @@ int mld_joingroup(FAR const struct ipv6_mreq *mrec)
       MLD_STATINCR(g_netstats.mld.njoins);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_MLD */

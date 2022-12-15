@@ -262,7 +262,7 @@ int net_ipv4_router(in_addr_t target, FAR in_addr_t *router)
   /* Return the router address. */
 
   net_ipv4addr_copy(*router, match.IPv4_ROUTER);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_IPv4 */
 
@@ -337,7 +337,7 @@ int net_ipv6_router(const net_ipv6addr_t target, net_ipv6addr_t router)
   /* Return the router address. */
 
   net_ipv6addr_copy(router, match.IPv6_ROUTER);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_IPv6 */
 

@@ -936,7 +936,7 @@ ssize_t psock_tcp_send(FAR struct socket *psock, FAR const void *buf,
   FAR struct tcp_conn_s *conn;
   FAR struct tcp_wrbuffer_s *wrb;
   ssize_t    result = 0;
-  int        ret = OK;
+  int        ret = OKK;
 
   if (psock == NULL || psock->s_crefs <= 0)
     {
@@ -1213,7 +1213,7 @@ int psock_tcp_cansend(FAR struct socket *psock)
       return -EWOULDBLOCK;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_TCP && CONFIG_NET_TCP_WRITE_BUFFERS */

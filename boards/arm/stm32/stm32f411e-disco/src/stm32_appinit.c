@@ -89,6 +89,6 @@ int board_app_initialize(uintptr_t arg)
 
   return stm32_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }

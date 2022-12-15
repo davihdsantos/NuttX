@@ -127,7 +127,7 @@ static ssize_t devconsole_read(struct file *filep, char *buffer, size_t len)
 static ssize_t devconsole_write(struct file *filep, const char *buffer, size_t len)
 {
   int remaining;
-  int ret = OK;
+  int ret = OKK;
 
   for (remaining = len; remaining > 0 && ret >= 0; remaining--)
     {
@@ -150,7 +150,7 @@ static ssize_t devconsole_write(struct file *filep, const char *buffer, size_t l
 static int devconsole_poll(FAR struct file *filep, FAR struct pollfd *fds,
                            bool setup)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

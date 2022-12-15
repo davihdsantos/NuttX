@@ -237,7 +237,7 @@ static int gpdma_interrupt(int irq, FAR void *context, FAR void *arg)
                   regval = getreg32(LPC17_40_DMA_INTTCST);
                   if ((regval & chbit) != 0)
                     {
-                      result = OK;
+                      result = OKK;
                     }
 
                   /* This should not happen */
@@ -261,7 +261,7 @@ static int gpdma_interrupt(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -317,7 +317,7 @@ void weak_function up_dma_initialize(void)
   /* Attach and enable the common interrupt handler */
 
   ret = irq_attach(LPC17_40_IRQ_GPDMA, gpdma_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(LPC17_40_IRQ_GPDMA);
     }
@@ -397,7 +397,7 @@ DMA_HANDLE lpc17_40_dmachannel(void)
   do
     {
       ret = nxsem_wait(&g_gpdma.exclsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -541,7 +541,7 @@ int lpc17_40_dmasetup(DMA_HANDLE handle, uint32_t control, uint32_t config,
                      DMACH_CONFIG_XFRTYPE_MASK);
   putreg32(regval, base + LPC17_40_DMACH_CONFIG_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -600,7 +600,7 @@ int lpc17_40_dmastart(DMA_HANDLE handle, dma_callback_t callback, void *arg)
   regval |= (DMACH_CONFIG_E | DMACH_CONFIG_IE | DMACH_CONFIG_ITC);
   putreg32(regval, base + LPC17_40_DMACH_CONFIG_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -628,7 +628,7 @@ void lpc17_40_dmastop(DMA_HANDLE handle)
 
   /* Disable this channel and mask any further interrupts from the channel.
    * this channel.  The channel is disabled by clearning the channel
-   * enable bit. Any outstanding data in the FIFO’s is lost.
+   * enable bit. Any outstanding data in the FIFOï¿½s is lost.
    */
 
   regaddr = LPC17_40_DMACH_CONFIG((uint32_t)dmach->chn);

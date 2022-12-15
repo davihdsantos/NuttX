@@ -456,7 +456,7 @@ static inline int sam_configinput(uintptr_t base, uint32_t pin,
    */
 
   sam_pio_enableclk(cfgset);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -549,7 +549,7 @@ static inline int sam_configoutput(uintptr_t base, uint32_t pin,
   /* Clocking to the PIO block may no longer be necessary. */
 
   sam_pio_disableclk(cfgset);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -674,7 +674,7 @@ static inline int sam_configperiph(uintptr_t base, uint32_t pin,
   /* Clocking to the PIO block may no longer be necessary. */
 
   sam_pio_disableclk(cfgset);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -945,6 +945,6 @@ int sam_dumppio(uint32_t pinset, const char *msg)
            getreg32(base + SAM_PIO_WPMR_OFFSET), getreg32(base + SAM_PIO_WPSR_OFFSET));
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif

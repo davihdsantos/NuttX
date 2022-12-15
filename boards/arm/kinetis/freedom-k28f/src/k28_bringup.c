@@ -94,5 +94,5 @@ int k28_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

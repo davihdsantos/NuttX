@@ -193,7 +193,7 @@ int mac802154_req_scan(MACHANDLE mac, FAR struct ieee802154_scan_req_s *req)
     }
 
   mac802154_unlock(priv)
-return OK;
+return OKK;
 
 errout_with_sem:
   mac802154_unlock(priv)

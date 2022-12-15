@@ -105,7 +105,7 @@ static void rwb_semtake(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -421,7 +421,7 @@ static int rwb_rhreload(struct rwbuffer_s *rwb, off_t startblock)
 int rwb_invalidate_writebuffer(FAR struct rwbuffer_s *rwb,
                                off_t startblock, size_t blockcount)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Is there a write buffer?  Is data saved in the write buffer? */
 
@@ -444,7 +444,7 @@ int rwb_invalidate_writebuffer(FAR struct rwbuffer_s *rwb,
 
       if (rwb->wrblockstart > invend || wrbend < startblock)
         {
-          ret = OK;
+          ret = OKK;
         }
 
       /* 2. We invalidate the entire write buffer. */
@@ -452,7 +452,7 @@ int rwb_invalidate_writebuffer(FAR struct rwbuffer_s *rwb,
       else if (rwb->wrblockstart >= startblock && wrbend <= invend)
         {
           rwb->wrnblocks = 0;
-          ret = OK;
+          ret = OKK;
         }
 
       /* We are going to invalidate a subset of the write buffer.  Three
@@ -487,7 +487,7 @@ int rwb_invalidate_writebuffer(FAR struct rwbuffer_s *rwb,
           else
             {
               rwb->wrnblocks = startblock - rwb->wrblockstart;
-              ret = OK;
+              ret = OKK;
             }
         }
 
@@ -496,7 +496,7 @@ int rwb_invalidate_writebuffer(FAR struct rwbuffer_s *rwb,
       else if (wrbend > startblock && wrbend <= invend)
         {
           rwb->wrnblocks = wrbend - startblock;
-          ret = OK;
+          ret = OKK;
         }
 
       /* 4. We invalidate a portion at the beginning of the write buffer */
@@ -537,7 +537,7 @@ int rwb_invalidate_writebuffer(FAR struct rwbuffer_s *rwb,
 
           rwb->wrblockstart = invend;
           rwb->wrnblocks    = nkeep;
-          ret = OK;
+          ret = OKK;
         }
 
       rwb_semgive(&rwb->wrsem);
@@ -580,7 +580,7 @@ int rwb_invalidate_readahead(FAR struct rwbuffer_s *rwb,
 
       if (rhbend <= startblock || rwb->rhblockstart >= invend)
         {
-          ret = OK;
+          ret = OKK;
         }
 
       /* 2. We invalidate the entire read-ahead buffer. */
@@ -588,7 +588,7 @@ int rwb_invalidate_readahead(FAR struct rwbuffer_s *rwb,
       else if (rwb->rhblockstart >= startblock && rhbend <= invend)
         {
           rwb->rhnblocks = 0;
-          ret = OK;
+          ret = OKK;
         }
 
       /* We are going to invalidate a subset of the read-ahead buffer.
@@ -604,7 +604,7 @@ int rwb_invalidate_readahead(FAR struct rwbuffer_s *rwb,
            */
 
           rwb->rhnblocks = startblock - rwb->rhblockstart;
-          ret = OK;
+          ret = OKK;
         }
 
       /* 3. We invalidate a portion at the end of the read-ahead buffer */
@@ -612,7 +612,7 @@ int rwb_invalidate_readahead(FAR struct rwbuffer_s *rwb,
       else if (rhbend > startblock && rhbend <= invend)
         {
           rwb->rhnblocks = rhbend - startblock;
-          ret = OK;
+          ret = OKK;
         }
 
       /* 4. We invalidate a portion at the beginning of the write buffer */
@@ -752,7 +752,7 @@ int rwb_initialize(FAR struct rwbuffer_s *rwb)
     }
 #endif /* CONFIG_DRVR_READAHEAD */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -792,7 +792,7 @@ void rwb_uninitialize(FAR struct rwbuffer_s *rwb)
 static ssize_t rwb_read_(FAR struct rwbuffer_s *rwb, off_t startblock,
                  size_t nblocks, FAR uint8_t *rdbuffer)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DRVR_READAHEAD
   if (rwb->rhmaxblocks > 0)
@@ -873,7 +873,7 @@ static ssize_t rwb_read_(FAR struct rwbuffer_s *rwb, off_t startblock,
 ssize_t rwb_read(FAR struct rwbuffer_s *rwb, off_t startblock,
                  size_t nblocks, FAR uint8_t *rdbuffer)
 {
-  int ret = OK;
+  int ret = OKK;
   size_t readblocks = 0;
 
   finfo("startblock=%ld nblocks=%ld rdbuffer=%p\n",
@@ -946,7 +946,7 @@ ssize_t rwb_read(FAR struct rwbuffer_s *rwb, off_t startblock,
 ssize_t rwb_write(FAR struct rwbuffer_s *rwb, off_t startblock,
                   size_t nblocks, FAR const uint8_t *wrbuffer)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DRVR_READAHEAD
   if (rwb->rhmaxblocks > 0)
@@ -1083,7 +1083,7 @@ int rwb_mediaremoved(FAR struct rwbuffer_s *rwb)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1119,7 +1119,7 @@ int rwb_invalidate(FAR struct rwbuffer_s *rwb,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1139,7 +1139,7 @@ int rwb_flush(FAR struct rwbuffer_s *rwb)
   rwb_wrflush(rwb);
   rwb_semgive(&rwb->wrsem);
 
-  return OK;
+  return OKK;
 }
 #endif
 

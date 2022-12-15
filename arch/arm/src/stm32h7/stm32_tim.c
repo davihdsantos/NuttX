@@ -762,7 +762,7 @@ static int stm32_tim_setisr(FAR struct stm32_tim_dev_s *dev,
     {
       up_disable_irq(vectorno);
       irq_detach(vectorno);
-      return OK;
+      return OKK;
     }
 
   /* Otherwise set callback and enable interrupt */
@@ -776,7 +776,7 @@ static int stm32_tim_setisr(FAR struct stm32_tim_dev_s *dev,
   up_prioritize_irq(vectorno, NVIC_SYSH_PRIORITY_DEFAULT);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 static void stm32_tim_enableint(FAR struct stm32_tim_dev_s *dev, int source)
@@ -859,7 +859,7 @@ static int stm32_tim_setmode(FAR struct stm32_tim_dev_s *dev,
         stm32_modifyreg16(dev, STM32_ATIM_BDTR_OFFSET, 0, ATIM_BDTR_MOE);
       }
 
-  return OK;
+  return OKK;
 }
 
 static int stm32_tim_setchannel(FAR struct stm32_tim_dev_s *dev,
@@ -1220,7 +1220,7 @@ static int stm32_tim_setchannel(FAR struct stm32_tim_dev_s *dev,
         break;
 #endif
     }
-  return OK;
+  return OKK;
 }
 
 static int stm32_tim_setcompare(FAR struct stm32_tim_dev_s *dev,
@@ -1250,7 +1250,7 @@ static int stm32_tim_setcompare(FAR struct stm32_tim_dev_s *dev,
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int stm32_tim_getcapture(FAR struct stm32_tim_dev_s *dev,
@@ -1476,7 +1476,7 @@ int stm32_tim_deinit(FAR struct stm32_tim_dev_s * dev)
 
   ((struct stm32_tim_priv_s *)dev)->mode = STM32_TIM_MODE_UNUSED;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* defined(CONFIG_STM32H7_TIM1 || ... || TIM17) */

@@ -74,7 +74,7 @@
 
 int stm32l4_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_FS_PROCFS
   /* Mount the procfs file system */
@@ -91,7 +91,7 @@ int stm32l4_bringup(void)
   /* Register the LED driver */
 
   ret = userled_lower_initialize("/dev/userleds");
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: userled_lower_initialize() failed: %d\n", ret);
       return ret;

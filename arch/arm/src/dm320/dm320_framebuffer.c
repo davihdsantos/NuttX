@@ -711,7 +711,7 @@ static int dm320_allocvideomemory(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 
 errout:
   dm320_freevideomemory();
@@ -991,7 +991,7 @@ static int dm320_getvid0videoinfo(FAR struct fb_vtable_s *vtable,
   vinfo->xres    = CONFIG_DM320_VID0_XRES;
   vinfo->yres    = CONFIG_DM320_VID0_YRES;
   vinfo->nplanes = 1;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1015,7 +1015,7 @@ static int dm320_getvid0planeinfo(FAR struct fb_vtable_s *vtable, int planeno,
   pinfo->stride  = DM320_VID0_STRIDE;
   pinfo->display = 0;
   pinfo->bpp     = DM320_VID0_BPP;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1038,7 +1038,7 @@ static int dm320_getvid1videoinfo(FAR struct fb_vtable_s *vtable,
   vinfo->xres    = CONFIG_DM320_VID1_XRES;
   vinfo->yres    = CONFIG_DM320_VID1_YRES;
   vinfo->nplanes = 1;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1062,7 +1062,7 @@ static int dm320_getvid1planeinfo(FAR struct fb_vtable_s *vtable, int planeno,
   pinfo->stride  = DM320_VID1_STRIDE;
   pinfo->display = 1;
   pinfo->bpp     = DM320_VID1_BPP;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1089,7 +1089,7 @@ static int dm320_getosd0videoinfo(FAR struct fb_vtable_s *vtable,
   vinfo->xres    = CONFIG_DM320_OSD0_XRES;
   vinfo->yres    = CONFIG_DM320_OSD0_YRES;
   vinfo->nplanes = 1;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1113,7 +1113,7 @@ static int dm320_getosd0planeinfo(FAR struct fb_vtable_s *vtable, int planeno,
   pinfo->stride  = DM320_OSD0_STRIDE;
   pinfo->display = 2;
   pinfo->bpp     = DM320_OSD0_BPP;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1140,7 +1140,7 @@ static int dm320_getosd1videoinfo(FAR struct fb_vtable_s *vtable,
   vinfo->xres    = CONFIG_DM320_OSD1_XRES;
   vinfo->yres    = CONFIG_DM320_OSD1_YRES;
   vinfo->nplanes = 1;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1164,7 +1164,7 @@ static int dm320_getosd1planeinfo(FAR struct fb_vtable_s *vtable, int planeno,
   pinfo->stride  = DM320_OSD1_STRIDE;
   pinfo->display = 3;
   pinfo->bpp     = DM320_OSD1_BPP;
-  return OK;
+  return OKK;
 }
 #endif
 

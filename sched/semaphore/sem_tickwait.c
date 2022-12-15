@@ -118,7 +118,7 @@ int nxsem_tickwait(FAR sem_t *sem, clock_t start, uint32_t delay)
   /* Try to take the semaphore without waiting. */
 
   ret = nxsem_trywait(sem);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* We got it! */
 

@@ -98,5 +98,5 @@ int mld_done(FAR struct net_driver_s *dev,
   /* Need to set d_len to zero to indication that nothing is being sent */
 
   dev->d_len = 0;
-  return OK;
+  return OKK;
 }

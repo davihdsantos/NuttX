@@ -184,7 +184,7 @@ int nxsem_timedwait(FAR sem_t *sem, FAR const struct timespec *abstime)
 
   /* Handle any time-related errors */
 
-  if (status != OK)
+  if (status != OKK)
     {
       ret = -status;
       goto errout_with_irqdisabled;

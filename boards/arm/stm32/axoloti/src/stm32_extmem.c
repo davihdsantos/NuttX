@@ -173,7 +173,7 @@ int stm32_sdram_memtest(void *base, uint32_t size)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -319,5 +319,5 @@ int stm32_sdram_initialize(void)
   /* Wait for the controller to be ready */
 
   stm32_fmc_sdram_wait();
-  return OK;
+  return OKK;
 }

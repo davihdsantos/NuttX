@@ -1494,7 +1494,7 @@ static int sam_req_write(struct sam_usbdev_s *priv, struct sam_ep_s *privep)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1745,7 +1745,7 @@ static int sam_req_read(struct sam_usbdev_s *priv, struct sam_ep_s *privep,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3234,7 +3234,7 @@ static int sam_usbhs_interrupt(int irq, void *context, FAR void *arg)
 
   usbtrace(TRACE_INTEXIT(SAM_TRACEINTID_INTERRUPT), devisr);
   MEMORY_SYNC();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3707,7 +3707,7 @@ static int sam_ep_configure_internal(struct sam_ep_s *privep,
 #endif
 
   sam_dumpep(priv, epno);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3755,7 +3755,7 @@ static int sam_ep_configure(struct usbdev_ep_s *ep,
   /* This logic is implemented in sam_ep_configure_internal */
 
   ret = sam_ep_configure_internal(privep, desc);
-  if (ret == OK && last)
+  if (ret == OKK && last)
     {
       /* If this was the last endpoint, then the class driver is fully
        * configured.
@@ -3798,7 +3798,7 @@ static int sam_ep_disable(struct usbdev_ep_s *ep)
 
   priv->devstate = USBHS_DEVSTATE_ADDRESSED;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3894,7 +3894,7 @@ static int sam_ep_submit(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   struct sam_usbdev_s *priv;
   irqstate_t flags;
   uint8_t epno;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(ep != NULL && req != NULL && req->callback != NULL && req->buf != NULL);
   usbtrace(TRACE_EPSUBMIT, USB_EPNO(ep->eplog));
@@ -3978,7 +3978,7 @@ static int sam_ep_cancel(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   flags = enter_critical_section();
   sam_req_cancel(privep, -EAGAIN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4130,7 +4130,7 @@ static int sam_ep_stall(struct usbdev_ep_s *ep, bool resume)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4284,7 +4284,7 @@ static int sam_wakeup(struct usbdev_s *dev)
    */
 
   while ((sam_getreg(SAM_USBHS_DEVCTRL) & USBHS_DEVCTRL_RMWKUP) != 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4303,7 +4303,7 @@ static int sam_selfpowered(struct usbdev_s *dev, bool selfpowered)
   DEBUGASSERT(dev != NULL);
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4470,7 +4470,7 @@ static int sam_pullup(FAR struct usbdev_s *dev, bool enable)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4958,7 +4958,7 @@ int usbdev_register(struct usbdevclass_driver_s *driver)
   /* Then bind the class driver */
 
   ret = CLASS_BIND(driver, &priv->usbdev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbtrace(TRACE_DEVERROR(SAM_TRACEERR_BINDFAILED), (uint16_t)-ret);
       priv->driver = NULL;
@@ -5020,7 +5020,7 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
 
   priv->driver = NULL;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_USBDEV && CONFIG_SAMV7_USBDEVHS */

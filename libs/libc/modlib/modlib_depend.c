@@ -105,7 +105,7 @@ int modlib_depend(FAR struct module_s *importer, FAR struct module_s *exporter)
            * more needs to be done.
            */
 
-          return OK;
+          return OKK;
         }
     }
 
@@ -133,7 +133,7 @@ int modlib_depend(FAR struct module_s *importer, FAR struct module_s *exporter)
 
        DEBUGASSERT(importer->dependencies[freendx] == NULL);
        importer->dependencies[freendx] = exporter;
-       return OK;
+       return OKK;
     }
 
   /* If we get there then the list of dependencies is full. */
@@ -142,7 +142,7 @@ int modlib_depend(FAR struct module_s *importer, FAR struct module_s *exporter)
   return -ENFILE;
 
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -193,5 +193,5 @@ int modlib_undepend(FAR struct module_s *importer)
     }
 #endif
 
-  return OK;
+  return OKK;
 }

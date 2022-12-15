@@ -110,5 +110,5 @@ int nxtk_closetoolbar(NXTKWINDOW hfwnd)
       nx_redrawreq(&fwnd->wnd, &fwnd->wnd.bounds);
     }
 
-  return OK;
+  return OKK;
 }

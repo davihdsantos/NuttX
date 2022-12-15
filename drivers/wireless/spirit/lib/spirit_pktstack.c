@@ -277,7 +277,7 @@ int spirit_pktstack_get_setup(FAR struct spirit_library_s *spirit,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************

@@ -147,7 +147,7 @@ int wd_cancel(WDOG_ID wdog)
 
       /* Return success */
 
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);

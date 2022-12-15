@@ -130,7 +130,7 @@ int pthread_key_create(FAR pthread_key_t *key,
       /* Yes.. Return the key value and success */
 
       *key = candidate;
-      ret  = OK;
+      ret  = OKK;
     }
 
   return ret;

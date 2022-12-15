@@ -192,7 +192,7 @@ static int comp_setup(FAR struct comp_dev_s *dev)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -289,7 +289,7 @@ static int comp_bind(FAR struct comp_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->interrupt.cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

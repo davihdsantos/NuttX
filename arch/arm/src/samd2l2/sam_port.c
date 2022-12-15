@@ -6,7 +6,7 @@
  *
  * References:
  *   "Atmel SAM D20J / SAM D20G / SAM D20E ARM-Based Microcontroller
- *   Datasheet", 42129J–SAM–12/2013
+ *   Datasheet", 42129Jï¿½SAMï¿½12/2013
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -495,7 +495,7 @@ int sam_configport(port_pinset_t pinset)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -578,7 +578,7 @@ int sam_dumpport(uint32_t pinset, const char *msg)
            getreg8(base + SAM_PORT_PINCFG_OFFSET(pin)));
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

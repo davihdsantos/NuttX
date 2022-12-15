@@ -100,7 +100,7 @@ int k64_pwm_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_PWM */

@@ -87,6 +87,6 @@ int dump_module(FAR const struct binary_s *bin)
       binfo("  unload:    %p\n", bin->unload);
     }
 
-  return OK;
+  return OKK;
 }
 #endif

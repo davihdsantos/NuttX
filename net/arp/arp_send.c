@@ -212,7 +212,7 @@ int arp_send(in_addr_t ipaddr)
     {
       /* We don't need to send the ARP request */
 
-      return OK;
+      return OKK;
     }
 
 #ifdef CONFIG_NET_IGMP
@@ -229,7 +229,7 @@ int arp_send(in_addr_t ipaddr)
     {
       /* We don't need to send the ARP request */
 
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -250,7 +250,7 @@ int arp_send(in_addr_t ipaddr)
 
   if (dev->d_lltype != NET_LL_ETHERNET)
     {
-      return OK;
+      return OKK;
     }
 
   /* Check if the destination address is on the local network. */
@@ -287,7 +287,7 @@ int arp_send(in_addr_t ipaddr)
     {
       /* Yes.. We don't need to send the ARP request */
 
-      return OK;
+      return OKK;
     }
 
   /* Allocate resources to receive a callback.  This and the following
@@ -343,7 +343,7 @@ int arp_send(in_addr_t ipaddr)
         {
           /* We have it!  Break out with success */
 
-          ret = OK;
+          ret = OKK;
           break;
         }
 

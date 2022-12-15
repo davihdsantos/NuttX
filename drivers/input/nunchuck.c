@@ -169,7 +169,7 @@ static int nunchuck_i2c_read(FAR struct nunchuck_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -280,7 +280,7 @@ static int nunchuck_sample(FAR struct nunchuck_dev_s *priv,
   iinfo("X: %03d | Y: %03d | AX: %03d AY: %03d AZ: %03d | B: %d\n",
         data[0], data[1], data[2], data[3], data[4], ((data[5]+1) & 0x03));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -299,7 +299,7 @@ static inline int nunchuck_takesem(sem_t *sem)
    * was awakened by a signal
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -346,7 +346,7 @@ static int nunchuck_open(FAR struct file *filep)
   /* Attach the open structure to the file structure */
 
   filep->f_priv = (FAR void *)opriv;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nunchuck_givesem(&priv->nck_exclsem);
@@ -393,7 +393,7 @@ static int nunchuck_close(FAR struct file *filep)
     {
       /* Another thread is doing the close */
 
-      return OK;
+      return OKK;
     }
 
   /* Get exclusive access to the driver structure */
@@ -434,7 +434,7 @@ static int nunchuck_close(FAR struct file *filep)
 
   kmm_free(opriv);
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_exclsem:
   nunchuck_givesem(&priv->nck_exclsem);
@@ -534,7 +534,7 @@ static int nunchuck_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         if (supported)
           {
             *supported = (NUNCHUCK_BUTTON_Z_BIT | NUNCHUCK_BUTTON_C_BIT);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -608,7 +608,7 @@ int nunchuck_register(FAR const char *devname, FAR struct i2c_master_s *i2c)
       goto errout_with_priv;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->nck_exclsem);

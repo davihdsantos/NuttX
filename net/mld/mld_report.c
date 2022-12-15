@@ -117,7 +117,7 @@ int mld_report(FAR struct net_driver_s *dev, FAR const net_ipv6addr_t grpaddr)
   /* Need to set d_len to zero to indication that nothing is being sent */
 
   dev->d_len = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -201,11 +201,11 @@ int mld_report_v2(FAR struct net_driver_s *dev,
       /* Handle this mcast address in the list */
 
       int status = mld_report(dev, report->addrec[i].mcast);
-      if (status == OK)
+      if (status == OKK)
         {
           /* Return success if any address in the listed was processed */
 
-          ret = OK;
+          ret = OKK;
         }
       else if (status != -ENOENT)
         {

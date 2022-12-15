@@ -68,5 +68,5 @@ int posix_spawnattr_getflags(FAR const posix_spawnattr_t *attr,
 {
   DEBUGASSERT(attr && flags);
   *flags = (short)attr->flags;
-  return OK;
+  return OKK;
 }

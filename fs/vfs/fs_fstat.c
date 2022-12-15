@@ -156,7 +156,7 @@ int fstat(int fd, FAR struct stat *buf)
           goto errout;
         }
 
-      return OK;
+      return OKK;
 #else
       /* No networking... it is just a bad descriptor */
 
@@ -186,7 +186,7 @@ int fstat(int fd, FAR struct stat *buf)
     {
       /* Successfully fstat'ed the file */
 
-      return OK;
+      return OKK;
     }
 
 errout:

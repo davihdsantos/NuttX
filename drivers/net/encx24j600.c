@@ -1071,7 +1071,7 @@ static int enc_transmit(FAR struct enc_driver_s *priv)
 
   sq_addlast((FAR sq_entry_t *)descr, &priv->txfreedescr);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1095,7 +1095,7 @@ static int enc_transmit(FAR struct enc_driver_s *priv)
 
 static int enc_txenqueue(FAR struct enc_driver_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
   FAR struct enc_descr_s *descr;
 
   DEBUGASSERT(priv->dev.d_len > 0);
@@ -1167,7 +1167,7 @@ static int enc_txenqueue(FAR struct enc_driver_s *priv)
 static int enc_txpoll(struct net_driver_s *dev)
 {
   FAR struct enc_driver_s *priv = (FAR struct enc_driver_s *)dev->d_private;
-  int ret = OK;
+  int ret = OKK;
 
   /* If the polling resulted in data that should be sent out on the network,
    * the field d_len is set to a value > 0.
@@ -2395,7 +2395,7 @@ static int enc_txavail(struct net_driver_s *dev)
   leave_critical_section(flags);
   enc_unlock(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2432,7 +2432,7 @@ static int enc_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Un-lock the SPI bus */
 
   enc_unlock(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2470,7 +2470,7 @@ static int enc_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Un-lock the SPI bus */
 
   enc_unlock(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2717,7 +2717,7 @@ static int enc_reset(FAR struct enc_driver_s *priv)
 
   ret = enc_waitreg(priv, ENC_ESTAT, ESTAT_CLKRDY, ESTAT_CLKRDY);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       nerr("ERROR: encx24j600 clock failed to become ready\n");
       return -ENODEV;
@@ -2788,14 +2788,14 @@ static int enc_reset(FAR struct enc_driver_s *priv)
     }
 
 #if 0
-  if (ret != OK)
+  if (ret != OKK)
     {
       nerr("ERROR: encx24j600 failed to establish link\n");
       return -ENODEV;
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

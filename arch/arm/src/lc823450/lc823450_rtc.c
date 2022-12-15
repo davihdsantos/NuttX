@@ -271,7 +271,7 @@ static int rtc_interrupt(int irq, void *context, FAR void *arg)
       g_alarmcb();
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_RTC_ALARM */
 
@@ -341,7 +341,7 @@ static int up_rtc_getdatetime_main(FAR struct tm *tp)
     }
 #endif /* CONFIG_RTC_DIV */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -465,7 +465,7 @@ int up_rtc_initialize(void)
 
   g_rtc_enabled = true;
 
-  return OK;
+  return OKK;
 }
 
 int up_rtc_getdatetime(FAR struct tm *tp)
@@ -484,7 +484,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
       tp->tm_mon  = CONFIG_START_MONTH - 1;
       tp->tm_year = CONFIG_START_YEAR - 1900;
       cboot = 0;
-      return OK;
+      return OKK;
     }
 #endif /* CONFIG_RTC_DIV */
 
@@ -504,7 +504,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
       up_rtc_getdatetime_main(tp);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -575,7 +575,7 @@ int up_rtc_settime(FAR const struct timespec *ts)
   alarm_after_rtc_change();
 #endif /* CONFIG_ALARM_DEV */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -639,7 +639,7 @@ int up_rtc_setalarm(FAR const struct timespec *ts, alarmcb_t callback)
 
   modifyreg8(RTC_RTCINT, 1 << RTC_RTCINT_SET, 1 << RTC_RTCINT_AIE);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

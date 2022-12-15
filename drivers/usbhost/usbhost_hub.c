@@ -481,7 +481,7 @@ static inline int usbhost_cfgdesc(FAR struct usbhost_class_s *hubclass,
     }
 
   uinfo("Endpoint allocated\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -566,7 +566,7 @@ static inline int usbhost_hubdesc(FAR struct usbhost_class_s *hubclass)
   uinfo("  DeviceRemovable:     %d\n", hubdesc.devattached);
   uinfo("  PortPwrCtrlMask:     %d\n", hubdesc.pwrctrlmask);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -649,7 +649,7 @@ static int usbhost_hubpwr(FAR struct usbhost_hubpriv_s *priv,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

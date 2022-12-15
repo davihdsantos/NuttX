@@ -159,7 +159,7 @@ int nxffs_unlink(FAR struct inode *mountpt, FAR const char *relpath)
 
   volume = mountpt->i_private;
   ret = nxsem_wait(&volume->exclsem);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout;
     }

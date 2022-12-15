@@ -128,7 +128,7 @@ int mrf24j40_setrxmode(FAR struct mrf24j40_radio_s *dev, int mode)
 
   dev->rxmode = mode;
   wlinfo("%u\n", (unsigned)mode);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -166,7 +166,7 @@ int mrf24j40_setchannel(FAR struct mrf24j40_radio_s *dev, uint8_t chan)
   dev->chan = chan;
   wlinfo("%u\n", (unsigned)chan);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -186,7 +186,7 @@ int mrf24j40_setpanid(FAR struct mrf24j40_radio_s *dev,
   IEEE802154_PANIDCOPY(dev->addr.panid, panid);
   wlinfo("%02X:%02X\n", panid[0], panid[1]);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -208,7 +208,7 @@ int mrf24j40_setsaddr(FAR struct mrf24j40_radio_s *dev,
   IEEE802154_SADDRCOPY(dev->addr.saddr, saddr);
 
   wlinfo("%02X:%02X\n", saddr[0], saddr[1]);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -233,7 +233,7 @@ int mrf24j40_seteaddr(FAR struct mrf24j40_radio_s *dev,
   wlinfo("%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X\n", eaddr[0], eaddr[1],
          eaddr[2], eaddr[3], eaddr[4], eaddr[5], eaddr[6], eaddr[7]);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -257,7 +257,7 @@ int mrf24j40_setcoordsaddr(FAR struct mrf24j40_radio_s *dev,
   IEEE802154_SADDRCOPY(dev->addr.saddr, saddr);
 
   wlinfo("%02X:%02X\n", saddr[0], saddr[1]);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -284,7 +284,7 @@ int mrf24j40_setcoordeaddr(FAR struct mrf24j40_radio_s *dev,
 
   wlinfo("%02X:%02X:%02X:%02X:%02X:%02X:%02X:%02X\n", eaddr[0], eaddr[1],
          eaddr[2], eaddr[3], eaddr[4], eaddr[5], eaddr[6], eaddr[7]);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -325,7 +325,7 @@ int mrf24j40_setdevmode(FAR struct mrf24j40_radio_s *dev, uint8_t mode)
 
   mrf24j40_setreg(dev->spi, MRF24J40_RXMCR, reg);
   dev->devmode = mode;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -412,7 +412,7 @@ int mrf24j40_settxpower(FAR struct mrf24j40_radio_s *dev,
 
   dev->txpower = save_txpwr;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -456,7 +456,7 @@ int mrf24j40_setcca(FAR struct mrf24j40_radio_s *dev,
   mrf24j40_setreg(dev->spi, MRF24J40_BBREG2, mode);
 
   memcpy(&dev->cca, cca, sizeof(struct ieee802154_cca_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -473,7 +473,7 @@ int mrf24j40_setpamode(FAR struct mrf24j40_radio_s *dev, int mode)
 {
   if (!dev->paenabled)
     {
-      return OK;
+      return OKK;
     }
 
   if (mode == MRF24J40_PA_AUTO)
@@ -500,5 +500,5 @@ int mrf24j40_setpamode(FAR struct mrf24j40_radio_s *dev, int mode)
     }
 
   mrf24j40_resetrfsm(dev);
-  return OK;
+  return OKK;
 }

@@ -98,7 +98,7 @@ int bt_queue_open(FAR const char *name, int oflags, int nmsgs,
 {
   struct mq_attr attr;
   mqd_t newmqd;
-  int ret = OK;
+  int ret = OKK;
 
   /* Initialize the message queue attributes */
 
@@ -169,7 +169,7 @@ int bt_queue_receive(mqd_t mqd, FAR struct bt_buf_s **buf)
   /* Return the buffer */
 
   *buf = u.msg.buf;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

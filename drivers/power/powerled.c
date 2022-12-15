@@ -141,7 +141,7 @@ static int powerled_open(FAR struct file *filep)
       nxsem_post(&dev->closesem);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -232,7 +232,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           /* Finally, call start from lower-half driver */
 
           ret = dev->ops->start(dev);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_START failed %d\n", ret);
             }
@@ -242,7 +242,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
       case PWRIOC_STOP:
         {
           ret = dev->ops->stop(dev);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_STOP failed %d\n", ret);
             }
@@ -254,7 +254,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           uint8_t mode = ((uint8_t)arg);
 
           ret = dev->ops->mode_set(dev, mode);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_SET_MODE failed %d\n", ret);
             }
@@ -277,7 +277,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           /* NOTE: this call must set the powerled_limits_s structure */
 
           ret = dev->ops->limits_set(dev, limits);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_SET_LIMITS failed %d\n", ret);
             }
@@ -290,7 +290,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             (FAR struct powerled_state_s *)((uintptr_t)arg);
 
           ret = dev->ops->state_get(dev, state);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_GET_STATE failed %d\n", ret);
             }
@@ -302,7 +302,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           uint8_t fault = ((uint8_t)arg);
 
           ret = dev->ops->fault_set(dev, fault);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_SET_FAULT failed %d\n", ret);
             }
@@ -314,7 +314,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           FAR uint8_t *fault = ((FAR uint8_t *)arg);
 
           ret = dev->ops->fault_get(dev, fault);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_GET_FAULT failed %d\n", ret);
             }
@@ -326,7 +326,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           uint8_t fault = ((uint8_t)arg);
 
           ret = dev->ops->fault_clean(dev, fault);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_CLEAN_FAULT failed %d\n", ret);
             }
@@ -357,7 +357,7 @@ static int powerled_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             }
 
           ret = dev->ops->params_set(dev, params);
-          if (ret != OK)
+          if (ret != OKK)
             {
               pwrerr("ERROR: PWRIOC_SET_PARAMS failed %d\n", ret);
             }

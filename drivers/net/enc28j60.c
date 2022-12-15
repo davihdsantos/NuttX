@@ -567,7 +567,7 @@ static inline void enc_src(FAR struct enc_driver_s *priv)
    * workaround this condition.
    *
    * Also, "After a System Reset, all PHY registers should not be read or
-   * written to until at least 50 µs have passed since the Reset has ended.
+   * written to until at least 50 ï¿½s have passed since the Reset has ended.
    * All registers will revert to their Reset default values. The dual
    * port buffer memory will maintain state throughout the System Reset."
    */
@@ -1000,7 +1000,7 @@ static uint16_t enc_rdphy(FAR struct enc_driver_s *priv, uint8_t phyaddr)
 
   enc_wrbreg(priv, ENC_MICMD, MICMD_MIIRD);
 
-  /*   3. Wait 10.24 µs. Poll the MISTAT.BUSY bit to be certain that the
+  /*   3. Wait 10.24 ï¿½s. Poll the MISTAT.BUSY bit to be certain that the
    *      operation is complete. While busy, the host controller should not
    *      start any MIISCAN operations or write to the MIWRH register.
    *
@@ -1009,7 +1009,7 @@ static uint16_t enc_rdphy(FAR struct enc_driver_s *priv, uint8_t phyaddr)
    */
 
   up_udelay(12);
-  if (enc_waitbreg(priv, ENC_MISTAT, MISTAT_BUSY, 0x00) == OK)
+  if (enc_waitbreg(priv, ENC_MISTAT, MISTAT_BUSY, 0x00) == OKK)
     {
       /* 4. Clear the MICMD.MIIRD bit. */
 
@@ -1068,7 +1068,7 @@ static void enc_wrphy(FAR struct enc_driver_s *priv, uint8_t phyaddr,
   enc_wrbreg(priv, ENC_MIWRH, phydata >> 8);
 
   /*    The PHY register will be written after the MIIM operation completes,
-   *    which takes 10.24 µs. When the write operation has completed, the BUSY
+   *    which takes 10.24 ï¿½s. When the write operation has completed, the BUSY
    *    bit will clear itself.
    *
    *    The host controller should not start any MIISCAN or MIIRD operations
@@ -1160,7 +1160,7 @@ static int enc_transmit(FAR struct enc_driver_s *priv)
 
   (void)wd_start(priv->txtimeout, ENC_TXTIMEOUT, enc_txtimeout, 1,
                  (wdparm_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1236,7 +1236,7 @@ static int enc_txpoll(struct net_driver_s *dev)
    * been examined.
    */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1909,9 +1909,9 @@ static void enc_toworker(FAR void *arg)
    */
 
   ret = enc_ifdown(&priv->dev);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   ret = enc_ifup(&priv->dev);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 
   /* Then poll the network for new XMIT data */
@@ -1960,7 +1960,7 @@ static void enc_txtimeout(int argc, uint32_t arg, ...)
    */
 
   ret = work_queue(ENCWORK, &priv->towork, enc_toworker, (FAR void *)priv, 0);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 }
 
@@ -2056,7 +2056,7 @@ static void enc_polltimer(int argc, uint32_t arg, ...)
 
   ret = work_queue(ENCWORK, &priv->pollwork, enc_pollworker,
                    (FAR void *)priv, 0);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 }
 
@@ -2095,7 +2095,7 @@ static int enc_ifup(struct net_driver_s *dev)
    */
 
   ret = enc_reset(priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       enc_setmacaddr(priv);
       enc_pwrfull(priv);
@@ -2237,7 +2237,7 @@ static int enc_txavail(struct net_driver_s *dev)
 
   leave_critical_section(flags);
   enc_unlock(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2274,7 +2274,7 @@ static int enc_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Un-lock the SPI bus */
 
   enc_unlock(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2312,7 +2312,7 @@ static int enc_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Un-lock the SPI bus */
 
   enc_unlock(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2361,7 +2361,7 @@ static void enc_pwrsave(FAR struct enc_driver_s *priv)
    *    polling ESTAT.RXBUSY. This bit should be clear before proceeding.
    */
 
-  if (enc_waitbreg(priv, ENC_ESTAT, ESTAT_RXBUSY, 0) == OK)
+  if (enc_waitbreg(priv, ENC_ESTAT, ESTAT_RXBUSY, 0) == OKK)
     {
       /* 3. Wait for any current transmissions to end by confirming
        * ECON1.TXRTS is clear.
@@ -2387,7 +2387,7 @@ static void enc_pwrsave(FAR struct enc_driver_s *priv)
  *   a slightly modified procedure:
  *
  *   1. Wake-up by clearing ECON2.PWRSV.
- *   2. Wait at least 300 ìs for the PHY to stabilize. To accomplish the
+ *   2. Wait at least 300 ï¿½s for the PHY to stabilize. To accomplish the
  *      delay, the host controller may poll ESTAT.CLKRDY and wait for it
  *      to become set.
  *   3. Restore receive capability by setting ECON1.RXEN.
@@ -2418,7 +2418,7 @@ static void enc_pwrfull(FAR struct enc_driver_s *priv)
 
   enc_bfcgreg(priv, ENC_ECON2, ECON2_PWRSV);
 
-  /* 2. Wait at least 300 ìs for the PHY to stabilize. To accomplish the
+  /* 2. Wait at least 300 ï¿½s for the PHY to stabilize. To accomplish the
    * delay, the host controller may poll ESTAT.CLKRDY and wait for it to
    * become set.
    */
@@ -2603,7 +2603,7 @@ static int enc_reset(FAR struct enc_driver_s *priv)
   enc_wrphy(priv, ENC_PHCON1, PHCON1_PDPXMD);
   enc_wrphy(priv, ENC_PHCON2, 0x00);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

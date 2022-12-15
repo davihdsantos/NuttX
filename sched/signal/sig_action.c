@@ -236,7 +236,7 @@ int nxsig_action(int signo, FAR const struct sigaction *act,
 
   if (act == NULL)
     {
-      return OK;
+      return OKK;
     }
 
 #if defined(CONFIG_SCHED_HAVE_PARENT) && defined(CONFIG_SCHED_CHILD_STATUS)
@@ -346,7 +346,7 @@ int nxsig_action(int signo, FAR const struct sigaction *act,
       sigact->act.sa_flags   = act->sa_flags;
     }
 
-  return OK;
+  return OKK;
 }
 
 int sigaction(int signo, FAR const struct sigaction *act,
@@ -363,7 +363,7 @@ int sigaction(int signo, FAR const struct sigaction *act,
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

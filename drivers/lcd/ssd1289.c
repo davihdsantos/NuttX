@@ -671,7 +671,7 @@ static int ssd1289_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buf
   /* De-select the LCD */
 
   lcd->deselect(lcd);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -804,7 +804,7 @@ static int ssd1289_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
   /* De-select the LCD */
 
   lcd->deselect(lcd);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -829,7 +829,7 @@ static int ssd1289_getvideoinfo(FAR struct lcd_dev_s *dev,
   vinfo->xres    = SSD1289_XRES;        /* Horizontal resolution in pixel columns */
   vinfo->yres    = SSD1289_YRES;        /* Vertical resolution in pixel rows */
   vinfo->nplanes = 1;                   /* Number of color planes supported */
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -852,7 +852,7 @@ static int ssd1289_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   pinfo->getrun = ssd1289_getrun;                 /* Get a run from LCD memory */
   pinfo->buffer = (FAR uint8_t *)priv->runbuffer; /* Run scratch buffer */
   pinfo->bpp    = SSD1289_BPP;                    /* Bits-per-pixel */
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -892,7 +892,7 @@ static int ssd1289_poweroff(FAR struct ssd1289_lcd_s *lcd)
   /* Remember the power off state */
 
   g_lcddev.power = 0;
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -937,7 +937,7 @@ static int ssd1289_setpower(FAR struct lcd_dev_s *dev, int power)
       ssd1289_poweroff(lcd);
     }
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -1244,7 +1244,7 @@ static inline int ssd1289_hwinitialize(FAR struct ssd1289_dev_s *priv)
       /* One driver has a 50 msec delay here */
       /* up_mdelay(50); */
 
-      ret = OK;
+      ret = OKK;
     }
 #ifndef CONFIG_LCD_NOGETRUN
   else
@@ -1300,7 +1300,7 @@ FAR struct lcd_dev_s *ssd1289_lcdinitialize(FAR struct ssd1289_lcd_s *lcd)
   /* Configure and enable LCD */
 
   ret = ssd1289_hwinitialize(priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Clear the display (setting it to the color 0=black) */
 

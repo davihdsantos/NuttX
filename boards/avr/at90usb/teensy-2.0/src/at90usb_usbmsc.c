@@ -109,5 +109,5 @@ int board_usbmsc_initialize(int port)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }

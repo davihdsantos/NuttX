@@ -140,7 +140,7 @@ int ipv6_getsockname(FAR struct socket *psock, FAR struct sockaddr *addr,
       memcpy(outaddr->sin6_addr.in6_u.u6_addr8, g_ipv6_unspecaddr, 16);
       *addrlen = sizeof(struct sockaddr_in6);
 
-      return OK;
+      return OKK;
     }
 
   net_lock();
@@ -172,7 +172,7 @@ int ipv6_getsockname(FAR struct socket *psock, FAR struct sockaddr *addr,
 
   /* Return success */
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_IPv6 */

@@ -95,7 +95,7 @@ static int a1x_timerisr(int irq, uint32_t *regs, void *arg)
   /* Process timer interrupt */
 
   nxsched_process_timer();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

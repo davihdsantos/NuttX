@@ -562,7 +562,7 @@ int imxrt_lpuart_configure(uint32_t base,
   regval |= LPUART_CTRL_RE | LPUART_CTRL_TE;
   putreg32(regval, base + IMXRT_LPUART_CTRL_OFFSET);
 
-  return OK;
+  return OKK;
 }
 #endif /* HAVE_LPUART_DEVICE */
 

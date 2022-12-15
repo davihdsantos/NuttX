@@ -76,7 +76,7 @@
 
 int pthread_barrier_destroy(FAR pthread_barrier_t *barrier)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (!barrier)
     {

@@ -77,7 +77,7 @@ static int tcp_find_ipv4_device(FAR struct tcp_conn_s *conn, in_addr_t addr)
 
   if (conn->dev != NULL)
     {
-      return OK;
+      return OKK;
     }
 
   /* Return success without using device notification if the locally bound
@@ -88,7 +88,7 @@ static int tcp_find_ipv4_device(FAR struct tcp_conn_s *conn, in_addr_t addr)
 
   if (net_ipv4addr_cmp(addr, INADDR_ANY))
     {
-      return OK;
+      return OKK;
     }
 
   /* We need to select the device that is going to route the TCP packet
@@ -127,7 +127,7 @@ static int tcp_find_ipv6_device(FAR struct tcp_conn_s *conn,
 
   if (conn->dev != NULL)
     {
-      return OK;
+      return OKK;
     }
 
   /* Return success without using device notification if the locally bound
@@ -138,7 +138,7 @@ static int tcp_find_ipv6_device(FAR struct tcp_conn_s *conn,
 
   if (net_ipv6addr_cmp(addr, g_ipv6_unspecaddr))
     {
-      return OK;
+      return OKK;
     }
 
   /* We need to select the device that is going to route the TCP packet

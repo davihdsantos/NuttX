@@ -212,7 +212,7 @@ int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

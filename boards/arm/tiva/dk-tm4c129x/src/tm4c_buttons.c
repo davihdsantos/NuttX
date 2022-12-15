@@ -176,7 +176,7 @@ int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
       if (irqhandler != NULL)
         {
           ret = irq_attach(IRQ_SW4, irqhandler, arg);
-          if (ret == OK)
+          if (ret == OKK)
             {
               up_enable_irq(IRQ_SW4);
             }

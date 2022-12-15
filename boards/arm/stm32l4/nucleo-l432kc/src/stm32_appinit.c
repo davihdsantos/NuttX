@@ -289,7 +289,7 @@ int board_app_initialize(uintptr_t arg)
   /* Initialize and register the timer driver */
 
   ret = board_timer_driver_initialize("/dev/timer0", 2);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the timer driver: %d\n",
@@ -306,7 +306,7 @@ int board_app_initialize(uintptr_t arg)
 #ifdef CONFIG_STM32L4_TIM1_QE
   sprintf(buf, "/dev/qe%d", index++);
   ret = stm32l4_qencoder_initialize(buf, 1);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",
@@ -318,7 +318,7 @@ int board_app_initialize(uintptr_t arg)
 #ifdef CONFIG_STM32L4_TIM2_QE
   sprintf(buf, "/dev/qe%d", index++);
   ret = stm32l4_qencoder_initialize(buf, 2);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",
@@ -330,7 +330,7 @@ int board_app_initialize(uintptr_t arg)
 #ifdef CONFIG_STM32L4_TIM3_QE
   sprintf(buf, "/dev/qe%d", index++);
   ret = stm32l4_qencoder_initialize(buf, 3);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",
@@ -342,7 +342,7 @@ int board_app_initialize(uintptr_t arg)
 #ifdef CONFIG_STM32L4_TIM4_QE
   sprintf(buf, "/dev/qe%d", index++);
   ret = stm32l4_qencoder_initialize(buf, 4);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",
@@ -354,7 +354,7 @@ int board_app_initialize(uintptr_t arg)
 #ifdef CONFIG_STM32L4_TIM5_QE
   sprintf(buf, "/dev/qe%d", index++);
   ret = stm32l4_qencoder_initialize(buf, 5);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",
@@ -366,7 +366,7 @@ int board_app_initialize(uintptr_t arg)
 #ifdef CONFIG_STM32L4_TIM8_QE
   sprintf(buf, "/dev/qe%d", index++);
   ret = stm32l4_qencoder_initialize(buf, 8);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",
@@ -378,7 +378,7 @@ int board_app_initialize(uintptr_t arg)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_BOARDCTL_IOCTL
@@ -397,6 +397,6 @@ int board_uniqueid(uint8_t *uniqueid)
     }
 
   stm32l4_get_uniqueid(uniqueid);
-  return OK;
+  return OKK;
 }
 #endif

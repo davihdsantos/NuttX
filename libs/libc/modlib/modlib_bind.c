@@ -153,7 +153,7 @@ static int modlib_relocate(FAR struct module_s *modp,
    * to be relocated.
    */
 
-  ret = OK;
+  ret = OKK;
 
   for (i = j = 0; i < relsec->sh_size / sizeof(Elf32_Rel); i++)
     {

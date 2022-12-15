@@ -387,7 +387,7 @@ static int z16f_setup(struct uart_dev_s *dev)
   putreg8(ctl0, priv->uartbase + Z16F_UART_CTL0);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -426,12 +426,12 @@ static int z16f_attach(struct uart_dev_s *dev)
   /* Attach the RX IRQ */
 
   ret = irq_attach(priv->rxirq, z16f_rxinterrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Attach the TX IRQ */
 
       ret = irq_attach(priv->txirq, z16f_txinterrupt, dev);
-      if (ret != OK)
+      if (ret != OKK)
         {
           irq_detach(priv->rxirq);
         }
@@ -496,7 +496,7 @@ static int z16f_rxinterrupt(int irq, void *context, void *arg)
       uart_recvchars(dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -527,7 +527,7 @@ static int z16f_txinterrupt(int irq, void *context, FAR void *arg)
       uart_xmitchars(dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

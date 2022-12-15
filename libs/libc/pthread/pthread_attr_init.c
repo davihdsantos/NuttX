@@ -85,7 +85,7 @@ const pthread_attr_t g_default_pthread_attr = PTHREAD_ATTR_INITIALIZER;
 
 int pthread_attr_init(FAR pthread_attr_t *attr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   linfo("attr=0x%p\n", attr);
   if (!attr)

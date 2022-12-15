@@ -327,7 +327,7 @@ static int lt1pa01_checkid(FAR struct lt1pa01_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -359,7 +359,7 @@ static int lt1pa01als_seqinit(FAR struct lt1pa01_dev_s *priv)
   seq_setsample(priv->seq, LT1PA01_ALS_BYTESPERSAMPLE, 0, LT1PA01_ELEMENTSIZE,
                 false);
 
-  return OK;
+  return OKK;
 }
 
 #ifndef CONFIG_LT1PA01_PROXIMITY_INTERRUPT
@@ -392,7 +392,7 @@ static int lt1pa01prox_seqinit(FAR struct lt1pa01_dev_s *priv)
   seq_setsample(priv->seq, LT1PA01_PROX_BYTESPERSAMPLE, 0, LT1PA01_ELEMENTSIZE,
                 false);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -435,7 +435,7 @@ static int lt1pa01_open_als(FAR struct file *filep)
 
   g_als_refcnt++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -478,7 +478,7 @@ static int lt1pa01_open_prox(FAR struct file *filep)
   g_prox_refcnt++;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -516,7 +516,7 @@ static int lt1pa01_close_als(FAR struct file *filep)
       (void) seq_ioctl(priv->seq, priv->minor, SCUIOC_FREEFIFO, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -552,7 +552,7 @@ static int lt1pa01_close_prox(FAR struct file *filep)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -615,7 +615,7 @@ static int lt1pa01_ioctl_als(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct lt1pa01_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -648,7 +648,7 @@ static int lt1pa01_ioctl_prox(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct lt1pa01_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -777,7 +777,7 @@ int lt1pa01_init(FAR struct i2c_master_s *i2c, int port)
 
   lt1pa01_putreg8(priv, LT1PA01_INTCONFIG, 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

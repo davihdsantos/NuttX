@@ -107,7 +107,7 @@ int nxffs_verifyblock(FAR struct nxffs_volume_s *volume, off_t block)
         {
           /* The block is valid */
 
-          return OK;
+          return OKK;
         }
       else if (blkhdr->state == BLOCK_STATE_BAD)
         {
@@ -156,12 +156,12 @@ int nxffs_validblock(struct nxffs_volume_s *volume, off_t *block)
       /* Loop until we find a valid block */
 
       ret = nxffs_verifyblock(volume, i);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* We found it, return the block number */
 
           *block = i;
-          return OK;
+          return OKK;
         }
     }
 

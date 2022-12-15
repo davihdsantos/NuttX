@@ -410,7 +410,7 @@ static int z8_setup(FAR struct uart_dev_s *dev)
   ctl0 |= (Z8_UARTCTL0_TEN|Z8_UARTCTL0_REN);
   z8_putuart(priv, ctl0, Z8_UART_CTL0);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -455,7 +455,7 @@ static int z8_attach(FAR struct uart_dev_s *dev)
       /* Attach the TX IRQ */
 
       ret = irq_attach(priv->txirq, z8_txinterrupt, dev);
-      if (ret != OK)
+      if (ret != OKK)
         {
           irq_detach(priv->rxirq);
         }
@@ -516,7 +516,7 @@ static int z8_rxinterrupt(int irq, FAR void *context, FAR void *arg)
 
       uart_recvchars(dev);
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -546,7 +546,7 @@ static int z8_txinterrupt(int irq, FAR void *context, FAR void *arg)
 
       uart_xmitchars(dev);
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

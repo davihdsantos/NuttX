@@ -598,7 +598,7 @@ static void usbhost_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -701,7 +701,7 @@ static int usbhost_allocdevno(FAR struct usbhost_state_s *priv)
           g_devinuse |= bitno;
           priv->devchar = 'a' + devno;
           leave_critical_section(flags);
-          return OK;
+          return OKK;
         }
     }
 
@@ -1550,7 +1550,7 @@ static inline int usbhost_cfgdesc(FAR struct usbhost_state_s *priv,
     }
 
   uinfo("Endpoints allocated\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1780,7 +1780,7 @@ static inline int usbhost_tdalloc(FAR struct usbhost_state_s *priv)
 static inline int usbhost_tdfree(FAR struct usbhost_state_s *priv)
 {
   FAR struct usbhost_hubport_s *hport;
-  int result = OK;
+  int result = OKK;
 
   DEBUGASSERT(priv);
 
@@ -1842,7 +1842,7 @@ static FAR struct usbhost_class_s *
 
       /* Assign a device number to this class instance */
 
-      if (usbhost_allocdevno(priv) == OK)
+      if (usbhost_allocdevno(priv) == OKK)
         {
          /* Initialize class method function pointers */
 
@@ -2032,7 +2032,7 @@ static int usbhost_disconnected(struct usbhost_class_s *usbclass)
       (void)work_queue(HPWORK, &priv->work, usbhost_destroy, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2084,7 +2084,7 @@ static int usbhost_open(FAR struct file *filep)
 
       priv->crefs++;
       priv->open = true;
-      ret        = OK;
+      ret        = OKK;
     }
   leave_critical_section(flags);
 
@@ -2165,7 +2165,7 @@ static int usbhost_close(FAR struct file *filep)
               /* Skip giving the semaphore... it is no longer valid */
 
               leave_critical_section(flags);
-              return OK;
+              return OKK;
             }
           else /* if (priv->crefs == 1) */
             {
@@ -2181,7 +2181,7 @@ static int usbhost_close(FAR struct file *filep)
 
   usbhost_givesem(&priv->exclsem);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2316,7 +2316,7 @@ static int usbhost_poll(FAR struct file *filep, FAR struct pollfd *fds,
 {
   FAR struct inode           *inode;
   FAR struct usbhost_state_s *priv;
-  int                         ret = OK;
+  int                         ret = OKK;
   int                         i;
 
   uinfo("Entry\n");

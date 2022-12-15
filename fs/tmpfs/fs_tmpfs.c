@@ -238,7 +238,7 @@ static void tmpfs_lock_reentrant(FAR struct tmpfs_sem_s *sem)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
 
@@ -409,7 +409,7 @@ static int tmpfs_realloc_file(FAR struct tmpfs_file_s **tfo,
               /* Hasn't shrunk enough.. Return doing nothing for now */
 
               oldtfo->tfo_size = newsize;
-              return OK;
+              return OKK;
             }
         }
     }
@@ -438,7 +438,7 @@ static int tmpfs_realloc_file(FAR struct tmpfs_file_s **tfo,
   newtfo->tfo_alloc = allocsize;
   newtfo->tfo_size  = newsize;
   *tfo              = newtfo;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -561,7 +561,7 @@ static int tmpfs_remove_dirent(FAR struct tmpfs_directory_s *tdo,
   /* And decrement the count of directory entries */
 
   tdo->tdo_nentries = last;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -613,7 +613,7 @@ static int tmpfs_add_dirent(FAR struct tmpfs_directory_s **tdo,
   /* Add backward link to the directory entry to the object */
 
   to->to_dirent  = tde;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -753,7 +753,7 @@ static int tmpfs_create_file(FAR struct tmpfs_s *fs,
 
   kmm_free(copy);
   *tfo = newtfo;
-  return OK;
+  return OKK;
 
   /* Error exits */
 
@@ -915,7 +915,7 @@ static int tmpfs_create_directory(FAR struct tmpfs_s *fs,
       *tdo = newtdo;
     }
 
-  return OK;
+  return OKK;
 
   /* Error exits */
 
@@ -1064,7 +1064,7 @@ static int tmpfs_find_object(FAR struct tmpfs_s *fs,
       *object = to;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1355,7 +1355,7 @@ static int tmpfs_foreach(FAR struct tmpfs_directory_s *tdo,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1496,7 +1496,7 @@ static int tmpfs_open(FAR struct file *filep, FAR const char *relpath,
 
   tmpfs_unlock_file(tfo);
   tmpfs_unlock(fs);
-  return OK;
+  return OKK;
 
   /* Error exits */
 
@@ -1549,13 +1549,13 @@ static int tmpfs_close(FAR struct file *filep)
        */
 
       kmm_free(tfo);
-      return OK;
+      return OKK;
     }
 
   /* Release the lock on the file */
 
   tmpfs_unlock_file(tfo);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1751,7 +1751,7 @@ static int tmpfs_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
        */
 
       *ppv = (FAR void *)tfo->tfo_data;
-      return OK;
+      return OKK;
     }
 
   ferr("ERROR: Invalid cmd: %d\n", cmd);
@@ -1787,7 +1787,7 @@ static int tmpfs_dup(FAR const struct file *oldp, FAR struct file *newp)
    */
 
   newp->f_priv = tfo;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1822,7 +1822,7 @@ static int tmpfs_fstat(FAR const struct file *filep, FAR struct stat *buf)
   /* Release the lock on the file and return success. */
 
   tmpfs_unlock_file(tfo);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1833,7 +1833,7 @@ static int tmpfs_truncate(FAR struct file *filep, off_t length)
 {
   FAR struct tmpfs_file_s *tfo;
   size_t oldsize;
-  int ret = OK;
+  int ret = OKK;
 
   finfo("filep: %p length: %ld\n", filep, (long)length);
   DEBUGASSERT(filep != NULL && length >= 0);
@@ -1872,7 +1872,7 @@ static int tmpfs_truncate(FAR struct file *filep, off_t length)
           memset(&tfo->tfo_data[oldsize], 0, length - oldsize);
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   /* Release the lock on the file */
@@ -1954,7 +1954,7 @@ static int tmpfs_closedir(FAR struct inode *mountpt,
   tmpfs_lock_directory(tdo);
   tdo->tdo_refs--;
   tmpfs_unlock_directory(tdo);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2021,7 +2021,7 @@ static int tmpfs_readdir(FAR struct inode *mountpt,
       /* Increment the index for next time */
 
       dir->u.tmpfs.tf_index = index + 1;
-      ret = OK;
+      ret = OKK;
     }
 
   tmpfs_unlock_directory(tdo);
@@ -2041,7 +2041,7 @@ static int tmpfs_rewinddir(FAR struct inode *mountpt,
   /* Set the readdir index to zero */
 
   dir->u.tmpfs.tf_index = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2092,7 +2092,7 @@ static int tmpfs_bind(FAR struct inode *blkdriver, FAR const void *data,
   /* Return the new file system handle */
 
   *handle = (FAR void *)fs;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2196,7 +2196,7 @@ static int tmpfs_statfs(FAR struct inode *mountpt, FAR struct statfs *buf)
   /* Release the lock on the file system */
 
   tmpfs_unlock(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2290,7 +2290,7 @@ static int tmpfs_unlink(FAR struct inode *mountpt, FAR const char *relpath)
   tmpfs_unlock_directory(tdo);
   tmpfs_unlock(fs);
 
-  return OK;
+  return OKK;
 
 errout_with_objects:
   tmpfs_release_lockedfile(tfo);
@@ -2415,7 +2415,7 @@ static int tmpfs_rmdir(FAR struct inode *mountpt, FAR const char *relpath)
   tmpfs_unlock_directory(parent);
   tmpfs_unlock(fs);
 
-  return OK;
+  return OKK;
 
 errout_with_objects:
   tdo->tdo_refs--;
@@ -2665,7 +2665,7 @@ static int tmpfs_stat(FAR struct inode *mountpt, FAR const char *relpath,
   /* Unlock the object and return success */
 
   tmpfs_release_lockedobject(to);
-  ret = OK;
+  ret = OKK;
 
 errout_with_fslock:
   tmpfs_unlock(fs);

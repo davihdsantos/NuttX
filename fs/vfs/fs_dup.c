@@ -60,7 +60,7 @@
 
 int dup(int fd)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Check the range of the descriptor to see if we got a file or a socket
    * descriptor.

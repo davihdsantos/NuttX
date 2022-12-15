@@ -78,7 +78,7 @@ int pthread_attr_getstack(FAR pthread_attr_t *attr,
     {
       *stackaddr = attr->stackaddr;
       *stacksize = attr->stacksize;
-      ret = OK;
+      ret = OKK;
     }
 
   linfo("Returning %d\n", ret);

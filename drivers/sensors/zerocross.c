@@ -250,7 +250,7 @@ static int zc_open(FAR struct file *filep)
   /* Attach the open structure to the file structure */
 
   filep->f_priv = (FAR void *)opriv;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nxsem_post(&priv->exclsem);
@@ -301,7 +301,7 @@ static int zc_close(FAR struct file *filep)
     {
       /* Another thread is doing the close */
 
-      return OK;
+      return OKK;
     }
 
   /* Get exclusive access to the driver structure */
@@ -349,7 +349,7 @@ static int zc_close(FAR struct file *filep)
   /* Enable/disable interrupt handling */
 
   zerocross_enable(priv);
-  ret = OK;
+  ret = OKK;
 
 errout_with_exclsem:
   nxsem_post(&priv->exclsem);
@@ -447,7 +447,7 @@ static int zc_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
               /* Enable/disable interrupt handling */
 
               zerocross_enable(priv);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;

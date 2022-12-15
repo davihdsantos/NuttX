@@ -130,7 +130,7 @@ int stm32_l3gd20initialize(FAR const char *devpath)
   /* Then register the gyro */
 
   ret = l3gd20_register(devpath, spi, &g_l3gd20_config);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout;
     }

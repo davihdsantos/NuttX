@@ -183,7 +183,7 @@ static int mlx90614_read_word(FAR struct mlx90614_dev_s *priv, uint8_t cmd,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -263,7 +263,7 @@ static int mlx90614_write_word(FAR struct mlx90614_dev_s *priv, uint8_t cmd,
 
   sninfo("New address 0x%02x stored correctly!\n", regval);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -276,7 +276,7 @@ static int mlx90614_write_word(FAR struct mlx90614_dev_s *priv, uint8_t cmd,
 
 static int mlx90614_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -289,7 +289,7 @@ static int mlx90614_open(FAR struct file *filep)
 
 static int mlx90614_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -374,7 +374,7 @@ static int mlx90614_ioctl(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct mlx90614_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

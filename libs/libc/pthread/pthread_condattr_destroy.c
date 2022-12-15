@@ -65,7 +65,7 @@
 
 int pthread_condattr_destroy(FAR pthread_condattr_t *attr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   linfo("attr=0x%p\n", attr);
 

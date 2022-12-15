@@ -144,7 +144,7 @@ int stm32_bringup(void)
 #ifdef CONFIG_ONESHOT
   struct oneshot_lowerhalf_s *os = NULL;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEV_GPIO
   ret = stm32_gpio_initialize();
@@ -346,7 +346,7 @@ int stm32_bringup(void)
   /* Initialize and register the qencoder driver */
 
   ret = stm32_qencoder_initialize("/dev/qe0", CONFIG_STM32F103MINIMUM_QETIMER);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",

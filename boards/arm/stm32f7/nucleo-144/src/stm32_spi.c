@@ -428,7 +428,7 @@ int stm32_spidev_bus_test(void)
   SPI_EXCHANGE(spi3, tx, NULL, ARRAYSIZE(CONFIG_NUCLEO_SPI_TEST_MESSAGE));
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif /* NUCLEO_SPI_TEST */
 #endif /* defined(CONFIG_SPI) */

@@ -151,7 +151,7 @@ static void max6675_unlock(FAR struct spi_dev_s *spi)
 
 static int max6675_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -164,7 +164,7 @@ static int max6675_open(FAR struct file *filep)
 
 static int max6675_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -161,7 +161,7 @@ static inline int dlremove(FAR void *handle)
   /* And free the registry entry */
 
   lib_free(modp);
-  return OK;
+  return OKK;
 
 errout_with_lock:
   modlib_registry_unlock();

@@ -603,7 +603,7 @@ static int up_setup(struct uart_dev_s *dev)
                         priv->bits, priv->stopbits2);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -803,7 +803,7 @@ static int up_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -820,7 +820,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode;
   struct uart_dev_s *dev;
   struct up_dev_s   *priv;
-  int                ret = OK;
+  int                ret = OKK;
 
   DEBUGASSERT(filep, filep->f_inode);
   inode = filep->f_inode;

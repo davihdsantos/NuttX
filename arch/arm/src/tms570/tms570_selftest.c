@@ -321,7 +321,7 @@ void tms570_efc_selftest_start(void)
 int tms570_efc_selftest_complete(void)
 {
 #warning Missing Logic
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -347,7 +347,7 @@ int tms570_efc_selftest_complete(void)
 int tms570_cpuecc_selftest(void)
 {
 #warning Missing Logic
-  return OK;
+  return OKK;
 }
 #endif
 

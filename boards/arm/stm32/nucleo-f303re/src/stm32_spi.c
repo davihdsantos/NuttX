@@ -179,7 +179,7 @@ int stm32_spi1cmddata(FAR struct spi_dev_s *dev, uint32_t devid,
   if (devid == SPIDEV_DISPLAY(0))
     {
       (void)stm32_gpiowrite(GPIO_OLED_DC, !cmd);
-      return OK;
+      return OKK;
     }
 #endif
 

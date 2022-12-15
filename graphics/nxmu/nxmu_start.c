@@ -228,5 +228,5 @@ int nxmu_start(int display, int plane)
       nxsig_usleep(50*1000);
     }
 
-  return OK;
+  return OKK;
 }

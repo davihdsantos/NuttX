@@ -355,7 +355,7 @@ int gpio_irqattach(int irq, xcpt_t handler, void *arg)
       g_gpiohandler[irq].arg     = arg;
 
       leave_critical_section(flags);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

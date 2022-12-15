@@ -128,7 +128,7 @@ static int sph_open(FAR struct file *filep)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int sph_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
@@ -171,7 +171,7 @@ static int sph_semtake(sem_t *id)
     {
       ASSERT(errno == EINTR);
     }
-  return OK;
+  return OKK;
 }
 
 static void sph_semgive(sem_t *id)
@@ -185,9 +185,9 @@ static int sph_lock(FAR struct sph_dev_s *priv)
   int ret;
 
   ret = sph_trylock(priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
-      return OK;
+      return OKK;
     }
 
   for (; ; )
@@ -219,7 +219,7 @@ static int sph_lock(FAR struct sph_dev_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 static int sph_trylock(FAR struct sph_dev_s *priv)
@@ -235,7 +235,7 @@ static int sph_trylock(FAR struct sph_dev_s *priv)
       sts = getreg32(CXD56_SPH_STS(priv->id));
       if (sph_state_locked(sts) && LOCK_OWNER(sts) == g_cpuid)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -246,7 +246,7 @@ static inline int sph_unlock(FAR struct sph_dev_s *priv)
 {
   putreg32(REQ_UNLOCK, CXD56_SPH_REQ(priv->id));
   hsinfo("hsem%d is unlocked.\n", priv->id);
-  return OK;
+  return OKK;
 }
 
 static inline int cxd56_sphdevinit(FAR const char *devname, int num)
@@ -269,7 +269,7 @@ static inline int cxd56_sphdevinit(FAR const char *devname, int num)
   irq_attach(CXD56_IRQ_SPH0 + num, cxd56_sphirqhandler, NULL);
   up_enable_irq(CXD56_IRQ_SPH0 + num);
 
-  return OK;
+  return OKK;
 }
 
 static int cxd56_sphirqhandler(int irq, FAR void *context, FAR void *arg)
@@ -290,7 +290,7 @@ static int cxd56_sphirqhandler(int irq, FAR void *context, FAR void *arg)
 
   sph_semgive(&g_sphdev[id].wait);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -307,7 +307,7 @@ int cxd56_sphinitialize(FAR const char *devname)
   for (i = 3; i < 15; i++)
     {
       ret = cxd56_sphdevinit(devname, i);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ERROR;
         }
@@ -315,7 +315,7 @@ int cxd56_sphinitialize(FAR const char *devname)
 
   g_cpuid = getreg32(CPU_ID);
 
-  return OK;
+  return OKK;
 }
 
 #endif

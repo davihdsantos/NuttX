@@ -277,7 +277,7 @@ int lpc54_gpio_interrupt(lpc54_pinset_t pinset)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -356,7 +356,7 @@ int lpc54_gpio_ackedge(int irq)
 
   regval = getreg32(LPC54_PINT_FALL) & mask;
   putreg32(regval, LPC54_PINT_FALL);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LPC54_GPIOIRQ */

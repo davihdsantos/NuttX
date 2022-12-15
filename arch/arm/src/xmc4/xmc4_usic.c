@@ -183,7 +183,7 @@ int xmc4_enable_usic(enum usic_e usic)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -247,7 +247,7 @@ int xmc4_disable_usic(enum usic_e usic)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -327,7 +327,7 @@ int xmc4_enable_usic_channel(enum usic_channel_e channel)
   regval &= ~USIC_CCR_MODE_MASK;
   putreg32(regval, regaddr);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -381,7 +381,7 @@ int xmc4_disable_usic_channel(enum usic_channel_e channel)
       xmc4_disable_usic(xmc4_channel2usic(channel));
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -458,7 +458,7 @@ int xmc4_usic_baudrate(enum usic_channel_e channel, uint32_t baud,
       regval |= (USIC_BRG_DCTQ(oversampling - 1) | USIC_BRG_PDIV(pdiv_int_min - 1));
       putreg32(regval, base + XMC4_USIC_BRG_OFFSET);
 
-      ret = OK;
+      ret = OKK;
     }
   else
     {

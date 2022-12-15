@@ -81,6 +81,6 @@ int net_checksd(int sd, int oflags)
    * are no access restrictions that can be enforced yet.
    */
 
-  return OK;
+  return OKK;
 }
 

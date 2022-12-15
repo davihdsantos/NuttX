@@ -211,7 +211,7 @@ int kl_configgpio(uint32_t cfgset)
             }
         }
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

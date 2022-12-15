@@ -463,7 +463,7 @@ static int avr_fifoready(int timeout)
 
       if ((UEINTX & (1 << RWAL)) != 0)
         {
-          return OK;
+          return OKK;
         }
 
       /* Check if we are still connected and not stalled */
@@ -618,7 +618,7 @@ static inline int avr_epNsend(FAR struct avr_ep_s *privep,
   /* This function should not be called if we are not ready to write! */
 
   ret = avr_fifoready(AVR_TIMEOUT_LONG);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbtrace(TRACE_DEVERROR(AVR_TRACEERR_EP0FIFOFULL), regval);
       return -EAGAIN;
@@ -742,7 +742,7 @@ static inline int avr_epNsend(FAR struct avr_ep_s *privep,
         }
     }
   while (more);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -768,7 +768,7 @@ static inline int avr_epNrecv(FAR struct avr_ep_s *privep,
   /* This function should not be called if we are not ready to read! */
 
   ret = avr_fifoready(AVR_TIMEOUT_LONG);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbtrace(TRACE_DEVERROR(AVR_TRACEERR_EP0FIFONOTREADY), ret);
       return ret;
@@ -796,7 +796,7 @@ static inline int avr_epNrecv(FAR struct avr_ep_s *privep,
           /* Return success */
 
           usbtrace(TRACE_READ(privep->ep.eplog), req->xfrd);
-          return OK;
+          return OKK;
         }
       else
         {
@@ -824,7 +824,7 @@ static inline int avr_epNrecv(FAR struct avr_ep_s *privep,
   UEINTX = regval;
 
   usbtrace(TRACE_READ(privep->ep.eplog), req->xfrd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -841,7 +841,7 @@ static inline int avr_epNrecv(FAR struct avr_ep_s *privep,
 static int avr_epINqueue(FAR struct avr_ep_s *privep)
 {
   FAR struct avr_req_s *privreq;
-  int ret = OK;
+  int ret = OKK;
 
   usbtrace(TRACE_INTDECODE(AVR_TRACEINTID_EPIN), 0);
 
@@ -901,7 +901,7 @@ static int avr_epINqueue(FAR struct avr_ep_s *privep)
 static int avr_epOUTqueue(FAR struct avr_ep_s *privep)
 {
   FAR struct avr_req_s *privreq;
-  int ret = OK;
+  int ret = OKK;
 
   usbtrace(TRACE_INTDECODE(AVR_TRACEINTID_EPOUT), 0);
 
@@ -1137,7 +1137,7 @@ static int avr_ep0configure(void)
   /* Enable OUT interrupts */
 
   UEIENX |= (1 << RXOUTE);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1890,7 +1890,7 @@ static int avr_epinterrupt(int irq, FAR void *context, FAR void *arg)
   avr_epNinterrupt();
 
   usbtrace(TRACE_INTEXIT(AVR_TRACEINTID_EPINT), irq);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1929,7 +1929,7 @@ static void avr_genvbus(void)
 
       UDCON |= (1 << DETACH);
 
-      /* Disable the clock inputs (the ”Resume Detection” is still active).
+      /* Disable the clock inputs (the ï¿½Resume Detectionï¿½ is still active).
        * This reduces the power consumption. Clear to enable the clock inputs. */
 
       USBCON |= (1 << FRZCLK);
@@ -2098,7 +2098,7 @@ static int avr_geninterrupt(int irq, FAR void *context, FAR void *arg)
     }
 
   usbtrace(TRACE_INTEXIT(AVR_TRACEINTID_GENINT), irq);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2231,7 +2231,7 @@ static int avr_epconfigure(FAR struct usbdev_ep_s *ep,
   /* Enable interrupts as appropriate for this endpoint */
 
   UEIENX |= ueienx;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2264,7 +2264,7 @@ static int avr_epdisable(FAR struct usbdev_ep_s *ep)
   g_usbdev.stalled = true;
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2380,7 +2380,7 @@ static int avr_epsubmit(FAR struct usbdev_ep_s *ep,
   FAR struct avr_req_s *privreq = (FAR struct avr_req_s *)req;
   FAR struct avr_ep_s *privep = (FAR struct avr_ep_s *)ep;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -2501,7 +2501,7 @@ static int avr_epcancel(FAR struct usbdev_ep_s *ep,
   flags = enter_critical_section();
   avr_cancelrequests(privep, -ESHUTDOWN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2535,7 +2535,7 @@ static int avr_epstall(FAR struct usbdev_ep_s *ep, bool resume)
       g_usbdev.stalled = true;
     }
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2710,7 +2710,7 @@ static int avr_wakeup(struct usbdev_s *dev)
   flags = enter_critical_section();
   avr_genwakeup();
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2734,7 +2734,7 @@ static int avr_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   g_usbdev.selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2748,7 +2748,7 @@ static int avr_selfpowered(struct usbdev_s *dev, bool selfpowered)
 static int avr_pullup(struct usbdev_s *dev, bool enable)
 {
   usbtrace(TRACE_DEVPULLUP, (uint16_t) enable);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2942,7 +2942,7 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   /* Unhook the driver */
 
   g_usbdev.driver = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

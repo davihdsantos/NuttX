@@ -428,7 +428,7 @@ static int vs1053_setfrequency(FAR struct vs1053_struct_s *dev, uint32_t freq)
   dev->chip_freq = freq;
   dev->spi_freq = freq / 7;
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -759,7 +759,7 @@ static int vs1053_configure(FAR struct audio_lowerhalf_s *lower,
             FAR const struct audio_caps_s *pCaps)
 #endif
 {
-  int     ret = OK;
+  int     ret = OKK;
 #if !defined(CONFIG_AUDIO_EXCLUDE_VOLUME) || !defined(CONFIG_AUDIO_EXCLUDE_TONE)
   FAR struct vs1053_struct_s *dev = (struct vs1053_struct_s *) lower;
 #endif
@@ -882,7 +882,7 @@ static int vs1053_softreset(FAR struct vs1053_struct_s *dev)
 
   vs1053_setfrequency(dev, CONFIG_VS1053_XTALI);
   vs1053_spi_unlock(dev->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -903,7 +903,7 @@ static int vs1053_hardreset(FAR struct vs1053_struct_s *dev)
   nxsig_usleep(VS1053_RST_USECS);
   vs1053_setfrequency(dev, CONFIG_VS1053_XTALI);  /* Slow speed at first */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -924,7 +924,7 @@ static int vs1053_shutdown(FAR struct audio_lowerhalf_s *lower)
   vs1053_setfrequency(dev, CONFIG_VS1053_XTALI);  /* Reduce speed to minimum */
   vs1053_writereg(dev, VS1053_SCI_VOL, 0xFEFE);   /* Power down the DAC outputs */
   vs1053_spi_unlock(spi);                         /* Unlock the device */
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1478,7 +1478,7 @@ static int vs1053_start(FAR struct audio_lowerhalf_s *lower)
   audinfo("Starting workerthread\n");
   ret = pthread_create(&dev->threadid, &tattr, vs1053_workerthread,
       (pthread_addr_t) dev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       auderr("ERROR: Can't create worker thread, errno=%d\n", errno);
     }
@@ -1532,7 +1532,7 @@ static int vs1053_stop(FAR struct audio_lowerhalf_s *lower)
 
   up_mdelay(40);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1554,14 +1554,14 @@ static int vs1053_pause(FAR struct audio_lowerhalf_s *lower)
 
   if (!dev->running)
     {
-      return OK;
+      return OKK;
     }
 
   /* Disable interrupts to prevent us from supplying any more data */
 
   dev->paused = true;
   dev->hw_lower->disable(dev->hw_lower);   /* Disable the DREQ interrupt */
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_AUDIO_EXCLUDE_PAUSE_RESUME */
 
@@ -1583,7 +1583,7 @@ static int vs1053_resume(FAR struct audio_lowerhalf_s *lower)
 
   if (!dev->running)
     {
-      return OK;
+      return OKK;
     }
 
   /* Enable interrupts to allow suppling data */
@@ -1591,7 +1591,7 @@ static int vs1053_resume(FAR struct audio_lowerhalf_s *lower)
   dev->paused = false;
   vs1053_feeddata(dev);
   dev->hw_lower->enable(dev->hw_lower);   /* Enable the DREQ interrupt */
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_AUDIO_EXCLUDE_PAUSE_RESUME */
 
@@ -1646,7 +1646,7 @@ static int vs1053_enqueuebuffer(FAR struct audio_lowerhalf_s *lower,
 static int vs1053_cancelbuffer(FAR struct audio_lowerhalf_s *lower,
                                FAR struct ap_buffer_s *apb)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1690,7 +1690,7 @@ static int vs1053_ioctl(FAR struct audio_lowerhalf_s *lower, int cmd,
         break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1778,7 +1778,7 @@ static int vs1053_release(FAR struct audio_lowerhalf_s *lower)
   dev->busy = false;
   nxsem_post(&dev->apbq_sem);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

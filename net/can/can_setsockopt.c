@@ -91,7 +91,7 @@ int can_setsockopt(FAR struct socket *psock, int option,
         if (value_len == 0)
           {
             conn->filter_count = 0;
-            ret = OK;
+            ret = OKK;
           }
         else if (value_len % sizeof(struct can_filter) != 0)
           {
@@ -113,7 +113,7 @@ int can_setsockopt(FAR struct socket *psock, int option,
 
         conn->filter_count = count;
 
-            ret = OK;
+            ret = OKK;
           }
         break;
 

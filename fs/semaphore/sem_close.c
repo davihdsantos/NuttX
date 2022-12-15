@@ -122,11 +122,11 @@ int sem_close(FAR sem_t *sem)
 
       DEBUGASSERT(inode->i_peer == NULL);
       inode_free(inode);
-      return OK;
+      return OKK;
     }
 
   inode_semgive();
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_FS_NAMED_SEMAPHORES */

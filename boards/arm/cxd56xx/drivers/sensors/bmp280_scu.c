@@ -307,7 +307,7 @@ static int bmp280_checkid(FAR struct bmp280_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -350,7 +350,7 @@ static int bmp280_get_calib_param_press(FAR struct bmp280_dev_s *priv)
         ((int16_t)bmp280_getreg8(priv, BMP280_DIG_P9_MSB) << 8) |
         bmp280_getreg8(priv, BMP280_DIG_P9_LSB);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -375,7 +375,7 @@ static int bmp280_get_calib_param_temp(FAR struct bmp280_dev_s *priv)
         ((int16_t)bmp280_getreg8(priv, BMP280_DIG_T3_MSB) << 8) |
         bmp280_getreg8(priv, BMP280_DIG_T3_LSB);
 
-  return OK;
+  return OKK;
 }
 /****************************************************************************
  * Name: bmp280_set_power_mode
@@ -459,7 +459,7 @@ static int bmp280_set_standby(FAR struct bmp280_dev_s *priv, uint8_t value)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -476,13 +476,13 @@ static int bmp280_initialize(FAR struct bmp280_dev_s *priv)
 
   ret = bmp280_set_standby(priv, BMP280_STANDBY_1_MS);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       snerr("Failed to set value for standby time.");
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int bmp280_seqinit_press(FAR struct bmp280_dev_s *priv)
@@ -507,7 +507,7 @@ static int bmp280_seqinit_press(FAR struct bmp280_dev_s *priv)
   seq_setsample(priv->seq, BMP280PRESS_BYTESPERSAMPLE, 0,
                 BMP280PRESS_ELEMENTSIZE, false);
 
-  return OK;
+  return OKK;
 }
 
 static int bmp280_seqinit_temp(FAR struct bmp280_dev_s *priv)
@@ -532,7 +532,7 @@ static int bmp280_seqinit_temp(FAR struct bmp280_dev_s *priv)
   seq_setsample(priv->seq, BMP280TEMP_BYTESPERSAMPLE, 0,
                 BMP280TEMP_ELEMENTSIZE, false);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -579,7 +579,7 @@ static int bmp280_open_press(FAR struct file *filep)
 
   g_refcnt_press++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -626,7 +626,7 @@ static int bmp280_open_temp(FAR struct file *filep)
 
   g_refcnt_temp++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -663,7 +663,7 @@ static int bmp280_close_press(FAR struct file *filep)
 
   g_refcnt_press--;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -700,7 +700,7 @@ static int bmp280_close_temp(FAR struct file *filep)
 
   g_refcnt_temp--;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -754,7 +754,7 @@ static int bmp280_ioctl_press(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct bmp280_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -813,7 +813,7 @@ static int bmp280_ioctl_temp(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct bmp280_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -892,7 +892,7 @@ int bmp280_init(FAR struct i2c_master_s *i2c, int port)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

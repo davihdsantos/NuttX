@@ -80,7 +80,7 @@ int pm_register(FAR struct pm_callback_s *callbacks)
   if (OSINIT_OS_READY())
     {
       ret = pm_lock();
-      if (ret == OK)
+      if (ret == OKK)
         {
           dq_addlast(&callbacks->entry, &g_pmglobals.registry);
           pm_unlock();
@@ -89,7 +89,7 @@ int pm_register(FAR struct pm_callback_s *callbacks)
   else
     {
       dq_addlast(&callbacks->entry, &g_pmglobals.registry);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

@@ -1107,7 +1107,7 @@ static int sam_base_getvideoinfo(struct fb_vtable_s *vtable,
   if (vtable && vinfo)
     {
       memcpy(vinfo, &g_base_videoinfo, sizeof(struct fb_videoinfo_s));
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -1129,7 +1129,7 @@ static int sam_base_getplaneinfo(struct fb_vtable_s *vtable, int planeno,
       pinfo->stride  = SAMA5_BASE_STRIDE;
       pinfo->display = 0;
       pinfo->bpp     = LAYER_BASE.bpp;
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -1185,7 +1185,7 @@ static int sam_hcr_getcursor(struct fb_vtable_s *vtable,
       lcdinfo("size: (h=%d, w=%d)\n", g_lcdc.csize.h, g_lcdc.csize.w);
       attrib->size = g_lcdc.csize;
 #endif
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -1225,7 +1225,7 @@ static int sam_hcr_setcursor(struct fb_vtable_s *vtable,
                 settings->img.image);
         }
 #endif
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -1442,7 +1442,7 @@ static int sam_setclut(struct sam_layer_s *layer,
       regaddr += sizeof(uint32_t);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1500,7 +1500,7 @@ static int sam_getclut(struct sam_layer_s *layer,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2991,7 +2991,7 @@ int up_fbinitialize(int display)
 
   sam_backlight(CONFIG_SAMA5_LCDC_DEFBACKLIGHT);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -113,7 +113,7 @@ int pthread_spin_init(FAR pthread_spinlock_t *lock, int pshared)
     {
       lock->sp_lock   = SP_UNLOCKED;
       lock->sp_holder = IMPOSSIBLE_THREAD;
-      ret             = OK;
+      ret             = OKK;
     }
 
   return ret;
@@ -150,7 +150,7 @@ int pthread_spin_init(FAR pthread_spinlock_t *lock, int pshared)
 
 int pthread_spin_destroy(pthread_spinlock_t *lock)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -257,7 +257,7 @@ int pthread_spin_trylock(pthread_spinlock_t *lock)
     }
   else if (lock->sp_holder == me)
     {
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -334,7 +334,7 @@ int pthread_spin_unlock(pthread_spinlock_t *lock)
 
   lock->sp_holder = IMPOSSIBLE_THREAD;
   lock->sp_lock   = SP_UNLOCKED;
-  return OK;
+  return OKK;
 }
 
 #endif  /* CONFIG_PTHREAD_SPINLOCKS */

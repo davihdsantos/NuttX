@@ -76,7 +76,7 @@ static int nxterm_fontsize(FAR struct nxterm_state_s *priv, uint8_t ch,
 
       size->w = fbm->metric.width + fbm->metric.xoffset;
       size->h = fbm->metric.height + fbm->metric.yoffset;
-      return OK;
+      return OKK;
     }
 
   return -ENOENT;
@@ -219,7 +219,7 @@ int nxterm_hidechar(FAR struct nxterm_state_s *priv,
     {
       /* It was rendered as a space. */
 
-      return OK;
+      return OKK;
     }
 
   /* Construct a bounding box for the glyph */

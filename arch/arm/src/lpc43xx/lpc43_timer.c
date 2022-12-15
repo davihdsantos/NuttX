@@ -388,7 +388,7 @@ static int lpc43_interrupt(int irq, FAR void *context, FAR void *arg)
       lpc43_putreg(chan_int, priv->base + LPC43_TMR_IR_OFFSET);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -452,7 +452,7 @@ static int lpc43_start(FAR struct timer_lowerhalf_s *lower)
   lpc43_putreg(TMR_TCR_EN, priv->base + LPC43_TMR_TCR_OFFSET);
 
   priv->started = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -495,7 +495,7 @@ static int lpc43_stop(FAR struct timer_lowerhalf_s *lower)
 
   priv->started = false;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -550,7 +550,7 @@ static int lpc43_getstatus(FAR struct timer_lowerhalf_s *lower,
   tmrinfo("  flags    : %08x\n", status->flags);
   tmrinfo("  timeout  : %d\n", status->timeout);
   tmrinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -611,7 +611,7 @@ static int lpc43_settimeout(FAR struct timer_lowerhalf_s *lower,
   tmrinfo("fclk=%d clkticks=%d timout=%d, adjustment=%d\n",
           TMR_FCLK, priv->clkticks, priv->timeout, priv->adjustment);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

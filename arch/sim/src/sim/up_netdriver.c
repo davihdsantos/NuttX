@@ -331,13 +331,13 @@ void netdriver_loop(void)
 int netdriver_ifup(struct net_driver_s *dev)
 {
   netdev_ifup(dev->d_ipaddr);
-  return OK;
+  return OKK;
 }
 
 int netdriver_ifdown(struct net_driver_s *dev)
 {
   netdev_ifdown();
-  return OK;
+  return OKK;
 }
 
 int netdriver_init(void)
@@ -356,7 +356,7 @@ int netdriver_init(void)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&g_sim_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 int netdriver_setmacaddr(unsigned char *macaddr)

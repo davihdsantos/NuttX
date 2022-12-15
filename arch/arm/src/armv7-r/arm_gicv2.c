@@ -486,7 +486,7 @@ int up_prioritize_irq(int irq, int priority)
       regval |= GIC_ICDIPR_ID(irq, priority);
       putreg32(regval, regaddr);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -523,7 +523,7 @@ int arm_cpu_sgi(int sgi, unsigned int cpuset)
 #endif
 
   putreg32(regval, GIC_ICDSGIR);
-  return OK;
+  return OKK;
 }
 
 #endif							/* CONFIG_ARMV7R_HAVE_GICv2 */

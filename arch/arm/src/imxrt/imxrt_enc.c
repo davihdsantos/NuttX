@@ -572,7 +572,7 @@ static inline void imxrt_enc_sem_wait(FAR struct imxrt_enc_lowerhalf_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -686,7 +686,7 @@ static int imxrt_enc_reconfig(FAR struct imxrt_enc_lowerhalf_s *priv, uint16_t a
 
   imxrt_enc_modifyreg16(priv, IMXRT_ENC_CTRL2_OFFSET, clear, set);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -785,7 +785,7 @@ static int imxrt_enc_test_gen(FAR struct imxrt_enc_lowerhalf_s *priv, uint16_t v
   imxrt_enc_modifyreg16(priv, IMXRT_ENC_TST_OFFSET, 0,
                         (value & ENC_TST_COUNT_MASK) << ENC_TST_COUNT_SHIFT);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DEBUG_SENSORS */
@@ -859,7 +859,7 @@ static int imxrt_setup(FAR struct qe_lowerhalf_s *lower)
   imxrt_enc_putreg16(priv, IMXRT_ENC_CTRL2_OFFSET, regval);
 
   imxrt_enc_sem_post(priv);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -899,7 +899,7 @@ static int imxrt_shutdown(FAR struct qe_lowerhalf_s *lower)
   imxrt_enc_clock_disable(priv->config->base);
 
   imxrt_enc_sem_post(priv);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -946,7 +946,7 @@ static int imxrt_position(FAR struct qe_lowerhalf_s *lower, FAR int32_t *pos)
   imxrt_enc_sem_post(priv);
 
   *pos = (int32_t)((upos << 16) | lpos);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -967,7 +967,7 @@ static int imxrt_reset(FAR struct qe_lowerhalf_s *lower)
   imxrt_enc_modifyreg16(priv, IMXRT_ENC_CTRL_OFFSET, 0, ENC_CTRL_SWIP);
   imxrt_enc_sem_post(priv);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1016,7 +1016,7 @@ static int imxrt_ioctl(FAR struct qe_lowerhalf_s *lower, int cmd,
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

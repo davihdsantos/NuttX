@@ -894,7 +894,7 @@ static void spi_dmarxwait(FAR struct stm32_spidev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR || priv->rxresult == 0);
 }
@@ -925,7 +925,7 @@ static void spi_dmatxwait(FAR struct stm32_spidev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR || priv->txresult == 0);
 }
@@ -1227,14 +1227,14 @@ static int spi_lock(FAR struct spi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1902,7 +1902,7 @@ static int spi_trigger(FAR struct spi_dev_s *dev)
   spi_dmarxstart(priv);
   spi_dmatxstart(priv);
 
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif

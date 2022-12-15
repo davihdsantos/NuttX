@@ -133,5 +133,5 @@ int lc823450_bringup(void)
    */
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

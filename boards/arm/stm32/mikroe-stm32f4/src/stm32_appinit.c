@@ -180,7 +180,7 @@ int board_app_initialize(uintptr_t arg)
   FAR struct spi_dev_s *spi;
   FAR struct mtd_dev_s *mtd;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
   /* Configure SPI-based devices */
 
@@ -317,7 +317,7 @@ int board_app_initialize(uintptr_t arg)
          CONFIG_NSH_MMCSDMINOR);
 
   ret = mmcsd_spislotinitialize(CONFIG_NSH_MMCSDMINOR, CONFIG_NSH_MMCSDSLOTNO, spi);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to bind SPI to the MMC/SD driver: %d\n", ret);
     }
@@ -333,7 +333,7 @@ int board_app_initialize(uintptr_t arg)
    */
 
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -344,7 +344,7 @@ int board_app_initialize(uintptr_t arg)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to start USB monitor: %d\n", ret);
     }
@@ -386,7 +386,7 @@ int board_app_initialize(uintptr_t arg)
   /* Initialize and register the qencoder driver */
 
   ret = stm32_qencoder_initialize("/dev/qe0", CONFIG_MIKROE_QETIMER);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",

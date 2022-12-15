@@ -178,7 +178,7 @@ static inline int btn_takesem(sem_t *sem)
    * was awakened by a signal
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -399,7 +399,7 @@ static int btn_open(FAR struct file *filep)
   /* Attach the open structure to the file structure */
 
   filep->f_priv = (FAR void *)opriv;
-  ret = OK;
+  ret = OKK;
 
   /* Enable/disable interrupt handling */
 
@@ -450,7 +450,7 @@ static int btn_close(FAR struct file *filep)
     {
       /* Another thread is doing the close */
 
-      return OK;
+      return OKK;
     }
 
   /* Get exclusive access to the driver structure */
@@ -498,7 +498,7 @@ static int btn_close(FAR struct file *filep)
   /* Enable/disable interrupt handling */
 
   btn_enable(priv);
-  ret = OK;
+  ret = OKK;
 
 errout_with_exclsem:
   btn_givesem(&priv->bu_exclsem);
@@ -604,7 +604,7 @@ static int btn_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             DEBUGASSERT(lower && lower->bl_supported);
 
             *supported = lower->bl_supported(lower);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -634,7 +634,7 @@ static int btn_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             /* Enable/disable interrupt handling */
 
             btn_enable(priv);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -667,7 +667,7 @@ static int btn_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             /* Enable/disable interrupt handling */
 
             btn_enable(priv);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -833,7 +833,7 @@ int btn_register(FAR const char *devname,
       goto errout_with_priv;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->bu_exclsem);

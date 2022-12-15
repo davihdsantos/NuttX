@@ -783,7 +783,7 @@ static int qspi_memory_enable(struct sam_qspidev_s *priv,
 
   qspi_putreg(priv, regval, SAM_QSPI_IFR_OFFSET);
   (void)qspi_getreg(priv, SAM_QSPI_IFR_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1000,7 +1000,7 @@ static int qspi_memory_nodma(struct sam_qspidev_s *priv,
    */
 
   while ((qspi_getreg(priv, SAM_QSPI_SR_OFFSET) & QSPI_SR_INSTRE) == 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1070,14 +1070,14 @@ static int qspi_lock(struct qspi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1530,7 +1530,7 @@ static int qspi_command(struct qspi_dev_s *dev,
 
   while ((qspi_getreg(priv, SAM_QSPI_SR_OFFSET) & QSPI_SR_INSTRE) == 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1701,7 +1701,7 @@ static int qspi_hw_initialize(struct sam_qspidev_s *priv)
   (void)qspi_getreg(priv, SAM_QSPI_RDR_OFFSET);
 
   qspi_dumpregs(priv, "After initialization");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

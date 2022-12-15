@@ -895,7 +895,7 @@ static int adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1073,7 +1073,7 @@ static int adc_setup(FAR struct adc_dev_s *dev)
   /* Attach the ADC interrupt */
 
   ret = irq_attach(priv->irq, priv->isr, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Make sure that the ADC device is in the powered up, reset state */
 
@@ -1233,7 +1233,7 @@ static int adc_interrupt(int irq, FAR void *context, FAR struct adc_dev_s *dev)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

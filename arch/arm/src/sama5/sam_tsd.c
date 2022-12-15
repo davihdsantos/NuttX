@@ -329,7 +329,7 @@ static int sam_tsd_sample(struct sam_tsd_s *priv, struct sam_sample_s *sample)
         }
 
       priv->penchange = false;
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -794,7 +794,7 @@ static int sam_tsd_schedule(struct sam_tsd_s *priv)
       ierr("ERROR: Failed to queue work: %d\n", ret);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -859,7 +859,7 @@ static int sam_tsd_open(struct file *filep)
 
       /* Successfully opened */
 
-      ret = OK;
+      ret = OKK;
     }
 
   sam_adc_unlock(priv->adc);
@@ -896,7 +896,7 @@ static int sam_tsd_close(struct file *filep)
     }
 
   sam_adc_unlock(priv->adc);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1065,7 +1065,7 @@ static int sam_tsd_poll(struct file *filep, struct pollfd *fds, bool setup)
 {
   struct inode *inode;
   struct sam_tsd_s *priv;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   iinfo("setup: %d\n", (int)setup);
@@ -1682,7 +1682,7 @@ int sam_tsd_register(struct sam_adc_s *adc, int minor)
    * touchscreen driver is opened for the first time.
    */
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->waitsem);

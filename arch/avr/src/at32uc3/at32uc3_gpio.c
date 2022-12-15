@@ -223,7 +223,7 @@ int at32uc3_configgpio(uint16_t cfgset)
       putreg32(pinmask, base + AVR32_GPIO_IERS_OFFSET);
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

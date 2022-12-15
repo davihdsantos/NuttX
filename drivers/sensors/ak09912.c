@@ -494,7 +494,7 @@ static int ak09912_checkid(FAR struct ak09912_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -536,7 +536,7 @@ static int ak09912_open(FAR struct file *filep)
       snerr("Failed to set power mode to %d.\n", priv->mode);
       return ret;
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -559,7 +559,7 @@ static int ak09912_close(FAR struct file *filep)
       snerr("Failed to set power mode to %d.\n", AKM_POWER_DOWN_MODE);
       return ret;
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -626,7 +626,7 @@ static int ak09912_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct ak09912_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

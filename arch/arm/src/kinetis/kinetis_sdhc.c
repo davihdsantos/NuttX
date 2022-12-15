@@ -442,7 +442,7 @@ static void kinetis_takesem(struct kinetis_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1203,7 +1203,7 @@ static int kinetis_interrupt(int irq, void *context, FAR void *arg)
   regval |= SDHC_INT_CINT;
   putreg32(regval, KINETIS_SDHC_IRQSIGEN);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1234,7 +1234,7 @@ static int kinetis_lock(FAR struct sdio_dev_s *dev, bool lock)
    */
 
   kinetis_muxbus_sdio_lock(lock);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1703,7 +1703,7 @@ static int kinetis_attach(FAR struct sdio_dev_s *dev)
   /* Attach the SDIO interrupt handler */
 
   ret = irq_attach(KINETIS_IRQ_SDHC, kinetis_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
 
       /* Disable all interrupts at the SDIO controller and clear all pending
@@ -1882,7 +1882,7 @@ static int kinetis_sendcmd(FAR struct sdio_dev_s *dev, uint32_t cmd,
 
   putreg32(SDHC_RESPDONE_INTS, KINETIS_SDHC_IRQSTAT);
   putreg32(regval, KINETIS_SDHC_XFERTYP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1934,7 +1934,7 @@ static int kinetis_recvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
 
   kinetis_configxfrints(priv, SDHC_RCVDONE_INTS);
   kinetis_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1985,7 +1985,7 @@ static int kinetis_sendsetup(FAR struct sdio_dev_s *dev, FAR const uint8_t *buff
 
   kinetis_configxfrints(priv, SDHC_SNDDONE_INTS);
   kinetis_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2041,7 +2041,7 @@ static int kinetis_cancel(FAR struct sdio_dev_s *dev)
   /* Mark no transfer in progress */
 
   priv->remaining = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2068,14 +2068,14 @@ static int kinetis_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
   clock_t start;
   clock_t elapsed;
   uint32_t errors;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd & MMCSD_RESPONSE_MASK)
     {
     case MMCSD_NO_RESPONSE:
       timeout = SDHC_CMDTIMEOUT;
       errors  = 0;
-      return OK;
+      return OKK;
 
     case MMCSD_R1_RESPONSE:
     case MMCSD_R1B_RESPONSE:
@@ -2161,7 +2161,7 @@ static int kinetis_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd,
                                 uint32_t *rshort)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R1  Command response (48-bit)
    *     47        0               Start bit
@@ -2233,7 +2233,7 @@ static int kinetis_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd,
                             uint32_t rlong[4])
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R2  CID, CSD register (136-bit)
    *     135       0               Start bit
@@ -2299,7 +2299,7 @@ static int kinetis_recvshort(FAR struct sdio_dev_s *dev, uint32_t cmd,
                              uint32_t *rshort)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R3  OCR (48-bit)
    *     47        0               Start bit
@@ -2577,7 +2577,7 @@ static int kinetis_registercallback(FAR struct sdio_dev_s *dev,
   priv->cbevents = 0;
   priv->cbarg    = arg;
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2634,7 +2634,7 @@ static int kinetis_dmarecvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
   /* Sample the register state */
 
   kinetis_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2695,7 +2695,7 @@ static int kinetis_dmasendsetup(FAR struct sdio_dev_s *dev,
   /* Enable TX interrupts */
 
   kinetis_configxfrints(priv, SDHC_DMADONE_INTS);
-  return OK;
+  return OKK;
 }
 #endif
 

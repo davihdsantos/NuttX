@@ -143,7 +143,7 @@ static int loop_semtake(FAR struct loop_struct_s *dev)
    * awakened by a signal.
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -165,7 +165,7 @@ static int loop_open(FAR struct inode *inode)
   /* Make sure we have exclusive access to the state structure */
 
   ret = loop_semtake(dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       if (dev->opencnt == MAX_OPENCNT)
         {
@@ -202,7 +202,7 @@ static int loop_close(FAR struct inode *inode)
   /* Make sure we have exclusive access to the state structure */
 
   ret = loop_semtake(dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       if (dev->opencnt == 0)
         {
@@ -348,7 +348,7 @@ static int loop_geometry(FAR struct inode *inode,
 #endif
       geometry->geo_nsectors      = dev->nsectors;
       geometry->geo_sectorsize    = dev->sectsize;
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -455,7 +455,7 @@ int losetup(FAR const char *devname, FAR const char *filename,
       goto errout_with_file;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_file:
   file_close(&dev->devfile);

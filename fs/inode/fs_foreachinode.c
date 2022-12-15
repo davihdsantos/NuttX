@@ -92,7 +92,7 @@ struct inode_path_s
 
 static int foreach_inodelevel(FAR struct inode *node, struct inode_path_s *info)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Visit each node at this level */
 

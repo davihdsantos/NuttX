@@ -107,7 +107,7 @@ int board_isx012_power_on(void)
       stat |= (uint32_t)board_power_monitor(PMIC_GPO(7)) << 2;
       if (stat == ALL_POWERON)
         {
-          ret = OK;
+          ret = OKK;
           break;
         }
 
@@ -140,7 +140,7 @@ int board_isx012_power_off(void)
       stat |= (uint32_t)board_power_monitor(PMIC_GPO(7)) << 2;
       if (stat == ALL_POWEROFF)
         {
-          ret = OK;
+          ret = OKK;
           break;
         }
 

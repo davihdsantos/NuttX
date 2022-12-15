@@ -159,7 +159,7 @@ static int onfi_readstatus(uintptr_t cmdaddr, uintptr_t dataaddr)
 
           if ((status & STATUS_BIT_0) == 0)
             {
-              return OK;
+              return OKK;
             }
           else
             {
@@ -366,7 +366,7 @@ int onfi_read(uintptr_t cmdaddr, uintptr_t addraddr, uintptr_t dataaddr,
   finfo("  pagesperblock: %d\n",     onfi->pagesperblock);
   finfo("  blocksperlun:  %d\n",     onfi->blocksperlun);
   finfo("  pagesize:      %d\n",     onfi->pagesize);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -467,7 +467,7 @@ bool onfi_ebidetect(uintptr_t cmdaddr, uintptr_t addraddr,
   for (timer = 0; timer < 60; timer++)
     {
       rc = onfi_readstatus(cmdaddr, dataaddr);
-      if (rc == OK)
+      if (rc == OKK)
         {
           WRITE_NAND_COMMAND(NAND_CMD_READID, cmdaddr);
           WRITE_NAND_ADDRESS(0, addraddr);

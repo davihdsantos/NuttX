@@ -81,7 +81,7 @@ static int imx_timerisr(int irq, uint32_t *regs, FAR void *arg)
       /* Process timer interrupt */
 
       nxsched_process_timer();
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

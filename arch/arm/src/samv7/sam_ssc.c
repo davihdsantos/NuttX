@@ -872,7 +872,7 @@ static void ssc_exclsem_take(struct sam_ssc_s *priv)
   do
     {
       ret = nxsem_wait(&priv->exclsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1248,14 +1248,14 @@ static int ssc_rxdma_setup(struct sam_ssc_s *priv)
 
   if (!sq_empty(&priv->rx.act))
     {
-      return OK;
+      return OKK;
     }
 
   /* If there are no pending transfer, then bail returning success */
 
   if (sq_empty(&priv->rx.pend))
     {
-      return OK;
+      return OKK;
     }
 
   /* Initialize DMA register sampling */
@@ -1356,7 +1356,7 @@ static int ssc_rxdma_setup(struct sam_ssc_s *priv)
     }
 
   ssc_dump_rxqueues(priv, "RX DMA started");
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1447,7 +1447,7 @@ static void ssc_rx_worker(void *arg)
        * the audio buffer.
        */
 
-      if (bfcontainer->result == OK)
+      if (bfcontainer->result == OKK)
         {
           apb->nbytes = apb->nmaxbytes;
         }
@@ -1664,14 +1664,14 @@ static int ssc_txdma_setup(struct sam_ssc_s *priv)
 
   if (!sq_empty(&priv->tx.act))
     {
-      return OK;
+      return OKK;
     }
 
   /* If there are no pending transfer, then bail returning success */
 
   if (sq_empty(&priv->tx.pend))
     {
-      return OK;
+      return OKK;
     }
 
   /* Initialize DMA register sampling */
@@ -1773,7 +1773,7 @@ static int ssc_txdma_setup(struct sam_ssc_s *priv)
     }
 
   ssc_dump_txqueues(priv, "TX DMA started");
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2041,7 +2041,7 @@ static int ssc_checkwidth(struct sam_ssc_s *priv, int bits)
   /* Save the new data width */
 
   priv->datalen = bits;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2238,10 +2238,10 @@ static int ssc_receive(struct i2s_dev_s *dev, struct ap_buffer_s *apb,
    */
 
   ret = ssc_rxdma_setup(priv);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   leave_critical_section(flags);
   ssc_exclsem_give(priv);
-  return OK;
+  return OKK;
 
 errout_with_exclsem:
   ssc_exclsem_give(priv);
@@ -2455,10 +2455,10 @@ static int ssc_send(struct i2s_dev_s *dev, struct ap_buffer_s *apb,
    */
 
   ret = ssc_txdma_setup(priv);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   leave_critical_section(flags);
   ssc_exclsem_give(priv);
-  return OK;
+  return OKK;
 
 errout_with_exclsem:
   ssc_exclsem_give(priv);
@@ -2602,7 +2602,7 @@ static int ssc_rx_configure(struct sam_ssc_s *priv)
   /* Disable the receiver */
 
   ssc_putreg(priv, SAM_SSC_CR_OFFSET, SSC_CR_RXDIS);
-  return OK;
+  return OKK;
 }
 
 static int ssc_tx_configure(struct sam_ssc_s *priv)
@@ -2754,7 +2754,7 @@ static int ssc_tx_configure(struct sam_ssc_s *priv)
   /* Disable the transmitter */
 
   ssc_putreg(priv, SAM_SSC_CR_OFFSET, SSC_CR_TXDIS);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2930,7 +2930,7 @@ static int ssc_dma_flags(struct sam_ssc_s *priv, uint32_t *dmaflags)
     }
 
   *dmaflags = (flags | DMACH_FLAG_PERIPHPID(priv->pid));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3012,7 +3012,7 @@ static int ssc_dma_allocate(struct sam_ssc_s *priv)
 
   /* Success exit */
 
-  return OK;
+  return OKK;
 
   /* Error exit */
 

@@ -388,7 +388,7 @@ static int cdcacm_sndpacket(FAR struct cdcacm_dev_s *priv)
   uint16_t reqlen;
   irqstate_t flags;
   int len;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (priv == NULL)
@@ -440,7 +440,7 @@ static int cdcacm_sndpacket(FAR struct cdcacm_dev_s *priv)
           req->priv    = wrcontainer;
           req->flags   = USBDEV_REQFLAGS_NULLPKT;
           ret          = EP_SUBMIT(ep, req);
-          if (ret != OK)
+          if (ret != OKK)
             {
               usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_SUBMITFAIL),
                        (uint16_t)-ret);
@@ -619,7 +619,7 @@ static int cdcacm_recvpacket(FAR struct cdcacm_dev_s *priv,
       return -ENOSPC;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -648,7 +648,7 @@ static int cdcacm_requeue_rdrequest(FAR struct cdcacm_dev_s *priv,
   ep       = priv->epbulkout;
   req->len = ep->maxpacket;
   ret      = EP_SUBMIT(ep, req);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_RDSUBMIT),
                               (uint16_t)-req->result);
@@ -701,7 +701,7 @@ static int cdcacm_release_rxpending(FAR struct cdcacm_dev_s *priv)
        * disabled throughout the following.
        */
 
-      ret = OK;
+      ret = OKK;
 
       while (!sq_empty(&priv->rxpending))
         {
@@ -1109,7 +1109,7 @@ static int cdcacm_setconfig(FAR struct cdcacm_dev_s *priv, uint8_t config)
       req           = priv->rdreqs[i].req;
       req->callback = cdcacm_rdcomplete;
       ret           = EP_SUBMIT(priv->epbulkout, req);
-      if (ret != OK)
+      if (ret != OKK)
         {
           usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_RDSUBMIT),
                    (uint16_t)-ret);
@@ -1129,7 +1129,7 @@ static int cdcacm_setconfig(FAR struct cdcacm_dev_s *priv, uint8_t config)
   uart_connected(&priv->serdev, true);
 #endif
 
-  return OK;
+  return OKK;
 
 errout:
   cdcacm_resetconfig(priv);
@@ -1471,7 +1471,7 @@ static int cdcacm_bind(FAR struct usbdevclass_driver_s *driver,
 
   DEV_CONNECT(dev);
 #endif
-  return OK;
+  return OKK;
 
 errout:
   cdcacm_unbind(driver, dev);
@@ -1997,7 +1997,7 @@ static int cdcacm_setup(FAR struct usbdevclass_driver_s *driver,
       if (ret < 0)
         {
           usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_EPRESPQ), (uint16_t)-ret);
-          ctrlreq->result = OK;
+          ctrlreq->result = OKK;
           cdcacm_ep0incomplete(dev->ep0, ctrlreq);
         }
     }
@@ -2186,7 +2186,7 @@ static int cdcuart_setup(FAR struct uart_dev_s *dev)
       return -ENOTCONN;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2226,7 +2226,7 @@ static void cdcuart_shutdown(FAR struct uart_dev_s *dev)
 static int cdcuart_attach(FAR struct uart_dev_s *dev)
 {
   usbtrace(CDCACM_CLASSAPI_ATTACH, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2255,7 +2255,7 @@ static int cdcuart_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
   struct inode        *inode  = filep->f_inode;
   struct cdcacm_dev_s *priv   = inode->i_private;
   FAR uart_dev_t      *serdev = &priv->serdev;
-  int                  ret    = OK;
+  int                  ret    = OKK;
 
   switch (cmd)
     {
@@ -3000,7 +3000,7 @@ int cdcacm_classobject(int minor, FAR struct usbdev_devinfo_s *devinfo,
     }
 
   *classdev = &drvr->drvr;
-  return OK;
+  return OKK;
 
 errout_with_class:
   wd_delete(priv->rxfailsafe);

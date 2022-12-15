@@ -101,7 +101,7 @@ int net_addroute_ipv4(in_addr_t target, in_addr_t netmask, in_addr_t router)
   ramroute_ipv4_addlast((FAR struct net_route_ipv4_entry_s *)route,
                         &g_ipv4_routes);
   net_unlock();
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -136,7 +136,7 @@ int net_addroute_ipv6(net_ipv6addr_t target, net_ipv6addr_t netmask,
   ramroute_ipv6_addlast((FAR struct net_route_ipv6_entry_s *)route,
                         &g_ipv6_routes);
   net_unlock();
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -138,5 +138,5 @@ int wd_delete(WDOG_ID wdog)
 
   /* Return success */
 
-  return OK;
+  return OKK;
 }

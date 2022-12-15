@@ -1343,7 +1343,7 @@ static int khci_wrstart(struct khci_usbdev_s *priv,
   /* Update for the next data IN interrupt */
 
   privreq->inflight[index] = nbytes;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1360,7 +1360,7 @@ static int khci_wrrequest(struct khci_usbdev_s *priv, struct khci_ep_s *privep)
 
   ret = khci_wrstart(priv, privep);
 #ifndef CONFIG_USBDEV_NOWRITEAHEAD
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Note:  We need to return the error condition only if nothing was
        * queued
@@ -1558,7 +1558,7 @@ static int khci_ep0rdsetup(struct khci_usbdev_s *priv, uint8_t *dest,
 
   priv->ctrlstate = CTRLSTATE_RDREQUEST;
   priv->rxbusy    = 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1658,7 +1658,7 @@ static int khci_rdsetup(struct khci_ep_s *privep, uint8_t *dest, int readlen)
           epno, bdtout, status, bdtout->addr);
 
   bdtout->status = status;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1693,7 +1693,7 @@ static int khci_rdrequest(struct khci_usbdev_s *priv,
           priv->rxbusy    = 0;
         }
 
-      return OK;
+      return OKK;
     }
 
   uinfo("EP%d: len=%d\n", USB_EPNO(privep->ep.eplog), privreq->req.len);
@@ -1704,7 +1704,7 @@ static int khci_rdrequest(struct khci_usbdev_s *priv,
     {
       usbtrace(TRACE_DEVERROR(KHCI_TRACEERR_EPOUTNULLPACKET), 0);
       khci_reqcomplete(privep, OK);
-      return OK;
+      return OKK;
     }
 
   /* Limit the size of the transfer to either the buffer size or the max
@@ -1729,7 +1729,7 @@ static int khci_rdrequest(struct khci_usbdev_s *priv,
    * queue.
    */
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       privreq = khci_remfirst(&privep->pend);
       DEBUGASSERT(privreq != NULL);
@@ -1836,7 +1836,7 @@ static void khci_eptransfer(struct khci_usbdev_s *priv, uint8_t epno,
 
       ret = khci_rdcomplete(priv, privep);
 #ifdef CONFIG_USBDEV_NOREADAHEAD
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* If that succeeds, then try to set up another OUT transfer. */
 
@@ -2970,7 +2970,7 @@ interrupt_exit:
 #else
   usbtrace(TRACE_INTEXIT(KHCI_TRACEINTID_INTERRUPT), usbir);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3353,7 +3353,7 @@ static int khci_epconfigure(struct usbdev_ep_s *ep,
 
   khci_putreg(regval, KINETIS_USB0_ENDPT(epno));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3401,7 +3401,7 @@ static int khci_epdisable(struct usbdev_ep_s *ep)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3465,7 +3465,7 @@ static int khci_epsubmit(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   struct khci_usbdev_s *priv;
   irqstate_t flags;
   uint8_t epno;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -3568,7 +3568,7 @@ static int khci_epcancel(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   flags = enter_critical_section();
   khci_cancelrequests(privep, -EAGAIN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3729,7 +3729,7 @@ static int khci_epbdtstall(struct usbdev_ep_s *ep, bool resume, bool epin)
               epno, epin ? "IN" : "OUT", otherbdt, otherbdt->status, otherbdt->addr);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3765,7 +3765,7 @@ static int khci_epstall(struct usbdev_ep_s *ep, bool resume)
   if (USB_EPNO(ep->eplog) == 0)
     {
       ret = khci_epbdtstall(ep, resume, true);
-      if (ret == OK)
+      if (ret == OKK)
         {
           ret = khci_epbdtstall(ep, resume, false);
         }
@@ -3945,7 +3945,7 @@ static int khci_wakeup(struct usbdev_s *dev)
   /* Resume normal operation. */
 
   khci_remote_resume(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3967,7 +3967,7 @@ static int khci_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4581,6 +4581,6 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   khci_swinitialize(priv);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_USBDEV */

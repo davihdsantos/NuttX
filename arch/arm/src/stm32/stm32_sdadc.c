@@ -775,7 +775,7 @@ static int sdadc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1003,7 +1003,7 @@ static int sdadc_setup(FAR struct adc_dev_s *dev)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1157,7 +1157,7 @@ static int sdadc_set_ch(FAR struct adc_dev_s *dev, uint8_t ch)
 
   sdadc_putreg(priv, STM32_SDADC_JCHGR_OFFSET, bits);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1178,7 +1178,7 @@ static int sdadc_set_ch(FAR struct adc_dev_s *dev, uint8_t ch)
 static int sdadc_ioctl(FAR struct adc_dev_s *dev, int cmd, unsigned long arg)
 {
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1223,7 +1223,7 @@ static int sdadc_interrupt(int irq, FAR void *context, FAR void *arg)
   pending = regval & SDADC_ISR_ALLINTS;
   if (pending == 0)
     {
-      return OK;
+      return OKK;
     }
 
   /* JOVRF: overrun flag */
@@ -1286,7 +1286,7 @@ static int sdadc_interrupt(int irq, FAR void *context, FAR void *arg)
       sdadc_putreg(priv, STM32_SDADC_CLRISR_OFFSET, pending);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

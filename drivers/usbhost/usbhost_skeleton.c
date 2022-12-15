@@ -226,7 +226,7 @@ static void usbhost_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -308,7 +308,7 @@ static int usbhost_allocdevno(FAR struct usbhost_state_s *priv)
           g_devinuse |= bitno;
           priv->devchar = 'a' + devno;
           leave_critical_section(flags);
-          return OK;
+          return OKK;
         }
     }
 
@@ -606,7 +606,7 @@ static inline int usbhost_cfgdesc(FAR struct usbhost_state_s *priv,
     }
 
   uinfo("Endpoints allocated\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -630,7 +630,7 @@ static inline int usbhost_cfgdesc(FAR struct usbhost_state_s *priv,
 
 static inline int usbhost_devinit(FAR struct usbhost_state_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Set aside a transfer buffer for exclusive use by the class driver */
 
@@ -820,7 +820,7 @@ static inline int usbhost_talloc(FAR struct usbhost_state_s *priv)
 static inline int usbhost_tfree(FAR struct usbhost_state_s *priv)
 {
   FAR struct usbhost_hubport_s *hport;
-  int result = OK;
+  int result = OKK;
 
   DEBUGASSERT(priv != NULL && priv->usbclass.hport != NULL);
 
@@ -880,7 +880,7 @@ static FAR struct usbhost_class_s *usbhost_create(FAR struct usbhost_hubport_s *
 
       /* Assign a device number to this class instance */
 
-      if (usbhost_allocdevno(priv) == OK)
+      if (usbhost_allocdevno(priv) == OKK)
         {
          /* Initialize class method function pointers */
 
@@ -1043,7 +1043,7 @@ static int usbhost_disconnected(struct usbhost_class_s *usbclass)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

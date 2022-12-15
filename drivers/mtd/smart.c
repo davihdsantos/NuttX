@@ -444,7 +444,7 @@ static const struct file_operations g_fops =
 static int smart_open(FAR struct inode *inode)
 {
   finfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -457,7 +457,7 @@ static int smart_open(FAR struct inode *inode)
 static int smart_close(FAR struct inode *inode)
 {
   finfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -778,7 +778,7 @@ int smart_checkfree(FAR struct smart_struct_s *dev, int lineno)
   prev_releasesectors = dev->releasesectors;
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -999,7 +999,7 @@ static int smart_geometry(FAR struct inode *inode, struct geometry *geometry)
       finfo("nsectors: %d sectorsize: %d\n",
             geometry->geo_nsectors, geometry->geo_sectorsize);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -1028,7 +1028,7 @@ static int smart_setsectorsize(FAR struct smart_struct_s *dev, uint16_t size)
 
   if (size == dev->sectorsize)
     {
-      return OK;
+      return OKK;
     }
 
   erasesize             = dev->geo.erasesize;
@@ -1255,7 +1255,7 @@ static int smart_setsectorsize(FAR struct smart_struct_s *dev, uint16_t size)
       goto errexit;
     }
 
-  return OK;
+  return OKK;
 
   /* On error for any allocation, we jump here and free anything that had
    * previously been allocated.
@@ -1914,7 +1914,7 @@ static int smart_scan(FAR struct smart_struct_s *dev)
   /* Now set the sectorsize and other sectorsize derived variables */
 
   ret = smart_setsectorsize(dev, sectorsize);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto err_out;
     }
@@ -2406,7 +2406,7 @@ static int smart_scan(FAR struct smart_struct_s *dev)
     }
 #endif
 
-  ret = OK;
+  ret = OKK;
 
 err_out:
   return ret;
@@ -2445,7 +2445,7 @@ static inline int smart_getformat(FAR struct smart_struct_s *dev,
 
       ret = smart_scan(dev);
 
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto err_out;
         }
@@ -2481,7 +2481,7 @@ static inline int smart_getformat(FAR struct smart_struct_s *dev,
 
   fmt->nfreesectors   -= dev->sectorsPerBlk + 4;
 
-  ret = OK;
+  ret = OKK;
 
 err_out:
   return ret;
@@ -2571,7 +2571,7 @@ static void smart_erase_block_if_empty(FAR struct smart_struct_s *dev,
 #endif
 
 #ifdef CONFIG_SMART_LOCAL_CHECKFREE
-      if (smart_checkfree(dev, __LINE__) != OK)
+      if (smart_checkfree(dev, __LINE__) != OKK)
         {
           fwarn("   ...while eraseing block %d\n", block);
         }
@@ -2606,11 +2606,11 @@ static int smart_relocate_static_data(FAR struct smart_struct_s *dev, uint16_t b
    * be worn less).
    */
 
-  ret = OK;
+  ret = OKK;
   header = (FAR struct smart_sect_header_s *) dev->rwbuffer;
 
 #ifdef CONFIG_SMART_LOCAL_CHECKFREE
-  if (smart_checkfree(dev, __LINE__) != OK)
+  if (smart_checkfree(dev, __LINE__) != OKK)
     {
       fwarn("   ...about to relocate static data %d\n", block);
     }
@@ -2792,7 +2792,7 @@ static int smart_relocate_static_data(FAR struct smart_struct_s *dev, uint16_t b
         }
 
 #ifdef CONFIG_SMART_LOCAL_CHECKFREE
-      if (smart_checkfree(dev, __LINE__) != OK)
+      if (smart_checkfree(dev, __LINE__) != OKK)
         {
           fwarn("   ...about to erase static block %d\n", block);
         }
@@ -2804,7 +2804,7 @@ static int smart_relocate_static_data(FAR struct smart_struct_s *dev, uint16_t b
     }
 
 #ifdef CONFIG_SMART_LOCAL_CHECKFREE
-  if (smart_checkfree(dev, __LINE__) != OK)
+  if (smart_checkfree(dev, __LINE__) != OKK)
     {
       fwarn("   ...done erasing static block %d\n", block);
     }
@@ -2913,7 +2913,7 @@ static inline int smart_llformat(FAR struct smart_struct_s *dev, unsigned long a
   /* Set the sector size for the device */
 
   ret = smart_setsectorsize(dev, sectorsize);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -3025,7 +3025,7 @@ static inline int smart_llformat(FAR struct smart_struct_s *dev, unsigned long a
   /* Now initialize our internal control variables */
 
   ret = smart_setsectorsize(dev, sectorsize);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -3093,7 +3093,7 @@ static inline int smart_llformat(FAR struct smart_struct_s *dev, unsigned long a
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_FS_WRITABLE */
 
@@ -3255,7 +3255,7 @@ static int smart_relocate_block(FAR struct smart_struct_s *dev, uint16_t block)
   header = (FAR struct smart_sect_header_s *) dev->rwbuffer;
 
 #ifdef CONFIG_SMART_LOCAL_CHECKFREE
-  if (smart_checkfree(dev, __LINE__) != OK)
+  if (smart_checkfree(dev, __LINE__) != OKK)
     {
       fwarn("   ...while relocating block %d, free=%d\n",
             block, dev->freesectors);
@@ -3446,7 +3446,7 @@ static int smart_relocate_block(FAR struct smart_struct_s *dev, uint16_t block)
 #endif
 
 #ifdef CONFIG_SMART_LOCAL_CHECKFREE
-  if (smart_checkfree(dev, __LINE__) != OK)
+  if (smart_checkfree(dev, __LINE__) != OKK)
     {
       fwarn("   ...while relocating block %d, free=%d, release=%d, oldrelease=%d\n",
             block, freecount, releasecount, oldrelease);
@@ -3461,7 +3461,7 @@ static int smart_relocate_block(FAR struct smart_struct_s *dev, uint16_t block)
   smart_relocate_static_data(dev, block);
 #endif
 
-  return OK;
+  return OKK;
 
 errout:
   /* Restore the block's freecount if error */
@@ -3820,7 +3820,7 @@ static int smart_garbagecollect(FAR struct smart_struct_s *dev)
             }
 
 #ifdef CONFIG_SMART_LOCAL_CHECKFREE
-          if (smart_checkfree(dev, __LINE__) != OK)
+          if (smart_checkfree(dev, __LINE__) != OKK)
             {
               fwarn("   ...before collecting block %d\n", collectblock);
             }
@@ -3841,20 +3841,20 @@ static int smart_garbagecollect(FAR struct smart_struct_s *dev)
           ret = smart_relocate_block(dev, collectblock);
 
 #ifdef CONFIG_SMART_LOCAL_CHECKFREE
-          if (smart_checkfree(dev, __LINE__) != OK)
+          if (smart_checkfree(dev, __LINE__) != OKK)
             {
               fwarn("   ...while collecting block %d\n", collectblock);
             }
 #endif
 
-          if (ret != OK)
+          if (ret != OKK)
             {
               goto errout;
             }
         }
     }
 
-  return OK;
+  return OKK;
 
 errout:
   return ret;
@@ -3911,7 +3911,7 @@ static int smart_write_wearstatus(struct smart_struct_s *dev)
       req.buffer = buffer;
 
       ret = smart_writesector(dev, (unsigned long) &req);
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto errout;
         }
@@ -3940,7 +3940,7 @@ static int smart_write_wearstatus(struct smart_struct_s *dev)
       /* Write the sector */
 
       ret = smart_writesector(dev, (unsigned long) &req);
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto errout;
         }
@@ -3967,7 +3967,7 @@ static int smart_write_wearstatus(struct smart_struct_s *dev)
   /* Now clear the NEEDS_WRITE wear status bit */
 
   dev->wearflags &= ~SMART_WEARFLAGS_WRITE_NEEDED;
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -4115,7 +4115,7 @@ static inline int smart_read_wearstatus(FAR struct smart_struct_s *dev)
     }
 #endif
 
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -4252,7 +4252,7 @@ static int smart_validate_crc(FAR struct smart_struct_s *dev)
 
   /* CRC checkout out okay */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -4638,7 +4638,7 @@ static int smart_writesector(FAR struct smart_struct_s *dev,
           ret = smart_validate_crc(dev);
         }
 
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* TODO: Mark this as a bad block! */
 
@@ -4657,7 +4657,7 @@ static int smart_writesector(FAR struct smart_struct_s *dev,
 #endif
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -4748,7 +4748,7 @@ static int smart_readsector(FAR struct smart_struct_s *dev,
       /* Validate the read CRC against the calculated sector CRC */
 
       ret = smart_validate_crc(dev);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* TODO: Mark the block bad */
 
@@ -5160,7 +5160,7 @@ static inline int smart_freesector(FAR struct smart_struct_s *dev,
   /* If this block has only released blocks, then erase it */
 
   smart_erase_block_if_empty(dev, block, FALSE);
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -5317,7 +5317,7 @@ static int smart_ioctl(FAR struct inode *inode, int cmd, unsigned long arg)
 #ifdef CONFIG_MTD_SMART_WEAR_LEVEL
       procfs_data->uneven_wearcount = dev->uneven_wearcount;
 #endif
-      ret = OK;
+      ret = OKK;
       goto ok_out;
 #endif
 
@@ -5330,7 +5330,7 @@ static int smart_ioctl(FAR struct inode *inode, int cmd, unsigned long arg)
           dev->debuglevel = debug_data->debugdata;
           finfo("Debug level set to %d\n", dev->debuglevel);
 
-          ret = OK;
+          ret = OKK;
           goto ok_out;
         }
 #endif
@@ -5416,7 +5416,7 @@ int smart_initialize(int minor, FAR struct mtd_dev_s *mtd, FAR const char *partn
 
       dev->sectorsize = 0;
       ret = smart_setsectorsize(dev, CONFIG_MTD_SMART_SECTOR_SIZE);
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto errout;
         }
@@ -5523,7 +5523,7 @@ int smart_initialize(int minor, FAR struct mtd_dev_s *mtd, FAR const char *partn
   (void)register_driver("/dev/smart", &g_fops, 0666, NULL);
 #endif
 
-  return OK;
+  return OKK;
 
 errout:
 #ifndef CONFIG_MTD_SMART_MINIMIZE_RAM
@@ -5602,7 +5602,7 @@ static int smart_losetup(int minor, FAR const char *filename,
 
   ret = smart_initialize(minor, mtd, NULL);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       filemtd_teardown(mtd);
     }
@@ -5667,7 +5667,7 @@ static int smart_loteardown(FAR const char *devname)
 
   kmm_free(dev);
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_SMART_DEV_LOOP */
 

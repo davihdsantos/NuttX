@@ -94,7 +94,7 @@ int select(int nfds, FAR fd_set *readfds, FAR fd_set *writefds,
            FAR fd_set *exceptfds, FAR struct timeval *timeout)
 {
   struct pollfd *pollset = NULL;
-  int errcode = OK;
+  int errcode = OKK;
   int fd;
   int npfds;
   int msec;

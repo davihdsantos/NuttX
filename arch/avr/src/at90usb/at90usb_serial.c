@@ -197,7 +197,7 @@ static int usart1_setup(struct uart_dev_s *dev)
   usart1_configure();
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -248,7 +248,7 @@ static int usart1_attach(struct uart_dev_s *dev)
   (void)irq_attach(AT90USB_IRQ_U1RX, usart1_rxinterrupt, NULL);
   (void)irq_attach(AT90USB_IRQ_U1DRE, usart1_txinterrupt, NULL);
 //(void)irq_attach(AT90USB_IRQ_U1TX, usart1_txinterrupt, NULL);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -297,7 +297,7 @@ static int usart1_rxinterrupt(int irq, void *context, FAR void *arg)
       uart_recvchars(&g_usart1port);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -325,7 +325,7 @@ static int usart1_txinterrupt(int irq, void *context, FAR void *arg)
       uart_xmitchars(&g_usart1port);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -339,7 +339,7 @@ static int usart1_txinterrupt(int irq, void *context, FAR void *arg)
 static int usart1_ioctl(struct file *filep, int cmd, unsigned long arg)
 {
 #if 0 /* Reserved for future growth */
-  int  ret = OK;
+  int  ret = OKK;
 
   switch (cmd)
     {

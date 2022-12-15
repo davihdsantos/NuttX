@@ -163,7 +163,7 @@ static int led_pm_prepare(struct pm_callback_s *cb, int domain,
    * We always accept the state change by returning OK.
    */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -221,7 +221,7 @@ void stm32_led_pminitialize(void)
   /* Register to receive power management callbacks */
 
   int ret = pm_register(&g_ledscb);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 }
 #endif /* CONFIG_PM */

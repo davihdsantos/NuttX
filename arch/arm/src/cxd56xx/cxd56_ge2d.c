@@ -102,7 +102,7 @@ static int ge2d_semtake(sem_t *id)
     {
       ASSERT(errno == EINTR);
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -232,7 +232,7 @@ static int ge2d_irqhandler(int irq, FAR void *context, FAR void *arg)
 
   ge2d_semgive(&g_wait);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -262,7 +262,7 @@ int cxd56_ge2dinitialize(FAR const char *devname)
   irq_attach(CXD56_IRQ_GE2D, ge2d_irqhandler, NULL);
   up_enable_irq(CXD56_IRQ_GE2D);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

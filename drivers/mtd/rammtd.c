@@ -225,7 +225,7 @@ static int ram_erase(FAR struct mtd_dev_s *dev, off_t startblock,
   /* Then erase the data in RAM */
 
   memset(&priv->start[offset], CONFIG_RAMMTD_ERASESTATE, nbytes);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -381,7 +381,7 @@ static int ram_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = CONFIG_RAMMTD_BLOCKSIZE;
               geo->erasesize    = CONFIG_RAMMTD_ERASESIZE;
               geo->neraseblocks = priv->nblocks;
-              ret               = OK;
+              ret               = OKK;
           }
         }
         break;
@@ -394,7 +394,7 @@ static int ram_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               /* Return (void*) base address of device memory */
 
               *ppv = (FAR void *)priv->start;
-              ret  = OK;
+              ret  = OKK;
             }
         }
         break;
@@ -406,7 +406,7 @@ static int ram_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
             /* Erase the entire device */
 
             memset(priv->start, CONFIG_RAMMTD_ERASESTATE, size);
-            ret = OK;
+            ret = OKK;
         }
         break;
 

@@ -210,7 +210,7 @@ int pthread_mutex_unlock(FAR pthread_mutex_t *mutex)
            */
 
           mutex->nlocks--;
-          ret = OK;
+          ret = OKK;
         }
       else
 

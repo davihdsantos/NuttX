@@ -218,7 +218,7 @@ int sixlowpan_nexthopaddr(FAR struct radio_driver_s *radio,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -265,7 +265,7 @@ int sixlowpan_destaddrfromip(FAR struct radio_driver_s *radio,
     }
 
   memcpy(destaddr, &properties.sp_hubnode, sizeof(struct netdev_varaddr_s));
-  return OK;
+  return OKK;
 
 #else /* CONFIG_NET_STARPOINT */
 
@@ -305,7 +305,7 @@ int sixlowpan_destaddrfromip(FAR struct radio_driver_s *radio,
                  sizeof(struct netdev_varaddr_s));
         }
 
-      return OK;
+      return OKK;
     }
 
   /* Otherwise, the destination MAC address is encoded in the IP address */
@@ -349,7 +349,7 @@ int sixlowpan_destaddrfromip(FAR struct radio_driver_s *radio,
           memset(destaddr, 0, sizeof(struct netdev_varaddr_s));
           sixlowpan_baddrfromip(ipaddr, destaddr->nv_addr);
           destaddr->nv_addrlen = 1;
-          return OK;
+          return OKK;
         }
       else
 #endif
@@ -360,7 +360,7 @@ int sixlowpan_destaddrfromip(FAR struct radio_driver_s *radio,
           memset(destaddr, 0, sizeof(struct netdev_varaddr_s));
           sixlowpan_saddrfromip(ipaddr, destaddr->nv_addr);
           destaddr->nv_addrlen = 2;
-          return OK;
+          return OKK;
         }
       else
 #endif
@@ -369,7 +369,7 @@ int sixlowpan_destaddrfromip(FAR struct radio_driver_s *radio,
         {
           sixlowpan_eaddrfromip(ipaddr, destaddr->nv_addr);
           destaddr->nv_addrlen = 8;
-          return OK;
+          return OKK;
         }
       else
 #endif
@@ -399,7 +399,7 @@ int sixlowpan_destaddrfromip(FAR struct radio_driver_s *radio,
           destaddr->nv_addrlen = NET_6LOWPAN_EADDRSIZE;
         }
 
-      return OK;
+      return OKK;
     }
 
 #endif /* CONFIG_WIRELESS_IEEE802154 */
@@ -654,7 +654,7 @@ int sixlowpan_src_panid(FAR struct radio_driver_s *radio,
   panid[0] = arg.u.getreq.attrval.mac.panid[1];
   panid[1] = arg.u.getreq.attrval.mac.panid[0];
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -706,7 +706,7 @@ int sixlowpan_extract_srcaddr(FAR struct radio_driver_s *radio,
           memcpy(srcaddr->nv_addr, ind->src.eaddr, NET_6LOWPAN_EADDRSIZE);
         }
 
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -724,7 +724,7 @@ int sixlowpan_extract_srcaddr(FAR struct radio_driver_s *radio,
       memcpy(srcaddr->nv_addr,  pktmeta->pm_src.pa_addr,
              pktmeta->pm_src.pa_addrlen);
 
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -779,7 +779,7 @@ int sixlowpan_extract_destaddr(FAR struct radio_driver_s *radio,
           memcpy(destaddr->nv_addr, ind->dest.eaddr, NET_6LOWPAN_EADDRSIZE);
         }
 
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -797,7 +797,7 @@ int sixlowpan_extract_destaddr(FAR struct radio_driver_s *radio,
       memcpy(destaddr->nv_addr, pktmeta->pm_dest.pa_addr,
              pktmeta->pm_dest.pa_addrlen);
 
-      return OK;
+      return OKK;
     }
 #endif
 

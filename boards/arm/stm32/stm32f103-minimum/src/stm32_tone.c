@@ -146,7 +146,7 @@ int stm32_tone_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_TONE */

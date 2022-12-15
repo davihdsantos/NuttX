@@ -492,7 +492,7 @@ static inline void efm32_i2c_sem_wait(FAR struct efm32_i2c_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -654,7 +654,7 @@ static inline int efm32_i2c_sem_waitdone(FAR struct efm32_i2c_priv_s *priv)
 
   if (elapsed < timeout)
     {
-      return OK;
+      return OKK;
     }
 
   return -1;
@@ -1279,7 +1279,7 @@ done:
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1388,7 +1388,7 @@ static int efm32_i2c_init(FAR struct efm32_i2c_priv_s *priv)
 
   efm32_i2c_putreg(priv, EFM32_I2C_CMD_OFFSET, I2C_CMD_ABORT);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1420,7 +1420,7 @@ static int efm32_i2c_deinit(FAR struct efm32_i2c_priv_s *priv)
   /* Disable clocking */
 
   modifyreg32(EFM32_CMU_HFPERCLKEN0, priv->config->clk_bit, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1439,7 +1439,7 @@ static int efm32_i2c_transfer(FAR struct i2c_master_s *dev,
                               FAR struct i2c_msg_s *msgs, int count)
 {
   FAR struct efm32_i2c_priv_s *priv = (struct efm32_i2c_priv_s *)dev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(count > 0);
 
@@ -1689,7 +1689,7 @@ int efm32_i2c_reset(FAR struct i2c_master_s *dev)
   /* Re-init the port */
 
   efm32_i2c_init(priv);
-  ret = OK;
+  ret = OKK;
 
 out:
   /* Release the port for re-use by other clients */
@@ -1779,7 +1779,7 @@ int efm32_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   if (--priv->refs)
     {
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(flags);
@@ -1791,7 +1791,7 @@ int efm32_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   /* Release unused resources */
 
   efm32_i2c_sem_destroy(priv);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_EFM32_I2C0 || CONFIG_EFM32_I2C1 */

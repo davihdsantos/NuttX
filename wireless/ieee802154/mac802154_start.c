@@ -197,7 +197,7 @@ int mac802154_req_start(MACHANDLE mac, FAR struct ieee802154_start_req_s *req)
 
   mac802154_unlock(priv)
 
-  return OK;
+  return OKK;
 
 errout:
   mac802154_unlock(priv)

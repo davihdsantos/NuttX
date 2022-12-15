@@ -240,7 +240,7 @@ int data2bin(FAR uint8_t* dest, FAR const uint8_t *src, int nsrcbytes)
       nsrcbytes -= 2;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -426,7 +426,7 @@ int hex2bin(FAR struct lib_instream_s *instream,
   uint8_t checksum;
   unsigned int lineno;
   int i;
-  int ret = OK;
+  int ret = OKK;
 
   /* Allocate buffer memory */
 
@@ -616,7 +616,7 @@ int hex2bin(FAR struct lib_instream_s *instream,
 
           if (bytecount == 0)
             {
-              ret = OK;
+              ret = OKK;
               goto exit_with_buffers;
             }
 

@@ -348,7 +348,7 @@ static void usbhost_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -430,7 +430,7 @@ static int usbhost_allocdevno(FAR struct usbhost_state_s *priv)
           g_devinuse |= bitno;
           priv->devchar = 'a' + devno;
           leave_critical_section(flags);
-          return OK;
+          return OKK;
         }
     }
 
@@ -596,7 +596,7 @@ static int usbhost_xboxcontroller_poll(int argc, char *argv[])
 #endif
   unsigned int nerrors = 0;
   ssize_t nbytes;
-  int ret = OK;
+  int ret = OKK;
 
   /* Synchronize with the start-up logic.  Get the private instance, re-start
    * the start-up logic, and wait a bit to make sure that all of the class
@@ -937,7 +937,7 @@ static int usbhost_sample(FAR struct usbhost_state_s *priv,
       /* The sample has been reported and is no longer valid */
 
       priv->valid = false;
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -1269,7 +1269,7 @@ static inline int usbhost_cfgdesc(FAR struct usbhost_state_s *priv,
     }
 
   uinfo("Endpoints allocated\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1294,7 +1294,7 @@ static inline int usbhost_cfgdesc(FAR struct usbhost_state_s *priv,
 static inline int usbhost_devinit(FAR struct usbhost_state_s *priv)
 {
   char devname[DEV_NAMELEN];
-  int ret = OK;
+  int ret = OKK;
 
   /* Set aside a transfer buffer for exclusive use by the class driver */
 
@@ -1501,7 +1501,7 @@ static inline int usbhost_talloc(FAR struct usbhost_state_s *priv)
 static inline int usbhost_tfree(FAR struct usbhost_state_s *priv)
 {
   FAR struct usbhost_hubport_s *hport;
-  int result = OK;
+  int result = OKK;
 
   DEBUGASSERT(priv != NULL && priv->usbclass.hport != NULL);
 
@@ -1561,7 +1561,7 @@ static FAR struct usbhost_class_s *usbhost_create(FAR struct usbhost_hubport_s *
 
       /* Assign a device number to this class instance */
 
-      if (usbhost_allocdevno(priv) == OK)
+      if (usbhost_allocdevno(priv) == OKK)
         {
          /* Initialize class method function pointers */
 
@@ -1740,7 +1740,7 @@ static int usbhost_disconnected(struct usbhost_class_s *usbclass)
       (void)work_queue(HPWORK, &priv->work, usbhost_destroy, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1815,7 +1815,7 @@ static int usbhost_open(FAR struct file *filep)
 
       priv->crefs++;
       priv->open = true;
-      ret        = OK;
+      ret        = OKK;
     }
 
   leave_critical_section(flags);
@@ -1894,7 +1894,7 @@ static int usbhost_close(FAR struct file *filep)
               /* Skip giving the semaphore... it is no longer valid */
 
               leave_critical_section(flags);
-              return OK;
+              return OKK;
             }
           else /* if (priv->crefs == 1) */
             {
@@ -1910,7 +1910,7 @@ static int usbhost_close(FAR struct file *filep)
 
   usbhost_givesem(&priv->exclsem);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2107,7 +2107,7 @@ static int usbhost_poll(FAR struct file *filep, FAR struct pollfd *fds,
 {
   FAR struct inode           *inode;
   FAR struct usbhost_state_s *priv;
-  int                         ret = OK;
+  int                         ret = OKK;
   int                         i;
 
   DEBUGASSERT(filep && filep->f_inode && fds);

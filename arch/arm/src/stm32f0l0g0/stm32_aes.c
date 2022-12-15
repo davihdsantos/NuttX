@@ -220,7 +220,7 @@ static int stm32aes_setup_cr(int mode, int encrypt)
     }
 
   putreg32(regval, STM32_AES_CR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -242,7 +242,7 @@ int stm32_aesreset(void)
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 int stm32_aesinitialize(void)
@@ -257,7 +257,7 @@ int stm32_aesinitialize(void)
 
   stm32aes_enable(false);
 
-  return OK;
+  return OKK;
 }
 
 int stm32_aesuninitialize(void)
@@ -272,14 +272,14 @@ int stm32_aesuninitialize(void)
 
   nxsem_destroy(&g_stm32aes_lock);
 
-  return OK;
+  return OKK;
 }
 
 int aes_cypher(FAR void *out, FAR const void *in, uint32_t size,
                FAR const void *iv, FAR const void *key, uint32_t keysize,
                int mode, int encrypt)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Ensure initialization was done */
 

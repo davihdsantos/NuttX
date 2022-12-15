@@ -232,7 +232,7 @@ int arp_update(in_addr_t ipaddr, FAR uint8_t *ethaddr)
   tabptr->at_ipaddr = ipaddr;
   memcpy(tabptr->at_ethaddr.ether_addr_octet, ethaddr, ETHER_ADDR_LEN);
   tabptr->at_time = clock_systimer();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -343,7 +343,7 @@ int arp_find(in_addr_t ipaddr, FAR struct ether_addr *ethaddr)
        * address mapping is available for the IP address.
        */
 
-      return OK;
+      return OKK;
     }
 
   /* No.. check if the IPv4 address is the address assigned to a local
@@ -356,7 +356,7 @@ int arp_find(in_addr_t ipaddr, FAR struct ether_addr *ethaddr)
 
   if (netdev_foreach(arp_match, &info) != 0)
     {
-      return OK;
+      return OKK;
     }
 
   /* Not found */

@@ -152,7 +152,7 @@ int stm32_adc_setup(void)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32_ADC1 */

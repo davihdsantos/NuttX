@@ -75,7 +75,7 @@
 int inet_txdrain(FAR struct socket *psock,
                  FAR const struct timespec *abstime)
 {
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(psock != NULL);
 

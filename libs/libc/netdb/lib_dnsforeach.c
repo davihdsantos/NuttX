@@ -225,12 +225,12 @@ int dns_foreach_nameserver(dns_callback_t callback, FAR void *arg)
 #endif
                 {
                   nerr("ERROR: Unrecognized address: %s\n", addrstr)
-                  ret = OK;
+                  ret = OKK;
                 }
 #ifdef CONFIG_NET_IPv6
             }
 #endif
-          if (ret != OK)
+          if (ret != OKK)
             {
               fclose(stream);
               return ret;
@@ -239,14 +239,14 @@ int dns_foreach_nameserver(dns_callback_t callback, FAR void *arg)
     }
 
   fclose(stream);
-  return OK;
+  return OKK;
 }
 
 #else /* CONFIG_NETDB_RESOLVCONF */
 
 int dns_foreach_nameserver(dns_callback_t callback, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (g_dns_address)
     {

@@ -343,7 +343,7 @@ static inline int gd25_readid(FAR struct gd25_dev_s *priv)
           priv->addr_4byte = true;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
 out:
@@ -587,7 +587,7 @@ static inline int gd25_chiperase(FAR struct gd25_dev_s *priv)
   priv->prev_instr = GD25_CE;
 
   SPI_SELECT(priv->spi, SPIDEV_FLASH(priv->spi_devid), false);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************
@@ -953,7 +953,7 @@ static int gd25_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = GD25_PAGE_SIZE;
               geo->erasesize    = GD25_SECTOR_SIZE;
               geo->neraseblocks = priv->nsectors;
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -1029,7 +1029,7 @@ FAR struct mtd_dev_s *gd25_initialize(FAR struct spi_dev_s *spi,
       /* Identify the FLASH chip and get its capacity */
 
       ret = gd25_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           ferr("ERROR: Unrecognized\n");
           kmm_free(priv);

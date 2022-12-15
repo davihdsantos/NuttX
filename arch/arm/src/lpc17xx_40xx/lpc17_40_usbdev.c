@@ -1076,7 +1076,7 @@ static int lpc17_40_wrrequest(struct lpc17_40_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_INTDECODE(LPC17_40_TRACEINTID_EPINQEMPTY), 0);
-      return OK;
+      return OKK;
     }
 
   uinfo("epphy=%d req=%p: len=%d xfrd=%d nullpkt=%d\n",
@@ -1099,7 +1099,7 @@ static int lpc17_40_wrrequest(struct lpc17_40_ep_s *privep)
       /* In any event, the request is complete */
 
       lpc17_40_reqcomplete(privep, OK);
-      return OK;
+      return OKK;
     }
 
   /* Otherwise send the data in the packet (in the DMA on case, we
@@ -1163,7 +1163,7 @@ static int lpc17_40_wrrequest(struct lpc17_40_ep_s *privep)
       lpc17_40_reqcomplete(privep, OK);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1186,7 +1186,7 @@ static int lpc17_40_rdrequest(struct lpc17_40_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_INTDECODE(LPC17_40_TRACEINTID_EPOUTQEMPTY), 0);
-      return OK;
+      return OKK;
     }
 
   uinfo("len=%d xfrd=%d nullpkt=%d\n",
@@ -1198,7 +1198,7 @@ static int lpc17_40_rdrequest(struct lpc17_40_ep_s *privep)
     {
       usbtrace(TRACE_DEVERROR(LPC17_40_TRACEERR_EPOUTNULLPACKET), 0);
       lpc17_40_reqcomplete(privep, OK);
-      return OK;
+      return OKK;
     }
 
   usbtrace(TRACE_READ(privep->epphy), privreq->req.xfrd);
@@ -1224,7 +1224,7 @@ static int lpc17_40_rdrequest(struct lpc17_40_ep_s *privep)
       lpc17_40_reqcomplete(privep, OK);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1568,7 +1568,7 @@ static inline void lpc17_40_ep0setup(struct lpc17_40_usbdev_s *priv)
 
   while (!lpc17_40_rqempty(ep0))
     {
-      int16_t result = OK;
+      int16_t result = OKK;
       if (privreq->req.xfrd != privreq->req.len)
         {
           result = -EPROTO;
@@ -2398,7 +2398,7 @@ static int lpc17_40_usbinterrupt(int irq, FAR void *context, FAR void *arg)
     }
 #endif
   usbtrace(TRACE_INTEXIT(LPC17_40_TRACEINTID_USB), 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2485,7 +2485,7 @@ static int lpc17_40_dmasetup(struct lpc17_40_usbdev_s *priv, uint8_t epphy,
           putreq32(1 << epphy, LPC17_40_USBDEV_EPDMAEN);
         }
     }
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_LPC17_40_USBDEV_DMA */
 
@@ -2598,7 +2598,7 @@ static int lpc17_40_epconfigure(FAR struct usbdev_ep_s *ep,
       lpc17_40_usbcmd(CMD_USBDEV_CONFIG, 1);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2644,7 +2644,7 @@ static int lpc17_40_epdisable(FAR struct usbdev_ep_s *ep)
   lpc17_40_putreg(regval, LPC17_40_USBDEV_EPINTEN);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2799,7 +2799,7 @@ static int lpc17_40_epsubmit(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s
   FAR struct lpc17_40_ep_s *privep = (FAR struct lpc17_40_ep_s *)ep;
   FAR struct lpc17_40_usbdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_USB
   if (!req || !req->callback || !req->buf || !ep)
@@ -2900,7 +2900,7 @@ static int lpc17_40_epcancel(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s
   flags = enter_critical_section();
   lpc17_40_cancelrequests(privep);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2929,7 +2929,7 @@ static int lpc17_40_epstall(FAR struct usbdev_ep_s *ep, bool resume)
       (void)lpc17_40_wrrequest(privep);
     }
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3134,7 +3134,7 @@ static int lpc17_40_wakeup(struct usbdev_s *dev)
 
   lpc17_40_usbcmd(CMD_USBDEV_SETSTATUS, arg);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3160,7 +3160,7 @@ static int lpc17_40_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3180,7 +3180,7 @@ static int lpc17_40_pullup(struct usbdev_s *dev, bool enable)
    */
 
   lpc17_40_usbcmd(CMD_USBDEV_SETSTATUS, (enable ? CMD_STATUS_CONNECT : 0));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3484,5 +3484,5 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   /* Unhook the driver */
 
   g_usbdev.driver = NULL;
-  return OK;
+  return OKK;
 }

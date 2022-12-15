@@ -156,7 +156,7 @@ static int work_hpthread(int argc, char *argv[])
         }
     }
 
-  return OK; /* To keep some compilers happy */
+  return OKK; /* To keep some compilers happy */
 }
 
 /****************************************************************************

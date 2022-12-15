@@ -658,7 +658,7 @@ static inline void tiva_i2c_sem_wait(struct tiva_i2c_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1378,7 +1378,7 @@ static int tiva_i2c_process(struct tiva_i2c_priv_s *priv, uint32_t status)
 #ifndef CONFIG_I2C_POLLED
   DEBUGASSERT(status == 0);
 #endif
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1509,7 +1509,7 @@ static int tiva_i2c_initialize(struct tiva_i2c_priv_s *priv, uint32_t frequency)
   up_enable_irq(config->irq);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1552,7 +1552,7 @@ static int tiva_i2c_uninitialize(struct tiva_i2c_priv_s *priv)
   modifyreg32(TIVA_SYSCON_RCGC1, priv->rcgbit, 0);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1618,7 +1618,7 @@ static int tiva_i2c_transfer(struct i2c_master_s *dev, struct i2c_msg_s *msgv,
 {
   struct tiva_i2c_priv_s *priv = (struct tiva_i2c_priv_s *)dev;
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(priv && priv->config && msgv && msgc > 0);
   i2cinfo("I2C%d: msgc=%d\n", priv->config->devno, msgc);
@@ -1726,7 +1726,7 @@ static int tiva_i2c_transfer(struct i2c_master_s *dev, struct i2c_msg_s *msgv,
 
       /* Is the busy condition a consequence of some other error? */
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* No... then just being busy is the cause of the error */
 
@@ -1860,7 +1860,7 @@ static int tiva_i2c_reset(FAR struct i2c_master_s * dev)
   /* Re-init the port */
 
   tiva_i2c_initialize(priv, priv->frequency);
-  ret = OK;
+  ret = OKK;
 
 out:
 
@@ -2039,7 +2039,7 @@ int tiva_i2cbus_uninitialize(struct i2c_master_s *dev)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_TIVA_I2C0 ... CONFIG_TIVA_I2C9 */

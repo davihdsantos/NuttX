@@ -113,7 +113,7 @@ int nxsem_wait(FAR sem_t *sem)
           sem->semcount--;
           nxsem_addholder(sem);
           rtcb->waitsem = NULL;
-          ret = OK;
+          ret = OKK;
         }
 
       /* The semaphore is NOT available, We will have to block the
@@ -161,7 +161,7 @@ int nxsem_wait(FAR sem_t *sem)
            */
 
           saved_errno   = rtcb->pterrno;
-          rtcb->pterrno = OK;
+          rtcb->pterrno = OKK;
 
           /* Add the TCB to the prioritized semaphore wait queue, after
            * checking this is not the idle task - descheduling that
@@ -201,7 +201,7 @@ int nxsem_wait(FAR sem_t *sem)
            * thread was restarted.
            */
 
-          ret           = rtcb->pterrno != OK ? -rtcb->pterrno : OK;
+          ret           = rtcb->pterrno != OKK ? -rtcb->pterrno : OK;
           rtcb->pterrno = saved_errno;
 
 #ifdef CONFIG_PRIORITY_INHERITANCE
@@ -264,7 +264,7 @@ int sem_wait(FAR sem_t *sem)
     }
 
   leave_cancellation_point();
-  return OK;
+  return OKK;
 
 errout_with_cancelpt:
   set_errno(errcode);

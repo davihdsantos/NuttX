@@ -225,7 +225,7 @@ int sched_unlock(void)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 #else /* CONFIG_SMP */
@@ -356,7 +356,7 @@ int sched_unlock(void)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

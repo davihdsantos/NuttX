@@ -529,7 +529,7 @@ static void imxrt_takesem(struct imxrt_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1276,7 +1276,7 @@ static int imxrt_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1306,7 +1306,7 @@ static int imxrt_lock(FAR struct sdio_dev_s *dev, bool lock)
 
   imxrt_muxbus_sdio_lock((dev - g_sdhcdev) /
                          sizeof(struct imxrt_dev_s), lock);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1808,7 +1808,7 @@ static int imxrt_attach(FAR struct sdio_dev_s *dev)
         }
     }
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Disable all interrupts at the SDIO controller and clear all pending
        * interrupts.
@@ -2083,7 +2083,7 @@ static int imxrt_sendcmd(FAR struct sdio_dev_s *dev, uint32_t cmd,
   putreg32(mcrregval, priv->addr + IMXRT_USDHC_MIX_OFFSET);
   putreg32(regval, priv->addr + IMXRT_USDHC_XFERTYP_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2166,7 +2166,7 @@ static int imxrt_recvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
   /* And enable interrupts */
 
   imxrt_configxfrints(priv, USDHC_RCVDONE_INTS);
-  imxrt_sample(priv, SAMPLENDX_AFTER_SETUP); return OK;
+  imxrt_sample(priv, SAMPLENDX_AFTER_SETUP); return OKK;
 }
 #endif
 
@@ -2214,7 +2214,7 @@ static int imxrt_sendsetup(FAR struct sdio_dev_s *dev,
   /* Enable TX interrupts */
 
   imxrt_configxfrints(priv, USDHC_SNDDONE_INTS);
-  imxrt_sample(priv, SAMPLENDX_AFTER_SETUP); return OK;
+  imxrt_sample(priv, SAMPLENDX_AFTER_SETUP); return OKK;
 }
 #endif
 
@@ -2270,7 +2270,7 @@ static int imxrt_cancel(FAR struct sdio_dev_s *dev)
 
   /* Mark no transfer in progress */
 
-  priv->remaining = 0; return OK;
+  priv->remaining = 0; return OKK;
 }
 
 /****************************************************************************
@@ -2300,7 +2300,7 @@ static int imxrt_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
   uint32_t enerrors;
 
   FAR struct imxrt_dev_s *priv = (FAR struct imxrt_dev_s *)dev;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd & MMCSD_RESPONSE_MASK)
     {
@@ -2394,7 +2394,7 @@ static int imxrt_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd,
 {
   FAR struct imxrt_dev_s *priv = (FAR struct imxrt_dev_s *)dev;
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R1 Command response (48-bit)
    *   47    0           Start bit
@@ -2466,7 +2466,7 @@ static int imxrt_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd,
 {
   FAR struct imxrt_dev_s *priv = (FAR struct imxrt_dev_s *)dev;
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R2 CID, CSD register (136-bit)
    *  135     0             Start bit
@@ -2524,7 +2524,7 @@ static int imxrt_recvshort(FAR struct sdio_dev_s *dev, uint32_t cmd,
 {
   FAR struct imxrt_dev_s *priv = (FAR struct imxrt_dev_s *)dev;
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R3 OCR (48-bit)
    *    47    0           Start bit
@@ -2800,7 +2800,7 @@ static int imxrt_registercallback(FAR struct sdio_dev_s *dev,
   priv->cbevents = 0;
   priv->cbarg    = arg;
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2855,7 +2855,7 @@ static int imxrt_dmarecvsetup(FAR struct sdio_dev_s *dev,
   /* Sample the register state */
 
   imxrt_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2911,7 +2911,7 @@ static int imxrt_dmasendsetup(FAR struct sdio_dev_s *dev,
   /* Enable TX interrupts */
 
   imxrt_configxfrints(priv, USDHC_DMADONE_INTS);
-  return OK;
+  return OKK;
 }
 #endif
 

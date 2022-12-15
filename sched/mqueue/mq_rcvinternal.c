@@ -103,7 +103,7 @@ int nxmq_verify_receive(mqd_t mqdes, FAR char *msg, size_t msglen)
       return -EMSGSIZE;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -185,7 +185,7 @@ int nxmq_wait_receive(mqd_t mqdes, FAR struct mqueue_msg_s **rcvmsg)
            */
 
           saved_errno    = rtcb->pterrno;
-          rtcb->pterrno  = OK;
+          rtcb->pterrno  = OKK;
 
           /* Make sure this is not the idle task, descheduling that
            * isn't going to end well.
@@ -203,7 +203,7 @@ int nxmq_wait_receive(mqd_t mqdes, FAR struct mqueue_msg_s **rcvmsg)
           ret            = rtcb->pterrno;
           rtcb->pterrno  = saved_errno;
 
-          if (ret != OK)
+          if (ret != OKK)
             {
               return -ret;
             }
@@ -228,7 +228,7 @@ int nxmq_wait_receive(mqd_t mqdes, FAR struct mqueue_msg_s **rcvmsg)
     }
 
   *rcvmsg = newmsg;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

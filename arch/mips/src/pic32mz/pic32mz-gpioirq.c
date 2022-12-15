@@ -236,7 +236,7 @@ static int pic32mz_cninterrupt(int irq, FAR void *context, FAR void *arg)
   uint32_t regval;
   int ioport;
   int status;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   /* Get the IO port index from the IRQ number.  This, of course,
@@ -413,7 +413,7 @@ void pic32mz_gpioirqinitialize(void)
            */
 
           ret = irq_attach(PIC32MZ_IRQ_PORTA + i, pic32mz_cninterrupt, NULL);
-          DEBUGASSERT(ret == OK);
+          DEBUGASSERT(ret == OKK);
           UNUSED(ret);
 
           /* Enable the CN module.  NOTE that the CN module is active when
@@ -552,7 +552,7 @@ int pic32mz_gpioattach(pinset_t pinset, xcpt_t handler, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

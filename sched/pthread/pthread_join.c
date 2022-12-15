@@ -236,7 +236,7 @@ int pthread_join(pthread_t thread, FAR pthread_addr_t *pexit_value)
         }
 
       (void)pthread_sem_give(&group->tg_joinsem);
-      ret = OK;
+      ret = OKK;
     }
 
   leave_cancellation_point();

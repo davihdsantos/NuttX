@@ -449,7 +449,7 @@ int vnc_negotiate(FAR struct vnc_session_s *session)
     }
 
   session->state = VNCSERVER_CONFIGURED;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -530,5 +530,5 @@ int vnc_client_pixelformat(FAR struct vnc_session_s *session,
     }
 
   session->change = true;
-  return OK;
+  return OKK;
 }

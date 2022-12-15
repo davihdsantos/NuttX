@@ -145,7 +145,7 @@ static int gpin_read(FAR struct gpio_dev_s *dev, FAR bool *value)
   gpioinfo("Reading...\n");
 
   *value = imxrt_gpio_read(g_gpioinputs[imxrtgpio->id]);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -159,7 +159,7 @@ static int gpout_read(FAR struct gpio_dev_s *dev, FAR bool *value)
   gpioinfo("Reading...\n");
 
   *value = imxrt_gpio_read(g_gpiooutputs[imxrtgpio->id]);
-  return OK;
+  return OKK;
 }
 
 static int gpout_write(FAR struct gpio_dev_s *dev, bool value)
@@ -171,7 +171,7 @@ static int gpout_write(FAR struct gpio_dev_s *dev, bool value)
   gpioinfo("Writing %d\n", (int)value);
 
   imxrt_gpio_write(g_gpiooutputs[imxrtgpio->id], value);
-  return OK;
+  return OKK;
 }
 #endif
 

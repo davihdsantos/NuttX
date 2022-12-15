@@ -298,7 +298,7 @@ static int pwm_timer(FAR struct lpc17_40_pwmtimer_s *priv,
 
   leave_critical_section(flags);
   pwm_dumpregs(priv, "After starting");
-  return OK;
+  return OKK;
 }
 
 #ifdef XXXXX
@@ -333,7 +333,7 @@ static int pwm_interrupt(struct lpc17_40_pwmtimer_s *priv)
    * since the last interrupt.
    */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -448,7 +448,7 @@ static int pwm_setup(FAR struct pwm_lowerhalf_s *dev)
 
   leave_critical_section(flags);
   pwm_dumpgpio(priv->pincfg, "PWM setup");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -476,7 +476,7 @@ static int pwm_shutdown(FAR struct pwm_lowerhalf_s *dev)
 
   /* Make sure that the output has been stopped */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -556,7 +556,7 @@ static int pwm_stop(FAR struct pwm_lowerhalf_s *dev)
 
   pwminfo("regaddr: %08x resetbit: %08x\n", regaddr, resetbit);
   pwm_dumpregs(priv, "After stop");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -114,7 +114,7 @@ _sa_handler_t signal(int signo, _sa_handler_t func)
    * indicate the error.
    */
 
-  if (ret == OK)
+  if (ret == OKK)
    {
      return oact.sa_handler;
    }

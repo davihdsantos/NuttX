@@ -155,7 +155,7 @@ static int hcsr04_irq_attach(FAR struct hcsr04_config_s *state, xcpt_t isr,
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /* Setup the interruption mode: Rising or Falling */

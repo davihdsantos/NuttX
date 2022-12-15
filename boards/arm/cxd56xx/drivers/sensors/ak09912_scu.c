@@ -282,7 +282,7 @@ static int ak09912_getreg(FAR struct ak09912_dev_s *priv, uint8_t regaddr,
 
   scu_i2ctransfer(priv->port, priv->addr, inst, 2, buffer, cnt);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -311,7 +311,7 @@ static int ak09912_checkid(FAR struct ak09912_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int ak09912_seqinit(FAR struct ak09912_dev_s *priv)
@@ -335,7 +335,7 @@ static int ak09912_seqinit(FAR struct ak09912_dev_s *priv)
   seq_setsample(priv->seq, AK09912_BYTESPERSAMPLE, 0,
                 AK09912_ELEMENTSIZE, false);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -373,7 +373,7 @@ static int ak09912_open(FAR struct file *filep)
 
   g_refcnt++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -408,7 +408,7 @@ static int ak09912_close(FAR struct file *filep)
       (void) seq_ioctl(priv->seq, priv->id, SCUIOC_FREEFIFO, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -445,7 +445,7 @@ static int ak09912_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct ak09912_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -524,7 +524,7 @@ int ak09912_init(FAR struct i2c_master_s *i2c, int port)
   val = (val & ~AK09912_NSF_MASK) | AK09912_NSF_LOW;
   ak09912_putreg8(priv, AK09912_CTRL1, val);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

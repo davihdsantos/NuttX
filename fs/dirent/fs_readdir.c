@@ -138,7 +138,7 @@ static inline int readpseudodir(struct fs_dirent_s *idir)
       inode_release(prev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -192,7 +192,7 @@ FAR struct dirent *readdir(DIR *dirp)
        * with readdir.  We return NULL to signal either case.
        */
 
-      ret = OK;
+      ret = OKK;
       goto errout;
     }
 
@@ -231,7 +231,7 @@ FAR struct dirent *readdir(DIR *dirp)
     {
       if (ret == -ENOENT)
         {
-          ret = OK;
+          ret = OKK;
         }
       else
         {

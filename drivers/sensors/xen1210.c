@@ -117,7 +117,7 @@ static inline void xen1210_configspi(FAR struct spi_dev_s *spi)
 
 static int xen1210_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -130,7 +130,7 @@ static int xen1210_open(FAR struct file *filep)
 
 static int xen1210_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

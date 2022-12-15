@@ -137,7 +137,7 @@ int sam_at25_automount(int minor)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_AT25 */

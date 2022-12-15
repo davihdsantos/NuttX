@@ -211,7 +211,7 @@ static int stm32l4_lptim_enable(FAR struct stm32l4_lptim_dev_s *dev)
         return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -239,7 +239,7 @@ static int stm32l4_lptim_disable(FAR struct stm32l4_lptim_dev_s *dev)
         return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -266,7 +266,7 @@ static int stm32l4_lptim_reset(FAR struct stm32l4_lptim_dev_s *dev)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -337,7 +337,7 @@ static int stm32l4_lptim_get_gpioconfig(FAR struct stm32l4_lptim_dev_s *dev,
         return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -378,7 +378,7 @@ static int stm32l4_lptim_setmode(FAR struct stm32l4_lptim_dev_s *dev,
 
   ((struct stm32l4_lptim_priv_s *)dev)->mode = mode;
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -461,7 +461,7 @@ static int stm32l4_lptim_setclock(FAR struct stm32l4_lptim_dev_s *dev,
 static int stm32l4_lptim_setchannel(FAR struct stm32l4_lptim_dev_s *dev,
                                     stm32l4_lptim_channel_t channel, int enable)
 {
-  int ret = OK;
+  int ret = OKK;
   uint32_t cfg = 0;
 
   DEBUGASSERT(dev);
@@ -542,7 +542,7 @@ int stm32l4_lptim_deinit(FAR struct stm32l4_lptim_dev_s * dev)
 
   ((struct stm32l4_lptim_priv_s *)dev)->mode = STM32L4_LPTIM_MODE_UNUSED;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32L4_LPTIM1 || CONFIG_STM32L4_LPTIM2 */

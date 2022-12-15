@@ -108,7 +108,7 @@ static void pipecommon_semtake(FAR sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -404,13 +404,13 @@ int pipecommon_close(FAR struct file *filep)
       if (PIPE_IS_UNLINKED(dev->d_flags))
         {
           pipecommon_freedev(dev);
-          return OK;
+          return OKK;
         }
 #endif
     }
 
   nxsem_post(&dev->d_bfsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -664,7 +664,7 @@ int pipecommon_poll(FAR struct file *filep, FAR struct pollfd *fds,
   FAR struct pipe_dev_s *dev      = inode->i_private;
   pollevent_t            eventset;
   pipe_ndx_t             nbytes;
-  int                    ret      = OK;
+  int                    ret      = OKK;
   int                    i;
 
   DEBUGASSERT(dev && fds);
@@ -809,7 +809,7 @@ int pipecommon_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
               PIPE_POLICY_0(dev->d_flags);
             }
 
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -906,7 +906,7 @@ int pipecommon_unlink(FAR struct inode *inode)
       pipecommon_freedev(dev);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

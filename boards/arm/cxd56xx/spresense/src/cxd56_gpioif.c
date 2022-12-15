@@ -168,7 +168,7 @@ int board_gpio_read(uint32_t pin)
 int board_gpio_intconfig(uint32_t pin, int mode, bool filter, xcpt_t isr)
 {
 #ifdef CONFIG_CXD56_GPIO_IRQ
-  int ret = OK;
+  int ret = OKK;
   uint32_t gpiocfg = 0;
 
   switch (mode)

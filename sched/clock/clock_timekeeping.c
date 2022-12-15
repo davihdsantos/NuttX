@@ -213,7 +213,7 @@ int adjtime(FAR const struct timeval *delta, FAR struct timeval *olddelta)
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

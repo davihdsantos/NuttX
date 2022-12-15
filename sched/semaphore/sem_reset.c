@@ -121,5 +121,5 @@ int nxsem_reset(FAR sem_t *sem, int16_t count)
 
   leave_critical_section(flags);
   sched_unlock();
-  return OK;
+  return OKK;
 }

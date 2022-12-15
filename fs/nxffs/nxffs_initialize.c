@@ -274,9 +274,9 @@ int nxffs_initialize(FAR struct mtd_dev_s *mtd)
   /* Get the file system limits */
 
   ret = nxffs_limits(volume);
-  if (ret == OK)
+  if (ret == OKK)
     {
-      return OK;
+      return OKK;
     }
 
   /* We may need to format the volume.  Try that before giving up. */
@@ -303,9 +303,9 @@ int nxffs_initialize(FAR struct mtd_dev_s *mtd)
   /* Now try to get the file system limits again */
 
   ret = nxffs_limits(volume);
-  if (ret == OK)
+  if (ret == OKK)
     {
-      return OK;
+      return OKK;
     }
 
   /* Now give up */
@@ -410,7 +410,7 @@ int nxffs_limits(FAR struct nxffs_volume_s *volume)
 
   if (!noinodes)
     {
-      while (nxffs_nextentry(volume, offset, &entry) == OK)
+      while (nxffs_nextentry(volume, offset, &entry) == OKK)
         {
           /* Discard the entry and guess the next offset. */
 
@@ -449,7 +449,7 @@ int nxffs_limits(FAR struct nxffs_volume_s *volume)
                   finfo("No inodes, inoffset: %d\n", volume->inoffset);
                 }
 
-              return OK;
+              return OKK;
             }
 
           /* No?  Then it is some other failure that we do not know how to handle */
@@ -482,7 +482,7 @@ int nxffs_limits(FAR struct nxffs_volume_s *volume)
                   finfo("First inode at offset %d\n", volume->inoffset);
                 }
 
-              return OK;
+              return OKK;
             }
         }
       else
@@ -494,7 +494,7 @@ int nxffs_limits(FAR struct nxffs_volume_s *volume)
 
   /* Won't get here */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -539,7 +539,7 @@ int nxffs_bind(FAR struct inode *blkdriver, FAR const void *data,
   DEBUGASSERT(g_volume.cache);
   *handle = &g_volume;
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

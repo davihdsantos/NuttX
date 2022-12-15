@@ -741,7 +741,7 @@ static int ssd1351_putrun(fb_coord_t row, fb_coord_t col,
 
   ssd1351_deselect(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -788,7 +788,7 @@ static int ssd1351_getrun(fb_coord_t row, fb_coord_t col,
 
   ssd1351_deselect(priv);
 
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -814,7 +814,7 @@ static int ssd1351_getvideoinfo(FAR struct lcd_dev_s *dev,
 
   ginfo("fmt: %u xres: %u yres: %u nplanes: %u\n",
         vinfo->fmt, vinfo->xres, vinfo->yres, vinfo->nplanes);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -839,7 +839,7 @@ static int ssd1351_getplaneinfo(FAR struct lcd_dev_s *dev,
   pinfo->bpp    = SSD1351_BPP;
 
   ginfo("planeno: %u bpp: %u\n", planeno, pinfo->bpp);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -906,7 +906,7 @@ static int ssd1351_setpower(FAR struct lcd_dev_s *dev, int power)
 
   ssd1351_deselect(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

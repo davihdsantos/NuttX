@@ -80,7 +80,7 @@ static int local_waitlisten(FAR struct local_conn_s *server)
 
   /* There is a client waiting for the connection */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -199,7 +199,7 @@ int local_accept(FAR struct socket *psock, FAR struct sockaddr *addr,
 
           /* Do we have a connection?  Is the write-side FIFO opened? */
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               DEBUGASSERT(conn->lc_outfile.f_inode != NULL);
 
@@ -219,7 +219,7 @@ int local_accept(FAR struct socket *psock, FAR struct sockaddr *addr,
 
           /* Do we have a connection?  Are the FIFOs opened? */
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               DEBUGASSERT(conn->lc_infile.f_inode != NULL);
 
@@ -231,7 +231,7 @@ int local_accept(FAR struct socket *psock, FAR struct sockaddr *addr,
                 }
             }
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Setup the client socket structure */
 

@@ -670,7 +670,7 @@ static int ili9341_putrun(int devno, fb_coord_t row, fb_coord_t col,
 
   lcd->deselect(lcd);
 
-  return OK;
+  return OKK;
 }
 
 
@@ -731,7 +731,7 @@ static int ili9341_getrun(int devno, fb_coord_t row, fb_coord_t col,
 
   lcd->deselect(lcd);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -825,7 +825,7 @@ static int ili9341_hwinitialize(FAR struct ili9341_dev_s *dev)
 
   ili9341_setpower(&dev->dev, 0);
 
-  return OK;
+  return OKK;
 }
 
 
@@ -941,7 +941,7 @@ static int ili9341_getvideoinfo(FAR struct lcd_dev_s *dev,
       lcdinfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
       vinfo->fmt, vinfo->xres, vinfo->yres, vinfo->nplanes);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -981,7 +981,7 @@ static int ili9341_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
 
       lcdinfo("planeno: %d bpp: %d\n", planeno, pinfo->bpp);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -1069,7 +1069,7 @@ static int ili9341_setpower(FAR struct lcd_dev_s *dev, int power)
 
       priv->power = power;
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -1171,7 +1171,7 @@ FAR struct lcd_dev_s *
 
           ret = ili9341_hwinitialize(priv);
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               return &priv->dev;
             }
@@ -1239,5 +1239,5 @@ int ili9341_clear(FAR struct lcd_dev_s *dev, uint16_t color)
 
   lcd->deselect(lcd);
 
-  return OK;
+  return OKK;
 }

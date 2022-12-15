@@ -276,7 +276,7 @@ static int sam_interrupt(int irq, FAR void *context, FAR void *arg)
       priv->handler(irq, context);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -364,7 +364,7 @@ static int sam_keepalive(FAR struct watchdog_lowerhalf_s *lower)
    */
 
   sam_putreg(WDT_CR_WDRSTT | WDT_CR_KEY, SAM_WDT_CR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -421,7 +421,7 @@ static int sam_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n", status->timeout);
   wdinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -536,7 +536,7 @@ static int sam_settimeout(FAR struct watchdog_lowerhalf_s *lower,
          sam_getreg(SAM_WDT_CR), sam_getreg(SAM_WDT_MR),
          sam_getreg(SAM_WDT_SR));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -693,7 +693,7 @@ int sam_wdt_initialize(void)
 
   (void)watchdog_register(CONFIG_WATCHDOG_DEVPATH,
                          (FAR struct watchdog_lowerhalf_s *)priv);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_WATCHDOG && CONFIG_SAMA5_WDT */

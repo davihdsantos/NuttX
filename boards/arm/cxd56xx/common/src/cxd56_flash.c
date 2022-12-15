@@ -129,5 +129,5 @@ int board_flash_initialize(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }

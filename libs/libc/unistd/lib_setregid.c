@@ -67,7 +67,7 @@
 
 int setregid(gid_t rgid, gid_t egid)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (rgid != (gid_t)-1)
     {

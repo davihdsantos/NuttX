@@ -442,7 +442,7 @@ static int spi_lock(FAR struct spi_dev_s *dev, bool lock)
       (void)sem_post(&priv->exclsem);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1554,7 +1554,7 @@ static void spi_dmatxwait(FAR struct cxd56_spidev_s *priv)
 {
   uint32_t val;
 
-  if (sem_wait(&priv->dmasem) != OK)
+  if (sem_wait(&priv->dmasem) != OKK)
     {
       spierr("dma error\n");
     }
@@ -1578,7 +1578,7 @@ static void spi_dmarxwait(FAR struct cxd56_spidev_s *priv)
 {
   uint32_t val;
 
-  if (sem_wait(&priv->dmasem) != OK)
+  if (sem_wait(&priv->dmasem) != OKK)
     {
       spierr("dma error\n");
     }
@@ -1602,12 +1602,12 @@ static void spi_dmatrxwait(FAR struct cxd56_spidev_s *priv)
 {
   uint32_t val;
 
-  if (sem_wait(&priv->dmasem) != OK)
+  if (sem_wait(&priv->dmasem) != OKK)
     {
       spierr("dma error\n");
     }
 
-  if (sem_wait(&priv->dmasem) != OK)
+  if (sem_wait(&priv->dmasem) != OKK)
     {
       spierr("dma error\n");
     }

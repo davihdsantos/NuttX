@@ -152,7 +152,7 @@ static void mtd_semtake(FAR sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -178,7 +178,7 @@ static int lc823450_erase(FAR struct mtd_dev_s *dev, off_t startblock,
                           size_t nblocks)
 {
   finfo("dev=%s startblock=%d nblocks=%d\n", dev, startblock, nblocks);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -238,7 +238,7 @@ static ssize_t lc823450_bread(FAR struct mtd_dev_s *dev, off_t startblock,
 
   mtd_semgive(&priv->sem);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("ERROR: Failed to read sector, ret=%d startblock=%d nblocks=%d\n",
             ret, startblock, nblocks);
@@ -305,7 +305,7 @@ static ssize_t lc823450_bwrite(FAR struct mtd_dev_s *dev, off_t startblock,
 
   mtd_semgive(&priv->sem);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("ERROR: Failed to write sector, ret=%d startblock=%d nblocks=%d\n",
             ret, startblock, nblocks);
@@ -351,7 +351,7 @@ static int lc823450_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
             geo->blocksize = priv->blocksize;
             geo->erasesize = priv->blocksize;
             geo->neraseblocks = priv->nblocks;
-            ret = OK;
+            ret = OKK;
           }
 
         finfo("blocksize=%d erasesize=%d neraseblocks=%d\n", geo->blocksize,
@@ -369,7 +369,7 @@ static int lc823450_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
              */
 
             *ppv = NULL;
-            ret  = OK;
+            ret  = OKK;
           }
         break;
 
@@ -378,7 +378,7 @@ static int lc823450_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
 
         /* Erase the entire device */
 
-        ret = OK;
+        ret = OKK;
         break;
 
 #ifdef TODO
@@ -419,18 +419,18 @@ static int mtd_mediainitialize(FAR struct lc823450_mtd_dev_s *dev)
   mtd_semtake(&dev->sem);
 
   ret = lc823450_sdc_initialize(dev->channel);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   ret = lc823450_sdc_setclock(dev->channel, 20000000, sysclk);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("ERROR: Failed to set clock: ret=%d\n", ret);
       goto exit_with_error;
     }
 
   ret = lc823450_sdc_identifycard(dev->channel);
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("ERROR: Failed to identify card: channel=%d ret=%d)\n",
            dev->channel, ret);
@@ -543,7 +543,7 @@ static FAR struct mtd_dev_s *lc823450_mtd_allocdev(uint32_t channel)
   priv->channel = channel;
 
   ret = mtd_mediainitialize(priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("ERROR: Failed to initialize media\n");
       nxsem_destroy(&priv->sem);
@@ -615,7 +615,7 @@ int lc823450_mtd_initialize(uint32_t devno)
     }
 
   ret = mmcl_initialize(devno, g_mtdmaster[ch]);
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("Failed to create block device on master partition: ch=%d\n", ch);
       kmm_free(g_mtdmaster[ch]);
@@ -638,7 +638,7 @@ int lc823450_mtd_initialize(uint32_t devno)
     {
       finfo("SDC has no child partitions.\n");
       mtd_semgive(&g_sem);
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -691,7 +691,7 @@ int lc823450_mtd_initialize(uint32_t devno)
     }
 
   mtd_semgive(&g_sem);
-  return OK;
+  return OKK;
 }
 
 #if CONFIG_MTD_DEV_MAX > 1
@@ -711,7 +711,7 @@ int lc823450_mtd_reinitialize_card(void)
 
   int ret = lc823450_sdc_clearcardinfo(ch);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("ERROR: Failed to set clock: ret=%d\n", ret);
       goto exit_with_error;
@@ -719,7 +719,7 @@ int lc823450_mtd_reinitialize_card(void)
 
   ret = lc823450_sdc_setclock(ch, 20000000, sysclk);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("ERROR: Failed to set clock: ret=%d\n", ret);
       goto exit_with_error;
@@ -727,7 +727,7 @@ int lc823450_mtd_reinitialize_card(void)
 
   ret = lc823450_sdc_identifycard(ch);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("ERROR: Failed to identify card: ret=%d)\n", ret);
       goto exit_with_error;
@@ -791,18 +791,18 @@ int lc823450_mtd_uninitialize(uint32_t devno)
   mtd_semtake(&priv->sem);
 
   ret = lc823450_sdc_clearcardinfo(ch);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   mtd_semgive(&priv->sem);
 
   ret = mmcl_uninitialize(devname);
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("mmcl_uninitialize failed: %d", ret);
     }
 
   ret = lc823450_sdc_finalize(ch);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   nxsem_destroy(&priv->sem);
 
@@ -816,6 +816,6 @@ int lc823450_mtd_uninitialize(uint32_t devno)
   finfo("/dev/mtdblock%d deleted\n", devno);
   fflush(stdout);
 #endif
-  return OK;
+  return OKK;
 }
 #endif

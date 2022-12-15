@@ -75,7 +75,7 @@ static void exited_child(FAR struct tcb_s *rtcb, FAR struct child_status_s *chil
 
   info->si_signo           = SIGCHLD;
   info->si_code            = CLD_EXITED;
-  info->si_errno           = OK;
+  info->si_errno           = OKK;
   info->si_value.sival_ptr = NULL;
   info->si_pid             = child->ch_pid;
   info->si_status          = child->ch_status;
@@ -421,7 +421,7 @@ int waitid(idtype_t idtype, id_t id, FAR siginfo_t *info, int options)
 
   leave_cancellation_point();
   sched_unlock();
-  return OK;
+  return OKK;
 
 errout_with_errno:
   set_errno(errcode);

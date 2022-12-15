@@ -433,7 +433,7 @@ static inline int w25_readid(struct w25_dev_s *priv)
           return -ENODEV;
         }
 
-      return OK;
+      return OKK;
     }
 
   /* We don't understand the manufacturer or the memory type */
@@ -696,7 +696,7 @@ static inline int w25_chiperase(struct w25_dev_s *priv)
 
   SPI_SELECT(priv->spi, SPIDEV_FLASH(0), false);
   finfo("Return: OK\n");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1259,7 +1259,7 @@ static int w25_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = W25_SECTOR_SIZE;
               geo->neraseblocks = priv->nsectors;
 #endif
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -1340,7 +1340,7 @@ FAR struct mtd_dev_s *w25_initialize(FAR struct spi_dev_s *spi)
       /* Identify the FLASH chip and get its capacity */
 
       ret = w25_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

@@ -184,7 +184,7 @@ static int emac_transmit(FAR struct emac_driver_s *priv)
   /* Setup the TX timeout watchdog (perhaps restarting the timer) */
 
   (void)wd_start(priv->d_txtimeout, HCS12_TXTIMEOUT, emac_txtimeout, 1, (uint32_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -464,7 +464,7 @@ static int emac_interrupt(int irq, FAR void *context, FAR void *arg)
 
   emac_txdone(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -572,7 +572,7 @@ static int emac_ifup(struct net_driver_s *dev)
 
   priv->d_bifup = true;
   up_enable_irq(CONFIG_HCS12_IRQ);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -615,7 +615,7 @@ static int emac_ifdown(struct net_driver_s *dev)
 
   priv->d_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -660,7 +660,7 @@ static int emac_txavail(struct net_driver_s *dev)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -688,7 +688,7 @@ static int emac_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -717,7 +717,7 @@ static int emac_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -789,7 +789,7 @@ int emac_initialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->d_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_HCS12_EMAC */

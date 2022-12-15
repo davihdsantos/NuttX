@@ -1212,7 +1212,7 @@ static int stm32_transmit(FAR struct stm32_ethmac_s *priv)
   /* Setup the TX timeout watchdog (perhaps restarting the timer) */
 
   (void)wd_start(priv->txtimeout, STM32_TXTIMEOUT, stm32_txtimeout_expiry, 1, (uint32_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1647,7 +1647,7 @@ static int stm32_recvframe(FAR struct stm32_ethmac_s *priv)
               ninfo("rxhead: %p d_buf: %p d_len: %d\n",
                     priv->rxhead, dev->d_buf, dev->d_len);
 
-              return OK;
+              return OKK;
             }
           else
             {
@@ -1702,7 +1702,7 @@ static void stm32_receive(FAR struct stm32_ethmac_s *priv)
    * Ethernet frames.
    */
 
-  while (stm32_recvframe(priv) == OK)
+  while (stm32_recvframe(priv) == OKK)
     {
 #ifdef CONFIG_NET_PKT
       /* When packet sockets are enabled, feed the frame into the packet tap */
@@ -2147,7 +2147,7 @@ static int stm32_interrupt(int irq, FAR void *context, FAR void *arg)
       work_queue(ETHWORK, &priv->irqwork, stm32_interrupt_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2376,7 +2376,7 @@ static int stm32_ifup(struct net_driver_s *dev)
   up_enable_irq(STM32_IRQ_ETH);
 
   stm32_checksetup();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2400,7 +2400,7 @@ static int stm32_ifdown(struct net_driver_s *dev)
 {
   FAR struct stm32_ethmac_s *priv = (FAR struct stm32_ethmac_s *)dev->d_private;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   ninfo("Taking the network down\n");
 
@@ -2504,7 +2504,7 @@ static int stm32_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, stm32_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2604,7 +2604,7 @@ static int stm32_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   temp |= (ETH_MACFFR_HM | ETH_MACFFR_HPF);
   stm32_putreg(temp, STM32_ETH_MACFFR);
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_MCASTGROUP || CONFIG_NET_ICMPv6 */
 
@@ -2667,7 +2667,7 @@ static int stm32_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
       stm32_putreg(temp, STM32_ETH_MACFFR);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2878,7 +2878,7 @@ static int stm32_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
           struct mii_ioctl_notify_s *req = (struct mii_ioctl_notify_s *)((uintptr_t)arg);
 
           ret = phy_notify_subscribe(dev->d_ifname, req->pid, &req->event);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable PHY link up/down interrupts */
 
@@ -2892,7 +2892,7 @@ static int stm32_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
         {
           struct mii_ioctl_data_s *req = (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = CONFIG_STM32_PHYADDR;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2946,7 +2946,7 @@ static int stm32_phyintenable(struct stm32_ethmac_s *priv)
   int ret;
 
   ret = stm32_phyread(CONFIG_STM32_PHYADDR, MII_INT_REG, &phyval);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable link up/down interrupts */
 
@@ -3005,7 +3005,7 @@ static int stm32_phyread(uint16_t phydevaddr, uint16_t phyregaddr, uint16_t *val
       if ((stm32_getreg(STM32_ETH_MACMIIAR) & ETH_MACMIIAR_MB) == 0)
         {
           *value = (uint16_t)stm32_getreg(STM32_ETH_MACMIIDR);
-          return OK;
+          return OKK;
         }
     }
 
@@ -3065,7 +3065,7 @@ static int stm32_phywrite(uint16_t phydevaddr, uint16_t phyregaddr, uint16_t val
     {
       if ((stm32_getreg(STM32_ETH_MACMIIAR) & ETH_MACMIIAR_MB) == 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -3137,7 +3137,7 @@ static inline int stm32_dm9161(FAR struct stm32_ethmac_s *priv)
       up_systemreset();
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -3360,7 +3360,7 @@ static int stm32_phyinit(FAR struct stm32_ethmac_s *priv)
         priv->fduplex ? "FULL" : "HALF",
         priv->mbps100 ? 100 : 10);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3726,7 +3726,7 @@ static int stm32_macconfig(FAR struct stm32_ethmac_s *priv)
   regval |= DMABMR_SET_MASK;
   stm32_putreg(regval, STM32_ETH_DMABMR);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3927,7 +3927,7 @@ static int stm32_macenable(FAR struct stm32_ethmac_s *priv)
    */
 
   stm32_putreg((ETH_DMAINT_RECV_ENABLE | ETH_DMAINT_ERROR_ENABLE), STM32_ETH_DMAIER);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4084,7 +4084,7 @@ int stm32_ethinitialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

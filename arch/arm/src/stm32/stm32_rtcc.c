@@ -257,7 +257,7 @@ static int rtc_synchwait(void)
         {
           /* Synchronized */
 
-          ret = OK;
+          ret = OKK;
           break;
         }
     }
@@ -292,7 +292,7 @@ static int rtc_enterinit(void)
 
   regval = getreg32(STM32_RTC_ISR);
 
-  ret = OK;
+  ret = OKK;
   if ((regval & RTC_ISR_INITF) == 0)
     {
       /* Set the Initialization mode */
@@ -307,7 +307,7 @@ static int rtc_enterinit(void)
           regval = getreg32(STM32_RTC_ISR);
           if ((regval & RTC_ISR_INITF) != 0)
             {
-              ret = OK;
+              ret = OKK;
               break;
             }
         }
@@ -414,7 +414,7 @@ static int rtc_setup(void)
   /* Set Initialization mode */
 
   ret = rtc_enterinit();
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Set the 24 hour format by clearing the FMT bit in the RTC
        * control register
@@ -634,7 +634,7 @@ int up_rtc_initialize(void)
             }
         }
     }
-  while (ret != OK && ++nretry < maxretry);
+  while (ret != OKK && ++nretry < maxretry);
 
   /* Check if the one-time initialization of the RTC has already been
    * performed. We can determine this by checking if the magic number
@@ -675,7 +675,7 @@ int up_rtc_initialize(void)
       rtc_dumpregs("Did resume");
     }
 
-  if (ret != OK && nretry > 0)
+  if (ret != OKK && nretry > 0)
     {
       rtcinfo("setup/resume ran %d times and failed with %d\n",
               nretry, ret);
@@ -694,7 +694,7 @@ int up_rtc_initialize(void)
 
   g_rtc_enabled = true;
   rtc_dumpregs("After Initialization");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -718,7 +718,7 @@ int stm32_rtc_irqinitialize(void)
 #  warning "Missing logic"
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -850,7 +850,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
 #endif /* CONFIG_STM32_HAVE_RTC_SUBSECONDS */
 
   rtc_dumptime(tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -978,7 +978,7 @@ int stm32_rtc_setdatetime(FAR const struct tm *tp)
   /* Set Initialization mode */
 
   ret = rtc_enterinit();
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Set the RTC TR and DR registers */
 
@@ -1068,7 +1068,7 @@ int stm32_rtc_setalarm(FAR const struct timespec *tp, alarmcb_t callback)
       /* The set the alarm */
 #warning "Missing logic"
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

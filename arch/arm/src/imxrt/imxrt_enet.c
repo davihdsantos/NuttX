@@ -571,7 +571,7 @@ static int imxrt_transmit(FAR struct imxrt_driver_s *priv)
   putreg32(ENET_TDAR, IMXRT_ENET_TDAR);
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1118,7 +1118,7 @@ static int imxrt_enet_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->irqwork, imxrt_enet_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1391,7 +1391,7 @@ static int imxrt_ifup_action(struct net_driver_s *dev, bool resetphy)
 #endif
   up_enable_irq(IMXRT_IRQ_ENET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1467,7 +1467,7 @@ static int imxrt_ifdown(struct net_driver_s *dev)
 
   priv->bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1549,7 +1549,7 @@ static int imxrt_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, imxrt_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 /****************************************************************************
  * Function: imxrt_calcethcrc
@@ -1677,7 +1677,7 @@ static int imxrt_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   temp |= 1 << hashindex;
   putreg32(temp, registeraddress);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1725,7 +1725,7 @@ static int imxrt_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   temp &= ~(1 << hashindex);
   putreg32(temp, registeraddress);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1766,7 +1766,7 @@ static int imxrt_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
             (struct mii_ioctl_notify_s *)((uintptr_t)arg);
 
           ret = phy_notify_subscribe(dev->d_ifname, req->pid, &req->event);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable PHY link up/down interrupts */
 
@@ -1781,7 +1781,7 @@ static int imxrt_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
           struct mii_ioctl_data_s *req =
             (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = priv->phyaddr;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -1843,7 +1843,7 @@ static int imxrt_phyintenable(struct imxrt_driver_s *priv)
    */
 
   ret = imxrt_readmii(priv, priv->phyaddr, MII_KSZ8081_INT, &phyval);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable link up/down interrupts */
 
@@ -1942,7 +1942,7 @@ static int imxrt_writemii(struct imxrt_driver_s *priv, uint8_t phyaddr,
   /* Clear the MII interrupt bit */
 
   putreg32(ENET_INT_MII, IMXRT_ENET_EIR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2005,7 +2005,7 @@ static int imxrt_readmii(struct imxrt_driver_s *priv, uint8_t phyaddr,
   /* And return the MII data */
 
   *data = (uint16_t)(getreg32(IMXRT_ENET_MMFR) & ENET_MMFR_DATA_MASK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2311,7 +2311,7 @@ static inline int imxrt_initphy(struct imxrt_driver_s *priv, bool renogphy)
 
   putreg32(rcr, IMXRT_ENET_RCR);
   putreg32(tcr, IMXRT_ENET_TCR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2575,7 +2575,7 @@ int imxrt_netinitialize(int intf)
   (void)netdev_register(&priv->dev, NET_LL_ETHERNET);
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

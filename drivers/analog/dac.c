@@ -142,7 +142,7 @@ static int dac_open(FAR struct file *filep)
 
               irqstate_t flags = enter_critical_section();
               ret = dev->ad_ops->ao_setup(dev);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* Mark the FIFOs empty */
 
@@ -241,7 +241,7 @@ static ssize_t dac_read(FAR struct file *filep, FAR char *buffer, size_t buflen)
 static int dac_xmit(FAR struct dac_dev_s *dev)
 {
   bool enable = false;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if the xmit FIFO is empty */
 
@@ -253,7 +253,7 @@ static int dac_xmit(FAR struct dac_dev_s *dev)
 
       /* Make sure the TX done interrupts are enabled */
 
-      enable = (ret == OK ? true : false);
+      enable = (ret == OKK ? true : false);
     }
 
   dev->ad_ops->ao_txint(dev, enable);
@@ -483,12 +483,12 @@ int dac_txdone(FAR struct dac_dev_s *dev)
       /* Send the next message in the FIFO */
 
       ret = dac_xmit(dev);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Inform any waiting threads that new xmit space is available */
 
           ret = nxsem_getvalue(&dev->ad_xmit.af_sem, &sval);
-          if (ret == OK && sval <= 0)
+          if (ret == OKK && sval <= 0)
             {
               ret = nxsem_post(&dev->ad_xmit.af_sem);
             }

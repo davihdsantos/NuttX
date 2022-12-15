@@ -63,7 +63,7 @@ int stm32_adc_setup(void)
 
   if (initialized)
     {
-      return OK;
+      return OKK;
     }
 
   ainfo("INFO: Initializing ADC12_IN10\n");
@@ -82,5 +82,5 @@ int stm32_adc_setup(void)
 
   initialized = true;
   ainfo("INFO: ADC12_IN10 initialized succesfully\n");
-  return OK;
+  return OKK;
 }

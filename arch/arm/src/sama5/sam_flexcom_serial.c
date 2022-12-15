@@ -579,7 +579,7 @@ static int flexus_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -692,7 +692,7 @@ static int flexus_setup(struct uart_dev_s *dev)
 
   flexus_serialout(priv, SAM_FLEXUS_CR_OFFSET, (FLEXUS_CR_RXEN | FLEXUS_CR_TXEN));
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -742,7 +742,7 @@ static int flexus_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, flexus_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the USART
@@ -785,7 +785,7 @@ static int flexus_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {
@@ -884,7 +884,7 @@ static int flexus_ioctl(struct file *filep, int cmd, unsigned long arg)
 
         /* Decode baud. */
 
-        ret = OK;
+        ret = OKK;
         baud = cfgetispeed(termiosp);
 
         /* Decode number of bits */
@@ -938,7 +938,7 @@ static int flexus_ioctl(struct file *filep, int cmd, unsigned long arg)
 #endif
         /* Verify that all settings are valid before committing */
 
-        if (ret == OK)
+        if (ret == OKK)
           {
             /* Commit */
 

@@ -73,7 +73,7 @@
 int tiva_timer_configure(void)
 {
   static bool initialized = false;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if we have already initialized */
 

@@ -767,7 +767,7 @@ static int dm9x_transmit(FAR struct dm9x_driver_s *priv)
 
       (void)wd_start(priv->dm_txtimeout, DM6X_TXTIMEOUT,
                      dm9x_txtimeout_expiry, 1, (wdparm_t)priv);
-      return OK;
+      return OKK;
     }
 
   return -EBUSY;
@@ -1289,7 +1289,7 @@ static int dm9x_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->dm_irqwork, dm9x_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1559,7 +1559,7 @@ static int dm9x_ifup(FAR struct net_driver_s *dev)
 
   priv->dm_bifup = true;
   up_enable_irq(CONFIG_DM9X_IRQ);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1605,7 +1605,7 @@ static int dm9x_ifdown(FAR struct net_driver_s *dev)
 
   priv->dm_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1688,7 +1688,7 @@ static int dm9x_txavail(FAR struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->dm_pollwork, dm9x_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1717,7 +1717,7 @@ static int dm9x_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
 #warning "Multicast MAC support not implemented"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1747,7 +1747,7 @@ static int dm9x_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
 #warning "Multicast MAC support not implemented"
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1988,7 +1988,7 @@ int dm9x_initialize(void)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&g_dm9x[0].dm_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_DM90x0 */

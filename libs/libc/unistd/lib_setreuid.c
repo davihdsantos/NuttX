@@ -67,7 +67,7 @@
 
 int setreuid(uid_t ruid, uid_t euid)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (ruid != (uid_t)-1)
     {

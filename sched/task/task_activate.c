@@ -91,5 +91,5 @@ int task_activate(FAR struct tcb_s *tcb)
 
   up_unblock_task(tcb);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }

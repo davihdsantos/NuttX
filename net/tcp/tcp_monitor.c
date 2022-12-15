@@ -297,7 +297,7 @@ int tcp_start_monitor(FAR struct socket *psock)
     }
 
   net_unlock();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

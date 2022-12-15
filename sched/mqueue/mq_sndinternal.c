@@ -106,7 +106,7 @@ int nxmq_verify_send(mqd_t mqdes, FAR const char *msg, size_t msglen,
       return -EMSGSIZE;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -288,7 +288,7 @@ int nxmq_wait_send(mqd_t mqdes)
                */
 
               saved_errno   = rtcb->pterrno;
-              rtcb->pterrno = OK;
+              rtcb->pterrno = OKK;
 
               /* Make sure this is not the idle task, descheduling that
                * isn't going to end well.
@@ -306,7 +306,7 @@ int nxmq_wait_send(mqd_t mqdes)
               ret           = rtcb->pterrno;
               rtcb->pterrno = saved_errno;
 
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   return -ret;
                 }
@@ -314,7 +314,7 @@ int nxmq_wait_send(mqd_t mqdes)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -442,5 +442,5 @@ int nxmq_do_send(mqd_t mqdes, FAR struct mqueue_msg_s *mqmsg,
 
   leave_critical_section(flags);
   sched_unlock();
-  return OK;
+  return OKK;
 }

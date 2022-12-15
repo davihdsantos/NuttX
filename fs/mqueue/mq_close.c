@@ -77,7 +77,7 @@ int nxmq_close_group(mqd_t mqdes, FAR struct task_group_s *group)
 {
   FAR struct mqueue_inode_s *msgq;
   FAR struct inode *inode;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(mqdes != NULL && group != NULL);
 

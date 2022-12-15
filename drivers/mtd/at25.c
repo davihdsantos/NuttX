@@ -252,7 +252,7 @@ static inline int at25_readid(struct at25_dev_s *priv)
       priv->nsectors    = AT25_AT25DF081A_NSECTORS;
       priv->pageshift   = AT25_AT25DF081A_PAGE_SHIFT;
       priv->npages      = AT25_AT25DF081A_NPAGES;
-      return OK;
+      return OKK;
     }
   else if (manufacturer == AT25_MANUFACTURER && memory == AT25_AT25DF321_TYPE)
     {
@@ -260,7 +260,7 @@ static inline int at25_readid(struct at25_dev_s *priv)
       priv->nsectors    = AT25_AT25DF321_NSECTORS;
       priv->pageshift   = AT25_AT25DF321_PAGE_SHIFT;
       priv->npages      = AT25_AT25DF321_NPAGES;
-      return OK;
+      return OKK;
     }
 
   return -ENODEV;
@@ -405,7 +405,7 @@ static inline int at25_bulkerase(struct at25_dev_s *priv)
 
   SPI_SELECT(priv->dev, SPIDEV_FLASH(0), false);
   finfo("Return: OK\n");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -616,7 +616,7 @@ static int at25_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = (1 << priv->pageshift);
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -694,7 +694,7 @@ FAR struct mtd_dev_s *at25_initialize(FAR struct spi_dev_s *dev)
       /* Identify the FLASH chip and get its capacity */
 
       ret = at25_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

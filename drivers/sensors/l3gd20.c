@@ -373,7 +373,7 @@ static int l3gd20_interrupt_handler(int irq, FAR void* context)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -461,7 +461,7 @@ static int l3gd20_open(FAR struct file *filep)
   sninfo("STATUS_REG = %04x\n", reg_content);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -478,7 +478,7 @@ static int l3gd20_close(FAR struct file *filep)
   /* Perform a reset */
 
   l3gd20_reset(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -546,7 +546,7 @@ static ssize_t l3gd20_write(FAR struct file *filep, FAR const char *buffer,
 
 static int l3gd20_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -587,7 +587,7 @@ int l3gd20_register(FAR const char *devpath, FAR struct spi_dev_s *spi,
                     FAR struct l3gd20_config_s *config)
 {
   FAR struct l3gd20_dev_s *priv;
-  int ret = OK;
+  int ret = OKK;
 
   /* Sanity check */
 

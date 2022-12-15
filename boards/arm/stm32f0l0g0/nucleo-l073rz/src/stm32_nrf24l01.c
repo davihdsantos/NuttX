@@ -89,7 +89,7 @@ static int nrf24l01_irq_attach(xcpt_t isr, FAR void *arg)
   g_isr = isr;
   g_arg = arg;
   (void)stm32_gpiosetevent(GPIO_NRF24L01_IRQ, false, true, false, g_isr, g_arg);
-  return OK;
+  return OKK;
 }
 
 static void nrf24l01_chip_enable(bool enable)
@@ -105,7 +105,7 @@ static void nrf24l01_chip_enable(bool enable)
 int stm32_wlinitialize(void)
 {
   FAR struct spi_dev_s *spidev;
-  int ret = OK;
+  int ret = OKK;
 
   syslog(LOG_INFO, "Register the nRF24L01 module\n");
 
@@ -125,7 +125,7 @@ int stm32_wlinitialize(void)
     }
 
   ret = nrf24l01_register(spidev, &nrf_cfg);
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("ERROR: Failed to register initialize SPI bus\n");
       goto errout;

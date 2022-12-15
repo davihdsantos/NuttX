@@ -120,7 +120,7 @@ int kinetis_usbpullup(FAR struct usbdev_s *dev, bool enable)
   khci_putreg(regval, KINETIS_USB0_OTGCTL);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -123,7 +123,7 @@ int gap8_udma_init(struct gap8_udma_peripheral *instance)
 
   UDMA_GC->CG |= (1L << id);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -147,7 +147,7 @@ int gap8_udma_deinit(struct gap8_udma_peripheral *instance)
 
   UDMA_GC->CG &= ~(1L << id);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -176,7 +176,7 @@ int gap8_udma_tx_setirq(struct gap8_udma_peripheral *instance, bool enable)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -205,7 +205,7 @@ int gap8_udma_rx_setirq(struct gap8_udma_peripheral *instance, bool enable)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -230,7 +230,7 @@ int gap8_udma_tx_start(struct gap8_udma_peripheral *instance,
 
   _dma_txstart(instance);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -255,7 +255,7 @@ int gap8_udma_rx_start(struct gap8_udma_peripheral *instance,
 
   _dma_rxstart(instance);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -305,7 +305,7 @@ int gap8_udma_doirq(int irq, void *context, FAR void *arg)
     {
       /* Bypass */
 
-      return OK;
+      return OKK;
     }
 
   /* Peripheral id happened to be half of event... */
@@ -313,7 +313,7 @@ int gap8_udma_doirq(int irq, void *context, FAR void *arg)
   the_peripheral = _peripherals[event >> 1];
   if (the_peripheral == NULL)
     {
-      return OK;
+      return OKK;
     }
 
   if (event & 0x1)
@@ -371,5 +371,5 @@ int gap8_udma_doirq(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }

@@ -72,5 +72,5 @@ int imx_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

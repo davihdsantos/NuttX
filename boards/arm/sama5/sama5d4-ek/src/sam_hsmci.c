@@ -199,7 +199,7 @@ static int sam_hsmci_cardetect(struct sam_hsmci_state_s *state)
       sdio_mediachange(state->hsmci, cd);
     }
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_SAMA5_HSMCI0
@@ -330,7 +330,7 @@ int sam_hsmci_initialize(int slotno, int minor)
   /* Now bind the SDIO interface to the MMC/SD driver */
 
   ret = mmcsd_slotinitialize(minor, state->hsmci);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n", ret);
       return ret;
@@ -349,7 +349,7 @@ int sam_hsmci_initialize(int slotno, int minor)
   /* Enable card detect interrupts */
 
   sam_pioirqenable(state->irq);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

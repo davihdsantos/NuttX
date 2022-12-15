@@ -277,7 +277,7 @@ static int convert_freq2period(uint32_t freq, ub16_t duty, uint32_t *param)
   *param = (period & 0xffff) |
            ((offperiod & 0xffff) << PWM_PARAM_OFFPERIOD_SHIFT);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -308,7 +308,7 @@ static int pwm_setup(FAR struct pwm_lowerhalf_s *dev)
       return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -329,7 +329,7 @@ static int pwm_setup(FAR struct pwm_lowerhalf_s *dev)
 
 static int pwm_shutdown(FAR struct pwm_lowerhalf_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -380,7 +380,7 @@ static int pwm_start(FAR struct pwm_lowerhalf_s *dev,
           /* Change duty cycle dynamically if already running */
 
           PWM_REG(priv->ch)->PARAM = param;
-          return OK;
+          return OKK;
         }
 
       PWM_REG(priv->ch)->EN = 0x0;
@@ -393,7 +393,7 @@ static int pwm_start(FAR struct pwm_lowerhalf_s *dev,
       PWM_REG(priv->ch)->EN = 0x1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -416,7 +416,7 @@ static int pwm_stop(FAR struct pwm_lowerhalf_s *dev)
 
   PWM_REG(priv->ch)->EN = 0x0;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -102,7 +102,7 @@ static inline bool pic32mx_pullup(uint16_t pinset)
 static int pic32mx_cninterrupt(int irq, FAR void *context)
 {
   int status;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   /* Call all attached handlers */
@@ -156,13 +156,13 @@ void pic32mx_gpioirqinitialize(void)
   /* Attach the change notice interrupt handler */
 
   ret = irqattach(PIC32MX_IRQ_CN, pic32mx_cninterrupt);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   /* Set the interrupt priority */
 
 #ifdef CONFIG_ARCH_IRQPRIO
   ret = up_prioritize_irq(PIC32MX_IRQ_CN, CONFIG_PIC32MX_CNPRIO);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 #endif
 
   /* Reset all registers and enable the CN module */
@@ -174,7 +174,7 @@ void pic32mx_gpioirqinitialize(void)
   /* And enable the GPIO interrupt */
 
   ret = up_enable_irq(PIC32MX_IRQSRC_CN);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 }
 
 /****************************************************************************
@@ -256,7 +256,7 @@ int pic32mx_gpioattach(uint32_t pinset, unsigned int cn, xcpt_t handler,
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -74,7 +74,7 @@ int usrsock_event(FAR struct usrsock_conn_s *conn, uint16_t events)
 
   if (!events)
     {
-      return OK;
+      return OKK;
     }
 
   net_lock();
@@ -130,7 +130,7 @@ int usrsock_event(FAR struct usrsock_conn_s *conn, uint16_t events)
   (void)devif_conn_event(NULL, conn, events, conn->list);
   net_unlock();
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_USRSOCK */

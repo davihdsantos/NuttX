@@ -438,7 +438,7 @@ static int max7219_putrun(fb_coord_t row, fb_coord_t col,
 
   if (pixlen <= 0 || row > MAX7219_YRES)
     {
-      return OK;
+      return OKK;
     }
 
   /* Get real row position in the strip */
@@ -523,7 +523,7 @@ static int max7219_putrun(fb_coord_t row, fb_coord_t col,
 
   max7219_deselect(priv->spi);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -615,7 +615,7 @@ static int max7219_getrun(fb_coord_t row, fb_coord_t col,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -636,7 +636,7 @@ static int max7219_getvideoinfo(FAR struct lcd_dev_s *dev,
          g_videoinfo.nplanes);
 
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -655,7 +655,7 @@ static int max7219_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   ginfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
 
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -724,7 +724,7 @@ static int max7219_setpower(struct lcd_dev_s *dev, int power)
   /* Let go of the SPI lock and de-select the device */
 
   max7219_deselect(priv->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -783,7 +783,7 @@ static int max7219_setcontrast(struct lcd_dev_s *dev, unsigned int contrast)
   /* Let go of the SPI lock and de-select the device */
 
   max7219_deselect(priv->spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -94,7 +94,7 @@ static int cxd56_erase(FAR struct mtd_dev_s *dev, off_t startblock,
           return ERROR;
         }
     }
-  return OK;
+  return OKK;
 }
 
 static ssize_t cxd56_bread(FAR struct mtd_dev_s *dev, off_t startblock,
@@ -180,7 +180,7 @@ static ssize_t cxd56_write(FAR struct mtd_dev_s *dev, off_t offset,
 static int cxd56_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
 {
   struct flash_controller_s *priv = (struct flash_controller_s *)dev;
-  int ret                         = OK;
+  int ret                         = OKK;
 
   switch (cmd)
     {
@@ -203,7 +203,7 @@ static int cxd56_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = PAGE_SIZE;
               geo->erasesize    = SECTOR_SIZE;
               geo->neraseblocks = priv->density >> SECTOR_SHIFT;
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);

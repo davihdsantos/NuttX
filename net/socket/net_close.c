@@ -111,7 +111,7 @@ int psock_close(FAR struct socket *psock)
   /* Then release our reference on the socket structure containing the connection */
 
   psock_release(psock);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

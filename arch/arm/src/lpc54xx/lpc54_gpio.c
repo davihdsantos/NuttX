@@ -426,7 +426,7 @@ int lpc54_gpio_config(lpc54_pinset_t cfgset)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

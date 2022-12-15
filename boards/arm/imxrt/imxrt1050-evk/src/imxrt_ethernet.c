@@ -161,7 +161,7 @@ int imxrt_phy_boardinitialize(int intf)
 
   imxrt_gpio_write(GPIO_ENET_RST, true);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -290,7 +290,7 @@ int arch_phy_irq(FAR const char *intf, xcpt_t handler, void *arg,
   /* Return the old handler (so that it can be restored) */
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_IMXRT_GPIO1_0_15_IRQ */
 

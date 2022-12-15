@@ -397,7 +397,7 @@ int board_composite_initialize(int port)
 
 #endif /* CONFIG_NSH_BUILTIN_APPS */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

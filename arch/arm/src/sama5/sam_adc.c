@@ -820,7 +820,7 @@ static int sam_adc_dmasetup(FAR struct sam_adc_s *priv, FAR uint8_t *buffer,
   /* Start the DMA */
 
   sam_dmastart(priv->dma, sam_adc_dmacallback, priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -972,7 +972,7 @@ static int sam_adc_interrupt(int irq, void *context, FAR void *arg)
 
   DEBUGASSERT(pending == 0);
   UNUSED(priv);  /* Not used in all configurations */
-  return OK;
+  return OKK;
 }
 
 #ifdef SAMA5_ADC_HAVE_CHANNELS
@@ -996,7 +996,7 @@ static int sam_adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1234,7 +1234,7 @@ static int sam_adc_ioctl(struct adc_dev_s *dev, int cmd, unsigned long arg)
 #ifdef CONFIG_SAMA5_ADC_SWTRIG
   struct sam_adc_s *priv = (struct sam_adc_s *)dev->ad_priv;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
   ainfo("cmd=%d arg=%ld\n", cmd, arg);
 
@@ -1337,7 +1337,7 @@ static int sam_adc_settimer(struct sam_adc_s *priv, uint32_t frequency,
   /* And start the timer */
 
   sam_tc_start(priv->tc);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1378,7 +1378,7 @@ static void sam_adc_freetimer(struct sam_adc_s *priv)
 static int sam_adc_trigger(struct sam_adc_s *priv)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
 #if defined(CONFIG_SAMA5_ADC_SWTRIG)
   ainfo("Setup software trigger\n");
@@ -2157,7 +2157,7 @@ void sam_adc_lock(FAR struct sam_adc_s *priv)
        * (and the worker thread will receive a lot of signals).
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }

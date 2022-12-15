@@ -445,7 +445,7 @@ static int up_setup(struct uart_dev_s *dev)
   priv->scr |= (SH1_SCISCR_TE | SH1_SCISCR_RE);
   up_serialout(priv, SH1_SCI_SCR_OFFSET, priv->scr);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -485,17 +485,17 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach the RDR full IRQ (RXI) that is enabled by the RIE SCR bit */
 
   ret = irq_attach(priv->irq + SH1_RXI_IRQ_OFFSET, up_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* The RIE interrupt enable also enables the receive error interrupt (ERI) */
 
       ret = irq_attach(priv->irq + SH1_ERI_IRQ_OFFSET, up_interrupt, dev);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Attach the TDR empty IRQ (TXI) enabled by the TIE SCR bit */
 
           ret = irq_attach(priv->irq + SH1_TXI_IRQ_OFFSET, up_interrupt, dev);
-          if (ret == OK)
+          if (ret == OKK)
             {
 #ifdef CONFIG_ARCH_IRQPRIO
               /* All SCI0 interrupts share the same prioritization */
@@ -504,7 +504,7 @@ static int up_attach(struct uart_dev_s *dev)
 #endif
               /* Return OK on success */
 
-              return OK;
+              return OKK;
             }
 
           /* Detach the ERI interrupt on failure */
@@ -625,7 +625,7 @@ static int up_interrupt(int irq, void *context, FAR void *arg)
    */
 
   up_serialout(priv, SH1_SCI_SSR_OFFSET, priv->ssr);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

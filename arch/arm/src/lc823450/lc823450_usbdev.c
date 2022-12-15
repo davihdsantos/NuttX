@@ -772,7 +772,7 @@ static int lc823450_epstall(struct usbdev_ep_s *ep, bool resume)
     }
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_USBMSC_IGNORE_CLEAR_STALL
@@ -883,7 +883,7 @@ static int lc823450_wakeup(struct usbdev_s *dev)
   usbtrace(TRACE_DEVWAKEUP, 0);
 
   modifyreg32(USB_DEVC, 0, USB_DEVC_RESUME);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -896,7 +896,7 @@ static int lc823450_wakeup(struct usbdev_s *dev)
 
 static int lc823450_selfpowered(struct usbdev_s *dev, bool selfpowered)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1422,7 +1422,7 @@ static int lc823450_usbinterrupt(int irq, void *context, FAR void *arg)
     }
 
   putreg32(~disr, USB_INTS);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1717,7 +1717,7 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   wake_unlock(&priv->wlock);
 #endif /* CONFIG_WAKELOCK */
 
-  return OK;
+  return OKK;
 }
 
 /* FOR USBMSC optimization */

@@ -125,7 +125,7 @@ int pthread_mutex_timedlock(FAR pthread_mutex_t *mutex,
               if (mutex->nlocks < INT16_MAX)
                 {
                   mutex->nlocks++;
-                  ret = OK;
+                  ret = OKK;
                 }
               else
                 {
@@ -208,7 +208,7 @@ int pthread_mutex_timedlock(FAR pthread_mutex_t *mutex,
            * that we own it.
            */
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               mutex->pid    = mypid;
 #ifdef CONFIG_PTHREAD_MUTEX_TYPES

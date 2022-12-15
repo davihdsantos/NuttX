@@ -241,7 +241,7 @@ sam_usart_configure(const struct sam_usart_config_s * const config)
   ctrla |= USART_CTRLA_ENABLE;
   putreg32(ctrla, config->base + SAM_USART_CTRLA_OFFSET);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -309,7 +309,7 @@ int sam_usart_internal(const struct sam_usart_config_s * const config)
   /* Set USART configuration according to the board configuration */
 
   ret = sam_usart_configure(config);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Configure USART pins */
 

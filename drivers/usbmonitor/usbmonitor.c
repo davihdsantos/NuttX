@@ -239,7 +239,7 @@ int usbmonitor_start(void)
         {
           g_usbmonitor.pid = ret;
           uinfo("Started: %d\n", g_usbmonitor.pid);
-          ret = OK;
+          ret = OKK;
         }
 
       sched_unlock();
@@ -249,7 +249,7 @@ int usbmonitor_start(void)
   sched_unlock();
   uinfo("%s: %d\n",
         g_usbmonitor.stop ? "Stopping" : "Running", g_usbmonitor.pid);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

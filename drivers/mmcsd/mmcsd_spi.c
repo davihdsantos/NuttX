@@ -439,7 +439,7 @@ static int mmcsd_waitready(FAR struct mmcsd_slot_s *slot)
       response = SPI_SEND(spi, 0xff);
       if (response == 0xff)
         {
-          return OK;
+          return OKK;
         }
 
       elapsed = ELAPSED_TIME(start);
@@ -484,7 +484,7 @@ static uint32_t mmcsd_sendcmd(FAR struct mmcsd_slot_s *slot,
    */
 
   ret = mmcsd_waitready(slot);
-  if (ret != OK && cmd != &g_cmd0)
+  if (ret != OKK && cmd != &g_cmd0)
     {
       return ret;
     }
@@ -934,7 +934,7 @@ static int mmcsd_getcardinfo(FAR struct mmcsd_slot_s *slot, uint8_t *buffer,
 
           SPI_SEND(spi, 0xff);
           SPI_SEND(spi, 0xff);
-          return OK;
+          return OKK;
         }
     }
 
@@ -979,7 +979,7 @@ static int mmcsd_recvblock(FAR struct mmcsd_slot_s *slot, uint8_t *buffer,
 
       SPI_SEND(spi, 0xff);
       SPI_SEND(spi, 0xff);
-      return OK;
+      return OKK;
     }
 
   ferr("ERROR: Did not receive data token (%02x)\n", token);
@@ -1030,7 +1030,7 @@ static int mmcsd_xmitblock(FAR struct mmcsd_slot_s *slot,
       return -EIO;
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_FS_WRITABLE && !CONFIG_MMCSD_READONLY */
 
@@ -1116,7 +1116,7 @@ errout_with_sem:
 static int mmcsd_close(FAR struct inode *inode)
 {
   finfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1429,7 +1429,7 @@ static ssize_t mmcsd_write(FAR struct inode *inode, const unsigned char *buffer,
             }
           buffer += SECTORSIZE(slot);
 
-          if (mmcsd_waitready(slot) != OK)
+          if (mmcsd_waitready(slot) != OKK)
             {
               ferr("ERROR: Failed: card is busy\n");
               goto errout_with_sem;
@@ -1547,7 +1547,7 @@ static int mmcsd_geometry(FAR struct inode *inode, struct geometry *geometry)
   finfo("geo_nsectors:      %d\n", geometry->geo_nsectors);
   finfo("geo_sectorsize:    %d\n", geometry->geo_sectorsize);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1789,7 +1789,7 @@ static int mmcsd_mediainitialize(FAR struct mmcsd_slot_s *slot)
 
   finfo("Get CSD\n");
   result = mmcsd_getcsd(slot, csd);
-  if (result != OK)
+  if (result != OKK)
     {
       ferr("ERROR: mmcsd_getcsd(CMD9) failed: %d\n", result);
       SPI_SELECT(spi, SPIDEV_MMCSD(0), false);
@@ -1837,7 +1837,7 @@ static int mmcsd_mediainitialize(FAR struct mmcsd_slot_s *slot)
 
   slot->state &= ~MMCSD_SLOTSTATUS_NOTREADY;
   SPI_SELECT(spi, SPIDEV_MMCSD(0), false);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2001,7 +2001,7 @@ int mmcsd_spislotinitialize(int minor, int slotno, FAR struct spi_dev_s *spi)
    */
 
   (void)SPI_REGISTERCALLBACK(spi, mmcsd_mediachanged, (FAR void *)slot);
-  return OK;
+  return OKK;
 }
 
 #endif /* defined (CONFIG_MMCSD) && defined (CONFIG_MMCSD_SPI) */

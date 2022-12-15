@@ -106,5 +106,5 @@ int sigwait(FAR const sigset_t *set, FAR int *sig)
   /* Return the signal number in the user provided location */
 
   *sig = signo;
-  return OK;
+  return OKK;
 }

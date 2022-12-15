@@ -94,7 +94,7 @@ static int _net_takesem(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR || ret == -ECANCELED);
+      DEBUGASSERT(ret == OKK || ret == -EINTR || ret == -ECANCELED);
     }
   while (ret == -EINTR);
 
@@ -139,7 +139,7 @@ int net_lock(void)
   irqstate_t flags = enter_critical_section();
 #endif
   pid_t me = getpid();
-  int ret = OK;
+  int ret = OKK;
 
   /* Does this thread already hold the semaphore? */
 
@@ -192,7 +192,7 @@ int net_trylock(void)
   irqstate_t flags = enter_critical_section();
 #endif
   pid_t me = getpid();
-  int ret = OK;
+  int ret = OKK;
 
   /* Does this thread already hold the semaphore? */
 
@@ -293,7 +293,7 @@ int net_breaklock(FAR unsigned int *count)
       g_count  = 0;
 
       (void)nxsem_post(&g_netlock);
-      ret      = OK;
+      ret      = OKK;
     }
 
   leave_critical_section(flags);

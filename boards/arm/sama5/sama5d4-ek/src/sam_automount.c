@@ -187,7 +187,7 @@ static int sam_attach(FAR const struct automount_lower_s *lower,
   state->pending = false;
   state->arg     = arg;
   state->handler = isr;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

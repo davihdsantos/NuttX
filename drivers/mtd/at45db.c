@@ -36,7 +36,7 @@
 
 /* Ordering Code Detail:
  *
- * AT 45DB 16 1 D – SS U
+ * AT 45DB 16 1 D ï¿½ SS U
  * |  |    |  | |   |  `- Device grade
  * |  |    |  | |   `- Package Option
  * |  |    |  | `- Device revision
@@ -378,49 +378,49 @@ static inline int at45db_rdid(FAR struct at45db_dev_s *priv)
 
           priv->pageshift   = 8;    /* Page size = 256 bytes */
           priv->npages      = 512;  /* 512 pages */
-          return OK;
+          return OKK;
 
         case AT45DB_DEVID1_2MBIT:
           /* Save the FLASH geometry for the 16Mbit AT45DB021 */
 
           priv->pageshift   = 8;    /* Page size = 256/264 bytes */
           priv->npages      = 1024; /* 1024 pages */
-          return OK;
+          return OKK;
 
         case AT45DB_DEVID1_4MBIT:
           /* Save the FLASH geometry for the 16Mbit AT45DB041 */
 
           priv->pageshift   = 8;    /* Page size = 256/264 bytes */
           priv->npages      = 2048; /* 2048 pages */
-          return OK;
+          return OKK;
 
         case AT45DB_DEVID1_8MBIT:
           /* Save the FLASH geometry for the 16Mbit AT45DB081 */
 
           priv->pageshift   = 8;    /* Page size = 256/264 bytes */
           priv->npages      = 4096; /* 4096 pages */
-          return OK;
+          return OKK;
 
         case AT45DB_DEVID1_16MBIT:
           /* Save the FLASH geometry for the 16Mbit AT45DB161 */
 
           priv->pageshift   = 9;    /* Page size = 512/528 bytes */
           priv->npages      = 4096; /* 4096 pages */
-          return OK;
+          return OKK;
 
         case AT45DB_DEVID1_32MBIT:
           /* Save the FLASH geometry for the 16Mbit AT45DB321 */
 
           priv->pageshift   = 9;    /* Page size = 512/528 bytes */
           priv->npages      = 8192; /* 8192 pages */
-          return OK;
+          return OKK;
 
         case AT45DB_DEVID1_64MBIT:
           /* Save the FLASH geometry for the 16Mbit AT45DB321 */
 
           priv->pageshift   = 10;   /* Page size = 1024/1056 bytes */
           priv->npages      = 8192; /* 8192 pages */
-          return OK;
+          return OKK;
 
         default:
           return -ENODEV;
@@ -556,7 +556,7 @@ static inline int at45db_chiperase(FAR struct at45db_dev_s *priv)
 #ifndef CONFIG_AT45DB_PREWAIT
   at45db_waitbusy(priv);
 #endif
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -775,7 +775,7 @@ static int at45db_ioctl(FAR struct mtd_dev_s *mtd, int cmd, unsigned long arg)
               geo->blocksize    = (1 << priv->pageshift);
               geo->erasesize    = geo->blocksize;
               geo->neraseblocks = priv->npages;
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -866,7 +866,7 @@ FAR struct mtd_dev_s *at45db_initialize(FAR struct spi_dev_s *spi)
       /* Identify the FLASH chip and get its capacity */
 
       ret = at45db_rdid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

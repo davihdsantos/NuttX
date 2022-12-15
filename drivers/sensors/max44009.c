@@ -243,7 +243,7 @@ static int max44009_open(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -298,7 +298,7 @@ static int max44009_close(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -321,7 +321,7 @@ static int max44009_close(FAR struct file *filep)
 
   max44009_dbg("CLOSED\n");
   nxsem_post(&priv->dev_sem);
-  return OK;
+  return OKK;
 }
 
 static ssize_t max44009_read(FAR struct file *filep, FAR char *buffer,
@@ -347,7 +347,7 @@ static ssize_t max44009_read(FAR struct file *filep, FAR char *buffer,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -755,7 +755,7 @@ static int max44009_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -835,7 +835,7 @@ static int max44009_poll(FAR struct file *filep, FAR struct pollfd *fds,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -907,7 +907,7 @@ static int max44009_int_handler(int irq, FAR void *context, FAR void *arg)
   max44009_notify(priv);
   max44009_dbg("MAX44009 interrupt\n");
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

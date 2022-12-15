@@ -83,7 +83,7 @@ int nx_block(NXWINDOW hwnd, FAR void *arg)
 {
   FAR struct nxbe_window_s *wnd = (FAR struct nxbe_window_s *)hwnd;
   struct nxsvrmsg_blocked_s outmsg;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!hwnd)

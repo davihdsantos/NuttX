@@ -130,7 +130,7 @@ int uart_ioctl(struct file *filep, int cmd, unsigned long arg)
           putreg32(getreg32(CONFIG_UART_MOXA_MODE_REG) | vmode, CONFIG_UART_MOXA_MODE_REG);
 
           leave_critical_section(flags);
-          ret = OK;
+          ret = OKK;
           break;
         }
 
@@ -145,7 +145,7 @@ int uart_ioctl(struct file *filep, int cmd, unsigned long arg)
 
           leave_critical_section(flags);
           *(unsigned long *)arg = opmode;
-          ret = OK;
+          ret = OKK;
           break;
         }
     }

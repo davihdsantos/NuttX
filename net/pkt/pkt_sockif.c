@@ -150,7 +150,7 @@ static int pkt_sockif_alloc(FAR struct socket *psock)
   /* Save the pre-allocated connection in the socket structure */
 
   psock->s_conn = conn;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -393,7 +393,7 @@ static int pkt_bind(FAR struct socket *psock, FAR const struct sockaddr *addr,
       /* Mark the socket bound */
 
       psock->s_flags |= _SF_BOUND;
-      return OK;
+      return OKK;
     }
   else
     {
@@ -640,7 +640,7 @@ static int pkt_close(FAR struct socket *psock)
               conn->crefs--;
             }
 
-          return OK;
+          return OKK;
         }
 
       default:

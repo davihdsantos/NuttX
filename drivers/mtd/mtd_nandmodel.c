@@ -240,7 +240,7 @@ int nandmodel_translate(FAR const struct nand_model_s *model, off_t address,
       *offset = tmpoffset;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -319,7 +319,7 @@ static inline int sam_configinput(uintptr_t base, uint32_t pin,
   /* Configure the pin as an input and enable the PIO function */
 
   putreg32(regval, base + SAM_PIO_CFGR_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -361,7 +361,7 @@ static inline int sam_configoutput(uintptr_t base, uint32_t pin,
   /* Configure the pin as an output and enable the PIO function */
 
   putreg32(regval, base + SAM_PIO_CFGR_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -398,7 +398,7 @@ static inline int sam_configperiph(uintptr_t base, uint32_t pin,
   /* Configure the pin as a peripheral */
 
   putreg32(regval, base + SAM_PIO_CFGR_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -494,7 +494,7 @@ int sam_configpio(pio_pinset_t cfgset)
 
       case PIO_ANALOG:
         /* REVISIT */
-        ret = OK;
+        ret = OKK;
         break;
 
       case PIO_PERIPHA:
@@ -659,6 +659,6 @@ int sam_dumppio(uint32_t pinset, const char *msg)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif

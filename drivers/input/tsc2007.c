@@ -324,7 +324,7 @@ static int tsc2007_sample(FAR struct tsc2007_dev_s *priv,
        }
 
       priv->penchange = false;
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -783,7 +783,7 @@ static int tsc2007_interrupt(int irq, FAR void *context)
   /* Clear any pending interrupts and return success */
 
   config->clear(config);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -839,7 +839,7 @@ errout_with_sem:
   nxsem_post(&priv->devsem);
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -884,7 +884,7 @@ static int tsc2007_close(FAR struct file *filep)
 
   nxsem_post(&priv->devsem);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1317,7 +1317,7 @@ int tsc2007_register(FAR struct i2c_master_s *dev,
 
   /* And return success (?) */
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->devsem);

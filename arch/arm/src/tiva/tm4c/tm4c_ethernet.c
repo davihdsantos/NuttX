@@ -1212,7 +1212,7 @@ static int tiva_transmit(FAR struct tiva_ethmac_s *priv)
   /* Setup the TX timeout watchdog (perhaps restarting the timer) */
 
   (void)wd_start(priv->txtimeout, TIVA_TXTIMEOUT, tiva_txtimeout_expiry, 1, (uint32_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1647,7 +1647,7 @@ static int tiva_recvframe(FAR struct tiva_ethmac_s *priv)
               ninfo("rxhead: %p d_buf: %p d_len: %d\n",
                     priv->rxhead, dev->d_buf, dev->d_len);
 
-              return OK;
+              return OKK;
             }
           else
             {
@@ -1702,7 +1702,7 @@ static void tiva_receive(FAR struct tiva_ethmac_s *priv)
    * Ethernet frames.
    */
 
-  while (tiva_recvframe(priv) == OK)
+  while (tiva_recvframe(priv) == OKK)
     {
 #ifdef CONFIG_NET_PKT
       /* When packet sockets are enabled, feed the frame into the packet tap */
@@ -2157,7 +2157,7 @@ static int tiva_interrupt(int irq, FAR void *context, FAR void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2385,7 +2385,7 @@ static int tiva_ifup(struct net_driver_s *dev)
   up_enable_irq(TIVA_IRQ_ETHCON);
 
   tiva_checksetup();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2432,7 +2432,7 @@ static int tiva_ifdown(struct net_driver_s *dev)
 
   priv->ifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2506,7 +2506,7 @@ static int tiva_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, tiva_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2606,7 +2606,7 @@ static int tiva_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   temp |= (EMAC_FRAMEFLTR_HMC | EMAC_FRAMEFLTR_HPF);
   tiva_putreg(temp, TIVA_EMAC_FRAMEFLTR);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2669,7 +2669,7 @@ static int tiva_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
       tiva_putreg(temp, TIVA_EMAC_FRAMEFLTR);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2877,7 +2877,7 @@ static int tiva_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
           struct mii_ioctl_notify_s *req = (struct mii_ioctl_notify_s *)((uintptr_t)arg);
 
           ret = phy_notify_subscribe(dev->d_ifname, req->pid, &req->event);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable PHY link up/down interrupts */
 
@@ -2891,7 +2891,7 @@ static int tiva_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
         {
           struct mii_ioctl_data_s *req = (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = CONFIG_TIVA_PHYADDR;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2966,16 +2966,16 @@ static void tiva_phy_intenable(bool enable)
 
       ret = tiva_phywrite(CONFIG_TIVA_PHYADDR, TIVA_EPHY_MISR1,
                           EPHY_MISR1_LINKSTATEN);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Enable PHY event based interrupts */
 
           ret = tiva_phyread(CONFIG_TIVA_PHYADDR, TIVA_EPHY_SCR, &phyval);
-          if (ret == OK)
+          if (ret == OKK)
             {
               phyval |= EPHY_SCR_INTEN;
               ret = tiva_phywrite(CONFIG_TIVA_PHYADDR, TIVA_EPHY_SCR, phyval);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* Enable PHY interrupts */
 
@@ -2991,12 +2991,12 @@ static void tiva_phy_intenable(bool enable)
        */
 
       ret = tiva_phyread(CONFIG_TIVA_PHYADDR, TIVA_EPHY_MISR1, &phyval);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Disable PHY event based interrupts */
 
           ret = tiva_phyread(CONFIG_TIVA_PHYADDR, TIVA_EPHY_SCR, &phyval);
-          if (ret == OK)
+          if (ret == OKK)
             {
               phyval |= EPHY_SCR_INTEN;
               (void)tiva_phywrite(CONFIG_TIVA_PHYADDR, TIVA_EPHY_SCR, phyval);
@@ -3060,7 +3060,7 @@ static int tiva_phyread(uint16_t phydevaddr, uint16_t phyregaddr, uint16_t *valu
       if ((tiva_getreg(TIVA_EMAC_MIIADDR) & EMAC_MIIADDR_MIIB) == 0)
         {
           *value = (uint16_t)tiva_getreg(TIVA_EMAC_MIIDATA);
-          return OK;
+          return OKK;
         }
     }
 
@@ -3119,7 +3119,7 @@ static int tiva_phywrite(uint16_t phydevaddr, uint16_t phyregaddr, uint16_t valu
     {
       if ((tiva_getreg(TIVA_EMAC_MIIADDR) & EMAC_MIIADDR_MIIB) == 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -3327,7 +3327,7 @@ static int tiva_phyinit(FAR struct tiva_ethmac_s *priv)
         priv->fduplex ? "FULL" : "HALF",
         priv->mbps100 ? 100 : 10);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3735,7 +3735,7 @@ static int tiva_macconfig(FAR struct tiva_ethmac_s *priv)
   regval |= DMABUSMOD_SET_MASK;
   tiva_putreg(regval, TIVA_EMAC_DMABUSMOD);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3928,7 +3928,7 @@ static int tiva_macenable(FAR struct tiva_ethmac_s *priv)
 
   tiva_putreg((EMAC_DMAINT_RECV_ENABLE | EMAC_DMAINT_ERROR_ENABLE),
               TIVA_EMAC_DMAIM);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4271,7 +4271,7 @@ int arch_phy_irq(FAR const char *intf, xcpt_t handler, void *arg,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_TIVA_PHY_INTERRUPTS */
 

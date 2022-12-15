@@ -295,7 +295,7 @@ static bool adc_active[CH_MAX] = {
 
 static int set_ofstgain(FAR struct cxd56adc_dev_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
   uint32_t addr;
 
   if (priv->ch == CH5)
@@ -353,7 +353,7 @@ static int adc_start(adc_ch_t ch, uint8_t freq, FAR struct seq_s *seq,
 
   if (adc_active[ch])
     {
-      return OK;
+      return OKK;
     }
 
   ret = seq_ioctl(seq, 0, SCUIOC_SETFIFO, fsize);
@@ -582,7 +582,7 @@ static int adc_stop(adc_ch_t ch, FAR struct seq_s *seq)
 
   if (!adc_active[ch])
     {
-      return OK;
+      return OKK;
     }
 
   (void) seq_ioctl(seq, 0, SCUIOC_STOP, 0);
@@ -625,7 +625,7 @@ static int adc_stop(adc_ch_t ch, FAR struct seq_s *seq)
 
   adc_active[ch] = false;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -661,7 +661,7 @@ static int cxd56_adc_open(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct cxd56adc_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
   int type;
 
   DEBUGASSERT(priv != NULL);
@@ -691,7 +691,7 @@ static int cxd56_adc_open(FAR struct file *filep)
     }
   ainfo("open ch%d freq%d scufifo%d\n", priv->ch, priv->freq, priv->fsize);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -732,7 +732,7 @@ static int cxd56_adc_close(FAR struct file *filep)
       priv->notify = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -748,7 +748,7 @@ static ssize_t cxd56_adc_read(FAR struct file *filep, FAR char *buffer,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct cxd56adc_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(priv != NULL);
   DEBUGASSERT(priv->seq != NULL);
@@ -773,7 +773,7 @@ static int cxd56_adc_ioctl(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct cxd56adc_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
   DEBUGASSERT(priv != NULL);
   DEBUGASSERT(priv->seq != NULL);
   DEBUGASSERT(priv->ch < CH_MAX);
@@ -1061,5 +1061,5 @@ int cxd56_adcinitialize(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }

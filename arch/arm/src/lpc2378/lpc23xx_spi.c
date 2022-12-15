@@ -203,14 +203,14 @@ static int spi_lock(FAR struct spi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

@@ -68,7 +68,7 @@
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_BUTTONS
   /* Register the BUTTON driver */
@@ -84,7 +84,7 @@ int stm32_bringup(void)
   /* Initialize the SLCD and register the SLCD device as /dev/slcd0 */
 
   ret = stm32_slcd_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: stm32_slcd_initialize failed: %d\n", ret);
       return ret;
@@ -105,7 +105,7 @@ int stm32_bringup(void)
   /* Initialize and register the qencoder driver */
 
   ret = stm32_qencoder_initialize("/dev/qe0", CONFIG_STM32LDISCO_QETIMER);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the qencoder: %d\n",

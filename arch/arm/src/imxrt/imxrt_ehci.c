@@ -1212,7 +1212,7 @@ static int imxrt_qh_foreach(struct imxrt_qh_s *qh, uint32_t **bp,
       qh = next;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1294,7 +1294,7 @@ static int imxrt_qtd_foreach(struct imxrt_qh_s *qh, foreach_qtd_t handler,
       qtd = next;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1321,7 +1321,7 @@ static int imxrt_qtd_discard(struct imxrt_qtd_s *qtd, uint32_t **bp,
   /* Then free the qTD */
 
   imxrt_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1375,7 +1375,7 @@ static int imxrt_qtd_invalidate(struct imxrt_qtd_s *qtd, uint32_t **bp,
 
   up_invalidate_dcache((uintptr_t)&qtd->hw,
                        (uintptr_t)&qtd->hw + sizeof(struct ehci_qtd_s));
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1420,7 +1420,7 @@ static int imxrt_qtd_flush(struct imxrt_qtd_s *qtd, uint32_t **bp, void *arg)
 
   up_flush_dcache((uintptr_t)&qtd->hw,
                   (uintptr_t)&qtd->hw + sizeof(struct ehci_qtd_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1522,7 +1522,7 @@ static void imxrt_qh_print(struct imxrt_qh_s *qh)
 static int imxrt_qtd_dump(struct imxrt_qtd_s *qtd, uint32_t **bp, void *arg)
 {
   imxrt_qtd_print(qtd);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1600,7 +1600,7 @@ static int imxrt_ioc_setup(struct imxrt_rhport_s *rhport,
       epinfo->callback = NULL;   /* No asynchronous callback */
       epinfo->arg      = NULL;
 #endif
-      ret              = OK;     /* We are good to go */
+      ret              = OKK;     /* We are good to go */
     }
 
   leave_critical_section(flags);
@@ -1885,7 +1885,7 @@ static int imxrt_qtd_addbpl(struct imxrt_qtd_s *qtd, const void *buffer,
       return -EFBIG;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2316,7 +2316,7 @@ static int imxrt_async_setup(struct imxrt_rhport_s *rhport,
   /* Add the new QH to the head of the asynchronous queue list */
 
   imxrt_qh_enqueue(&g_asynchead, qh);
-  return OK;
+  return OKK;
 
   /* Clean-up after an error */
 
@@ -2453,7 +2453,7 @@ static int imxrt_intr_setup(struct imxrt_rhport_s *rhport,
 
   regval |= EHCI_USBCMD_PSEN;
   imxrt_putreg(regval, &HCOR->usbcmd);
-  return OK;
+  return OKK;
 
   /* Clean-up after an error */
 
@@ -2590,7 +2590,7 @@ static inline int imxrt_ioc_async_setup(struct imxrt_rhport_s *rhport,
       epinfo->result   = -EBUSY;   /* Transfer in progress */
       epinfo->callback = callback; /* Asynchronous callback */
       epinfo->arg      = arg;      /* Argument that accompanies the callback */
-      ret              = OK;       /* We are good to go */
+      ret              = OKK;       /* We are good to go */
     }
 
   leave_critical_section(flags);
@@ -2637,7 +2637,7 @@ static void imxrt_asynch_completion(struct imxrt_epinfo_s *epinfo)
 
   epinfo->callback = NULL;
   epinfo->arg      = NULL;
-  epinfo->result   = OK;
+  epinfo->result   = OKK;
   epinfo->iocwait  = false;
 
   /* Then perform the callback.  Provide the number of bytes successfully
@@ -2698,7 +2698,7 @@ static int imxrt_qtd_ioccheck(struct imxrt_qtd_s *qtd, uint32_t **bp,
   /* Release this QH by returning it to the free list */
 
   imxrt_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2755,7 +2755,7 @@ static int imxrt_qh_ioccheck(struct imxrt_qh_s *qh, uint32_t **bp, void *arg)
        * zero to visit the next QH in the list.
        */
       *bp = &qh->hw.hlp;
-      return OK;
+      return OKK;
     }
 
   /* Remove all active, attached qTD structures from the inactive QH */
@@ -2790,7 +2790,7 @@ static int imxrt_qh_ioccheck(struct imxrt_qh_s *qh, uint32_t **bp, void *arg)
           /* Report success */
 
           epinfo->status  = 0;
-          epinfo->result  = OK;
+          epinfo->result  = OKK;
         }
       else
         {
@@ -2860,7 +2860,7 @@ static int imxrt_qh_ioccheck(struct imxrt_qh_s *qh, uint32_t **bp, void *arg)
       *bp = &qh->hw.hlp;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2898,7 +2898,7 @@ static int imxrt_qtd_cancel(struct imxrt_qtd_s *qtd, uint32_t **bp, void *arg)
   /* Release this QH by returning it to the free list */
 
   imxrt_qtd_free(qtd);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_USBHOST_ASYNCH */
 
@@ -2934,7 +2934,7 @@ static int imxrt_qh_cancel(struct imxrt_qh_s *qh, uint32_t **bp, void *arg)
     {
       /* No... keep looking */
 
-      return OK;
+      return OKK;
     }
 
   /* Disable both the asynchronous and period schedules */
@@ -3418,7 +3418,7 @@ static int imxrt_ehci_interrupt(int irq, FAR void *context, FAR void *arg)
       imxrt_putreg(usbsts & EHCI_INT_ALLINTS, &HCOR->usbsts);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3482,7 +3482,7 @@ static int imxrt_wait(FAR struct usbhost_connection_s *conn,
 
               usbhost_vtrace2(EHCI_VTRACE2_MONWAKEUP,
                               rhpndx + 1, rhport->connected);
-              return OK;
+              return OKK;
             }
         }
 
@@ -3503,7 +3503,7 @@ static int imxrt_wait(FAR struct usbhost_connection_s *conn,
 
           usbhost_vtrace2(EHCI_VTRACE2_MONWAKEUP,
                           connport->port + 1, connport->connected);
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -3759,7 +3759,7 @@ static int imxrt_rh_enumerate(FAR struct usbhost_connection_s *conn,
                   USBDEV_PRTSC1_PSPD_LS);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int imxrt_enumerate(FAR struct usbhost_connection_s *conn,
@@ -3851,7 +3851,7 @@ static int imxrt_ep0configure(FAR struct usbhost_driver_s *drvr,
   epinfo->maxpacket = maxpacketsize;
 
   imxrt_givesem(&g_ehci.exclsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3938,7 +3938,7 @@ static int imxrt_epalloc(FAR struct usbhost_driver_s *drvr,
    */
 
   *ep = (usbhost_ep_t)epinfo;
-  return OK;
+  return OKK;
 }
 
 /*****************************************************************************
@@ -3972,7 +3972,7 @@ static int imxrt_epfree(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
   /* Free the container */
 
   kmm_free(epinfo);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4024,7 +4024,7 @@ static int imxrt_alloc(FAR struct usbhost_driver_s *drvr,
   if (*buffer)
     {
       *maxlen = IMXRT_EHCI_BUFSIZE;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -4061,7 +4061,7 @@ static int imxrt_free(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffer)
   /* No special action is require to free the transfer/descriptor buffer memory */
 
   kmm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4140,7 +4140,7 @@ static int imxrt_iofree(FAR struct usbhost_driver_s *drvr,
   /* No special action is require to free the I/O buffer memory */
 
   kumm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4211,7 +4211,7 @@ static int imxrt_ctrlin(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
   /* Set the request for the IOC event well BEFORE initiating the transfer. */
 
   ret = imxrt_ioc_setup(rhport, ep0info);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4307,7 +4307,7 @@ static ssize_t imxrt_transfer(FAR struct usbhost_driver_s *drvr,
   /* Set the request for the IOC event well BEFORE initiating the transfer. */
 
   ret = imxrt_ioc_setup(rhport, epinfo);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4413,7 +4413,7 @@ static int imxrt_asynch(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep,
   /* Set the request for the callback well BEFORE initiating the transfer. */
 
   ret = imxrt_ioc_async_setup(rhport, epinfo, callback, arg);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbhost_trace1(EHCI_TRACE1_DEVDISCONNECTED, -ret);
       goto errout_with_sem;
@@ -4454,7 +4454,7 @@ static int imxrt_asynch(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep,
   /* The transfer is in progress */
 
   imxrt_givesem(&g_ehci.exclsem);
-  return OK;
+  return OKK;
 
 errout_with_callback:
   epinfo->callback = NULL;
@@ -4546,7 +4546,7 @@ static int imxrt_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
   if (!iocwait)
 #endif
     {
-      ret = OK;
+      ret = OKK;
       goto errout_with_sem;
     }
 
@@ -4574,7 +4574,7 @@ static int imxrt_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
             {
               /* Claim that we successfully cancelled the transfer */
 
-              ret = OK;
+              ret = OKK;
               goto exit_terminate;
             }
         }
@@ -4596,7 +4596,7 @@ static int imxrt_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
                * canceled the transfer.
                */
 
-              ret = OK;
+              ret = OKK;
               goto exit_terminate;
             }
         }
@@ -4710,7 +4710,7 @@ static int imxrt_connect(FAR struct usbhost_driver_s *drvr,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

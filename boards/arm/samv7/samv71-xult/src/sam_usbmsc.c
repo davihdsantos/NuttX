@@ -61,7 +61,7 @@
 
 int board_usbmsc_initialize(int port)
 {
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_USBMSC && !CONFIG_USBMSC_COMPOSITE */

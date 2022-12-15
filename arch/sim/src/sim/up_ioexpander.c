@@ -229,7 +229,7 @@ static int sim_direction(FAR struct ioexpander_dev_s *dev, uint8_t pin,
       priv->inpins &= ~(1 << pin);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -287,7 +287,7 @@ static int sim_option(FAR struct ioexpander_dev_s *dev, uint8_t pin,
     {
       ioe_pinset_t bit = ((ioe_pinset_t)1 << pin);
 
-      ret = OK;
+      ret = OKK;
       switch ((uintptr_t)value)
         {
           case IOEXPANDER_VAL_HIGH:    /* Interrupt on high level */
@@ -378,7 +378,7 @@ static int sim_writepin(FAR struct ioexpander_dev_s *dev, uint8_t pin,
       priv->outval &= ~(1 << pin);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -425,7 +425,7 @@ static int sim_readpin(FAR struct ioexpander_dev_s *dev, uint8_t pin,
 
   retval = (((inval >> pin) & 1) != 0);
   *value = ((priv->invert & (1 << pin)) != 0) ? !retval : retval;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -474,7 +474,7 @@ static int sim_multiwritepin(FAR struct ioexpander_dev_s *dev,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -531,7 +531,7 @@ static int sim_multireadpin(FAR struct ioexpander_dev_s *dev,
       values[i] = ((priv->invert & (1 << pin)) != 0) ? !pinval : pinval;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -616,7 +616,7 @@ static int sim_detach(FAR struct ioexpander_dev_s *dev, FAR void *handle)
   cb->pinset = 0;
   cb->cbfunc = NULL;
   cb->cbarg  = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

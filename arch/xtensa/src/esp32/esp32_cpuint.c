@@ -385,7 +385,7 @@ int esp32_cpuint_initialize(void)
   intmap[ESP32_CPUINT_TIMER0] = XTENSA_IRQ_TIMER0;
   intmap[ESP32_CPUINT_TIMER1] = XTENSA_IRQ_TIMER1;
   intmap[ESP32_CPUINT_TIMER2] = XTENSA_IRQ_TIMER2;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

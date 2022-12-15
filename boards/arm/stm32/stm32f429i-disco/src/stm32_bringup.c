@@ -330,7 +330,7 @@ int stm32_bringup(void)
    */
 
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -341,7 +341,7 @@ int stm32_bringup(void)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to start USB monitor: %d\n", ret);
     }
@@ -359,7 +359,7 @@ int stm32_bringup(void)
 
 #ifdef CONFIG_SENSORS_L3GD20
   ret = stm32_l3gd20initialize("/dev/gyr0");
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize l3gd20 sensor: %d\n", ret);
     }
@@ -387,5 +387,5 @@ int stm32_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

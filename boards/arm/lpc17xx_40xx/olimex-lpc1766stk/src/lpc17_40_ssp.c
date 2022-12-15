@@ -177,7 +177,7 @@ static int ssp0_cdinterrupt(int irq, FAR void *context)
     {
       g_ssp0callback.callback(g_ssp0callback.arg);
     }
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -190,7 +190,7 @@ static int ssp1_cdinterrupt(int irq, FAR void *context)
     {
       g_ssp1callback.callback(g_ssp1callback.arg);
     }
-  return OK;
+  return OKK;
 }
 #endif
 #endif
@@ -356,7 +356,7 @@ int lpc17_40_ssp0register(FAR struct spi_dev_s *dev,
 
   spi_cdirqsetup(LPC1766STK_SPICD_IRQ, ssp0_cdinterrupt);
 #endif
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -375,7 +375,7 @@ int lpc17_40_ssp1register(FAR struct spi_dev_s *dev,
 
   spi_cdirqsetup(LPC1766STK_SPICD_IRQ, ssp1_cdinterrupt);
 #endif
-  return OK;
+  return OKK;
 }
 #endif
 #endif

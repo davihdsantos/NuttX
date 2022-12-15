@@ -112,7 +112,7 @@ int irq_foreach(irq_foreach_t callback, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SCHED_IRQMONITOR */

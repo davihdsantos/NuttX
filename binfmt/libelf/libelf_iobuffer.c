@@ -94,7 +94,7 @@ int elf_allocbuffer(FAR struct elf_loadinfo_s *loadinfo)
       loadinfo->buflen = CONFIG_ELF_BUFFERSIZE;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -131,6 +131,6 @@ int elf_reallocbuffer(FAR struct elf_loadinfo_s *loadinfo, size_t increment)
 
   loadinfo->iobuffer = buffer;
   loadinfo->buflen   = newsize;
-  return OK;
+  return OKK;
 }
 

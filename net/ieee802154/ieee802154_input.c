@@ -189,7 +189,7 @@ static int ieee802154_queue_frame(FAR struct ieee802154_conn_s *conn,
   DEBUGASSERT((int)conn->backlog == ieee802154_count_frames(conn));
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -245,7 +245,7 @@ int ieee802154_input(FAR struct radio_driver_s *radio,
   FAR struct ieee802154_conn_s *conn;
   FAR struct iob_s *frame;
   FAR struct iob_s *next;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if there is a connection that will accept this packet */
 

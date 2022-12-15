@@ -91,7 +91,7 @@ static void  *g_callback_arg;
 
 static int stm32_exti_pvd_isr(int irq, void *context, void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending EXTI interrupt */
 
@@ -166,5 +166,5 @@ int stm32_exti_pvd(bool risingedge, bool fallingedge, bool event,
               func ? 0 : EXTI_PVD_LINE,
               func ? EXTI_PVD_LINE : 0);
 
-  return OK;
+  return OKK;
 }

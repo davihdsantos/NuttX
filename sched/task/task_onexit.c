@@ -117,7 +117,7 @@ int on_exit(CODE void (*func)(int, FAR void *), FAR void *arg)
             {
               group->tg_onexitfunc[index] = func;
               group->tg_onexitarg[index]  = arg;
-              ret = OK;
+              ret = OKK;
               break;
             }
         }
@@ -140,7 +140,7 @@ int on_exit(CODE void (*func)(int, FAR void *), FAR void *arg)
     {
       group->tg_onexitfunc = func;
       group->tg_onexitarg  = arg;
-      ret = OK;
+      ret = OKK;
     }
 
   sched_unlock();

@@ -237,7 +237,7 @@ static void twi_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -555,7 +555,7 @@ static int twi_interrupt(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -747,7 +747,7 @@ static int twi_transfer(FAR struct i2c_master_s *dev,
 #ifdef CONFIG_I2C_RESET
 static int twi_reset(FAR struct i2c_master_s * dev)
 {
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_I2C_RESET */
 
@@ -1033,7 +1033,7 @@ int sam_i2cbus_uninitialize(FAR struct i2c_master_s * dev)
   /* Detach Interrupt Handler */
 
   irq_detach(priv->irq);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAM34_TWIM0 || CONFIG_SAM34_TWIM1 */

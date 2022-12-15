@@ -192,7 +192,7 @@ static int am335x_gpio_interrupt(uint32_t base, int irq0, void *context)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_AM335X_GPIO0_IRQ

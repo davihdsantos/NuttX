@@ -314,7 +314,7 @@ static int devurand_poll(FAR struct file *filep, FAR struct pollfd *fds,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

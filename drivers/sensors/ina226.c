@@ -240,7 +240,7 @@ static int ina226_readpower(FAR struct ina226_dev_s *priv,
 
   buffer->current = (int32_t)tmp;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

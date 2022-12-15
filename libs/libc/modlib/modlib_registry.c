@@ -236,7 +236,7 @@ int modlib_registry_del(FAR struct module_s *modp)
     }
 
   modp->flink = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -297,7 +297,7 @@ int modlib_registry_verify(FAR struct module_s *modp)
     {
       if (node == modp)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -325,7 +325,7 @@ int modlib_registry_verify(FAR struct module_s *modp)
 int modlib_registry_foreach(mod_callback_t callback, FAR void *arg)
 {
   FAR struct module_s *modp;
-  int ret = OK;
+  int ret = OKK;
 
   /* Get exclusive access to the module registry */
 

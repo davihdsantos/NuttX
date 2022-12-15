@@ -118,5 +118,5 @@ int stm32_pmstop(bool lpds)
 
   asm("wfi");
 #endif
-  return OK;
+  return OKK;
 }

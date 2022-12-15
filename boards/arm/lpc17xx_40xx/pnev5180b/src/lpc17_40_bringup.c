@@ -117,7 +117,7 @@
 
 int pnev5180b_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_FS_PROCFS
   ret = mount(NULL, "/proc", "procfs", 0, NULL);
@@ -165,7 +165,7 @@ int pnev5180b_bringup(void)
 
 #ifdef CONFIG_LPC17_40_ROMFS
   ret = lpc17_40_romfs_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: lpc17_40_romfs_initialize() failed: %d\n", ret);
       goto done;
@@ -174,7 +174,7 @@ int pnev5180b_bringup(void)
 
 #ifdef CONFIG_USBMONITOR
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: usbmonitor_start() failed: %d\n", ret);
       goto done;

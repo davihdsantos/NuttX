@@ -255,7 +255,7 @@ int stm32_spi5cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 
       (void)stm32_gpiowrite(GPIO_LCD_DC, !cmd);
 
-      return OK;
+      return OKK;
     }
 #endif
 

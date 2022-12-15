@@ -165,7 +165,7 @@ static inline int nxvfork_stackargsetup(FAR struct tcb_s *parent,
       child->argv[argc] = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -331,7 +331,7 @@ static int automount_unmount(FAR struct automounter_state_s *priv)
        */
 
       priv->mounted = false;
-      return OK;
+      return OKK;
 
     default:
       ferr("ERROR: automount_findinode failed: %d\n", ret);
@@ -504,7 +504,7 @@ static int automount_interrupt(FAR const struct automount_lower_s *lower,
       (void)wd_cancel(priv->wdog);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

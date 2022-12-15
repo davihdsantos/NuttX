@@ -1371,7 +1371,7 @@ static int proc_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the index as the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)procfile;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1391,7 +1391,7 @@ static int proc_close(FAR struct file *filep)
 
   kmm_free(procfile);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1512,7 +1512,7 @@ static int proc_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new container in the new file structure */
 
   newp->f_priv = (FAR void *)newfile;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1640,7 +1640,7 @@ static int proc_opendir(FAR const char *relpath, FAR struct fs_dirent_s *dir)
 
   procdir->pid  = pid;
   dir->u.procfs = (FAR void *)procdir;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1663,7 +1663,7 @@ static int proc_closedir(FAR struct fs_dirent_s *dir)
     }
 
   dir->u.procfs = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1745,7 +1745,7 @@ static int proc_readdir(struct fs_dirent_s *dir)
        */
 
       procdir->base.index = index + 1;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1766,7 +1766,7 @@ static int proc_rewinddir(struct fs_dirent_s *dir)
   priv = dir->u.procfs;
 
   priv->base.index = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1883,7 +1883,7 @@ static int proc_stat(const char *relpath, struct stat *buf)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

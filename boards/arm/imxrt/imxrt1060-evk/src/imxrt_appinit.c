@@ -84,7 +84,7 @@ int board_app_initialize(uintptr_t arg)
 
   return imxrt_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }
 

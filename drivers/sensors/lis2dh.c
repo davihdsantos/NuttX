@@ -208,7 +208,7 @@ static int lis2dh_open(FAR struct file *filep)
   FAR struct inode        *inode = filep->f_inode;
   FAR struct lis2dh_dev_s *priv  = inode->i_private;
   uint8_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* Probe device */
 
@@ -270,7 +270,7 @@ static int lis2dh_close(FAR struct file *filep)
 static int lis2dh_fifo_start(FAR struct lis2dh_dev_s *priv)
 {
   uint8_t buf;
-  int ret = OK;
+  int ret = OKK;
 
   buf =  0x00 | priv->setup->trigger_selection |
       priv->setup->fifo_trigger_threshold;
@@ -794,7 +794,7 @@ static int lis2dh_int_handler(int irq, FAR void *context, FAR void *arg)
   lis2dh_notify(priv);
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_LIS2DH_DRIVER_SELFTEST
@@ -834,7 +834,7 @@ static int lis2dh_clear_registers(FAR struct lis2dh_dev_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -864,7 +864,7 @@ static int lis2dh_write_register(FAR struct lis2dh_dev_s *priv, uint8_t reg,
                  value, reg);
       return ERROR;
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -920,14 +920,14 @@ static int lis2dh_handle_selftest(FAR struct lis2dh_dev_s *priv)
   int16_t abs_st_x_value;
   int16_t abs_st_y_value;
   int16_t abs_st_z_value;
-  int ret = OK;
-  int err = OK;
+  int ret = OKK;
+  int err = OKK;
 
   DEBUGASSERT(priv);
 
   lis2dh_powerdown(priv);
 
-  if (lis2dh_clear_registers(priv) != OK)
+  if (lis2dh_clear_registers(priv) != OKK)
     {
       ret = -EIO;
       goto out;
@@ -937,7 +937,7 @@ static int lis2dh_handle_selftest(FAR struct lis2dh_dev_s *priv)
    * Data Update) and HR (High Resolution) bits enabled.
    */
 
-  if (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG4, 0x88) != OK)
+  if (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG4, 0x88) != OKK)
     {
       lis2dh_dbg("lis2dh: Failed to write CTRL4 REG for selftest\n");
       ret = -EIO;
@@ -948,7 +948,7 @@ static int lis2dh_handle_selftest(FAR struct lis2dh_dev_s *priv)
    * X/Y/Z axis enabled.
    */
 
-  if (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG1, 0x47) != OK)
+  if (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG1, 0x47) != OKK)
     {
       lis2dh_dbg("lis2dh: Failed to write CTRL1 REG for selftest\n");
       ret = -EIO;
@@ -994,7 +994,7 @@ static int lis2dh_handle_selftest(FAR struct lis2dh_dev_s *priv)
 
       buf = (i == SELFTEST_0) ? 0x8a : 0x8c;
 
-      if (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG4, buf) != OK)
+      if (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG4, buf) != OKK)
         {
           lis2dh_dbg("lis2dh: Failed to write CTRL4 REG for selftest\n");
           ret = -EIO;
@@ -1056,7 +1056,7 @@ static int lis2dh_handle_selftest(FAR struct lis2dh_dev_s *priv)
 
   /* Verify INT1 and INT2 lines */
 
-  if (lis2dh_clear_registers(priv) != OK)
+  if (lis2dh_clear_registers(priv) != OKK)
     {
       ret = -EIO;
       goto out;
@@ -1090,11 +1090,11 @@ static int lis2dh_handle_selftest(FAR struct lis2dh_dev_s *priv)
      FIFO mode, INT1 , THS 0
      OR combination, all events enabled */
 
-  if ((lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG1, 0x77) != OK) ||
-      (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG3, 0x12) != OK) ||
-      (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG5, 0x4a) != OK) ||
-      (lis2dh_write_register(priv, ST_LIS2DH_FIFO_CTRL_REG, 0x40) != OK) ||
-      (lis2dh_write_register(priv, ST_LIS2DH_INT1_CFG_REG, 0x3f) != OK))
+  if ((lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG1, 0x77) != OKK) ||
+      (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG3, 0x12) != OKK) ||
+      (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG5, 0x4a) != OKK) ||
+      (lis2dh_write_register(priv, ST_LIS2DH_FIFO_CTRL_REG, 0x40) != OKK) ||
+      (lis2dh_write_register(priv, ST_LIS2DH_INT1_CFG_REG, 0x3f) != OKK))
     {
       syslog(LOG_NOTICE, "Writing registers for INT line check failed\n");
       ret = -EIO;
@@ -1136,7 +1136,7 @@ static int lis2dh_handle_selftest(FAR struct lis2dh_dev_s *priv)
 
       /* Enable interupt 1 on INT2 pin */
 
-      if (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG6, 0x40) != OK)
+      if (lis2dh_write_register(priv, ST_LIS2DH_CTRL_REG6, 0x40) != OKK)
         {
           syslog(LOG_NOTICE, "Failed to enable interrupt 1 on INT2 pin");
           ret = -EIO;
@@ -1281,7 +1281,7 @@ static int lis2dh_clear_interrupts(FAR struct lis2dh_dev_s *priv,
                                    uint8_t interrupts)
 {
   uint8_t buf;
-  int ret = OK;
+  int ret = OKK;
 
   if (interrupts & LIS2DH_INT1)
     {
@@ -1373,7 +1373,7 @@ static int lis2dh_get_reading(FAR struct lis2dh_dev_s *dev,
         }
 
       res->z = z;
-      return OK;
+      return OKK;
     }
 
   return -EIO;
@@ -1502,7 +1502,7 @@ static int lis2dh_read_temp(FAR struct lis2dh_dev_s *dev, FAR int16_t *temper)
 
   *temper = buf[0] | ((int16_t)buf[1] << 8);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1701,7 +1701,7 @@ static int lis2dh_reboot(FAR struct lis2dh_dev_s *dev)
 
   /* Reboot completed, chip is now in power-down state. */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1718,7 +1718,7 @@ static int lis2dh_reboot(FAR struct lis2dh_dev_s *dev)
 static int lis2dh_powerdown(FAR struct lis2dh_dev_s * dev)
 {
   uint8_t buf = 0;
-  int ret = OK;
+  int ret = OKK;
 
   if (lis2dh_access(dev, ST_LIS2DH_CTRL_REG1, &buf, -1) != 1)
     {
@@ -1970,7 +1970,7 @@ static int lis2dh_setup(FAR struct lis2dh_dev_s * dev,
       dev->fifo_used = false;
     }
 
-  return OK;
+  return OKK;
 
 error:
 
@@ -2044,7 +2044,7 @@ int lis2dh_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
     }
   priv->config->irq_attach(config, lis2dh_int_handler, priv);
   priv->config->irq_enable(config, false);
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->devsem);

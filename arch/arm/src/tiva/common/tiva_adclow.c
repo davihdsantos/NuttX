@@ -275,25 +275,25 @@ static struct tiva_adc_sse_s *g_sses[] =
 static int tiva_adc0_sse0_interrupt(int irq, void *context)
 {
   tiva_adc_interrupt(&sse00);
-  return OK;
+  return OKK;
 }
 
 static int tiva_adc0_sse1_interrupt(int irq, void *context)
 {
   tiva_adc_interrupt(&sse01);
-  return OK;
+  return OKK;
 }
 
 static int tiva_adc0_sse2_interrupt(int irq, void *context)
 {
   tiva_adc_interrupt(&sse02);
-  return OK;
+  return OKK;
 }
 
 static int tiva_adc0_sse3_interrupt(int irq, void *context)
 {
   tiva_adc_interrupt(&sse03);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -301,25 +301,25 @@ static int tiva_adc0_sse3_interrupt(int irq, void *context)
 static int tiva_adc1_sse0_interrupt(int irq, void *context)
 {
   tiva_adc_interrupt(&sse10);
-  return OK;
+  return OKK;
 }
 
 static int tiva_adc1_sse1_interrupt(int irq, void *context)
 {
   tiva_adc_interrupt(&sse11);
-  return OK;
+  return OKK;
 }
 
 static int tiva_adc1_sse2_interrupt(int irq, void *context)
 {
   tiva_adc_interrupt(&sse12);
-  return OK;
+  return OKK;
 }
 
 static int tiva_adc1_sse3_interrupt(int irq, void *context)
 {
   tiva_adc_interrupt(&sse13);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -393,7 +393,7 @@ static int tiva_adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -460,7 +460,7 @@ static int tiva_adc_setup(struct adc_dev_s *dev)
     }
 
   tiva_adc_rxint(dev, false);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -547,7 +547,7 @@ static void tiva_adc_rxint(struct adc_dev_s *dev, bool enable)
 
 static int tiva_adc_ioctl(struct adc_dev_s *dev, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   ainfo("cmd=%d arg=%ld\n", cmd, arg);
 
@@ -930,7 +930,7 @@ int tiva_adc_initialize(const char *devpath, struct tiva_adc_cfg_s *cfg,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -959,7 +959,7 @@ void tiva_adc_lock(FAR struct tiva_adc_s *priv, int sse)
        * worker thread will receive a lot of signals).
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
 
 #ifdef CONFIG_DEBUG_ANALOG
       if (loop_count % 1000)

@@ -274,7 +274,7 @@ static inline void lc823450_i2c_sem_wait(FAR struct lc823450_i2c_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -505,7 +505,7 @@ static int lc823450_i2c_reset(FAR struct i2c_master_s *dev)
   modifyreg32(priv->config->base + I2CCTL, I2C_CTL_SRST, I2C_CTL_SRST);
   modifyreg32(priv->config->base + I2CCTL, I2C_CTL_IREQEN, 0);
   modifyreg32(priv->config->base + I2CCTL, I2C_CTL_FMODE, I2C_CTL_FMODE);
-  return OK;
+  return OKK;
 }
 #endif  /* CONFIG_I2C_RESET */
 
@@ -625,7 +625,7 @@ static int lc823450_i2c_poll(FAR struct lc823450_i2c_priv_s *priv)
 
   if (! lc823450_i2c_checkirq(priv))
     {
-      return OK;
+      return OKK;
     }
 
   ack = lc823450_i2c_checkack(priv);
@@ -659,7 +659,7 @@ static int lc823450_i2c_poll(FAR struct lc823450_i2c_priv_s *priv)
 
       priv->timedout = false;
 
-      return OK;
+      return OKK;
     }
 
   if (priv->irqstate == IRQSTATE_WSTART)
@@ -803,7 +803,7 @@ static int lc823450_i2c_poll(FAR struct lc823450_i2c_priv_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -886,7 +886,7 @@ static int lc823450_i2c_init(FAR struct lc823450_i2c_priv_s *priv, int port)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -948,7 +948,7 @@ static int lc823450_i2c_deinit(FAR struct lc823450_i2c_priv_s *priv, int port)
   irq_detach(priv->config->irq);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1150,7 +1150,7 @@ int lc823450_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
 
   if (priv->refs == 0)
     {
-      return OK;
+      return OKK;
     }
 
   flags = enter_critical_section();
@@ -1158,7 +1158,7 @@ int lc823450_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   if (--priv->refs != 0)
     {
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(flags);
@@ -1194,7 +1194,7 @@ int lc823450_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   nxsem_destroy(&priv->sem_isr);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

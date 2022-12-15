@@ -667,7 +667,7 @@ static void stm32_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1035,7 +1035,7 @@ static int stm32_chan_waitsetup(FAR struct stm32_usbhost_s *priv,
       chan->callback = NULL;
       chan->arg      = NULL;
 #endif
-      ret            = OK;
+      ret            = OKK;
     }
 
   leave_critical_section(flags);
@@ -1075,7 +1075,7 @@ static int stm32_chan_asynchsetup(FAR struct stm32_usbhost_s *priv,
       chan->waiter   = false;
       chan->callback = callback;
       chan->arg      = arg;
-      ret            = OK;
+      ret            = OKK;
     }
 
   leave_critical_section(flags);
@@ -1127,7 +1127,7 @@ static int stm32_chan_wait(FAR struct stm32_usbhost_s *priv,
        * awakened by a signal too.
        */
 
-      DEBUGASSERT(ret == OK || get_errno() == EINTR);
+      DEBUGASSERT(ret == OKK || get_errno() == EINTR);
     }
   while (chan->waiter);
 
@@ -1261,7 +1261,7 @@ static int stm32_ctrlchan_alloc(FAR struct stm32_usbhost_s *priv,
   /* Configure control IN channels */
 
   stm32_chan_configure(priv, inndx);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1323,7 +1323,7 @@ static int stm32_ctrlep_alloc(FAR struct stm32_usbhost_s *priv,
   /* Return a pointer to the control pipe container as the pipe "handle" */
 
   *ep = (usbhost_ep_t)ctrlep;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1395,7 +1395,7 @@ static int stm32_xfrep_alloc(FAR struct stm32_usbhost_s *priv,
   /* Return the index to the allocated channel as the endpoint "handle" */
 
   *ep = (usbhost_ep_t)chidx;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1835,7 +1835,7 @@ static int stm32_in_setup(FAR struct stm32_usbhost_s *priv, int chidx)
   /* Start the transfer */
 
   stm32_transfer_start(priv, chidx);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2043,7 +2043,7 @@ static void stm32_in_next(FAR struct stm32_usbhost_s *priv,
   /* Is the full transfer complete? Did the last chunk transfer complete OK? */
 
   result = -(int)chan->result;
-  if (chan->xfrd < chan->buflen && result == OK)
+  if (chan->xfrd < chan->buflen && result == OKK)
     {
       /* Yes.. Set up for the next transfer based on the direction and the
        * endpoint type
@@ -2193,7 +2193,7 @@ static int stm32_out_setup(FAR struct stm32_usbhost_s *priv, int chidx)
   /* Start the transfer */
 
   stm32_transfer_start(priv, chidx);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2332,7 +2332,7 @@ static void stm32_out_next(FAR struct stm32_usbhost_s *priv,
   /* Is the full transfer complete? Did the last chunk transfer complete OK? */
 
   result = -(int)chan->result;
-  if (chan->xfrd < chan->buflen && result == OK)
+  if (chan->xfrd < chan->buflen && result == OKK)
     {
       /* Yes.. Set up for the next transfer based on the direction and the
        * endpoint type
@@ -2589,7 +2589,7 @@ static inline void stm32_gint_hcinisr(FAR struct stm32_usbhost_s *priv,
 
           /* Set the request done state */
 
-          chan->result = OK;
+          chan->result = OKK;
         }
     }
 
@@ -2609,7 +2609,7 @@ static inline void stm32_gint_hcinisr(FAR struct stm32_usbhost_s *priv,
         {
           /* Set the request done result */
 
-          chan->result = OK;
+          chan->result = OKK;
         }
       else if (chan->chreason == CHREASON_STALL)
         {
@@ -2881,7 +2881,7 @@ static inline void stm32_gint_hcoutisr(FAR struct stm32_usbhost_s *priv,
         {
           /* Set the request done result */
 
-          chan->result = OK;
+          chan->result = OKK;
 
           /* Read the HCCHAR register to get the HCCHAR register to get
            * the endpoint type.
@@ -3584,7 +3584,7 @@ static int stm32_gint_isr(int irq, FAR void *context, FAR void *arg)
 
       if (pending == 0)
         {
-          return OK;
+          return OKK;
         }
 
       /* Otherwise, process each pending, unmasked GINT interrupts */
@@ -3657,7 +3657,7 @@ static int stm32_gint_isr(int irq, FAR void *context, FAR void *arg)
 
   /* We won't get here */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3884,7 +3884,7 @@ static int stm32_wait(FAR struct usbhost_connection_s *conn,
           leave_critical_section(flags);
 
           uinfo("RHport Connected: %s\n", connport->connected ? "YES" : "NO");
-          return OK;
+          return OKK;
         }
 
 #ifdef CONFIG_USBHOST_HUB
@@ -3901,7 +3901,7 @@ static int stm32_wait(FAR struct usbhost_connection_s *conn,
           leave_critical_section(flags);
 
           uinfo("Hub port Connected: %s\n", connport->connected ? "YES" : "NO");
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -4104,7 +4104,7 @@ static int stm32_ep0configure(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep
   stm32_chan_configure(priv, ep0info->inndx);
 
   stm32_givesem(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -4220,7 +4220,7 @@ static int stm32_epfree(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
     }
 
   stm32_givesem(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4274,7 +4274,7 @@ static int stm32_alloc(FAR struct usbhost_driver_s *drvr,
 
   *buffer = alloc;
   *maxlen = CONFIG_STM32_OTGHS_DESCSIZE;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4306,7 +4306,7 @@ static int stm32_free(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffer)
 
   DEBUGASSERT(drvr && buffer);
   kmm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -4354,7 +4354,7 @@ static int stm32_ioalloc(FAR struct usbhost_driver_s *drvr,
   /* Return the allocated buffer */
 
   *buffer = alloc;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -4386,7 +4386,7 @@ static int stm32_iofree(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffer)
 
   DEBUGASSERT(drvr && buffer);
   kmm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4484,12 +4484,12 @@ static int stm32_ctrlin(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
 
           priv->chan[ep0info->outndx].outdata1 ^= true;
           ret = stm32_ctrl_senddata(priv, ep0info, NULL, 0);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* All success transactions exit here */
 
               stm32_givesem(&priv->exclsem);
-              return OK;
+              return OKK;
             }
 
           usbhost_trace1(OTGHS_TRACE1_SENDDATA, ret < 0 ? -ret : ret);
@@ -4568,15 +4568,15 @@ static int stm32_ctrlout(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
 
           /* Handle the status IN phase */
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               ret = stm32_ctrl_recvdata(priv, ep0info, NULL, 0);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* All success transactins exit here */
 
                   stm32_givesem(&priv->exclsem);
-                  return OK;
+                  return OKK;
                 }
 
               usbhost_trace1(OTGHS_TRACE1_RECVDATA, ret < 0 ? -ret : ret);
@@ -4815,7 +4815,7 @@ static int stm32_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
 #endif
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -4865,7 +4865,7 @@ static int stm32_connect(FAR struct usbhost_driver_s *drvr,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -5337,7 +5337,7 @@ static inline int stm32_hw_initialize(FAR struct stm32_usbhost_s *priv)
   /* Initialize host mode and return success */
 
   stm32_host_initialize(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

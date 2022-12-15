@@ -156,7 +156,7 @@ int lpc43_gpioint_grpinitialize(int group, bool anded, bool level)
   putreg32(regval, grpbase + LPC43_GRPINT_CTRL_OFFSET);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -263,7 +263,7 @@ int lpc43_gpioint_pinconfig(uint16_t gpiocfg)
   putreg32(einr, LPC43_GPIOINT_IENR);
   putreg32(einf, LPC43_GPIOINT_IENF);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -329,7 +329,7 @@ int lpc43_gpioint_grpconfig(uint16_t gpiocfg)
   putreg32(regval, regaddr);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -354,7 +354,7 @@ int lpc43_gpioint_ack(uint8_t intnumber)
   regval |= (1 << intnumber);
   putreg32(regval, LPC43_GPIOINT_IST);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LPC43_GPIO_IRQ */

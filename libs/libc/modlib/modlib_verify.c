@@ -112,5 +112,5 @@ int modlib_verifyheader(FAR const Elf32_Ehdr *ehdr)
 
   /* Looks good so far... we still might find some problems later. */
 
-  return OK;
+  return OKK;
 }

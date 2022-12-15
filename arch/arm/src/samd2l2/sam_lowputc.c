@@ -6,7 +6,7 @@
  *
  * References:
  *   1. "Atmel SAM D20J / SAM D20G / SAM D20E ARM-Based Microcontroller
- *      Datasheet", 42129J–SAM–12/2013
+ *      Datasheet", 42129Jï¿½SAMï¿½12/2013
  *   2. Atmel sample code.  This code has an ASF license with is compatible
  *      with the NuttX BSD license, but includes the provision that this
  *      code not be used in non-Atmel products.  That sample code was used
@@ -243,7 +243,7 @@ sam_usart_configure(const struct sam_usart_config_s *const config)
   /* Write configuration to CTRLA */
 
   putreg32(ctrla, config->base + SAM_USART_CTRLA_OFFSET);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -328,7 +328,7 @@ int sam_usart_internal(const struct sam_usart_config_s *const config)
   /* Set USART configuration according to the board configuration */
 
   ret = sam_usart_configure(config);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Configure USART pins */
 

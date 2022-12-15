@@ -163,7 +163,7 @@ int up_create_stack(FAR struct tcb_s *tcb, size_t stack_size, uint8_t ttype)
 #if defined(ARCH_HAVE_LEDS)
       board_autoled_on(LED_STACKCREATED);
 #endif
-      return OK;
+      return OKK;
     }
 
   return ERROR;

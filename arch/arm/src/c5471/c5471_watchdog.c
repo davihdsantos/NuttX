@@ -245,7 +245,7 @@ static int wdt_interrupt(int irq, void *context, FAR void *arg)
 #else
   wdinfo("  No reboot\n");
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -305,7 +305,7 @@ static int wdt_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
       return -ENOTTY;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -327,7 +327,7 @@ static int wdt_open(struct file *filep)
   c5471_wdt_cntl = C5471_DISABLE_VALUE2;
 
   g_wdtopen = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -388,5 +388,5 @@ int up_wdtinit(void)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }

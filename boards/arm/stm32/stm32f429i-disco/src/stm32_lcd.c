@@ -405,7 +405,7 @@ static int stm32_ili9341_initialize(void)
 
   lcd->deselect(lcd);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -499,14 +499,14 @@ int board_lcd_initialize(void)
           g_lcd = ili9341_initialize(dev, ILI9341_LCD_DEVICE);
           if (g_lcd)
             {
-              return OK;
+              return OKK;
             }
         }
 
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_STM32F429I_DISCO_ILI9341_LCDIFACE */
 
@@ -530,7 +530,7 @@ int board_lcd_initialize(void)
 int up_fbinitialize(int display)
 {
   static bool initialized = false;
-  int ret = OK;
+  int ret = OKK;
 
   if (!initialized)
     {

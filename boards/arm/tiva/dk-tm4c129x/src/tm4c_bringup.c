@@ -188,5 +188,5 @@ int tm4c_bringup(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }

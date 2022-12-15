@@ -156,7 +156,7 @@ int psock_connect(FAR struct socket *psock, FAR const struct sockaddr *addr,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

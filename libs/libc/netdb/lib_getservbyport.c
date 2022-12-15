@@ -63,7 +63,7 @@ FAR struct servent *getservbyport(int port, FAR const char *proto)
   int ret;
 
   ret = getservbyport_r(port, proto, &ent, (FAR void *)buf, sizeof buf, &res);
-  return (ret != OK) ? NULL : res;
+  return (ret != OKK) ? NULL : res;
 }
 
 #endif /* CONFIG_LIBC_NETDB */

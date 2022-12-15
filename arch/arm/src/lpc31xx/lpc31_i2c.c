@@ -190,7 +190,7 @@ static int i2c_interrupt(int irq, FAR void *context, FAR void *arg)
 
   DEBUGASSERT(priv != NULL);
   i2c_progress(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -524,7 +524,7 @@ static int i2c_transfer(FAR struct i2c_master_s *dev, FAR struct i2c_msg_s *msgs
 #ifdef CONFIG_I2C_RESET
 static int i2c_reset(FAR struct i2c_master_s * dev)
 {
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_I2C_RESET */
 
@@ -618,5 +618,5 @@ int lpc31_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   /* Disable I2C system clocks */
 
   lpc31_disableclock(priv->clkid);
-  return OK;
+  return OKK;
 }

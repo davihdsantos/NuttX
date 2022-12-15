@@ -361,7 +361,7 @@ int arch_phy_irq(FAR const char *intf, xcpt_t handler, void *arg,
   /* Return the old handler (so that it can be restored) */
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_SAMV7_GPIOA_IRQ */
 

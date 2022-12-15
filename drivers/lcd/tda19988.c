@@ -231,7 +231,7 @@ static int tda19988_getregs(FAR const struct tda19988_i2c_s *dev,
 
   lcdinfo("Write: %02x<-%02x\n", regaddr, *regval);
   lcderrdumpbuffer("Read:", regval, nregs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -265,7 +265,7 @@ static int tda19988_putreg(FAR const struct tda19988_i2c_s *dev,
     }
 
   lcdinfo("Wrote: %02x<-%02x\n", regaddr, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -300,7 +300,7 @@ static int tda19988_putreg16(FAR const struct tda19988_i2c_s *dev,
     }
 
   lcdinfo("Wrote: 02x<-%04x\n", regaddr, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -345,7 +345,7 @@ static int tda19988_modifyreg(FAR const struct tda19988_i2c_s *dev,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -418,7 +418,7 @@ static inline int tda19988_cec_modifyreg(FAR struct tda1988_dev_s *priv,
 
 static int tda19988_select_page(FAR struct tda1988_dev_s *priv, uint8_t page)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if we need to select a new page for this transfer */
 
@@ -472,7 +472,7 @@ static int tda19988_hdmi_getregs(FAR struct tda1988_dev_s *priv,
     }
 
   lcdinfo("Read: %02x:%02x->%02x\n", page, regaddr, *regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -514,7 +514,7 @@ static int tda19988_hdmi_putreg(FAR struct tda1988_dev_s *priv,
     }
 
   lcdinfo("Read: %02x:%02x<-%02x\n", page, regaddr, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -556,7 +556,7 @@ static int tda19988_hdmi_putreg16(FAR struct tda1988_dev_s *priv,
     }
 
   lcdinfo("Read: %02x:%02x<-%04x\n", page, regaddr, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -597,7 +597,7 @@ static int tda19988_hdmi_modifyreg(FAR struct tda1988_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -658,7 +658,7 @@ static int tda19988_fetch_edid_block(FAR struct tda1988_dev_s *priv,
   int attempt;
   int ret;
 
-  ret = OK;
+  ret = OKK;
 
   tda19988_hdmi_modifyreg(priv, HDMI_CTRL_INT_REG, 0, HDMI_CTRL_INT_EDID);
 
@@ -860,7 +860,7 @@ static int tda19988_open(FAR struct file *filep)
   priv->crefs++;
 
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -910,7 +910,7 @@ static int tda19988_close(FAR struct file *filep)
   if (priv->crefs == 0 && priv->unlinked)
     {
       tda19988_shutdown(priv);
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -1206,7 +1206,7 @@ static int tda19988_poll(FAR struct file *filep, FAR struct pollfd *fds,
     }
 
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1245,7 +1245,7 @@ static int tda19988_unlink(FAR struct inode *inode)
   if (priv->crefs <= 0)
     {
       tda19988_shutdown(priv);
-      return OK;
+      return OKK;
     }
 
   /* No... just mark the driver as unlinked and free the resources when the
@@ -1254,7 +1254,7 @@ static int tda19988_unlink(FAR struct inode *inode)
 
   priv->unlinked = true;
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1360,7 +1360,7 @@ static int tda19988_hwinitialize(FAR struct tda1988_dev_s *priv)
   tda19988_hdmi_putreg(priv, HDMI_CTRL_VIPCTRL_1_REG, 0x01);
   tda19988_hdmi_putreg(priv, HDMI_CTRL_VIPCTRL_2_REG, 0x45);
 
-  ret = OK;
+  ret = OKK;
 
 done:
   return ret;
@@ -1586,7 +1586,7 @@ static int
 
   tda19988_hdmi_modifyreg(priv, HDMI_CTRL_TBG_CNTRL_0_REG,
                           HDMI_CTRL_TBG_CNTRL_0_SYNC_ONCE, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

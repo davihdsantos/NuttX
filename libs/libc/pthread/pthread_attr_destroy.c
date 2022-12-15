@@ -77,7 +77,7 @@ int pthread_attr_destroy(FAR pthread_attr_t *attr)
   else
     {
       memset(attr, 0, sizeof(pthread_attr_t));
-      ret = OK;
+      ret = OKK;
     }
 
   linfo("Returning %d\n", ret);

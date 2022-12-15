@@ -858,7 +858,7 @@ static int up_setup(struct uart_dev_s *dev)
 
   priv->initialized = true;
 
-  return OK;
+  return OKK;
 }
 
 
@@ -951,7 +951,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, up_interrupt, priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the USART
@@ -1092,7 +1092,7 @@ static int up_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1116,7 +1116,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
     || defined(CONFIG_STM32F0L0G0_SERIALBRK_BSDCOMPAT)
   struct up_dev_s   *priv  = (struct up_dev_s *)dev->priv;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {
@@ -1751,7 +1751,7 @@ static int up_pm_prepare(struct pm_callback_s *cb, int domain,
 {
   /* Logic to prepare for a reduced power state goes here. */
 
-  return OK;
+  return OKK;
 }
 #endif
 #endif /* HAVE_UART */
@@ -1846,7 +1846,7 @@ void up_serialinit(void)
 
 #ifdef CONFIG_PM
   ret = pm_register(&g_serialcb);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 #endif
 

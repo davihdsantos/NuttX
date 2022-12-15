@@ -104,7 +104,7 @@ static int sx127x_irq0_attach(xcpt_t isr, FAR void *arg)
   /* IRQ on rising edge */
 
   (void)stm32_gpiosetevent(GPIO_SX127X_DIO0, true, false, false, isr, arg);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -143,7 +143,7 @@ static void sx127x_chip_reset(void)
 
 static int sx127x_opmode_change(int opmode)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Configure antena switch outputs in SLEEP mode */
 
@@ -227,7 +227,7 @@ errout:
 
 static int sx127x_freq_select(uint32_t freq)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Only HF supported (BAND3 - 860-930 MHz) */
 
@@ -247,7 +247,7 @@ static int sx127x_freq_select(uint32_t freq)
 static int sx127x_pa_select(bool enable)
 {
   g_high_power_output = enable;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -257,7 +257,7 @@ static int sx127x_pa_select(bool enable)
 int stm32_lpwaninitialize(void)
 {
   FAR struct spi_dev_s *spidev;
-  int ret = OK;
+  int ret = OKK;
 
   wlinfo("Register the sx127x module\n");
 

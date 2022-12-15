@@ -177,5 +177,5 @@ int stm32l4_exti_comp(int cmp, bool risingedge, bool fallingedge,
   /* Leave the critical section */
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }

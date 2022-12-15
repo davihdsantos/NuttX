@@ -298,7 +298,7 @@ static int sam_mrf24j40_devsetup(FAR struct sam_priv_s *priv)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -342,6 +342,6 @@ int sam_mrf24j40_initialize(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 #endif /* HAVE_MRF24J40 */

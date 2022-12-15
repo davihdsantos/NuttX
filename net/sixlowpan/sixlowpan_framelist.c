@@ -329,7 +329,7 @@ static int sixlowpan_pktradio_metadata(FAR struct radio_driver_s *radio,
 
   pktmeta->pm_dest.pa_addrlen = destmac->nv_addrlen;
   memcpy(pktmeta->pm_dest.pa_addr, destmac->nv_addr, destmac->nv_addrlen);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -769,7 +769,7 @@ int sixlowpan_queue_frames(FAR struct radio_driver_s *radio,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_6LOWPAN */

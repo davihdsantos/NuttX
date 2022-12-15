@@ -344,7 +344,7 @@ int btuart_send(FAR const struct bt_driver_s *dev, FAR struct bt_buf_s *buf)
   nwritten = lower->write(lower, buf->data, buf->len);
   if (nwritten == buf->len)
     {
-      return OK;
+      return OKK;
     }
 
   if (nwritten < 0)
@@ -381,5 +381,5 @@ int btuart_open(FAR const struct bt_driver_s *dev)
   /* Re-enable Rx callbacks */
 
   lower->rxenable(lower, true);
-  return OK;
+  return OKK;
 }

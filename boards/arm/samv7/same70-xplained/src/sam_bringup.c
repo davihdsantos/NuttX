@@ -304,7 +304,7 @@ int sam_bringup(void)
    */
 
   ret = sam_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize USB host: %d\n", ret);
     }
@@ -314,7 +314,7 @@ int sam_bringup(void)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to start the USB monitor: %d\n", ret);
     }
@@ -365,5 +365,5 @@ int sam_bringup(void)
    */
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

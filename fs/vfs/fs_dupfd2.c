@@ -124,7 +124,7 @@ int dup2(int fd1, int fd2)
       goto errout;
     }
 
-  return OK;
+  return OKK;
 
 errout:
   set_errno(-ret);

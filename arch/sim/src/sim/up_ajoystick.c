@@ -127,7 +127,7 @@ static int ajoy_sample(FAR const struct ajoy_lowerhalf_s *lower,
   memcpy(sample, &g_ajoy_sample, sizeof(struct ajoy_sample_s));
   g_ajoy_buttons = g_ajoy_sample.as_buttons;
   g_ajoy_valid = false;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -184,7 +184,7 @@ int sim_ajoy_initialize(void)
   /* Register the joystick device as /dev/ajoy0 */
 
   ret = ajoy_register("/dev/ajoy0", &g_ajoylower);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable X11 event processing from the IDLE loop */
 
@@ -251,7 +251,7 @@ int up_buttonevent(int x, int y, int buttons)
          }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_AJOYSTICK */

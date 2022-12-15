@@ -122,7 +122,7 @@ static int board_button_irqx(gio_pinset_t pinset, int irq,
 
   /* Return the old button handler (so that it can be restored) */
 
-  return OK;
+  return OKK;
 }
 #endif
 

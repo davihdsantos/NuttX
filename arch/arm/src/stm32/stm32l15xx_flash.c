@@ -111,7 +111,7 @@ static void sem_lock(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -472,7 +472,7 @@ ssize_t up_progmem_write(size_t addr, const void *buf, size_t count)
 {
   uint32_t *word = (uint32_t *)buf;
   size_t written = count;
-  int ret = OK;
+  int ret = OKK;
 
   /* STM32L1 requires word access and alignment. */
 
@@ -535,7 +535,7 @@ out:
    * error bits).
    */
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("flash write error: %d, status: 0x%x\n", ret, getreg32(STM32_FLASH_SR));
       modifyreg32(STM32_FLASH_SR, 0, FLASH_SR_ALLERRS);
@@ -543,6 +543,6 @@ out:
 
   flash_lock();
   sem_unlock();
-  return (ret == OK) ? written : ret;
+  return (ret == OKK) ? written : ret;
 }
 #endif /* defined(CONFIG_STM32_STM32L15XX) */

@@ -267,7 +267,7 @@ static int pmic_int_handler(int irq, void *context, void *arg)
 
   up_disable_irq(irq);
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_CXD56_PMIC_INT */
 
@@ -791,7 +791,7 @@ int cxd56_pmic_getchargevol(FAR int *voltage)
       *voltage = 4200;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -876,7 +876,7 @@ int cxd56_pmic_getchargecurrent(FAR int *current)
         return -EFAULT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1070,7 +1070,7 @@ int cxd56_pmic_getrechargevol(FAR int *mV)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1309,7 +1309,7 @@ int cxd56_pmic_getchargemode(FAR int *low, FAR int *high)
   *low = arg.low;
   *high = arg.high;
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_CXD56_PMIC_BATMONITOR

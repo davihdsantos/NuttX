@@ -122,6 +122,6 @@ int stm32_sdinitialize(int minor)
   finfo("Successfuly bound SPI port %d to MMC/SD slot %d\n",
         STM32_MMCSDSPIPORTNO, STM32_MMCSDSLOTNO);
 #endif
-  return OK;
+  return OKK;
 }
 

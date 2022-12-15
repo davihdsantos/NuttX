@@ -335,7 +335,7 @@ int stm32l4_configgpio(uint32_t cfgset)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

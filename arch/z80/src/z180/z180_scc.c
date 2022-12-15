@@ -385,7 +385,7 @@ static int z180_setup(struct uart_dev_s *dev)
 #ifndef CONFIG_SUPPRESS_UART_CONFIG
 #  warning "Missing logic"
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

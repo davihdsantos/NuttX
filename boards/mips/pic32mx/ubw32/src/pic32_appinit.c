@@ -75,7 +75,7 @@ static int nsh_usbdevinitialize(void)
    */
 
   pic32mx_usbattach();
-  return OK;
+  return OKK;
 }
 #else
 #  define nsh_usbdevinitialize() (OK)

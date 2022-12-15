@@ -247,7 +247,7 @@ int stm32_adc_setup(void)
 
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ADC && (CONFIG_STM32_ADC1 || CONFIG_STM32_ADC2) */

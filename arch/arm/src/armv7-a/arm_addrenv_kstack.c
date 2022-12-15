@@ -157,7 +157,7 @@ int up_addrenv_kstackalloc(FAR struct tcb_s *tcb)
       return -ENOMEM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -190,7 +190,7 @@ int up_addrenv_kstackfree(FAR struct tcb_s *tcb)
       tcb->xcp.kstack = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ARCH_ADDRENV && CONFIG_ARCH_KERNEL_STACK */

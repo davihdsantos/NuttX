@@ -166,7 +166,7 @@ static void pcf8574_lock(FAR struct pcf8574_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -349,7 +349,7 @@ static int pcf8574_option(FAR struct ioexpander_dev_s *dev, uint8_t pin,
       unsigned int ival = (unsigned int)((uintptr_t)value);
       ioe_pinset_t bit = ((ioe_pinset_t)1 << pin);
 
-      ret = OK;
+      ret = OKK;
       pcf8574_lock(priv);
       switch (ival)
         {
@@ -509,7 +509,7 @@ static int pcf8574_readpin(FAR struct ioexpander_dev_s *dev, uint8_t pin,
 
       *value = ((priv->outstate & (1 << pin)) != 0);
       pcf8574_unlock(priv);
-      return OK;
+      return OKK;
     }
 
   /* It is an input pin. Read the input register for this pin
@@ -536,7 +536,7 @@ static int pcf8574_readpin(FAR struct ioexpander_dev_s *dev, uint8_t pin,
   /* Return 0 or 1 to indicate the state of pin */
 
   *value = (bool)((regval >> (pin & 7)) & 1);
-  ret = OK;
+  ret = OKK;
 
 errout_with_lock:
   pcf8574_unlock(priv);
@@ -703,7 +703,7 @@ static int pcf8574_multireadpin(FAR struct ioexpander_dev_s *dev,
       gpioinfo("%d. pin=%u value=%u\n", pin, values[i]);
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_lock:
   pcf8574_unlock(priv);
@@ -795,7 +795,7 @@ static int pcf8574_detach(FAR struct ioexpander_dev_s *dev, FAR void *handle)
   cb->pinset = 0;
   cb->cbfunc = NULL;
   cb->cbarg  = NULL;
-  return OK;
+  return OKK;
 }
 #endif
 

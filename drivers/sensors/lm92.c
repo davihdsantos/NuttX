@@ -222,7 +222,7 @@ static int lm92_readb16(FAR struct lm92_dev_s *priv, uint8_t regaddr,
                       (uint32_t)(buffer[0] & ~(1 << 7)) << 17 |
                       (uint32_t)(buffer[1] & ~7) << 9);
   sninfo("addr: %02x value: %08x ret: %d\n", regaddr, *regvalue, ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -290,7 +290,7 @@ static int lm92_readtemp(FAR struct lm92_dev_s *priv, FAR b16_t *temp)
     }
 
   *temp = temp16;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -384,7 +384,7 @@ static int lm92_readid(FAR struct lm92_dev_s *priv, FAR uint16_t *id)
 
   *id = (uint16_t)buffer[0] << 8 | (uint16_t)buffer[1];
   sninfo("id: %04x ret: %d\n", *id, ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -397,7 +397,7 @@ static int lm92_readid(FAR struct lm92_dev_s *priv, FAR uint16_t *id)
 
 static int lm92_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -410,7 +410,7 @@ static int lm92_open(FAR struct file *filep)
 
 static int lm92_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -475,7 +475,7 @@ static int lm92_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode      *inode = filep->f_inode;
   FAR struct lm92_dev_s *priv  = inode->i_private;
-  int                    ret   = OK;
+  int                    ret   = OKK;
 
   switch (cmd)
     {
@@ -503,7 +503,7 @@ static int lm92_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         {
           uint8_t conf;
           ret = lm92_readconf(priv, &conf);
-          if (ret == OK)
+          if (ret == OKK)
             {
               ret = lm92_writeconf(priv, conf | LM92_CONF_SHUTDOWN);
             }
@@ -518,7 +518,7 @@ static int lm92_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         {
           uint8_t conf;
           ret = lm92_readconf(priv, &conf);
-          if (ret == OK)
+          if (ret == OKK)
             {
               ret = lm92_writeconf(priv, conf & ~LM92_CONF_SHUTDOWN);
             }

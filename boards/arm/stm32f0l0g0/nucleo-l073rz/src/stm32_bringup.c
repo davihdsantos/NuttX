@@ -161,5 +161,5 @@ int stm32_bringup(void)
 #endif  /* CONFIG_CL_MFRC522 */
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

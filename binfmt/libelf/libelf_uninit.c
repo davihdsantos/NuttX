@@ -90,7 +90,7 @@ int elf_uninit(struct elf_loadinfo_s *loadinfo)
       close(loadinfo->filfd);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -122,5 +122,5 @@ int elf_freebuffers(struct elf_loadinfo_s *loadinfo)
       loadinfo->buflen    = 0;
     }
 
-  return OK;
+  return OKK;
 }

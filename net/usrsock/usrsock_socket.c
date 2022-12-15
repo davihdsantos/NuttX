@@ -261,7 +261,7 @@ int usrsock_socket(int domain, int type, int protocol,
 
   net_unlock();
 
-  return OK;
+  return OKK;
 
 errout_teardown_callback:
   usrsock_teardown_request_callback(&state);

@@ -183,7 +183,7 @@ static int tsc_attach(FAR struct ads7843e_config_s *state, xcpt_t isr)
       priv->handler = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static void tsc_enable(FAR struct ads7843e_config_s *state, bool enable)
@@ -290,7 +290,7 @@ int stm32_tsc_setup(int minor)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_INPUT_ADS7843E */

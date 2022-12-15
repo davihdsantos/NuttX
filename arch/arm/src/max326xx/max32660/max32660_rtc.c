@@ -284,7 +284,7 @@ static int max326_rtc_interrupt(int irq, void *context, FAR void *arg)
       g_alarmarg = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -346,7 +346,7 @@ int up_rtc_initialize(void)
   max326_rtc_wrenable(false);
 
   g_rtc_enabled = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -435,7 +435,7 @@ int up_rtc_gettime(FAR struct timespec *tp)
   tp->tv_sec  = sec;
   tp->tv_nsec = (long)tmp;
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -495,7 +495,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
   max326_rtc_wrenable(false);
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -623,7 +623,7 @@ int max326_rtc_setalarm(FAR struct timespec *ts, alm_callback_t cb, FAR void *ar
       /* Enable the RTC interrupt at the NVIC */
 
       up_enable_irq(MAX326_IRQ_RTC);
-      ret = OK;
+      ret = OKK;
     }
 
 errout_with_lock:
@@ -702,7 +702,7 @@ int max326_rtc_rdalarm(FAR b32_t *ftime)
      }
 
    *ftime  = b32now + b32delay;
-   return OK;
+   return OKK;
 }
 #endif
 
@@ -752,7 +752,7 @@ int max326_rtc_cancelalarm(void)
       putreg32(0, MAX326_RTC_RAS);
       putreg32(0, MAX326_RTC_RSSA);
 
-      ret = OK;
+      ret = OKK;
     }
 
   spin_unlock_irqrestore(flags);

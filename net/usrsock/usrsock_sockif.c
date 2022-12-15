@@ -304,7 +304,7 @@ static int usrsock_sockif_close(FAR struct socket *psock)
       conn->crefs--;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_USRSOCK */

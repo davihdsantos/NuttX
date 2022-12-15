@@ -77,7 +77,7 @@ int netdev_carrier_on(FAR struct net_driver_s *dev)
   if (dev)
     {
       dev->d_flags |= IFF_RUNNING;
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -103,7 +103,7 @@ int netdev_carrier_off(FAR struct net_driver_s *dev)
   if (dev)
     {
       dev->d_flags &= ~IFF_RUNNING;
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

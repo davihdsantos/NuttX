@@ -430,7 +430,7 @@ static int at86rf23x_setTRXstate(FAR struct at86rf23x_dev_s *dev,
 
   uint8_t status = at86rf23x_getTRXstate(dev);
 
-  int ret = OK;
+  int ret = OKK;
 
   /* TODO I don't have every state included verify this will work with SLEEP */
 
@@ -688,7 +688,7 @@ static int at86rf23x_setchannel(FAR struct ieee802154_radio_s *ieee,
   dev->channel = chan;
 
   wlinfo("CHANNEL Changed to %d\n", chan);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -720,7 +720,7 @@ static int at86rf23x_getchannel(FAR struct ieee802154_radio_s *ieee,
   /* Set the channel within local device */
 
   dev->channel = *chan;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -740,7 +740,7 @@ static int at86rf23x_setpanid(FAR struct ieee802154_radio_s *ieee,
   at86rf23x_setreg(dev->spi, RF23X_REG_PANID0, pan[0]);
   at86rf23x_setreg(dev->spi, RF23X_REG_PANID1, pan[1]);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -761,7 +761,7 @@ static int at86rf23x_getpanid(FAR struct ieee802154_radio_s *ieee,
 
   pan[0] = at86rf23x_getreg(dev->spi, RF23X_REG_PANID0);
   pan[1] = at86rf23x_getreg(dev->spi, RF23X_REG_PANID1);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -781,7 +781,7 @@ static int at86rf23x_setsaddr(FAR struct ieee802154_radio_s *ieee,
   at86rf23x_setreg(dev->spi, RF23X_REG_SADDR0, addr[0]);
   at86rf23x_setreg(dev->spi, RF23X_REG_SADDR1, addr[1]);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -803,7 +803,7 @@ static int at86rf23x_getsaddr(FAR struct ieee802154_radio_s *ieee,
   addr[0] = at86rf23x_getreg(dev->spi, RF23X_REG_SADDR0);
   addr[1] = at86rf23x_getreg(dev->spi, RF23X_REG_SADDR1);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -830,7 +830,7 @@ static int at86rf23x_seteaddr(FAR struct ieee802154_radio_s *ieee,
   at86rf23x_setreg(dev->spi, RF23X_REG_IEEEADDR6, eaddr[6]);
   at86rf23x_setreg(dev->spi, RF23X_REG_IEEEADDR7, eaddr[7]);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -857,7 +857,7 @@ static int at86rf23x_geteaddr(FAR struct ieee802154_radio_s *ieee,
   eaddr[6] = at86rf23x_getreg(dev->spi, RF23X_REG_IEEEADDR6);
   eaddr[7] = at86rf23x_getreg(dev->spi, RF23X_REG_IEEEADDR7);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -879,7 +879,7 @@ static int at86rf23x_setpromisc(FAR struct ieee802154_radio_s *ieee,
    */
 
   at86rf23x_setregbits(dev->spi, RF23X_XAHCTRL1_BITS_PROM_MODE, promisc);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -896,7 +896,7 @@ static int at86rf23x_getpromisc(FAR struct ieee802154_radio_s *ieee,
   FAR struct at86rf23x_dev_s *dev = (struct at86rf23x_dev_s *)ieee;
 
   *promisc = at86rf23x_getregbits(dev->spi, RF23X_XAHCTRL1_BITS_PROM_MODE);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -932,7 +932,7 @@ static int at86rf23x_setdevmode(FAR struct ieee802154_radio_s *ieee,
     }
 
   dev->devmode = mode;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -959,7 +959,7 @@ static int at86rf23x_getdevmode(FAR struct ieee802154_radio_s *ieee,
       *mode = IEEE802154_MODE_DEVICE;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -980,7 +980,7 @@ static int at86rf23x_settxpower(FAR struct ieee802154_radio_s *ieee,
   /* Right now we only set tx power to 0 */
 
   at86rf23x_setreg(dev->spi, RF23X_REG_TXPWR, RF23X_TXPWR_0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1072,7 +1072,7 @@ static int at86rf23x_gettxpower(FAR struct ieee802154_radio_s *ieee,
       break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1113,7 +1113,7 @@ static
     }
 
   memcpy(&dev->cca, cca, sizeof(struct ieee802154_cca_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1174,7 +1174,7 @@ int at86rf23x_initialize(FAR struct at86rf23x_dev_s *dev)
   version = at86rf23x_getreg(dev->spi, RF23X_REG_VERSION);
 
   wlinfo("Radio part: 0x%02x version: 0x%02x found\n", part, version);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1216,9 +1216,9 @@ static int at86rf23x_resetrf(FAR struct at86rf23x_dev_s *dev)
 
       retry_cnt++;
     }
-  while (trx_status != OK);
+  while (trx_status != OKK);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1468,7 +1468,7 @@ static int at86rf23x_transmit(FAR struct ieee802154_radio_s *ieee,
    * back to RX_ON.
    */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1500,7 +1500,7 @@ FAR struct ieee802154_radio_s *
 
   /* Attach irq */
 
-  if (lower->attach(lower, at86rf23x_interrupt, dev) != OK)
+  if (lower->attach(lower, at86rf23x_interrupt, dev) != OKK)
     {
       return NULL;
     }

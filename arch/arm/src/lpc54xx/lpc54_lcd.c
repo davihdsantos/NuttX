@@ -189,7 +189,7 @@ static int lpc54_getvideoinfo(FAR struct fb_vtable_s *vtable,
   if (vtable && vinfo)
     {
       memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -207,7 +207,7 @@ static int lpc54_getplaneinfo(FAR struct fb_vtable_s *vtable, int planeno,
   if (vtable && planeno == 0 && pinfo)
     {
       memcpy(pinfo, &g_planeinfo, sizeof(struct fb_planeinfo_s));
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -284,7 +284,7 @@ static int lpc54_getcmap(FAR struct fb_vtable_s *vtable,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -354,7 +354,7 @@ static int lpc54_putcmap(FAR struct fb_vtable_s *vtable,
       *pal++ = (rgb0 | rgb1);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -383,7 +383,7 @@ static int lpc54_getcursor(FAR struct fb_vtable_s *vtable,
       lcdinfo("size: (h=%d, w=%d)\n", g_csize.h, g_csize.w);
       attrib->size = g_csize;
 #endif
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -423,7 +423,7 @@ static int lpc54_setcursor(FAR struct fb_vtable_s *vtable,
                   settings->img.image);
         }
 #endif
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -792,7 +792,7 @@ int up_fbinitialize(int display)
   regval |= LCD_CTRL_LCDPWR;
   putreg32(regval, LPC54_LCD_CTRL);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

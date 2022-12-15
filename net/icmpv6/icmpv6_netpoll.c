@@ -259,7 +259,7 @@ int icmpv6_pollsetup(FAR struct socket *psock, FAR struct pollfd *fds)
     }
 
   net_unlock();
-  return OK;
+  return OKK;
 
 errout_with_lock:
   kmm_free(info);
@@ -315,7 +315,7 @@ int icmpv6_pollteardown(FAR struct socket *psock, FAR struct pollfd *fds)
       kmm_free(info);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* !CONFIG_MM_IOB */

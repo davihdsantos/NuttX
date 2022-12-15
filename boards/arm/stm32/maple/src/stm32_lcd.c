@@ -87,7 +87,7 @@ static int up_lcdextcominisr(int irq, void *context, void *arg)
     {
       lcderr("ERROR: error, irq not attached, disabled\n");
       STM32_TIM_DISABLEINT(tim, ATIM_DIER_UIE);
-      return OK;
+      return OKK;
     }
 
   return g_isr(irq, context, arg);
@@ -108,7 +108,7 @@ static int up_lcdirqattach(xcpt_t isr, void * arg)
       g_isr = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static void up_lcddispcontrol(bool on)
@@ -192,7 +192,7 @@ FAR int board_lcd_initialize(void)
   l_lcddev = memlcd_initialize(spi, &memlcd_priv, 0);
   DEBUGASSERT(l_lcddev);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

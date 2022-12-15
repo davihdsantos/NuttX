@@ -187,14 +187,14 @@ static int spi_lock(FAR struct spi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR || ret == -ECANCELED);
+          DEBUGASSERT(ret == OKK || ret == -EINTR || ret == -ECANCELED);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&g_exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -342,7 +342,7 @@ static int spi_waitspif(void)
         }
       else if ((status & SPI_SR_SPIF) != 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -388,7 +388,7 @@ static int spi_transfer(uint8_t chout, FAR uint8_t *chin)
       *chin = response;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

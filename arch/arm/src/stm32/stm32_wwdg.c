@@ -316,7 +316,7 @@ static int stm32_interrupt(int irq, FAR void *context, FAR void *arg)
       stm32_putreg(regval, STM32_WWDG_SR);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -348,7 +348,7 @@ static int stm32_start(FAR struct watchdog_lowerhalf_s *lower)
 
   stm32_putreg(WWDG_CR_WDGA | WWDG_CR_T_RESET | priv->reload, STM32_WWDG_CR);
   priv->started = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -412,7 +412,7 @@ static int stm32_keepalive(FAR struct watchdog_lowerhalf_s *lower)
    */
 
   stm32_putreg((WWDG_CR_T_RESET | priv->reload), STM32_WWDG_CR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -468,7 +468,7 @@ static int stm32_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n", status->timeout);
   wdinfo("  timeleft : %d\n", status->flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -600,7 +600,7 @@ static int stm32_settimeout(FAR struct watchdog_lowerhalf_s *lower,
    */
 
   stm32_setwindow(priv, 0x7f);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -719,7 +719,7 @@ static int stm32_ioctl(FAR struct watchdog_lowerhalf_s *lower, int cmd,
           uint32_t window = (priv->timeout - mintime) * priv->fwwdg / 1000 - 1;
           DEBUGASSERT(window < priv->reload);
           stm32_setwindow(priv, window | WWDG_CR_T_RESET);
-          ret = OK;
+          ret = OKK;
         }
     }
 

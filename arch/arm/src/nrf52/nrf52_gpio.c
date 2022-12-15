@@ -192,7 +192,7 @@ int nrf52_gpio_config(nrf52_pinset_t cfgset)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

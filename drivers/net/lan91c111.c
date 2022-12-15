@@ -490,7 +490,7 @@ static int lan91c111_transmit(FAR struct net_driver_s *dev)
    */
 
   NETDEV_TXDONE(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -978,7 +978,7 @@ static int lan91c111_interrupt(int irq, FAR void *context, FAR void *arg)
 
   work_queue(LAN91C111_WORK, &priv->irqwork, lan91c111_interrupt_work,
              dev, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1137,7 +1137,7 @@ static int lan91c111_ifup(FAR struct net_driver_s *dev)
   /* Enable the Ethernet interrupt */
 
   up_enable_irq(priv->irq);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1187,7 +1187,7 @@ static int lan91c111_ifdown(FAR struct net_driver_s *dev)
   putreg16(priv, CONFIG_REG, CONFIG_CLEAR);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1275,7 +1275,7 @@ static int lan91c111_txavail(FAR struct net_driver_s *dev)
                  dev, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1353,7 +1353,7 @@ static int lan91c111_addmac(FAR struct net_driver_s *dev,
   modifyreg16(priv, MCAST_REG1 + off, 0, 1 << bit);
   net_unlock();
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1400,7 +1400,7 @@ static int lan91c111_rmmac(FAR struct net_driver_s *dev,
   modifyreg16(priv, MCAST_REG1 + off, 1 << bit, 0);
   net_unlock();
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1499,7 +1499,7 @@ static int lan91c111_ioctl(FAR struct net_driver_s *dev, int cmd,
 {
   FAR struct lan91c111_driver_s *priv = dev->d_private;
   struct mii_ioctl_data_s *req = (void *)arg;
-  int ret = OK;
+  int ret = OKK;
 
   net_lock();
 
@@ -1640,7 +1640,7 @@ int lan91c111_initialize(uintptr_t base, int irq)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   netdev_register(dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 
 err:
   kmm_free(priv);

@@ -452,7 +452,7 @@ static int mount_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)procfile;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -472,7 +472,7 @@ static int mount_close(FAR struct file *filep)
 
   kmm_free(procfile);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -582,7 +582,7 @@ static int mount_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new container in the new file structure */
 
   newp->f_priv = (FAR void *)newfile;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -596,7 +596,7 @@ static int mount_stat(const char *relpath, struct stat *buf)
 {
   memset(buf, 0, sizeof(struct stat));
   buf->st_mode = S_IFREG | S_IROTH | S_IRGRP | S_IRUSR;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

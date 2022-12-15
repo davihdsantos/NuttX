@@ -98,7 +98,7 @@ int nxffs_statfs(FAR struct inode *mountpt, FAR struct statfs *buf)
   buf->f_blocks  = volume->nblocks;
   buf->f_namelen = volume->geo.blocksize - SIZEOF_NXFFS_BLOCK_HDR -
                    SIZEOF_NXFFS_INODE_HDR;
-  ret            = OK;
+  ret            = OKK;
 
   nxsem_post(&volume->exclsem);
 
@@ -130,7 +130,7 @@ int nxffs_stat(FAR struct inode *mountpt, FAR const char *relpath,
 
   volume = mountpt->i_private;
   ret = nxsem_wait(&volume->exclsem);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout;
     }
@@ -175,7 +175,7 @@ int nxffs_stat(FAR struct inode *mountpt, FAR const char *relpath,
                        S_IXGRP | S_IXUSR;
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   nxsem_post(&volume->exclsem);
@@ -217,7 +217,7 @@ int nxffs_fstat(FAR const struct file *filep, FAR struct stat *buf)
    */
 
   ret = nxsem_wait(&volume->exclsem);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: nxsem_wait failed: %d\n", ret);
       return ret;
@@ -234,5 +234,5 @@ int nxffs_fstat(FAR const struct file *filep, FAR struct stat *buf)
   buf->st_ctime  = ofile->entry.utc;
 
   nxsem_post(&volume->exclsem);
-  return OK;
+  return OKK;
 }

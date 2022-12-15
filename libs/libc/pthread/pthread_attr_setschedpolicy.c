@@ -87,7 +87,7 @@ int pthread_attr_setschedpolicy(FAR pthread_attr_t *attr, int policy)
   else
     {
       attr->policy = policy;
-      ret = OK;
+      ret = OKK;
     }
 
   linfo("Returning %d\n", ret);

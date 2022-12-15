@@ -63,7 +63,7 @@ static int local_accept_pollsetup(FAR struct local_conn_s *conn,
                                   bool setup)
 {
   pollevent_t eventset;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   net_lock();
@@ -252,7 +252,7 @@ int local_pollsetup(FAR struct socket *psock, FAR struct pollfd *fds)
           else
             {
               fds->priv = shadowfds;
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -286,7 +286,7 @@ int local_pollsetup(FAR struct socket *psock, FAR struct pollfd *fds)
         break;
 
       default:
-        ret = OK;
+        ret = OKK;
         break;
     }
 #endif
@@ -296,7 +296,7 @@ int local_pollsetup(FAR struct socket *psock, FAR struct pollfd *fds)
 pollerr:
   fds->revents |= POLLERR;
   nxsem_post(fds->sem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -318,7 +318,7 @@ pollerr:
 int local_pollteardown(FAR struct socket *psock, FAR struct pollfd *fds)
 {
   FAR struct local_conn_s *conn;
-  int status = OK;
+  int status = OKK;
   int ret = -ENOSYS;
 
   conn = (FAR struct local_conn_s *)psock->s_conn;
@@ -337,7 +337,7 @@ int local_pollteardown(FAR struct socket *psock, FAR struct pollfd *fds)
 
   if (conn->lc_state == LOCAL_STATE_DISCONNECTED)
     {
-      return OK;
+      return OKK;
     }
 
   switch (fds->events & (POLLIN | POLLOUT))
@@ -348,7 +348,7 @@ int local_pollteardown(FAR struct socket *psock, FAR struct pollfd *fds)
 
           if (shadowfds == NULL)
             {
-              return OK;
+              return OKK;
             }
 
           /* Teardown for both shadow pollfds. */
@@ -375,7 +375,7 @@ int local_pollteardown(FAR struct socket *psock, FAR struct pollfd *fds)
         {
           if (fds->priv == NULL)
             {
-              return OK;
+              return OKK;
             }
 
           status = file_poll(&conn->lc_infile, fds, false);
@@ -386,7 +386,7 @@ int local_pollteardown(FAR struct socket *psock, FAR struct pollfd *fds)
         {
           if (fds->priv == NULL)
             {
-              return OK;
+              return OKK;
             }
 
           status = file_poll(&conn->lc_outfile, fds, false);

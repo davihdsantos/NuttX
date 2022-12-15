@@ -120,7 +120,7 @@ int i2schar_devinit(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_AUDIO_I2SCHAR && (CONFIG_SAMA5_SSC0 || CONFIG_SAMA5_SSC1) */

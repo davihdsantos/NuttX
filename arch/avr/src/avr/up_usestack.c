@@ -128,6 +128,6 @@ int up_use_stack(struct tcb_s *tcb, void *stack, size_t stack_size)
   tcb->adj_stack_ptr  = (FAR void *)top_of_stack;
   tcb->adj_stack_size = stack_size;
 
-  return OK;
+  return OKK;
 }
 

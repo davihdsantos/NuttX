@@ -290,7 +290,7 @@ static int at24c_eraseall(FAR struct at24c_dev_s *priv)
       at24c_i2c_write(priv, at24addr, buf, AT24XX_PAGESIZE + AT24XX_ADDRSIZE);
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -586,7 +586,7 @@ static int at24c_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = priv->pagesize;
               geo->neraseblocks = priv->npages;
 #endif
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -601,7 +601,7 @@ static int at24c_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
 #ifdef CONFIG_AT24XX_EXTENDED
       case MTDIOC_EXTENDED:
         priv->extended = (arg != 0);
-        ret = OK;
+        ret = OKK;
         break;
 #endif
 

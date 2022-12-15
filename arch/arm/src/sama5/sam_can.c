@@ -744,7 +744,7 @@ static int can_recvsetup(FAR struct sam_can_s *priv)
       can_putreg(priv, SAM_CAN_IER_OFFSET, CAN_INT_MB(mbndx));
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -880,7 +880,7 @@ static int can_setup(FAR struct can_dev_s *dev)
 
   up_enable_irq(config->pid);
   can_semgive(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1175,7 +1175,7 @@ static int can_send(FAR struct can_dev_s *dev, FAR struct can_msg_s *msg)
 
   can_dumpmbregs(priv, "After send");
   can_semgive(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1543,7 +1543,7 @@ static void can_interrupt(int irq, void *context, FAR void *arg)
  *      (1 x tCAN).
  *   2. Propogation segment (PROP_SEG):  This part of the bit time is used
  *      to compensate for the physical delay times within the network. It is
- *      twice the sum of the signal’s propagation time on the bus line, the
+ *      twice the sum of the signalï¿½s propagation time on the bus line, the
  *      input comparator delay, and the output driver delay. It is
  *      programmable to be 1 to 8 Tq long.  This parameter is defined in the
  *      PROPAG field of the CAN Baudrate Register.
@@ -1697,7 +1697,7 @@ static int can_bittiming(struct sam_can_s *priv)
            CAN_BR_PROPAG(propag) | CAN_BR_SJW(sjw) | CAN_BR_BRP(brp) |
            CAN_BR_ONCE;
   can_putreg(priv, SAM_CAN_BR_OFFSET, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1766,7 +1766,7 @@ static int can_autobaud(struct sam_can_s *priv)
   regval &= ~(CAN_MR_CANEN | CAN_MR_ABM);
   can_putreg(priv, SAM_CAN_MR_OFFSET, regval);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1876,7 +1876,7 @@ static int can_hwinitialize(struct sam_can_s *priv)
    */
 
   while ((can_getreg(priv, SAM_CAN_SR_OFFSET) & CAN_INT_WAKEUP) == 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

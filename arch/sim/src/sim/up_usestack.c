@@ -132,5 +132,5 @@ int up_use_stack(FAR struct tcb_s *tcb, FAR void *stack, size_t stack_size)
   memset(stack, 0, sizeof(struct tls_info_s));
 #endif
 
-  return OK;
+  return OKK;
 }

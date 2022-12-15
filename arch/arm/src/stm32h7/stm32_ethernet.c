@@ -1285,7 +1285,7 @@ static int stm32_transmit(struct stm32_ethmac_s *priv)
 
   putreg32((uintptr_t)txdesc, STM32_ETH_DMACTXDTPR);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1812,7 +1812,7 @@ static int stm32_recvframe(struct stm32_ethmac_s *priv)
 
                   /* Return success */
 
-                  return OK;
+                  return OKK;
                 }
               else
                 {
@@ -1883,7 +1883,7 @@ static void stm32_receive(struct stm32_ethmac_s *priv)
    * Ethernet frames.
    */
 
-  while (stm32_recvframe(priv) == OK)
+  while (stm32_recvframe(priv) == OKK)
     {
 #ifdef CONFIG_NET_PKT
       /* When packet sockets are enabled, feed the frame into the packet tap */
@@ -2349,7 +2349,7 @@ static int stm32_interrupt(int irq, void *context, FAR void *arg)
       work_queue(ETHWORK, &priv->irqwork, stm32_interrupt_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2586,7 +2586,7 @@ static int stm32_ifup(struct net_driver_s *dev)
   up_enable_irq(STM32_IRQ_ETH);
 
   stm32_checksetup();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2633,7 +2633,7 @@ static int stm32_ifdown(struct net_driver_s *dev)
 
   priv->ifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2707,7 +2707,7 @@ static int stm32_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, stm32_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2808,7 +2808,7 @@ static int stm32_addmac(struct net_driver_s *dev, const uint8_t *mac)
   temp |= (ETH_MACPFR_HMC | ETH_MACPFR_HPF);
   stm32_putreg(temp, STM32_ETH_MACPFR);
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_IGMP || CONFIG_NET_ICMPv6 */
 
@@ -2871,7 +2871,7 @@ static int stm32_rmmac(struct net_driver_s *dev, const uint8_t *mac)
       stm32_putreg(temp, STM32_ETH_MACPFR);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -3099,7 +3099,7 @@ static int stm32_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
 
           ret = phy_notify_subscribe(dev->d_ifname, req->pid, req->signo,
                                      req->arg);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable PHY link up/down interrupts */
 
@@ -3114,7 +3114,7 @@ static int stm32_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
           struct mii_ioctl_data_s *req =
             (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = CONFIG_STM32H7_PHYADDR;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -3219,7 +3219,7 @@ static int stm32_phyread(uint16_t phydevaddr, uint16_t phyregaddr,
       if ((stm32_getreg(STM32_ETH_MACMDIOAR) & ETH_MACMDIOAR_MB) == 0)
         {
           *value = (uint16_t)stm32_getreg(STM32_ETH_MACMDIODR);
-          return OK;
+          return OKK;
         }
     }
 
@@ -3263,7 +3263,7 @@ static int stm32_phywrite(uint16_t phydevaddr, uint16_t phyregaddr,
 
   if (clear != 0xffff)
     {
-      if (stm32_phyread(phydevaddr, phyregaddr, &value) != OK)
+      if (stm32_phyread(phydevaddr, phyregaddr, &value) != OKK)
         {
           return -ETIMEDOUT;
         }
@@ -3299,7 +3299,7 @@ static int stm32_phywrite(uint16_t phydevaddr, uint16_t phyregaddr,
     {
       if ((stm32_getreg(STM32_ETH_MACMDIOAR) & ETH_MACMDIOAR_MB) == 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -3371,7 +3371,7 @@ static inline int stm32_dm9161(struct stm32_ethmac_s *priv)
       up_systemreset();
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -3648,7 +3648,7 @@ static int stm32_phyinit(struct stm32_ethmac_s *priv)
         priv->fduplex ? "FULL" : "HALF",
         priv->mbps100 ? 100 : 10);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4028,7 +4028,7 @@ static int stm32_macconfig(struct stm32_ethmac_s *priv)
   /* Setup up the MACVTR register */
 
   stm32_putreg(0, STM32_ETH_MACVTR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4231,7 +4231,7 @@ static int stm32_macenable(struct stm32_ethmac_s *priv)
   regval |= (ETH_DMACSR_TPS | ETH_DMACSR_RPS);
   stm32_putreg(regval, STM32_ETH_DMACSR);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4420,7 +4420,7 @@ int stm32_ethinitialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

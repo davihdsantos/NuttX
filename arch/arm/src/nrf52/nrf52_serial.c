@@ -225,7 +225,7 @@ static int nrf52_setup(struct uart_dev_s *dev)
 
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -272,7 +272,7 @@ static int nrf52_attach(struct uart_dev_s *dev)
    */
 
   ret = irq_attach(priv->irq, nrf52_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(priv->irq);
     }
@@ -340,7 +340,7 @@ static int nrf52_interrupt(int irq, void *context, FAR void *arg)
 
   putreg32(0, priv->uartbase + NRF52_UART_ERRORSRC_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

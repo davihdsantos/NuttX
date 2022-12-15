@@ -255,7 +255,7 @@ struct sim_qspiflashdev_s g_qspidev =
 
 static int qspiflash_lock(FAR struct qspi_dev_s *dev, bool lock)
 {
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

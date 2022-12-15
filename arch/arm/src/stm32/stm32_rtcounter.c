@@ -441,7 +441,7 @@ int up_rtc_initialize(void)
 
   stm32_pwr_enablebkp(false);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -468,7 +468,7 @@ int stm32_rtc_irqinitialize(void)
   up_enable_irq(STM32_IRQ_RTC);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -611,7 +611,7 @@ int up_rtc_gettime(FAR struct timespec *tp)
 
   tp->tv_sec  = (ms << (32-RTC_CLOCKS_SHIFT-16)) | (ls >> (RTC_CLOCKS_SHIFT+16));
   tp->tv_nsec = (ls & (CONFIG_RTC_FREQUENCY-1)) * (1000000000/CONFIG_RTC_FREQUENCY);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -666,7 +666,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
 
   stm32_pwr_enablebkp(false);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -723,7 +723,7 @@ int stm32_rtc_setalarm(FAR const struct timespec *tp, alarmcb_t callback)
 
       stm32_pwr_enablebkp(false);
 
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -769,7 +769,7 @@ int stm32_rtc_cancelalarm(void)
       stm32_rtc_endwr();
       stm32_pwr_enablebkp(false);
 
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);

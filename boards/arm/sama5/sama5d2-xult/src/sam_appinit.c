@@ -85,7 +85,7 @@ int board_app_initialize(uintptr_t arg)
 
   return sam_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }
 

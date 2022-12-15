@@ -457,7 +457,7 @@ int board_app_initialize(uintptr_t arg)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_BOARDCTL_IOCTL
@@ -476,6 +476,6 @@ int board_uniqueid(uint8_t *uniqueid)
     }
 
   stm32l4_get_uniqueid(uniqueid);
-  return OK;
+  return OKK;
 }
 #endif

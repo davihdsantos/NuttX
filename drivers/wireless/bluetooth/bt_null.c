@@ -245,7 +245,7 @@ static int btnull_send(FAR const struct bt_driver_s *dev,
 
 static int btnull_open(FAR const struct bt_driver_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

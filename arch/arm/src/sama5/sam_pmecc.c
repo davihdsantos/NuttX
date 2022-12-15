@@ -963,7 +963,7 @@ static int pmecc_pagelayout(uint16_t datasize, uint16_t eccsize)
   finfo("sector1k=%d nsectors=%d bcherr=%d correctability=%d\n",
         g_pmecc.sector1k, g_pmecc.nsectors, bcherr, g_pmecc.correctability);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1031,7 +1031,7 @@ int pmecc_configure(struct sam_nandcs_s *priv, bool protected)
       /* No, we are already configured */
 
       finfo("Already configured\n");
-      return OK;
+      return OKK;
     }
 
   /* Get a convenience pointer to the NAND model */
@@ -1216,7 +1216,7 @@ int pmecc_configure(struct sam_nandcs_s *priv, bool protected)
 #if NAND_NPMECC_BANKS > 1
   g_pmecc.cs = priv->cs;
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1241,7 +1241,7 @@ void pmecc_lock(void)
   do
     {
       ret = nxsem_wait(&g_pmecc.exclsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }

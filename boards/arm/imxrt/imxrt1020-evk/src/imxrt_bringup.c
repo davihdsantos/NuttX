@@ -132,7 +132,7 @@ static int nsh_sdmmc_initialize(void)
       /* Bind the SDIO interface to the MMC/SD driver */
 
       ret = mmcsd_slotinitialize(BOARD_USDHC_SD_ID, sdmmc);
-      if (ret != OK)
+      if (ret != OKK)
         {
           syslog(LOG_ERR,
                  "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n",
@@ -140,7 +140,7 @@ static int nsh_sdmmc_initialize(void)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #else

@@ -89,7 +89,7 @@ int ptsname_r(int fd, FAR char *buf, size_t buflen)
    */
 
   snprintf(buf, buflen, "/dev/pts/%d", ptyno);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_PSEUDOTERM_SUSV1 */

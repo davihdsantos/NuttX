@@ -149,7 +149,7 @@ int pic32mx_usbpullup(FAR struct usbdev_s *dev,  bool enable)
 {
   /* The PIC32 Ethernet Starter Kit does not have a USB pull-up */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

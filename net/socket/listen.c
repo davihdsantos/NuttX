@@ -104,7 +104,7 @@ int psock_listen(FAR struct socket *psock, int backlog)
     }
 
   psock->s_flags |= _SF_LISTENING;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -179,6 +179,6 @@ int listen(int sockfd, int backlog)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 

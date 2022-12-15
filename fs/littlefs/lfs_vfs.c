@@ -200,7 +200,7 @@ static void littlefs_semtake(FAR struct littlefs_mountpt_s *fs)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -319,7 +319,7 @@ static int littlefs_open(FAR struct file *filep, FAR const char *relpath,
   /* Attach the private date to the struct file instance */
 
   filep->f_priv = priv;
-  return OK;
+  return OKK;
 
 errout_with_file:
   lfs_file_close(&fs->lfs, priv);
@@ -354,7 +354,7 @@ static int littlefs_close(FAR struct file *filep)
   /* Now free the pointer */
 
   kmm_free(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -556,7 +556,7 @@ static int littlefs_fstat(FAR const struct file *filep, FAR struct stat *buf)
   buf->st_blksize = fs->cfg.block_size;
   buf->st_blocks  = (buf->st_size + buf->st_blksize - 1) / buf->st_blksize;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -633,7 +633,7 @@ static int littlefs_opendir(FAR struct inode *mountpt,
 
   littlefs_semgive(fs);
   dir->u.littlefs = priv;
-  return OK;
+  return OKK;
 
 errout:
   littlefs_semgive(fs);
@@ -666,7 +666,7 @@ static int littlefs_closedir(FAR struct inode *mountpt,
   littlefs_semgive(fs);
 
   kmm_free(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -822,7 +822,7 @@ static int littlefs_erase_block(FAR const struct lfs_config_s *c,
 {
   FAR struct littlefs_mountpt_s *fs = c->context;
   FAR struct inode *drv = fs->drv;
-  int ret = OK;
+  int ret = OKK;
 
   if (INODE_IS_MTD(drv))
     {
@@ -993,7 +993,7 @@ static int littlefs_bind(FAR struct inode *driver, FAR const void *data,
 
   *handle = fs;
   littlefs_semgive(fs);
-  return OK;
+  return OKK;
 
 errout_with_fs:
   nxsem_destroy(&fs->sem);

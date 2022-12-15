@@ -158,7 +158,7 @@ int tcp_unlisten(FAR struct tcp_conn_s *conn)
       if (tcp_listenports[ndx] == conn)
         {
           tcp_listenports[ndx] = NULL;
-          ret = OK;
+          ret = OKK;
           break;
         }
     }
@@ -220,7 +220,7 @@ int tcp_listen(FAR struct tcp_conn_s *conn)
               /* Yes.. we found it */
 
               tcp_listenports[ndx] = conn;
-              ret = OK;
+              ret = OKK;
               break;
             }
         }
@@ -299,7 +299,7 @@ int tcp_accept_connection(FAR struct net_driver_s *dev,
            */
 
           ret = tcp_backlogadd(listener, conn);
-          if (ret == OK)
+          if (ret == OKK)
             {
               (void)tcp_callback(dev, listener, TCP_BACKLOG);
             }

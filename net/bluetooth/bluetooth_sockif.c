@@ -155,7 +155,7 @@ static int bluetooth_sockif_alloc(FAR struct socket *psock)
   /* Save the pre-allocated connection in the socket structure */
 
   psock->s_conn = conn;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -294,7 +294,7 @@ static int bluetooth_connect(FAR struct socket *psock,
       /* Mark the socket as connected. */
 
       psock->s_flags |= _SF_CONNECTED;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -444,7 +444,7 @@ static int bluetooth_bind(FAR struct socket *psock,
   /* Mark the socket bound */
 
   psock->s_flags |= _SF_BOUND;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -506,7 +506,7 @@ static int bluetooth_getsockname(FAR struct socket *psock,
   /* Return the actual size transferred */
 
   *addrlen = copylen;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -568,7 +568,7 @@ static int bluetooth_getpeername(FAR struct socket *psock,
   /* Return the actual size transferred */
 
   *addrlen = copylen;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -789,7 +789,7 @@ static int bluetooth_close(FAR struct socket *psock)
               conn->bc_crefs--;
             }
 
-          return OK;
+          return OKK;
         }
 
       default:

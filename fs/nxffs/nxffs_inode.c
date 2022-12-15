@@ -181,7 +181,7 @@ static int nxffs_rdentry(FAR struct nxffs_volume_s *volume, off_t offset,
    * header.
    */
 
-  return OK;
+  return OKK;
 
   /* On errors where we are suspicious of the validity of the inode header,
    * we need to increment the file position to just after the "good" magic
@@ -335,10 +335,10 @@ int nxffs_nextentry(FAR struct nxffs_volume_s *volume, off_t offset,
               /* Try to extract the inode header from that position */
 
               ret = nxffs_rdentry(volume, offset, entry);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   finfo("Found a valid fileheader, offset: %d\n", offset);
-                  return OK;
+                  return OKK;
                 }
 
               /* False alarm.. keep looking */
@@ -406,7 +406,7 @@ int nxffs_findinode(FAR struct nxffs_volume_s *volume, FAR const char *name,
         {
           /* Yes, return success with the entry data in 'entry' */
 
-          return OK;
+          return OKK;
         }
 
       /* Discard this entry and try the next one.  Here we set the

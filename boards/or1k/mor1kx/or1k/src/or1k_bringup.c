@@ -77,5 +77,5 @@ int or1k_bringup(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }

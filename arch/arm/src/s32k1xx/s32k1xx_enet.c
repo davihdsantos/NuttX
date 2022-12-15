@@ -580,7 +580,7 @@ static int s32k1xx_transmit(FAR struct s32k1xx_driver_s *priv)
   putreg32(ENET_TDAR, S32K1XX_ENET_TDAR);
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1130,7 +1130,7 @@ static int s32k1xx_enet_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->irqwork, s32k1xx_enet_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1407,7 +1407,7 @@ static int s32k1xx_ifup_action(struct net_driver_s *dev, bool resetphy)
   up_enable_irq(S32K1XX_IRQ_ENET_TXDONE);
   up_enable_irq(S32K1XX_IRQ_ENET_RXDONE);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1484,7 +1484,7 @@ static int s32k1xx_ifdown(struct net_driver_s *dev)
 
   priv->bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1566,7 +1566,7 @@ static int s32k1xx_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, s32k1xx_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1695,7 +1695,7 @@ static int s32k1xx_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   temp |= 1 << hashindex;
   putreg32(temp, registeraddress);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1743,7 +1743,7 @@ static int s32k1xx_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   temp &= ~(1 << hashindex);
   putreg32(temp, registeraddress);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1785,7 +1785,7 @@ static int s32k1xx_ioctl(struct net_driver_s *dev, int cmd,
             (struct mii_ioctl_notify_s *)((uintptr_t)arg);
 
           ret = phy_notify_subscribe(dev->d_ifname, req->pid, &req->event);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable PHY link up/down interrupts */
 
@@ -1800,7 +1800,7 @@ static int s32k1xx_ioctl(struct net_driver_s *dev, int cmd,
           struct mii_ioctl_data_s *req =
             (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = priv->phyaddr;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -1864,7 +1864,7 @@ static int s32k1xx_phyintenable(struct s32k1xx_driver_s *priv)
    */
 
   ret = s32k1xx_readmii(priv, priv->phyaddr, MII_KSZ8081_INT, &phyval);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable link up/down interrupts */
 
@@ -1962,7 +1962,7 @@ static int s32k1xx_writemii(struct s32k1xx_driver_s *priv, uint8_t phyaddr,
   /* Clear the MII interrupt bit */
 
   putreg32(ENET_INT_MII, S32K1XX_ENET_EIR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2025,7 +2025,7 @@ static int s32k1xx_readmii(struct s32k1xx_driver_s *priv, uint8_t phyaddr,
   /* And return the MII data */
 
   *data = (uint16_t)(getreg32(S32K1XX_ENET_MMFR) & ENET_MMFR_DATA_MASK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2373,7 +2373,7 @@ static inline int s32k1xx_initphy(struct s32k1xx_driver_s *priv,
 
   putreg32(rcr, S32K1XX_ENET_RCR);
   putreg32(tcr, S32K1XX_ENET_TCR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2657,7 +2657,7 @@ int s32k1xx_netinitialize(int intf)
   (void)netdev_register(&priv->dev, NET_LL_ETHERNET);
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

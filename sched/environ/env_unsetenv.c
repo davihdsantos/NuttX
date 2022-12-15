@@ -79,7 +79,7 @@ int unsetenv(FAR const char *name)
   FAR char *pvar;
   FAR char *newenvp;
   int newsize;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(name && group);
 

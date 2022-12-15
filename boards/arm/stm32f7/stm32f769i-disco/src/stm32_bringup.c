@@ -68,7 +68,7 @@
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_FS_PROCFS
 #ifdef CONFIG_STM32_CCM_PROCFS

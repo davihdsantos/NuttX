@@ -296,7 +296,7 @@ static int ssd1306_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buf
 
   if (pixlen <= 0 || row > SSD1306_DEV_YRES)
     {
-      return OK;
+      return OKK;
     }
 
   /* Perform coordinate conversion for reverse landscape mode.
@@ -469,7 +469,7 @@ static int ssd1306_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buf
   /* De-select and unlock the device */
 
   ssd1306_select(priv, false);
-  return OK;
+  return OKK;
 }
 #else
 #  error "Configuration not implemented"
@@ -631,7 +631,7 @@ static int ssd1306_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 #else
 #  error "Configuration not implemented"
@@ -652,7 +652,7 @@ static int ssd1306_getvideoinfo(FAR struct lcd_dev_s *dev,
   lcdinfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
           g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres, g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -669,7 +669,7 @@ static int ssd1306_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(pinfo && planeno == 0);
   lcdinfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -803,7 +803,7 @@ static int ssd1306_setpower(FAR struct lcd_dev_s *dev, int power)
       priv->on = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -886,7 +886,7 @@ static int ssd1306_setcontrast(struct lcd_dev_s *dev, unsigned int contrast)
   /* De-select and unlock the device */
 
   ssd1306_select(priv, false);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -1259,7 +1259,7 @@ static int ssd1306_configuredisplay(struct ssd1306_dev_s *priv)
   up_mdelay(100);
 
   priv->is_conf = true;
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -1332,7 +1332,7 @@ static int ssd1306_redrawfb(struct ssd1306_dev_s *priv)
   /* De-select and unlock the device */
 
   ssd1306_select(priv, false);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************

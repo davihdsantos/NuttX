@@ -298,7 +298,7 @@ static int rtc_synchwait(void)
         {
           /* Synchronized */
 
-          ret = OK;
+          ret = OKK;
           break;
         }
     }
@@ -330,7 +330,7 @@ static int rtc_enterinit(void)
 
   regval = getreg32(STM32L4_RTC_ISR);
 
-  ret = OK;
+  ret = OKK;
   if ((regval & RTC_ISR_INITF) == 0)
     {
       /* Set the Initialization mode */
@@ -345,7 +345,7 @@ static int rtc_enterinit(void)
           regval = getreg32(STM32L4_RTC_ISR);
           if ((regval & RTC_ISR_INITF) != 0)
             {
-              ret = OK;
+              ret = OKK;
               break;
             }
         }
@@ -479,7 +479,7 @@ static int stm32l4_rtc_alarm_handler(int irq, FAR void *context, FAR void *rtc_h
   FAR void *arg;
   uint32_t isr;
   uint32_t cr;
-  int ret = OK;
+  int ret = OKK;
 
   /* Enable write access to the backup domain (RTC registers, RTC
    * backup data registers and backup SRAM).
@@ -588,7 +588,7 @@ static int rtchw_check_alrawf(void)
       regval = getreg32(STM32L4_RTC_ISR);
       if ((regval & RTC_ISR_ALRAWF) != 0)
         {
-          ret = OK;
+          ret = OKK;
           break;
         }
     }
@@ -614,7 +614,7 @@ static int rtchw_check_alrbwf(void)
       regval = getreg32(STM32L4_RTC_ISR);
       if ((regval & RTC_ISR_ALRBWF) != 0)
         {
-          ret = OK;
+          ret = OKK;
           break;
         }
     }
@@ -660,7 +660,7 @@ static int rtchw_set_alrmar(rtc_alarmreg_t alarmreg)
   /* Wait for Alarm A to be writable */
 
   ret = rtchw_check_alrawf();
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_wprunlock;
     }
@@ -703,7 +703,7 @@ static int rtchw_set_alrmbr(rtc_alarmreg_t alarmreg)
   /* Wait for Alarm B to be writable */
 
   ret = rtchw_check_alrbwf();
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto rtchw_set_alrmbr_exit;
     }
@@ -805,7 +805,7 @@ static int stm32l4_rtc_getalarmdatetime(rtc_alarmreg_t reg, FAR struct tm *tp)
   tmp = (data & (RTC_ALRMR_DU_MASK | RTC_ALRMR_DT_MASK)) >> RTC_ALRMR_DU_SHIFT;
   tp->tm_mday = rtc_bcd2bin(tmp);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -893,7 +893,7 @@ int up_rtc_initialize(void)
 
       /* Set Initialization mode */
 
-      if (OK != rtc_enterinit())
+      if (OKK != rtc_enterinit())
         {
           /* Enable the write protection for RTC registers */
 
@@ -993,7 +993,7 @@ int up_rtc_initialize(void)
   g_rtc_enabled = true;
   rtc_dumpregs("After Initialization");
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1122,7 +1122,7 @@ int stm32l4_rtc_getdatetime_with_subseconds(FAR struct tm *tp, FAR long *nsec)
 #endif
 
   rtc_dumptime(tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1248,7 +1248,7 @@ int stm32l4_rtc_setdatetime(FAR const struct tm *tp)
   /* Set Initialization mode */
 
   ret = rtc_enterinit();
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Set the RTC TR and DR registers */
 
@@ -1462,7 +1462,7 @@ int stm32l4_rtc_cancelalarm(enum alm_id_e alarmid)
           putreg32(-1, STM32L4_RTC_ALRMAR);
           modifyreg32(STM32L4_RTC_ISR, RTC_ISR_ALRAF, 0);
           rtc_wprlock();
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -1493,7 +1493,7 @@ int stm32l4_rtc_cancelalarm(enum alm_id_e alarmid)
           putreg32(-1, STM32L4_RTC_ALRMBR);
           modifyreg32(STM32L4_RTC_ISR, RTC_ISR_ALRBF, 0);
           rtc_wprlock();
-          ret = OK;
+          ret = OKK;
         }
         break;
 #endif
@@ -1595,7 +1595,7 @@ static int stm32l4_rtc_wakeup_handler(int irq, FAR void *context, FAR void *arg)
       g_wakeupcb();
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1720,7 +1720,7 @@ int stm32l4_rtc_setperiodic(FAR const struct timespec *period, wakeupcb_t callba
         {
           /* Synchronized */
 
-          ret = OK;
+          ret = OKK;
           break;
         }
     }
@@ -1793,7 +1793,7 @@ int stm32l4_rtc_setperiodic(FAR const struct timespec *period, wakeupcb_t callba
 #ifdef CONFIG_RTC_PERIODIC
 int stm32l4_rtc_cancelperiodic(void)
 {
-  int ret = OK;
+  int ret = OKK;
   int timeout = 0;
   uint32_t regval = 0;
 
@@ -1815,7 +1815,7 @@ int stm32l4_rtc_cancelperiodic(void)
         {
           /* Synchronized */
 
-          ret = OK;
+          ret = OKK;
           break;
         }
     }

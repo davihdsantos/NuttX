@@ -662,7 +662,7 @@ static inline int nxffs_wropen(FAR struct nxffs_volume_s *volume,
 
   *ppofile = &wrfile->ofile;
   nxsem_post(&volume->exclsem);
-  return OK;
+  return OKK;
 
 errout_with_name:
   kmm_free(wrfile->ofile.entry.name);
@@ -699,7 +699,7 @@ static inline int nxffs_rdopen(FAR struct nxffs_volume_s *volume,
    */
 
   ret = nxsem_wait(&volume->exclsem);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: nxsem_wait failed: %d\n", ret);
       goto errout;
@@ -752,7 +752,7 @@ static inline int nxffs_rdopen(FAR struct nxffs_volume_s *volume,
       /* Find the file on this volume associated with this file name */
 
       ret = nxffs_findinode(volume, name, &ofile->entry);
-      if (ret != OK)
+      if (ret != OKK)
         {
           finfo("Inode '%s' not found: %d\n", name, -ret);
           goto errout_with_ofile;
@@ -768,7 +768,7 @@ static inline int nxffs_rdopen(FAR struct nxffs_volume_s *volume,
 
   *ppofile = ofile;
   nxsem_post(&volume->exclsem);
-  return OK;
+  return OKK;
 
 errout_with_ofile:
   kmm_free(ofile);
@@ -1107,7 +1107,7 @@ int nxffs_dup(FAR const struct file *oldp, FAR struct file *newp)
 
   ofile->crefs++;
   newp->f_priv = (FAR void *)ofile;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1144,7 +1144,7 @@ int nxffs_close(FAR struct file *filep)
    */
 
   ret = nxsem_wait(&volume->exclsem);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: nxsem_wait failed: %d\n", ret);
       goto errout;
@@ -1152,7 +1152,7 @@ int nxffs_close(FAR struct file *filep)
 
   /* Decrement the reference count on the open file */
 
-  ret = OK;
+  ret = OKK;
   if (ofile->crefs == 1)
     {
       /* Decrementing the reference count would take it zero.
@@ -1310,5 +1310,5 @@ int nxffs_updateinode(FAR struct nxffs_volume_s *volume,
       ofile->entry.doffset = entry->doffset;
     }
 
-  return OK;
+  return OKK;
 }

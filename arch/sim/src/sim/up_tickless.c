@@ -182,7 +182,7 @@ int up_timer_gettime(FAR struct timespec *ts)
   ts->tv_sec  = g_elapsed_time.tv_sec;
   ts->tv_nsec = g_elapsed_time.tv_nsec;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

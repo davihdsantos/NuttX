@@ -193,7 +193,7 @@ static int  dac_setup(FAR struct dac_dev_s *dev)
   SPI_SELECT(spi, priv->devno, false);
 
   dac_unlock(spi);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -276,7 +276,7 @@ static inline int fat_parsesfname(const char **path,
 #endif
           *terminator = ch;
           *path       = node;
-          return OK;
+          return OKK;
         }
 
       /* Accept only the printable character set (excluding space).  Note
@@ -509,7 +509,7 @@ static inline int fat_parselfname(const char **path,
 
           *terminator = ch;
           *path       = node;
-          return OK;
+          return OKK;
         }
 
       /* Accept only the printable character set (including space) */
@@ -679,7 +679,7 @@ static inline int fat_createalias(struct fat_dirinfo_s *dirinfo)
 
           /* In any event, we are done */
 
-          return OK;
+          return OKK;
         }
 
       /* Exclude those few characters included in long file names, but
@@ -729,7 +729,7 @@ static inline int fat_createalias(struct fat_dirinfo_s *dirinfo)
 
               if (!ext || extchars < 1)
                 {
-                  return OK;
+                  return OKK;
                 }
 
               ndx    = 8;
@@ -752,7 +752,7 @@ static inline int fat_createalias(struct fat_dirinfo_s *dirinfo)
 
           if (extchars < 1 || ndx == 11)
             {
-              return OK;
+              return OKK;
             }
         }
 
@@ -874,7 +874,7 @@ static inline int fat_uniquealias(struct fat_mountpt_s *fs,
     }
   else if (ret == -ENOENT)
     {
-      return OK; /* Alias was unique already */
+      return OKK; /* Alias was unique already */
     }
   else
     {
@@ -948,7 +948,7 @@ static inline int fat_uniquealias(struct fat_mountpt_s *fs,
 
   if (ret == -ENOENT)
     {
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1068,12 +1068,12 @@ static int fat_findsfnentry(struct fat_mountpt_s *fs,
           dirinfo->fd_seq.ds_lfnoffset   = dirinfo->fd_seq.ds_offset;
           dirinfo->fd_seq.ds_lfncluster  = dirinfo->fd_seq.ds_cluster;
 #endif
-          return OK;
+          return OKK;
         }
 
       /* No... get the next directory index and try again */
 
-      if (fat_nextdirentry(fs, &dirinfo->dir) != OK)
+      if (fat_nextdirentry(fs, &dirinfo->dir) != OKK)
         {
           return -ENOENT;
         }
@@ -1343,7 +1343,7 @@ static inline int fat_findlfnentry(struct fat_mountpt_s *fs,
                * alias and all of the meat about the file or directory.
                */
 
-              if (fat_nextdirentry(fs, &dirinfo->dir) != OK)
+              if (fat_nextdirentry(fs, &dirinfo->dir) != OKK)
                 {
                   return -ENOENT;
                 }
@@ -1372,7 +1372,7 @@ static inline int fat_findlfnentry(struct fat_mountpt_s *fs,
                   dirinfo->fd_seq.ds_sector  = fs->fs_currentsector;
                   dirinfo->fd_seq.ds_offset  = diroffset;
                   dirinfo->fd_seq.ds_cluster = dirinfo->dir.fd_currcluster;
-                  return OK;
+                  return OKK;
                 }
 
               /* Bad news.. reset and continue with this entry (which is
@@ -1402,7 +1402,7 @@ static inline int fat_findlfnentry(struct fat_mountpt_s *fs,
       /* Continue at the next directory entry */
 
 next_entry:
-      if (fat_nextdirentry(fs, &dirinfo->dir) != OK)
+      if (fat_nextdirentry(fs, &dirinfo->dir) != OKK)
         {
           return -ENOENT;
         }
@@ -1475,7 +1475,7 @@ static inline int fat_allocatesfnentry(struct fat_mountpt_s *fs,
           dirinfo->fd_seq.ds_lfnoffset    = dirinfo->fd_seq.ds_offset;
           dirinfo->fd_seq.ds_lfncluster   = dirinfo->fd_seq.ds_cluster;
 #endif
-          return OK;
+          return OKK;
         }
 
       /* It is not empty try the next one */
@@ -1601,7 +1601,7 @@ static inline int fat_allocatelfnentry(struct fat_mountpt_s *fs,
               dirinfo->fd_seq.ds_sector  = fs->fs_currentsector;
               dirinfo->fd_seq.ds_offset  = diroffset;
               dirinfo->fd_seq.ds_cluster = dirinfo->dir.fd_currcluster;
-              return OK;
+              return OKK;
             }
 
           /* Otherwise, just decrement the number of directory entries
@@ -1753,7 +1753,7 @@ static inline int fat_getsfname(uint8_t *direntry, char *buffer,
    */
 
   *buffer = '\0';
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1892,7 +1892,7 @@ static inline int fat_getlfname(struct fat_mountpt_s *fs, struct fs_dirent_s *di
 
       /* Read next directory entry */
 
-      if (fat_nextdirentry(fs, &dir->u.fat) != OK)
+      if (fat_nextdirentry(fs, &dir->u.fat) != OKK)
         {
           return -ENOENT;
         }
@@ -1925,7 +1925,7 @@ static inline int fat_getlfname(struct fat_mountpt_s *fs, struct fs_dirent_s *di
             {
               /* Yes.. return success! */
 
-              return OK;
+              return OKK;
             }
 
           /* No, the checksum is bad. */
@@ -1970,7 +1970,7 @@ static int fat_putsfname(struct fat_mountpt_s *fs, struct fat_dirinfo_s *dirinfo
   DIR_PUTNTRES(direntry, 0);
 #endif
   fs->fs_dirty = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2202,7 +2202,7 @@ static int fat_putlfname(struct fat_mountpt_s *fs,
 
       /* Read next directory entry */
 
-      if (fat_nextdirentry(fs, &dirinfo->dir) != OK)
+      if (fat_nextdirentry(fs, &dirinfo->dir) != OKK)
         {
           return -ENOENT;
         }
@@ -2226,7 +2226,7 @@ static int fat_putlfname(struct fat_mountpt_s *fs,
            * just return success.
            */
 
-          return OK;
+          return OKK;
         }
 
       /* The sequence number is just the number of entries left to be
@@ -2275,7 +2275,7 @@ static int fat_putsfdirentry(struct fat_mountpt_s *fs,
   DIR_PUTCRDATE(direntry, fattime >> 16);
 
   fs->fs_dirty = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2342,7 +2342,7 @@ int fat_finddirentry(struct fat_mountpt_s *fs, struct fat_dirinfo_s *dirinfo,
   if (*path == '\0')
     {
       dirinfo->fd_root = true;
-      return OK;
+      return OKK;
     }
 
   /* This is not the root directory */
@@ -2419,7 +2419,7 @@ int fat_finddirentry(struct fat_mountpt_s *fs, struct fat_dirinfo_s *dirinfo,
            * directory entry is in dirinfo.
            */
 
-          return OK;
+          return OKK;
         }
 
       /* No.. then we have found one of the intermediate directories on
@@ -2762,7 +2762,7 @@ int fat_dirnamewrite(struct fat_mountpt_s *fs, struct fat_dirinfo_s *dirinfo)
        */
 
       ret = fat_putlfname(fs, dirinfo);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -2806,7 +2806,7 @@ int fat_dirwrite(struct fat_mountpt_s *fs, struct fat_dirinfo_s *dirinfo,
        */
 
       ret = fat_putlfname(fs, dirinfo);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -2840,7 +2840,7 @@ int fat_dircreate(struct fat_mountpt_s *fs, struct fat_dirinfo_s *dirinfo)
    */
 
   ret = fat_allocatedirentry(fs, dirinfo);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* Failed to allocate the required directory entry or entries. */
 
@@ -2873,7 +2873,7 @@ int fat_remove(struct fat_mountpt_s *fs, const char *relpath, bool directory)
   /* Find the directory entry referring to the entry to be deleted */
 
   ret = fat_finddirentry(fs, &dirinfo, relpath);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* Most likely, some element of the path does not exist. */
 
@@ -3023,5 +3023,5 @@ int fat_remove(struct fat_mountpt_s *fs, const char *relpath, bool directory)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }

@@ -517,7 +517,7 @@ int up_prioritize_irq(int irq, int priority)
       putreg32(regval, regaddr);
 
       arm_gic_dump("Exit up_prioritize_irq", false, irq);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -568,7 +568,7 @@ int arm_gic_irq_trigger(int irq, bool edge)
       regval |= GIC_ICDICFR_ID(irq, intcfg);
       putreg32(regval, regaddr);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

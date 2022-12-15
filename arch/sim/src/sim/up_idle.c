@@ -162,7 +162,7 @@ void up_idle(void)
     newstate = pm_checkstate(PM_IDLE_DOMAIN);
     if (newstate != state)
       {
-        if (pm_changestate(PM_IDLE_DOMAIN, newstate) == OK)
+        if (pm_changestate(PM_IDLE_DOMAIN, newstate) == OKK)
           {
             state = newstate;
             pwrinfo("IDLE: switching to new state %i\n", state);

@@ -336,7 +336,7 @@ static inline int am335x_gpio_configoutput(gpio_pinset_t pinset)
   /* Convert the configured input GPIO to an output */
 
   am335x_gpio_dirout(port, pin);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

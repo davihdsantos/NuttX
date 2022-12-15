@@ -262,7 +262,7 @@ int stm32_pwr_enablewkup(enum stm32_pwr_wupin_e wupin, bool wupon)
       stm32_pwr_modifyreg32(STM32_PWR_CSR_OFFSET, pinmask, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

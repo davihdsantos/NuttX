@@ -234,7 +234,7 @@ static int ip_semtake(sem_t * id)
           return -EINTR;
         }
     }
-  return OK;
+  return OKK;
 }
 
 static void ip_semgive(sem_t * id)

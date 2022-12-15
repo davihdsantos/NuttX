@@ -179,7 +179,7 @@ int task_reparent(pid_t ppid, pid_t chpid)
 
       /* Either case is a success */
 
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -197,7 +197,7 @@ int task_reparent(pid_t ppid, pid_t chpid)
 
   ogrp->tg_nchildren--;  /* The orignal parent now has one few children */
   pgrp->tg_nchildren++;  /* The new parent has one additional child */
-  ret = OK;
+  ret = OKK;
 
 #endif /* CONFIG_SCHED_CHILD_STATUS */
 
@@ -292,7 +292,7 @@ int task_reparent(pid_t ppid, pid_t chpid)
 
       /* Either case is a success */
 
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -310,7 +310,7 @@ int task_reparent(pid_t ppid, pid_t chpid)
 
   otcb->group->tg_nchildren--;  /* The orignal parent now has one few children */
   ptcb->group->tg_nchildren++;  /* The new parent has one additional child */
-  ret = OK;
+  ret = OKK;
 
 #endif /* CONFIG_SCHED_CHILD_STATUS */
 

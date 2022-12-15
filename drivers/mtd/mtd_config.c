@@ -161,7 +161,7 @@ static int mtdconfig_readbytes(FAR struct mtdconfig_struct_s *dev, int offset,
   off_t  firstbyte;
   off_t  block;
   off_t  index;
-  int    ret = OK;
+  int    ret = OKK;
   size_t bytes;
 
   /* Test if read interface supported.  If it is, use it directly. */
@@ -256,7 +256,7 @@ static int mtdconfig_writebytes(FAR struct mtdconfig_struct_s *dev,
                                 int offset, FAR const uint8_t *pdata,
                                 int writelen)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_MTD_BYTE_WRITE
 
@@ -347,7 +347,7 @@ static int  mtdconfig_findfirstentry(FAR struct mtdconfig_struct_s *dev,
   /* Read the signature bytes */
 
   ret = mtdconfig_readbytes(dev, 0, sig, sizeof(sig));
-  if (ret != OK)
+  if (ret != OKK)
     {
       return 0;
     }
@@ -381,7 +381,7 @@ static int  mtdconfig_findfirstentry(FAR struct mtdconfig_struct_s *dev,
 
       ret = mtdconfig_readbytes(dev, offset, (FAR uint8_t *)phdr,
               sizeof(struct mtdconfig_header_s));
-      if (ret != OK)
+      if (ret != OKK)
         {
           return 0;
         }
@@ -494,7 +494,7 @@ static int  mtdconfig_findnextentry(FAR struct mtdconfig_struct_s *dev,
 read_next:
       ret = mtdconfig_readbytes(dev, offset, (FAR uint8_t *)phdr,
                                 sizeof(*phdr));
-      if (ret != OK)
+      if (ret != OKK)
         {
           return 0;
         }
@@ -919,7 +919,7 @@ retry_relocate:
                   /* Move the data. */
 
                   ret = mtdconfig_readbytes(dev, src_offset, pbuf, bytes);
-                  if (ret != OK)
+                  if (ret != OKK)
                     {
                       /* I/O Error! */
 
@@ -1044,7 +1044,7 @@ static int  mtdconfig_close(FAR struct file *filep)
   /* Release exclusive access to the device */
 
   nxsem_post(&dev->exclsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1129,7 +1129,7 @@ static int mtdconfig_findentry(FAR struct mtdconfig_struct_s *dev,
 
           ret = mtdconfig_readbytes(dev, offset, (FAR uint8_t *)phdr,
                                     sizeof(*phdr));
-          if (ret != OK)
+          if (ret != OKK)
             {
               /* Error reading the data */
 
@@ -1247,7 +1247,7 @@ retry:
 
   if (pdata->len == 0)
     {
-      ret = OK;
+      ret = OKK;
       goto errout;
     }
 
@@ -1372,7 +1372,7 @@ retry_find:
           goto errout;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
 errout:
@@ -1430,7 +1430,7 @@ static int mtdconfig_getconfig(FAR struct mtdconfig_struct_s *dev,
 
       ret = mtdconfig_readbytes(dev, offset + sizeof(hdr), pdata->configdata,
                                 bytes_to_read);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Error reading the data */
 
@@ -1441,7 +1441,7 @@ static int mtdconfig_getconfig(FAR struct mtdconfig_struct_s *dev,
       /* Set return data length to match the config item length */
 
       pdata->len = hdr.len;
-      ret = OK;
+      ret = OKK;
     }
 
 errout:
@@ -1490,7 +1490,7 @@ static int mtdconfig_deleteconfig(FAR struct mtdconfig_struct_s *dev,
       hdr.flags = (uint8_t)~MTD_ERASED_FLAGS;
       mtdconfig_writebytes(dev, offset, &hdr.flags, sizeof(hdr.flags));
 
-      ret = OK;
+      ret = OKK;
     }
 
   /* Free the buffer */
@@ -1669,7 +1669,7 @@ static int mtdconfig_poll(FAR struct file *filep, FAR struct pollfd *fds,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

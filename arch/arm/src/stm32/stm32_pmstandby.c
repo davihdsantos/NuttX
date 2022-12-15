@@ -105,5 +105,5 @@ int stm32_pmstandby(void)
   /* Sleep until the wakeup reset occurs */
 
   asm("wfi");
-  return OK;  /* Won't get here */
+  return OKK;  /* Won't get here */
 }

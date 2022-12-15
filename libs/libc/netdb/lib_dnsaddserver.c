@@ -199,7 +199,7 @@ int dns_add_nameserver(FAR const struct sockaddr *addr, socklen_t addrlen)
     }
 
   dns_notify_nameserver(addr, addrlen);
-  ret = OK;
+  ret = OKK;
 
 errout:
   fclose(stream);
@@ -269,7 +269,7 @@ int dns_add_nameserver(FAR const struct sockaddr *addr, socklen_t addrlen)
 
   g_dns_address = true;
   dns_notify_nameserver(addr, addrlen);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NETDB_RESOLVCONF */

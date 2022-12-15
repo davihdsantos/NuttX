@@ -85,7 +85,7 @@ int board_app_initialize(uintptr_t arg)
 
   return sam_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -99,7 +99,7 @@ int board_ioctl(unsigned int cmd, uintptr_t arg)
         break;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -111,7 +111,7 @@ int board_uniqueid(uint8_t *uniqueid)
       return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

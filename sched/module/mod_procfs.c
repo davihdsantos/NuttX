@@ -199,7 +199,7 @@ static int modprocfs_open(FAR struct file *filep, FAR const char *relpath,
    */
 
   filep->f_priv = (FAR void *)priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -219,7 +219,7 @@ static int modprocfs_close(FAR struct file *filep)
 
   kmm_free(priv);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -293,7 +293,7 @@ static int modprocfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new attributes in the new file structure */
 
   newp->f_priv = (FAR void *)newpriv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -307,7 +307,7 @@ static int modprocfs_stat(FAR const char *relpath, FAR struct stat *buf)
 {
   memset(buf, 0, sizeof(struct stat));
   buf->st_mode    = S_IFREG | S_IROTH | S_IRGRP | S_IRUSR;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -268,7 +268,7 @@ static int max326_rdtime(FAR struct rtc_lowerhalf_s *lower,
       goto errout_with_errno;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_errno:
   ret = get_errno();
@@ -291,7 +291,7 @@ errout_with_errno:
       return -errcode;
     }
 
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -607,7 +607,7 @@ static int max326_rdalarm(FAR struct rtc_lowerhalf_s *lower,
 #else
           (void)gmtime_r(&sec, (FAR struct tm *)alarminfo->time);
 #endif
-          ret = OK;
+          ret = OKK;
         }
     }
 
@@ -651,7 +651,7 @@ static int max326_periodic_callback(void)
       cb(priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_RTC_PERIODIC */
 

@@ -163,7 +163,7 @@ int pic32mx_usbpullup(FAR struct usbdev_s *dev,  bool enable)
 {
   /* The Sure PIC32MX does not have a USB pull-up */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

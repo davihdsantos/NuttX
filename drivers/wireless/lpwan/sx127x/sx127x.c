@@ -837,7 +837,7 @@ static int sx127x_close(FAR struct file *filep)
 
   nxsem_post(&dev->dev_sem);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1296,7 +1296,7 @@ static int sx127x_lora_isr0_process(FAR struct sx127x_dev_s *dev)
   bool    data_valid = true;
 #endif
   uint8_t irq        = 0;
-  int     ret        = OK;
+  int     ret        = OKK;
 
   /* Get IRQ */
 
@@ -1433,7 +1433,7 @@ static int sx127x_fskook_isr0_process(FAR struct sx127x_dev_s *dev)
 #endif
   uint8_t irq1       = 0;
   uint8_t irq2       = 0;
-  int     ret        = OK;
+  int     ret        = OKK;
 
   /* Get IRQ1 and IRQ2 */
 
@@ -1541,7 +1541,7 @@ static void sx127x_isr0_process(FAR void *arg)
   DEBUGASSERT(arg);
 
   FAR struct sx127x_dev_s *dev = (struct sx127x_dev_s *)arg;
-  int ret = OK;
+  int ret = OKK;
 
   /* Return immediately if isr0_process is not initialized */
 
@@ -1859,7 +1859,7 @@ static int sx127x_txfifo_write(FAR struct sx127x_dev_s *dev,
 
   sx127x_writereg(dev, SX127X_CMN_FIFO, data, datalen);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1989,7 +1989,7 @@ errout:
 
 static int sx127x_opmode_init(FAR struct sx127x_dev_s *dev, uint8_t opmode)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (opmode == dev->opmode)
     {
@@ -2028,7 +2028,7 @@ errout:
 
 static int sx127x_opmode_set(FAR struct sx127x_dev_s *dev, uint8_t opmode)
 {
-  int ret = OK;
+  int ret = OKK;
 
   wlinfo("opmode_set %d->%d\n", dev->opmode, opmode);
 
@@ -2092,7 +2092,7 @@ static int sx127x_fskook_opmode_init(FAR struct sx127x_dev_s *dev,
   uint8_t dio0map = 0;
   uint8_t setbits = 0;
   uint8_t clrbits = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
 
   sx127x_lock(dev->spi);
 
@@ -2179,7 +2179,7 @@ static int sx127x_fskook_opmode_set(FAR struct sx127x_dev_s *dev,
 
   uint8_t setbits = 0;
   uint8_t clrbits = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
 
   switch (opmode)
     {
@@ -2232,7 +2232,7 @@ static int sx127x_fskook_rxbw_set(FAR struct sx127x_dev_s *dev, uint8_t rx_bw)
   DEBUGASSERT(dev->modulation == SX127X_MODULATION_FSK ||
               dev->modulation == SX127X_MODULATION_OOK);
 
-  int ret = OK;
+  int ret = OKK;
 
   if (rx_bw == dev->fskook.rx_bw)
     {
@@ -2308,7 +2308,7 @@ static int sx127x_fskook_afcbw_set(FAR struct sx127x_dev_s *dev,
   DEBUGASSERT(dev->modulation == SX127X_MODULATION_FSK ||
               dev->modulation == SX127X_MODULATION_OOK);
 
-  int ret = OK;
+  int ret = OKK;
 
   if (afc_bw == dev->fskook.afc_bw)
     {
@@ -2424,7 +2424,7 @@ static int sx127x_fskook_seq_init(FAR struct sx127x_dev_s *dev)
 
   uint8_t seq1 = 0;
   uint8_t seq2 = 0;
-  int     ret  = OK;
+  int     ret  = OKK;
 
   /* Need sleep mode or standby mode */
 
@@ -2484,7 +2484,7 @@ static int sx127x_fskook_syncword_set(FAR struct sx127x_dev_s *dev,
   uint8_t setbits = 0;
   uint8_t clrbits = 0;
   uint8_t offset  = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
   int     i       = 0;
 
   if (len > SX127X_FOM_SYNCSIZE_MAX)
@@ -2663,7 +2663,7 @@ static int sx127x_fskook_fdev_set(FAR struct sx127x_dev_s *dev,
                                   uint32_t freq)
 {
   uint32_t fdev = 0;
-  int      ret  = OK;
+  int      ret  = OKK;
 
   /* Only for FSK modulation */
 
@@ -2718,7 +2718,7 @@ static int sx127x_fskook_bitrate_set(FAR struct sx127x_dev_s *dev,
                                      uint32_t bitrate)
 {
   uint32_t br  = 0;
-  int      ret = OK;
+  int      ret = OKK;
 
   if (bitrate == dev->fskook.bitrate)
     {
@@ -2846,7 +2846,7 @@ static int sx127x_lora_opmode_init(FAR struct sx127x_dev_s *dev,
   uint8_t dio0map = 0;
   uint8_t setbits = 0;
   uint8_t clrbits = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
 
   sx127x_lock(dev->spi);
 
@@ -2939,7 +2939,7 @@ static int sx127x_lora_opmode_set(FAR struct sx127x_dev_s *dev,
 {
   DEBUGASSERT(dev->modulation == SX127X_MODULATION_LORA);
 
-  int ret = OK;
+  int ret = OKK;
 
   sx127x_lock(dev->spi);
 
@@ -3009,7 +3009,7 @@ static int sx127x_lora_syncword_set(FAR struct sx127x_dev_s *dev,
 {
   DEBUGASSERT(dev->modulation == SX127X_MODULATION_LORA);
 
-  int ret = OK;
+  int ret = OKK;
 
   if (len != 1)
     {
@@ -3048,7 +3048,7 @@ static int sx127x_lora_bw_set(FAR struct sx127x_dev_s *dev, uint8_t bw)
 
   uint8_t clrbits = 0;
   uint8_t setbits = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
 
   if (bw == dev->lora.bw)
     {
@@ -3110,7 +3110,7 @@ static int sx127x_lora_cr_set(FAR struct sx127x_dev_s *dev, uint8_t cr)
 
   uint8_t clrbits = 0;
   uint8_t setbits = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
 
   if (cr == dev->lora.cr)
     {
@@ -3169,7 +3169,7 @@ static int sx127x_lora_sf_set(FAR struct sx127x_dev_s *dev, uint8_t sf)
   uint8_t dthr    = SX127X_LRM_DETECTTHR_SF7SF12;
   uint8_t setbits = 0;
   uint8_t clrbits = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
 
   if (dev->lora.sf == sf)
     {
@@ -3235,7 +3235,7 @@ static int sx127x_lora_implicthdr_set(FAR struct sx127x_dev_s *dev,
 
   uint8_t setbits = 0;
   uint8_t clrbits = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
 
   if (dev->lora.sf == 6 && enable == false)
     {
@@ -3650,7 +3650,7 @@ static int sx127x_modulation_set(FAR struct sx127x_dev_s *dev,
 {
   uint8_t setbits = 0;
   uint8_t clrbits = 0;
-  int     ret     = OK;
+  int     ret     = OKK;
 
   wlinfo("modulation_set %d->%d\n", dev->modulation, modulation);
 
@@ -3863,7 +3863,7 @@ static uint32_t sx127x_frequency_get(FAR struct sx127x_dev_s *dev)
 static int sx127x_frequency_set(FAR struct sx127x_dev_s *dev, uint32_t freq)
 {
   uint32_t frf = 0;
-  int      ret = OK;
+  int      ret = OKK;
 
   wlinfo("frequency %d->%d\n", dev->freq, freq);
 
@@ -3925,7 +3925,7 @@ static int sx127x_power_set(FAR struct sx127x_dev_s *dev, int8_t power)
   bool pa_dac     = false;
   uint8_t setbits = 0;
   uint8_t clrbits = 0;
-  int ret         = OK;
+  int ret         = OKK;
 
   if (dev->power == power)
     {
@@ -4120,7 +4120,7 @@ static uint8_t sx127x_version_get(FAR struct sx127x_dev_s *dev)
 static int sx127x_calibration(FAR struct sx127x_dev_s *dev, uint32_t freq)
 {
   uint8_t regval = 0;
-  int     ret    = OK;
+  int     ret    = OKK;
 
   /* NOTE: The automatic calibration at POR and Reset is only valid at
    * 434 MHz.
@@ -4188,7 +4188,7 @@ errout:
 
 static int sx127x_init(FAR struct sx127x_dev_s *dev)
 {
-  int     ret     = OK;
+  int     ret     = OKK;
   uint8_t regval  = 0;
 
   wlinfo("Init sx127x dev\n");
@@ -4293,7 +4293,7 @@ static int sx127x_deinit(FAR struct sx127x_dev_s *dev)
 
   sx127x_reset(dev);
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_DEBUG_WIRELESS_INFO
@@ -4519,7 +4519,7 @@ static int sx127x_unregister(FAR struct sx127x_dev_s *dev)
   nxsem_destroy(&dev->rx_buffer_sem);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4538,7 +4538,7 @@ int sx127x_register(FAR struct spi_dev_s *spi,
                     FAR const struct sx127x_lower_s *lower)
 {
   FAR struct sx127x_dev_s *dev = NULL;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(spi != NULL);
   DEBUGASSERT(lower != NULL);

@@ -340,7 +340,7 @@ void arm_boot(void)
   /* Run the memory selftest on CPU RAM. */
 
   tms570_memtest_start(PBIST_RINFOL_ESRAM1_RAM);
-  DEBUGASSERT(tms570_memtest_complete() == OK);
+  DEBUGASSERT(tms570_memtest_complete() == OKK);
 #endif /* CONFIG_TMS570_SELFTEST */
 
   /* Initialize CPU RAM. */
@@ -379,7 +379,7 @@ void arm_boot(void)
 
   /* Wait for the memory test to complete */
 
-  DEBUGASSERT(tms570_memtest_complete() == OK);
+  DEBUGASSERT(tms570_memtest_complete() == OKK);
 #endif /* CONFIG_TMS570_SELFTEST */
 
 #ifdef CONFIG_TMS570_MIBASPI1

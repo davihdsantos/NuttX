@@ -1005,7 +1005,7 @@ static int adc_timinit(FAR struct stm32_dev_s *priv)
 
   tim_dumpregs(priv, "After starting timers");
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1031,7 +1031,7 @@ static int adc_pm_prepare(struct pm_callback_s *cb, int domain,
       return -EBUSY;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1215,7 +1215,7 @@ static int adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1572,7 +1572,7 @@ static int adc_setoffset(FAR struct stm32_dev_s *priv, uint8_t ch, uint8_t i,
 
   regval |= ADC_OFR_OFFSETY_CH(ch) | ADC_OFR_OFFSETY(offset);
   adc_putreg(priv, reg, regval);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1649,7 +1649,7 @@ static int adc_set_ch(FAR struct adc_dev_s *dev, uint8_t ch)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1672,7 +1672,7 @@ static int adc_ioctl(FAR struct adc_dev_s *dev, int cmd, unsigned long arg)
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
   uint32_t regval;
   uint32_t tmp;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1814,7 +1814,7 @@ static int adc_interrupt(FAR struct adc_dev_s *dev, uint32_t adcisr)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1861,7 +1861,7 @@ static int adc12_interrupt(int irq, FAR void *context, FAR void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1893,7 +1893,7 @@ static int adc3_interrupt(int irq, FAR void *context, FAR void *arg)
       putreg32(regval, STM32L4_ADC3_ISR);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2025,7 +2025,7 @@ struct adc_dev_s *stm32l4_adc_initialize(int intf, FAR const uint8_t *chanlist,
   memcpy(priv->chanlist, chanlist, cchannels);
 
 #ifdef CONFIG_PM
-  if (pm_register(&priv->pm_callback) != OK)
+  if (pm_register(&priv->pm_callback) != OKK)
     {
       aerr("Power management registration failed\n");
       return NULL;

@@ -1046,7 +1046,7 @@ static void vl53l1x_putreg32(FAR struct vl53l1x_dev_s *priv, uint16_t regaddr,
 
 static int vl53l1x_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1059,7 +1059,7 @@ static int vl53l1x_open(FAR struct file *filep)
 
 static int vl53l1x_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

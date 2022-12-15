@@ -152,7 +152,7 @@ static void ez80_i2c_semtake(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -471,7 +471,7 @@ static int ez80_i2c_sendaddr(struct ez80_i2cdev_s *priv, uint8_t readbit)
         }
     }
 
-  return OK;
+  return OKK;
 
   /* We don't attempt any fancy status-based error recovery */
 
@@ -635,7 +635,7 @@ static int ez80_i2c_read_transfer(FAR struct ez80_i2cdev_s *priv,
                 }
 
               ez80_i2c_clriflg();
-              return OK;
+              return OKK;
             }
 
           /* Arbitration lost in address or data byte */
@@ -775,7 +775,7 @@ static int ez80_i2c_write_transfer(FAR struct ez80_i2cdev_s *priv,
                   ez80_i2c_stop();
                 }
 
-              return OK;
+              return OKK;
             }
         }
     }
@@ -845,7 +845,7 @@ static int ez80_i2c_transfer(FAR struct i2c_master_s *dev,
   FAR struct i2c_msg_s *msg;
   bool nostop;
   uint8_t flags;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   /* Perform each segment of the transfer, message at a time */

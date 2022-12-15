@@ -560,7 +560,7 @@ int net_addcache_ipv4(FAR struct net_route_ipv4_s *route)
           if (prev == NULL)
             {
               net_unlock_ipv4_cache();
-              return OK;
+              return OKK;
             }
 
           /* Otherwise, remove the cache entry from the middle or end of
@@ -598,7 +598,7 @@ int net_addcache_ipv4(FAR struct net_route_ipv4_s *route)
 
   net_add_newest_ipv4(cache);
   net_unlock_ipv4_cache();
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -642,7 +642,7 @@ int net_addcache_ipv6(FAR struct net_route_ipv6_s *route)
           if (prev == NULL)
             {
               net_unlock_ipv6_cache();
-              return OK;
+              return OKK;
             }
 
           /* Otherwise, remove the cache entry from the middle or end of
@@ -680,7 +680,7 @@ int net_addcache_ipv6(FAR struct net_route_ipv6_s *route)
 
   net_add_newest_ipv6(cache);
   net_unlock_ipv6_cache();
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -795,7 +795,7 @@ void net_flushcache_ipv4(void)
       ret = net_lock_ipv4_cache();
     }
   while (ret == -EINTR);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   /* Reset the cache */
 
@@ -819,7 +819,7 @@ void net_flushcache_ipv6(void)
       ret = net_lock_ipv6_cache();
     }
   while (ret == -EINTR);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   /* Reset the cache */
 

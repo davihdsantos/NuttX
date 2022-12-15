@@ -62,7 +62,7 @@
 static int syslogstream_flush(FAR struct lib_syslogstream_s *stream)
 {
   FAR struct iob_s *iob;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(stream != NULL);
   iob = stream->iob;
@@ -84,7 +84,7 @@ static int syslogstream_flush(FAR struct lib_syslogstream_s *stream)
           else
             {
               iob->io_len = 0;
-              ret = OK;
+              ret = OKK;
             }
         }
       while (ret == -EINTR);

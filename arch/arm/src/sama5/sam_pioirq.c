@@ -121,7 +121,7 @@ static int sam_irqbase(int irq, uint32_t *base, int *pin)
         {
           *base = SAM_PIOA_VBASE;
           *pin  = irq - SAM_IRQ_PA0;
-          return OK;
+          return OKK;
         }
 #endif
 #ifdef CONFIG_SAMA5_PIOB_IRQ
@@ -129,7 +129,7 @@ static int sam_irqbase(int irq, uint32_t *base, int *pin)
         {
           *base = SAM_PIOB_VBASE;
           *pin  = irq - SAM_IRQ_PB0;
-          return OK;
+          return OKK;
         }
 #endif
 #ifdef CONFIG_SAMA5_PIOC_IRQ
@@ -137,7 +137,7 @@ static int sam_irqbase(int irq, uint32_t *base, int *pin)
         {
           *base = SAM_PIOC_VBASE;
           *pin  = irq - SAM_IRQ_PC0;
-          return OK;
+          return OKK;
         }
 #endif
 #ifdef CONFIG_SAMA5_PIOD_IRQ
@@ -145,7 +145,7 @@ static int sam_irqbase(int irq, uint32_t *base, int *pin)
         {
           *base = SAM_PIOD_VBASE;
           *pin  = irq - SAM_IRQ_PD0;
-          return OK;
+          return OKK;
         }
 #endif
 #ifdef CONFIG_SAMA5_PIOE_IRQ
@@ -153,7 +153,7 @@ static int sam_irqbase(int irq, uint32_t *base, int *pin)
         {
           *base = SAM_PIOE_VBASE;
           *pin  = irq - SAM_IRQ_PE0;
-          return OK;
+          return OKK;
         }
 #endif
 #ifdef CONFIG_SAMA5_PIOF_IRQ
@@ -161,7 +161,7 @@ static int sam_irqbase(int irq, uint32_t *base, int *pin)
         {
           *base = SAM_PIOF_VBASE;
           *pin  = irq - SAM_IRQ_PF0;
-          return OK;
+          return OKK;
         }
 #endif
     }
@@ -198,7 +198,7 @@ static int sam_piointerrupt(uint32_t base, int irq0, void *context)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_SAMA5_PIOA_IRQ
@@ -478,7 +478,7 @@ void sam_pioirqenable(int irq)
   uint32_t base;
   int      pin;
 
-  if (sam_irqbase(irq, &base, &pin) == OK)
+  if (sam_irqbase(irq, &base, &pin) == OKK)
     {
       /* Clear (all) pending interrupts and enable this pin interrupt */
 
@@ -500,7 +500,7 @@ void sam_pioirqdisable(int irq)
   uint32_t base;
   int      pin;
 
-  if (sam_irqbase(irq, &base, &pin) == OK)
+  if (sam_irqbase(irq, &base, &pin) == OKK)
     {
       /* Disable this pin interrupt */
 

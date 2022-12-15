@@ -360,7 +360,7 @@ static inline bool pg_startfill(void)
 
       pginfo("Call up_allocpage(%p)\n", g_pftcb);
       result = up_allocpage(g_pftcb, &vpage);
-      DEBUGASSERT(result == OK);
+      DEBUGASSERT(result == OKK);
 
       /* Start the fill.  The exact way that the fill is started depends upon
        * the nature of the architecture-specific up_fillpage() function -- Is it
@@ -378,7 +378,7 @@ static inline bool pg_startfill(void)
 
       pginfo("Call up_fillpage(%p)\n", g_pftcb);
       result = up_fillpage(g_pftcb, vpage);
-      DEBUGASSERT(result == OK);
+      DEBUGASSERT(result == OKK);
 #else
       /* If CONFIG_PAGING_BLOCKINGFILL is defined, then up_fillpage is non-blocking
        * call. In this case up_fillpage() will accept an additional argument: The page
@@ -391,7 +391,7 @@ static inline bool pg_startfill(void)
 
       pginfo("Call up_fillpage(%p)\n", g_pftcb);
       result = up_fillpage(g_pftcb, vpage, pg_callback);
-      DEBUGASSERT(result == OK);
+      DEBUGASSERT(result == OKK);
 
       /* Save the time that the fill was started.  These will be used to check for
        * timeouts.
@@ -571,7 +571,7 @@ int pg_worker(int argc, char *argv[])
             {
               /* Any value other than OK, brings the system down */
 
-              DEBUGASSERT(g_fillresult == OK);
+              DEBUGASSERT(g_fillresult == OKK);
 
               /* Handle the successful page fill complete event by restarting the
                * task that was blocked waiting for this page fill.
@@ -664,6 +664,6 @@ int pg_worker(int argc, char *argv[])
 #endif
     }
 
-  return OK; /* To keep some compilers happy */
+  return OKK; /* To keep some compilers happy */
 }
 #endif /* CONFIG_PAGING */

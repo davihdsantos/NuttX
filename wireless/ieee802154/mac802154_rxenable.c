@@ -194,7 +194,7 @@ int mac802154_req_rxenable(MACHANDLE mac,
     }
 
   mac802154_unlock(priv)
-  return OK;
+  return OKK;
 
 errout_with_sem:
   mac802154_unlock(priv)

@@ -526,7 +526,7 @@ static int lo_ifup(FAR struct net_driver_s *dev)
                  1, (wdparm_t)priv);
 
   priv->lo_bifup = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -558,7 +558,7 @@ static int lo_ifdown(FAR struct net_driver_s *dev)
   /* Mark the device "down" */
 
   priv->lo_bifup = false;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -648,7 +648,7 @@ static int lo_txavail(FAR struct net_driver_s *dev)
       work_queue(LPBKWORK, &priv->lo_work, lo_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -685,7 +685,7 @@ static int lo_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* There is no multicast support in the loopback driver */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -723,7 +723,7 @@ static int lo_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* There is no multicast support in the loopback driver */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -803,7 +803,7 @@ static int lo_ioctl(FAR struct net_driver_s *dev, int cmd,
 #if CONFIG_PKTRADIO_ADDRLEN > 1
               memset(&devaddr->pa_addr[1], 0, CONFIG_PKTRADIO_ADDRLEN - 1);
 #endif
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -827,7 +827,7 @@ static int lo_ioctl(FAR struct net_driver_s *dev, int cmd,
 #if CONFIG_PKTRADIO_ADDRLEN > 1
           memset(&addr->pa_addr[1], 0, CONFIG_PKTRADIO_ADDRLEN - 1);
 #endif
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -930,7 +930,7 @@ static int lo_req_data(FAR struct radio_driver_s *netdev,
   /* Schedule to serialize the poll on the worker thread. */
 
   work_queue(LPBKWORK, &priv->lo_work, lo_loopback_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -980,7 +980,7 @@ static int lo_properties(FAR struct radio_driver_s *netdev,
   properties->sp_hubnode.nv_addr[0] = CONFIG_SPIRIT_HUBNODE;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

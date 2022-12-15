@@ -99,7 +99,7 @@ static int udp_input(FAR struct net_driver_s *dev, unsigned int iplen)
 #ifdef CONFIG_NET_UDP_CHECKSUMS
   uint16_t chksum;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
   /* Update the count of UDP packets received */
 

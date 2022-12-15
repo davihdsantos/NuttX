@@ -447,7 +447,7 @@ static inline void s32k1xx_lpi2c_sem_wait(FAR struct s32k1xx_lpi2c_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1388,7 +1388,7 @@ static int s32k1xx_lpi2c_isr_process(struct s32k1xx_lpi2c_priv_s *priv)
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1482,7 +1482,7 @@ static int s32k1xx_lpi2c_init(FAR struct s32k1xx_lpi2c_priv_s *priv)
   /* Enable I2C */
 
   s32k1xx_lpi2c_modifyreg(priv, S32K1XX_LPI2C_MCR_OFFSET, 0, LPI2C_MCR_MEN);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1513,7 +1513,7 @@ static int s32k1xx_lpi2c_deinit(FAR struct s32k1xx_lpi2c_priv_s *priv)
 
   /* NOTE that clocking is left enabled. */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1748,7 +1748,7 @@ static int s32k1xx_lpi2c_reset(FAR struct i2c_master_s *dev)
   /* Restore the frequency */
 
   s32k1xx_lpi2c_setclock(priv, frequency);
-  ret = OK;
+  ret = OKK;
 
 out:
 
@@ -1840,7 +1840,7 @@ int s32k1xx_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   if (--priv->refs > 0)
     {
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(flags);
@@ -1852,7 +1852,7 @@ int s32k1xx_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   /* Release unused resources */
 
   s32k1xx_lpi2c_sem_destroy(priv);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_S32K1XX_LPI2C */

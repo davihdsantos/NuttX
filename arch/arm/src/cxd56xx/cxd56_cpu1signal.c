@@ -188,7 +188,7 @@ int cxd56_cpu1siginit(uint8_t sigtype, FAR void *data)
 
   if (priv->ndev > 0)
     {
-      ret = OK;
+      ret = OKK;
       goto _err1;
     }
 
@@ -257,7 +257,7 @@ int cxd56_cpu1siguninit(uint8_t sigtype)
 
   if (priv->ndev > 0)
     {
-      ret = OK;
+      ret = OKK;
       goto _err0;
     }
 

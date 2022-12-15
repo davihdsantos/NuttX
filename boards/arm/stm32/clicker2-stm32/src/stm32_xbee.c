@@ -230,7 +230,7 @@ static int stm32_attach_attn(FAR const struct xbee_lower_s *lower,
 
   priv->handler = handler;
   priv->arg     = arg;
-  return OK;
+  return OKK;
 }
 
 static void stm32_enable_attn(FAR const struct xbee_lower_s *lower,
@@ -320,7 +320,7 @@ static int stm32_xbee_devsetup(FAR struct stm32_priv_s *priv)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -364,6 +364,6 @@ int stm32_xbee_initialize(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_IEEE802154_XBEE */

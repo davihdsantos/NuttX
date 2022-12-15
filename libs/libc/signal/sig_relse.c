@@ -61,7 +61,7 @@ int sigrelse(int signo)
 
   (void)sigemptyset(&set);
   ret = sigaddset(&set, signo);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Unblock the signal */
 

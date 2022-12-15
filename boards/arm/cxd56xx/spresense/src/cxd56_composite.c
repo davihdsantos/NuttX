@@ -173,7 +173,7 @@ static void board_mscuninitialize(FAR struct usbdevclass_driver_s *classdev)
 
 int board_composite_initialize(int port)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

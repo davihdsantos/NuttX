@@ -80,5 +80,5 @@ int posix_spawnattr_setschedparam(FAR posix_spawnattr_t *attr,
   attr->budget.tv_sec       = param->sched_ss_init_budget.tv_sec;
   attr->budget.tv_nsec      = param->sched_ss_init_budget.tv_nsec;
 #endif
-  return OK;
+  return OKK;
 }

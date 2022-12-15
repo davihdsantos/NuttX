@@ -254,7 +254,7 @@ static int nsh_sdinitialize(void)
   syslog(LOG_INFO, "Successfuly bound SPI port %d to MMC/SD slot %d\n",
          CONFIG_NSH_MMCSDSPIPORTNO,
          CONFIG_NSH_MMCSDSLOTNO);
-  return OK;
+  return OKK;
 
 errout:
   return ret;
@@ -287,7 +287,7 @@ static int nsh_usbhostinitialize(void)
   /* Register the USB host Mass Storage Class */
 
   ret = usbhost_msc_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the mass storage class: %d\n", ret);
@@ -298,7 +298,7 @@ static int nsh_usbhostinitialize(void)
   /* Register the CDC/ACM serial class */
 
   ret = usbhost_cdcacm_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the CDC/ACM serial class: %d\n", ret);
@@ -343,7 +343,7 @@ static int nsh_usbdevinitialize(void)
    */
 
   pic32mx_usbattach();
-  return OK;
+  return OKK;
 }
 #else
 #  define nsh_usbdevinitialize() (OK)

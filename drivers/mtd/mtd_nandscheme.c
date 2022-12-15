@@ -380,5 +380,5 @@ int nandscheme_build4086(FAR struct nand_scheme_s *scheme,
       scheme->xbytepos[i] = 2 + i;
     }
 
-  return OK;
+  return OKK;
 };

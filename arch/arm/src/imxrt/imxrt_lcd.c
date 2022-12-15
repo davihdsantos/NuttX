@@ -245,7 +245,7 @@ static int imxrt_getvideoinfo(FAR struct fb_vtable_s *vtable,
   if (vtable && vinfo)
     {
       memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -263,7 +263,7 @@ static int imxrt_getplaneinfo(FAR struct fb_vtable_s *vtable, int planeno,
   if (vtable && planeno == 0 && pinfo)
     {
       memcpy(pinfo, &g_planeinfo, sizeof(struct fb_planeinfo_s));
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -314,7 +314,7 @@ static int imxrt_getcmap(FAR struct fb_vtable_s *vtable,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -366,7 +366,7 @@ static int imxrt_putcmap(FAR struct fb_vtable_s *vtable,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -614,7 +614,7 @@ int up_fbinitialize(int display)
   putreg32(LCDIF_CTRL_RUN_MASK | LCDIF_CTRL_DOTCLK_MODE_MASK,
       IMXRT_LCDIF_CTRL_SET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

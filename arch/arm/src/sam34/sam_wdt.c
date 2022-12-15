@@ -281,7 +281,7 @@ static int sam34_interrupt(int irq, FAR void *context, FAR void *arg)
       /* The EWI interrupt is cleared by the WDT_SR register. */
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -325,7 +325,7 @@ static int sam34_start(FAR struct watchdog_lowerhalf_s *lower)
   mr_val |= (WDT_MR_WDD(priv->window) | WDT_MR_WDV(priv->reload) | WDT_MR_WDRSTEN);
   sam34_putreg(mr_val, SAM_WDT_MR);
   priv->started = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -379,7 +379,7 @@ static int sam34_keepalive(FAR struct watchdog_lowerhalf_s *lower)
   wdinfo("Entry\n");
 
   sam34_putreg((WDT_CR_KEY | WDT_CR_WDRSTT), SAM_WDT_CR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -435,7 +435,7 @@ static int sam34_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n", status->timeout);
   wdinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -498,7 +498,7 @@ static int sam34_settimeout(FAR struct watchdog_lowerhalf_s *lower,
 
   /* Don't commit to MR register until started! */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -627,7 +627,7 @@ static int sam34_ioctl(FAR struct watchdog_lowerhalf_s *lower, int cmd,
           uint32_t window = (((priv->timeout - mintime) * WDT_FCLK) / 1000) - 1;
           DEBUGASSERT(window <= priv->reload);
           priv->window = window;
-          ret = OK;
+          ret = OKK;
         }
     }
 

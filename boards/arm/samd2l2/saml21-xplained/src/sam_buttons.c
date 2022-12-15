@@ -130,7 +130,7 @@ int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
       sam_portirqenable(IRQ_SW0);
 
       leave_critical_section(flags);
-      ret = OK;
+      ret = OKK;
     }
 
   /* Return the old button handler (so that it can be restored) */

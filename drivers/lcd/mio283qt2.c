@@ -531,7 +531,7 @@ static int mio283qt2_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *b
   /* De-select the LCD */
 
   lcd->deselect(lcd);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -590,7 +590,7 @@ static int mio283qt2_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
   /* De-select the LCD */
 
   lcd->deselect(lcd);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif
@@ -615,7 +615,7 @@ static int mio283qt2_getvideoinfo(FAR struct lcd_dev_s *dev,
   vinfo->xres    = MIO283QT2_XRES;      /* Horizontal resolution in pixel columns */
   vinfo->yres    = MIO283QT2_YRES;      /* Vertical resolution in pixel rows */
   vinfo->nplanes = 1;                   /* Number of color planes supported */
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -638,7 +638,7 @@ static int mio283qt2_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planen
   pinfo->getrun = mio283qt2_getrun;               /* Get a run from LCD memory */
   pinfo->buffer = (FAR uint8_t *)priv->runbuffer; /* Run scratch buffer */
   pinfo->bpp    = MIO283QT2_BPP;                  /* Bits-per-pixel */
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -686,7 +686,7 @@ static int mio283qt2_poweroff(FAR struct mio283qt2_lcd_s *lcd)
   /* Remember the power off state */
 
   g_lcddev.power = 0;
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -741,7 +741,7 @@ static int mio283qt2_setpower(FAR struct lcd_dev_s *dev, int power)
       mio283qt2_poweroff(lcd);
     }
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -897,7 +897,7 @@ static inline int mio283qt2_hwinitialize(FAR struct mio283qt2_dev_s *priv)
       /* Window setting */
 
       mio283qt2_setarea(lcd, 0, 0, (MIO283QT2_XRES-1), (MIO283QT2_YRES-1));
-      ret = OK;
+      ret = OKK;
     }
 #ifndef CONFIG_LCD_NOGETRUN
   else
@@ -953,7 +953,7 @@ FAR struct lcd_dev_s *mio283qt2_lcdinitialize(FAR struct mio283qt2_lcd_s *lcd)
   /* Configure and enable LCD */
 
   ret = mio283qt2_hwinitialize(priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Clear the display (setting it to the color 0=black) */
 

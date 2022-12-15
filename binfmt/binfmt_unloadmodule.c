@@ -107,7 +107,7 @@ static inline int exec_dtors(FAR struct binary_s *binp)
 #ifdef CONFIG_ARCH_ADDRENV
   return up_addrenv_restore(&oldenv);
 #else
-  return OK;
+  return OKK;
 #endif
 }
 #endif
@@ -194,7 +194,7 @@ int unload_module(FAR struct binary_s *binp)
        */
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_BINFMT_DISABLE */

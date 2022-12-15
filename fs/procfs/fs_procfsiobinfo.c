@@ -242,7 +242,7 @@ static int iobinfo_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the attributes as the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)procfile;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -262,7 +262,7 @@ static int iobinfo_close(FAR struct file *filep)
 
   kmm_free(procfile);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -394,7 +394,7 @@ static int iobinfo_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new attributes in the new file structure */
 
   newp->f_priv = (FAR void *)newattr;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -418,7 +418,7 @@ static int iobinfo_stat(FAR const char *relpath, FAR struct stat *buf)
 
   memset(buf, 0, sizeof(struct stat));
   buf->st_mode = S_IFREG | S_IROTH | S_IRGRP | S_IRUSR;
-  return OK;
+  return OKK;
 }
 
 #endif /* !CONFIG_DISABLE_MOUNTPOINT && CONFIG_FS_PROCFS &&

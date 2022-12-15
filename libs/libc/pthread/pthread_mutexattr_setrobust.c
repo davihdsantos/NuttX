@@ -69,7 +69,7 @@ int pthread_mutexattr_setrobust(pthread_mutexattr_t *attr, int robust)
 
   if (attr != NULL && robust == PTHREAD_MUTEX_STALLED)
     {
-      return OK;
+      return OKK;
     }
 
   return EINVAL;
@@ -79,7 +79,7 @@ int pthread_mutexattr_setrobust(pthread_mutexattr_t *attr, int robust)
   if (attr != NULL && (robust == PTHREAD_MUTEX_STALLED || robust == _PTHREAD_MFLAGS_ROBUST))
     {
       attr->robust = robust;
-      return OK;
+      return OKK;
     }
 
   return EINVAL;
@@ -88,7 +88,7 @@ int pthread_mutexattr_setrobust(pthread_mutexattr_t *attr, int robust)
 
   if (attr != NULL && robust == _PTHREAD_MFLAGS_ROBUST)
     {
-      return OK;
+      return OKK;
     }
 
   return EINVAL;

@@ -311,7 +311,7 @@ static inline int nxffs_startpos(FAR struct nxffs_volume_s *volume,
           /* Return the FLASH offset to the destination inode header */
 
           *froffset = offset;
-          return OK;
+          return OKK;
         }
 
       /* Free the allocated memory in the entry */
@@ -429,7 +429,7 @@ static int nxffs_srcsetup(FAR struct nxffs_volume_s *volume,
     }
 
   DEBUGASSERT(pack->src.entry.datlen == 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -602,7 +602,7 @@ static int nxffs_destsetup(FAR struct nxffs_volume_s *volume,
         }
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout:
   volume->froffset = nxffs_packtell(volume, pack);
@@ -865,7 +865,7 @@ static int nxffs_endsrcblock(FAR struct nxffs_volume_s *volume,
   pack->src.blkoffset = blkentry.hoffset;
   pack->src.blklen    = blkentry.datlen;
   pack->src.blkpos    = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -922,7 +922,7 @@ static inline int nxffs_packblock(FAR struct nxffs_volume_s *volume,
 
       if (ret == -ENOSPC)
         {
-          return OK;
+          return OKK;
         }
       else
         {
@@ -999,7 +999,7 @@ static inline int nxffs_packblock(FAR struct nxffs_volume_s *volume,
                * this function is called on the next I/O block.
                */
 
-              return OK;
+              return OKK;
             }
 
           /* Configure the destination stream */
@@ -1014,7 +1014,7 @@ static inline int nxffs_packblock(FAR struct nxffs_volume_s *volume,
 
               if (ret == -ENOSPC)
                 {
-                  return OK;
+                  return OKK;
                 }
               else
                 {
@@ -1044,7 +1044,7 @@ static inline int nxffs_packblock(FAR struct nxffs_volume_s *volume,
           /* Yes.. Write the destination data block header and return success */
 
           nxffs_wrdathdr(volume, pack);
-          return OK;
+          return OKK;
         }
     }
 
@@ -1176,7 +1176,7 @@ static inline int nxffs_packwriter(FAR struct nxffs_volume_s *volume,
 
       if (ret == -ENOSPC)
         {
-          return OK;
+          return OKK;
         }
       else
         {
@@ -1244,7 +1244,7 @@ static inline int nxffs_packwriter(FAR struct nxffs_volume_s *volume,
           /* Yes.. Write the destination data block header and return success */
 
           nxffs_wrdathdr(volume, pack);
-          return OK;
+          return OKK;
         }
     }
 
@@ -1280,7 +1280,7 @@ int nxffs_pack(FAR struct nxffs_volume_s *volume)
   off_t block;
   bool packed;
   int i;
-  int ret = OK;
+  int ret = OKK;
 
   /* Get the offset to the first valid inode entry */
 
@@ -1319,7 +1319,7 @@ int nxffs_pack(FAR struct nxffs_volume_s *volume)
            */
 
           ret = nxffs_reformat(volume);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* The free flash offset will be in the first valid block of
                * the FLASH.
@@ -1327,7 +1327,7 @@ int nxffs_pack(FAR struct nxffs_volume_s *volume)
 
               block = 0;
               ret = nxffs_validblock(volume, &block);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* Set to the offset past the block header in the first
                    * valid block
@@ -1383,7 +1383,7 @@ int nxffs_pack(FAR struct nxffs_volume_s *volume)
 
           else
             {
-              return OK;
+              return OKK;
             }
         }
       else

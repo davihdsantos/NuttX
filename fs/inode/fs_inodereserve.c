@@ -240,7 +240,7 @@ int inode_reserve(FAR const char *path, FAR struct inode **inode)
             {
               inode_insert(node, left, parent);
               *inode = node;
-              ret = OK;
+              ret = OKK;
               break;
             }
         }

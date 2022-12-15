@@ -145,5 +145,5 @@ int mac802154_req_reset(MACHANDLE mac, bool resetattr)
 
   priv->nrxusers = 0;
 
-  return OK;
+  return OKK;
 }

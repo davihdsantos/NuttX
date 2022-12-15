@@ -671,7 +671,7 @@ static int up_setup(struct uart_dev_s *dev)
 
   regval = (uint8_t)up_serialin16(priv, M16C_UART_RB);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -716,7 +716,7 @@ static int up_attach(struct uart_dev_s *dev)
       /* Attach the UART transmit complete IRQ */
 
       ret = irq_attach(priv->xmtirq, up_xmtinterrupt, dev);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Detach the ERI interrupt on failure */
 
@@ -772,7 +772,7 @@ static int up_rcvinterrupt(int irq, void *context, void *arg)
   /* Handle incoming, receive bytes (RDRF: Receive Data Register Full) */
 
   uart_recvchars(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -915,7 +915,7 @@ static int up_xmtinterrupt(int irq, void *context, void *arg)
   /* Handle outgoing, transmit bytes */
 
   uart_xmitchars(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -115,7 +115,7 @@ int work_signal(int qid)
 
   if (i >= threads)
     {
-      return OK;
+      return OKK;
     }
 
   /* Otherwise, signal the first IDLE thread found */

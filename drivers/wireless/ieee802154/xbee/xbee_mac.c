@@ -125,7 +125,7 @@ static void xbee_assoctimer(int argc, uint32_t arg, ...)
 
   ret = work_queue(HPWORK, &priv->assocwork, xbee_assocworker, (FAR void *)priv, 0);
   (void)ret;
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 }
 
 /****************************************************************************
@@ -253,7 +253,7 @@ int xbee_bind(XBEEHANDLE xbee, FAR struct xbee_maccb_s *cb)
       priv->nclients++;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -417,7 +417,7 @@ int xbee_req_data(XBEEHANDLE xbee,
 
   nxsem_post(&priv->tx_sem);
   iob_free(frame, IOBUSER_WIRELESS_RAD802154);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -645,7 +645,7 @@ int xbee_req_start(XBEEHANDLE xbee, FAR struct ieee802154_start_req_s *req)
   xbee_enable_coord(priv, true);
   xbee_set_sleepperiod(priv, 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -717,5 +717,5 @@ int xbee_req_reset(XBEEHANDLE xbee, bool resetattr)
       xbee_set_coordassocflags(priv, 0);
     }
 
-  return OK;
+  return OKK;
 }

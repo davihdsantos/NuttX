@@ -217,7 +217,7 @@ static int lpc17_40_pinsel(unsigned int port, unsigned int pin, unsigned int val
       regval &= ~(PINCONN_PINSEL_MASK << shift);
       regval |= (value << shift);
       putreg32(regval, regaddr);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -285,7 +285,7 @@ static int lpc17_40_pullup(lpc17_40_pinset_t cfgset, unsigned int port,
       regval &= ~(PINCONN_PINMODE_MASK << shift);
       regval |= (value << shift);
       putreg32(regval, regaddr);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -430,7 +430,7 @@ static inline int lpc17_40_configinput(lpc17_40_pinset_t cfgset, unsigned int po
 
   lpc17_40_clropendrain(port, pin);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -456,7 +456,7 @@ static inline int lpc17_40_configinterrupt(lpc17_40_pinset_t cfgset, unsigned in
 #ifdef CONFIG_LPC17_40_GPIOIRQ
   lpc17_40_setintedge(port, pin, (cfgset & GPIO_EDGE_MASK) >> GPIO_EDGE_SHIFT);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -506,7 +506,7 @@ static inline int lpc17_40_configoutput(lpc17_40_pinset_t cfgset, unsigned int p
   putreg32(regval, fiobase + LPC17_40_FIO_DIR_OFFSET);
 
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -545,7 +545,7 @@ static int lpc17_40_configalternate(lpc17_40_pinset_t cfgset, unsigned int port,
       lpc17_40_setopendrain(port, pin);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

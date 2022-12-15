@@ -93,7 +93,7 @@ int stm32_hrtim_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32_HRTIM && CONFIG_STM32_HRTIM1 */

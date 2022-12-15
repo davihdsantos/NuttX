@@ -158,7 +158,7 @@ static int zcross_interrupt(int irq, FAR void *context, FAR void *arg)
       g_zcrosshandler(&g_zcrosslower, g_zcrossarg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

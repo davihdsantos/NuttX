@@ -195,7 +195,7 @@ static int cxd56_rtc_interrupt(int irq, FAR void *context, FAR void *arg)
   FAR void *cb_arg;
   uint32_t source, clear;
   int id;
-  int ret = OK;
+  int ret = OKK;
 
   /* interrupt clear */
 
@@ -284,7 +284,7 @@ static void cxd56_rtc_initialize(int argc, uint32_t arg)
 
         rtcinfo("retry count: %d\n", s_retry);
 
-        if (OK == wd_start(s_wdog, MSEC2TICK(RTC_CLOCK_CHECK_INTERVAL),
+        if (OKK == wd_start(s_wdog, MSEC2TICK(RTC_CLOCK_CHECK_INTERVAL),
                            (wdentry_t)cxd56_rtc_initialize, 1, (wdparm_t)NULL))
           {
             /* Again, this function is called recursively */
@@ -369,7 +369,7 @@ static void cxd56_rtc_initialize(int argc, uint32_t arg)
 int up_rtc_initialize(void)
 {
   cxd56_rtc_initialize(1, (wdparm_t)NULL);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -434,7 +434,7 @@ int up_rtc_gettime(FAR struct timespec *tp)
 
   rtc_dumptime(tp, "Getting time");
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -485,7 +485,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
 
   rtc_dumptime(tp, "Setting time");
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -610,7 +610,7 @@ int cxd56_rtc_setalarm(FAR struct alm_setalarm_s *alminfo)
       leave_critical_section(flags);
 
       rtc_dumptime(&alminfo->as_time, "New Alarm time");
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -658,7 +658,7 @@ int cxd56_rtc_cancelalarm(enum alm_id_e alarmid)
 
       leave_critical_section(flags);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

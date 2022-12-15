@@ -957,7 +957,7 @@ static int dfsdm_timinit(FAR struct stm32_dev_s *priv)
 
   tim_dumpregs(priv, "After starting timers");
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1106,7 +1106,7 @@ static int dfsdm_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1386,7 +1386,7 @@ static int dfsdm_set_ch(FAR struct adc_dev_s *dev, uint8_t ch)
   regval |= DFSDM_CHCFGR1_CHEN;
   dfsdm_putreg(priv, CHCFGR1_OFFSET(priv), regval);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1409,7 +1409,7 @@ static int dfsdm_ioctl(FAR struct adc_dev_s *dev, int cmd, unsigned long arg)
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
   uint32_t regval;
   uint32_t tmp;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1568,7 +1568,7 @@ static int dfsdm_interrupt(FAR struct adc_dev_s *dev, uint32_t isr)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1592,7 +1592,7 @@ static int dfsdm_flt0_interrupt(int irq, FAR void *context, FAR void *arg)
       dfsdm_interrupt(&g_dfsdmdev0, regval);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1617,7 +1617,7 @@ static int dfsdm_flt1_interrupt(int irq, FAR void *context, FAR void *arg)
       dfsdm_interrupt(&g_dfsdmdev1, regval);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1642,7 +1642,7 @@ static int dfsdm_flt2_interrupt(int irq, FAR void *context, FAR void *arg)
       dfsdm_interrupt(&g_dfsdmdev2, regval);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1667,7 +1667,7 @@ static int dfsdm_flt3_interrupt(int irq, FAR void *context, FAR void *arg)
       dfsdm_interrupt(&g_dfsdmdev3, regval);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

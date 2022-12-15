@@ -417,7 +417,7 @@ int max326_gpio_config(max326_pinset_t pinset)
     }
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -1018,7 +1018,7 @@ static int lpc214x_wrrequest(struct lpc214x_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_INTDECODE(LPC214X_TRACEINTID_EPINQEMPTY), 0);
-      return OK;
+      return OKK;
     }
 
   uinfo("epphy=%d req=%p: len=%d xfrd=%d nullpkt=%d\n",
@@ -1041,7 +1041,7 @@ static int lpc214x_wrrequest(struct lpc214x_ep_s *privep)
       /* In any event, the request is complete */
 
       lpc214x_reqcomplete(privep, OK);
-      return OK;
+      return OKK;
     }
 
   /* Otherwise send the data in the packet (in the DMA on case, we
@@ -1105,7 +1105,7 @@ static int lpc214x_wrrequest(struct lpc214x_ep_s *privep)
       lpc214x_reqcomplete(privep, OK);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1128,7 +1128,7 @@ static int lpc214x_rdrequest(struct lpc214x_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_INTDECODE(LPC214X_TRACEINTID_EPOUTQEMPTY), 0);
-      return OK;
+      return OKK;
     }
 
   uinfo("len=%d xfrd=%d nullpkt=%d\n",
@@ -1140,7 +1140,7 @@ static int lpc214x_rdrequest(struct lpc214x_ep_s *privep)
     {
       usbtrace(TRACE_DEVERROR(LPC214X_TRACEERR_EPOUTNULLPACKET), 0);
       lpc214x_reqcomplete(privep, OK);
-      return OK;
+      return OKK;
     }
 
   usbtrace(TRACE_READ(privep->epphy), privreq->req.xfrd);
@@ -1166,7 +1166,7 @@ static int lpc214x_rdrequest(struct lpc214x_ep_s *privep)
       lpc214x_reqcomplete(privep, OK);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1524,7 +1524,7 @@ static inline void lpc214x_ep0setup(struct lpc214x_usbdev_s *priv)
 
   while (!lpc214x_rqempty(ep0))
     {
-      int16_t result = OK;
+      int16_t result = OKK;
       if (privreq->req.xfrd != privreq->req.len)
         {
           result = -EPROTO;
@@ -2360,7 +2360,7 @@ static int lpc214x_usbinterrupt(int irq, FAR void *context, FAR void *arg)
     }
 #endif
   usbtrace(TRACE_INTEXIT(LPC214X_TRACEINTID_USB), 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2447,7 +2447,7 @@ static int lpc214x_dmasetup(struct lpc214x_usbdev_s *priv, uint8_t epphy,
           putreq32(1 << epphy, LPC214X_USBDEV_EPDMAEN);
         }
     }
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_LPC214X_USBDEV_DMA */
 
@@ -2560,7 +2560,7 @@ static int lpc214x_epconfigure(FAR struct usbdev_ep_s *ep,
       lpc214x_usbcmd(CMD_USB_DEV_CONFIG, 1);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2605,7 +2605,7 @@ static int lpc214x_epdisable(FAR struct usbdev_ep_s *ep)
   lpc214x_putreg(reg, LPC214X_USBDEV_EPINTEN);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2758,7 +2758,7 @@ static int lpc214x_epsubmit(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s 
   FAR struct lpc214x_ep_s *privep = (FAR struct lpc214x_ep_s *)ep;
   FAR struct lpc214x_usbdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -2858,7 +2858,7 @@ static int lpc214x_epcancel(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s 
   flags = enter_critical_section();
   lpc214x_cancelrequests(privep);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2887,7 +2887,7 @@ static int lpc214x_epstall(FAR struct usbdev_ep_s *ep, bool resume)
       (void)lpc214x_wrrequest(privep);
     }
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3092,7 +3092,7 @@ static int lpc214x_wakeup(struct usbdev_s *dev)
 
   lpc214x_usbcmd(CMD_USB_DEV_SETSTATUS, arg);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3118,7 +3118,7 @@ static int lpc214x_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3138,7 +3138,7 @@ static int lpc214x_pullup(struct usbdev_s *dev, bool enable)
    */
 
   lpc214x_usbcmd(CMD_USB_DEV_SETSTATUS, (enable ? USBDEV_DEVSTATUS_CONNECT : 0));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3393,5 +3393,5 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   /* Unhook the driver */
 
   g_usbdev.driver = NULL;
-  return OK;
+  return OKK;
 }

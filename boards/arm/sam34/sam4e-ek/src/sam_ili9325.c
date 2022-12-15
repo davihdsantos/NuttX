@@ -669,7 +669,7 @@ static int sam_poweroff(FAR struct sam_dev_s *priv)
   /* Remember the power off state */
 
   priv->power = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -732,7 +732,7 @@ static int sam_putrun(fb_coord_t row, fb_coord_t col,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -803,7 +803,7 @@ static int sam_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -822,7 +822,7 @@ static int sam_getvideoinfo(FAR struct lcd_dev_s *dev,
           g_videoinfo.fmt, g_videoinfo.xres,
           g_videoinfo.yres, g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -839,7 +839,7 @@ static int sam_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(dev && pinfo && planeno == 0);
   lcdinfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -900,7 +900,7 @@ static int sam_setpower(struct lcd_dev_s *dev, int power)
       sam_poweroff(priv);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1311,7 +1311,7 @@ static inline int sam_lcd_initialize(void)
     }
 
   sam_lcd9325_initialize();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1352,7 +1352,7 @@ int board_lcd_initialize(void)
 
   up_mdelay(50);
   ret = sam_lcd_initialize();
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Clear the display (setting it to the color 0=black) */
 

@@ -142,7 +142,7 @@ int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
         }
 
       leave_critical_section(flags);
-      ret = OK;
+      ret = OKK;
     }
 
   /* Return the old button handler (so that it can be restored) */

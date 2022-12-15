@@ -310,7 +310,7 @@ int stm32_bringup(void)
       /* Now bind the SDIO interface to the MMC/SD driver */
 
       ret = mmcsd_slotinitialize(CONFIG_NSH_MMCSDMINOR, sdio);
-      if (ret != OK)
+      if (ret != OKK)
         {
           syslog(LOG_ERR,
                  "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n",
@@ -342,7 +342,7 @@ int stm32_bringup(void)
    */
 
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to initialize USB host: %d\n", ret);
     }
@@ -401,5 +401,5 @@ int stm32_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

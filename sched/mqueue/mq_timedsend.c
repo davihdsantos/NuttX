@@ -263,7 +263,7 @@ int nxmq_timedsend(mqd_t mqdes, FAR const char *msg, size_t msglen,
 
   /* Handle any time-related errors */
 
-  if (result != OK)
+  if (result != OKK)
     {
       ret = -result;
       goto errout_in_critical_section;

@@ -1120,7 +1120,7 @@ static int  pic32mz_timer_setisr(FAR struct pic32mz_timer_dev_s *dev,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1251,7 +1251,7 @@ int pic32mz_timer_deinit(FAR struct pic32mz_timer_dev_s *dev)
   pic32mz_timer_stop(dev);
   ((FAR struct pic32mz_timer_priv_s *)dev)->inuse = false;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* defined(CONFIG_PIC32MZ_T2 || ... || T9) */

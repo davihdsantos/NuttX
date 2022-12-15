@@ -271,7 +271,7 @@ static int cxd56_wdtinterrupt(int irq, FAR void *context, FAR void *arg)
       priv->handler(irq, context, NULL);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -301,7 +301,7 @@ static int cxd56_start(FAR struct watchdog_lowerhalf_s *lower)
   cxd56_putreg(0, CXD56_WDT_WDOGLOCK);
 
   priv->started = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -327,7 +327,7 @@ static int cxd56_stop(FAR struct watchdog_lowerhalf_s *lower)
   cxd56_putreg(WDOGLOCK_UNLOCK_KEY, CXD56_WDT_WDOGLOCK);
   cxd56_putreg(WDOGCONTROL_STOP, CXD56_WDT_WDOGCONTROL);
   priv->started = false;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -353,7 +353,7 @@ static int cxd56_keepalive(FAR struct watchdog_lowerhalf_s *lower)
   cxd56_putreg(WDOGLOCK_UNLOCK_KEY, CXD56_WDT_WDOGLOCK);
   cxd56_putreg(0, CXD56_WDT_WDOGINTCLR); /* reload by write any value */
   cxd56_putreg(0, CXD56_WDT_WDOGLOCK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -413,7 +413,7 @@ static int cxd56_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n", status->timeout);
   wdinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -492,7 +492,7 @@ static int cxd56_settimeout(FAR struct watchdog_lowerhalf_s *lower,
 
   priv->started = true;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -684,7 +684,7 @@ int cxd56_wdt_initialize(void)
 
   pmhandle = cxd56_pm_register_callback(PM_CLOCK_APP_CPU, cxd56_pm_event);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CXD56_WDT */

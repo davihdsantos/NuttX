@@ -114,7 +114,7 @@ static struct pm_cpu_freqlock_s g_hv_lock =
 static void board_sdcard_enable(FAR void *arg)
 {
   struct stat stat_sdio;
-  int ret = OK;
+  int ret = OKK;
 
   /* Acquire frequency lock */
 
@@ -145,7 +145,7 @@ static void board_sdcard_enable(FAR void *arg)
           finfo("Bind SDHC to the MMC/SD driver, minor=0\n");
 
           ret = mmcsd_slotinitialize(0, g_sdhci.sdhci);
-          if (ret != OK)
+          if (ret != OKK)
             {
               _err("ERROR: Failed to bind SDHC to the MMC/SD driver: %d\n",
                                                                       ret);
@@ -316,7 +316,7 @@ static int board_sdcard_detect_int(int irq, FAR void *context, FAR void *arg)
                            NULL);
     }
 
-   return OK;
+   return OKK;
 }
 #endif
 
@@ -334,7 +334,7 @@ static int board_sdcard_detect_int(int irq, FAR void *context, FAR void *arg)
 
 int board_sdcard_initialize(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_SDCARD_TXS02612_PORT0
   /* Select port0 for SD-Card (default) */
@@ -389,7 +389,7 @@ int board_sdcard_initialize(void)
 
 int board_sdcard_finalize(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* At first, Disable interrupt of the card detection */
 

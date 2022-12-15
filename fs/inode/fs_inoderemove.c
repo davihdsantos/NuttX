@@ -167,7 +167,7 @@ int inode_remove(FAR const char *path)
 
           DEBUGASSERT(node->i_peer == NULL);
           inode_free(node);
-          return OK;
+          return OKK;
         }
     }
 

@@ -85,5 +85,5 @@ int modlib_unload(struct mod_loadinfo_s *loadinfo)
   loadinfo->textsize  = 0;
   loadinfo->datasize  = 0;
 
-  return OK;
+  return OKK;
 }

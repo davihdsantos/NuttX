@@ -482,13 +482,13 @@ static const struct rndis_oid_value_s g_rndis_oid_values[] =
 static int rndis_submit_rdreq(FAR struct rndis_dev_s *priv)
 {
   irqstate_t flags = enter_critical_section();
-  int ret = OK;
+  int ret = OKK;
 
   if (!priv->rdreq_submitted && !priv->rx_blocked)
     {
       priv->rdreq->len = priv->epbulkout->maxpacket;
       ret = EP_SUBMIT(priv->epbulkout, priv->rdreq);
-      if (ret != OK)
+      if (ret != OKK)
         {
           usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_RDSUBMIT),
                    (uint16_t)-priv->rdreq->result);
@@ -972,7 +972,7 @@ static void rndis_rxdispatch(FAR void *arg)
 static int rndis_txpoll(FAR struct net_driver_s *dev)
 {
   FAR struct rndis_dev_s *priv = (FAR struct rndis_dev_s *)dev->d_private;
-  int ret = OK;
+  int ret = OKK;
 
   if (!priv->connected)
     {
@@ -1031,7 +1031,7 @@ static int rndis_txpoll(FAR struct net_driver_s *dev)
 
 static int rndis_transmit(FAR struct rndis_dev_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Queue the packet */
 
@@ -1116,7 +1116,7 @@ static int rndis_ifup(FAR struct net_driver_s *dev)
 
   (void)wd_start(priv->txpoll, RNDIS_WDDELAY, rndis_polltimer,
                  1, (wdparm_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1132,7 +1132,7 @@ static int rndis_ifdown(FAR struct net_driver_s *dev)
   FAR struct rndis_dev_s *priv = (FAR struct rndis_dev_s *)dev->d_private;
 
   wd_cancel(priv->txpoll);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1180,7 +1180,7 @@ static int rndis_txavail(FAR struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, rndis_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1304,7 +1304,7 @@ static inline int rndis_recvpacket(FAR struct rndis_dev_s *priv,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1364,7 +1364,7 @@ static int rndis_send_encapsulated_response(FAR struct rndis_dev_s *priv)
   EP_CANCEL(priv->epintin, priv->epintin_req);
   EP_SUBMIT(priv->epintin, priv->epintin_req);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1566,7 +1566,7 @@ static int rndis_handle_control_message(FAR struct rndis_dev_s *priv,
         uwarn("Unsupported RNDIS control message: %u\n", cmd_hdr->msgtype);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1600,7 +1600,7 @@ static void rndis_rdcomplete(FAR struct usbdev_ep_s *ep,
 
   /* Process the received data unless this is some unusual condition */
 
-  ret = OK;
+  ret = OKK;
 
   flags = enter_critical_section();
   priv->rdreq_submitted = false;
@@ -2163,7 +2163,7 @@ static int usbclass_bind(FAR struct usbdevclass_driver_s *driver,
   DEV_CONNECT(dev);
 #endif
 
-  return OK;
+  return OKK;
 
 errout:
   usbclass_unbind(driver, dev);
@@ -2465,7 +2465,7 @@ static int usbclass_setup(FAR struct usbdevclass_driver_s *driver,
       if (ret < 0)
         {
           usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_EPRESPQ), (uint16_t)-ret);
-          ctrlreq->result = OK;
+          ctrlreq->result = OKK;
           usbclass_ep0incomplete(dev->ep0, ctrlreq);
         }
     }
@@ -2659,7 +2659,7 @@ static int usbclass_setconfig(FAR struct rndis_dev_s *priv, uint8_t config)
 
   priv->rdreq->callback = rndis_rdcomplete;
   ret = rndis_submit_rdreq(priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_RDSUBMIT), (uint16_t)-ret);
       goto errout;
@@ -2673,7 +2673,7 @@ static int usbclass_setconfig(FAR struct rndis_dev_s *priv, uint8_t config)
       priv->netdev.d_flags |= IFF_UP;
     }
 
-  return OK;
+  return OKK;
 
 errout:
   usbclass_resetconfig(priv);
@@ -2754,7 +2754,7 @@ static int usbclass_classobject(int minor,
 
   drvr->dev->registered = true;
 
-  return OK;
+  return OKK;
 }
 
 static void usbclass_uninitialize(FAR struct usbdevclass_driver_s *classdev)
@@ -2823,7 +2823,7 @@ int usbdev_rndis_initialize(FAR const uint8_t *mac_address)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2861,7 +2861,7 @@ int usbdev_rndis_set_host_mac_addr(FAR struct net_driver_s *netdev,
       memcpy(dev->host_mac_address, g_rndis_default_mac_addr, 6);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

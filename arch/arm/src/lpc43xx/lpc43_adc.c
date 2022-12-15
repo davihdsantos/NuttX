@@ -194,7 +194,7 @@ static int adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -355,7 +355,7 @@ static int adc_setup(FAR struct adc_dev_s *dev)
   FAR struct up_dev_s *priv = (FAR struct up_dev_s *)dev->ad_priv;
 
   int ret = irq_attach(priv->irq, adc_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(priv->irq);
     }
@@ -504,7 +504,7 @@ static int adc_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

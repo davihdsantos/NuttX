@@ -121,6 +121,6 @@ int up_prioritize_irq(int irq, int priority)
   regval &= ~((uint32_t)0xff << shift);
   regval |= ((uint32_t)priority << shift);
   putreg32(regval, regaddr);
-  return OK;
+  return OKK;
 }
 #endif

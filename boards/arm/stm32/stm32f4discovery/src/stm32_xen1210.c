@@ -165,7 +165,7 @@ int xen1210_interrupt(int irq, FAR void *context, FAR void *arg)
       g_xen1210config.handler(&g_xen1210config.config, g_xen1210config.arg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /* IRQ/GPIO access callbacks.  These operations all hidden behind
@@ -192,7 +192,7 @@ static int xen1210_attach(FAR struct xen1210_config_s *state,
 
   priv->handler = handler;
   priv->arg = arg;
-  return OK;
+  return OKK;
 }
 
 static void xen1210_enable(FAR struct xen1210_config_s *state, bool enable)
@@ -350,7 +350,7 @@ int xen1210_archinitialize(int minor)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SENSORS_XEN1210 */

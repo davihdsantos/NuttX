@@ -141,7 +141,7 @@ static void vnc_sem_debug(FAR struct vnc_session_s *session,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -227,7 +227,7 @@ vnc_alloc_update(FAR struct vnc_session_s *session)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -321,7 +321,7 @@ vnc_remove_queue(FAR struct vnc_session_s *session)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -499,7 +499,7 @@ int vnc_start_updater(FAR struct vnc_session_s *session)
       return -status;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -545,7 +545,7 @@ int vnc_stop_updater(FAR struct vnc_session_s *session)
 
   /* Not running?  Just say we stopped the thread successfully. */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -597,7 +597,7 @@ int vnc_update_rectangle(FAR struct vnc_session_s *session,
           /* No.. ignore the client update.  We have nothing new to report. */
 
           sched_unlock();
-          return OK;
+          return OKK;
         }
 
       /* Ignore all updates if there is a queued whole screen update */
@@ -669,5 +669,5 @@ int vnc_update_rectangle(FAR struct vnc_session_s *session,
    * really no way a failure can occur.
    */
 
-  return OK;
+  return OKK;
 }

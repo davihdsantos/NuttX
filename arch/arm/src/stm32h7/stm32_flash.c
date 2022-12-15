@@ -251,7 +251,7 @@ static void stm32h7_flash_sem_lock(FAR struct stm32h7_flash_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -363,7 +363,7 @@ int stm32h7_flash_unlock(size_t addr)
 
   if (priv)
     {
-      rv = OK;
+      rv = OKK;
       stm32h7_flash_sem_lock(priv);
       stm32h7_unlock_flash(priv);
       stm32h7_flash_sem_unlock(priv);
@@ -387,7 +387,7 @@ int stm32h7_flash_lock(size_t addr)
 
   if (priv)
     {
-      rv = OK;
+      rv = OKK;
       stm32h7_flash_sem_lock(priv);
       stm32h7_lock_flash(priv);
       stm32h7_flash_sem_unlock(priv);
@@ -431,7 +431,7 @@ int stm32h7_flash_writeprotect(size_t block, bool enabled)
 
       stm32h7_flash_modifyreg32(priv, STM32_FLASH_WPSN_PRG1R_OFFSET,
                                 clearbits, setbits);
-      rv  = OK;
+      rv  = OKK;
     }
 
   return rv;

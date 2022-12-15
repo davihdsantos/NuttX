@@ -294,7 +294,7 @@ static int tiva_gpioporthandler(uint8_t port, void *context)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_TIVA_GPIOA_IRQS
@@ -631,7 +631,7 @@ int tiva_gpioirqinitialize(void)
   up_enable_irq(TIVA_IRQ_GPIOS);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -687,7 +687,7 @@ int tiva_gpioirqattach(pinconfig_t pinconfig, xcpt_t isr, void *arg)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

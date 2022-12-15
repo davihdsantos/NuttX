@@ -98,7 +98,7 @@ static inline int fs_checkfd(FAR struct tcb_s *tcb, int fd, int oflags)
    * already been created.
    */
 
-  if (inode_checkflags(inode, oflags) != OK)
+  if (inode_checkflags(inode, oflags) != OKK)
     {
       /* Cannot support the requested access */
 
@@ -107,7 +107,7 @@ static inline int fs_checkfd(FAR struct tcb_s *tcb, int fd, int oflags)
 
   /* Looks good to me */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -126,7 +126,7 @@ FAR struct file_struct *fs_fdopen(int fd, int oflags, FAR struct tcb_s *tcb)
 {
   FAR struct streamlist *slist;
   FAR FILE              *stream;
-  int                    errcode = OK;
+  int                    errcode = OKK;
   int                    ret;
   int                    i;
 

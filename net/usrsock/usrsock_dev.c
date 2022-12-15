@@ -305,7 +305,7 @@ static void usrsockdev_semtake(FAR sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -958,7 +958,7 @@ static int usrsockdev_open(FAR struct file *filep)
   else
     {
       dev->ocount = tmp;
-      ret = OK;
+      ret = OKK;
     }
 
   usrsockdev_semgive(&dev->devsem);
@@ -1010,7 +1010,7 @@ static int usrsockdev_close(FAR struct file *filep)
 
   dev->ocount--;
   DEBUGASSERT(dev->ocount == 0);
-  ret = OK;
+  ret = OKK;
 
   do
     {
@@ -1078,7 +1078,7 @@ static int usrsockdev_poll(FAR struct file *filep, FAR struct pollfd *fds,
   FAR struct inode *inode = filep->f_inode;
   FAR struct usrsockdev_s *dev;
   pollevent_t eventset;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   DEBUGASSERT(inode);

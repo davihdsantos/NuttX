@@ -235,7 +235,7 @@ int nxmu_mousein(FAR struct nxmu_state_s *nxmu,
             {
               /* Ignore events until the button is released */
 
-              return OK;
+              return OKK;
             }
         }
 
@@ -263,7 +263,7 @@ int nxmu_mousein(FAR struct nxmu_state_s *nxmu,
       g_mwnd = wnd;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NX_XYINPUT */

@@ -292,7 +292,7 @@ static int stm32_tickless_setchannel(uint8_t channel)
   stm32_putreg16(ccmr_offset, ccmr_orig);
   stm32_putreg16(STM32_GTIM_CCER_OFFSET, ccer_val);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -390,7 +390,7 @@ static int stm32_tickless_handler(int irq, void *context, void *arg)
       stm32_interval_handler();
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -651,7 +651,7 @@ int up_timer_gettime(FAR struct timespec *ts)
     {
       ts->tv_nsec = 0;
       ts->tv_sec  = 0;
-      return OK;
+      return OKK;
     }
 
   /* Temporarily disable the overflow counter.  NOTE that we have to be
@@ -717,7 +717,7 @@ int up_timer_gettime(FAR struct timespec *ts)
   tmrinfo("usec=%llu ts=(%u, %lu)\n",
           usec, (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
 
-  return OK;
+  return OKK;
 }
 
 #else
@@ -725,7 +725,7 @@ int up_timer_gettime(FAR struct timespec *ts)
 int up_timer_getcounter(FAR uint64_t *cycles)
 {
   *cycles = (uint64_t)STM32_TIM_GETCOUNTER(g_tickless.tch);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CLOCK_TIMEKEEPING */
@@ -815,7 +815,7 @@ int up_timer_cancel(FAR struct timespec *ts)
         }
 
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   /* Yes.. Get the timer counter and period registers and disable the compare
@@ -863,7 +863,7 @@ int up_timer_cancel(FAR struct timespec *ts)
 
           ts->tv_sec  = 0;
           ts->tv_nsec = 0;
-          return OK;
+          return OKK;
         }
 
       /* The total time remaining is the difference.  Convert that
@@ -889,7 +889,7 @@ int up_timer_cancel(FAR struct timespec *ts)
              (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -984,7 +984,7 @@ int up_timer_start(FAR const struct timespec *ts)
 
   g_tickless.pending = true;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1004,7 +1004,7 @@ int up_alarm_start(FAR const struct timespec *ts)
   stm32_tickless_ackint(g_tickless.channel);
   stm32_tickless_enableint(CONFIG_STM32F7_TICKLESS_CHANNEL);
 
-  return OK;
+  return OKK;
 }
 
 int up_alarm_cancel(FAR struct timespec *ts)

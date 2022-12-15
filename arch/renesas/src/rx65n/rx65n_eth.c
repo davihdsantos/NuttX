@@ -1062,7 +1062,7 @@ static int rx65n_transmit(FAR struct rx65n_ethmac_s *priv)
 
   rx65n_cmtw0_start(rx65n_cmtw0_timeout,
                     RX65N_CMTW0_COUNT_VALUE_FOR_TXTIMEOUT);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1492,7 +1492,7 @@ static int rx65n_recvframe(FAR struct rx65n_ethmac_s *priv)
               ninfo("rxhead: %p d_buf: %p d_len: %d\n",
                     priv->rxhead, dev->d_buf, dev->d_len);
 
-              return OK;
+              return OKK;
             }
           else
             {
@@ -1556,7 +1556,7 @@ static void rx65n_receive(FAR struct rx65n_ethmac_s *priv)
    * Ethernet frames.
    */
 
-  while (rx65n_recvframe(priv) == OK)
+  while (rx65n_recvframe(priv) == OKK)
     {
 #ifdef CONFIG_NET_PKT
 
@@ -2041,7 +2041,7 @@ static int rx65n_interrupt(int irq, FAR void *context, FAR void *arg)
       work_queue(ETHWORK, &priv->irqwork, rx65n_interrupt_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2289,7 +2289,7 @@ static int rx65n_ifup(struct net_driver_s *dev)
   up_enable_irq(RX65N_ETH_IRQ);
 
   rx65n_checksetup();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2314,7 +2314,7 @@ static int rx65n_ifdown(struct net_driver_s *dev)
   FAR struct rx65n_ethmac_s *priv = (FAR struct rx65n_ethmac_s *)dev->
                                                 d_private;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
   ninfo("Taking the network down\n");
   flags = enter_critical_section();
 
@@ -2419,7 +2419,7 @@ static int rx65n_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, rx65n_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2476,7 +2476,7 @@ static int rx65n_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
 {
   /* Currnently not implemented */
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_MCASTGROUP || CONFIG_NET_ICMPv6 */
 
@@ -2506,7 +2506,7 @@ static int rx65n_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
 {
   /* Currnently not implemented */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2718,7 +2718,7 @@ static int rx65n_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
                  (struct mii_ioctl_notify_s *)((uintptr_t)arg);
 
           ret = phy_notify_subscribe(dev->d_ifname, req->pid, &req->event);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable PHY link up/down interrupts */
 
@@ -2733,7 +2733,7 @@ static int rx65n_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
           struct mii_ioctl_data_s *req =
                  (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = CONFIG_RX65N_EMAC0_PHYADDR;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2918,7 +2918,7 @@ int arch_phy_irq(FAR const char *intf, xcpt_t handler, void *arg,
   /* Return the old handler (so that it can be restored) */
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -3145,7 +3145,7 @@ static uint16_t rx65n_phyread (uint8_t phydevaddr, uint16_t reg_addr,
   phy_reg_read(&data);
   rx65n_phy_trans_zto0();
   *value = data;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3488,7 +3488,7 @@ static int rx65n_phywrite (uint8_t phydevaddr, uint16_t reg_addr,
   rx65n_phy_trans_1to0();
   rx65n_phy_reg_write(data);
   rx65n_phy_trans_zto0();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3942,7 +3942,7 @@ static int rx65n_macconfig(FAR struct rx65n_ethmac_s *priv)
   rx65n_putreg(regval, RX65N_ETHD_EESIPR);
 
   rx65n_macaddress(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4379,7 +4379,7 @@ int rx65n_ethinitialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

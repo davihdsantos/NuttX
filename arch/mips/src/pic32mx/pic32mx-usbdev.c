@@ -1260,7 +1260,7 @@ static int pic32mx_wrstart(struct pic32mx_usbdev_s *priv,
   /* Update for the next data IN interrupt */
 
   privreq->inflight[index] = nbytes;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1277,7 +1277,7 @@ static int pic32mx_wrrequest(struct pic32mx_usbdev_s *priv, struct pic32mx_ep_s 
 
   ret = pic32mx_wrstart(priv, privep);
 #ifndef CONFIG_USBDEV_NOWRITEAHEAD
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Note:  We need to return the error condition only if nothing was
        * queued
@@ -1476,7 +1476,7 @@ static int pic32mx_ep0rdsetup(struct pic32mx_usbdev_s *priv, uint8_t *dest,
 
   priv->ctrlstate = CTRLSTATE_RDREQUEST;
   priv->rxbusy    = 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1576,7 +1576,7 @@ static int pic32mx_rdsetup(struct pic32mx_ep_s *privep, uint8_t *dest, int readl
           epno, bdtout, status, bdtout->addr);
 
   bdtout->status = status;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1611,7 +1611,7 @@ static int pic32mx_rdrequest(struct pic32mx_usbdev_s *priv,
           priv->rxbusy    = 0;
         }
 
-      return OK;
+      return OKK;
     }
 
   uinfo("EP%d: len=%d\n", USB_EPNO(privep->ep.eplog), privreq->req.len);
@@ -1622,7 +1622,7 @@ static int pic32mx_rdrequest(struct pic32mx_usbdev_s *priv,
     {
       usbtrace(TRACE_DEVERROR(PIC32MX_TRACEERR_EPOUTNULLPACKET), 0);
       pic32mx_reqcomplete(privep, OK);
-      return OK;
+      return OKK;
     }
 
   /* Limit the size of the transfer to either the buffer size or the max
@@ -1647,7 +1647,7 @@ static int pic32mx_rdrequest(struct pic32mx_usbdev_s *priv,
    * queue.
    */
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       privreq = pic32mx_remfirst(&privep->pend);
       DEBUGASSERT(privreq != NULL);
@@ -1753,7 +1753,7 @@ static void pic32mx_eptransfer(struct pic32mx_usbdev_s *priv, uint8_t epno,
 
       ret = pic32mx_rdcomplete(priv, privep);
 #ifdef CONFIG_USBDEV_NOREADAHEAD
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* If that succeeds, then try to set up another OUT transfer. */
 
@@ -2893,7 +2893,7 @@ static int pic32mx_interrupt(int irq, void *context, FAR void *arg)
 interrupt_exit:
   up_clrpend_irq(PIC32MX_IRQSRC_USB);
   usbtrace(TRACE_INTEXIT(PIC32MX_TRACEINTID_INTERRUPT), usbir | otgir);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3253,7 +3253,7 @@ static int pic32mx_epconfigure(struct usbdev_ep_s *ep,
       ep->eplog = USB_EPOUT(epno);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3301,7 +3301,7 @@ static int pic32mx_epdisable(struct usbdev_ep_s *ep)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3363,7 +3363,7 @@ static int pic32mx_epsubmit(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   struct pic32mx_usbdev_s *priv;
   irqstate_t flags;
   uint8_t epno;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -3466,7 +3466,7 @@ static int pic32mx_epcancel(struct usbdev_ep_s *ep, struct usbdev_req_s *req)
   flags = enter_critical_section();
   pic32mx_cancelrequests(privep, -EAGAIN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3629,7 +3629,7 @@ static int pic32mx_epbdtstall(struct usbdev_ep_s *ep, bool resume, bool epin)
               otherbdt->addr);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3665,7 +3665,7 @@ static int pic32mx_epstall(struct usbdev_ep_s *ep, bool resume)
   if (USB_EPNO(ep->eplog) == 0)
     {
       ret = pic32mx_epbdtstall(ep, resume, true);
-      if (ret == OK)
+      if (ret == OKK)
         {
           ret = pic32mx_epbdtstall(ep, resume, false);
         }
@@ -3845,7 +3845,7 @@ static int pic32mx_wakeup(struct usbdev_s *dev)
   /* Resume normal operation. */
 
   pic32mx_resume(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3867,7 +3867,7 @@ static int pic32mx_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4472,7 +4472,7 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
 
   priv->driver = NULL;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

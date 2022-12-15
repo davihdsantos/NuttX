@@ -148,7 +148,7 @@ int photon_wlan_initialize()
 
   ret = bcmf_sdio_initialize(SDIO_WLAN0_MINOR, g_sdio_dev);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("ERROR: Failed to bind SDIO to bcmf driver\n");
 
@@ -156,5 +156,5 @@ int photon_wlan_initialize()
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }

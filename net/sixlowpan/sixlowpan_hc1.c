@@ -479,7 +479,7 @@ int sixlowpan_uncompresshdr_hc1(FAR struct radio_driver_s *radio,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_6LOWPAN_COMPRESSION_HC1 */

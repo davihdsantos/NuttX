@@ -81,6 +81,6 @@ int board_app_initialize(uintptr_t arg)
 
   return xmc4_bringup();
 #else
-  return OK;
+  return OKK;
 #endif /* CONFIG_BOARD_LATE_INITIALIZE */
 }

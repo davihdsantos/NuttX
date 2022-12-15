@@ -263,7 +263,7 @@ int sim_tsc_setup(int minor)
       goto errout_with_nx;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_nx:
   nx_disconnect(g_simtc.hnx);

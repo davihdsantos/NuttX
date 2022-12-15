@@ -115,7 +115,7 @@ int find_mtddriver(FAR const char *pathname, FAR struct inode **ppinode)
 
   *ppinode = inode;
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
 errout_with_inode:
   inode_release(inode);

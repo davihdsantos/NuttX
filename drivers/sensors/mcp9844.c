@@ -157,7 +157,7 @@ static int mcp9844_read_u16(FAR struct mcp9844_dev_s *priv,
   *value = (((uint16_t)(buffer[0]))<<8) + ((uint16_t)(buffer[1]));
 
   sninfo("addr: %02x value: %08x ret: %d\n", regaddr, *value, ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -205,7 +205,7 @@ static int mcp9844_write_u16(FAR struct mcp9844_dev_s *priv,
 
 static int mcp9844_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -218,7 +218,7 @@ static int mcp9844_open(FAR struct file *filep)
 
 static int mcp9844_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -249,7 +249,7 @@ static int mcp9844_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct mcp9844_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -304,7 +304,7 @@ static int mcp9844_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
       case SNIOC_SETRESOLUTION:
         {
           ret = mcp9844_write_u16(priv, MCP9844_RESO_REG, (uint16_t)(arg));
-          if (ret != OK)
+          if (ret != OKK)
             {
               snerr("ERROR: ioctl::SNIOC_SETRESOLUTION - mcp9844_write_u16 failed - no resolution set\n");
             }

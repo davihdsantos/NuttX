@@ -686,7 +686,7 @@ static int lpc54_eth_transmit(struct lpc54_ethdriver_s *priv,
 
   (void)wd_start(priv->eth_txtimeout, LPC54_TXTIMEOUT,
                  lpc54_eth_txtimeout_expiry, 1, (wdparm_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1547,7 +1547,7 @@ static int lpc54_eth_interrupt(int irq, void *context, void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->eth_irqwork, lpc54_eth_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1569,7 +1569,7 @@ static int lpc54_eth_interrupt(int irq, void *context, void *arg)
 #if 0 /* Not used */
 static int  lpc54_pmt_interrupt(int irq, void *context, void *arg)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1592,7 +1592,7 @@ static int  lpc54_pmt_interrupt(int irq, void *context, void *arg)
 #if 0 /* Not used */
 static int lpc54_mac_interrupt(int irq, void *context, void *arg)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2163,7 +2163,7 @@ static int lpc54_eth_ifup(struct net_driver_s *dev)
 
   priv->eth_bifup = 1;
   up_enable_irq(LPC54_IRQ_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2239,7 +2239,7 @@ static int lpc54_eth_ifdown(struct net_driver_s *dev)
 
   priv->eth_bifup = 0;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2318,7 +2318,7 @@ static int lpc54_eth_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->eth_pollwork, lpc54_eth_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2345,7 +2345,7 @@ static int lpc54_eth_addmac(struct net_driver_s *dev, const uint8_t *mac)
    * In these cases, I am simply accepting all multicast packets.
    */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2414,7 +2414,7 @@ static int lpc54_eth_ioctl(struct net_driver_s *dev, int cmd,
         {
           struct mii_ioctl_data_s *req = (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = CONFIG_LPC54_ETH_PHYADDR;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2440,7 +2440,7 @@ static int lpc54_eth_ioctl(struct net_driver_s *dev, int cmd,
         return -ENOTTY;  /* Special return value for this case */
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2929,7 +2929,7 @@ static int lpc54_phy_autonegotiate(struct lpc54_ethdriver_s *priv)
 #  error Unrecognized PHY
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2984,7 +2984,7 @@ static int lpc54_phy_reset(struct lpc54_ethdriver_s *priv)
     }
   while ((phyval & MII_MCR_RESET) != 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3140,7 +3140,7 @@ int up_netinitialize(int intf)
       goto errout_with_clock;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_clock:
   lpc54_eth_disableclk();

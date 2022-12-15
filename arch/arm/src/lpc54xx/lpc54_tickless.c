@@ -618,7 +618,7 @@ static int lpc54_tl_isr(int irq, FAR void *context, FAR void *arg)
     }
 
   lpc54_sync_down();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -702,7 +702,7 @@ int up_timer_gettime(FAR struct timespec *ts)
   lpc54_tick2ts(count + g_base_rest, &count_ts, false);
   lpc54_ts_add(&g_base_ts, &count_ts, ts);
   lpc54_sync_down();
-  return OK;
+  return OKK;
 }
 
 int up_alarm_cancel(FAR struct timespec *ts)
@@ -721,7 +721,7 @@ int up_alarm_cancel(FAR struct timespec *ts)
   lpc54_init_timer_vars();
 
   lpc54_sync_down();
-  return OK;
+  return OKK;
 }
 
 int up_alarm_start(FAR const struct timespec *ts)
@@ -764,7 +764,7 @@ int up_alarm_start(FAR const struct timespec *ts)
 
   lpc54_sync_down();
 
-  return OK;
+  return OKK;
 }
 
 #ifndef CONFIG_SCHED_TICKLESS_ALARM
@@ -781,7 +781,7 @@ int up_timer_cancel(FAR struct timespec *ts)
 
   lpc54_init_timer_vars();
   lpc54_sync_down();
-  return OK;
+  return OKK;
 }
 
 int up_timer_start(FAR const struct timespec *ts)
@@ -795,7 +795,7 @@ int up_timer_start(FAR const struct timespec *ts)
   up_alarm_start(&abs_ts);
 
   lpc54_sync_down();
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SCHED_TICKLESS_ALARM */

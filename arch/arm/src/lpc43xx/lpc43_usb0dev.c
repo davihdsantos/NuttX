@@ -831,7 +831,7 @@ static int lpc43_progressep(struct lpc43_ep_s *privep)
   if (!privreq)
     {
       usbtrace(TRACE_INTDECODE(LPC43_TRACEINTID_EPINQEMPTY), 0);
-      return OK;
+      return OKK;
     }
 
   /* Ignore any attempt to send a zero length packet */
@@ -859,7 +859,7 @@ static int lpc43_progressep(struct lpc43_ep_s *privep)
         }
 
       lpc43_reqcomplete(privep, lpc43_rqdequeue(privep), OK);
-      return OK;
+      return OKK;
     }
 
   if (privep->epphy == LPC43_EP0_IN)
@@ -890,7 +890,7 @@ static int lpc43_progressep(struct lpc43_ep_s *privep)
 
   lpc43_queuedtd(privep->epphy, dtd);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1785,7 +1785,7 @@ static int lpc43_usbinterrupt(int irq, FAR void *context, FAR void *arg)
       lpc43_usbreset(priv);
 
       usbtrace(TRACE_INTEXIT(LPC43_TRACEINTID_USB), 0);
-      return OK;
+      return OKK;
     }
 
   /* When the device controller enters a suspend state from an active state,
@@ -1941,7 +1941,7 @@ static int lpc43_usbinterrupt(int irq, FAR void *context, FAR void *arg)
     }
 
   usbtrace(TRACE_INTEXIT(LPC43_TRACEINTID_USB), 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2040,7 +2040,7 @@ static int lpc43_epconfigure(FAR struct usbdev_ep_s *ep,
       lpc43_setbits (USBDEV_ENDPTCTRL_RXE, LPC43_USBDEV_ENDPTCTRL(privep->epphy >> 1));
     }
 
-   return OK;
+   return OKK;
 }
 
 /****************************************************************************
@@ -2085,7 +2085,7 @@ static int lpc43_epdisable(FAR struct usbdev_ep_s *ep)
   lpc43_cancelrequests(privep, -ESHUTDOWN);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2200,7 +2200,7 @@ static int lpc43_epsubmit(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s *r
   FAR struct lpc43_ep_s *privep = (FAR struct lpc43_ep_s *)ep;
   FAR struct lpc43_usbdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!req || !req->callback || !req->buf || !ep)
@@ -2291,7 +2291,7 @@ static int lpc43_epcancel(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s *r
 
   lpc43_cancelrequests(privep, -ESHUTDOWN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2332,7 +2332,7 @@ static int lpc43_epstall(FAR struct usbdev_ep_s *ep, bool resume)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2537,7 +2537,7 @@ static int lpc43_wakeup(struct usbdev_s *dev)
   flags = enter_critical_section();
   lpc43_setbits(USBDEV_PRTSC1_FPR, LPC43_USBDEV_PORTSC1);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2563,7 +2563,7 @@ static int lpc43_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2596,7 +2596,7 @@ static int lpc43_pullup(struct usbdev_s *dev, bool enable)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2870,6 +2870,6 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   /* Unhook the driver */
 
   g_usbdev.driver = NULL;
-  return OK;
+  return OKK;
 }
 

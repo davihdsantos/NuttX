@@ -69,7 +69,7 @@
 int nxmu_sendclientwindow(FAR struct nxbe_window_s *wnd, FAR const void *msg,
                           size_t msglen)
 {
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(wnd != NULL && wnd->conn != NULL && msg != NULL);
 

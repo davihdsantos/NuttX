@@ -143,7 +143,7 @@ int tcp_setsockopt(FAR struct socket *psock, int option,
               {
                 conn->keepalive = (bool)keepalive;
                 conn->keeptime  = clock_systimer();   /* Reset start time */
-                ret = OK;
+                ret = OKK;
               }
           }
         break;
@@ -185,7 +185,7 @@ int tcp_setsockopt(FAR struct socket *psock, int option,
                   {
                     conn->keepidle = (uint16_t)dsecs;
                     conn->keeptime = clock_systimer();   /* Reset start time */
-                    ret = OK;
+                    ret = OKK;
                   }
               }
           }
@@ -223,7 +223,7 @@ int tcp_setsockopt(FAR struct socket *psock, int option,
                   {
                     conn->keepintvl = (uint16_t)dsecs;
                     conn->keeptime  = clock_systimer();   /* Reset start time */
-                    ret = OK;
+                    ret = OKK;
                   }
               }
           }
@@ -247,7 +247,7 @@ int tcp_setsockopt(FAR struct socket *psock, int option,
               {
                 conn->keepcnt  = (uint8_t)keepcnt;
                 conn->keeptime = clock_systimer();   /* Reset start time */
-                ret = OK;
+                ret = OKK;
               }
           }
         break;

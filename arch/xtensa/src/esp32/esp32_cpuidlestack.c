@@ -115,7 +115,7 @@ int up_cpu_idlestack(int cpu, FAR struct tcb_s *tcb, size_t stack_size)
   /* REVISIT: Does it make since to have co-processors enabled on the IDLE thread? */
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

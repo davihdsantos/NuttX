@@ -254,7 +254,7 @@ ssize_t psock_bluetooth_sendto(FAR struct socket *psock, FAR const void *buf,
   FAR struct radio_driver_s *radio;
   FAR struct bluetooth_conn_s *conn;
   struct bluetooth_sendto_s state;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify that the sockfd corresponds to valid, allocated socket */
 

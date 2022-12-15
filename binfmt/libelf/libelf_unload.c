@@ -110,6 +110,6 @@ int elf_unload(struct elf_loadinfo_s *loadinfo)
   loadinfo->ndtors    = 0;
 #endif
 
-  return OK;
+  return OKK;
 }
 

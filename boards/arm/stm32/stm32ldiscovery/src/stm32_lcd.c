@@ -524,7 +524,7 @@ static uint8_t slcd_getcontrast(void)
 static int slcd_setcontrast(uint8_t contrast)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* Make sure that the contrast setting is within range */
 
@@ -1423,7 +1423,7 @@ static int slcd_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         return -ENOTTY;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1444,7 +1444,7 @@ static int slcd_poll(FAR struct file *filep, FAR struct pollfd *fds,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1463,7 +1463,7 @@ static int slcd_poll(FAR struct file *filep, FAR struct pollfd *fds,
 int stm32_slcd_initialize(void)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   /* Only initialize the driver once. */

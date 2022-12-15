@@ -166,5 +166,5 @@ int board_app_initialize(uintptr_t arg)
          CONFIG_NSH_MMCSDSPIPORTNO, CONFIG_NSH_MMCSDSLOTNO);
 #endif
 
-  return OK;
+  return OKK;
 }

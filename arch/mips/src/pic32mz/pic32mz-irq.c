@@ -442,7 +442,7 @@ int up_prioritize_irq(int irq, int priority)
 
       putreg32(0x1f << shift, PIC32MZ_INT_IPCCLR(regndx));
       putreg32(priority << shift, PIC32MZ_INT_IPCSET(regndx));
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

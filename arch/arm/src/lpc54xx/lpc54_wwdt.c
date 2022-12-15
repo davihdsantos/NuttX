@@ -242,7 +242,7 @@ static int lpc54_wwdt_interrupt(int irq, FAR void *context)
       putreg32(regval, LPC54_WWDT_MOD);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -283,7 +283,7 @@ static int lpc54_start(FAR struct watchdog_lowerhalf_s *lower)
   putreg32(0x55, LPC54_WWDT_FEED);
 
   priv->started = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -348,7 +348,7 @@ static int lpc54_keepalive(FAR struct watchdog_lowerhalf_s *lower)
   putreg32(0xAA, LPC54_WWDT_FEED);
   putreg32(0x55, LPC54_WWDT_FEED);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -406,7 +406,7 @@ static int lpc54_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n", status->timeout);
   wdinfo("  timeleft : %d\n", status->flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -477,7 +477,7 @@ static int lpc54_settimeout(FAR struct watchdog_lowerhalf_s *lower,
   /* Set the warning interrupt register value */
 
   lpc54_setwarning(WWDT_WARNINT_VALUE);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -598,7 +598,7 @@ static int lpc54_ioctl(FAR struct watchdog_lowerhalf_s *lower, int cmd,
           uint32_t window = mintime*WWDT_FREQ/1000;
           DEBUGASSERT(window < priv->reload);
           lpc54_setwindow( window );
-          ret = OK;
+          ret = OKK;
         }
     }
 

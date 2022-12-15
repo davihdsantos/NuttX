@@ -150,7 +150,7 @@ int stm32_romfs_initialize(void)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32_ROMFS */

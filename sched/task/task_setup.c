@@ -137,7 +137,7 @@ static int nxtask_assignpid(FAR struct tcb_s *tcb)
           tcb->pid = next_pid;
 
           (void)sched_unlock();
-          return OK;
+          return OKK;
         }
     }
 
@@ -363,7 +363,7 @@ static int nxthread_schedsetup(FAR struct tcb_s *tcb, int priority,
   /* Assign a unique task ID to the task. */
 
   ret = nxtask_assignpid(tcb);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Save task priority and entry point in the TCB */
 
@@ -608,7 +608,7 @@ static inline int nxtask_stackargsetup(FAR struct task_tcb_s *tcb,
   stackargv[argc + 1] = NULL;
   tcb->argv = stackargv;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

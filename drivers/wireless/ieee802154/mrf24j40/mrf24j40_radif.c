@@ -230,7 +230,7 @@ int mrf24j40_bind(FAR struct ieee802154_radio_s *radio,
 
   DEBUGASSERT(dev != NULL);
   dev->radiocb = radiocb;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -285,7 +285,7 @@ int mrf24j40_txnotify(FAR struct ieee802154_radio_s *radio, bool gts)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -374,7 +374,7 @@ int mrf24j40_txdelayed(FAR struct ieee802154_radio_s *radio,
 
   nxsem_post(&dev->exclsem);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -423,7 +423,7 @@ int mrf24j40_rxenable(FAR struct ieee802154_radio_s *radio, bool enable)
       mrf24j40_setreg(dev->spi, MRF24J40_INTCON, reg);
     }
 
-  return OK;
+  return OKK;
 }
 
 int mrf24j40_energydetect(FAR struct ieee802154_radio_s *radio, uint32_t nsymbols)
@@ -524,7 +524,7 @@ int mrf24j40_reset(FAR struct ieee802154_radio_s *radio)
 
   mrf24j40_setpamode(dev, MRF24J40_PA_AUTO);
 
-  return OK;
+  return OKK;
 }
 
 int mrf24j40_getattr(FAR struct ieee802154_radio_s *radio,
@@ -711,7 +711,7 @@ int mrf24j40_beaconstart(FAR struct ieee802154_radio_s *radio,
       return -ENOTTY;
     }
 
-  return OK;
+  return OKK;
 }
 
 int mrf24j40_beaconupdate(FAR struct ieee802154_radio_s *radio,
@@ -723,7 +723,7 @@ int mrf24j40_beaconupdate(FAR struct ieee802154_radio_s *radio,
                       MRF24J40_BEACON_FIFO);
   mrf24j40_beacon_trigger(dev);
 
-  return OK;
+  return OKK;
 }
 
 int mrf24j40_beaconstop(FAR struct ieee802154_radio_s *radio)
@@ -768,5 +768,5 @@ int mrf24j40_sfupdate(FAR struct ieee802154_radio_s *radio,
   reg |= sfspec->final_capslot & MRF24J40_ESLOTG1_CAP;
   mrf24j40_setreg(dev->spi, MRF24J40_ESLOTG1, reg);
 
-  return OK;
+  return OKK;
 }

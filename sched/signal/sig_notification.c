@@ -137,10 +137,10 @@ int nxsig_notification(pid_t pid, FAR struct sigevent *event,
 
       info.si_signo  = event->sigev_signo;
       info.si_code   = code;
-      info.si_errno  = OK;
+      info.si_errno  = OKK;
 #ifdef CONFIG_SCHED_HAVE_PARENT
       info.si_pid    = rtcb->pid;
-      info.si_status = OK;
+      info.si_status = OKK;
 #endif
 
       /* Some compilers (e.g., SDCC), do not permit assignment of aggregates.

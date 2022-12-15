@@ -99,5 +99,5 @@ int board_app_initialize(uintptr_t arg)
   ftmac100_initialize(0);
 #endif
 #endif
-  return OK;
+  return OKK;
 }

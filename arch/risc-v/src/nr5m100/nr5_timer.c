@@ -271,7 +271,7 @@ static int nr5_timer_setisr(FAR struct nr5_timer_dev_s *dev,
     {
       up_disable_irq(vectorno);
       irq_detach(vectorno);
-      return OK;
+      return OKK;
     }
 
   /* Otherwise set callback and enable interrupt */
@@ -285,7 +285,7 @@ static int nr5_timer_setisr(FAR struct nr5_timer_dev_s *dev,
   up_prioritize_irq(vectorno, NVIC_SYSH_PRIORITY_DEFAULT);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 static void nr5_timer_enableint(FAR struct nr5_timer_dev_s *dev, int source)
@@ -344,7 +344,7 @@ static int nr5_timer_setmode(FAR struct nr5_timer_dev_s *dev, nr5_timer_mode_t m
   nr5_timer_clear_counter(dev);
   nr5_putreg16(dev, NR5_BTIM_CR1_OFFSET, val);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -507,7 +507,7 @@ int nr5_timer_deinit(FAR struct nr5_timer_dev_s * dev)
 
   ((struct nr5_timer_priv_s *)dev)->mode = NR5_TIMER_MODE_UNUSED;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* defined(CONFIG_NR5_TIM1 || ... || TIM8) */

@@ -275,7 +275,7 @@ static int rtc_interrupt(int irq, void *context, FAR void *arg)
   /* Clear any pending alarm interrupts */
 
   putreg32(RTC_SCCR_ALRCLR, SAM_RTC_SCCR);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -348,7 +348,7 @@ int up_rtc_initialize(void)
 #endif
 
   rtc_dumpregs("After Initialization");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -442,7 +442,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
   tp->tm_year = cent * 100 + year - 1900;
 
   rtc_dumptime(tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -553,7 +553,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
   DEBUGASSERT(g_rtc_enabled);
 
   rtc_dumpregs("New time setting");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -650,7 +650,7 @@ int sam_rtc_setalarm(FAR const struct timespec *tp, alarmcb_t callback)
       /* Enable alarm interrupts */
 
       putreg32(RTC_IER_ALREN, SAM_RTC_IER);
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);

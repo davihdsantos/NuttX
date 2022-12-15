@@ -497,7 +497,7 @@ static void lpc17_40_takesem(struct lpc17_40_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1390,7 +1390,7 @@ static int lpc17_40_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1421,7 +1421,7 @@ static int lpc17_40_lock(FAR struct sdio_dev_s *dev, bool lock)
    */
 
   lpc17_40_muxbus_sdio_lock(lock);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1648,7 +1648,7 @@ static int lpc17_40_attach(FAR struct sdio_dev_s *dev)
   /* Attach the SD card interrupt handler */
 
   ret = irq_attach(LPC17_40_IRQ_MCI, lpc17_40_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
 
       /* Disable all interrupts at the SD card controller and clear static
@@ -1734,7 +1734,7 @@ static int lpc17_40_sendcmd(FAR struct sdio_dev_s *dev, uint32_t cmd, uint32_t a
 
   putreg32(SDCARD_RESPDONE_ICR | SDCARD_CMDDONE_ICR, LPC17_40_SDCARD_CLEAR);
   putreg32(regval, LPC17_40_SDCARD_CMD);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1791,7 +1791,7 @@ static int lpc17_40_recvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
 
   lpc17_40_configxfrints(priv, SDCARD_RECV_MASK);
   lpc17_40_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1845,7 +1845,7 @@ static int lpc17_40_sendsetup(FAR struct sdio_dev_s *dev, FAR const uint8_t *buf
 
   lpc17_40_configxfrints(priv, SDCARD_SEND_MASK);
   lpc17_40_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1901,7 +1901,7 @@ static int lpc17_40_cancel(FAR struct sdio_dev_s *dev)
   /* Mark no transfer in progress */
 
   priv->remaining = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1967,7 +1967,7 @@ static int lpc17_40_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
     }
 
   putreg32(SDCARD_CMDDONE_ICR, LPC17_40_SDCARD_CLEAR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1998,7 +1998,7 @@ static int lpc17_40_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd, uint3
   uint32_t respcmd;
 #endif
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R1  Command response (48-bit)
    *     47        0               Start bit
@@ -2080,7 +2080,7 @@ static int lpc17_40_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd, uint3
 static int lpc17_40_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd, uint32_t rlong[4])
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R2  CID, CSD register (136-bit)
    *     135       0               Start bit
@@ -2134,7 +2134,7 @@ static int lpc17_40_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd, uint32_t 
 static int lpc17_40_recvshort(FAR struct sdio_dev_s *dev, uint32_t cmd, uint32_t *rshort)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R3  OCR (48-bit)
    *     47        0               Start bit
@@ -2423,7 +2423,7 @@ static int lpc17_40_registercallback(FAR struct sdio_dev_s *dev,
   priv->cbevents = 0;
   priv->cbarg    = arg;
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2491,7 +2491,7 @@ static int lpc17_40_dmarecvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer
       ret = lpc17_40_dmasetup(priv->dma, SDCARD_RXDMA32_CONTROL,
                            SDCARD_RXDMA32_CONFIG, LPC17_40_SDCARD_FIFO,
                            (uint32_t)buffer, (buflen + 3) >> 2);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Start the DMA */
 
@@ -2563,7 +2563,7 @@ static int lpc17_40_dmasendsetup(FAR struct sdio_dev_s *dev,
       ret = lpc17_40_dmasetup(priv->dma, SDCARD_TXDMA32_CONTROL,
                            SDCARD_TXDMA32_CONFIG, (uint32_t)buffer,
                            LPC17_40_SDCARD_FIFO, (buflen + 3) >> 2);
-      if (ret == OK)
+      if (ret == OKK)
         {
           lpc17_40_sample(priv, SAMPLENDX_BEFORE_ENABLE);
 

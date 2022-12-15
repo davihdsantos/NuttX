@@ -113,7 +113,7 @@ int stm32_usbpullup(FAR struct usbdev_s *dev, bool enable)
 {
   usbtrace(TRACE_DEVPULLUP, (uint16_t)enable);
   stm32_gpiowrite(GPIO_USB_PULLUPn, !enable);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

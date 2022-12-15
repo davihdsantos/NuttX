@@ -114,7 +114,7 @@ int psock_local_bind(FAR struct socket *psock,
     }
 
   conn->lc_state = LOCAL_STATE_BOUND;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_LOCAL */

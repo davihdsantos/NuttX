@@ -126,7 +126,7 @@ static ssize_t nxffs_rdseek(FAR struct nxffs_volume_s *volume,
 
   blkentry->foffset = fpos - datstart;
   nxffs_ioseek(volume, blkentry->hoffset + SIZEOF_NXFFS_DATA_HDR + blkentry->foffset);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -356,11 +356,11 @@ int nxffs_nextblock(FAR struct nxffs_volume_s *volume, off_t offset,
               /* Read the block header and verify the block at that address */
 
               ret = nxffs_rdblkhdr(volume, blkentry->hoffset, &blkentry->datlen);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   finfo("Found a valid data block, offset: %d datlen: %d\n",
                         blkentry->hoffset, blkentry->datlen);
-                  return OK;
+                  return OKK;
                 }
 
               /* False alarm.. Restore the volume cache position (that was
@@ -454,5 +454,5 @@ int nxffs_rdblkhdr(FAR struct nxffs_volume_s *volume, off_t offset,
   /* Looks good! Return the data length and success */
 
   *datlen = dlen;
-  return OK;
+  return OKK;
 }

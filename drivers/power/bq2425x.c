@@ -213,7 +213,7 @@ static int bq2425x_getreg8(FAR struct bq2425x_dev_s *priv, uint8_t regaddr,
   /* Copy 8-bit value to be returned */
 
   *regval = val;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -265,7 +265,7 @@ static inline int bq2425x_getreport(FAR struct bq2425x_dev_s *priv,
   int ret;
 
   ret = bq2425x_getreg8(priv, BQ2425X_REG_1, &regval);
-  if (ret == OK)
+  if (ret == OKK)
     {
       *report = regval;
     }
@@ -319,7 +319,7 @@ static inline int bq2425x_reset(FAR struct bq2425x_dev_s *priv)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -359,7 +359,7 @@ static inline int bq2425x_watchdog(FAR struct bq2425x_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -414,7 +414,7 @@ static int bq2425x_state(FAR struct battery_charger_dev_s *dev,
       *status = BATTERY_IDLE;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -480,7 +480,7 @@ static int bq2425x_health(FAR struct battery_charger_dev_s *dev,
     break;
   }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -497,7 +497,7 @@ static int bq2425x_online(FAR struct battery_charger_dev_s *dev,
   /* There is no concept of online/offline in this driver */
 
   *status = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -576,7 +576,7 @@ static inline int bq2425x_powersupply(FAR struct bq2425x_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -625,7 +625,7 @@ static inline int bq2425x_setvolt(FAR struct bq2425x_dev_s *priv, int volts)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -674,7 +674,7 @@ static inline int bq2425x_setcurr(FAR struct bq2425x_dev_s *priv, int current)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -699,7 +699,7 @@ static int bq2425x_voltage(FAR struct battery_charger_dev_s *dev, int value)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -724,7 +724,7 @@ static int bq2425x_current(FAR struct battery_charger_dev_s *dev, int value)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -748,7 +748,7 @@ static int bq2425x_input_current(FAR struct battery_charger_dev_s *dev,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

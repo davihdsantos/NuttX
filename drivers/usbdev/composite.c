@@ -409,7 +409,7 @@ static int composite_bind(FAR struct usbdevclass_driver_s *driver,
   /* And pull-up the data line for the soft connect function */
 
   DEV_CONNECT(dev);
-  return OK;
+  return OKK;
 
 errout:
   composite_unbind(driver, dev);
@@ -738,7 +738,7 @@ static int composite_setup(FAR struct usbdevclass_driver_s *driver,
       if (ret < 0)
         {
           usbtrace(TRACE_CLSERROR(USBCOMPOSITE_TRACEERR_EPRESPQ), (uint16_t)-ret);
-          ctrlreq->result = OK;
+          ctrlreq->result = OKK;
           composite_ep0incomplete(dev->ep0, ctrlreq);
         }
     }

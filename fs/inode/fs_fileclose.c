@@ -71,7 +71,7 @@
 int file_close(FAR struct file *filep)
 {
   struct inode *inode;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(filep != NULL);
   inode = filep->f_inode;

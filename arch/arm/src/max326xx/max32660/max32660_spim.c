@@ -743,7 +743,7 @@ done:
 
   /* Return OK to indicate that we are finished with the transfer */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -786,7 +786,7 @@ static int spi_interrupt(int irq, void *context, void *arg)
       do
         {
           ret = spi_poll(priv);
-          DEBUGASSERT(ret == OK || ret == -EBUSY);
+          DEBUGASSERT(ret == OKK || ret == -EBUSY);
 
           /* Check if there is more Rx data to be read */
 
@@ -797,7 +797,7 @@ static int spi_interrupt(int irq, void *context, void *arg)
       while (/* RX buffer != NULL && */ rxavail > rxlevel);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -839,14 +839,14 @@ static int spi_lock(struct spi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1310,7 +1310,7 @@ static void spi_exchange(struct spi_dev_s *dev, const void *txbuffer, void *rxbu
   /* Poll one time to setup the transfer */
 
   ret = spi_poll(priv);
-  DEBUGASSERT(ret == OK || ret == -EBUSY);
+  DEBUGASSERT(ret == OKK || ret == -EBUSY);
 
   /* Initiate data transmission */
 
@@ -1324,7 +1324,7 @@ static void spi_exchange(struct spi_dev_s *dev, const void *txbuffer, void *rxbu
     {
       ret = spi_poll(priv);
     }
-  while (ret != OK);
+  while (ret != OKK);
 
   /* Then wait for the master done interrupt */
 
@@ -1467,7 +1467,7 @@ static void spi_bus_initialize(struct max326_spidev_s *priv)
    */
 
   ret = irq_attach(priv->irq, spi_interrupt, priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(priv->irq);
     }

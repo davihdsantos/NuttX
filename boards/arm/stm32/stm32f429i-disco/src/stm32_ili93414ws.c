@@ -496,7 +496,7 @@ static int stm32_ili93414ws_sendblock(FAR struct ili93414ws_lcd_s *lcd,
 
   stm32_ili93414ws_spidisable();
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -718,7 +718,7 @@ static int stm32_ili93414ws_recvblock(FAR struct ili93414ws_lcd_s *lcd,
 
   /* Disable spi device is done by recvword  */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -889,7 +889,7 @@ static inline void stm32_ili93414ws_cmddata(
 
 static int stm32_ili93414ws_backlight(FAR struct ili9341_lcd_s *lcd, int level)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

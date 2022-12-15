@@ -148,7 +148,7 @@ static inline int romfs_checkentry(struct romfs_mountpt_s *rm,
             }
 
           dirinfo->rd_next                   = next;
-          return OK;
+          return OKK;
         }
     }
 
@@ -245,7 +245,7 @@ static int romfs_followhardlinks(struct romfs_mountpt_s *rm, uint32_t offset,
       if (!IS_HARDLINK(next))
         {
           *poffset = offset;
-          return OK;
+          return OKK;
         }
 
       /* Follow the hard-link */
@@ -308,7 +308,7 @@ static inline int romfs_searchdir(struct romfs_mountpt_s *rm,
         {
           /* Its a match! Return success */
 
-          return OK;
+          return OKK;
         }
 
       /* No match... select the offset to the next entry */
@@ -368,7 +368,7 @@ void romfs_semgive(struct romfs_mountpt_s *rm)
 int romfs_hwread(struct romfs_mountpt_s *rm, uint8_t *buffer, uint32_t sector,
                  unsigned int nsectors)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Check the access mode */
 
@@ -401,7 +401,7 @@ int romfs_hwread(struct romfs_mountpt_s *rm, uint8_t *buffer, uint32_t sector,
 
       if (nsectorsread == (ssize_t)nsectors)
         {
-          ret = OK;
+          ret = OKK;
         }
       else if (nsectorsread < 0)
         {
@@ -465,7 +465,7 @@ int romfs_filecacheread(struct romfs_mountpt_s *rm, struct romfs_file_s *rf,
       rf->rf_cachesector = sector;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -499,7 +499,7 @@ int romfs_hwconfigure(struct romfs_mountpt_s *rm)
 
       ret = MTD_IOCTL(inode->u.i_mtd, MTDIOC_GEOMETRY,
                       (unsigned long)&mgeo);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -515,7 +515,7 @@ int romfs_hwconfigure(struct romfs_mountpt_s *rm)
       struct geometry geo;
 
       ret = inode->u.i_bops->geometry(inode, &geo);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -558,7 +558,7 @@ int romfs_hwconfigure(struct romfs_mountpt_s *rm)
 
       rm->rm_buffer      = rm->rm_xipbase;
       rm->rm_cachesector = 0;
-      return OK;
+      return OKK;
     }
 
   /* Allocate the device cache buffer for normal sector accesses */
@@ -569,7 +569,7 @@ int romfs_hwconfigure(struct romfs_mountpt_s *rm)
       return -ENOMEM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -617,7 +617,7 @@ int romfs_fsconfigure(struct romfs_mountpt_s *rm)
   /* and return success */
 
   rm->rm_mounted    = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -658,7 +658,7 @@ int romfs_fileconfigure(struct romfs_mountpt_s *rm, struct romfs_file_s *rf)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -692,14 +692,14 @@ int romfs_checkmount(struct romfs_mountpt_s *rm)
         {
           /* It is impossible to remove MTD device */
 
-          return OK;
+          return OKK;
         }
       else if (inode->u.i_bops->geometry)
         {
           ret = inode->u.i_bops->geometry(inode, &geo);
           if (ret == OK && geo.geo_available && !geo.geo_mediachanged)
             {
-              return OK;
+              return OKK;
             }
         }
 
@@ -739,7 +739,7 @@ int romfs_finddirentry(struct romfs_mountpt_s *rm,
 
   if (!path || path[0] == '\0')
     {
-      return OK;
+      return OKK;
     }
 
   /* Then loop for each directory/file component in the full path */
@@ -788,7 +788,7 @@ int romfs_finddirentry(struct romfs_mountpt_s *rm,
         {
           /* Yes.. return success */
 
-          return OK;
+          return OKK;
         }
 
       /* No... If that was not the last path component, then it had
@@ -861,7 +861,7 @@ int romfs_parsedirentry(struct romfs_mountpt_s *rm, uint32_t offset,
   *pinfo = romfs_devread32(rm, ndx + ROMFS_FHDR_INFO);
   *psize = romfs_devread32(rm, ndx + ROMFS_FHDR_SIZE);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -928,7 +928,7 @@ int romfs_parsefilename(struct romfs_mountpt_s *rm, uint32_t offset,
   /* Terminate the name (NAME_MAX+1 chars total) and return success */
 
   pname[namelen] = '\0';
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -982,7 +982,7 @@ int romfs_datastart(struct romfs_mountpt_s *rm, uint32_t offset,
           /* Yes.. then the data starts at the next chunk */
 
           *start = offset;
-          return OK;
+          return OKK;
         }
     }
 

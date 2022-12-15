@@ -245,7 +245,7 @@ int nx_smp_start(void)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

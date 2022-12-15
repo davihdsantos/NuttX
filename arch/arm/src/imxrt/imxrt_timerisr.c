@@ -232,7 +232,7 @@ void arm_timer_initialize(void)
   /* Register to receive power management callbacks */
 
   ret = pm_register(&g_timer_pmcb);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   UNUSED(ret);
 #endif
 

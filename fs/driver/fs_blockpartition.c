@@ -117,7 +117,7 @@ static int part_open(FAR struct inode *inode)
 {
   FAR struct part_struct_s *dev = inode->i_private;
   FAR struct inode *parent = dev->parent;
-  int ret = OK;
+  int ret = OKK;
 
   /* Open the parent block device */
 
@@ -140,7 +140,7 @@ static int part_close(FAR struct inode *inode)
 {
   FAR struct part_struct_s *dev = inode->i_private;
   FAR struct inode *parent = dev->parent;
-  int ret = OK;
+  int ret = OKK;
 
   if (parent->u.i_bops->close)
     {
@@ -282,7 +282,7 @@ static int part_unlink(FAR struct inode *inode)
   inode_release(parent);
   kmm_free(dev);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -355,7 +355,7 @@ int register_blockpartition(FAR const char *partition,
       goto errout_release;
     }
 
-  return OK;
+  return OKK;
 
 errout_release:
   inode_release(dev->parent);

@@ -387,7 +387,7 @@ int s32k1xx_lpuart_configure(uint32_t base,
   regval |= LPUART_CTRL_RE | LPUART_CTRL_TE;
   putreg32(regval, base + S32K1XX_LPUART_CTRL_OFFSET);
 
-  return OK;
+  return OKK;
 }
 #endif /* HAVE_LPUART_DEVICE */
 

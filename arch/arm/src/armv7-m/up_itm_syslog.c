@@ -136,7 +136,7 @@ static int itm_putc(int ch)
 
 static int itm_flush(void)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

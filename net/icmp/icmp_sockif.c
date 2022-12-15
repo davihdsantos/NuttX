@@ -161,7 +161,7 @@ static int icmp_setup(FAR struct socket *psock, int protocol)
       /* Save the pre-allocated connection in the socket structure */
 
       psock->s_conn = conn;
-      return OK;
+      return OKK;
     }
   else
     {
@@ -545,7 +545,7 @@ static int icmp_close(FAR struct socket *psock)
       conn->crefs--;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

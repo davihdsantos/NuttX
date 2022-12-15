@@ -162,7 +162,7 @@ int rmmod(FAR void *handle)
   /* And free the registry entry */
 
   kmm_free(modp);
-  return OK;
+  return OKK;
 
 errout_with_lock:
   modlib_registry_unlock();

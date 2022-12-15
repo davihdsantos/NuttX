@@ -284,7 +284,7 @@ static int lpc17_40_irqinfo(int irq, uintptr_t *regaddr, uint32_t *bit,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -574,6 +574,6 @@ int up_prioritize_irq(int irq, int priority)
   putreg32(regval, regaddr);
 
   lpc17_40_dumpnvic("prioritize", irq);
-  return OK;
+  return OKK;
 }
 #endif

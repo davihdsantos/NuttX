@@ -430,7 +430,7 @@ int hcs12_configgpio(uint16_t cfgset)
     {
       hcs12_gpiowrite(cfgset, (cfgset & GPIO_OUTPUT_VALUE) == GPIO_OUTPUT_HIGH);
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

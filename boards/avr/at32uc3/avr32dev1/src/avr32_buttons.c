@@ -89,7 +89,7 @@ static int board_button_irqx(int irq, xcpt_t irqhandler, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

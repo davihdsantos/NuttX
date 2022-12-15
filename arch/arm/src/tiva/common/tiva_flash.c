@@ -180,7 +180,7 @@ static int tiva_erase(FAR struct mtd_dev_s *dev, off_t startblock,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -409,7 +409,7 @@ static int tiva_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = TIVA_FLASH_PAGESIZE;  /* Size of one read/write block */
               geo->erasesize    = TIVA_FLASH_PAGESIZE;  /* Size of one erase block */
               geo->neraseblocks = TIVA_VIRTUAL_NPAGES;
-              ret               = OK;
+              ret               = OKK;
           }
         }
         break;
@@ -426,7 +426,7 @@ static int tiva_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
                */
 
               *ppv = (void *)TIVA_VIRTUAL_BASE;
-              ret  = OK;
+              ret  = OKK;
             }
         }
         break;
@@ -437,7 +437,7 @@ static int tiva_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
 
           tiva_erase(dev, 0, TIVA_VIRTUAL_NPAGES);
 
-          ret = OK;
+          ret = OKK;
         }
         break;
 

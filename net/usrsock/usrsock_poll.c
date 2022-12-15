@@ -171,7 +171,7 @@ static int usrsock_pollsetup(FAR struct socket *psock, FAR struct pollfd *fds)
   FAR struct usrsock_conn_s *conn = psock->s_conn;
   FAR struct usrsock_poll_s *info;
   FAR struct devif_callback_s *cb;
-  int ret = OK;
+  int ret = OKK;
 
   /* Sanity check */
 
@@ -351,7 +351,7 @@ static int usrsock_pollteardown(FAR struct socket *psock,
       kmm_free(info);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

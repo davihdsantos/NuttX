@@ -326,7 +326,7 @@ static int bmp180_checkid(FAR struct bmp180_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -522,7 +522,7 @@ static int bmp180_getpressure(FAR struct bmp180_dev_s *priv)
 
 static int bmp180_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -535,7 +535,7 @@ static int bmp180_open(FAR struct file *filep)
 
 static int bmp180_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -75,7 +75,7 @@
 
 int a1x_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_BUTTONS
   /* Register the BUTTON driver */

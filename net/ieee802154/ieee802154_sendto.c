@@ -442,7 +442,7 @@ ssize_t psock_ieee802154_sendto(FAR struct socket *psock, FAR const void *buf,
   FAR struct radio_driver_s *radio;
   FAR struct ieee802154_conn_s *conn;
   struct ieee802154_sendto_s state;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify that the sockfd corresponds to valid, allocated socket */
 

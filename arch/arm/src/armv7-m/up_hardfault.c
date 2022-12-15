@@ -146,5 +146,5 @@ int up_hardfault(int irq, FAR void *context, FAR void *arg)
   (void)up_irq_save();
   _alert("PANIC!!! Hard fault: %08x\n", getreg32(NVIC_HFAULTS));
   PANIC();
-  return OK;
+  return OKK;
 }

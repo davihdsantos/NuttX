@@ -233,7 +233,7 @@ static int syslog_rpmsg_flush(void)
   FAR struct syslog_rpmsg_s *priv = &g_syslog_rpmsg;
 
   work_queue(HPWORK, &priv->work, syslog_rpmsg_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 static ssize_t syslog_rpmsg_write(FAR const char *buffer, size_t buflen)

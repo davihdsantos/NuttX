@@ -146,7 +146,7 @@ int sim_zoneinfo(int minor)
     }
 
   printf("TZ database mounted at %s\n", CONFIG_LIBC_TZDIR);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LIB_ZONEINFO_ROMFS */

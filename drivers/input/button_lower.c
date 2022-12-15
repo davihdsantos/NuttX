@@ -212,7 +212,7 @@ static int btn_interrupt(int irq, FAR void *context, FAR void *arg)
       g_btnhandler(&g_btnlower, g_btnarg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

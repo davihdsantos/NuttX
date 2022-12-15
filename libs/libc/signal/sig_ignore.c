@@ -62,7 +62,7 @@ int sigignore(int signo)
   act.sa_flags   = 0;
 
   ret = sigemptyset(&act.sa_mask);
-  if (ret == OK)
+  if (ret == OKK)
     {
       ret = sigaction(signo, &act, NULL);
     }

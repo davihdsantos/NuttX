@@ -91,7 +91,7 @@
 int psock_bind(FAR struct socket *psock, const struct sockaddr *addr,
                socklen_t addrlen)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify that the psock corresponds to valid, allocated socket */
 
@@ -112,7 +112,7 @@ int psock_bind(FAR struct socket *psock, const struct sockaddr *addr,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -163,7 +163,7 @@ int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET */

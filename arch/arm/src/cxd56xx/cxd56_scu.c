@@ -378,7 +378,7 @@ static int seq_semtake(sem_t *id)
     {
       ASSERT(errno == EINTR);
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1004,7 +1004,7 @@ static int seq_oneshot(int bustype, int slave, FAR uint16_t *inst,
   int tid;
   int istart;
   int i;
-  int ret = OK;
+  int ret = OKK;
   uint16_t lastinst;
 
   ASSERT(bustype == SCU_BUS_SPI || bustype == SCU_BUS_I2C0 ||
@@ -1265,7 +1265,7 @@ static int seq_stop(FAR struct seq_s *seq, int fifoid)
 
   if (!seq_isactive(seq))
     {
-      return OK;
+      return OKK;
     }
 
   val = getreg32(SCUFIFO_R_CTRL1(fifo->rid));
@@ -1425,7 +1425,7 @@ static int seq_setsamplingrate(FAR struct seq_s *seq, uint8_t samplingrate)
     }
   seq->rate = samplingrate;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1873,7 +1873,7 @@ static int seq_fifoinit(FAR struct seq_s *seq, int fifoid, uint16_t fsize)
     {
       if (deci->dfifo[fifoid].fifo)
         {
-          return OK;
+          return OKK;
         }
     }
   else
@@ -1882,7 +1882,7 @@ static int seq_fifoinit(FAR struct seq_s *seq, int fifoid, uint16_t fsize)
         {
           /* FIFO already initialized */
 
-          return OK;
+          return OKK;
         }
     }
 
@@ -2026,7 +2026,7 @@ static int seq_fifoinit(FAR struct seq_s *seq, int fifoid, uint16_t fsize)
       putreg32(val, SCUSEQ_ADC_PROPERTY);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2158,7 +2158,7 @@ static int seq_setadjustment(FAR struct seq_s *seq,
   val = adj->z.offset | ((uint32_t)adj->z.gain << 16);
   putreg32(val, SCUSEQ_MATH_PROC_OFST_GAIN_Z(sid));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2202,7 +2202,7 @@ static int seq_setfilter(FAR struct scufifo_s *fifo, int pos,
   mathf_setiirfilter(mid, 0, &iir[0]);
   mathf_setiirfilter(mid, 1, &iir[1]);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2303,7 +2303,7 @@ static int seq_seteventnotifier(FAR struct scufifo_s *fifo,
 
   putreg32(1 << mid, SCU_EVENT_STT);
 
-  return OK;
+  return OKK;
 }
 
 #ifndef CONFIG_DISABLE_SIGNAL
@@ -2355,7 +2355,7 @@ static int seq_setwatermark(FAR struct seq_s *seq, int fifoid,
   scuinfo("watermark = %04x, PID = %d, signo = %d\n", wm->watermark,
           notify->pid, notify->signo);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2808,7 +2808,7 @@ int seq_setinstruction(FAR struct seq_s *seq, const uint16_t *inst,
 
   seq_setinst(seq->id, istart, nr_insts - 1);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3104,7 +3104,7 @@ int seq_read(FAR struct seq_s *seq, int fifoid, FAR char *buffer, int length)
 
 int seq_ioctl(FAR struct seq_s *seq, int fifoid, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   if (fifoid < 0 || fifoid > 2)
     {

@@ -118,7 +118,7 @@ static inline int open_mountpoint(FAR struct inode *inode,
       return -ret;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -372,7 +372,7 @@ FAR DIR *opendir(FAR const char *path)
       /* Open the directory at the relative path */
 
       ret = open_mountpoint(inode, relpath, dir);
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto errout_with_direntry;
         }

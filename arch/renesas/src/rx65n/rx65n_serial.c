@@ -1052,7 +1052,7 @@ static int up_setup(struct uart_dev_s *dev)
   priv->scr |= (RX_SCISCR_TE | RX_SCISCR_RE);
   up_serialout(priv, RX_SCI_SCR_OFFSET, priv->scr);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1101,7 +1101,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach the RDR full IRQ (RXI) that is enabled by the RIE SCR bit */
 
   ret = irq_attach(priv->recvirq, up_rcvinterrupt, dev);
-  if (OK != ret)
+  if (OKK != ret)
     {
       return ret;
     }
@@ -1109,7 +1109,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach the TDR empty IRQ (TXI) enabled by the TIE SCR bit */
 
   ret = irq_attach(priv->xmitirq, up_xmtinterrupt, dev);
-  if (OK != ret)
+  if (OKK != ret)
     {
       return ret;
     }
@@ -1117,7 +1117,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach the ERI IRQ */
 
   ret = irq_attach(priv->eriirq, up_eriinterrupt, dev);
-  if (OK != ret)
+  if (OKK != ret)
     {
       return ret;
     }
@@ -1125,7 +1125,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach the TEI IRQ */
 
   ret = irq_attach(priv->teiirq, up_teiinterrupt, dev);
-  if (OK == ret)
+  if (OKK == ret)
     {
 #ifdef CONFIG_ARCH_IRQPRIO
       /* All SCI0 interrupts share the same prioritization */
@@ -1136,7 +1136,7 @@ static int up_attach(struct uart_dev_s *dev)
 
       /* Return OK on success */
 
-      return OK;
+      return OKK;
     }
 
   (void)irq_detach(priv->recvirq);
@@ -1194,7 +1194,7 @@ static int up_eriinterrupt(int irq, void *context, void *arg)
       up_serialout(priv, RX_SCI_SSR_OFFSET, priv->ssr);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int up_teiinterrupt(int irq, void *context, void *arg)
@@ -1219,7 +1219,7 @@ static int up_teiinterrupt(int irq, void *context, void *arg)
      up_serialout(priv, RX_SCI_SSR_OFFSET, priv->ssr);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int up_rcvinterrupt(int irq, void *context, void *arg)
@@ -1235,7 +1235,7 @@ static int up_rcvinterrupt(int irq, void *context, void *arg)
    */
 
   uart_recvchars(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1263,7 +1263,7 @@ static int  up_xmtinterrupt(int irq, void *context, FAR void *arg)
    */
 
   uart_xmitchars(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

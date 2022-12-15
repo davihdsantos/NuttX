@@ -237,7 +237,7 @@ static int gpdma_interrupt(int irq, FAR void *context, FAR void *arg)
                   regval = getreg32(LPC43_GPDMA_INTTCSTAT);
                   if ((regval & chbit) != 0)
                     {
-                      result = OK;
+                      result = OKK;
                     }
 
                   /* This should not happen */
@@ -261,7 +261,7 @@ static int gpdma_interrupt(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -317,7 +317,7 @@ void weak_function up_dma_initialize(void)
   /* Attach and enable the common interrupt handler */
 
   ret = irq_attach(LPC43M4_IRQ_DMA, gpdma_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(LPC43M4_IRQ_DMA);
     }
@@ -398,7 +398,7 @@ DMA_HANDLE lpc43_dmachannel(void)
   do
     {
       ret = nxsem_wait(&g_gpdma.exclsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret < 0);
 
@@ -543,7 +543,7 @@ int lpc43_dmasetup(DMA_HANDLE handle, uint32_t control, uint32_t config,
                      GPDMA_CONFIG_FCNTRL_MASK);
   putreg32(regval, base + LPC43_GPDMA_CONFIG_CHOFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -602,7 +602,7 @@ int lpc43_dmastart(DMA_HANDLE handle, dma_callback_t callback, void *arg)
   regval |= (GPDMA_CONFIG_ENA | GPDMA_CONFIG_IE | GPDMA_CONFIG_ITC);
   putreg32(regval, base + LPC43_GPDMA_CONFIG_CHOFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

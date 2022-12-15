@@ -144,7 +144,7 @@ int ipv6_getpeername(FAR struct socket *psock, FAR struct sockaddr *addr,
 
   /* Return success */
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_IPv6 */

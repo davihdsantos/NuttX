@@ -123,7 +123,7 @@ int tm4c_adc_setup(void)
     }
 #endif /* CONFIG_ADC */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

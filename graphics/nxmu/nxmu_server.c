@@ -252,7 +252,7 @@ static inline int nxmu_setup(FAR const char *mqname, FAR NX_DRIVERTYPE *dev,
 #ifdef CONFIG_NX_XYINPUT
   nxmu_mouseinit(nxmu->be.vinfo.xres, nxmu->be.vinfo.yres);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -581,7 +581,7 @@ int nx_runinstance(FAR const char *mqname, FAR NX_DRIVERTYPE *dev)
     }
 
   nxmu_shutdown(&nxmu);
-  return OK;
+  return OKK;
 
 errout:
   nxmu_shutdown(&nxmu);

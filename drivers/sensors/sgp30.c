@@ -463,7 +463,7 @@ static int sgp30_measure_airq(FAR struct sgp30_dev_s *priv,
   data->co2eq_ppm = sgp30_data_word_to_uint16(words + 0);
   data->tvoc_ppb = sgp30_data_word_to_uint16(words + 1);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -496,7 +496,7 @@ static int sgp30_measure_raw(FAR struct sgp30_dev_s *priv,
   data->h2_signal = sgp30_data_word_to_uint16(words + 0);
   data->ethanol_signal = sgp30_data_word_to_uint16(words + 1);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -524,7 +524,7 @@ static int sgp30_open(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -601,7 +601,7 @@ static int sgp30_close(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -618,11 +618,11 @@ static int sgp30_close(FAR struct file *filep)
     {
       nxsem_destroy(&priv->devsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -650,7 +650,7 @@ static ssize_t sgp30_read(FAR struct file *filep, FAR char *buffer,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -755,7 +755,7 @@ static int sgp30_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -936,7 +936,7 @@ static int sgp30_unlink(FAR struct inode *inode)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -946,7 +946,7 @@ static int sgp30_unlink(FAR struct inode *inode)
     {
       nxsem_destroy(&priv->devsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   /* No... just mark the driver as unlinked and free the resources when

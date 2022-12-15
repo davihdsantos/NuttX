@@ -618,7 +618,7 @@ static int cxd56_geofence_poll(FAR struct file *filep, FAR struct pollfd *fds,
 {
   FAR struct inode *               inode;
   FAR struct cxd56_geofence_dev_s *priv;
-  int                              ret = OK;
+  int                              ret = OKK;
   int                              i;
 
   inode = filep->f_inode;

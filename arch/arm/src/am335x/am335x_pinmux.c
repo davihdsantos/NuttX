@@ -101,5 +101,5 @@ int am335x_pinmux_configure(uintptr_t padctl, pinmux_pinset_t muxset)
   /* Write the result to the specified Pad Control register */
 
   putreg32(regval, padctl);
-  return OK;
+  return OKK;
 }

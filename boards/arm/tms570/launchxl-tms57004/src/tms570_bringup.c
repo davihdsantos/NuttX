@@ -61,5 +61,5 @@
 
 int tms570_bringup(void)
 {
-  return OK;
+  return OKK;
 }

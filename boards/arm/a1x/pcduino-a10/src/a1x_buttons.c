@@ -126,7 +126,7 @@ int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
       a1x_pioirqenable(xxx);
       leave_critical_section(flags);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

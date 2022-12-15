@@ -180,7 +180,7 @@ static int max3421e_attach(FAR const struct max3421e_lowerhalf_s *lower,
       priv->arg     = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 static void max3421e_enable(FAR const struct max3421e_lowerhalf_s *lower,
@@ -418,7 +418,7 @@ int stm32_max3421e_setup(void)
       uerr("ERROR: Failed to start connection monitor: %d\n", monpid);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_VIEWTOOL_MAX3421E_SPI1 || CONFIG_VIEWTOOL_MAX3421E_SPI2 */

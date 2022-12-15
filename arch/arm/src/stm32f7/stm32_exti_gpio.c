@@ -98,7 +98,7 @@ static struct gpio_callback_s g_gpio_callbacks[16];
 
 static int stm32_exti0_isr(int irq, void *context, void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -119,7 +119,7 @@ static int stm32_exti0_isr(int irq, void *context, void *arg)
 
 static int stm32_exti1_isr(int irq, void *context, void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -140,7 +140,7 @@ static int stm32_exti1_isr(int irq, void *context, void *arg)
 
 static int stm32_exti2_isr(int irq, void *context, void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -161,7 +161,7 @@ static int stm32_exti2_isr(int irq, void *context, void *arg)
 
 static int stm32_exti3_isr(int irq, void *context, void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -182,7 +182,7 @@ static int stm32_exti3_isr(int irq, void *context, void *arg)
 
 static int stm32_exti4_isr(int irq, void *context, void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -205,7 +205,7 @@ static int stm32_exti_multiisr(int irq, void *context, int first, int last)
 {
   uint32_t pr;
   int pin;
-  int ret = OK;
+  int ret = OKK;
 
   /* Examine the state of each pin in the group */
 
@@ -395,7 +395,7 @@ int stm32_gpiosetevent(uint32_t pinset, bool risingedge, bool fallingedge,
               func ? 0 : exti,
               func ? exti : 0);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32F7_STM32F74XX || CONFIG_STM32F7_STM32F75XX */

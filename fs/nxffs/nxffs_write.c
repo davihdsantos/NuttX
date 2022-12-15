@@ -105,7 +105,7 @@ static inline int nxffs_hdrpos(FAR struct nxffs_volume_s *volume,
   /* Reserve memory for the object */
 
   ret = nxffs_wrreserve(volume, SIZEOF_NXFFS_DATA_HDR + size);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Save the offset to the FLASH region reserved for the data block
        * header
@@ -169,7 +169,7 @@ static inline int nxffs_hdrerased(FAR struct nxffs_volume_s *volume,
   /* Find a valid location to save the inode header */
 
   ret = nxffs_wrverify(volume, SIZEOF_NXFFS_DATA_HDR + size);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* This is where we will put the data block header */
 
@@ -221,16 +221,16 @@ static inline int nxffs_wralloc(FAR struct nxffs_volume_s *volume,
        */
 
       ret = nxffs_hdrpos(volume, wrfile, mindata);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Find a region of memory in the block that is fully erased */
 
           ret = nxffs_hdrerased(volume, wrfile, mindata);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Valid memory for the data block was found.  Return success. */
 
-              return OK;
+              return OKK;
             }
         }
 
@@ -265,7 +265,7 @@ static inline int nxffs_wralloc(FAR struct nxffs_volume_s *volume,
 
   /* Can't get here */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -315,7 +315,7 @@ static inline int nxffs_reverify(FAR struct nxffs_volume_s *volume,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -710,7 +710,7 @@ int nxffs_wrextend(FAR struct nxffs_volume_s *volume,
       remaining -= nwritten;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -810,7 +810,7 @@ int nxffs_wrreserve(FAR struct nxffs_volume_s *volume, size_t size)
    */
 
   volume->froffset = nxffs_iotell(volume) + size;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -907,7 +907,7 @@ int nxffs_wrverify(FAR struct nxffs_volume_s *volume, size_t size)
                       /* Update the free flash offset and return success */
 
                       volume->froffset = offset + size;
-                      return OK;
+                      return OKK;
                     }
                 }
 
@@ -1023,7 +1023,7 @@ int nxffs_wrblkhdr(FAR struct nxffs_volume_s *volume,
 
   /* Return success */
 
-  ret = OK;
+  ret = OKK;
 
 errout:
   wrfile->crc     = 0;

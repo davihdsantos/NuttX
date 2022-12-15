@@ -444,7 +444,7 @@ static int lmp92001_dac_setref(FAR struct lmp92001_dev_s *priv,
   uint8_t const BUFFER_SIZE = 2U;
   uint8_t buffer[BUFFER_SIZE];
 
-  int ret = OK;
+  int ret = OKK;
 
   ret = lmp92001_i2c_read(priv, LMP92001_REG_CREF, &value, 1);
   if (ret < 0)
@@ -488,7 +488,7 @@ static int lmp92001_dac_updateall(FAR struct lmp92001_dev_s *priv,
   uint8_t const BUFFER_SIZE = 3U;
   uint8_t buffer[BUFFER_SIZE];
 
-  int ret = OK;
+  int ret = OKK;
 
   buffer[0] = LMP92001_REG_DALL;
   buffer[1] = (uint8_t)(value >> 8U);
@@ -536,7 +536,7 @@ static int lmp92001_dac_setup(FAR struct dac_dev_s *dev)
   uint8_t const BUFFER_SIZE = 2U;
   uint8_t buffer[BUFFER_SIZE];
 
-  int ret = OK;
+  int ret = OKK;
 
   /* Enable DAC channels. */
 
@@ -634,7 +634,7 @@ static int lmp92001_dac_ioctl(FAR struct dac_dev_s *dev, int cmd,
                                unsigned long arg)
 {
   FAR struct lmp92001_dev_s *priv = (FAR struct lmp92001_dev_s *)dev->ad_priv;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -678,7 +678,7 @@ static int lmp92001_adc_setref(FAR struct lmp92001_dev_s *priv,
   uint8_t const BUFFER_SIZE = 2U;
   uint8_t buffer[BUFFER_SIZE];
 
-  int ret = OK;
+  int ret = OKK;
 
   ret = lmp92001_i2c_read(priv, LMP92001_REG_CREF, &value, 1);
   if (ret < 0)
@@ -768,7 +768,7 @@ static int lmp92001_adc_enablechannel(FAR struct lmp92001_dev_s *priv,
   uint8_t const BUFFER_SIZE = 2U;
   uint8_t buffer[BUFFER_SIZE];
 
-  int ret = OK;
+  int ret = OKK;
 
   if (priv->adc_channels_enabled < LMP92001_ADC_MAX_CHANNELS && channels != 0)
     {
@@ -857,7 +857,7 @@ static int lmp92001_adc_singleshot(FAR struct lmp92001_dev_s *priv)
 
   uint8_t sgen_value = 0;
 
-  int ret = OK;
+  int ret = OKK;
 
   /* Lock registers, this will also force CGEN.STRT to 0. */
 
@@ -921,7 +921,7 @@ static int lmp92001_adc_continuousconv(FAR struct lmp92001_dev_s *priv)
 
   uint8_t sgen_value = 0U;
 
-  int ret = OK;
+  int ret = OKK;
 
   /* Set CGEN.STRT bit and lock registers */
 
@@ -973,7 +973,7 @@ static int lmp92001_adc_readchannel(FAR struct lmp92001_dev_s *priv,
   uint8_t buffer[2];
   uint8_t channel;
 
-  int ret = OK;
+  int ret = OKK;
 
   /* Adding LMP92001_REG_ADC1 to a channel gives the channel's register.
    * Reminder: Channels numbering is the same as the datasheet.
@@ -1014,7 +1014,7 @@ static int lmp92001_adc_bind(FAR struct adc_dev_s *dev,
 
   priv->cb = callback;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1047,7 +1047,7 @@ static void lmp92001_adc_reset(FAR struct adc_dev_s *dev)
 
 static int lmp92001_adc_setup(FAR struct adc_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1088,7 +1088,7 @@ static int lmp92001_adc_ioctl(FAR struct adc_dev_s *dev, int cmd,
 {
   FAR struct lmp92001_dev_s *priv =
     (FAR struct lmp92001_dev_s *)dev->ad_priv;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1267,7 +1267,7 @@ static int lmp92001_gpio_direction(FAR struct ioexpander_dev_s *dev,
 static int lmp92001_gpio_option(FAR struct ioexpander_dev_s *dev, uint8_t pin,
                                 int opt, void *regval)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

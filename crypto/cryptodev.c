@@ -116,12 +116,12 @@ static int cryptodev_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
     {
       FAR struct session_op *ses = (FAR struct session_op *)arg;
       ses->ses = (uint32_t)ses;
-      return OK;
+      return OKK;
     }
 
   case CIOCFSESSION:
     {
-      return OK;
+      return OKK;
     }
 
 #ifdef CONFIG_CRYPTO_AES

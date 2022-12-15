@@ -193,7 +193,7 @@ int board_altmdm_initialize(FAR const char *devpath)
       board_altmdm_poweroff();
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -215,7 +215,7 @@ int board_altmdm_uninitialize(void)
       g_devhandle = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

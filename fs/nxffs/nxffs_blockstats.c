@@ -233,5 +233,5 @@ int nxffs_blockstats(FAR struct nxffs_volume_s *volume,
   finfo("  Unreadable blocks:  %d\n", stats->nbadread);
 
 #endif
-  return OK;
+  return OKK;
 }

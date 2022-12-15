@@ -179,7 +179,7 @@ static int stm32_attach_irq(FAR const struct mrf24j40_lower_s *lower,
 
   priv->handler = handler;
   priv->arg     = arg;
-  return OK;
+  return OKK;
 }
 
 static void stm32_enable_irq(FAR const struct mrf24j40_lower_s *lower,
@@ -291,7 +291,7 @@ static int stm32_mrf24j40_devsetup(FAR struct stm32_priv_s *priv)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -335,6 +335,6 @@ int stm32_mrf24j40_initialize(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_IEEE802154_MRF24J40 */

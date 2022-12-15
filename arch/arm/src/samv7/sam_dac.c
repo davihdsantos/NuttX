@@ -215,7 +215,7 @@ static int dac_interrupt(int irq, FAR void *context, FAR void *arg)
       dac_txdone(&g_dac1dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -266,7 +266,7 @@ static void dac_reset(FAR struct dac_dev_s *dev)
 static int dac_setup(FAR struct dac_dev_s *dev)
 {
 #warning "Missing logic"
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -337,7 +337,7 @@ static int dac_send(FAR struct dac_dev_s *dev, FAR struct dac_msg_s *msg)
 
   putreg16(msg->am_data >> 16, chan->dro);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -423,7 +423,7 @@ static int dac_timer_init(struct sam_dac_s *priv, uint32_t freq_required,
   /* And start the timer */
 
   sam_tc_start(priv->tc);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -495,7 +495,7 @@ static int dac_channel_init(FAR struct sam_chan_s *chan)
   /* Mark the DAC channel "in-use" */
 
   chan->inuse = 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -522,7 +522,7 @@ static int dac_module_init(void)
     {
       /* Yes.. then return success  We only have to do this once */
 
-      return OK;
+      return OKK;
     }
 
   ainfo("Initializing...\n");
@@ -581,7 +581,7 @@ static int dac_module_init(void)
   /* Mark the DAC module as initialized */
 
   g_dacmodule.initialized = 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

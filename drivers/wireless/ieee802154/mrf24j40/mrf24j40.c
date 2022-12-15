@@ -129,7 +129,7 @@ static int mrf24j40_energydetect(FAR struct mrf24j40_radio_s *dev,
 
   mrf24j40_setpamode(dev, MRF24J40_PA_AUTO);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -451,7 +451,7 @@ FAR struct ieee802154_radio_s *
 
   /* Attach irq */
 
-  if (lower->attach(lower, mrf24j40_interrupt, dev) != OK)
+  if (lower->attach(lower, mrf24j40_interrupt, dev) != OKK)
     {
 #if 0
       free(dev);

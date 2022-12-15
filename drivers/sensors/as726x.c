@@ -339,7 +339,7 @@ static void as726x_write8(FAR struct as726x_dev_s *priv, uint8_t regaddr,
 
 static int as726x_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -352,7 +352,7 @@ static int as726x_open(FAR struct file *filep)
 
 static int as726x_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

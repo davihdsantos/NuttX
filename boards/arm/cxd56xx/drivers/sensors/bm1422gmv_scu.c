@@ -272,7 +272,7 @@ static int bm1422gmv_checkid(FAR struct bm1422gmv_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -304,7 +304,7 @@ static int bm1422gmv_seqinit(FAR struct bm1422gmv_dev_s *priv)
   seq_setsample(priv->seq, BM1422GMV_BYTESPERSAMPLE, 0, BM1422GMV_ELEMENTSIZE,
                 false);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -355,7 +355,7 @@ static int bm1422gmv_open(FAR struct file *filep)
 
   g_refcnt++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -391,7 +391,7 @@ static int bm1422gmv_close(FAR struct file *filep)
       (void) seq_ioctl(priv->seq, priv->minor, SCUIOC_FREEFIFO, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -428,7 +428,7 @@ static int bm1422gmv_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct bm1422gmv_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -493,7 +493,7 @@ int bm1422gmv_init(FAR struct i2c_master_s *i2c, int port)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -139,7 +139,7 @@ static int oneshot_open(FAR struct file *filep)
 {
   tmrinfo("Opening...\n");
   DEBUGASSERT(filep != NULL && filep->f_inode != NULL);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -154,7 +154,7 @@ static int oneshot_close(FAR struct file *filep)
 {
   tmrinfo("Closing...\n");
   DEBUGASSERT(filep != NULL && filep->f_inode != NULL);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

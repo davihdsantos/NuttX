@@ -267,7 +267,7 @@ static void net_rpmsg_drv_wait(FAR sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -331,7 +331,7 @@ static int net_rpmsg_drv_transmit(FAR struct net_driver_s *dev, bool nocopy)
   else
     {
       NETDEV_TXDONE(dev);
-      return OK;
+      return OKK;
     }
 }
 
@@ -1014,7 +1014,7 @@ static int net_rpmsg_drv_ifup(FAR struct net_driver_s *dev)
 #  endif
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1154,7 +1154,7 @@ static int net_rpmsg_drv_txavail(FAR struct net_driver_s *dev)
       work_queue(LPWORK, &priv->pollwork, net_rpmsg_drv_txavail_work, dev, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1414,5 +1414,5 @@ int net_rpmsg_drv_init(FAR const char *cpuname,
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   netdev_register(dev, lltype);
-  return OK;
+  return OKK;
 }

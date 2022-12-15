@@ -77,7 +77,7 @@ int mq_getattr(mqd_t mqdes, struct mq_attr *mq_stat)
       mq_stat->mq_flags   = mqdes->oflags;
       mq_stat->mq_curmsgs = mqdes->msgq->nmsgs;
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

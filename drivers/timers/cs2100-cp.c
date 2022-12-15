@@ -833,7 +833,7 @@ int cs2100_dump(FAR const struct cs2100_config_s *config)
     }
 
   csinfo("  FuncCfg3: %02x\n", regval);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CS2100CP_DEBUG */

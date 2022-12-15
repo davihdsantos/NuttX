@@ -147,7 +147,7 @@ static int xbee_interrupt(int irq, FAR void *context, FAR void *arg)
       return work_queue(HPWORK, &priv->attnwork, xbee_attnworker, (FAR void *)priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1211,7 +1211,7 @@ XBEEHANDLE xbee_init(FAR struct spi_dev_s *spi,
 
   /* Attach irq */
 
-  if (lower->attach(lower, xbee_interrupt, priv) != OK)
+  if (lower->attach(lower, xbee_interrupt, priv) != OKK)
     {
       wlinfo("Failed to attach IRQ with XBee lower half\n");
       kmm_free(priv);
@@ -1567,7 +1567,7 @@ int xbee_atquery(FAR struct xbee_priv_s *priv, FAR const char *atcommand)
 
   nxsem_post(&priv->atquery_sem);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

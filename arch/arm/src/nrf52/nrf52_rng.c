@@ -135,7 +135,7 @@ static int nrf52_rng_initialize(void)
   static bool first_flag = true;
 
   if (false == first_flag)
-    return OK;
+    return OKK;
 
   first_flag = false;
 
@@ -161,7 +161,7 @@ static int nrf52_rng_initialize(void)
       return -EAGAIN;
     }
 
-  return OK;
+  return OKK;
 }
 
 static int nrf52_rng_irqhandler(int irq, FAR void *context, FAR void *arg)
@@ -186,7 +186,7 @@ static int nrf52_rng_irqhandler(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -203,7 +203,7 @@ static int nrf52_rng_open(FAR struct file *filep)
       return -EPERM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -216,7 +216,7 @@ static ssize_t nrf52_rng_read(FAR struct file *filep, FAR char *buffer,
   FAR struct rng_dev_s *priv = (struct rng_dev_s *)&g_rngdev;
   ssize_t read_len;
 
-  if (sem_wait(&priv->excl_sem) != OK)
+  if (sem_wait(&priv->excl_sem) != OKK)
     {
       errno = EBUSY;
       return -errno;

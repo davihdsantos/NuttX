@@ -237,7 +237,7 @@ static int kinetis_rdtime(FAR struct rtc_lowerhalf_s *lower,
       goto errout_with_errno;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_errno:
   ret = get_errno();
@@ -260,7 +260,7 @@ errout_with_errno:
       return -errcode;
     }
 
-  return OK;
+  return OKK;
 #endif
 }
 

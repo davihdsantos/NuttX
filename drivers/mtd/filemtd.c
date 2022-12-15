@@ -286,7 +286,7 @@ static int filemtd_erase(FAR struct mtd_dev_s *dev, off_t startblock,
       nbytes -= sizeof(buffer);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -445,7 +445,7 @@ static int filemtd_ioctl(FAR struct mtd_dev_s *dev, int cmd,
               geo->blocksize    = priv->blocksize;
               geo->erasesize    = priv->erasesize;
               geo->neraseblocks = priv->nblocks;
-              ret               = OK;
+              ret               = OKK;
             }
         }
         break;
@@ -459,7 +459,7 @@ static int filemtd_ioctl(FAR struct mtd_dev_s *dev, int cmd,
           /* Erase the entire device */
 
           filemtd_erase(dev, 0, priv->nblocks);
-          ret = OK;
+          ret = OKK;
         }
         break;
 

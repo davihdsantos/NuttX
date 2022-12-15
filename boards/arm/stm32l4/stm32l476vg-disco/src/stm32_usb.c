@@ -193,7 +193,7 @@ int stm32l4_usbhost_initialize(void)
   /* Register the USB mass storage class class */
 
   ret = usbhost_msc_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       udbg("ERROR: Failed to register the mass storage class: %d\n", ret);
     }
@@ -203,7 +203,7 @@ int stm32l4_usbhost_initialize(void)
   /* Register the CDC/ACM serial class */
 
   ret = usbhost_cdcacm_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       udbg("ERROR: Failed to register the CDC/ACM serial class: %d\n", ret);
     }
@@ -213,7 +213,7 @@ int stm32l4_usbhost_initialize(void)
   /* Initialize the HID keyboard class */
 
   ret = usbhost_kbdinit();
-  if (ret != OK)
+  if (ret != OKK)
     {
       udbg("Failed to register the HID keyboard class\n");
     }
@@ -223,7 +223,7 @@ int stm32l4_usbhost_initialize(void)
   /* Initialize the HID mouse class */
 
   ret = usbhost_mouse_init();
-  if (ret != OK)
+  if (ret != OKK)
     {
       udbg("Failed to register the HID mouse class\n");
     }

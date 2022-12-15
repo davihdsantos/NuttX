@@ -108,7 +108,7 @@ static int kinetis_dmainterrupt_int(int irq, void *context,
       ch->callback((DMA_HANDLE)&ch, ch->arg, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int kinetis_dmainterrupt(int irq, void *context, void *arg)
@@ -132,7 +132,7 @@ static int kinetis_dmainterrupt(int irq, void *context, void *arg)
                                &g_channels[irq_int + DMA_CHN_PER_GROUP]);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -179,7 +179,7 @@ void weak_function up_dma_initialize(void)
           ret = irq_attach(g_channels[i].irq, kinetis_dmainterrupt,
                            (void *)&g_channels[i].ind);
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable the IRQ at the NVIC (still disabled at the DMA
                * controller)
@@ -393,7 +393,7 @@ int kinetis_dmasetup(DMA_HANDLE handle, uint32_t mem_addr, size_t ntransfers,
   putreg16(ntransfers, KINETIS_DMA_TCD_BITER(ch->ind));
   putreg16(ntransfers, KINETIS_DMA_TCD_CITER(ch->ind));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -417,7 +417,7 @@ int kinetis_dmastart(DMA_HANDLE handle, dma_callback_t callback, void *arg)
 
   putreg8(ch->ind, KINETIS_DMA_SERQ);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

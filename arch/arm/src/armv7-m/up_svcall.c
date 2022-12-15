@@ -480,5 +480,5 @@ int up_svcall(int irq, FAR void *context, FAR void *arg)
 # endif
 #endif
 
-  return OK;
+  return OKK;
 }

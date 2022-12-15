@@ -86,7 +86,7 @@ int kinetis_usbpullup(FAR struct usbdev_s *dev, bool enable)
 {
   usbtrace(TRACE_DEVPULLUP, (uint16_t)enable);
 # warning "Missing logic"
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

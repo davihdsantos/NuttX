@@ -379,5 +379,5 @@ int tms570_sci_configure(uint32_t base, FAR const struct sci_config_s *config)
 
   gcr1 |= SCI_GCR1_SWRST;
   putreg32(gcr1, base + TMS570_SCI_GCR1_OFFSET);
-  return OK;
+  return OKK;
 }

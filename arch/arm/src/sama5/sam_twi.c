@@ -321,7 +321,7 @@ static void twi_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -656,7 +656,7 @@ static int twi_interrupt(int irq, FAR void *context, FAR void *arg)
       twi_wakeup(priv, -EIO);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -972,7 +972,7 @@ static int twi_reset(FAR struct i2c_master_s *dev)
   /* Re-initialize the port hardware */
 
   twi_hw_initialize(priv, priv->frequency);
-  ret = OK;
+  ret = OKK;
 
 errout_with_lock:
 
@@ -1328,7 +1328,7 @@ int sam_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   /* Detach Interrupt Handler */
 
   (void)irq_detach(priv->attr->irq);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAMA5_TWI0 || ... || CONFIG_SAMA5_TWI3 */

@@ -120,7 +120,7 @@ int imxrt_xbar_connect(uint16_t mux_index_out, uint16_t mux_index_input)
         }
 
       modifyreg16(address, clearbits, mux_input);
-      retval = OK;
+      retval = OKK;
     }
 
   return retval;

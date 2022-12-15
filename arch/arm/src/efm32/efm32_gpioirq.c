@@ -122,7 +122,7 @@ static int  efm32_gpio_interrupt(uint32_t mask, void *context)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

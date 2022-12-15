@@ -364,7 +364,7 @@ static int spiffs_check_delobj_lazy(FAR struct spiffs_s *fs, int16_t objid)
   ret = spiffs_objlu_find_id_and_span(fs, objid, 0, 0, &objhdr_pgndx);
   if (ret == -ENOENT)
     {
-      return OK;
+      return OKK;
     }
   else if (ret < 0)
     {
@@ -433,7 +433,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
   int16_t objndx_pgndx;
   int16_t ref_pgndx;
   bool delete_page = false;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check validity, take actions */
 
@@ -463,7 +463,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
             {
               /* No object with this objid, so remove page safely */
 
-              ret = OK;
+              ret = OKK;
             }
           else if (ret < 0)
             {
@@ -609,7 +609,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
                 {
                   /* no object with this objid, so remove page safely */
 
-                  ret = OK;
+                  ret = OKK;
                 }
               else if (ret < 0)
                 {
@@ -687,7 +687,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
                                                   &objndx_pgndx_lu);
               if (ret == -ENOENT)
                 {
-                  ret = OK;
+                  ret = OKK;
                   objndx_pgndx_lu = 0;
                 }
               else if (ret < 0)
@@ -706,7 +706,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
                                                   &objndx_pgndx_ph);
               if (ret == -ENOENT)
                 {
-                  ret = OK;
+                  ret = OKK;
                   objndx_pgndx_ph = 0;
                 }
               else if (ret < 0)
@@ -736,7 +736,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
                                                   0, 0, &data_pgndx_lu);
                   if (ret == -ENOENT)
                     {
-                      ret = OK;
+                      ret = OKK;
                       objndx_pgndx_lu = 0;
                     }
                   else if (ret < 0)
@@ -757,7 +757,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
                                                   0, 0, &data_pgndx_ph);
                   if (ret == -ENOENT)
                     {
-                      ret = OK;
+                      ret = OKK;
                       objndx_pgndx_ph = 0;
                     }
                   else if (ret < 0)
@@ -843,7 +843,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
                                               pghdr->spndx, cur_pgndx, &data_pgndx);
           if (ret == -ENOENT)
             {
-              ret = OK;
+              ret = OKK;
               data_pgndx = 0;
             }
           else if (ret < 0)
@@ -860,7 +860,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
                                               &objndx_pgndx_d);
           if (ret == -ENOENT)
             {
-              ret = OK;
+              ret = OKK;
               objndx_pgndx_d = 0;
             }
           else if (ret < 0)
@@ -973,7 +973,7 @@ static int spiffs_check_luentry_validate(FAR struct spiffs_s *fs,
             {
               /* No object with this ID, so remove page safely */
 
-              ret = OK;
+              ret = OKK;
               delete_page = true;
             }
           else if (ret < 0)
@@ -1065,7 +1065,7 @@ static int spiffs_lucheck_callback(FAR struct spiffs_s *fs, int16_t objid,
 {
   struct spiffs_page_header_s pghdr;
   int16_t cur_pgndx;
-  int ret = OK;
+  int ret = OKK;
   bool reload_lu = false;
 
   cur_pgndx = SPIFFS_OBJ_LOOKUP_ENTRY_TO_PGNDX(fs, cur_block, cur_entry);
@@ -1158,7 +1158,7 @@ static int spiffs_check_objidconsistency_callback(FAR struct spiffs_s *fs,
   FAR uint32_t *log_ndx = (FAR uint32_t *)user_var;
   FAR int16_t *obj_table = (FAR int16_t *)fs->work;
   int retc = SPIFFS_VIS_COUNTINUE;
-  int ret = OK;
+  int ret = OKK;
 
   if (objid != SPIFFS_OBJID_FREE && objid != SPIFFS_OBJID_DELETED &&
       (objid & SPIFFS_OBJID_NDXFLAG) != 0)
@@ -1323,13 +1323,13 @@ static int spiffs_check_objidconsistency_callback(FAR struct spiffs_s *fs,
 
 int spiffs_check_luconsistency(FAR struct spiffs_s *fs)
 {
-  int ret = OK;
+  int ret = OKK;
 
   ret = spiffs_foreach_objlu(fs, 0, 0, 0, 0, spiffs_lucheck_callback,
                              0, 0, 0, 0);
   if (ret == SPIFFS_VIS_END)
     {
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1370,7 +1370,7 @@ int spiffs_check_pgconsistency(FAR struct spiffs_s *fs)
   const uint32_t bits = 4;
   const int16_t pages_per_scan = SPIFFS_GEO_PAGE_SIZE(fs) * 8 / bits;
   int16_t pgndx_offset = 0;
-  int ret = OK;
+  int ret = OKK;
 
   /* For each range of pages fitting into work memory */
 
@@ -1510,7 +1510,7 @@ int spiffs_check_pgconsistency(FAR struct spiffs_s *fs)
                                                               0, &data_pgndx);
                           if (ret == -ENOENT)
                             {
-                              ret = OK;
+                              ret = OKK;
                               data_pgndx = 0;
                             }
                           else if (ret < 0)
@@ -1632,7 +1632,7 @@ int spiffs_check_pgconsistency(FAR struct spiffs_s *fs)
                                                               rpgndx, &data_pgndx);
                               if (ret == -ENOENT)
                                 {
-                                  ret = OK;
+                                  ret = OKK;
                                   data_pgndx = 0;
                                 }
                               else if (ret < 0)
@@ -1898,7 +1898,7 @@ int spiffs_check_pgconsistency(FAR struct spiffs_s *fs)
                                            cur_pgndx);
 
                           delete_page = true;
-                          ret = OK;
+                          ret = OKK;
                         }
 
                       if (rewrite_ndx_to_this)
@@ -2051,7 +2051,7 @@ int spiffs_check_pgconsistency(FAR struct spiffs_s *fs)
 int spiffs_check_objidconsistency(FAR struct spiffs_s *fs)
 {
   uint32_t objid_logndx = 0;
-  int ret = OK;
+  int ret = OKK;
 
   /* Implementation not:
    * fs->work is used for a temporary object index memory, listing found
@@ -2068,7 +2068,7 @@ int spiffs_check_objidconsistency(FAR struct spiffs_s *fs)
                              &objid_logndx, 0, 0);
   if (ret == SPIFFS_VIS_END)
     {
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -2103,7 +2103,7 @@ int spiffs_dump(FAR struct spiffs_s *fs)
   char buffer[80];
   int entries_per_page;
   int len = 0;
-  int ret = OK;
+  int ret = OKK;
 
   entries_per_page = (SPIFFS_GEO_PAGE_SIZE(fs) / sizeof(int16_t));
 
@@ -2214,6 +2214,6 @@ int spiffs_dump(FAR struct spiffs_s *fs)
   spiffs_checkinfo("used:        %ld of %ld\n",
                    (long)(fs->alloc_pages * data_pgsize),
                    (long)(ndata_pages * data_pgsize));
-  return OK;
+  return OKK;
 }
 #endif

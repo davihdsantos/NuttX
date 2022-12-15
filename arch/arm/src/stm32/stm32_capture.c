@@ -622,7 +622,7 @@ static inline int stm32_cap_set_rcc(FAR const struct stm32_cap_priv_s *priv,
       modifyreg32(offset, mask, 0);
     }
 
-  return OK;
+  return OKK;
 }
 /************************************************************************************
  * Basic Functions
@@ -732,7 +732,7 @@ static int stm32_cap_setisr(FAR struct stm32_cap_dev_s *dev, xcpt_t handler,
           irq_detach(irq_of);
         }
 #endif
-      return OK;
+      return OKK;
     }
 
   /* Otherwise set callback and enable interrupt */
@@ -748,7 +748,7 @@ static int stm32_cap_setisr(FAR struct stm32_cap_dev_s *dev, xcpt_t handler,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 static void stm32_cap_enableint(FAR struct stm32_cap_dev_s *dev,
@@ -1013,7 +1013,7 @@ static int stm32_cap_setchannel(FAR struct stm32_cap_dev_s *dev, uint8_t channel
   /* Enable this channel timer */
 
   stm32_modifyreg16(priv, STM32_GTIM_CCER_OFFSET, 0, ccer_en_bit);
-  return OK;
+  return OKK;
 }
 
 static uint32_t stm32_cap_getcapture(FAR struct stm32_cap_dev_s *dev, uint8_t channel)
@@ -1332,7 +1332,7 @@ int stm32_cap_deinit(FAR struct stm32_cap_dev_s * dev)
     }
 
   stm32_cap_set_rcc(priv, false);
-  return OK;
+  return OKK;
 }
 
 #endif /* defined(CONFIG_STM32_TIM1 || ... || TIM14) */

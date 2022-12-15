@@ -110,7 +110,7 @@ static void pthread_condtimedout(int argc, uint32_t pid, uint32_t signo)
       info.si_value.sival_ptr = NULL;
 #ifdef CONFIG_SCHED_HAVE_PARENT
       info.si_pid             = (pid_t)pid;
-      info.si_status          = OK;
+      info.si_status          = OKK;
 #endif
 
       /* Process the receipt of the signal.  The scheduler is not locked as
@@ -171,7 +171,7 @@ int pthread_cond_timedwait(FAR pthread_cond_t *cond, FAR pthread_mutex_t *mutex,
   irqstate_t flags;
   sclock_t ticks;
   int mypid = (int)getpid();
-  int ret = OK;
+  int ret = OKK;
   int status;
 
   sinfo("cond=0x%p mutex=0x%p abstime=0x%p\n", cond, mutex, abstime);
@@ -321,7 +321,7 @@ int pthread_cond_timedwait(FAR pthread_cond_t *cond, FAR pthread_mutex_t *mutex,
                   sinfo("Re-locking...\n");
 
                   status = pthread_mutex_take(mutex, NULL, false);
-                  if (status == OK)
+                  if (status == OKK)
                     {
                       mutex->pid = mypid;
                     }

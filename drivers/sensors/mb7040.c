@@ -242,7 +242,7 @@ static int mb7040_changeaddr(FAR struct mb7040_dev_s *priv, uint8_t addr)
 
 static int mb7040_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -255,7 +255,7 @@ static int mb7040_open(FAR struct file *filep)
 
 static int mb7040_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -298,7 +298,7 @@ static int mb7040_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode        *inode = filep->f_inode;
   FAR struct mb7040_dev_s *priv  = inode->i_private;
-  int                      ret   = OK;
+  int                      ret   = OKK;
 
   /* Handle ioctl commands */
 
@@ -319,7 +319,7 @@ static int mb7040_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           uint16_t     range = 0;
           DEBUGASSERT(ptr != NULL);
           ret = mb7040_readrange(priv, &range);
-          if (ret == OK)
+          if (ret == OKK)
             {
               *ptr = (int32_t)range;
 

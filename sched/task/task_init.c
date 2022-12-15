@@ -146,7 +146,7 @@ int task_init(FAR struct tcb_s *tcb, const char *name, int priority,
       goto errout_with_group;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_group:
   group_leave(tcb);

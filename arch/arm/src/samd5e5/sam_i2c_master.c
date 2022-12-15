@@ -501,7 +501,7 @@ static void i2c_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -790,7 +790,7 @@ static int i2c_interrupt(int irq, FAR void *context, FAR void *arg)
           i2c_wait_synchronization(priv);
 
           i2c_wakeup(priv, -ENODEV);
-          return OK;
+          return OKK;
         }
 
       if (priv->xfrd == msg->length)
@@ -815,7 +815,7 @@ static int i2c_interrupt(int irq, FAR void *context, FAR void *arg)
       i2c_putreg8(priv, I2C_INT_MB, SAM_I2C_INTFLAG_OFFSET);
     }
 
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************
@@ -1460,7 +1460,7 @@ int sam_i2c_uninitialize(FAR struct i2c_master_s *dev)
   /* Detach Interrupt Handler */
 
   (void)irq_detach(priv->attr->irq);
-  return OK;
+  return OKK;
 }
 
 /*******************************************************************************
@@ -1506,7 +1506,7 @@ int sam_i2c_reset(FAR struct i2c_master_s *dev)
   /* Re-initialize the port hardware */
 
   i2c_hw_initialize(priv, priv->frequency);
-  ret = OK;
+  ret = OKK;
 
   /* Release our lock on the bus */
 

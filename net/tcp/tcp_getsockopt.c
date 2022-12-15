@@ -149,7 +149,7 @@ int tcp_getsockopt(FAR struct socket *psock, int option,
             FAR int *keepalive = (FAR int *)value;
             *keepalive         = (int)conn->keepalive;
             *value_len         = sizeof(int);
-            ret                = OK;
+            ret                = OKK;
           }
         break;
 
@@ -184,7 +184,7 @@ int tcp_getsockopt(FAR struct socket *psock, int option,
 
                 net_dsec2timeval(conn->keepidle, tv);
                 *value_len = sizeof(struct timeval);
-                ret        = OK;
+                ret        = OKK;
               }
           }
         break;
@@ -215,7 +215,7 @@ int tcp_getsockopt(FAR struct socket *psock, int option,
 
                 net_dsec2timeval(conn->keepintvl, tv);
                 *value_len = sizeof(struct timeval);
-                ret        = OK;
+                ret        = OKK;
               }
           }
         break;
@@ -235,7 +235,7 @@ int tcp_getsockopt(FAR struct socket *psock, int option,
             FAR int *keepcnt = (FAR int *)value;
             *keepcnt         = (int)conn->keepcnt;
             *value_len       = sizeof(int);
-            ret              = OK;
+            ret              = OKK;
           }
         break;
 

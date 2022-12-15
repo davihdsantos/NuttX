@@ -246,7 +246,7 @@ static uint8_t spi_status(FAR struct spi_bitbang_s *priv, uint32_t devid)
 static int spi_cmddata(FAR struct spi_bitbang_s *priv, uint32_t devid,
                        bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -391,7 +391,7 @@ int sam_tsc_setup(int minor)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ARDUINO_ITHEAD_TFT && CONFIG_SPI_BITBANG && CONFIG_INPUT_ADS7843E */

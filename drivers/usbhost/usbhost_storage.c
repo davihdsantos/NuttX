@@ -341,7 +341,7 @@ static void usbhost_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -468,7 +468,7 @@ static int usbhost_allocdevno(FAR struct usbhost_state_s *priv)
           g_devinuse |= bitno;
           priv->sdchar = 'a' + devno;
           leave_critical_section(flags);
-          return OK;
+          return OKK;
         }
     }
 
@@ -711,7 +711,7 @@ static inline int usbhost_maxlunreq(FAR struct usbhost_state_s *priv)
       *(priv->tbuffer) = 0;
     }
 
-  return OK;
+  return OKK;
 }
 
 static inline int usbhost_testunitready(FAR struct usbhost_state_s *priv)
@@ -1192,7 +1192,7 @@ static inline int usbhost_cfgdesc(FAR struct usbhost_state_s *priv,
     }
 
   uinfo("Endpoints allocated\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1218,7 +1218,7 @@ static inline int usbhost_initvolume(FAR struct usbhost_state_s *priv)
 {
   FAR struct usbmsc_csw_s *csw;
   unsigned int retries;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(priv != NULL);
 
@@ -1605,7 +1605,7 @@ static inline int usbhost_talloc(FAR struct usbhost_state_s *priv)
 static inline int usbhost_tfree(FAR struct usbhost_state_s *priv)
 {
   FAR struct usbhost_hubport_s *hport;
-  int result = OK;
+  int result = OKK;
 
   DEBUGASSERT(priv != NULL && priv->usbclass.hport != NULL);
 
@@ -1695,7 +1695,7 @@ usbhost_create(FAR struct usbhost_hubport_s *hport,
 
       /* Assign a device number to this class instance */
 
-      if (usbhost_allocdevno(priv) == OK)
+      if (usbhost_allocdevno(priv) == OKK)
         {
          /* Initialize class method function pointers */
 
@@ -1861,7 +1861,7 @@ static int usbhost_disconnected(struct usbhost_class_s *usbclass)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1909,7 +1909,7 @@ static int usbhost_open(FAR struct inode *inode)
       /* Otherwise, just increment the reference count on the driver */
 
       priv->crefs++;
-      ret = OK;
+      ret = OKK;
     }
   leave_critical_section(flags);
 
@@ -1967,7 +1967,7 @@ static int usbhost_close(FAR struct inode *inode)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2220,7 +2220,7 @@ static int usbhost_geometry(FAR struct inode *inode, struct geometry *geometry)
       uinfo("nsectors: %ld sectorsize: %d\n",
              (long)geometry->geo_nsectors, geometry->geo_sectorsize);
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

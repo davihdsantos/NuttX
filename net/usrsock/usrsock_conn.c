@@ -284,7 +284,7 @@ int usrsock_setup_request_callback(FAR struct usrsock_conn_s *conn,
       pstate->cb->priv  = (FAR void *)pstate;
       pstate->cb->event = event;
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

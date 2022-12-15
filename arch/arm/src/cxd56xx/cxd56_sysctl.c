@@ -66,7 +66,7 @@ static const struct file_operations g_sysctlfops =
 
 static int sysctl_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -108,7 +108,7 @@ static int sysctl_rxhandler(int cpuid, int protoid,
 
   sysctl_semgive(&g_sync);
 
-  return OK;
+  return OKK;
 }
 
 int cxd56_sysctlcmd(uint8_t id, uint32_t data)

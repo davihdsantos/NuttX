@@ -313,7 +313,7 @@ int pthread_create(FAR pthread_t *thread, FAR const pthread_attr_t *attr,
                             TCB_FLAG_TTYPE_PTHREAD);
     }
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       errcode = ENOMEM;
       goto errout_with_join;
@@ -420,7 +420,7 @@ int pthread_create(FAR pthread_t *thread, FAR const pthread_attr_t *attr,
 
   ret = pthread_schedsetup(ptcb, param.sched_priority, pthread_start,
                            start_routine);
-  if (ret != OK)
+  if (ret != OKK)
     {
       errcode = EBUSY;
       goto errout_with_join;

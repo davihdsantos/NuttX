@@ -133,7 +133,7 @@ static void nxsig_timeout(int argc, wdparm_t itcb)
       u.wtcb->sigunbinfo.si_value.sival_int = 0;
 #ifdef CONFIG_SCHED_HAVE_PARENT
       u.wtcb->sigunbinfo.si_pid             = 0;  /* Not applicable */
-      u.wtcb->sigunbinfo.si_status          = OK;
+      u.wtcb->sigunbinfo.si_status          = OKK;
 #endif
       up_unblock_task(u.wtcb);
     }
@@ -186,7 +186,7 @@ void nxsig_wait_irq(FAR struct tcb_s *wtcb, int errcode)
       wtcb->sigunbinfo.si_value.sival_int = 0;
 #ifdef CONFIG_SCHED_HAVE_PARENT
       wtcb->sigunbinfo.si_pid             = 0;  /* Not applicable */
-      wtcb->sigunbinfo.si_status          = OK;
+      wtcb->sigunbinfo.si_status          = OKK;
 #endif
       up_unblock_task(wtcb);
     }

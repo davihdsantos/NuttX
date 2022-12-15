@@ -160,7 +160,7 @@ static int kl_portinterrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -286,7 +286,7 @@ int kl_gpioirqattach(uint32_t pinset, xcpt_t pinisr, void *pinarg)
    /* And return the old PIN isr address */
 
    leave_critical_section(flags);
-   return OK;
+   return OKK;
 
 #else
    return -ENOSYS;

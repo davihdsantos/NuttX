@@ -97,5 +97,5 @@ int board_app_initialize(uintptr_t arg)
   stm32_wlinitialize();
 #endif
 
-  return OK;
+  return OKK;
 }

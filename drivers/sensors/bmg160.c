@@ -323,7 +323,7 @@ static int bmg160_interrupt_handler(int irq, FAR void *context)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -411,7 +411,7 @@ static int bmg160_open(FAR struct file *filep)
   sninfo("BMG160_INT_MAP_1_REG = %04x\n", reg_content);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -429,7 +429,7 @@ static int bmg160_close(FAR struct file *filep)
 
   bmg160_reset(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -496,7 +496,7 @@ static ssize_t bmg160_write(FAR struct file *filep, FAR const char *buffer,
 
 static int bmg160_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -593,7 +593,7 @@ int bmg160_register(FAR const char *devpath, FAR struct spi_dev_s *spi,
   priv->flink = g_bmg160_list;
   g_bmg160_list = priv;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_SENSORS_BMG160 */

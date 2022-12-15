@@ -79,7 +79,7 @@ int register_binfmt(FAR struct binfmt_s *binfmt)
       binfmt->next = g_binfmts;
       g_binfmts    = binfmt;
       sched_unlock();
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

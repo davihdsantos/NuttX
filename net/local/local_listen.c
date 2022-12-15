@@ -144,7 +144,7 @@ int local_listen(FAR struct socket *psock, int backlog)
       server->lc_state = LOCAL_STATE_LISTENING;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_LOCAL_STREAM */

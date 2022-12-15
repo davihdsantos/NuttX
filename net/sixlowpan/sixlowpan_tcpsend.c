@@ -284,7 +284,7 @@ static int sixlowpan_tcp_header(FAR struct tcp_conn_s *conn,
   ipv6tcp->tcp.tcpchksum   = ~sixlowpan_tcp_chksum(ipv6tcp, buf, buflen);
 
   ninfo("Outgoing TCP packet length: %d bytes\n", iplen + IPv6_HDRLEN);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

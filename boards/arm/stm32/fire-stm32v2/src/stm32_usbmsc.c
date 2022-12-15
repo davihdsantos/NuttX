@@ -80,6 +80,6 @@ int board_usbmsc_initialize(int port)
 #ifndef CONFIG_NSH_BUILTIN_APPS
   return stm32_sdinitialize(CONFIG_SYSTEM_USBMSC_DEVMINOR1);
 #else
-  return OK;
+  return OKK;
 #endif
 }

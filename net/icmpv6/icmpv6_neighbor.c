@@ -217,7 +217,7 @@ int icmpv6_neighbor(const net_ipv6addr_t ipaddr)
        * of the Multicast address, a routing able entry will be required.
        */
 
-      return OK;
+      return OKK;
     }
 
   /* Get the device that can route this request */
@@ -315,7 +315,7 @@ int icmpv6_neighbor(const net_ipv6addr_t ipaddr)
         {
           /* We have it!  Break out with success */
 
-          ret = OK;
+          ret = OKK;
           break;
         }
 
@@ -354,7 +354,7 @@ int icmpv6_neighbor(const net_ipv6addr_t ipaddr)
        * Advertisement is received.  Otherwise, it will return -ETIMEDOUT.
        */
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           break;
         }

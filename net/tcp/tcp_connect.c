@@ -124,7 +124,7 @@ static inline int psock_setup_callbacks(FAR struct socket *psock,
                                 TCP_TIMEDOUT | TCP_CONNECTED | NETDEV_DOWN);
       pstate->tc_cb->priv    = (FAR void *)pstate;
       pstate->tc_cb->event   = psock_connect_eventhandler;
-      ret                    = OK;
+      ret                    = OKK;
     }
 
   return ret;
@@ -245,7 +245,7 @@ static uint16_t psock_connect_eventhandler(FAR struct net_driver_s *dev,
 
           /* Indicate that the socket is no longer connected */
 
-          pstate->tc_result = OK;
+          pstate->tc_result = OKK;
         }
 
       /* Otherwise, it is not an event of importance to us at the moment */
@@ -307,7 +307,7 @@ int psock_tcp_connect(FAR struct socket *psock,
                       FAR const struct sockaddr *addr)
 {
   struct tcp_connect_s state;
-  int                  ret = OK;
+  int                  ret = OKK;
 
   /* Interrupts must be disabled through all of the following because
    * we cannot allow the network callback to occur until we are completely

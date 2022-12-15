@@ -557,7 +557,7 @@ static int esp32_setup(struct uart_dev_s *dev)
   esp32_serialout(priv, UART_CONF1_OFFSET, regval);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -636,7 +636,7 @@ static int esp32_attach(struct uart_dev_s *dev)
 {
   struct esp32_dev_s *priv = (struct esp32_dev_s *)dev->priv;
   int cpu;
-  int ret = OK;
+  int ret = OKK;
 
   /* Allocate a level-sensitive, priority 1 CPU interrupt for the UART */
 
@@ -664,7 +664,7 @@ static int esp32_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->config->irq, esp32_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the CPU interrupt (RX and TX interrupts are still disabled
        * in the UART
@@ -793,7 +793,7 @@ static int esp32_interrupt(int cpuint, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -810,7 +810,7 @@ static int esp32_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {
@@ -909,7 +909,7 @@ static int esp32_ioctl(struct file *filep, int cmd, unsigned long arg)
 
         /* Decode baud. */
 
-        ret = OK;
+        ret = OKK;
         baud = cfgetispeed(termiosp);
 
         /* Decode number of bits */
@@ -963,7 +963,7 @@ static int esp32_ioctl(struct file *filep, int cmd, unsigned long arg)
 #endif
         /* Verify that all settings are valid before committing */
 
-        if (ret == OK)
+        if (ret == OKK)
           {
             /* Commit */
 

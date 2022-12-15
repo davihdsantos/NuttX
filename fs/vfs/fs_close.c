@@ -135,7 +135,7 @@ int close(int fd)
     }
 
   leave_cancellation_point();
-  return OK;
+  return OKK;
 
 errout:
   set_errno(errcode);

@@ -310,7 +310,7 @@ static uint8_t pn532_status(FAR struct pn532_dev_s *dev)
 
 static int pn532_wait_rx_ready(FAR struct pn532_dev_s *dev, int timeout)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_PN532_USE_IRQ_FLOW_CONTROL
   struct timespec ts;
@@ -463,7 +463,7 @@ int pn532_read_ack(FAR struct pn532_dev_s *dev)
 
 int pn532_write_frame(FAR struct pn532_dev_s *dev, FAR struct pn532_frame *f)
 {
-  int res = OK;
+  int res = OKK;
 
   pn532_lock(dev->spi);
   pn532_select(dev);
@@ -478,7 +478,7 @@ int pn532_write_frame(FAR struct pn532_dev_s *dev, FAR struct pn532_frame *f)
   /* Wait ACK frame */
 
   res = pn532_wait_rx_ready(dev, 30);
-  if (res == OK)
+  if (res == OKK)
     {
       if (!pn532_read_ack(dev))
         {
@@ -497,7 +497,7 @@ int pn532_read_frame(FAR struct pn532_dev_s *dev, FAR struct pn532_frame *f,
 
   /* Wait for frame available */
 
-  if ((res = pn532_wait_rx_ready(dev, 100)) == OK)
+  if ((res = pn532_wait_rx_ready(dev, 100)) == OKK)
     {
       /* Read header */
 
@@ -518,7 +518,7 @@ int pn532_read_frame(FAR struct pn532_dev_s *dev, FAR struct pn532_frame *f,
 
           if (pn532_rx_frame_is_valid(f, true))
             {
-              res = OK;
+              res = OKK;
             }
         }
     }
@@ -539,7 +539,7 @@ bool pn532_set_config(FAR struct pn532_dev_s *dev, uint8_t flags)
   uint8_t resp[9];
   bool res = false;
 
-  if (pn532_write_frame(dev, f) == OK)
+  if (pn532_write_frame(dev, f) == OKK)
     {
       pn532_read(dev, (uint8_t *) &resp, 9);
       tracerx("set config responce", resp, 9);
@@ -571,14 +571,14 @@ int pn532_sam_config(FAR struct pn532_dev_s *dev,
 
   res = -EIO;
 
-  if (pn532_write_frame(dev, f) == OK)
+  if (pn532_write_frame(dev, f) == OKK)
     {
-      if (pn532_read_frame(dev, f, 4) == OK)
+      if (pn532_read_frame(dev, f, 4) == OKK)
         {
           tracerx("sam config response", (uint8_t *) f->data, 3);
           if (f->data[0] == PN532_COMMAND_SAMCONFIGURATION + 1)
             {
-              res = OK;
+              res = OKK;
             }
         }
     }
@@ -597,9 +597,9 @@ int pn532_get_fw_version(FAR struct pn532_dev_s *dev,
   pn532_frame_init(f, PN532_COMMAND_GETFIRMWAREVERSION);
   pn532_frame_finish(f);
 
-  if (pn532_write_frame(dev, f) == OK)
+  if (pn532_write_frame(dev, f) == OKK)
     {
-      if (pn532_read_frame(dev, f, 6) == OK)
+      if (pn532_read_frame(dev, f, 6) == OKK)
         {
           if (f->data[0] == PN532_COMMAND_GETFIRMWAREVERSION + 1)
             {
@@ -611,7 +611,7 @@ int pn532_get_fw_version(FAR struct pn532_dev_s *dev,
                   memcpy(fv, fw, sizeof(struct pn_firmware_version));
                 }
 
-              res = OK;
+              res = OKK;
             }
         }
     }
@@ -639,7 +639,7 @@ int pn532_write_gpio(FAR struct pn532_dev_s *dev, uint8_t p3, uint8_t p7)
       if ((f->tfi == PN532_PN532TOHOST) &&
           (f->data[0] == PN532_COMMAND_WRITEGPIO + 1))
         {
-          res = OK;
+          res = OKK;
         }
     }
 
@@ -663,12 +663,12 @@ uint32_t pn532_write_passive_data(FAR struct pn532_dev_s *dev,
   f->len += 7;
   pn532_frame_finish(f);
 
-  if (pn532_write_frame(dev, f) == OK)
+  if (pn532_write_frame(dev, f) == OKK)
     {
       if (dev->state == PN532_STATE_DATA_READY)
         {
           if (pn532_read_frame(dev, (FAR struct pn532_frame *) resp, 15)
-              == OK)
+              == OKK)
             {
               dev->state = PN532_STATE_IDLE;
               f = (FAR struct pn532_frame *) resp;
@@ -700,11 +700,11 @@ uint32_t pn532_read_passive_data(FAR struct pn532_dev_s *dev, uint8_t address,
   f->len += 3;
   pn532_frame_finish(f);
 
-  if (pn532_write_frame(dev, f) == OK)
+  if (pn532_write_frame(dev, f) == OKK)
     {
       if (dev->state == PN532_STATE_DATA_READY)
         {
-          if (pn532_read_frame(dev, (FAR struct pn532_frame *)resp, 25) == OK)
+          if (pn532_read_frame(dev, (FAR struct pn532_frame *)resp, 25) == OKK)
             {
               dev->state = PN532_STATE_IDLE;
               f = (FAR struct pn532_frame *) resp;
@@ -738,7 +738,7 @@ uint32_t pn532_read_passive_target_id(FAR struct pn532_dev_s *dev,
   if (dev->state == PN532_STATE_DATA_READY)
     {
       res = -EIO;
-      if (pn532_read_frame(dev, (FAR struct pn532_frame *) resp, 15) == OK)
+      if (pn532_read_frame(dev, (FAR struct pn532_frame *) resp, 15) == OKK)
         {
           FAR struct pn_poll_response *r;
 
@@ -812,7 +812,7 @@ bool pn532_set_rf_config(struct pn532_dev_s *dev, struct pn_rf_config_s *conf)
   f->len += conf->data_size+1;
   pn532_frame_finish(f);
 
-  if (pn532_write_frame(dev, f) == OK)
+  if (pn532_write_frame(dev, f) == OKK)
     {
       pn532_read(dev, (uint8_t *) f, 10);
       tracerx("rf config response", (uint8_t *) f, 10);
@@ -854,7 +854,7 @@ static int irq_handler(int irq, FAR void *context)
   ctlsinfo("*IRQ*\n");
   work_queue(HPWORK, &g_dev->irq_work, pn532_worker, dev, 0);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -886,7 +886,7 @@ static int _open(FAR struct file *filep)
   pn532_get_fw_version(dev, NULL);
 
   dev->state = PN532_STATE_IDLE;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -920,7 +920,7 @@ static int _close(FAR struct file *filep)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -986,7 +986,7 @@ static int _ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode;
   FAR struct pn532_dev_s *dev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(filep);
   inode = filep->f_inode;

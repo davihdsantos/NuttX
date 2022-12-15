@@ -352,7 +352,7 @@ static inline void nxtask_sigchild(grpid_t pgrpid, FAR struct tcb_s *ctcb,
 
       info.si_signo           = SIGCHLD;
       info.si_code            = CLD_EXITED;
-      info.si_errno           = OK;
+      info.si_errno           = OKK;
       info.si_value.sival_ptr = NULL;
 #ifndef CONFIG_DISABLE_PTHREAD
       info.si_pid             = chgrp->tg_task;
@@ -405,7 +405,7 @@ static inline void nxtask_sigchild(FAR struct tcb_s *ptcb,
 
       info.si_signo           = SIGCHLD;
       info.si_code            = CLD_EXITED;
-      info.si_errno           = OK;
+      info.si_errno           = OKK;
       info.si_value.sival_ptr = NULL;
 #ifndef CONFIG_DISABLE_PTHREAD
       info.si_pid             = ctcb->group->tg_task;

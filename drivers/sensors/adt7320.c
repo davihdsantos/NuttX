@@ -326,7 +326,7 @@ static int adt7320_readtemp(FAR struct adt7320_dev_s *priv, FAR b16_t *temp)
     }
 
   *temp = temp16;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -347,7 +347,7 @@ static int adt7320_open(FAR struct file *filep)
       set_errno(ENODEV);
       return -ENODEV;
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -360,7 +360,7 @@ static int adt7320_open(FAR struct file *filep)
 
 static int adt7320_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -465,7 +465,7 @@ static int adt7320_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct adt7320_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

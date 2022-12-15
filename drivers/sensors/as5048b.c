@@ -419,7 +419,7 @@ static int as5048b_readang(FAR struct as5048b_dev_s *priv, FAR uint16_t *ang)
 
 static int as5048b_setup(FAR struct qe_lowerhalf_s *lower)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -432,7 +432,7 @@ static int as5048b_setup(FAR struct qe_lowerhalf_s *lower)
 
 static int as5048b_shutdown(FAR struct qe_lowerhalf_s *lower)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -506,7 +506,7 @@ static int as5048b_ioctl(FAR struct qe_lowerhalf_s *lower, int cmd,
                          unsigned long arg)
 {
   FAR struct as5048b_dev_s *priv = (FAR struct as5048b_dev_s *)lower;
-  int                       ret  = OK;
+  int                       ret  = OKK;
 
   switch (cmd)
     {
@@ -518,7 +518,7 @@ static int as5048b_ioctl(FAR struct qe_lowerhalf_s *lower, int cmd,
           uint16_t zero;
           DEBUGASSERT(ptr != NULL);
           ret = as5048b_readzero(priv, &zero);
-          if (ret == OK)
+          if (ret == OKK)
             {
               *ptr = (int32_t)zero;
             }
@@ -557,7 +557,7 @@ static int as5048b_ioctl(FAR struct qe_lowerhalf_s *lower, int cmd,
           uint16_t mag;
           DEBUGASSERT(ptr != NULL);
           ret = as5048b_readmag(priv, &mag);
-          if (ret == OK)
+          if (ret == OKK)
             {
               *ptr = (int32_t)mag;
             }

@@ -468,7 +468,7 @@ static int ipv6_dev_forward(FAR struct net_driver_s *dev,
       if (ret >= 0)
         {
           dev->d_len = 0;
-          return OK;
+          return OKK;
         }
     }
 
@@ -539,7 +539,7 @@ int ipv6_forward_callback(FAR struct net_driver_s *fwddev, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -664,7 +664,7 @@ int ipv6_forward(FAR struct net_driver_s *dev, FAR struct ipv6_hdr_s *ipv6)
    * the transfer.
    */
 
-  return OK;
+  return OKK;
 
 drop:
   ipv6_dropstats(ipv6);

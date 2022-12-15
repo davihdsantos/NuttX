@@ -172,7 +172,7 @@ static int cxd56_ili93404ws_backlight(FAR struct ili9340_lcd_s *lcd,
       lcd->sendparam(lcd, 0x0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -208,7 +208,7 @@ static int cxd56_ili93404ws_sendcmd(FAR struct ili9340_lcd_s *lcd,
   (void) SPI_SEND(priv->spi, cmd);
   cxd56_gpio_write(DISPLAY_DC, true);  /* Indicate DATA */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -234,7 +234,7 @@ static int cxd56_ili93404ws_sendparam(FAR struct ili9340_lcd_s *lcd,
   cxd56_gpio_write(DISPLAY_DC, true);  /* Indicate DATA */
   (void) SPI_SEND(priv->spi, param);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -263,7 +263,7 @@ static int cxd56_ili93404ws_sendgram(FAR struct ili9340_lcd_s *lcd,
   SPI_SETBITS(priv->spi, 16);
   (void) SPI_SNDBLOCK(priv->spi, wd, nwords);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -289,7 +289,7 @@ static int cxd56_ili93404ws_recvparam(FAR struct ili9340_lcd_s *lcd,
   cxd56_gpio_write(DISPLAY_DC, true);  /* Indicate DATA */
   *param = (uint8_t)(SPI_SEND(priv->spi, param) & 0xff);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -313,7 +313,7 @@ static int cxd56_ili93404ws_recvgram(FAR struct ili9340_lcd_s *lcd,
 {
   lcdinfo("wd=%p, nwords=%d\n", wd, nwords);
 
-  return OK;
+  return OKK;
 };
 
 /****************************************************************************
@@ -376,7 +376,7 @@ int board_lcd_initialize(void)
       g_lcd = ili9340_initialize(&priv->dev, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

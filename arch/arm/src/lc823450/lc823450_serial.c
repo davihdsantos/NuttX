@@ -583,7 +583,7 @@ static int up_setup(struct uart_dev_s *dev)
   ctl |= (UART_UCM_RE | UART_UCM_TE);
   up_serialout(priv, UART_UCM, ctl);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -624,7 +624,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, up_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the UART
@@ -719,7 +719,7 @@ static int up_interrupt(int irq, void *context, FAR void *arg)
 
   up_serialout(priv, UART_UISR, mis);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -732,7 +732,7 @@ static int up_interrupt(int irq, void *context, FAR void *arg)
 #ifdef CONFIG_SERIAL_TERMIOS
 static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
 {
-  int                ret   = OK;
+  int                ret   = OKK;
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
   struct up_dev_s   *priv  = (struct up_dev_s *)dev->priv;
@@ -1053,7 +1053,7 @@ static int  up_hs_attach(struct uart_dev_s *dev)
 
   hs_recstart = 1;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

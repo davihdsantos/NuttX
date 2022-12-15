@@ -199,7 +199,7 @@ static int local_create_fifo(FAR const char *path)
    * created the FIFO at that location.
    */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -238,7 +238,7 @@ static int local_release_fifo(FAR const char *path)
 
   /* The FIFO does not exist or we successfully unlinked it. */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -273,7 +273,7 @@ static int local_rx_open(FAR struct local_conn_s *conn, FAR const char *path,
       return ret == -ENOENT ? -EFAULT : ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -307,7 +307,7 @@ static int local_tx_open(FAR struct local_conn_s *conn, FAR const char *path,
       return ret == -ENOENT ? -EFAULT : ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -447,7 +447,7 @@ int local_release_halfduplex(FAR struct local_conn_s *conn)
    */
 
 #  warning Missing logic
-  return OK;
+  return OKK;
 
 #else
   char path[LOCAL_FULLPATH_LEN];
@@ -481,7 +481,7 @@ int local_open_client_rx(FAR struct local_conn_s *client, bool nonblock)
   /* Then open the file for read-only access */
 
   ret = local_rx_open(client, path, nonblock);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Policy: Free FIFO resources when the last reference is closed */
 
@@ -513,7 +513,7 @@ int local_open_client_tx(FAR struct local_conn_s *client, bool nonblock)
   /* Then open the file for write-only access */
 
   ret = local_tx_open(client, path, nonblock);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Policy: Free FIFO resources when the last reference is closed */
 
@@ -545,7 +545,7 @@ int local_open_server_rx(FAR struct local_conn_s *server, bool nonblock)
   /* Then open the file for write-only access */
 
   ret = local_rx_open(server, path, nonblock);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Policy: Free FIFO resources when the last reference is closed */
 
@@ -577,7 +577,7 @@ int local_open_server_tx(FAR struct local_conn_s *server, bool nonblock)
   /* Then open the file for read-only access */
 
   ret = local_tx_open(server, path, nonblock);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Policy: Free FIFO resources when the last reference is closed */
 
@@ -609,7 +609,7 @@ int local_open_receiver(FAR struct local_conn_s *conn, bool nonblock)
   /* Then open the file for read-only access */
 
   ret = local_rx_open(conn, path, nonblock);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Policy: Free FIFO resources when the buffer is empty. */
 
@@ -642,7 +642,7 @@ int local_open_sender(FAR struct local_conn_s *conn, FAR const char *path,
   /* Then open the file for read-only access */
 
   ret = local_tx_open(conn, fullpath, nonblock);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Policy: Free FIFO resources when the buffer is empty. */
 

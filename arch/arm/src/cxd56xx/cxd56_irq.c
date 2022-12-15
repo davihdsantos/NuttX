@@ -269,7 +269,7 @@ static int excinfo(int irq, uint32_t *regaddr, uint32_t *bit)
         return ERROR; /* Invalid or unsupported exception */
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -469,7 +469,7 @@ void up_disable_irq(int irq)
     }
   else
     {
-      if (excinfo(irq, &regaddr, &bit) == OK)
+      if (excinfo(irq, &regaddr, &bit) == OKK)
         {
           regval  = getreg32(regaddr);
           regval &= ~bit;
@@ -524,7 +524,7 @@ void up_enable_irq(int irq)
     }
   else
     {
-      if (excinfo(irq, &regaddr, &bit) == OK)
+      if (excinfo(irq, &regaddr, &bit) == OKK)
         {
           regval  = getreg32(regaddr);
           regval |= bit;
@@ -599,6 +599,6 @@ int up_prioritize_irq(int irq, int priority)
   putreg32(regval, regaddr);
 
   cxd56_dumpnvic("prioritize", irq);
-  return OK;
+  return OKK;
 }
 #endif

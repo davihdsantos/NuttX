@@ -889,7 +889,7 @@ static int spi_interrupt(int irq, void *context, FAR void *arg)
 #warning Missing logic
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -932,14 +932,14 @@ static int spi_lock(struct spi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->spilock);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1229,7 +1229,7 @@ static void spi_dma_callback(DMA_HANDLE dma, void *arg, int result)
     }
   else if (dma == priv->dma_tx)
     {
-      if (result != OK)
+      if (result != OKK)
         {
           spierr("ERROR: DMA transmission failed: %d\n", result);
         }

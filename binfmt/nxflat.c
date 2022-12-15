@@ -221,7 +221,7 @@ static int nxflat_loadbinary(FAR struct binary_s *binp)
                     MIN(loadinfo.isize - loadinfo.entryoffs, 512));
 
   nxflat_uninit(&loadinfo);
-  return OK;
+  return OKK;
 
 errout_with_load:
   nxflat_unload(&loadinfo);
@@ -265,7 +265,7 @@ static int nxflat_unloadbinary(FAR struct binary_s *binp)
        */
     }
 
- return OK;
+ return OKK;
 }
 
 /****************************************************************************

@@ -154,7 +154,7 @@ int sam_eic_initialize(void)
   sam_eic_syncwait();
 
   sam_eic_dumpregs();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -227,7 +227,7 @@ int sam_eic_configure(uint8_t eirq, port_pinset_t pinset)
   putreg32(EIC_EXTINT(eirq), SAM_EIC_INTENSET);
 
   sam_eic_dumpregs();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -249,7 +249,7 @@ int sam_eic_irq_ack(int irq)
   int eirq = irq - SAM_IRQ_EXTINT0;
 
   putreg32(EIC_EXTINT(eirq), SAM_EIC_INTENCLR);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAMD5E5_EIC */

@@ -182,7 +182,7 @@ static inline int djoy_takesem(sem_t *sem)
    * was awakened by a signal
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -415,7 +415,7 @@ static int djoy_open(FAR struct file *filep)
   /* Attach the open structure to the file structure */
 
   filep->f_priv = (FAR void *)opriv;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   djoy_givesem(&priv->du_exclsem);
@@ -462,7 +462,7 @@ static int djoy_close(FAR struct file *filep)
     {
       /* Another thread is doing the close */
 
-      return OK;
+      return OKK;
     }
 
   /* Get exclusive access to the driver structure */
@@ -510,7 +510,7 @@ static int djoy_close(FAR struct file *filep)
   /* Enable/disable interrupt handling */
 
   djoy_enable(priv);
-  ret = OK;
+  ret = OKK;
 
 errout_with_exclsem:
   djoy_givesem(&priv->du_exclsem);
@@ -615,7 +615,7 @@ static int djoy_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             DEBUGASSERT(lower && lower->dl_supported);
 
             *supported = (int)lower->dl_supported(lower);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -645,7 +645,7 @@ static int djoy_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             /* Enable/disable interrupt handling */
 
             djoy_enable(priv);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -678,7 +678,7 @@ static int djoy_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             /* Enable/disable interrupt handling */
 
             djoy_enable(priv);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;

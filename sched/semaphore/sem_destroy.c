@@ -96,7 +96,7 @@ int nxsem_destroy (FAR sem_t *sem)
       /* Release holders of the semaphore */
 
       nxsem_destroyholder(sem);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

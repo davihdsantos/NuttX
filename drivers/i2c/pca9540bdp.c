@@ -141,7 +141,7 @@ static int pca9540bdp_select_port(FAR struct pca9540bdp_dev_s *priv,
     {
       /* port already selected */
 
-      return OK;
+      return OKK;
     }
 
   /* Modify state and write it to the mux */
@@ -160,7 +160,7 @@ static int pca9540bdp_transfer_on_port(FAR struct i2c_master_s* dev,
 
   /* select the mux port */
 
-  if (pca9540bdp_select_port(priv, port_dev->port) != OK)
+  if (pca9540bdp_select_port(priv, port_dev->port) != OKK)
     {
       i2cerr("Could not select proper mux port\n");
       return -ECOMM;  /* Signal error condition */
@@ -184,7 +184,7 @@ static int pca9540bdp_reset_on_port (FAR struct i2c_master_s *dev)
 
   /* select the mux port */
 
-  if (pca9540bdp_select_port(priv, port) != OK)
+  if (pca9540bdp_select_port(priv, port) != OKK)
     {
       i2cerr("Could not select proper mux port\n");
       return -ECOMM;  /* signal error condition */
@@ -291,7 +291,7 @@ FAR struct pca9540bdp_dev_s *
   priv->addr       = addr;
   priv->state      = 0x00;
 
-  if (pca9540bdp_read_config(priv, &priv->state) != OK)
+  if (pca9540bdp_read_config(priv, &priv->state) != OKK)
     {
       i2cerr("Could not read initial state from the device\n");
       kmm_free(priv);
@@ -300,7 +300,7 @@ FAR struct pca9540bdp_dev_s *
 
   i2cinfo("Initial device state: %d\n", priv->state);
 
-  if (pca9540bdp_select_port(priv, PCA9540BDP_SEL_PORT0) != OK)
+  if (pca9540bdp_select_port(priv, PCA9540BDP_SEL_PORT0) != OKK)
     {
       i2cerr("Could not select mux port 0\n");
       kmm_free(priv);

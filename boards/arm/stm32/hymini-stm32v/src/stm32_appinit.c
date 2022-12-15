@@ -137,7 +137,7 @@ static int nsh_cdinterrupt(int irq, FAR void *context, FAR void *arg)
       inserted = present;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -206,7 +206,7 @@ int board_app_initialize(uintptr_t arg)
          CONFIG_NSH_MMCSDMINOR);
 
   ret = mmcsd_slotinitialize(CONFIG_NSH_MMCSDMINOR, g_sdiodev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n", ret);
       return ret;
@@ -233,5 +233,5 @@ int board_app_initialize(uintptr_t arg)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

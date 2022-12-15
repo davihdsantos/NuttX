@@ -421,7 +421,7 @@ static inline int lpc43_chiperase(struct lpc43_dev_s *priv)
       return -EIO;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -480,7 +480,7 @@ static int lpc43_pagewrite(FAR struct lpc43_dev_s *priv, FAR uint8_t *dest,
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -868,7 +868,7 @@ static int lpc43_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = SPIFI_BLKSIZE;
               geo->neraseblocks = priv->nblocks;
 #endif
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -1111,7 +1111,7 @@ static inline int lpc43_rominit(FAR struct lpc43_dev_s *priv)
   finfo("   nblocks: %d\n", priv->nblocks);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1184,7 +1184,7 @@ FAR struct mtd_dev_s *lpc43_spifi_initialize(void)
   /* Initialize the SPIFI ROM driver */
 
   ret = lpc43_rominit(priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return NULL;
     }

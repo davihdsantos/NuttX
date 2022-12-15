@@ -401,7 +401,7 @@ int board_composite_initialize(int port)
          OLIMEXINO_STM32_MMCSDSLOTNO);
 
   ret = mmcsd_spislotinitialize(0, OLIMEXINO_STM32_MMCSDSLOTNO, spi);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
             "ERROR: Failed to bind SPI port %d to MMC/SD minor=0 slot=%d %d\n",
@@ -412,7 +412,7 @@ int board_composite_initialize(int port)
 
   syslog(LOG_INFO, "Successfully bound SPI to the MMC/SD driver\n");
 
-   return OK;
+   return OKK;
 }
 
 /****************************************************************************

@@ -142,7 +142,7 @@ int tcp_backlogcreate(FAR struct tcp_conn_s *conn, int nblg)
 
   conn->backlog = bls;
   net_unlock();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -205,7 +205,7 @@ int tcp_backlogdestroy(FAR struct tcp_conn_s *conn)
       kmm_free(blg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -255,7 +255,7 @@ int tcp_backlogadd(FAR struct tcp_conn_s *conn, FAR struct tcp_conn_s *blconn)
 
           blc->bc_conn = blconn;
           sq_addlast(&blc->bc_node, &bls->bl_pending);
-          ret = OK;
+          ret = OKK;
         }
     }
 
@@ -389,7 +389,7 @@ int tcp_backlogdelete(FAR struct tcp_conn_s *conn,
 
               blc->bc_conn = NULL;
               sq_addlast(&blc->bc_node, &bls->bl_free);
-              return OK;
+              return OKK;
             }
         }
 
@@ -397,7 +397,7 @@ int tcp_backlogdelete(FAR struct tcp_conn_s *conn,
       return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_TCP && CONFIG_NET_TCPBACKLOG */

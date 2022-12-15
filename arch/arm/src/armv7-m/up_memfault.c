@@ -88,5 +88,5 @@ int up_memfault(int irq, FAR void *context, FAR void *arg)
          getbasepri(), getprimask(), getipsr(), getcontrol());
 
   PANIC();
-  return OK; /* Won't get here */
+  return OKK; /* Won't get here */
 }

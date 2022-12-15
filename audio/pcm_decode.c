@@ -751,7 +751,7 @@ static int pcm_configure(FAR struct audio_lowerhalf_s *dev,
        */
 
       pcm_subsample_configure(priv, caps->ac_controls.b[0]);
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -1125,7 +1125,7 @@ static int pcm_enqueuebuffer(FAR struct audio_lowerhalf_s *dev,
                   apb, apb->curbyte, apb->nbytes);
 
           ret = lower->ops->enqueuebuffer(lower, apb);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Now we are streaming.  Unless for some reason there is only
                * one audio buffer in the audio stream.  In that case, this
@@ -1133,7 +1133,7 @@ static int pcm_enqueuebuffer(FAR struct audio_lowerhalf_s *dev,
                */
 
               priv->streaming = ((apb->flags & AUDIO_APB_FINAL) == 0);
-              return OK;
+              return OKK;
             }
         }
 

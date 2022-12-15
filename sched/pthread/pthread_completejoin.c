@@ -73,7 +73,7 @@ static bool pthread_notifywaiters(FAR struct join_s *pjoin)
   /* Are any tasks waiting for our exit value? */
 
   status = nxsem_getvalue(&pjoin->exit_sem, &ntasks_waiting);
-  if (status == OK && ntasks_waiting < 0)
+  if (status == OKK && ntasks_waiting < 0)
     {
       /* Set the data semaphore so that this thread will be
        * awakened when all waiting tasks receive the data
@@ -88,12 +88,12 @@ static bool pthread_notifywaiters(FAR struct join_s *pjoin)
       do
         {
           status = pthread_sem_give(&pjoin->exit_sem);
-          if (status == OK)
+          if (status == OKK)
             {
               status = nxsem_getvalue(&pjoin->exit_sem, &ntasks_waiting);
             }
         }
-      while (ntasks_waiting < 0 && status == OK);
+      while (ntasks_waiting < 0 && status == OKK);
 
       /* Now wait for all these restarted tasks to obtain the return
        * value.
@@ -249,7 +249,7 @@ int pthread_completejoin(pid_t pid, FAR void *exit_value)
       (void)pthread_sem_give(&group->tg_joinsem);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

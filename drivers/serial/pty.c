@@ -234,7 +234,7 @@ static void pty_semtake(FAR struct pty_devpair_s *devpair)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -376,7 +376,7 @@ static int pty_open(FAR struct file *filep)
       devpair->pp_nopen++;
       DEBUGASSERT(devpair->pp_nopen > 0);
 
-      ret = OK;
+      ret = OKK;
     }
 
   pty_semgive(devpair);
@@ -429,7 +429,7 @@ static int pty_close(FAR struct file *filep)
       /* Yes.. Free the device pair now (without freeing the semaphore) */
 
       pty_destroy(devpair);
-      return OK;
+      return OKK;
     }
   else
     {
@@ -439,7 +439,7 @@ static int pty_close(FAR struct file *filep)
     }
 
   pty_semgive(devpair);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -779,7 +779,7 @@ static int pty_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           else
             {
               *ptyno = (int)devpair->pp_minor;
-              ret = OK;
+              ret = OKK;
             }
 #endif
         }
@@ -809,14 +809,14 @@ static int pty_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
                while (sval < 0);
 
                sched_unlock();
-               ret = OK;
+               ret = OKK;
             }
           else
             {
               /* Locking */
 
                devpair->pp_locked = true;
-               ret = OK;
+               ret = OKK;
             }
         }
         break;
@@ -831,7 +831,7 @@ static int pty_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           else
             {
               *ptr = (int)devpair->pp_locked;
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -852,7 +852,7 @@ static int pty_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           termiosp->c_iflag = dev->pd_iflag;
           termiosp->c_oflag = dev->pd_oflag;
           termiosp->c_lflag = 0;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -870,7 +870,7 @@ static int pty_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 
           dev->pd_iflag = termiosp->c_iflag;
           dev->pd_oflag = termiosp->c_oflag;
-          ret = OK;
+          ret = OKK;
         }
         break;
 #endif
@@ -1041,11 +1041,11 @@ static int pty_unlink(FAR struct inode *inode)
   if (devpair->pp_nopen == 0)
     {
       pty_destroy(devpair);
-      return OK;
+      return OKK;
     }
 
   pty_semgive(devpair);
-  return OK;
+  return OKK;
 }
 #endif
 /****************************************************************************
@@ -1196,7 +1196,7 @@ int pty_register(int minor)
       goto errout_with_slave;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_slave:
 #ifdef CONFIG_PSEUDOTERM_BSD

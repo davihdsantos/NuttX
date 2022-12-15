@@ -779,7 +779,7 @@ static int audio_comp_reserve(FAR struct audio_lowerhalf_s *dev)
 #ifdef CONFIG_AUDIO_MULTI_SESSION
   FAR void **sess;
 #endif
-  int ret = OK;
+  int ret = OKK;
   int i;
 
 #ifdef CONFIG_AUDIO_MULTI_SESSION
@@ -856,7 +856,7 @@ static int audio_comp_release(FAR struct audio_lowerhalf_s *dev)
 #ifdef CONFIG_AUDIO_MULTI_SESSION
   FAR void **sess = session;
 #endif
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   for (i = priv->count - 1; i >= 0; i--)
@@ -990,7 +990,7 @@ int audio_comp_initialize(FAR const char *name, ...)
     }
 
   va_end(ap);
-  return OK;
+  return OKK;
 
 free_lower:
   kmm_free(priv->lower);

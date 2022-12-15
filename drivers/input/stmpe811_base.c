@@ -5,7 +5,7 @@
  *   Author: Gregory Nutt <gnutt@nuttx.org>
  *
  * References:
- *   "STMPE811 S-Touch® advanced resistive touchscreen controller with 8-bit
+ *   "STMPE811 S-Touchï¿½ advanced resistive touchscreen controller with 8-bit
  *    GPIO expander," Doc ID 14489 Rev 6, CD00186725, STMicroelectronics"
  *
  * Redistribution and use in source and binary forms, with or without
@@ -187,7 +187,7 @@ static int stmpe811_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Clear any pending interrupts and return success */
 
   config->clear(config);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -216,7 +216,7 @@ static int stmpe811_checkid(FAR struct stmpe811_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

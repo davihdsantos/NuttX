@@ -221,7 +221,7 @@ int pcf85263_rtc_initialize(FAR struct i2c_master_s *i2c)
 
   g_pcf85263.i2c = i2c;
   g_rtc_enabled  = true;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -361,7 +361,7 @@ int up_rtc_getdatetime(FAR struct tm *tp)
   tp->tm_year = rtc_bcd2bin(buffer[6]) + 68;
 
   rtc_dumptime(tp, "Returning");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -507,7 +507,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
   while ((buffer[2] & PCF85263_RTC_SECONDS_MASK) >
          (seconds & PCF85263_RTC_SECONDS_MASK));
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_RTC_PCF85263 */

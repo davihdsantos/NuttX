@@ -216,7 +216,7 @@ static int lsm6dsl_readreg8(FAR struct lsm6dsl_dev_s *priv,
     }
 
   sninfo("addr: %02x value: %02x\n", regaddr, *regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -259,7 +259,7 @@ static int lsm6dsl_writereg8(FAR struct lsm6dsl_dev_s *priv,
     }
 
   sninfo("addr: %02x value: %02x\n", regaddr, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -298,7 +298,7 @@ static int lsm6dsl_modifyreg8(FAR struct lsm6dsl_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -385,7 +385,7 @@ static int lsm6dsl_sensor_config(FAR struct lsm6dsl_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -448,7 +448,7 @@ static int lsm6dsl_sensor_start(FAR struct lsm6dsl_dev_s *priv)
 
   lsm6dsl_writereg8(priv, LSM6DSL_CTRL10_C, 0x20);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -479,7 +479,7 @@ static int lsm6dsl_sensor_stop(FAR struct lsm6dsl_dev_s *priv)
                      LSM6DSL_CTRL2_G_ODR_G_MASK,
                      LSM6DSL_CTRL2_G_ODR_G_POWER_DOWN);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -880,7 +880,7 @@ static int lsm6dsl_selftest(FAR struct lsm6dsl_dev_s *priv, uint32_t mode)
       break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1009,7 +1009,7 @@ static int lsm6dsl_sensor_read(FAR struct lsm6dsl_dev_s *priv,
   sensor_data->g_y_data = y_valg * g_gyrofactor;
   sensor_data->g_z_data = z_valg * g_gyrofactor;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1023,7 +1023,7 @@ static int lsm6dsl_sensor_read(FAR struct lsm6dsl_dev_s *priv,
 static int lsm6dsl_open(FAR struct file *filep)
 {
   sninfo("Device LSM6DSL opened!!\r\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1036,7 +1036,7 @@ static int lsm6dsl_open(FAR struct file *filep)
 
 static int lsm6dsl_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1305,7 +1305,7 @@ static int lsm6dsl_register(FAR const char *devpath,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

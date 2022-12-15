@@ -94,5 +94,5 @@ int posix_spawn_file_actions_destroy(FAR posix_spawn_file_actions_t *file_action
   /* Mark the list empty */
 
   *file_actions = NULL;
-  return OK;
+  return OKK;
 }

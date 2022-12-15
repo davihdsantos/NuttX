@@ -275,7 +275,7 @@ int sam_bringup(void)
    */
 
   ret = sam_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       _err("ERROR: Failed to initialize USB host: %d\n", ret);
     }
@@ -285,7 +285,7 @@ int sam_bringup(void)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       _err("ERROR: Failed to start the USB monitor: %d\n", ret);
     }
@@ -325,7 +325,7 @@ int sam_bringup(void)
   /* Configure WM8904 audio */
 
   ret = sam_wm8904_initialize(0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       _err("ERROR: Failed to initialize WM8904 audio: %d\n", ret);
     }
@@ -335,7 +335,7 @@ int sam_bringup(void)
   /* Configure the NULL audio device */
 
   ret = sam_audio_null_initialize(0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       _err("ERROR: Failed to initialize the NULL audio device: %d\n", ret);
     }
@@ -358,5 +358,5 @@ int sam_bringup(void)
    */
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

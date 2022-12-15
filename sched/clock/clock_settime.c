@@ -68,7 +68,7 @@ int clock_settime(clockid_t clock_id, FAR const struct timespec *tp)
 {
   struct timespec bias;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   sinfo("clock_id=%d\n", clock_id);
   DEBUGASSERT(tp != NULL);

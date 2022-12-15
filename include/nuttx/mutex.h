@@ -189,7 +189,7 @@ static inline bool nxmutex_is_locked(FAR mutex_t *mutex)
 
   ret = nxsem_getvalue(mutex, &cnt);
 
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
 
   return cnt < 1;
 }

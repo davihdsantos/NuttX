@@ -155,7 +155,7 @@ int task_delete(pid_t pid)
 
       dtcb->flags |= TCB_FLAG_CANCEL_PENDING;
       sched_unlock();
-      return OK;
+      return OKK;
     }
 
 #ifdef CONFIG_CANCELLATION_POINTS
@@ -179,7 +179,7 @@ int task_delete(pid_t pid)
         }
 
       sched_unlock();
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -206,7 +206,7 @@ int task_delete(pid_t pid)
       goto errout;
     }
 
-  return OK;
+  return OKK;
 
 errout:
   set_errno(errcode);

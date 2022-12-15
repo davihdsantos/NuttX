@@ -114,7 +114,7 @@ int nxmq_send(mqd_t mqdes, FAR const char *msg, size_t msglen,
 
   mqmsg = NULL;
   flags = enter_critical_section();
-  ret   = OK;
+  ret   = OKK;
 
   if (!up_interrupt_context())           /* In an interrupt handler? */
     {

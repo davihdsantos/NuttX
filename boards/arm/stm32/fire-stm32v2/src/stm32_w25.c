@@ -149,5 +149,5 @@ int stm32_w25initialize(int minor)
     }
 #endif
 #endif
-  return OK;
+  return OKK;
 }

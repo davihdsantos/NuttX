@@ -70,7 +70,7 @@
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_ADC
   /* Initialize ADC and register the ADC driver. */
@@ -105,5 +105,5 @@ int stm32_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

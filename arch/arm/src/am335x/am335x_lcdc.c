@@ -181,7 +181,7 @@ static int am335x_getvideoinfo(FAR struct fb_vtable_s *vtable,
 #ifdef CONFIG_FB_OVERLAY
       vinfo->noverlays = 0;
 #endif
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -210,7 +210,7 @@ static int am335x_getplaneinfo(FAR struct fb_vtable_s *vtable, int planeno,
       pinfo->stride  = priv->stride;
       pinfo->display = 0;
       pinfo->bpp     = priv->panel.bpp;
-      return OK;
+      return OKK;
     }
 
   lcderr("ERROR: Returning EINVAL\n");
@@ -330,7 +330,7 @@ done:
   /* Read value back to make sure it reached the hardware */
 
   regval = getreg32(AM335X_LCD_END_INT);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -461,7 +461,7 @@ static int am335x_get_refclk(uint32_t *frequency)
 
   sysclk     = am335x_get_sysclk();
   *frequency = ((regval >> 8) & 0x7ff) * (sysclk / ((regval & 0x7f) + 1));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -490,7 +490,7 @@ static int am335x_lcdc_enableclk(void)
       up_udelay(10);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -852,7 +852,7 @@ int am335x_lcd_initialize(FAR const struct am335x_panel_info_s *panel)
   /* Enable interrupts at the interrupt controller */
 
   up_enable_irq(AM335X_IRQ_LCDC);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

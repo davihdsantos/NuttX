@@ -622,7 +622,7 @@ static void sam_takesem(struct sam_tc_s *tc)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -876,7 +876,7 @@ static int sam_tc_interrupt(struct sam_tc_s *tc, struct sam_chan_s *chan)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1100,7 +1100,7 @@ static int sam_tc_mcksrc(uint32_t frequency, uint32_t *tcclks,
 
   *actual = fselect;
   *tcclks = sam_tc_tcclks_lookup(ndx);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1740,7 +1740,7 @@ int sam_tc_clockselect(uint32_t frequency, uint32_t *tcclks,
 
           /* Return success */
 
-          return OK;
+          return OKK;
         }
     }
 

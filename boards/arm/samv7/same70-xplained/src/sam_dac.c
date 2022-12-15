@@ -117,7 +117,7 @@ int sam_dacdev_initialize(void)
 
       initialized = true;
     }
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAMV7_DAC0 || CONFIG_SAMV7_DAC1 */

@@ -480,7 +480,7 @@ int cisif_intc_handler(int irq, FAR void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -558,7 +558,7 @@ static int cisif_check_param(cisif_param_t *p)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -579,7 +579,7 @@ static int cisif_check_sarea(void *s)
       return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -603,7 +603,7 @@ static int cisif_set_yuv_param(cisif_param_t *p)
 
   g_ycc_notify_callback_func = p->yuv_param.notify_func;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -619,7 +619,7 @@ static int cisif_set_yuv_sarea(void *s)
   cisif_reg_write(CISIF_YCC_DAREA_SIZE, (ss->strg_size & 0xffffffe0));
   cisif_reg_write(CISIF_YCC_START_ADDR, (uint32_t)ss->strg_addr);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -635,7 +635,7 @@ static int cisif_set_jpg_param(cisif_param_t *p)
 
   g_jpg_notify_callback_func = p->jpg_param.notify_func;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -651,7 +651,7 @@ static int cisif_set_jpg_sarea(void *s)
   cisif_reg_write(CISIF_JPG_DAREA_SIZE, (ss->strg_size & 0xffffffe0));
   cisif_reg_write(CISIF_JPG_START_ADDR, (uint32_t)ss->strg_addr);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -681,7 +681,7 @@ static int cisif_set_intlev_sarea(void *s, uint32_t yuv_size)
 
   cisif_set_jpg_sarea(&sarea_int);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -722,7 +722,7 @@ int cxd56_cisifinit(void)
 
   g_state = STATE_READY;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -755,7 +755,7 @@ int cxd56_cisiffinalize(void)
 
   g_state = STATE_STANDBY;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -776,7 +776,7 @@ int cxd56_cisifstartcapture(
     }
 
   ret = cisif_check_param(param);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -784,7 +784,7 @@ int cxd56_cisifstartcapture(
   cisif_reg_write(CISIF_INTR_DISABLE, ALL_CLEAR_INT);
 
   ret = cisif_check_sarea(sarea);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -846,7 +846,7 @@ int cxd56_cisifstartcapture(
   cisif_reg_write(CISIF_DIN_ENABLE, 1);
   cisif_reg_write(CISIF_EXE_CMD, 1);
 
-  return OK;
+  return OKK;
 }
 
 int cxd56_cisifstopcapture(void)
@@ -856,7 +856,7 @@ int cxd56_cisifstopcapture(void)
   cisif_reg_write(CISIF_INTR_DISABLE, ALL_CLEAR_INT);
   cisif_reg_write(CISIF_EXE_CMD, 1);
 
-  return OK;
+  return OKK;
 }
 
 int cxd56_cisifsetdmabuf(cisif_sarea_t *sarea)
@@ -868,7 +868,7 @@ int cxd56_cisifsetdmabuf(cisif_sarea_t *sarea)
   uint32_t yuv_vsize;
 
   ret = cisif_check_sarea(sarea);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -898,7 +898,7 @@ int cxd56_cisifsetdmabuf(cisif_sarea_t *sarea)
         break;
     }
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }

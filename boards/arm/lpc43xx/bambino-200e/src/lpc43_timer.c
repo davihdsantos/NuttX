@@ -120,7 +120,7 @@ int lpc43_timerinitialize(void)
   lpc43_tmrinitialize(CONFIG_TIMER3_DEVPATH, LPC43M4_IRQ_TIMER3);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_TIMER */

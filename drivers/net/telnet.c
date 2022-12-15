@@ -731,7 +731,7 @@ static int telnet_open(FAR struct file *filep)
   /* Save the new open count on success */
 
   priv->td_crefs = tmp;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nxsem_post(&priv->td_exclsem);
@@ -862,7 +862,7 @@ static int telnet_close(FAR struct file *filep)
       sched_unlock();
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -1190,7 +1190,7 @@ static int telnet_session(FAR struct telnet_session_s *session)
   /* Return the path to the new telnet driver */
 
   nxsem_post(&g_telnet_common.tc_exclsem);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   nxsem_post(&g_telnet_common.tc_exclsem);
@@ -1442,7 +1442,7 @@ static int common_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         priv->pid = (pid_t)arg;
         DEBUGASSERT((unsigned long)(priv->pid) == arg);
 
-        ret = OK;
+        ret = OKK;
       }
       break;
 #endif
@@ -1457,7 +1457,7 @@ static int common_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           pw->ws_row = priv->td_rows;
           pw->ws_col = priv->td_cols;
 
-          ret = OK;
+          ret = OKK;
         }
       break;
 #endif

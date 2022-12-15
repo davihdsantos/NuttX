@@ -342,7 +342,7 @@ static int nx_start_task(int argc, FAR char **argv)
   /* Do the board/application initialization and exit */
 
   nx_start_application();
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -468,5 +468,5 @@ int nx_bringup(void)
   (void)clearenv();
 #endif
 
-  return OK;
+  return OKK;
 }

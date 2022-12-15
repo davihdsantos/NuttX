@@ -86,5 +86,5 @@ int stm32_bringup(void)
 #endif  /* CONFIG_LPWAN_SX127X */
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

@@ -614,7 +614,7 @@ static int kinetis_setup(struct uart_dev_s *dev)
   /* Make sure that all interrupts are disabled */
 
   kinetis_restoreuartint(priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -665,7 +665,7 @@ static int kinetis_attach(struct uart_dev_s *dev)
    */
 
   ret = irq_attach(priv->irq, kinetis_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(priv->irq);
     }
@@ -753,7 +753,7 @@ static int kinetis_interrupt(int irq, void *context, void *arg)
 
           kinetis_serialout(priv, KINETIS_LPUART_STAT_OFFSET,
                             stat & LPUART_STAT_ERRORS);
-          return OK;
+          return OKK;
         }
 
       /* Handle incoming, receive bytes
@@ -790,7 +790,7 @@ static int kinetis_interrupt(int irq, void *context, void *arg)
     }
   while (stat != 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -814,7 +814,7 @@ static int kinetis_ioctl(struct file *filep, int cmd, unsigned long arg)
   bool                   iflow = false;
   bool                   oflow = false;
 #endif
-  int                    ret = OK;
+  int                    ret = OKK;
 
 #if defined(CONFIG_SERIAL_TERMIOS) || defined(CONFIG_SERIAL_TIOCSERGSTRUCT) || \
     defined(CONFIG_KINETIS_SERIALBRK_BSDCOMPAT)

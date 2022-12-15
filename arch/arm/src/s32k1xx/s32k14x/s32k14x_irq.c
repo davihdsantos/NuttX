@@ -300,7 +300,7 @@ static int s32k14x_irqinfo(int irq, uintptr_t *regaddr, uint32_t *bit,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -579,6 +579,6 @@ int up_prioritize_irq(int irq, int priority)
   putreg32(regval, regaddr);
 
   s32k14x_dumpnvic("prioritize", irq);
-  return OK;
+  return OKK;
 }
 #endif

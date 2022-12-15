@@ -154,7 +154,7 @@ static uint16_t tcp_close_eventhandler(FAR struct net_driver_s *dev,
         }
       else
         {
-          pstate->cl_result = OK;
+          pstate->cl_result = OKK;
         }
 
       goto end_wait;
@@ -275,7 +275,7 @@ static inline int tcp_close_disconnect(FAR struct socket *psock)
   struct timespec abstime;
   bool linger;
 #endif
-  int ret = OK;
+  int ret = OKK;
 
   /* Interrupts are disabled here to avoid race conditions */
 
@@ -501,7 +501,7 @@ static inline int udp_close(FAR struct socket *psock)
   conn->crefs = 0;
   udp_free(psock->s_conn);
   net_unlock();
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -632,5 +632,5 @@ int inet_close(FAR struct socket *psock)
         return -EBADF;
     }
 
-  return OK;
+  return OKK;
 }

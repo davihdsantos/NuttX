@@ -118,7 +118,7 @@ static const struct file_operations fb_fops =
 static int fb_open(FAR struct file *filep)
 {
   DEBUGASSERT(filep != NULL && filep->f_inode != NULL);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -132,7 +132,7 @@ static int fb_open(FAR struct file *filep)
 static int fb_close(FAR struct file *filep)
 {
   DEBUGASSERT(filep != NULL && filep->f_inode != NULL);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -329,7 +329,7 @@ static int fb_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 
           DEBUGASSERT(ppv != NULL);
           *ppv = fb->fbmem;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -434,7 +434,7 @@ static int fb_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 
           DEBUGASSERT(fb->vtable != NULL && fb->vtable->getoverlayinfo != NULL);
           ret = fb->vtable->getoverlayinfo(fb->vtable, arg, &oinfo);
-          if (ret == OK)
+          if (ret == OKK)
             {
               fb->fbmem = oinfo.fbmem;
               fb->fblen = oinfo.fblen;
@@ -674,7 +674,7 @@ int fb_register(int display, int plane)
       goto errout_with_fb;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_fb:
   kmm_free(fb);

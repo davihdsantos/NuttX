@@ -208,7 +208,7 @@ int stm32_adau1961_initialize(int minor)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 
   /* Error exits. Unfortunately there is no mechanism in place now to
    * recover resources from most errors on initialization failures.

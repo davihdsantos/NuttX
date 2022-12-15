@@ -501,7 +501,7 @@ static inline int tcp_ipv4_bind(FAR struct tcp_conn_s *conn,
     }
 
   net_unlock();
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_IPv4 */
 
@@ -568,7 +568,7 @@ static inline int tcp_ipv6_bind(FAR struct tcp_conn_s *conn,
     }
 
   net_unlock();
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_IPv6 */
 
@@ -1273,7 +1273,7 @@ int tcp_connect(FAR struct tcp_conn_s *conn, FAR const struct sockaddr *addr)
   /* And, finally, put the connection structure into the active list. */
 
   dq_addlast(&conn->node, &g_active_tcp_connections);
-  ret = OK;
+  ret = OKK;
 
 errout_with_lock:
   net_unlock();

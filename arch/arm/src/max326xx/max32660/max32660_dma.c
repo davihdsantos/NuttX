@@ -149,7 +149,7 @@ static int max326_dmach_interrupt(int irq, FAR void *context, FAR void *arg)
   if ((stat & DMACH_STAT_IPEND) == 0)
     {
       dmaerr("Interrupt with nothing pending: %04x\n", stat);
-      return OK;
+      return OKK;
     }
 
   DEBUGASSERT((stat & (DMACH_STAT_CTZST | DMACH_STAT_BUSERR |
@@ -213,7 +213,7 @@ static int max326_dmach_interrupt(int irq, FAR void *context, FAR void *arg)
       max326_dma_terminate(dmach, OK);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -375,7 +375,7 @@ int max326_dma_setup(DMA_HANDLE handle, uint32_t cfg, uint32_t saddr,
   dmach->reload = false;
   dmach->cb     = NULL;
   dmach->arg    = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -410,7 +410,7 @@ int max326_dma_append(DMA_HANDLE handle, uint32_t saddr, uint32_t daddr,
   /* Setup the DMA channel state */
 
   dmach->reload = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -454,7 +454,7 @@ int max326_dmastart(DMA_HANDLE handle, dma_callback_t callback, void *arg)
   /* Enable channel interrupts at the NVIC */
 
   up_enable_irq(MAX326_IRQ_DMA(dmach->chno));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

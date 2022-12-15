@@ -206,7 +206,7 @@ int up_shmat(FAR uintptr_t *pages, unsigned int npages, uintptr_t vaddr)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -324,7 +324,7 @@ int up_shmdt(uintptr_t vaddr, unsigned int npages)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_BUILD_KERNEL && CONFIG_MM_SHM */

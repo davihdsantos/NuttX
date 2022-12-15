@@ -309,5 +309,5 @@ int nxbe_configure(FAR NX_DRIVERTYPE *dev, FAR struct nxbe_state_s *be)
           return -ENOSYS;
         }
     }
-  return OK;
+  return OKK;
 }

@@ -120,7 +120,7 @@ int stm32_bringup(void)
   /* Initialize the SDIO block driver */
 
   ret = stm32_sdio_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to initialize MMC/SD driver: %d\n",
@@ -134,7 +134,7 @@ int stm32_bringup(void)
    */
 
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to initialize USB host: %d\n",
@@ -146,7 +146,7 @@ int stm32_bringup(void)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to start USB monitor: %d\n",
@@ -180,5 +180,5 @@ int stm32_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

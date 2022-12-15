@@ -117,7 +117,7 @@ int gap8_configpin(uint32_t cfgset)
   pin_alt_reg |= altfunc << shiftcnt;
   PORTA->PADFUN[pinnum >> 4] = pin_alt_reg;
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

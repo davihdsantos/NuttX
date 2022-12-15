@@ -1076,7 +1076,7 @@ static void max3421e_takesem(sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1239,7 +1239,7 @@ static int max3421e_chan_waitsetup(FAR struct max3421e_usbhost_s *priv,
       priv->callback = NULL;
       priv->arg      = NULL;
 #endif
-      ret            = OK;
+      ret            = OKK;
     }
 
   leave_critical_section(flags);
@@ -1277,7 +1277,7 @@ static int max3421e_chan_asynchsetup(FAR struct max3421e_usbhost_s *priv,
       priv->waiter   = NULL;      /* No waiter */
       priv->callback = callback;
       priv->arg      = arg;
-      ret            = OK;
+      ret            = OKK;
     }
 
   leave_critical_section(flags);
@@ -1329,7 +1329,7 @@ static int max3421e_chan_wait(FAR struct max3421e_usbhost_s *priv,
        * awakened by a signal too.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (priv->waiter != NULL);
 
@@ -1461,7 +1461,7 @@ static int max3421e_transfer_status(FAR struct max3421e_usbhost_s *priv)
   switch (regval & USBHOST_HRSL_HRSLT_MASK)
     {
       case USBHOST_HRSL_HRSLT_SUCCESS:
-        ret = OK;
+        ret = OKK;
         break;
 
       case USBHOST_HRSL_HRSLT_BUSY:
@@ -1904,7 +1904,7 @@ static void max3421e_out_next(FAR struct max3421e_usbhost_s *priv,
   /* Is the full transfer complete? Did the last chunk transfer complete OK? */
 
   result = -(int)priv->result;
-  if (priv->xfrd < priv->buflen && result == OK)
+  if (priv->xfrd < priv->buflen && result == OKK)
     {
       /* Yes.. Set up for the next transfer based on the direction and the
        * endpoint type
@@ -2360,7 +2360,7 @@ static int max3421e_in_setup(FAR struct max3421e_usbhost_s *priv,
   /* Start the transfer. */
 
   max3421e_recv_start(priv, chan);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2417,7 +2417,7 @@ static int max3421e_out_setup(FAR struct max3421e_usbhost_s *priv,
   /* Start the transfer */
 
   max3421e_send_start(priv, chan);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2814,7 +2814,7 @@ static void max3421e_in_next(FAR struct max3421e_usbhost_s *priv,
   /* Is the full transfer complete? Did the last chunk transfer complete OK? */
 
   result = -(int)priv->result;
-  if (priv->xfrd < priv->buflen && result == OK)
+  if (priv->xfrd < priv->buflen && result == OKK)
     {
       /* Yes.. Set up for the next transfer based on the direction and the
        * endpoint type
@@ -3017,7 +3017,7 @@ static int max3421e_connected(FAR struct max3421e_usbhost_s *priv)
   /* Were we previously disconnected? */
 
   max3421e_connect_event(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3228,7 +3228,7 @@ static int max3421e_interrupt(int irq, FAR void *context, FAR void *arg)
   /* And defer interrupt processing to the high priority work queue thread */
 
   (void)work_queue(LPWORK, &priv->irqwork, max3421e_irqwork, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3365,7 +3365,7 @@ static int max3421e_wait(FAR struct usbhost_connection_s *conn,
           usbhost_vtrace1(MAX3421E_VTRACE1_CONNECTED2, connport->connected);
 
           max3421e_give_exclsem(priv);
-          return OK;
+          return OKK;
         }
 
 #ifdef CONFIG_USBHOST_HUB
@@ -3384,7 +3384,7 @@ static int max3421e_wait(FAR struct usbhost_connection_s *conn,
                           connport->connected);
 
           max3421e_give_exclsem(priv);
-          return OK;
+          return OKK;
         }
 #endif
 
@@ -3626,7 +3626,7 @@ static int max3421e_ep0configure(FAR struct usbhost_driver_s *drvr, usbhost_ep_t
   chan->toggles   = USBHOST_HCTL_RCVTOG0 | USBHOST_HCTL_SNDTOG0;
 
   max3421e_give_exclsem(priv);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3702,7 +3702,7 @@ static int max3421e_epalloc(FAR struct usbhost_driver_s *drvr,
 
   *ep = (usbhost_ep_t)chidx;
   max3421e_give_exclsem(priv);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3739,7 +3739,7 @@ static int max3421e_epfree(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
 
   max3421e_chan_free(priv, (intptr_t)ep);
   max3421e_give_exclsem(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3793,7 +3793,7 @@ static int max3421e_alloc(FAR struct usbhost_driver_s *drvr,
 
   *buffer = alloc;
   *maxlen = CONFIG_MAX3421E_DESCSIZE;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3825,7 +3825,7 @@ static int max3421e_free(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffer)
 
   DEBUGASSERT(drvr && buffer);
   kmm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3873,7 +3873,7 @@ static int max3421e_ioalloc(FAR struct usbhost_driver_s *drvr,
   /* Return the allocated buffer */
 
   *buffer = alloc;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3905,7 +3905,7 @@ static int max3421e_iofree(FAR struct usbhost_driver_s *drvr, FAR uint8_t *buffe
 
   DEBUGASSERT(drvr && buffer);
   kmm_free(buffer);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4017,7 +4017,7 @@ static int max3421e_ctrlin(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
                   /* All success transactions exit here */
 
                   max3421e_give_exclsem(priv);
-                  return OK;
+                  return OKK;
                 }
 
               usbhost_trace1(MAX3421E_TRACE1_SENDSTATUS_FAIL, -ret);
@@ -4112,7 +4112,7 @@ static int max3421e_ctrlout(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep0,
                   /* All success transactions exit here */
 
                   max3421e_give_exclsem(priv);
-                  return OK;
+                  return OKK;
                 }
 
               usbhost_trace1(MAX3421E_TRACE1_RECVSTATUS_FAIL, -ret);
@@ -4356,7 +4356,7 @@ static int max3421e_cancel(FAR struct usbhost_driver_s *drvr, usbhost_ep_t ep)
 #endif
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -4406,7 +4406,7 @@ static int max3421e_connect(FAR struct usbhost_driver_s *drvr,
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -4580,7 +4580,7 @@ static int max3421e_startsof(FAR struct max3421e_usbhost_s *priv)
 
   max3421e_int_wait(priv, USBHOST_HIRQ_FRAMEIRQ, 0);
   usleep(20*1000);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4696,7 +4696,7 @@ static inline int max3421e_sw_initialize(FAR struct max3421e_usbhost_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4803,7 +4803,7 @@ static inline int max3421e_hw_initialize(FAR struct max3421e_usbhost_s *priv)
     }
 
   max3421e_unlock(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

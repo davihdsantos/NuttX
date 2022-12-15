@@ -451,7 +451,7 @@ static void ee25xx_semtake(FAR struct ee25xx_dev_s *eedev)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -483,7 +483,7 @@ static int ee25xx_open(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct ee25xx_dev_s *eedev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(inode && inode->i_private);
   eedev = (FAR struct ee25xx_dev_s *)inode->i_private;
@@ -515,7 +515,7 @@ static int ee25xx_close(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct ee25xx_dev_s *eedev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(inode && inode->i_private);
   eedev = (FAR struct ee25xx_dev_s *)inode->i_private;

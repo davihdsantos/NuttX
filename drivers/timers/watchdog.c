@@ -275,7 +275,7 @@ static int wdog_open(FAR struct file *filep)
   /* Save the new open count */
 
   upper->crefs = tmp;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nxsem_post(&upper->exclsem);
@@ -318,7 +318,7 @@ static int wdog_close(FAR struct file *filep)
     }
 
   nxsem_post(&upper->exclsem);
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -493,7 +493,7 @@ static int wdog_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
               {
                 capture->oldhandler =
                   lower->ops->capture(lower, capture->newhandler);
-                ret = OK;
+                ret = OKK;
               }
             else
               {

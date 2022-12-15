@@ -205,7 +205,7 @@ static int skel_open(FAR struct file *filep, FAR const char *relpath,
    */
 
   filep->f_priv = (FAR void *)priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -225,7 +225,7 @@ static int skel_close(FAR struct file *filep)
 
   kmm_free(priv);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -344,7 +344,7 @@ static int skel_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new attributes in the new file structure */
 
   newp->f_priv = (FAR void *)newpriv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -384,7 +384,7 @@ static int skel_opendir(FAR const char *relpath, FAR struct fs_dirent_s *dir)
   level1->base.index    = 0;
 
   dir->u.procfs = (FAR void *) level1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -407,7 +407,7 @@ static int skel_closedir(FAR struct fs_dirent_s *dir)
     }
 
   dir->u.procfs = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -465,7 +465,7 @@ static int skel_readdir(FAR struct fs_dirent_s *dir)
        */
 
       level1->base.index = index + 1;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -486,7 +486,7 @@ static int skel_rewinddir(FAR struct fs_dirent_s *dir)
   priv = dir->u.procfs;
 
   priv->base.index = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -514,7 +514,7 @@ static int skel_stat(FAR const char *relpath, FAR struct stat *buf)
    * TODO:  Other 'struct buf' settings may be appropriate (optional)
    */
 
-  ret = OK;
+  ret = OKK;
 
   return ret;
 }

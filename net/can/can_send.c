@@ -181,7 +181,7 @@ ssize_t psock_can_send(FAR struct socket *psock, FAR const void *buf,
   FAR struct net_driver_s *dev;
   FAR struct can_conn_s *conn;
   struct send_s state;
-  int ret = OK;
+  int ret = OKK;
 
   conn = (FAR struct can_conn_s *)psock->s_conn;
 
@@ -311,7 +311,7 @@ ssize_t psock_can_sendmsg(FAR struct socket *psock, FAR struct msghdr *msg)
   FAR struct net_driver_s *dev;
   FAR struct can_conn_s *conn;
   struct send_s state;
-  int ret = OK;
+  int ret = OKK;
 
   conn = (FAR struct can_conn_s *)psock->s_conn;
 

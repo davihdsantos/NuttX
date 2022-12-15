@@ -83,7 +83,7 @@ static struct gpio_callback_s g_gpio_handlers[16];
 
 static int stm32l4_exti0_isr(int irq, void *context, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -104,7 +104,7 @@ static int stm32l4_exti0_isr(int irq, void *context, FAR void *arg)
 
 static int stm32l4_exti1_isr(int irq, void *context, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -125,7 +125,7 @@ static int stm32l4_exti1_isr(int irq, void *context, FAR void *arg)
 
 static int stm32l4_exti2_isr(int irq, void *context, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -146,7 +146,7 @@ static int stm32l4_exti2_isr(int irq, void *context, FAR void *arg)
 
 static int stm32l4_exti3_isr(int irq, void *context, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -167,7 +167,7 @@ static int stm32l4_exti3_isr(int irq, void *context, FAR void *arg)
 
 static int stm32l4_exti4_isr(int irq, void *context, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Clear the pending interrupt */
 
@@ -190,7 +190,7 @@ static int stm32l4_exti_multiisr(int irq, void *context, void *arg, int first, i
 {
   uint32_t pr;
   int pin;
-  int ret = OK;
+  int ret = OKK;
 
   /* Examine the state of each pin in the group */
 
@@ -385,5 +385,5 @@ int stm32l4_gpiosetevent(uint32_t pinset, bool risingedge, bool fallingedge,
 
   /* Return the old IRQ handler */
 
-  return OK;
+  return OKK;
 }

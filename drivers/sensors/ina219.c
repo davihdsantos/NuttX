@@ -260,7 +260,7 @@ static int ina219_readpower(FAR struct ina219_dev_s *priv,
   sninfo("Voltage: %u uV, Current: %d uA\n",
          buffer->voltage, buffer->current);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

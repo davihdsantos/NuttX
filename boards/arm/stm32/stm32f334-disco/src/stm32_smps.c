@@ -345,7 +345,7 @@ static int smps_shutdown(FAR struct smps_dev_s *dev)
 
   memset(smps, 0, sizeof(struct smps_s));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -367,7 +367,7 @@ static int smps_setup(FAR struct smps_dev_s *dev)
   FAR struct smps_priv_s      *priv;
   struct adc_channel_s         channels[ADC1_NCHANNELS];
   struct adc_sample_time_s     stime;
-  int ret = OK;
+  int ret = OKK;
   int i   = 0;
 
   /* Initialize smps structure */
@@ -427,7 +427,7 @@ static int smps_start(FAR struct smps_dev_s *dev)
   FAR struct stm32_adc_dev_s  *adc   = lower->adc;
   volatile uint64_t per = 0;
   uint64_t fclk = 0;
-  int ret = OK;
+  int ret = OKK;
 
   /* Disable HRTIM outputs */
 
@@ -554,14 +554,14 @@ static int smps_stop(FAR struct smps_dev_s *dev)
 
   priv->running = false;
 
-  return OK;
+  return OKK;
 }
 
 static int smps_params_set(FAR struct smps_dev_s *dev,
                            FAR struct smps_params_s *param)
 {
   FAR struct smps_s *smps = (FAR struct smps_s *)dev->priv;
-  int ret = OK;
+  int ret = OKK;
 
   /* Only output voltage */
 
@@ -585,7 +585,7 @@ static int smps_params_set(FAR struct smps_dev_s *dev,
 static int smps_mode_set(FAR struct smps_dev_s *dev, uint8_t mode)
 {
   FAR struct smps_s *smps = (FAR struct smps_s *)dev->priv;
-  int ret = OK;
+  int ret = OKK;
 
   /* Only constant voltage mode supported */
 
@@ -608,7 +608,7 @@ static int smps_limits_set(FAR struct smps_dev_s *dev,
                            FAR struct smps_limits_s *limits)
 {
   FAR struct smps_s *smps = (FAR struct smps_s *)dev->priv;
-  int ret = OK;
+  int ret = OKK;
 
   /* Some assertions */
 
@@ -694,27 +694,27 @@ static int smps_state_get(FAR struct smps_dev_s *dev,
 
   memcpy(state, &smps->state, sizeof(struct smps_state_s));
 
-  return OK;
+  return OKK;
 }
 
 static int smps_fault_set(FAR struct smps_dev_s *dev, uint8_t fault)
 {
-  return OK;
+  return OKK;
 }
 
 static int smps_fault_get(FAR struct smps_dev_s *dev, FAR uint8_t *fault)
 {
-  return OK;
+  return OKK;
 }
 
 static int smps_fault_clean(FAR struct smps_dev_s *dev, uint8_t fault)
 {
-  return OK;
+  return OKK;
 }
 
 static int smps_ioctl(FAR struct smps_dev_s *dev, int cmd, unsigned long arg)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1037,7 +1037,7 @@ int stm32_smps_setup(void)
   FAR struct hrtim_dev_s *hrtim      = NULL;
   FAR struct adc_dev_s *adc          = NULL;
   static bool initialized            = false;
-  int ret                            = OK;
+  int ret                            = OKK;
   int i;
 
   /* Initialize only once */

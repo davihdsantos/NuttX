@@ -595,7 +595,7 @@ static int spi_transfer(struct imx_spidev_s *priv, const void *txbuffer,
     }
   while (priv->nrxwords < priv->nwords);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -681,7 +681,7 @@ static int spi_interrupt(int irq, void *context, FAR void *arg, FAR void *arg)
       nxsem_post(&priv->waitsem);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -718,14 +718,14 @@ static int spi_lock(FAR struct spi_dev_s *dev, bool lock)
           /* Take the semaphore (perhaps waiting) */
 
           ret = nxsem_wait(&priv->exclsem);
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

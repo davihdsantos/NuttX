@@ -82,5 +82,5 @@ int board_app_initialize(uintptr_t arg)
 {
   /* Configure SPI-based devices */
 
-  return OK;
+  return OKK;
 }

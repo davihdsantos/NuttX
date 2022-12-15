@@ -88,7 +88,7 @@ static int tms3570_gio_interrupt(int irq, void *context, FAR void *arg)
       irq_dispatch(irq2, context);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

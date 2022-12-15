@@ -388,7 +388,7 @@ static int cxd56_powermgr_procfs_check_dir(char *relpath,
                                         mode_t *mode, int *level, int *fileno)
 {
   char *temp;
-  int ret = OK;
+  int ret = OKK;
 
   *level = 0;
   *mode = S_IFDIR;
@@ -470,7 +470,7 @@ static int cxd56_powermgr_procfs_open(FAR struct file *filep,
   snprintf(temp, sizeof(temp)-1, "%s", relpath);
   ret = cxd56_powermgr_procfs_check_dir(temp, &getmode, &level, &fileno);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -489,7 +489,7 @@ static int cxd56_powermgr_procfs_open(FAR struct file *filep,
   priv->readcnt = 0;
   filep->f_priv = (void *)priv;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -508,7 +508,7 @@ static int cxd56_powermgr_procfs_close(FAR struct file *filep)
   kmm_free(filep->f_priv);
   filep->f_priv = NULL;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -609,7 +609,7 @@ static int cxd56_powermgr_procfs_dup(FAR const struct file *oldp,
 
   newp->f_priv = newpriv;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -667,7 +667,7 @@ static int cxd56_powermgr_procfs_opendir(FAR const char *relpath,
 
   pminfo("Opendir '%s' %d %d\n", relpath, ret, level);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -687,7 +687,7 @@ static int cxd56_powermgr_procfs_opendir(FAR const char *relpath,
   procfs->index = 0;
   dir->u.procfs = (FAR void *)procfs;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -713,7 +713,7 @@ static int cxd56_powermgr_procfs_closedir(FAR struct fs_dirent_s *dir)
     }
 
   dir->u.procfs = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -745,7 +745,7 @@ static int cxd56_powermgr_procfs_readdir(struct fs_dirent_s *dir)
             strlen(g_powermg_procfs_dir[procfs->index])+1);
   procfs->index++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -766,7 +766,7 @@ static int cxd56_powermgr_procfs_rewinddir(struct fs_dirent_s *dir)
   pminfo("Rewind %d\n", procfs->index);
   procfs->index = 0;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

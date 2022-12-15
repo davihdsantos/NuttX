@@ -177,7 +177,7 @@ static int dma_interrupt_core(void *context)
   up_disable_clk(LC823450_CLOCK_DMA);
   phydmastart(pdmach);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -211,7 +211,7 @@ static int dma_interrupt(int irq, FAR void *context, FAR void *arg)
 
   up_disable_clk(LC823450_CLOCK_DMA);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -580,7 +580,7 @@ int lc823450_dmasetup(DMA_HANDLE handle, uint32_t control,
   dmach->nxfrs = nxfrs;
   dmach->llist = 0;
 
-  return OK;
+  return OKK;
 }
 
 int lc823450_dmallsetup(DMA_HANDLE handle, uint32_t control,
@@ -596,7 +596,7 @@ int lc823450_dmallsetup(DMA_HANDLE handle, uint32_t control,
   dmach->nxfrs = nxfrs;
   dmach->llist = llist;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -639,7 +639,7 @@ int lc823450_dmastart(DMA_HANDLE handle, dma_callback_t callback, void *arg)
 
   spin_unlock_irqrestore(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

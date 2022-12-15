@@ -362,7 +362,7 @@ static int ee24xx_open(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct ee24xx_dev_s *eedev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(inode && inode->i_private);
   eedev = (FAR struct ee24xx_dev_s *)inode->i_private;
@@ -394,7 +394,7 @@ static int ee24xx_close(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct ee24xx_dev_s *eedev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(inode && inode->i_private);
   eedev = (FAR struct ee24xx_dev_s *)inode->i_private;
@@ -882,7 +882,7 @@ int ee24xx_initialize(FAR struct i2c_master_s *bus, uint8_t devaddr,
 
   kmm_free(uuidname);
 
-  if (OK != ret)
+  if (OKK != ret)
     {
       ferr("register uuid failed, ret = %d\n", ret);
       return ret;

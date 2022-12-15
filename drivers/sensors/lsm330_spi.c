@@ -740,7 +740,7 @@ static int lsm330acl_dvr_open(FAR void *instance_handle, int32_t arg)
     }
 
   priv->seek_address = (uint8_t) LSM330_ACL_OUT_X_L;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -833,7 +833,7 @@ static int lsm330gyro_dvr_open(FAR void *instance_handle, int32_t arg)
     }
 
   priv->seek_address = (uint8_t) LSM330_GYRO_OUT_X_L;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -854,7 +854,7 @@ static int lsm330acl_dvr_close(FAR void *instance_handle, int32_t arg)
   /* Release the sensor */
 
   nxsem_post(&priv->devicesem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -877,7 +877,7 @@ static int lsm330gyro_dvr_close(FAR void *instance_handle, int32_t arg)
   /* Release the sensor */
 
   nxsem_post(&priv->devicesem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1056,7 +1056,7 @@ static off_t lsm330gyro_dvr_seek(FAR void *instance_handle, off_t offset,
 static int lsm330_dvr_ioctl(FAR void *instance_handle, int cmd,
                             unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1415,7 +1415,7 @@ int lsm330_register(FAR const char *devpath_acl,
    * then return a handle to the caller
    */
 
-  return OK;
+  return OKK;
 
 err_exit:
   /* Registration the of the gyroscope failed, so we need to destroy the

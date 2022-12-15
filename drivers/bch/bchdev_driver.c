@@ -119,7 +119,7 @@ static int bch_poll(FAR struct file *filep, FAR struct pollfd *fds,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -133,7 +133,7 @@ static int bch_open(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct bchlib_s *bch;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(inode && inode->i_private);
   bch = (FAR struct bchlib_s *)inode->i_private;
@@ -165,7 +165,7 @@ static int bch_close(FAR struct file *filep)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct bchlib_s *bch;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(inode && inode->i_private);
   bch = (FAR struct bchlib_s *)inode->i_private;
@@ -208,7 +208,7 @@ static int bch_close(FAR struct file *filep)
              {
                 /* Return without releasing the stale semaphore */
 
-                return OK;
+                return OKK;
              }
         }
     }
@@ -372,7 +372,7 @@ static int bch_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             {
               bch->refs++;
               *bchr = bch;
-              ret   = OK;
+              ret   = OKK;
             }
 
           bchlib_semgive(bch);
@@ -409,7 +409,7 @@ static int bch_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
       case DIOC_SETKEY:
         {
           memcpy(bch->key, (FAR void *)arg, CONFIG_BCH_ENCRYPTION_KEY_SIZE);
-          ret = OK;
+          ret = OKK;
         }
         break;
 #endif
@@ -444,7 +444,7 @@ static int bch_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 static int bch_unlink(FAR struct inode *inode)
 {
   FAR struct bchlib_s *bch;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(inode && inode->i_private);
   bch = (FAR struct bchlib_s *)inode->i_private;
@@ -477,7 +477,7 @@ static int bch_unlink(FAR struct inode *inode)
         {
           /* Return without releasing the stale semaphore */
 
-          return OK;
+          return OKK;
         }
     }
 

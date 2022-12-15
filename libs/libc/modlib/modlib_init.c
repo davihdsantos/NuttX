@@ -117,7 +117,7 @@ static inline int modlib_filelen(FAR struct mod_loadinfo_s *loadinfo,
   /* Return the size of the file in the loadinfo structure */
 
   loadinfo->filelen = buf.st_size;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -196,5 +196,5 @@ int modlib_initialize(FAR const char *filename,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }

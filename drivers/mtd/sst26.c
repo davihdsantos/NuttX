@@ -360,7 +360,7 @@ static inline int sst26_readid(struct sst26_dev_s *priv)
           priv->nsectors    = SST26_SST26VF064_NSECTORS;
           priv->pageshift   = SST26_SST26VF064_PAGE_SHIFT;
           priv->npages      = SST26_SST26VF064_NPAGES;
-          return OK;
+          return OKK;
         }
       else if (capacity == SST26_SST26VF032_CAPACITY)
         {
@@ -370,7 +370,7 @@ static inline int sst26_readid(struct sst26_dev_s *priv)
           priv->nsectors    = SST26_SST26VF032_NSECTORS;
           priv->pageshift   = SST26_SST26VF032_PAGE_SHIFT;
           priv->npages      = SST26_SST26VF032_NPAGES;
-          return OK;
+          return OKK;
         }
       else if (capacity == SST26_SST26VF016_CAPACITY)
         {
@@ -380,7 +380,7 @@ static inline int sst26_readid(struct sst26_dev_s *priv)
           priv->nsectors    = SST26_SST26VF016_NSECTORS;
           priv->pageshift   = SST26_SST26VF016_PAGE_SHIFT;
           priv->npages      = SST26_SST26VF016_NPAGES;
-          return OK;
+          return OKK;
         }
     }
 
@@ -568,7 +568,7 @@ static inline int sst26_chiperase(struct sst26_dev_s *priv)
   sst26_waitwritecomplete(priv);
 
   sstinfo("Return: OK\n");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -889,7 +889,7 @@ static int sst26_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 
-              ret = OK;
+              ret = OKK;
 
               sstinfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                       geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -970,7 +970,7 @@ FAR struct mtd_dev_s *sst26_initialize_spi(FAR struct spi_dev_s *dev)
       /* Identify the FLASH chip and get its capacity */
 
       ret = sst26_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

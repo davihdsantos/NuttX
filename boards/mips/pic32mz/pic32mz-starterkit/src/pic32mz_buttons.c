@@ -155,7 +155,7 @@ uint32_t board_buttons(void)
 int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
 {
 #ifdef CONFIG_PIC32MZ_GPIOIRQ_PORTB
-  int ret = OK;
+  int ret = OKK;
 
   if ((unsigned)id < NUM_BUTTONS)
     {

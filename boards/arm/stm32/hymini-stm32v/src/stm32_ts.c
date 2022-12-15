@@ -100,7 +100,7 @@ static int hymini_ts_irq_attach(FAR struct ads7843e_config_s *state, xcpt_t isr)
 
   tc_isr = isr;
   (void)stm32_gpiosetevent(GPIO_TS_IRQ, true, true, true, isr, NULL);
-  return OK;
+  return OKK;
 }
 
 /* Enable or disable the GPIO interrupt */

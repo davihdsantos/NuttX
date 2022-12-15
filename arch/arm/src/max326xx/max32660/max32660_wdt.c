@@ -388,7 +388,7 @@ static int max326_start(FAR struct watchdog_lowerhalf_s *lower)
   putreg32(ctrl, MAX326_WDT0_CTRL);
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -427,7 +427,7 @@ static int max326_stop(FAR struct watchdog_lowerhalf_s *lower)
   irq_detach(MAX326_IRQ_WDT0);
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -461,7 +461,7 @@ static int max326_keepalive(FAR struct watchdog_lowerhalf_s *lower)
   max326_wdog_reset(priv);
   spin_unlock_irqrestore(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -518,7 +518,7 @@ static int max326_getstatus(FAR struct watchdog_lowerhalf_s *lower,
   wdinfo("  flags    : %08x\n", status->flags);
   wdinfo("  timeout  : %d\n",   status->timeout);
   wdinfo("  timeleft : %d\n",   status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -574,7 +574,7 @@ static int max326_settimeout(FAR struct watchdog_lowerhalf_s *lower,
   putreg32(ctrl, MAX326_WDT0_CTRL);
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

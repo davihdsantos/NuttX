@@ -104,7 +104,7 @@ static int fat_attrib(const char *path, fat_attrib_t *retattrib,
 
   fat_semtake(fs);
   ret = fat_checkmount(fs);
-  if (ret != OK)
+  if (ret != OKK)
     {
       goto errout_with_semaphore;
     }
@@ -112,7 +112,7 @@ static int fat_attrib(const char *path, fat_attrib_t *retattrib,
   /* Find the file/directory entry for the relpath */
 
   ret = fat_finddirentry(fs, &dirinfo, desc.relpath);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* Some error occurred -- probably -ENOENT */
 
@@ -149,7 +149,7 @@ static int fat_attrib(const char *path, fat_attrib_t *retattrib,
       DIR_PUTATTRIBUTES(direntry, newattributes);
       fs->fs_dirty = true;
       ret = fat_updatefsinfo(fs);
-      if (ret != OK)
+      if (ret != OKK)
         {
           ret = -ret;
           goto errout_with_semaphore;
@@ -166,7 +166,7 @@ static int fat_attrib(const char *path, fat_attrib_t *retattrib,
   fat_semgive(fs);
   inode_release(inode);
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   fat_semgive(fs);

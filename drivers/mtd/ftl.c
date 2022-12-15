@@ -154,7 +154,7 @@ static int ftl_open(FAR struct inode *inode)
   dev = (FAR struct ftl_struct_s *)inode->i_private;
 
   dev->refs++;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -189,7 +189,7 @@ static int ftl_close(FAR struct inode *inode)
       kmm_free(dev);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -501,7 +501,7 @@ static int ftl_geometry(FAR struct inode *inode, struct geometry *geometry)
       finfo("nsectors: %d sectorsize: %d\n",
             geometry->geo_nsectors, geometry->geo_sectorsize);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -599,7 +599,7 @@ static int ftl_unlink(FAR struct inode *inode)
       kmm_free(dev);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

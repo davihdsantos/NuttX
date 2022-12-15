@@ -311,7 +311,7 @@ int mac802154_req_associate(MACHANDLE mac,
 
   mac802154_unlock(priv)
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -434,7 +434,7 @@ int mac802154_resp_associate(MACHANDLE mac,
 
   mac802154_unlock(priv)
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

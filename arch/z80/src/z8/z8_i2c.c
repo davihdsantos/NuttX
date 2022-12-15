@@ -152,7 +152,7 @@ static void z8_i2c_semtake(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -334,7 +334,7 @@ static int z8_i2c_read_transfer(FAR struct z8_i2cdev_s *priv,
                       I2CCTL |= I2C_CTL_STOP;
                     }
 
-                  return OK;
+                  return OKK;
                 }
             }
 
@@ -435,7 +435,7 @@ static int z8_i2c_write_transfer(FAR struct z8_i2cdev_s *priv,
 
               if ((I2CSTAT & I2C_STAT_ACK) != 0)
                 {
-                  return OK;
+                  return OKK;
                 }
 
               /* If was was not ACKed, then this inner loop will
@@ -526,7 +526,7 @@ static int z8_i2c_transfer(FAR struct i2c_master_s *dev,
   FAR struct i2c_msg_s *msg;
   bool nostop;
   uint8_t flags;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   /* Perform each segment of the transfer, message at a time */
@@ -621,7 +621,7 @@ static int z8_i2c_transfer(FAR struct i2c_master_s *dev,
 #ifdef CONFIG_I2C_RESET
 static int z8_i2c_reset(FAR struct i2c_master_s * dev)
 {
-  return OK;
+  return OKK;
 }
 #endif
 

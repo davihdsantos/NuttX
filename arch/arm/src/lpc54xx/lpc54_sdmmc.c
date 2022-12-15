@@ -1204,7 +1204,7 @@ static int lpc54_sdmmc_interrupt(int irq, void *context, FAR void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1231,7 +1231,7 @@ static int lpc54_lock(FAR struct sdio_dev_s *dev, bool lock)
    */
 
   lpc54_muxbus_sdio_lock(lock);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1543,7 +1543,7 @@ static int lpc54_attach(FAR struct sdio_dev_s *dev)
   /* Attach the SD card interrupt handler */
 
   ret = irq_attach(LPC54_IRQ_SDMMC, lpc54_sdmmc_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Disable all interrupts at the SD card controller and clear static
        * interrupt flags
@@ -1651,7 +1651,7 @@ static int lpc54_sendcmd(FAR struct sdio_dev_s *dev, uint32_t cmd,
                LPC54_SDMMC_RINTSTS);
   lpc54_ciu_sendcmd(regval, arg);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1750,7 +1750,7 @@ static int lpc54_recvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
   /* Configure the transfer interrupts */
 
   lpc54_config_xfrints(priv, SDCARD_RECV_MASK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1818,7 +1818,7 @@ static int lpc54_sendsetup(FAR struct sdio_dev_s *dev, FAR const uint8_t *buffer
   /* Configure the transfer interrupts */
 
   lpc54_config_xfrints(priv, SDCARD_SEND_MASK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1861,7 +1861,7 @@ static int lpc54_cancel(FAR struct sdio_dev_s *dev)
   /* Mark no transfer in progress */
 
   priv->remaining = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1944,7 +1944,7 @@ static int lpc54_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
     }
 
   lpc54_putreg(SDCARD_CMDDONE_CLEAR, LPC54_SDMMC_RINTSTS);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1974,7 +1974,7 @@ static int lpc54_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd,
 {
   uint32_t regval;
 
-  int ret = OK;
+  int ret = OKK;
 
   mcinfo("cmd=%04x\n", cmd);
 
@@ -2051,7 +2051,7 @@ static int lpc54_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd,
                           uint32_t rlong[4])
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   mcinfo("cmd=%04x\n", cmd);
 
@@ -2108,7 +2108,7 @@ static int lpc54_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd,
 static int lpc54_recvshort(FAR struct sdio_dev_s *dev, uint32_t cmd, uint32_t *rshort)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   mcinfo("cmd=%04x\n", cmd);
 
@@ -2406,7 +2406,7 @@ static int lpc54_registercallback(FAR struct sdio_dev_s *dev,
   priv->cbevents = 0;
   priv->cbarg    = arg;
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2553,7 +2553,7 @@ static int lpc54_dmarecvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
   /* Setup DMA error interrupts */
 
   lpc54_config_dmaints(priv, SDCARD_DMARECV_MASK, SDCARD_DMAERROR_MASK);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2703,7 +2703,7 @@ static int lpc54_dmasendsetup(FAR struct sdio_dev_s *dev,
   /* Setup DMA error interrupts */
 
   lpc54_config_dmaints(priv, SDCARD_DMASEND_MASK, SDCARD_DMAERROR_MASK);
-  return OK;
+  return OKK;
 }
 #endif
 

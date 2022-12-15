@@ -363,7 +363,7 @@ int up_prioritize_irq(int irq, int priority)
 #endif
 
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

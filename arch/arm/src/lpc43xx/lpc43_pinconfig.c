@@ -150,5 +150,5 @@ int lpc43_pin_config(uint32_t pinconf)
   regaddr =  LPC43_SCU_SFSP(pinset, pin);
   putreg32(regval, regaddr);
 
-  return OK;
+  return OKK;
 }

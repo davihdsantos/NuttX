@@ -659,7 +659,7 @@ int tiva_eeprom_initialize(void)
 
   /* The EEPROM does not indicate that any error occurred. */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

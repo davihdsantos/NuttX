@@ -486,7 +486,7 @@ static void usbhost_takesem(FAR sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -616,7 +616,7 @@ static int usbhost_devno_alloc(FAR struct usbhost_cdcacm_s *priv)
           g_devinuse |= bitno;
           priv->minor = devno;
           leave_critical_section(flags);
-          return OK;
+          return OKK;
         }
     }
 
@@ -1621,7 +1621,7 @@ static int usbhost_cfgdesc(FAR struct usbhost_cdcacm_s *priv,
 #endif
 
   uinfo("Endpoints allocated\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1794,7 +1794,7 @@ static int usbhost_alloc_buffers(FAR struct usbhost_cdcacm_s *priv)
       goto errout;
     }
 
-  return OK;
+  return OKK;
 
 errout:
   usbhost_free_buffers(priv);
@@ -1902,7 +1902,7 @@ usbhost_create(FAR struct usbhost_hubport_s *hport,
 
       /* Assign a device number to this class instance */
 
-      if (usbhost_devno_alloc(priv) == OK)
+      if (usbhost_devno_alloc(priv) == OKK)
         {
          /* Initialize class method function pointers */
 
@@ -2207,7 +2207,7 @@ static int usbhost_disconnected(FAR struct usbhost_class_s *usbclass)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2257,7 +2257,7 @@ static int usbhost_setup(FAR struct uart_dev_s *uartdev)
       /* Otherwise, just increment the reference count on the driver */
 
       priv->crefs++;
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -2337,7 +2337,7 @@ static void usbhost_shutdown(FAR struct uart_dev_s *uartdev)
 
 static int usbhost_attach(FAR struct uart_dev_s *uartdev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

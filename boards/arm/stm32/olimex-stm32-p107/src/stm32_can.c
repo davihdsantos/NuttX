@@ -106,7 +106,7 @@ int stm32_can_setup(void)
       return ret;
     }
 
-  return OK;
+  return OKK;
 #else
   return -ENODEV;
 #endif

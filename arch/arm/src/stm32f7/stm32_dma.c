@@ -262,7 +262,7 @@ static void stm32_dmatake(FAR struct stm32_dma_s *dmast)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -453,7 +453,7 @@ static int stm32_dmainterrupt(int irq, void *context, FAR void *arg)
       dmast->callback(dmast, status, dmast->arg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

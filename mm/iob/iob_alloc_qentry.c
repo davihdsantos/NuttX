@@ -107,7 +107,7 @@ static FAR struct iob_qentry_s *iob_allocwait_qentry(void)
 {
   FAR struct iob_qentry_s *qentry;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   /* The following must be atomic; interrupt must be disabled so that there
    * is no conflict with interrupt level I/O buffer chain container
@@ -122,7 +122,7 @@ static FAR struct iob_qentry_s *iob_allocwait_qentry(void)
    */
 
   qentry = iob_tryalloc_qentry();
-  while (ret == OK && qentry == NULL)
+  while (ret == OKK && qentry == NULL)
     {
       /* If not successful, then the semaphore count was less than or equal
        * to zero (meaning that there are no free buffers).  We need to wait
@@ -146,7 +146,7 @@ static FAR struct iob_qentry_s *iob_allocwait_qentry(void)
             {
               /* Force a success indication so that we will continue looping. */
 
-              ret = OK;
+              ret = OKK;
             }
         }
       else

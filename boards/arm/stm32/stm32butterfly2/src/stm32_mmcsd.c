@@ -148,7 +148,7 @@ static int stm32_cd(int irq, void *context, void *arg)
       nxsem_post(&g_cdsem);
     }
 
-  return OK;
+  return OKK;
 }
 
 /*****************************************************************************
@@ -168,7 +168,7 @@ int stm32_spi1register(struct spi_dev_s *dev, spi_mediachange_t callback,
   spiinfo("INFO: Registering spi1 device\n");
   g_chmediaclbk = callback;
   g_chmediaarg = arg;
-  return OK;
+  return OKK;
 }
 
 /*****************************************************************************
@@ -215,5 +215,5 @@ int stm32_mmcsd_initialize(int minor)
   pthread_create(NULL, &pattr, stm32_cd_thread, NULL);
 
   spiinfo("INFO: mmcsd card has been initialized successfully\n");
-  return OK;
+  return OKK;
 }

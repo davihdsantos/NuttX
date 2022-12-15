@@ -279,7 +279,7 @@ static int max326_irqinfo(int irq, uintptr_t *regaddr, uint32_t *bit,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -579,6 +579,6 @@ int up_prioritize_irq(int irq, int priority)
   modifyreg32(regaddr, 0xff << shift, priority << shift);
 
   max326_dumpnvic("prioritize", irq);
-  return OK;
+  return OKK;
 }
 #endif

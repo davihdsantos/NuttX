@@ -146,7 +146,7 @@ static int k64_cdinterrupt(int irq, FAR void *context, FAR void *arg)
   /* All of the work is done by k64_mediachange() */
 
   k64_mediachange();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -193,7 +193,7 @@ int k64_sdhc_initialize(void)
   mcinfo("Bind SDHC to the MMC/SD driver, minor=%d\n", MMSCD_MINOR);
 
   ret = mmcsd_slotinitialize(MMSCD_MINOR, g_sdhc.sdhc);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to bind SDHC to the MMC/SD driver: %d\n",
              ret);
@@ -209,7 +209,7 @@ int k64_sdhc_initialize(void)
   /* Enable CD interrupts to handle subsequent media changes */
 
   kinetis_pinirqenable(GPIO_SD_CARDDETECT);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

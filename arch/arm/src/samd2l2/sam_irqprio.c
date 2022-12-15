@@ -134,6 +134,6 @@ int up_prioritize_irq(int irq, int priority)
   putreg32(regval, regaddr);
 
   sam_dumpnvic("prioritize", irq);
-  return OK;
+  return OKK;
 }
 #endif

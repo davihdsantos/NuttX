@@ -891,7 +891,7 @@ static int sam_setup(struct uart_dev_s *dev)
   sam_serialout(priv, SAM_UART_CR_OFFSET, (UART_CR_RXEN | UART_CR_TXEN));
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -941,7 +941,7 @@ static int sam_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, sam_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the USART
@@ -1033,7 +1033,7 @@ static int sam_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1050,7 +1050,7 @@ static int sam_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {
@@ -1149,7 +1149,7 @@ static int sam_ioctl(struct file *filep, int cmd, unsigned long arg)
 
         /* Decode baud. */
 
-        ret = OK;
+        ret = OKK;
         baud = cfgetispeed(termiosp);
 
         /* Decode number of bits */
@@ -1203,7 +1203,7 @@ static int sam_ioctl(struct file *filep, int cmd, unsigned long arg)
 #endif
         /* Verify that all settings are valid before committing */
 
-        if (ret == OK)
+        if (ret == OKK)
           {
             /* Commit */
 

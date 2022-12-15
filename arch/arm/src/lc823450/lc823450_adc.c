@@ -273,7 +273,7 @@ static void lc823450_adc_start(FAR struct lc823450_adc_inst_s *inst)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 #endif
@@ -305,7 +305,7 @@ static inline void lc823450_adc_sem_wait(FAR struct lc823450_adc_inst_s *inst)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -338,7 +338,7 @@ static int lc823450_adc_isr(int irq, void *context, FAR void *arg)
 
   lc823450_adc_clearirq();
   nxsem_post(&g_inst->sem_isr);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -359,7 +359,7 @@ static int lc823450_adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -398,7 +398,7 @@ static void lc823450_adc_reset(FAR struct adc_dev_s *dev)
 static int lc823450_adc_setup(FAR struct adc_dev_s *dev)
 {
   ainfo("\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -501,7 +501,7 @@ static int lc823450_adc_ioctl(FAR struct adc_dev_s *dev, int cmd,
              */
 
             priv->cb->au_receive(dev, priv->chanlist[ch], val);
-            DEBUGASSERT(ret == OK);
+            DEBUGASSERT(ret == OKK);
           }
 
         lc823450_adc_standby(1);
@@ -643,7 +643,7 @@ int lc823450_adc_receive(FAR struct adc_dev_s *dev, FAR struct adc_msg_s *msg)
   lc823450_adc_standby(1);
   lc823450_adc_sem_post(inst);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ARCH_CHIP_LC823450 */

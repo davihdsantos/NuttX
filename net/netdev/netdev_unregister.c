@@ -177,7 +177,7 @@ int netdev_unregister(FAR struct net_driver_s *dev)
 #else
       ninfo("Unregistered dev: %s\n", dev->d_ifname);
 #endif
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

@@ -195,7 +195,7 @@ static int mcp73871_state(FAR struct battery_charger_dev_s *dev,
     break;
   }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -243,7 +243,7 @@ static int mcp73871_health(FAR struct battery_charger_dev_s *dev,
     break;
   }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -260,7 +260,7 @@ static int mcp73871_online(FAR struct battery_charger_dev_s *dev,
   /* There is no concept of online/offline in this driver */
 
   *status = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -276,7 +276,7 @@ static inline int mcp73871_powersupply(FAR struct mcp73871_dev_s *priv,
 {
   /* This chip doesn't support setting current limit by software */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -292,7 +292,7 @@ static inline int mcp73871_setvolt(FAR struct mcp73871_dev_s *priv,
 {
   /* This chip doesn't support setting voltage by software */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -308,7 +308,7 @@ static inline int mcp73871_setcurr(FAR struct mcp73871_dev_s *priv,
 {
   /* This chip doesn't support setting current by software */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -323,7 +323,7 @@ static int mcp73871_voltage(FAR struct battery_charger_dev_s *dev, int value)
 {
   /* This chip doesn't support setting voltage by software */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -338,7 +338,7 @@ static int mcp73871_current(FAR struct battery_charger_dev_s *dev, int value)
 {
   /* This chip doesn't support setting current rate by software */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -354,7 +354,7 @@ static int mcp73871_input_current(FAR struct battery_charger_dev_s *dev,
 {
   /* This chip doesn't support setting input current limit by software */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -66,6 +66,6 @@ int board_uniqueid(uint8_t *uniqueid)
     }
 
   stm32_get_uniqueid(uniqueid);
-  return OK;
+  return OKK;
 }
 #endif

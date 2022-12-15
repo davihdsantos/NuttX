@@ -165,7 +165,7 @@ int prctl(int option, ...)
 
 #if CONFIG_TASK_NAME_SIZE > 0
   va_end(ap);
-  return OK;
+  return OKK;
 #endif
 
 errout:

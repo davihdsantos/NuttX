@@ -87,7 +87,7 @@ int setenv(FAR const char *name, FAR const char *value, int overwrite)
   FAR char *newenvp;
   int newsize;
   int varlen;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify input parameter */
 
@@ -113,7 +113,7 @@ int setenv(FAR const char *name, FAR const char *value, int overwrite)
         {
           /* Otherwise, it is a request to remove a variable without altering it? */
 
-          return OK;
+          return OKK;
         }
     }
 
@@ -135,7 +135,7 @@ int setenv(FAR const char *name, FAR const char *value, int overwrite)
           /* No.. then just return success */
 
           sched_unlock();
-          return OK;
+          return OKK;
         }
 
       /* Yes.. just remove the name=value pair from the environment.  It will
@@ -188,7 +188,7 @@ int setenv(FAR const char *name, FAR const char *value, int overwrite)
 
   sprintf(pvar, "%s=%s", name, value);
   sched_unlock();
-  return OK;
+  return OKK;
 
 errout_with_lock:
   sched_unlock();

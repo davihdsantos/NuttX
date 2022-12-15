@@ -104,7 +104,7 @@ static void aio_fsync_worker(FAR void *arg)
     }
   else
     {
-      aiocbp->aio_result = OK;
+      aiocbp->aio_result = OKK;
     }
 
   /* Signal the client */
@@ -238,7 +238,7 @@ int aio_fsync(int op, FAR struct aiocb *aiocbp)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_FS_AIO */

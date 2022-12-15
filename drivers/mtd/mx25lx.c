@@ -375,7 +375,7 @@ static inline int mx25l_readid(FAR struct mx25l_dev_s *priv)
           priv->nsectors     = MX25L_MX25L3233F_NSECTORS;
           priv->pageshift    = MX25L_MX25L3233F_PAGE_SHIFT;
           priv->addressbytes = MX25L_ADDRESSBYTES_3;
-          return OK;
+          return OKK;
         }
       else if (capacity == MX25L_JEDEC_MX25L6433F_CAPACITY)
         {
@@ -385,7 +385,7 @@ static inline int mx25l_readid(FAR struct mx25l_dev_s *priv)
           priv->nsectors     = MX25L_MX25L6433F_NSECTORS;
           priv->pageshift    = MX25L_MX25L6433F_PAGE_SHIFT;
           priv->addressbytes = MX25L_ADDRESSBYTES_3;
-          return OK;
+          return OKK;
         }
       else if (capacity == MX25L_JEDEC_MX25L25635F_CAPACITY)
         {
@@ -395,7 +395,7 @@ static inline int mx25l_readid(FAR struct mx25l_dev_s *priv)
           priv->nsectors     = MX25L_MX25L25635F_NSECTORS;
           priv->pageshift    = MX25L_MX25L25635F_PAGE_SHIFT;
           priv->addressbytes = MX25L_ADDRESSBYTES_4;
-          return OK;
+          return OKK;
         }
     }
 
@@ -576,7 +576,7 @@ static inline int mx25l_chiperase(FAR struct mx25l_dev_s *priv)
   mx25l_waitwritecomplete(priv);
 
   mxlinfo("Return: OK\n");
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1031,7 +1031,7 @@ static int mx25l_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 #endif
-              ret = OK;
+              ret = OKK;
 
               mxlinfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                       geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -1109,7 +1109,7 @@ FAR struct mtd_dev_s *mx25l_initialize_spi(FAR struct spi_dev_s *dev)
       /* Identify the FLASH chip and get its capacity */
 
       ret = mx25l_readid(priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Unrecognized! Discard all of that work we just did and return NULL */
 

@@ -168,5 +168,5 @@ int board_app_initialize(uintptr_t arg)
     }
 #endif
 #endif
-  return OK;
+  return OKK;
 }

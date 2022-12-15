@@ -520,7 +520,7 @@ static int kinetis_transmit(FAR struct kinetis_driver_s *priv)
 
   (void)wd_start(priv->txtimeout, KINETIS_TXTIMEOUT, kinetis_txtimeout_expiry,
                  1, (wdparm_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -979,7 +979,7 @@ static int kinetis_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->irqwork, kinetis_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1268,7 +1268,7 @@ static int kinetis_ifup(struct net_driver_s *dev)
   priv->ints = RX_INTERRUPTS | ERROR_INTERRUPTS;
   modifyreg32(KINETIS_ENET_EIMR, TX_INTERRUPTS,  priv->ints);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1325,7 +1325,7 @@ static int kinetis_ifdown(struct net_driver_s *dev)
 
   priv->bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1407,7 +1407,7 @@ static int kinetis_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, kinetis_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1436,7 +1436,7 @@ static int kinetis_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1467,7 +1467,7 @@ static int kinetis_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   /* Add the MAC address to the hardware multicast routing table */
 
   UNUSED(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1507,7 +1507,7 @@ static int kinetis_ioctl(struct net_driver_s *dev, int cmd,
           struct mii_ioctl_data_s *req =
             (struct mii_ioctl_data_s *)((uintptr_t)arg);
           req->phy_id = priv->phyaddr;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -1622,7 +1622,7 @@ static int kinetis_writemii(struct kinetis_driver_s *priv, uint8_t phyaddr,
   /* Clear the MII interrupt bit */
 
   putreg32(ENET_INT_MII, KINETIS_ENET_EIR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1685,7 +1685,7 @@ static int kinetis_readmii(struct kinetis_driver_s *priv, uint8_t phyaddr,
   /* And return the MII data */
 
   *data = (uint16_t)(getreg32(KINETIS_ENET_MMFR) & ENET_MMFR_DATA_MASK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1941,7 +1941,7 @@ static inline int kinetis_initphy(struct kinetis_driver_s *priv)
 #endif
   putreg32(rcr, KINETIS_ENET_RCR);
   putreg32(tcr, KINETIS_ENET_TCR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2265,7 +2265,7 @@ int kinetis_netinitialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

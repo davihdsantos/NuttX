@@ -109,7 +109,7 @@ int unregister_binfmt(FAR struct binfmt_s *binfmt)
             }
 
           binfmt->next = NULL;
-          ret = OK;
+          ret = OKK;
         }
 
       sched_unlock();

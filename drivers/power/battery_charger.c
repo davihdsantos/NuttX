@@ -108,7 +108,7 @@ static const struct file_operations g_batteryops =
 
 static int bat_charger_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -121,7 +121,7 @@ static int bat_charger_open(FAR struct file *filep)
 
 static int bat_charger_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -77,7 +77,7 @@ int putenv(FAR const char *string)
 {
   char *pname;
   char *pequal;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify that a string was passed */
 

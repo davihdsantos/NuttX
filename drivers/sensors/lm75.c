@@ -218,7 +218,7 @@ static int lm75_readb16(FAR struct lm75_dev_s *priv, uint8_t regaddr,
 
   *regvalue = b8tob16((b8_t)buffer[0] << 8 | (b8_t)buffer[1]);
   sninfo("addr: %02x value: %08x ret: %d\n", regaddr, *regvalue, ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -287,7 +287,7 @@ static int lm75_readtemp(FAR struct lm75_dev_s *priv, FAR b16_t *temp)
     }
 
   *temp = temp16;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -355,7 +355,7 @@ static int lm75_writeconf(FAR struct lm75_dev_s *priv, uint8_t conf)
 
 static int lm75_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -368,7 +368,7 @@ static int lm75_open(FAR struct file *filep)
 
 static int lm75_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -432,7 +432,7 @@ static int lm75_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode      *inode = filep->f_inode;
   FAR struct lm75_dev_s *priv  = inode->i_private;
-  int                    ret   = OK;
+  int                    ret   = OKK;
 
   switch (cmd)
     {
@@ -460,7 +460,7 @@ static int lm75_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         {
           uint8_t conf;
           ret = lm75_readconf(priv, &conf);
-          if (ret == OK)
+          if (ret == OKK)
             {
               ret = lm75_writeconf(priv, conf | LM75_CONF_SHUTDOWN);
             }
@@ -475,7 +475,7 @@ static int lm75_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         {
           uint8_t conf;
           ret = lm75_readconf(priv, &conf);
-          if (ret == OK)
+          if (ret == OKK)
             {
               ret = lm75_writeconf(priv, conf & ~LM75_CONF_SHUTDOWN);
             }

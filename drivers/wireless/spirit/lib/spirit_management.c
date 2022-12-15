@@ -433,7 +433,7 @@ uint8_t spirit_managment_wavco_calibration(FAR struct spirit_library_s *spirit)
   spirit_calib_set_vcotxcal(spirit, vco_txword);
   spirit_calib_set_vcorxcal(spirit, vco_rxword);
 
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -499,7 +499,7 @@ int spirit_management_txstrobe(FAR struct spirit_library_s *spirit)
       spirit->commstate = COMMUNICATION_STATE_TX;
     }
 
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -543,7 +543,7 @@ int spirit_management_rxstrobe(FAR struct spirit_library_s *spirit)
       spirit->commstate = COMMUNICATION_STATE_RX;
     }
 
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************

@@ -160,7 +160,7 @@ int psock_accept(FAR struct socket *psock, FAR struct sockaddr *addr,
   newsock->s_flags |= _SF_CONNECTED;
   newsock->s_flags &= ~_SF_CLOSED;
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_lock:
   net_unlock();

@@ -628,7 +628,7 @@ static void dac_reset(FAR struct dac_dev_s *dev)
 
 static int dac_setup(FAR struct dac_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -801,7 +801,7 @@ static int dac_send(FAR struct dac_dev_s *dev, FAR struct dac_msg_s *msg)
 #ifdef HAVE_DMA
   tim_modifyreg(chan, STM32L4_BTIM_EGR_OFFSET, 0, ATIM_EGR_UG);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -988,7 +988,7 @@ static int dac_timinit(FAR struct stm32_chan_s *chan)
   /* Enable the counter */
 
   tim_modifyreg(chan, STM32L4_BTIM_CR1_OFFSET, 0, ATIM_CR1_CEN);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1101,7 +1101,7 @@ static int dac_chaninit(FAR struct stm32_chan_s *chan)
   /* Mark the DAC channel "in-use" */
 
   chan->inuse = 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

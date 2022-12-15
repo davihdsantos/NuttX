@@ -436,7 +436,7 @@ static int lpc17_40_gpiointerrupt(int irq, void *context, FAR void *arg)
 
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

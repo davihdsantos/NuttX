@@ -256,7 +256,7 @@ int ipfwd_forward(FAR struct forward_s *fwd)
       /* Notify the device driver of the availability of TX data */
 
       netdev_txnotify_dev(fwd->f_dev);
-      return OK;
+      return OKK;
     }
 
   return -EBUSY;

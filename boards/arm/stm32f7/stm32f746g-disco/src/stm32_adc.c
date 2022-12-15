@@ -156,7 +156,7 @@ static const uint32_t g_pinlist[6]  =
        initialized = true;
      }
 
-   return OK;
+   return OKK;
  #else
    return -ENOSYS;
  #endif

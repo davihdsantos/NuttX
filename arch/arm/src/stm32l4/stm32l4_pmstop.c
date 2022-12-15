@@ -79,7 +79,7 @@ static int do_stop(void)
   regval &= ~NVIC_SYSCON_SLEEPDEEP;
   putreg32(regval, NVIC_SYSCON);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

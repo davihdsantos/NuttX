@@ -295,7 +295,7 @@ static int mpl115a_getpressure(FAR struct mpl115a_dev_s *priv)
 
 static int mpl115a_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -308,7 +308,7 @@ static int mpl115a_open(FAR struct file *filep)
 
 static int mpl115a_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

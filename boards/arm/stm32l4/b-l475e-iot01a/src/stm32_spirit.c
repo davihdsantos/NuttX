@@ -149,7 +149,7 @@ static int stm32l4_reset(FAR const struct spirit_lower_s *lower)
   /* Wait minimum 1.5 ms to allow Spirit a proper boot-up sequence */
 
   nxsig_usleep(1500);
-  return OK;
+  return OKK;
 }
 
 /* IRQ/GPIO access callbacks.  These operations all hidden behind
@@ -174,7 +174,7 @@ static int stm32l4_attach_irq(FAR const struct spirit_lower_s *lower,
 
   priv->handler = handler;
   priv->arg     = arg;
-  return OK;
+  return OKK;
 }
 
 static void stm32l4_enable_irq(FAR const struct spirit_lower_s *lower,
@@ -250,7 +250,7 @@ static int stm32l4_spirit_devsetup(FAR struct stm32l4_priv_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -281,6 +281,6 @@ int stm32l4_spirit_initialize(void)
       wlerr("ERROR: Failed to initialize Spirit: %d\n", ret);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* HAVE_SPSGRF */

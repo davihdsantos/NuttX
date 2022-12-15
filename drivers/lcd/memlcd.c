@@ -388,7 +388,7 @@ static int memlcd_extcominisr(int irq, FAR void *context, void *arg)
   pol = !pol;
   mlcd->priv->setpolarity(pol);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -481,7 +481,7 @@ static int memlcd_putrun(fb_coord_t row, fb_coord_t col,
 
   memlcd_deselect(mlcd->spi);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -552,7 +552,7 @@ static int memlcd_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t * buffer,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -571,7 +571,7 @@ static int memlcd_getvideoinfo(FAR struct lcd_dev_s *dev,
           g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres,
           g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -588,7 +588,7 @@ static int memlcd_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(pinfo && planeno == 0);
   lcdinfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -636,7 +636,7 @@ static int memlcd_setpower(FAR struct lcd_dev_s *dev, int power)
       mlcd->priv->dispcontrol(0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -682,7 +682,7 @@ static int memlcd_setcontrast(struct lcd_dev_s *dev, unsigned int contrast)
 
   mlcd->contrast = contrast;
   mlcd->priv->setvcomfreq(contrast);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

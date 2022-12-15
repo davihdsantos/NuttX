@@ -262,7 +262,7 @@ int stm32_bringup(void)
          CONFIG_NSH_MMCSDMINOR);
 
   ret = mmcsd_slotinitialize(CONFIG_NSH_MMCSDMINOR, sdio);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n", ret);
       return ret;
@@ -312,7 +312,7 @@ int stm32_bringup(void)
   /* Initialize and register the joystick driver */
 
   ret = stm32_djoy_initialization();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to register the joystick driver: %d\n", ret);
       return ret;
@@ -322,5 +322,5 @@ int stm32_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

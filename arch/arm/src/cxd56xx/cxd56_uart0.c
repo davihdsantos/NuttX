@@ -132,7 +132,7 @@ static int uart0_semtake(sem_t *id)
     {
       ASSERT(errno == EINTR);
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -158,7 +158,7 @@ static int uart0_open(FAR struct file *filep)
 
   if (inode->i_crefs > 1)
     {
-      return OK;
+      return OKK;
     }
 
   ret = PD_UartInit(0);
@@ -205,7 +205,7 @@ static int uart0_open(FAR struct file *filep)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -309,7 +309,7 @@ int cxd56_uart0initialize(FAR const char *devname)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

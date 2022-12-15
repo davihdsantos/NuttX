@@ -325,7 +325,7 @@ static int ftmac100_transmit(FAR struct ftmac100_driver_s *priv)
   (void)wd_start(priv->ft_txtimeout, FTMAC100_TXTIMEOUT,
                  ftmac100_txtimeout_expiry, 1, (wdparm_t)priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1022,7 +1022,7 @@ static int ftmac100_interrupt(int irq, FAR void *context, FAR void *arg)
   work_queue(FTMAWORK, &priv->ft_irqwork, ftmac100_interrupt_work,
              priv, 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1222,7 +1222,7 @@ static int ftmac100_ifup(struct net_driver_s *dev)
 
   priv->ft_bifup = true;
   up_enable_irq(CONFIG_FTMAC100_IRQ);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1270,7 +1270,7 @@ static int ftmac100_ifdown(struct net_driver_s *dev)
 
   priv->ft_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1349,7 +1349,7 @@ static int ftmac100_txavail(struct net_driver_s *dev)
                  priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1406,7 +1406,7 @@ static int ftmac100_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
 
   putreg32(mta, &iobase->maht0 + hash_reg);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1455,7 +1455,7 @@ static int ftmac100_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
 
   putreg32(mta, &iobase->maht0 + hash_reg);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1604,7 +1604,7 @@ int ftmac100_initialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->ft_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_FTMAC100 */

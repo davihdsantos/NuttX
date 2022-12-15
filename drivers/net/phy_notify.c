@@ -155,7 +155,7 @@ static void phy_semtake(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -255,7 +255,7 @@ static int phy_handler(int irq, FAR void *context, FAR void *arg)
       phyerr("ERROR: nxsig_notification failed: %d\n", ret);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -291,7 +291,7 @@ int phy_notify_subscribe(FAR const char *intf, pid_t pid,
                          FAR struct sigevent *event)
 {
   FAR struct phy_notify_s *client;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(intf);
 
@@ -397,7 +397,7 @@ int phy_notify_unsubscribe(FAR const char *intf, pid_t pid)
   client->pid      = -1;
 
   phy_semgive();
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ARCH_PHY_INTERRUPT */

@@ -430,7 +430,7 @@ int mx25rxx_write_page(struct mx25rxx_dev_s *priv, FAR const uint8_t *buffer,
     }
   while ((ret & MX25R_SR_WIP) != 0);
 
-  return OK;
+  return OKK;
 }
 
 int mx25rxx_erase_sector(struct mx25rxx_dev_s *priv, off_t sector)
@@ -459,7 +459,7 @@ int mx25rxx_erase_sector(struct mx25rxx_dev_s *priv, off_t sector)
     }
   while ((status & MX25R_SR_WIP) != 0);
 
-  return OK;
+  return OKK;
 }
 
 #if 0 /* FIXME:  Not used */
@@ -484,7 +484,7 @@ int mx25rxx_erase_block(struct mx25rxx_dev_s *priv, off_t block)
     }
   while ((status & MX25R_SR_WIP) != 0);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -509,7 +509,7 @@ int mx25rxx_erase_chip(struct mx25rxx_dev_s *priv)
       status = priv->cmdbuf[0];
     }
 
-  return OK;
+  return OKK;
 }
 
 void mx25rxx_write_enable(FAR struct mx25rxx_dev_s *dev, bool enable)
@@ -746,7 +746,7 @@ int mx25rxx_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->erasesize    = (1 << priv->sectorshift);
               geo->neraseblocks = priv->nsectors;
 #endif
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);
@@ -815,7 +815,7 @@ int mx25rxx_readid(struct mx25rxx_dev_s *dev)
         return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -825,7 +825,7 @@ int mx25rxx_readid(struct mx25rxx_dev_s *dev)
 #ifdef CONFIG_MX25RXX_SECTOR512
 static int mx25rxx_flush_cache(struct mx25rxx_dev_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* If the cache is dirty (meaning that it no longer matches the old FLASH contents)
    * or was erased (with the cache containing the correct FLASH contents), then write
@@ -1082,7 +1082,7 @@ FAR struct mtd_dev_s *mx25rxx_initialize(FAR struct qspi_dev_s *qspi, bool unpro
   /* Identify the FLASH chip and get its capacity */
 
   ret = mx25rxx_readid(dev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* Unrecognized! Discard all of that work we just did and return NULL */
 

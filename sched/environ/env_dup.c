@@ -80,7 +80,7 @@ int env_dup(FAR struct task_group_s *group)
   FAR struct tcb_s *ptcb = this_task();
   FAR char *envp = NULL;
   size_t envlen;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(group != NULL && ptcb != NULL && ptcb->group != NULL);
 

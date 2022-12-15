@@ -180,7 +180,7 @@ static void skel_lock(FAR struct skel_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -405,7 +405,7 @@ static int skel_getmultibits(FAR struct skel_dev_s *priv, FAR uint8_t *pins,
 {
   ioe_pinset_t pinset;
   int pin;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   /* Read the pinset from the IO-Expander hardware */
@@ -424,7 +424,7 @@ static int skel_getmultibits(FAR struct skel_dev_s *priv, FAR uint8_t *pins,
       values[i] = ((pinset & (1 << pin) != 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -610,7 +610,7 @@ static int skel_attach(FAR struct ioexpander_dev_s *dev, ioe_pinset_t pinset,
 
            priv->cb[i].pinset = pinset;
            priv->cb[i].cbfunc = callback;
-           ret = OK;
+           ret = OKK;
          }
     }
 
@@ -718,7 +718,7 @@ static void skel_interrupt(FAR void *arg)
                  (FAR void *)priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -74,7 +74,7 @@ static int do_test_aes(FAR struct cipher_testvec *test, int mode, int encrypt)
 
   int res = aes_cypher(out, test->input, test->ilen, test->iv, test->key,
                        test->klen, mode, encrypt);
-  if (res == OK)
+  if (res == OKK)
     {
       res = memcmp(out, test->result, test->rlen);
     }
@@ -117,7 +117,7 @@ static int test_aes(void)
                   ARRAY_SIZE(aes_ctr_dec_tv_template),
                   aes_ctr_enc_tv_template, aes_ctr_dec_tv_template)
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -130,14 +130,14 @@ int crypto_test(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #else /* CONFIG_CRYPTO_ALGTEST */
 
 int crypto_test(void)
 {
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CRYPTO_ALGTEST */

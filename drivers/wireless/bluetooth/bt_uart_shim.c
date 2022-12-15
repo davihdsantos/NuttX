@@ -264,7 +264,7 @@ hciuart_setbaud(FAR const struct btuart_lowerhalf_s *lower, uint32_t baud)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -406,7 +406,7 @@ static int hcicollecttask(int argc, FAR char **argv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

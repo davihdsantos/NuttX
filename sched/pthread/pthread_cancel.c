@@ -104,7 +104,7 @@ int pthread_cancel(pthread_t thread)
 
       tcb->cmn.flags |= TCB_FLAG_CANCEL_PENDING;
       sched_unlock();
-      return OK;
+      return OKK;
     }
 
 #ifdef CONFIG_CANCELLATION_POINTS
@@ -128,7 +128,7 @@ int pthread_cancel(pthread_t thread)
         }
 
       sched_unlock();
-      return OK;
+      return OKK;
     }
 #endif
 

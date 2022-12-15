@@ -302,5 +302,5 @@ int minerva_swint(int irq, FAR void *context, FAR void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }

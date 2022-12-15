@@ -100,10 +100,10 @@ int nxtk_drawlinewindow(NXTKWINDOW hfwnd, FAR struct nxgl_vector_s *vector,
 
       case 0:
         ret = nxtk_filltrapwindow(hfwnd, &trap[0], color);
-        if (ret == OK)
+        if (ret == OKK)
           {
             ret = nxtk_filltrapwindow(hfwnd, &trap[1], color);
-            if (ret == OK)
+            if (ret == OKK)
               {
                 ret = nxtk_filltrapwindow(hfwnd, &trap[2], color);
               }
@@ -141,7 +141,7 @@ int nxtk_drawlinewindow(NXTKWINDOW hfwnd, FAR struct nxgl_vector_s *vector,
 
       /* Draw a circle at pt1 */
 
-      ret = OK;
+      ret = OKK;
       if ((caps & NX_LINECAP_PT1) != 0)
         {
           ret = nxtk_fillcirclewindow(hfwnd, &vector->pt1, radius, color);
@@ -149,7 +149,7 @@ int nxtk_drawlinewindow(NXTKWINDOW hfwnd, FAR struct nxgl_vector_s *vector,
 
       /* Draw a circle at pt2 */
 
-      if (ret == OK && (caps & NX_LINECAP_PT2) != 0)
+      if (ret == OKK && (caps & NX_LINECAP_PT2) != 0)
         {
           ret = nxtk_fillcirclewindow(hfwnd, &vector->pt2, radius, color);
         }

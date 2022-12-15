@@ -570,7 +570,7 @@ int imx_uart_configure(uint32_t base, FAR const struct uart_config_s *config)
   putreg32(regval, base + UART_UCR1_OFFSET);
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif /* IMX_HAVE_UART */
 

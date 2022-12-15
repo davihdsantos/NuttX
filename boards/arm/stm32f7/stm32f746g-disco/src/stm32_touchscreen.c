@@ -162,7 +162,7 @@ static int  stm32_ft5x06_attach(FAR const struct ft5x06_config_s *config,
       g_priv_config.arg     = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -304,7 +304,7 @@ int stm32_tsc_setup(int minor)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_INPUT_FT5X06 */

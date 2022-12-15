@@ -506,7 +506,7 @@ static int stm32_complock(FAR struct stm32_comp_s *priv, bool lock)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -838,7 +838,7 @@ static int stm32_compconfig(FAR struct stm32_comp_s *priv)
       stm32_complock(priv, true);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -886,7 +886,7 @@ static int stm32_compenable(FAR struct stm32_comp_s *priv, bool enable)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -907,7 +907,7 @@ static int stm32_compenable(FAR struct stm32_comp_s *priv, bool enable)
 static int comp_setup(FAR struct comp_dev_s *dev)
 {
 #warning "Missing logic"
-    return OK;
+    return OKK;
 }
 
 /****************************************************************************

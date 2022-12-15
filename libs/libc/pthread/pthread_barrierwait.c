@@ -96,7 +96,7 @@
 int pthread_barrier_wait(FAR pthread_barrier_t *barrier)
 {
   int semcount;
-  int ret = OK;
+  int ret = OKK;
 
   if (!barrier)
     {
@@ -110,7 +110,7 @@ int pthread_barrier_wait(FAR pthread_barrier_t *barrier)
   /* Find out how many threads are already waiting at the barrier */
 
   ret = sem_getvalue(&barrier->sem, &semcount);
-  if (ret != OK)
+  if (ret != OKK)
     {
       sched_unlock();
       return EINVAL;
@@ -137,7 +137,7 @@ int pthread_barrier_wait(FAR pthread_barrier_t *barrier)
     {
       /* Otherwise, this thread must wait as well */
 
-      while (sem_wait(&barrier->sem) != OK)
+      while (sem_wait(&barrier->sem) != OKK)
         {
           /* If the thread is awakened by a signal, just continue to wait */
 

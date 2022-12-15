@@ -87,7 +87,7 @@ int pthread_attr_setschedparam(FAR pthread_attr_t *attr,
       attr->budget.tv_sec       = param->sched_ss_init_budget.tv_sec;
       attr->budget.tv_nsec      = param->sched_ss_init_budget.tv_nsec;
 #endif
-      ret = OK;
+      ret = OKK;
     }
 
   linfo("Returning %d\n", ret);

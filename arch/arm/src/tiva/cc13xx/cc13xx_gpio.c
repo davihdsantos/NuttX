@@ -137,7 +137,7 @@ int tiva_configgpio(pinconfig_t pinconfig)
     }
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

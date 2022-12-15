@@ -118,7 +118,7 @@ int nxsig_queue(int pid, int signo, void *sival_ptr)
 
   info.si_signo           = signo;
   info.si_code            = SI_QUEUE;
-  info.si_errno           = OK;
+  info.si_errno           = OKK;
 #ifdef CONFIG_CAN_PASS_STRUCTS
   info.si_value           = value;
 #else
@@ -126,7 +126,7 @@ int nxsig_queue(int pid, int signo, void *sival_ptr)
 #endif
 #ifdef CONFIG_SCHED_HAVE_PARENT
   info.si_pid             = rtcb->pid;
-  info.si_status          = OK;
+  info.si_status          = OKK;
 #endif
 
   /* Send the signal */

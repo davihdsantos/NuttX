@@ -120,7 +120,7 @@ int net_openroute_detached(FAR const char *pathname, int oflags,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -564,7 +564,7 @@ off_t net_seekroute_ipv4(FAR struct file *filep, unsigned int index)
       return (int)ret;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -587,7 +587,7 @@ off_t net_seekroute_ipv6(FAR struct file *filep, unsigned int index)
       return (int)ret;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -655,7 +655,7 @@ int net_lockroute_ipv4(void)
       /* Yes.. just increment the count of locks held */
 
       g_ipv4_count++;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -694,7 +694,7 @@ int net_lockroute_ipv6(void)
       /* Yes.. just increment the count of locks held */
 
       g_ipv6_count++;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -756,7 +756,7 @@ int net_unlockroute_ipv4(void)
       /* Not the last count... just decrement the count and return success */
 
       g_ipv4_count--;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -797,7 +797,7 @@ int net_unlockroute_ipv6(void)
       /* Not the last count... just decrement the count and return success */
 
       g_ipv6_count--;
-      ret = OK;
+      ret = OKK;
     }
   else
     {

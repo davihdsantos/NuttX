@@ -75,7 +75,7 @@
 int net_fstat(int sockfd, FAR struct stat *buf)
 {
   FAR struct socket *psock;
-  int ret = OK;
+  int ret = OKK;
 
   /* Get the underlying socket structure */
 
@@ -113,7 +113,7 @@ int net_fstat(int sockfd, FAR struct stat *buf)
        */
 
       nwarn("WARNING:  Socket not connected\n");
-      return OK;
+      return OKK;
     }
 
   /* We are only prepared to handle the MSS of connected TCP/IP and UDP

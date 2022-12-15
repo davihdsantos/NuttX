@@ -130,7 +130,7 @@ int mkfifo2(FAR const char *pathname, mode_t mode, size_t bufsize)
       goto errout;
     }
 
-  return OK;
+  return OKK;
 
 errout:
   set_errno(errcode);

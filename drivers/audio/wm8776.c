@@ -399,7 +399,7 @@ static int wm8776_configure(FAR struct audio_lowerhalf_s *dev,
 #endif
 {
   FAR struct wm8776_dev_s *priv = (FAR struct wm8776_dev_s *)dev;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(priv != NULL && caps != NULL);
   audinfo("ac_type: %d\n", caps->ac_type);
@@ -476,7 +476,7 @@ static int wm8776_configure(FAR struct audio_lowerhalf_s *dev,
 
         /* TODO : channels, bits per sample, bitrate */
 
-        ret = OK;
+        ret = OKK;
       }
       break;
 
@@ -506,7 +506,7 @@ static int wm8776_shutdown(FAR struct audio_lowerhalf_s *dev)
    */
 
   wm8776_hw_reset(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -653,7 +653,7 @@ static int wm8776_sendbuffer(FAR struct wm8776_dev_s *priv)
   irqstate_t flags;
   uint32_t timeout;
   int shift;
-  int ret = OK;
+  int ret = OKK;
 
   /* Loop while there are audio buffers to be sent and we have few than
    * CONFIG_WM8776_INFLIGHT then "in-flight"
@@ -765,7 +765,7 @@ static int wm8776_start(FAR struct audio_lowerhalf_s *dev)
   audinfo("Starting worker thread\n");
   ret = pthread_create(&priv->threadid, &tattr, wm8776_workerthread,
                        (pthread_addr_t)priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       auderr("ERROR: pthread_create failed: %d\n", ret);
     }
@@ -812,7 +812,7 @@ static int wm8776_stop(FAR struct audio_lowerhalf_s *dev)
   /* Enter into a reduced power usage mode */
   /* REVISIT: */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -838,7 +838,7 @@ static int wm8776_pause(FAR struct audio_lowerhalf_s *dev)
       wm8776_setvolume(priv, priv->volume, true);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_AUDIO_EXCLUDE_PAUSE_RESUME */
 
@@ -865,7 +865,7 @@ static int wm8776_resume(FAR struct audio_lowerhalf_s *dev)
       wm8776_sendbuffer(priv);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_AUDIO_EXCLUDE_PAUSE_RESUME */
 
@@ -902,7 +902,7 @@ static int wm8776_enqueuebuffer(FAR struct audio_lowerhalf_s *dev,
    * case we are just "priming the pump" and we don't need to send any message.
    */
 
-  ret = OK;
+  ret = OKK;
   if (priv->mq != NULL)
     {
       term_msg.msgId  = AUDIO_MSG_ENQUEUE;
@@ -934,7 +934,7 @@ static int wm8776_cancelbuffer(FAR struct audio_lowerhalf_s *dev,
                                FAR struct ap_buffer_s *apb)
 {
   audinfo("apb=%p\n", apb);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -988,7 +988,7 @@ static int wm8776_ioctl(FAR struct audio_lowerhalf_s *dev, int cmd,
         break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1006,7 +1006,7 @@ static int wm8776_reserve(FAR struct audio_lowerhalf_s *dev)
 #endif
 {
   FAR struct wm8776_dev_s *priv = (FAR struct wm8776_dev_s *) dev;
-  int   ret = OK;
+  int   ret = OKK;
 
   /* Borrow the APBQ semaphore for thread sync */
 
@@ -1070,7 +1070,7 @@ static int wm8776_release(FAR struct audio_lowerhalf_s *dev)
   priv->reserved = false;
   wm8776_givesem(&priv->pendsem);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -91,7 +91,7 @@ int board_app_initialize(uintptr_t arg)
 #ifndef CONFIG_BOARD_LATE_INITIALIZE
   return lpc17_40_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }
 

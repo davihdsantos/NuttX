@@ -70,7 +70,7 @@ static inline void _files_semtake(FAR struct filelist *list)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -162,6 +162,6 @@ int file_detach(int fd, FAR struct file *filep)
   parent->f_priv   = NULL;
 
   _files_semgive(list);
-  return OK;
+  return OKK;
 }
 

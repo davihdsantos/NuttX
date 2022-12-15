@@ -83,7 +83,7 @@ int stm32_spi2register(struct spi_dev_s *dev, spi_mediachange_t callback,
 {
   /* TODO: media change callback */
 
-  return OK;
+  return OKK;
 }
 
 /*****************************************************************************
@@ -122,5 +122,5 @@ int stm32_mmcsd_initialize(int port, int minor)
     }
 
   spiinfo("INFO: mmcsd card has been initialized successfully\n");
-  return OK;
+  return OKK;
 }

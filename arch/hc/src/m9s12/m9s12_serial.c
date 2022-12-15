@@ -383,7 +383,7 @@ static int up_setup(struct uart_dev_s *dev)
 
   priv->im = 0;
   up_serialout(priv, HCS12_SCI_CR2_OFFSET, (SCI_CR2_TE|SCI_CR2_RE));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -423,7 +423,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, up_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
        /* Enable the Rx interrupt (the TX interrupt is still disabled
         * until we have something to send).
@@ -508,7 +508,7 @@ static int up_interrupt(int irq, void *context, void *arg)
            handled = true;
         }
     }
-    return OK;
+    return OKK;
 }
 
 /****************************************************************************
@@ -523,7 +523,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
 {
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
-  int                ret   = OK;
+  int                ret   = OKK;
 
   switch (cmd)
     {

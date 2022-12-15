@@ -199,7 +199,7 @@ static void page_buffer_lock(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -247,7 +247,7 @@ static int efc_command(uint32_t cmd, uint32_t arg)
     }
   else
     {
-      return OK;
+      return OKK;
     }
 }
 
@@ -290,7 +290,7 @@ static int efc_lock(size_t page, size_t npages)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -332,7 +332,7 @@ static int efc_unlock(size_t page, size_t npages)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -96,7 +96,7 @@ int dns_register_notify(dns_callback_t callback, FAR void *arg)
   /* Notify the existed nameserver */
 
   dns_foreach_nameserver(callback, arg);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -121,7 +121,7 @@ int dns_unregister_notify(dns_callback_t callback, FAR void *arg)
            dq_rem(&notify->entry, &g_dns_notify);
            dns_semgive();
            lib_free(notify);
-           return OK;
+           return OKK;
         }
     }
 

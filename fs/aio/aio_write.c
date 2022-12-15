@@ -312,7 +312,7 @@ int aio_write(FAR struct aiocb *aiocbp)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_FS_AIO */

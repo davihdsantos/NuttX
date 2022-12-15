@@ -179,7 +179,7 @@ static int bluetooth_queue_frame(FAR struct bluetooth_conn_s *conn,
   DEBUGASSERT((int)conn->bc_backlog == bluetooth_count_frames(conn));
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -235,7 +235,7 @@ int bluetooth_input(FAR struct radio_driver_s *radio,
   FAR struct bluetooth_conn_s *conn;
   FAR struct iob_s *frame;
   FAR struct iob_s *next;
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if there is a connection that will accept this packet */
 

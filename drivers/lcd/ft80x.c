@@ -248,7 +248,7 @@ static int ft80x_fade(FAR struct ft80x_dev_s *priv,
     }
   while (duty != endduty);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -299,7 +299,7 @@ static void ft80x_interrupt_work(FAR void *arg)
   do
     {
       ret = nxsem_wait(&priv->exclsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret < 0);
 
@@ -417,7 +417,7 @@ static int ft80x_interrupt(int irq, FAR void *context, FAR void *arg)
 
   DEBUGASSERT(priv->lower != NULL && priv->lower->enable != NULL);
   priv->lower->enable(priv->lower, false);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -494,7 +494,7 @@ static int ft80x_open(FAR struct file *filep)
   /* Save the new open count */
 
   priv->crefs = tmp;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nxsem_post(&priv->exclsem);
@@ -502,7 +502,7 @@ errout_with_sem:
 errout:
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -548,7 +548,7 @@ static int ft80x_close(FAR struct file *filep)
       if (priv->unlinked)
         {
           ft80x_destroy(priv);
-          return OK;
+          return OKK;
         }
     }
   else
@@ -558,13 +558,13 @@ static int ft80x_close(FAR struct file *filep)
       priv->crefs--;
     }
 
-  ret = OK;
+  ret = OKK;
   nxsem_post(&priv->exclsem);
 
 errout:
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -727,7 +727,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
                   filep->f_pos += dl->dlsize;
                 }
 
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -752,7 +752,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             {
               ft80x_read_memory(priv, FT80X_RAM_DL + ramdl->offset,
                                 ramdl->value, ramdl->nbytes);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -777,7 +777,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             {
               ft80x_write_memory(priv, FT80X_RAM_G + ramg->offset,
                                  ramg->value, ramg->nbytes);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -802,7 +802,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             {
               ft80x_write_memory(priv, FT80X_RAM_CMD + ramcmd->offset,
                                 ramcmd->value, ramcmd->nbytes);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -825,7 +825,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           else
             {
               reg->value.u8 = ft80x_read_byte(priv, reg->addr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -848,7 +848,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           else
             {
               reg->value.u16 = ft80x_read_hword(priv, reg->addr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -871,7 +871,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           else
             {
               reg->value.u32 = ft80x_read_word(priv, reg->addr);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -895,7 +895,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             {
               ft80x_read_memory(priv, regs->addr, regs->value,
                                 (size_t)regs->nregs << 2);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -918,7 +918,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           else
             {
               ft80x_write_byte(priv, reg->addr, reg->value.u8);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -941,7 +941,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           else
             {
               ft80x_write_hword(priv, reg->addr, reg->value.u16);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -964,7 +964,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           else
             {
               ft80x_write_word(priv, reg->addr, reg->value.u32);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -988,7 +988,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             {
               ft80x_write_memory(priv, regs->addr, regs->value,
                                  (size_t)regs->nregs << 2);
-              ret = OK;
+              ret = OKK;
             }
         }
         break;
@@ -1037,7 +1037,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
                       regval  = ft80x_read_word(priv, FT80X_REG_INT_MASK);
                       regval |= (1 << notify->id);
                       ft80x_write_word(priv, FT80X_REG_INT_MASK, regval);
-                      ret = OK;
+                      ret = OKK;
                     }
                 }
               else
@@ -1056,7 +1056,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
                   /* Cancel any pending notification */
 
                   nxsig_cancel_notification(&info->work);
-                  ret = OK;
+                  ret = OKK;
                 }
             }
         }
@@ -1101,7 +1101,7 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           DEBUGASSERT(arg == 0 || arg == 1);
 
           priv->lower->audio(priv->lower, (arg != 0));
-          ret = OK;
+          ret = OKK;
 
 #elif defined(CONFIG_LCD_FT80X_AUDIO_GPIOSHUTDOWN)
           /* Amplifier is controlled by an FT80x GPIO pin */
@@ -1124,13 +1124,13 @@ static int ft80x_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             }
 
           ft80x_write_byte(priv, FT80X_REG_GPIO, regval8);
-          ret = OK;
+          ret = OKK;
 
 #else
           /* Amplifier is not controllable. */
 
           DEBUGASSERT(arg == 0 || arg == 1);
-          return OK;
+          return OKK;
 #endif
         }
         break;
@@ -1176,7 +1176,7 @@ static int ft80x_unlink(FAR struct inode *inode)
       ft80x_destroy(priv);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1471,7 +1471,7 @@ static int ft80x_initialize(FAR struct ft80x_dev_s *priv)
 #  error No FT80x device configured
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1574,7 +1574,7 @@ int ft80x_register(FAR struct i2c_master_s *i2c,
       goto errout_with_interrupts;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_interrupts:
   lower->enable(lower, false);

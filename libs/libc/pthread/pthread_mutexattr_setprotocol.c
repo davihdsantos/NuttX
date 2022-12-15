@@ -73,7 +73,7 @@ int pthread_mutexattr_setprotocol(FAR pthread_mutexattr_t *attr,
   if (protocol >= PTHREAD_PRIO_NONE && protocol <= PTHREAD_PRIO_PROTECT)
     {
       attr->proto = protocol;
-      return OK;
+      return OKK;
     }
 
   return EINVAL;
@@ -81,7 +81,7 @@ int pthread_mutexattr_setprotocol(FAR pthread_mutexattr_t *attr,
 #else
   if (protocol == PTHREAD_PRIO_NONE)
     {
-      return OK;
+      return OKK;
     }
 
   return ENOSYS;

@@ -261,7 +261,7 @@ static int usbmsc_bind(FAR struct usbdevclass_driver_s *driver,
   FAR struct usbmsc_dev_s *priv = ((FAR struct usbmsc_driver_s *)driver)->dev;
   FAR struct usbmsc_req_s *reqcontainer;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   usbtrace(TRACE_CLASSBIND, 0);
@@ -387,7 +387,7 @@ static int usbmsc_bind(FAR struct usbdevclass_driver_s *driver,
 
   DEV_CONNECT(dev);
 #endif
-  return OK;
+  return OKK;
 
 errout:
   usbmsc_unbind(driver, dev);
@@ -667,7 +667,7 @@ static int usbmsc_setup(FAR struct usbdevclass_driver_s *driver,
                  * worker thread.
                  */
 
-                return OK;
+                return OKK;
               }
           }
           break;
@@ -706,7 +706,7 @@ static int usbmsc_setup(FAR struct usbdevclass_driver_s *driver,
                      * the worker thread.
                      */
 
-                    return OK;
+                    return OKK;
                   }
               }
           }
@@ -775,7 +775,7 @@ static int usbmsc_setup(FAR struct usbdevclass_driver_s *driver,
                      * the worker thread.
                      */
 
-                    return OK;
+                    return OKK;
                   }
               }
           }
@@ -836,7 +836,7 @@ static int usbmsc_setup(FAR struct usbdevclass_driver_s *driver,
         {
           usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_EPRESPQ), (uint16_t)-ret);
 #if 0 /* Not necessary */
-          ctrlreq->result = OK;
+          ctrlreq->result = OKK;
           usbmsc_ep0incomplete(dev->ep0, ctrlreq);
 #endif
         }
@@ -964,7 +964,7 @@ int usbmsc_setconfig(FAR struct usbmsc_dev_s *priv, uint8_t config)
       /* Already configured -- Do nothing */
 
       usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_ALREADYCONFIGURED), 0);
-      return OK;
+      return OKK;
     }
 
 #ifdef CONFIG_USBDEV_DUALSPEED
@@ -980,7 +980,7 @@ int usbmsc_setconfig(FAR struct usbmsc_dev_s *priv, uint8_t config)
   if (config == USBMSC_CONFIGIDNONE)
     {
       usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_CONFIGNONE), 0);
-      return OK;
+      return OKK;
     }
 
   /* We only accept one configuration */
@@ -1037,7 +1037,7 @@ int usbmsc_setconfig(FAR struct usbmsc_dev_s *priv, uint8_t config)
     }
 
   priv->config = config;
-  return OK;
+  return OKK;
 
 errout:
   usbmsc_resetconfig(priv);
@@ -1205,7 +1205,7 @@ void usbmsc_rdcomplete(FAR struct usbdev_ep_s *ep,
         req->callback = usbmsc_rdcomplete;
 
         ret = EP_SUBMIT(priv->epbulkout, req);
-        if (ret != OK)
+        if (ret != OKK)
           {
             usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_RDCOMPLETERDSUBMIT),
                      (uint16_t)-ret);
@@ -1268,7 +1268,7 @@ void usbmsc_deferredresponse(FAR struct usbmsc_dev_s *priv, bool failed)
           usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_DEFERREDRESPSUBMIT),
                    (uint16_t)-ret);
 #if 0 /* Not necessary */
-          ctrlreq->result = OK;
+          ctrlreq->result = OKK;
           usbmsc_ep0incomplete(dev->ep0, ctrlreq);
 #endif
         }
@@ -1422,7 +1422,7 @@ int usbmsc_configure(unsigned int nluns, void **handle)
   /* Return the handle and success */
 
   *handle = (FAR void *)alloc;
-  return OK;
+  return OKK;
 
 errout:
   usbmsc_uninitialize(alloc);
@@ -1506,7 +1506,7 @@ int usbmsc_bindlun(FAR void *handle, FAR const char *drvrpath,
   /* Get the drive geometry */
 
   if (!inode || !inode->u.i_bops || !inode->u.i_bops->geometry ||
-      inode->u.i_bops->geometry(inode, &geo) != OK || !geo.geo_available)
+      inode->u.i_bops->geometry(inode, &geo) != OKK || !geo.geo_available)
     {
       usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_NOGEOMETRY), 0);
       return -ENODEV;
@@ -1578,7 +1578,7 @@ int usbmsc_bindlun(FAR void *handle, FAR const char *drvrpath,
       lun->readonly = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1642,7 +1642,7 @@ int usbmsc_unbindlun(FAR void *handle, unsigned int lunno)
       /* Close the block driver */
 
      usbmsc_lununinitialize(lun);
-     ret = OK;
+     ret = OKK;
    }
 
   usbmsc_scsi_unlock(priv);
@@ -1675,7 +1675,7 @@ int usbmsc_exportluns(FAR void *handle)
   FAR struct usbmsc_driver_s *drvr;
 #endif
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_DEBUG_FEATURES
   if (!alloc)
@@ -1724,7 +1724,7 @@ int usbmsc_exportluns(FAR void *handle)
 
 #ifndef CONFIG_USBMSC_COMPOSITE
   ret = usbdev_register(&drvr->drvr);
-  if (ret != OK)
+  if (ret != OKK)
     {
       usbtrace(TRACE_CLSERROR(USBMSC_TRACEERR_DEVREGISTER), (uint16_t)-ret);
       goto errout_with_lock;

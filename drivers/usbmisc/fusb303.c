@@ -268,11 +268,11 @@ static int fusb303_putreg(FAR struct fusb303_dev_s *priv, uint8_t regaddr,
   for (retries = 0; retries < FUSB303_I2C_RETRIES; retries++)
     {
       ret = I2C_TRANSFER(priv->i2c, &msg, 1);
-      if (ret == OK)
+      if (ret == OKK)
         {
           fusb303_info("reg:%02X, value:%02X\n", regaddr, regval);
 
-          return OK;
+          return OKK;
         }
       else
         {
@@ -332,7 +332,7 @@ static int noinline_function fusb303_dumpregs(FAR const char *funcname,
   DUMPREG(priv, FUSB303_TYPE_REG);
   DUMPREG(priv, FUSB303_INTERRUPT_REG);
   DUMPREG(priv, FUSB303_INTERRUPT1_REG);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_DEBUG_FUSB303 */
 
@@ -416,7 +416,7 @@ static int fusb303_clear_interrupts(FAR struct fusb303_dev_s *priv)
 static int fusb303_setup(FAR struct fusb303_dev_s *priv,
                          struct fusb303_setup_s *setup)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t regval;
 
   fusb303_info("drp_tgl:%02X, host_curr:%02X\n"
@@ -580,7 +580,7 @@ static int fusb303_read_status(FAR struct fusb303_dev_s *priv,
     }
 
   *arg = ret;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -604,7 +604,7 @@ static int fusb303_read_devtype(FAR struct fusb303_dev_s *priv,
     }
 
   *arg = ret;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -698,7 +698,7 @@ static int fusb303_close(FAR struct file *filep)
   priv->config->irq_enable(priv->config, false);
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -858,7 +858,7 @@ static int fusb303_poll(FAR struct file *filep, FAR struct pollfd *fds,
   FAR struct inode *inode;
   FAR struct fusb303_dev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
   int i;
 
   DEBUGASSERT(filep && fds);
@@ -987,7 +987,7 @@ static int fusb303_int_handler(int irq, FAR void *context, FAR void *arg)
   fusb303_notify(priv);
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1039,7 +1039,7 @@ int fusb303_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
   priv->config->irq_attach(config, fusb303_int_handler, priv);
   priv->config->irq_enable(config, false);
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->devsem);

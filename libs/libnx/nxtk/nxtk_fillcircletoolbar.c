@@ -90,11 +90,11 @@ int nxtk_fillcircletoolbar(NXWINDOW hfwnd, FAR const struct nxgl_point_s *center
   for (i = 0; i < NCIRCLE_TRAPS; i++)
     {
       ret = nxtk_filltraptoolbar(hfwnd, &traps[i], color);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
     }
 
-  return OK;
+  return OKK;
 }

@@ -173,7 +173,7 @@ int mac802154_txdesc_alloc(FAR struct ieee802154_privmac_s *priv,
    */
 
   ret = nxsem_trywait(&priv->txdesc_sem);
-  if (ret == OK)
+  if (ret == OKK)
     {
       *txdesc =
         (FAR struct ieee802154_txdesc_s *)sq_remfirst(&priv->txdesc_queue);
@@ -230,7 +230,7 @@ int mac802154_txdesc_alloc(FAR struct ieee802154_privmac_s *priv,
   (*txdesc)->retrycount = priv->maxretries;
 
   (*txdesc)->conf = &primitive->u.dataconf;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -127,7 +127,7 @@ int board_app_initialize(uintptr_t arg)
 
   syslog(LOG_INFO, "Start USB host services\n");
   ret = lpc31_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to start USB host services: %d\n", ret);
       return ret;
@@ -139,11 +139,11 @@ int board_app_initialize(uintptr_t arg)
 
   syslog(LOG_ERR, "ERROR: Failed to start the USB monitor\n");
   ret = usbmonitor_start();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to start USB monitor: %d\n", ret);
     }
 #endif
 
-  return OK;
+  return OKK;
 }

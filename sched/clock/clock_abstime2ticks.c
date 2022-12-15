@@ -110,7 +110,7 @@ int clock_abstime2ticks(clockid_t clockid, FAR const struct timespec *abstime,
    */
 
   ret = clock_gettime(clockid, &currtime);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return EINVAL;
     }
@@ -123,7 +123,7 @@ int clock_abstime2ticks(clockid_t clockid, FAR const struct timespec *abstime,
        */
 
       *ticks = -1;
-      return OK;
+      return OKK;
     }
 
   /* The relative time to wait is the absolute time minus the current time. */

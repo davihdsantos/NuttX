@@ -74,5 +74,5 @@ int pthread_attr_setaffinity_np(FAR pthread_attr_t *attr,
               cpuset != NULL && *cpuset != 0);
 
   attr->affinity = *cpuset;
-  return OK;
+  return OKK;
 }

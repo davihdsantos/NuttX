@@ -86,7 +86,7 @@ static int stm32tiny_wl_irq_attach(xcpt_t isr, FAR void *arg)
   g_isr = isr;
   g_arg = arg;
   (void)stm32_gpiosetevent(GPIO_NRF24L01_IRQ, false, true, false, g_isr, g_arg);
-  return OK;
+  return OKK;
 }
 
 static void stm32tiny_wl_chip_enable(bool enable)
@@ -137,7 +137,7 @@ void stm32_wlinitialize(void)
     }
 
   result = nrf24l01_register(spidev, &nrf_cfg);
-  if (result != OK)
+  if (result != OKK)
     {
       wlerr("ERROR: Failed to register initialize SPI bus\n");
       return;

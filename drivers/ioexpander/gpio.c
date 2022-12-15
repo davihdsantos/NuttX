@@ -116,7 +116,7 @@ static int gpio_handler(FAR struct gpio_dev_s *dev, uint8_t pin)
                          SI_QUEUE, &signal->gp_work);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -130,7 +130,7 @@ static int gpio_handler(FAR struct gpio_dev_s *dev, uint8_t pin)
 static int gpio_open(FAR struct file *filep)
 {
   filep->f_pos = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -143,7 +143,7 @@ static int gpio_open(FAR struct file *filep)
 
 static int gpio_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -377,7 +377,7 @@ static int gpio_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
           DEBUGASSERT(ptr != NULL);
 
           *ptr = dev->gp_pintype;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -404,7 +404,7 @@ static int gpio_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
                     memcpy(&signal->gp_event, (FAR void *)arg,
                            sizeof(signal->gp_event));
                     signal->gp_pid = pid;
-                    ret = OK;
+                    ret = OKK;
                     break;
                   }
               }
@@ -465,7 +465,7 @@ static int gpio_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 
                     dev->gp_signals[j].gp_pid = 0;
                     nxsig_cancel_notification(&dev->gp_signals[j].gp_work);
-                    ret = OK;
+                    ret = OKK;
                     break;
                   }
                 }

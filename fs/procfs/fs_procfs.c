@@ -379,7 +379,7 @@ static int procfs_open(FAR struct file *filep, FAR const char *relpath,
 
           ret = g_procfs_entries[x].ops->open(filep, relpath, oflags, mode);
 
-          if (ret == OK)
+          if (ret == OKK)
             {
               DEBUGASSERT(filep->f_priv);
 
@@ -410,7 +410,7 @@ static int procfs_close(FAR struct file *filep)
 
   kmm_free(attr);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -538,7 +538,7 @@ static int procfs_fstat(FAR const struct file *filep, FAR struct stat *buf)
       buf->st_mode |= S_IWOTH | S_IWGRP | S_IWUSR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -625,7 +625,7 @@ static int procfs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
 
               ret = g_procfs_entries[x].ops->opendir(relpath, dir);
 
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   DEBUGASSERT(dir->u.procfs);
 
@@ -676,7 +676,7 @@ static int procfs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
     }
 
   dir->u.procfs = priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -700,7 +700,7 @@ static int procfs_closedir(FAR struct inode *mountpt,
     }
 
   dir->u.procfs = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -831,7 +831,7 @@ static int procfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
               /* Advance to next entry for the next read */
 
               priv->index = index;
-              ret = OK;
+              ret = OKK;
             }
         }
 #ifndef CONFIG_FS_PROCFS_EXCLUDE_PROCESS
@@ -858,7 +858,7 @@ static int procfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
            */
 
           level0->base.index = index + 1;
-          ret = OK;
+          ret = OKK;
         }
 #endif /* CONFIG_FS_PROCFS_EXCLUDE_PROCESS */
     }
@@ -909,7 +909,7 @@ static int procfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
             }
 
           level1->base.index++;
-          ret = OK;
+          ret = OKK;
         }
       else
         {
@@ -954,7 +954,7 @@ static int procfs_rewinddir(struct inode *mountpt, struct fs_dirent_s *dir)
       priv->index = 0;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -977,7 +977,7 @@ static int procfs_bind(FAR struct inode *blkdriver, const void *data,
   procfs_initialize();
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -991,7 +991,7 @@ static int procfs_bind(FAR struct inode *blkdriver, const void *data,
 static int procfs_unbind(void *handle, FAR struct inode **blkdriver,
                          unsigned int flags)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1012,7 +1012,7 @@ static int procfs_statfs(struct inode *mountpt, struct statfs *buf)
   buf->f_bfree   = 0;
   buf->f_bavail  = 0;
   buf->f_namelen = NAME_MAX;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1044,7 +1044,7 @@ static int procfs_stat(struct inode *mountpt, const char *relpath,
        */
 
       buf->st_mode = S_IFDIR | S_IROTH | S_IRGRP | S_IRUSR;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -1075,7 +1075,7 @@ static int procfs_stat(struct inode *mountpt, const char *relpath,
               /* It's an internal subdirectory */
 
               buf->st_mode = S_IFDIR | S_IROTH | S_IRGRP | S_IRUSR;
-              ret = OK;
+              ret = OKK;
               break;
             }
         }
@@ -1121,7 +1121,7 @@ int procfs_initialize(void)
       g_procfs_entrycount = g_base_entrycount;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1195,7 +1195,7 @@ int procfs_register(FAR const struct procfs_entry_s *entry)
 
       g_procfs_entries    = newtable;
       g_procfs_entrycount = newcount;
-      ret = OK;
+      ret = OKK;
     }
 
   sched_unlock();

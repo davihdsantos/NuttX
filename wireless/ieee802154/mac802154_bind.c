@@ -112,5 +112,5 @@ int mac802154_bind(MACHANDLE mac, FAR struct mac802154_maccb_s *cb)
       priv->nclients++;
     }
 
-  return OK;
+  return OKK;
 }

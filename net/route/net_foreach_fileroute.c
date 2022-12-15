@@ -95,7 +95,7 @@ int net_foreachroute_ipv4(route_handler_ipv4_t handler, FAR void *arg)
           /* The routing table does not exit.. return successful completion */
 
           ninfo("The IPv4 routing table file does not exist\n");
-          return OK;
+          return OKK;
         }
 
       /* Some other error occurred. */
@@ -121,14 +121,14 @@ int net_foreachroute_ipv4(route_handler_ipv4_t handler, FAR void *arg)
         {
           /* End of file */
 
-          ret = OK;
+          ret = OKK;
           break;
         }
 
       /* Call the handler. */
 
       ret = handler(&route, arg);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Terminate early if the handler returns any non-zero value. */
 
@@ -164,7 +164,7 @@ int net_foreachroute_ipv6(route_handler_ipv6_t handler, FAR void *arg)
           /* The routing table does not exit.. return successful completion */
 
           ninfo("The IPv6 routing table file does not exist\n");
-          return OK;
+          return OKK;
         }
 
       /* Some other error occurred. */
@@ -190,14 +190,14 @@ int net_foreachroute_ipv6(route_handler_ipv6_t handler, FAR void *arg)
         {
           /* End of file */
 
-          ret = OK;
+          ret = OKK;
           break;
         }
 
       /* Call the handler. */
 
       ret = handler(&route, arg);
-      if (ret != OK)
+      if (ret != OKK)
         {
           /* Terminate early if the handler returns any non-zero value. */
 

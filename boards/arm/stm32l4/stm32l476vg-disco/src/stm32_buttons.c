@@ -186,7 +186,7 @@ static int button_handler(int irq, FAR void *context, FAR void *arg)
 
   pm_activity(PM_IDLE_DOMAIN, CONFIG_PM_BUTTON_ACTIVITY);
 #endif
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_ARCH_IRQBUTTONS */
 #endif
@@ -211,7 +211,7 @@ static int button_pm_prepare(struct pm_callback_s *cb, int domain,
    * We always accept the state change by returning OK.
    */
 
-  return OK;
+  return OKK;
 }
 #endif
 

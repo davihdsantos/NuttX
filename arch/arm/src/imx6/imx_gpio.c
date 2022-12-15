@@ -470,7 +470,7 @@ static inline int imx_gpio_configoutput(gpio_pinset_t pinset)
   /* Convert the configured input GPIO to an output */
 
   imx_gpio_dirout(port, pin);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

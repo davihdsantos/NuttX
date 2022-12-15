@@ -264,7 +264,7 @@ int up_prioritize_irq(int irq, int priority)
       if (group >= 0)
         {
           putreg32(g_ipr[priority], AVR32_INTC_IPR(group));
-          return OK;
+          return OKK;
         }
     }
 

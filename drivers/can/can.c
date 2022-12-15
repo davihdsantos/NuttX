@@ -187,7 +187,7 @@ static int can_takesem(FAR sem_t *sem)
    * was awakened by a signal
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -997,7 +997,7 @@ static int can_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode     *inode = filep->f_inode;
   FAR struct can_dev_s *dev   = inode->i_private;
-  int                   ret   = OK;
+  int                   ret   = OKK;
 
   caninfo("cmd: %d arg: %ld\n", cmd, arg);
 
@@ -1373,7 +1373,7 @@ int can_receive(FAR struct can_dev_s *dev, FAR struct can_hdr_s *hdr,
               can_givesem(&fifo->rx_sem);
             }
 
-          errcode = OK;
+          errcode = OKK;
 
           /* Notify all poll/select waiters that they can read from the
            * cd_recv buffer
@@ -1506,7 +1506,7 @@ int can_txdone(FAR struct can_dev_s *dev)
         }
       else
         {
-          ret = OK;
+          ret = OKK;
         }
     }
 

@@ -400,6 +400,6 @@ int up_prioritize_irq(int irq, int priority)
   putreg32(regval, regaddr);
 
   nuc_dumpnvic("prioritize", irq);
-  return OK;
+  return OKK;
 }
 #endif

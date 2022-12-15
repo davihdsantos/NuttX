@@ -129,7 +129,7 @@ int arm_start_handler(int irq, FAR void *context, FAR void *arg)
    */
 
   up_restorestate(tcb->xcp.regs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

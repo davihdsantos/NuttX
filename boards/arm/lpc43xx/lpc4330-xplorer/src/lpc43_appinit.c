@@ -124,7 +124,7 @@ static int nsh_spifi_initialize(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #else
 #  define nsh_spifi_initialize() (OK)

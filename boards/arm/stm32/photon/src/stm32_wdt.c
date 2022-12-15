@@ -170,5 +170,5 @@ int photon_watchdog_initialize(void)
 
 #endif /* CONFIG_PHOTON_WDG_THREAD */
 
-  return OK;
+  return OKK;
 }

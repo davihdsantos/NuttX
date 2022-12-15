@@ -84,7 +84,7 @@ static int group_continue_handler(pid_t pid, FAR void *arg)
 
   /* Always return zero.  We need to visit each member of the group*/
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -249,7 +249,7 @@ static int stm32_mb1_mmcsd_carddetect(int irq, FAR void *regs, FAR void *arg)
                         &g_mb1_mmcsd, 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -262,7 +262,7 @@ static int stm32_mb2_mmcsd_carddetect(int irq, FAR void *regs, FAR void *arg)
                         &g_mb2_mmcsd, 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -305,7 +305,7 @@ static int stm32_mmcsd_setup(struct stm32_mmcsd_state_s *state)
 #endif
 
   mcinfo("INFO: mmcsd%d card has been initialized successfully\n", state->minor);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -348,7 +348,7 @@ int stm32_mmcsd_initialize(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -404,7 +404,7 @@ int stm32_spi2register(struct spi_dev_s *dev, spi_mediachange_t callback,
   g_mb2_mmcsd.callback = callback;
   g_mb2_mmcsd.cbarg    = arg;
 #endif
-  return OK;
+  return OKK;
 }
 
 /*****************************************************************************
@@ -422,7 +422,7 @@ int stm32_spi3register(struct spi_dev_s *dev, spi_mediachange_t callback,
   g_mb1_mmcsd.callback = callback;
   g_mb1_mmcsd.cbarg    = arg;
 #endif
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_MMCSD_SPI */

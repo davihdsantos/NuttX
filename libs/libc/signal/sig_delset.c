@@ -76,7 +76,7 @@ int sigdelset(FAR sigset_t *set, int signo)
       /* Remove the signal from the set */
 
       *set &= ~SIGNO2SET(signo);
-      return OK;
+      return OKK;
     }
 }
 

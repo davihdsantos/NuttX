@@ -188,7 +188,7 @@ int board_app_initialize(uintptr_t arg)
    */
 
   ret = stm32l4_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       udbg("ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;
@@ -199,7 +199,7 @@ int board_app_initialize(uintptr_t arg)
   /* Start the USB Monitor */
 
   ret = usbmonitor_start(0, NULL);
-  if (ret != OK)
+  if (ret != OKK)
     {
       udbg("ERROR: Failed to start USB monitor: %d\n", ret);
       return ret;
@@ -227,7 +227,7 @@ int board_app_initialize(uintptr_t arg)
   (void)stm32l4_dac_setup();
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_LIB_BOARDCTL */
 
@@ -240,7 +240,7 @@ int board_ioctl(unsigned int cmd, uintptr_t arg)
         return -EINVAL;
     }
 
-    return OK;
+    return OKK;
 }
 #endif
 
@@ -253,6 +253,6 @@ int board_uniqueid(uint8_t *uniqueid)
     }
 
   stm32l4_get_uniqueid(uniqueid);
-  return OK;
+  return OKK;
 }
 #endif

@@ -1391,7 +1391,7 @@ static int userfs_bind(FAR struct inode *blkdriver, FAR const void *data,
   /* Mounted! */
 
   *handle = (FAR void *)priv;
-  return OK;
+  return OKK;
 
 errout_with_psock:
   psock_close(&priv->psock);
@@ -1481,7 +1481,7 @@ static int userfs_unbind(FAR void *handle, FAR struct inode **blkdriver,
 
   psock_close(&priv->psock);
   kmm_free(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

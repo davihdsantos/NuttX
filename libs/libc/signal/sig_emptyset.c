@@ -63,6 +63,6 @@
 int sigemptyset(FAR sigset_t *set)
 {
   *set = NULL_SIGNAL_SET;
-  return OK;
+  return OKK;
 }
 

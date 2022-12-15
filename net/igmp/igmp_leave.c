@@ -171,7 +171,7 @@ int igmp_leavegroup(struct net_driver_s *dev,
       /* And remove the group address from the ethernet drivers MAC filter set */
 
       igmp_removemcastmac(dev, (FAR in_addr_t *)&grpaddr->s_addr);
-      return OK;
+      return OKK;
     }
 
   /* Return ENOENT if the address is not a member of the group */

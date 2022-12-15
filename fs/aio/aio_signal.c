@@ -87,7 +87,7 @@ int aio_signal(pid_t pid, FAR struct aiocb *aiocbp)
 
   DEBUGASSERT(aiocbp);
 
-  ret = OK; /* Assume success */
+  ret = OKK; /* Assume success */
 
   /* Signal the client */
 
@@ -125,7 +125,7 @@ int aio_signal(pid_t pid, FAR struct aiocb *aiocbp)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_FS_AIO */

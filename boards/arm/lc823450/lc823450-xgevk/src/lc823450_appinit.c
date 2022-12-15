@@ -161,7 +161,7 @@ int board_app_initialize(uintptr_t arg)
   /* Initialize eMMC */
 
   ret = lc823450_mtd_initialize(CONFIG_MTD_DEVNO_EMMC);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "Failed to initialize eMMC: ret=%d\n", ret);
     }
@@ -170,7 +170,7 @@ int board_app_initialize(uintptr_t arg)
   /* Initialize uSD */
 
   ret = lc823450_mtd_initialize(CONFIG_MTD_DEVNO_SDC);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "Failed to initialize uSD: ret=%d\n", ret);
     }
@@ -185,7 +185,7 @@ int board_app_initialize(uintptr_t arg)
 
   return lc823450_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }
 

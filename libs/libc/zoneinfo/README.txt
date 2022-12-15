@@ -174,5 +174,5 @@ int mount_zoneinfo(int minor)
     }
 
   printf("TZ database mounted at %s\n", CONFIG_LIBC_TZDIR);
-  return OK;
+  return OKK;
 }

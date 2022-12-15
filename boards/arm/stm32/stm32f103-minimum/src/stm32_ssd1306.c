@@ -91,7 +91,7 @@ int board_lcd_initialize(void)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

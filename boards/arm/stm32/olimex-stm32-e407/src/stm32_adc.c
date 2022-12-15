@@ -161,7 +161,7 @@ int stm32_adc_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif

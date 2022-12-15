@@ -236,7 +236,7 @@ static void stm32_dmatake(FAR struct stm32_dma_s *dmach)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -325,7 +325,7 @@ static int stm32_dmainterrupt(int irq, void *context, FAR void *arg)
     {
       dmach->callback(dmach, isr >> DMA_ISR_CHAN_SHIFT(dmach->chan), dmach->arg);
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

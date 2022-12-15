@@ -116,7 +116,7 @@ static int stm32_oneshot_handler(int irg_num, void * context, void *arg)
   oneshot->arg     = NULL;
 
   oneshot_handler(oneshot_arg);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -153,7 +153,7 @@ static inline int stm32_allocate_handler(struct stm32_oneshot_s *oneshot)
 
           g_oneshot[i]   = oneshot;
           oneshot->cbndx = i;
-          ret            = OK;
+          ret            = OKK;
           break;
         }
     }
@@ -165,7 +165,7 @@ static inline int stm32_allocate_handler(struct stm32_oneshot_s *oneshot)
   if (g_oneshot[0] == NULL)
     {
       g_oneshot[0] = oneshot;
-      return OK;
+      return OKK;
     }
 
   return -EBUSY;
@@ -243,7 +243,7 @@ int stm32_oneshot_max_delay(struct stm32_oneshot_s *oneshot, uint64_t *usec)
 
   *usec = (uint64_t)(UINT32_MAX / oneshot->frequency) *
           (uint64_t)USEC_PER_SEC;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -335,7 +335,7 @@ int stm32_oneshot_start(struct stm32_oneshot_s *oneshot,
 
   oneshot->running = true;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -386,7 +386,7 @@ int stm32_oneshot_cancel(struct stm32_oneshot_s *oneshot,
       ts->tv_sec  = 0;
       ts->tv_nsec = 0;
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   /* Yes.. Get the timer counter and period registers and stop the counter.
@@ -467,7 +467,7 @@ int stm32_oneshot_cancel(struct stm32_oneshot_s *oneshot,
              (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32_ONESHOT */

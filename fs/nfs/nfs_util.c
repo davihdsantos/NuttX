@@ -98,7 +98,7 @@ static inline int nfs_pathsegment(FAR const char **path, FAR char *buffer,
 
               *terminator = ch;
               *path       = src;
-              return OK;
+              return OKK;
             }
 
           /* Just skip over any leading '/' characters */
@@ -249,7 +249,7 @@ tryagain:
     }
 
   finfo("NFS_SUCCESS\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -371,7 +371,7 @@ int nfs_lookup(struct nfsmount *nmp, FAR const char *filename,
       memcpy(dir_attributes, ptr, sizeof(struct nfs_fattr));
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -420,7 +420,7 @@ int nfs_findnode(struct nfsmount *nmp, FAR const char *relpath,
           memcpy(dir_attributes, &nmp->nm_fattr, sizeof(struct nfs_fattr));
         }
 
-      return OK;
+      return OKK;
     }
 
   /* This is not the root directory. Loop until the directory entry corresponding
@@ -432,7 +432,7 @@ int nfs_findnode(struct nfsmount *nmp, FAR const char *relpath,
       /* Extract the next path segment name. */
 
       error = nfs_pathsegment(&path, buffer, &terminator);
-      if (error != OK)
+      if (error != OKK)
         {
           /* The filename segment contains is too long. */
 
@@ -444,7 +444,7 @@ int nfs_findnode(struct nfsmount *nmp, FAR const char *relpath,
       /* Look-up this path segment */
 
       error = nfs_lookup(nmp, buffer, fhandle, obj_attributes, dir_attributes);
-      if (error != OK)
+      if (error != OKK)
         {
           ferr("ERROR: nfs_lookup of \"%s\" failed at \"%s\": %d\n",
                 relpath, buffer, error);
@@ -462,7 +462,7 @@ int nfs_findnode(struct nfsmount *nmp, FAR const char *relpath,
            * directory entry is in fhandle, obj_attributes, and dir_attributes.
            */
 
-          return OK;
+          return OKK;
         }
 
       /* No.. then we have found one of the intermediate directories on
@@ -526,7 +526,7 @@ int nfs_finddir(struct nfsmount *nmp, FAR const char *relpath,
       /* Extract the next path segment name. */
 
       error = nfs_pathsegment(&path, filename, &terminator);
-      if (error != OK)
+      if (error != OKK)
         {
           /* The filename segment contains is too long. */
 
@@ -546,13 +546,13 @@ int nfs_finddir(struct nfsmount *nmp, FAR const char *relpath,
            * containing the object is in fhandle and attributes.
            */
 
-          return OK;
+          return OKK;
         }
 
       /* Look-up the next path segment */
 
       error = nfs_lookup(nmp, filename, fhandle, attributes, NULL);
-      if (error != OK)
+      if (error != OKK)
         {
           ferr("ERROR: fs_lookup of \"%s\" failed at \"%s\": %d\n",
                 relpath, filename, error);

@@ -198,7 +198,7 @@ static int imxrt_ocotp_wait_for_completion(uint32_t timeout_ms)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -218,7 +218,7 @@ int imxrt_ocotp_reload()
   int ret;
 
   ret = imxrt_ocotp_wait_for_completion(OCOTP_OPT_TIMEOUT_MS);
-  if (ret == OK)
+  if (ret == OKK)
     {
       imxrt_ocotp_reset_errors();
       imxrt_ocotp_initialize();
@@ -251,7 +251,7 @@ int imxrt_ocotp_read(uint32_t otp_index, uint32_t *data)
   int ret;
 
   ret = imxrt_ocotp_wait_for_completion(OCOTP_OPT_TIMEOUT_MS);
-  if (ret == OK)
+  if (ret == OKK)
     {
       imxrt_ocotp_reset_errors();
       imxrt_ocotp_initialize();
@@ -261,7 +261,7 @@ int imxrt_ocotp_read(uint32_t otp_index, uint32_t *data)
       putreg32(OCOTP_READ_CTRL_READ_FUSE, IMXRT_OCOTP_READ_CTRL);
 
       ret = imxrt_ocotp_wait_for_completion(OCOTP_OPT_TIMEOUT_MS);
-      if (ret == OK)
+      if (ret == OKK)
         {
           if ((getreg32(IMXRT_OCOTP_CTRL) & OCOTP_CTRL_ERROR) != 0)
             {
@@ -299,7 +299,7 @@ int imxrt_ocotp_write(uint32_t otp_index, uint32_t data)
 {
   int ret;
   ret = imxrt_ocotp_wait_for_completion(OCOTP_OPT_TIMEOUT_MS);
-  if (ret == OK)
+  if (ret == OKK)
     {
       imxrt_ocotp_reset_errors();
       imxrt_ocotp_initialize();
@@ -311,7 +311,7 @@ int imxrt_ocotp_write(uint32_t otp_index, uint32_t data)
       putreg32(data, IMXRT_OCOTP_DATA);
 
       ret = imxrt_ocotp_wait_for_completion(OCOTP_OPT_TIMEOUT_MS);
-      if (ret == OK)
+      if (ret == OKK)
         {
           if ((getreg32(IMXRT_OCOTP_CTRL) & OCOTP_CTRL_ERROR) != 0)
             {

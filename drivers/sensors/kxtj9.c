@@ -423,7 +423,7 @@ static int kxtj9_enable(FAR struct kxtj9_dev_s *priv, bool on)
     }
 
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -465,7 +465,7 @@ static int kxtj9_read_sensor_data(FAR struct kxtj9_dev_s *priv,
   add_sensor_randomness((acc_data[0] << 16) ^ (acc_data[1] << 8) ^
                         acc_data[2]);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -478,7 +478,7 @@ static int kxtj9_read_sensor_data(FAR struct kxtj9_dev_s *priv,
 
 static int kxtj9_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -491,7 +491,7 @@ static int kxtj9_open(FAR struct file *filep)
 
 static int kxtj9_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -681,7 +681,7 @@ int kxtj9_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_I2C && CONFIG_SENSORS_KXTJ9 */

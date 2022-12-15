@@ -105,7 +105,7 @@ void stm32_usbinitialize(void)
 int stm32_usbpullup(FAR struct usbdev_s *dev, bool enable)
 {
   usbtrace(TRACE_DEVPULLUP, (uint16_t)enable);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

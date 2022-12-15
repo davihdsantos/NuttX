@@ -296,7 +296,7 @@ static int elf_loadbinary(FAR struct binary_s *binp)
 
   elf_dumpentrypt(binp, &loadinfo);
   elf_uninit(&loadinfo);
-  return OK;
+  return OKK;
 
 errout_with_load:
   elf_unload(&loadinfo);

@@ -1006,7 +1006,7 @@ static int adc_timinit(FAR struct stm32_dev_s *priv)
 
   tim_dumpregs(priv, "After starting timers");
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1033,7 +1033,7 @@ static int adc_pm_prepare(struct pm_callback_s *cb, int domain,
       return -EBUSY;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1234,7 +1234,7 @@ static int adc_bind(FAR struct adc_dev_s *dev,
 
   DEBUGASSERT(priv != NULL);
   priv->cb = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1613,7 +1613,7 @@ static int adc_set_ch(FAR struct adc_dev_s *dev, uint8_t ch)
          adc_sqrbits(priv, ADC_SQR1_FIRST, ADC_SQR1_LAST, ADC_SQR1_SQ_OFFSET);
   adc_modifyreg(priv, STM32_ADC_SQR1_OFFSET, ~ADC_SQR1_RESERVED, bits);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1634,7 +1634,7 @@ static int adc_set_ch(FAR struct adc_dev_s *dev, uint8_t ch)
 static int adc_ioctl(FAR struct adc_dev_s *dev, int cmd, unsigned long arg)
 {
   FAR struct stm32_dev_s *priv = (FAR struct stm32_dev_s *)dev->ad_priv;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -1674,7 +1674,7 @@ static int adc_interrupt(FAR struct adc_dev_s *dev)
   pending = regval & ADC_ISR_ALLINTS;
   if (pending == 0)
     {
-      return OK;
+      return OKK;
     }
 
   /* Identifies the interruption AWD, OVR or EOC */
@@ -1731,7 +1731,7 @@ static int adc_interrupt(FAR struct adc_dev_s *dev)
 
   regval &= ~pending;
   adc_putreg(priv, STM32_ADC_ISR_OFFSET, regval);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1760,7 +1760,7 @@ static int adc123_interrupt(int irq, FAR void *context, FAR void *arg)
   adc_interrupt(&g_adcdev3);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

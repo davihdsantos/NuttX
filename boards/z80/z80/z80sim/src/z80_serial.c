@@ -148,7 +148,7 @@ static uart_dev_t g_uartport =
 
 static int up_setup(FAR struct uart_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -182,7 +182,7 @@ static void up_shutdown(FAR struct uart_dev_s *dev)
 
 static int up_attach(FAR struct uart_dev_s *dev)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

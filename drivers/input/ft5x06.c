@@ -428,7 +428,7 @@ static int ft5x06_data_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Clear any pending interrupts and return success */
 
   config->clear(config);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -749,7 +749,7 @@ static int ft5x06_bringup(FAR struct ft5x06_dev_s *priv)
   config->clear(config);
   config->enable(config, true);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -883,7 +883,7 @@ static int ft5x06_close(FAR struct file *filep)
      }
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1237,7 +1237,7 @@ int ft5x06_register(FAR struct i2c_master_s *i2c,
 
   /* And return success */
 
-  return OK;
+  return OKK;
 
 errout_with_timer:
 #ifdef CONFIG_FT5X06_POLLMODE

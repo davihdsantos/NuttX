@@ -306,7 +306,7 @@ static int tiva_start(struct timer_lowerhalf_s *lower)
 
       tiva_timer32_start(priv->handle);
       priv->started = true;
-      return OK;
+      return OKK;
     }
 
   /* Return EBUSY to indicate that the timer was already running */
@@ -343,7 +343,7 @@ static int tiva_stop(struct timer_lowerhalf_s *lower)
 
       tiva_timer32_stop(priv->handle);
       priv->started = false;
-      return OK;
+      return OKK;
     }
 
   /* Return ENODEV to indicate that the timer was not running */
@@ -401,7 +401,7 @@ static int tiva_getstatus(struct timer_lowerhalf_s *lower,
   tmrinfo("  flags    : %08x\n", status->flags);
   tmrinfo("  timeout  : %d\n",   status->timeout);
   tmrinfo("  timeleft : %d\n",   status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -440,7 +440,7 @@ static int tiva_settimeout(struct timer_lowerhalf_s *lower, uint32_t timeout)
   /* Reset the timer interval */
 
   tiva_timer32_setinterval(priv->handle, priv->clkticks);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -613,7 +613,7 @@ int tiva_timer_initialize(FAR const char *devpath,
       goto errout_with_timer;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_timer:
   tiva_gptm_release(priv->handle);  /* Free timer resources */

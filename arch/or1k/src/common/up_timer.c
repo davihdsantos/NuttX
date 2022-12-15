@@ -78,7 +78,7 @@ static int or1k_timer_isr(int irq, uint32_t *regs, void *arg)
 
   nxsched_process_timer();
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

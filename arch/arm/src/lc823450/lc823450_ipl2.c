@@ -524,11 +524,11 @@ static void chg_disable(void)
 
       /* Charge disable */
 
-      if (ret == OK && freq == R2A20056BM_SCL)
+      if (ret == OKK && freq == R2A20056BM_SCL)
         {
           ret = I2C_TRANSFER(i2c, msg, sizeof(msg) / sizeof(msg[0]));
 
-          if (ret != OK)
+          if (ret != OKK)
             {
               _info("no vbus (%d)\n", ret);
             }

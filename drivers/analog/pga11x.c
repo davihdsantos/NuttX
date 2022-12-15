@@ -5,7 +5,7 @@
  *   Author: Gregory Nutt <gnutt@nuttx.org>
  *
  * References:
- *   "PGA112, PGA113, PGA116, PGA117: Zerø-Drift PROGRAMMABLE GAIN AMPLIFIER
+ *   "PGA112, PGA113, PGA116, PGA117: Zerï¿½-Drift PROGRAMMABLE GAIN AMPLIFIER
  *   with MUX", SBOS424B, March 2008, Revised September 2008, Texas
  *   Instruments Incorporated"
  *
@@ -371,7 +371,7 @@ int pga11x_select(PGA11X_HANDLE handle,
   /* Send the command */
 
   pga11x_write(spi, cmd);
-  return OK;
+  return OKK;
 #else
   FAR struct spi_dev_s *spi = (FAR struct spi_dev_s *)handle;
   uint16_t u1cmd;
@@ -394,7 +394,7 @@ int pga11x_select(PGA11X_HANDLE handle,
   /* Send the command */
 
   pga11x_write(spi, u1cmd, u2cmd);
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -448,7 +448,7 @@ int pga11x_uselect(PGA11X_HANDLE handle, int pos,
   /* Send the command */
 
   pga11x_write(spi, u1cmd, u2cmd);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -511,7 +511,7 @@ int pga11x_read(PGA11X_HANDLE handle, FAR struct pga11x_settings_s *settings)
   settings->u1.gain    = (uint8_t)((u1value & PGA11X_GAIN_MASK) >> PGA11X_GAIN_SHIFT);
   settings->u2.channel = (uint8_t)((u2value & PGA11X_CHAN_MASK) >> PGA11X_CHAN_SHIFT);
   settings->u2.gain    = (uint8_t)((u2value & PGA11X_GAIN_MASK) >> PGA11X_GAIN_SHIFT);
-  return OK;
+  return OKK;
 #else
   FAR struct spi_dev_s *spi = (FAR struct spi_dev_s *)handle;
   uint16_t value;
@@ -544,7 +544,7 @@ int pga11x_read(PGA11X_HANDLE handle, FAR struct pga11x_settings_s *settings)
   spiinfo("Returning: %04x\n", value);
   settings->channel = (uint8_t)((value & PGA11X_CHAN_MASK) >> PGA11X_CHAN_SHIFT);
   settings->gain    = (uint8_t)((value & PGA11X_GAIN_MASK) >> PGA11X_GAIN_SHIFT);
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -573,7 +573,7 @@ int pga11x_uread(PGA11X_HANDLE handle, int pos,
 {
   struct pga11x_settings_s both;
   int ret = pga11x_read(handle, &both);
-  if (ret == OK)
+  if (ret == OKK)
     {
       if (pos == 0)
         {
@@ -623,7 +623,7 @@ int pga11x_shutdown(PGA11X_HANDLE handle)
 #else
   pga11x_write(spi, PGA11X_CMD_SDN_EN);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -663,7 +663,7 @@ int pga11x_ushutdown(PGA11X_HANDLE handle, int pos)
       pga11x_write(spi, PGA11X_CMD_NOOP, PGA11X_DCCMD_SDN_EN);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -702,7 +702,7 @@ int pga11x_enable(PGA11X_HANDLE handle)
 #else
   pga11x_write(spi, PGA11X_CMD_SDN_DIS);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -742,7 +742,7 @@ int pga11x_uenable(PGA11X_HANDLE handle, int pos)
       pga11x_write(spi, PGA11X_CMD_NOOP, PGA11X_DCCMD_SDN_DIS);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

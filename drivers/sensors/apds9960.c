@@ -201,7 +201,7 @@ static int apds9960_int_handler(int irq, FAR void *context, FAR void *arg)
       snerr("ERROR: Failed to queue work: %d\n", ret);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -441,7 +441,7 @@ static int apds9960_setdefault(FAR struct apds9960_dev_s *priv)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -469,7 +469,7 @@ static int apds9960_probe(FAR struct apds9960_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -510,7 +510,7 @@ static int apds9960_i2c_read(FAR struct apds9960_dev_s *priv,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1146,7 +1146,7 @@ static int apds9960_readgesture(FAR struct apds9960_dev_s *priv)
 
 static int apds9960_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1159,7 +1159,7 @@ static int apds9960_open(FAR struct file *filep)
 
 static int apds9960_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1264,7 +1264,7 @@ int apds9960_register(FAR const char *devpath,
   /* Probe APDS9960 device */
 
   ret = apds9960_probe(priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       snerr("ERROR: APDS-9960 is not responding!\n");
       return ret;

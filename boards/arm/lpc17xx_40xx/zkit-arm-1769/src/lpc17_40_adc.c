@@ -118,7 +118,7 @@ int zkit_adc_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_ADC */

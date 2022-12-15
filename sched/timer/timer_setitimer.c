@@ -106,7 +106,7 @@ int setitimer(int which, FAR const struct itimerval *value,
   struct itimerspec spec;
   struct itimerspec ospec;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   if (which != ITIMER_REAL || !value)
     {
@@ -124,7 +124,7 @@ int setitimer(int which, FAR const struct itimerval *value,
 
       leave_critical_section(flags);
 
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }

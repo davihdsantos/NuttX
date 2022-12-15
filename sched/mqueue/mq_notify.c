@@ -185,7 +185,7 @@ int mq_notify(mqd_t mqdes, FAR const struct sigevent *notification)
     }
 
   sched_unlock();
-  return OK;
+  return OKK;
 
 errout:
   set_errno(errval);

@@ -127,7 +127,7 @@ int stm32_comp_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_COMP && (CONFIG_STM32_COMP1 ||

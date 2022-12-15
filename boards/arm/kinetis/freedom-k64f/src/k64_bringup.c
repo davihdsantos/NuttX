@@ -159,7 +159,7 @@ int k64_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LIB_BOARDCTL CONFIG_BOARD_LATE_INITIALIZE */

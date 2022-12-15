@@ -155,7 +155,7 @@ static void comp_semtake(FAR sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -169,7 +169,7 @@ static int comp_poll(FAR struct file *filep, FAR struct pollfd *fds,
 {
   FAR struct inode      *inode    = filep->f_inode;
   FAR struct comp_dev_s *dev      = inode->i_private;
-  int                    ret      = OK;
+  int                    ret      = OKK;
   int                    i;
 
   DEBUGASSERT(dev && fds);
@@ -292,7 +292,7 @@ static int comp_open(FAR struct file *filep)
 
               irqstate_t flags = enter_critical_section();
               ret = dev->ad_ops->ao_setup(dev);
-              if (ret == OK)
+              if (ret == OKK)
                 {
                   /* Save the new open count on success */
 

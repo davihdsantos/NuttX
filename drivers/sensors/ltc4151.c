@@ -209,7 +209,7 @@ static int ltc4151_readpower(FAR struct ltc4151_dev_s *priv,
   sninfo("volt_reg=0x%04x float_voltage=%d\n",
          volt_reg, (int)float_voltage);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -222,7 +222,7 @@ static int ltc4151_readpower(FAR struct ltc4151_dev_s *priv,
 
 static int ltc4151_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -235,7 +235,7 @@ static int ltc4151_open(FAR struct file *filep)
 
 static int ltc4151_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

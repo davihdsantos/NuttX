@@ -108,5 +108,5 @@ int max326_bringup(void)
    */
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

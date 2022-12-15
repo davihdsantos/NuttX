@@ -202,7 +202,7 @@ int smartfs_mount(struct smartfs_mountpt_s *fs, bool writeable)
 {
   FAR struct inode *inode;
   struct geometry geo;
-  int ret = OK;
+  int ret = OKK;
 #if defined(CONFIG_SMARTFS_MULTI_ROOT_DIRS)
   struct smartfs_mountpt_s *nextfs;
 #endif
@@ -215,7 +215,7 @@ int smartfs_mount(struct smartfs_mountpt_s *fs, bool writeable)
 
   inode = fs->fs_blkdriver;
   if (!inode || !inode->u.i_bops || !inode->u.i_bops->geometry ||
-      inode->u.i_bops->geometry(inode, &geo) != OK || !geo.geo_available)
+      inode->u.i_bops->geometry(inode, &geo) != OKK || !geo.geo_available)
     {
       ret = -ENODEV;
       goto errout;
@@ -234,7 +234,7 @@ int smartfs_mount(struct smartfs_mountpt_s *fs, bool writeable)
    */
 
   ret = FS_IOCTL(fs, BIOC_GETFORMAT, (unsigned long) &fs->fs_llformat);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: Error getting device low level format: %d\n", ret);
       goto errout;
@@ -345,7 +345,7 @@ errout:
 
 int smartfs_unmount(struct smartfs_mountpt_s *fs)
 {
-  int           ret = OK;
+  int           ret = OKK;
   struct inode *inode;
 #if defined(CONFIG_SMARTFS_MULTI_ROOT_DIRS) || \
   (defined(CONFIG_FS_PROCFS) && !defined(CONFIG_FS_PROCFS_EXCLUDE_SMARTFS))
@@ -519,7 +519,7 @@ int smartfs_finddirentry(struct smartfs_mountpt_s *fs,
       direntry->datlen = 0;
 
       *parentdirsector = 0;    /* Our parent is the format sector I guess */
-      return OK;
+      return OKK;
     }
 
   /* Parse through each segment of relpath */
@@ -726,7 +726,7 @@ int smartfs_finddirentry(struct smartfs_mountpt_s *fs,
 
                           *parentdirsector = dirstack[depth];
                           *filename = segment;
-                          ret = OK;
+                          ret = OKK;
                           goto errout;
                         }
                       else
@@ -1083,7 +1083,7 @@ int smartfs_createentry(FAR struct smartfs_mountpt_s *fs,
   memset(direntry->name, 0, fs->fs_llformat.namesize + 1);
   strncpy(direntry->name, filename, fs->fs_llformat.namesize);
 
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -1302,7 +1302,7 @@ int smartfs_deleteentry(struct smartfs_mountpt_s *fs,
         }
     }
 
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
@@ -1410,7 +1410,7 @@ int smartfs_sync_internal(FAR struct smartfs_mountpt_s *fs,
 {
   FAR struct smartfs_chain_header_s *header;
   struct smart_read_write_s readwrite;
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_SMARTFS_USE_SECTOR_BUFFER
   if (sf->bflags & SMARTFS_BFLAG_DIRTY)
@@ -1857,7 +1857,7 @@ int smartfs_shrinkfile(FAR struct smartfs_mountpt_s *fs,
 #endif
 
   entry->datlen = length;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1997,7 +1997,7 @@ int smartfs_extendfile(FAR struct smartfs_mountpt_s *fs,
           /* Now sync the file to write this sector out */
 
           ret = smartfs_sync_internal(fs, sf);
-          if (ret != OK)
+          if (ret != OKK)
             {
               goto errout_with_buffer;
             }
@@ -2026,7 +2026,7 @@ int smartfs_extendfile(FAR struct smartfs_mountpt_s *fs,
           /* Sync the file to write this sector out */
 
           ret = smartfs_sync_internal(fs, sf);
-          if (ret != OK)
+          if (ret != OKK)
             {
               goto errout_with_buffer;
             }
@@ -2081,7 +2081,7 @@ int smartfs_extendfile(FAR struct smartfs_mountpt_s *fs,
 
   /* The file was successfully extended with zeros */
 
-  ret = OK;
+  ret = OKK;
 
 errout_with_buffer:
 #ifndef CONFIG_SMARTFS_USE_SECTOR_BUFFER

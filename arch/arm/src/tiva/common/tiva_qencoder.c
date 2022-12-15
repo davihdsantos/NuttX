@@ -282,7 +282,7 @@ static int tiva_qe_setup(FAR struct qe_lowerhalf_s *lower)
   ctlreg |= QEI_ENABLE << TIVA_QEI_CTL_ENABLE;
   tiva_qe_putreg(qe, TIVA_QEI_CTL_OFFSET, ctlreg);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -311,7 +311,7 @@ static int tiva_qe_shutdown(FAR struct qe_lowerhalf_s *lower)
 
   tiva_qe_putreg(qe, TIVA_SYSCON_SRQEI_OFFSET, SYSCON_SRQEI(qe->id));
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -336,7 +336,7 @@ static int tiva_qe_reset(FAR struct qe_lowerhalf_s *lower)
 
   tiva_qe_putreg(qe, TIVA_QEI_POS_OFFSET, 0);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -362,7 +362,7 @@ static int tiva_qe_position(FAR struct qe_lowerhalf_s *lower, FAR int32_t *pos)
 
   *pos = (int32_t) tiva_qe_getreg(qe, TIVA_QEI_POS_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -415,7 +415,7 @@ static int tiva_qe_ioctl(FAR struct qe_lowerhalf_s *lower, int cmd,
       break;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -446,7 +446,7 @@ static int tiva_qe_direction(FAR struct tiva_qe_s *qe, unsigned long *dir)
 
   *dir = dirbit;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -469,7 +469,7 @@ static int tiva_qe_velocity(FAR struct tiva_qe_s *qe, unsigned long *vel)
 
   *vel = (int32_t) tiva_qe_getreg(qe, TIVA_QEI_SPEED_OFFSET) * 100 / 4;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -544,7 +544,7 @@ static int tiva_qe_resetatmaxpos(FAR struct tiva_qe_s *qe, unsigned long maxpos)
   ctlreg |= QEI_ENABLE << TIVA_QEI_CTL_ENABLE;
   tiva_qe_putreg(qe, TIVA_QEI_CTL_OFFSET, ctlreg);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -586,7 +586,7 @@ static int tiva_qe_resetatindex(FAR struct tiva_qe_s *qe)
   ctlreg |= QEI_ENABLE << TIVA_QEI_CTL_ENABLE;
   tiva_qe_putreg(qe, TIVA_QEI_CTL_OFFSET, ctlreg);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

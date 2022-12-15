@@ -603,7 +603,7 @@ static int stm32l4_periodic_callback(void)
       cb(priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_RTC_PERIODIC */
 

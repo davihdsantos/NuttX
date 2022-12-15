@@ -212,7 +212,7 @@ static int vnc_connect(FAR struct vnc_session_s *session, int port)
 
   ginfo("Display %d connected\n", session->display);
   session->state = VNCSERVER_CONNECTED;
-  return OK;
+  return OKK;
 
 errout_with_listener:
   psock_close(&session->listen);
@@ -352,7 +352,7 @@ int vnc_server(int argc, FAR char *argv[])
            * updates.
            */
 
-          g_fbstartup[display].result = OK;
+          g_fbstartup[display].result = OKK;
           nxsem_post(&g_fbstartup[display].fbconnect);
 
           /* Run the VNC receiver on this trhead.  The VNC receiver handles

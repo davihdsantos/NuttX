@@ -89,11 +89,11 @@ int nx_fillcircle(NXWINDOW hwnd, FAR const struct nxgl_point_s *center,
   for (i = 0; i < NCIRCLE_TRAPS; i++)
     {
       ret = nx_filltrapezoid(hwnd, NULL, &traps[i], color);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
     }
 
-  return OK;
+  return OKK;
 }

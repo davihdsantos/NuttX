@@ -246,6 +246,6 @@ int sam_spic0mddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
       (void)sam_gpiowrite(GPIO_OLED_DATA, !cmd);
     }
 #endif
-      return OK;
+      return OKK;
 }
 #endif

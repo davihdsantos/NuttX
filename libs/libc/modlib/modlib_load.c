@@ -217,7 +217,7 @@ static inline int modlib_loadfile(FAR struct mod_loadinfo_s *loadinfo)
       *pptr += ELF_ALIGNUP(shdr->sh_size);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -280,7 +280,7 @@ int modlib_load(FAR struct mod_loadinfo_s *loadinfo)
       goto errout_with_buffers;
     }
 
-  return OK;
+  return OKK;
 
   /* Error exits */
 

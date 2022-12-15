@@ -504,7 +504,7 @@ int mount(FAR const char *source, FAR const char *target,
 #ifndef CONFIG_DISABLE_PSEUDOFS_OPERATIONS
   RELEASE_SEARCH(&desc);
 #endif
-  return OK;
+  return OKK;
 
   /* A lot of goto's!  But they make the error handling much simpler */
 

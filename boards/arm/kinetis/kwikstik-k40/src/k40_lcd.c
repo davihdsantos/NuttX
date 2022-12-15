@@ -68,7 +68,7 @@ int board_lcd_initialize(void)
 {
   ginfo("Initializing\n");
 #warning "Missing logic"
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

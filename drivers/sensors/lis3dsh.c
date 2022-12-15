@@ -331,7 +331,7 @@ static int lis3dsh_interrupt_handler(int irq, FAR void *context)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -413,7 +413,7 @@ static int lis3dsh_open(FAR struct file *filep)
   }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -431,7 +431,7 @@ static int lis3dsh_close(FAR struct file *filep)
 
   lis3dsh_reset(priv);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -497,7 +497,7 @@ static ssize_t lis3dsh_write(FAR struct file *filep, FAR const char *buffer,
 
 static int lis3dsh_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -593,7 +593,7 @@ int lis3dsh_register(FAR const char *devpath, FAR struct spi_dev_s *spi,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SPI && CONFIG_LIS3DSH */

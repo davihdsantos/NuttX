@@ -70,7 +70,7 @@
 int task_setcanceltype(int type, FAR int *oldtype)
 {
   FAR struct tcb_s *tcb = this_task();
-  int ret = OK;
+  int ret = OKK;
 
   /* Suppress context changes for a bit so that the flags are stable. (the
    * flags should not change in interrupt handling).

@@ -131,7 +131,7 @@ static inline int group_addmember(FAR struct task_group_s *group, pid_t pid)
    */
 
   group->tg_members[group->tg_nmembers] = pid;
-  return OK;
+  return OKK;
 }
 #endif /* HAVE_GROUP_MEMBERS */
 
@@ -173,7 +173,7 @@ int group_bind(FAR struct pthread_tcb_s *tcb)
   /* Copy the group reference from the parent to the child */
 
   tcb->cmn.group = ptcb->group;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -226,7 +226,7 @@ int group_join(FAR struct pthread_tcb_s *tcb)
 #endif
 
   group->tg_nmembers++;
-  return OK;
+  return OKK;
 }
 
 #endif /* !CONFIG_DISABLE_PTHREAD */

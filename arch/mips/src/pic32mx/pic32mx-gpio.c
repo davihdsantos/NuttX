@@ -224,7 +224,7 @@ int pic32mx_configgpio(uint16_t cfgset)
         }
 
       sched_unlock();
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

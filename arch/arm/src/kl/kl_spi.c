@@ -251,14 +251,14 @@ static int spi_lock(FAR struct spi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -301,7 +301,7 @@ static uint32_t spi_setfrequency(FAR struct spi_dev_s *dev, uint32_t frequency)
    * divisor in the range {2, 4, 8, 16, 32, 64, 128, 256, or 512).
    *
    *
-   * BaudRateDivisor = (SPPR + 1) × 2^(SPR + 1)
+   * BaudRateDivisor = (SPPR + 1) ï¿½ 2^(SPR + 1)
    * BaudRate = BusClock / BaudRateDivisor
    *
    * The strategy is to pick the smallest divisor that yields an in-range

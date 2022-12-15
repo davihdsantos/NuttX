@@ -174,7 +174,7 @@ static int elf_relocate(FAR struct elf_loadinfo_s *loadinfo, int relidx,
    * to be relocated.
    */
 
-  ret = OK;
+  ret = OKK;
 
   for (i = j = 0; i < relsec->sh_size / sizeof(Elf32_Rel); i++)
     {
@@ -444,7 +444,7 @@ int elf_bind(FAR struct elf_loadinfo_s *loadinfo,
   if (status < 0)
     {
       berr("ERROR: elf_addrenv_restore() failed: %d\n", status);
-      if (ret == OK)
+      if (ret == OKK)
         {
           ret = status;
         }

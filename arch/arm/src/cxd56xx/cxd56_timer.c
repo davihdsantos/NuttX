@@ -207,7 +207,7 @@ static int cxd56_timer_interrupt(int irq, FAR void *context, FAR void *arg)
 
   putreg32(TIMER_INTERRUPT, priv->base + CXD56_TIMER_INTCLR);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -252,7 +252,7 @@ static int cxd56_start(FAR struct timer_lowerhalf_s *lower)
       putreg32(ctrl, priv->base + CXD56_TIMER_CONTROL);
 
       priv->started = true;
-      return OK;
+      return OKK;
     }
 
   /* Return EBUSY to indicate that the timer was already running */
@@ -294,7 +294,7 @@ static int cxd56_stop(FAR struct timer_lowerhalf_s *lower)
       putreg32(TIMER_INTERRUPT, priv->base + CXD56_TIMER_INTCLR);
 
       priv->started = false;
-      return OK;
+      return OKK;
     }
 
   /* Return ENODEV to indicate that the timer was not running */
@@ -353,7 +353,7 @@ static int cxd56_getstatus(FAR struct timer_lowerhalf_s *lower,
   tmrinfo("  flags    : %08x\n", status->flags);
   tmrinfo("  timeout  : %d\n", status->timeout);
   tmrinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -412,7 +412,7 @@ static int cxd56_settimeout(FAR struct timer_lowerhalf_s *lower,
   tmrinfo("clkticks=%d timeout=%d load=%d\n", priv->clkticks, priv->timeout,
          load);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -500,7 +500,7 @@ static int cxd56_ioctl(FAR struct timer_lowerhalf_s *lower, int cmd,
         if (param != NULL)
           {
             cxd56_setcallback(lower, param->handler, param->arg);
-            ret = OK;
+            ret = OKK;
           }
         else
           {

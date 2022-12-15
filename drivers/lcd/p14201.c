@@ -661,7 +661,7 @@ static int rit_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buffer,
 
   if (npixels < 1)
     {
-      return OK;
+      return OKK;
     }
 
   /* Get the beginning of the line containing run in the framebuffer */
@@ -805,7 +805,7 @@ static int rit_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buffer,
   /* De-select the SD1329 controller */
 
   rit_deselect(priv->spi);
-  return OK;
+  return OKK;
 }
 #else
 static int rit_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buffer,
@@ -857,7 +857,7 @@ static int rit_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buffer,
       rit_deselect(priv->spi);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -893,7 +893,7 @@ static int rit_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
 
   if (npixels < 1)
     {
-      return OK;
+      return OKK;
     }
 
   /* Get the beginning of the line containing run in the framebuffer */
@@ -966,7 +966,7 @@ static int rit_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #else
 static int rit_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
@@ -993,7 +993,7 @@ static int rit_getvideoinfo(FAR struct lcd_dev_s *dev,
   ginfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
         g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres, g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -1010,7 +1010,7 @@ static int rit_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(pinfo && planeno == 0);
   ginfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -1075,7 +1075,7 @@ static int rit_setpower(struct lcd_dev_s *dev, int power)
   /* De-select the SD1329 controller */
 
   rit_deselect(priv->spi);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -1125,7 +1125,7 @@ static int rit_setcontrast(struct lcd_dev_s *dev, unsigned int contrast)
 
   rit_deselect(priv->spi);
   priv->contrast = contrast;
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************

@@ -397,7 +397,7 @@ static int apds9930_checkid(FAR struct apds9930_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -505,7 +505,7 @@ static int apds9930als_seqinit(FAR struct apds9930_dev_s *priv)
   seq_setsample(priv->seq, APDS9930_ALS_BYTESPERSAMPLE, 0, APDS9930_ELEMENTSIZE,
                 false);
 
-  return OK;
+  return OKK;
 }
 
 #ifndef CONFIG_SENSORS_APDS9930_PROXIMITY_INTERRUPT
@@ -538,7 +538,7 @@ static int apds9930ps_seqinit(FAR struct apds9930_dev_s *priv)
   seq_setsample(priv->seq, APDS9930_PS_BYTESPERSAMPLE, 0, APDS9930_ELEMENTSIZE,
                 false);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -576,7 +576,7 @@ static int apds9930_open_als(FAR struct file *filep)
 
   g_als_refcnt++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -614,7 +614,7 @@ static int apds9930_open_ps(FAR struct file *filep)
   g_ps_refcnt++;
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -646,7 +646,7 @@ static int apds9930_close_als(FAR struct file *filep)
       (void) seq_ioctl(priv->seq, priv->minor, SCUIOC_FREEFIFO, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -683,7 +683,7 @@ static int apds9930_close_ps(FAR struct file *filep)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -746,7 +746,7 @@ static int apds9930_ioctl_als(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct apds9930_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -779,7 +779,7 @@ static int apds9930_ioctl_ps(FAR struct file *filep, int cmd,
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct apds9930_dev_s *priv = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -929,7 +929,7 @@ int apds9930_init(FAR struct i2c_master_s *i2c, int port)
         APDS9930_CONTROL_PGAIN_X1 | APDS9930_CONTROL_AGAIN_X1;
   apds9930_putreg8(priv, APDS9930_CONTROL, val);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

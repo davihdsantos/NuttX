@@ -166,7 +166,7 @@ int chdir(FAR const char *path)
 
   setenv("PWD", path, TRUE);
   sched_unlock();
-  return OK;
+  return OKK;
 
 errout:
   set_errno(errcode);

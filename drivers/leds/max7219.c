@@ -178,7 +178,7 @@ static inline void max7219_write16(FAR struct max7219_dev_s *priv,
 
 static int max7219_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -191,7 +191,7 @@ static int max7219_open(FAR struct file *filep)
 
 static int max7219_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

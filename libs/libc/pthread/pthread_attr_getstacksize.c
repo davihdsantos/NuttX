@@ -77,7 +77,7 @@ int pthread_attr_getstacksize(FAR const pthread_attr_t *attr,
   else
     {
       *stacksize = attr->stacksize;
-      ret = OK;
+      ret = OKK;
     }
 
   linfo("Returning %d\n", ret);

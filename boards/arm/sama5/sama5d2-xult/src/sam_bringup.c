@@ -72,5 +72,5 @@ int sam_bringup(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }

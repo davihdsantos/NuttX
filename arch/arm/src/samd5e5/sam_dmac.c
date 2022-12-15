@@ -191,7 +191,7 @@ static void sam_takechsem(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -224,7 +224,7 @@ static void sam_takedsem(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -342,7 +342,7 @@ static int sam_dmainterrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -674,7 +674,7 @@ static int sam_txbuffer(struct sam_dmach_s *dmach, uint32_t paddr,
     }
 
   dmach->dc_dir = DMADIR_TX;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -752,7 +752,7 @@ static int sam_rxbuffer(struct sam_dmach_s *dmach, uint32_t paddr,
     }
 
   dmach->dc_dir = DMADIR_RX;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -981,7 +981,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
   struct sam_dmach_s *dmach = (struct sam_dmach_s *)handle;
   ssize_t remaining = (ssize_t)nbytes;
   size_t maxtransfer;
-  int ret = OK;
+  int ret = OKK;
 
   dmainfo("dmach: %p paddr: %08x maddr: %08x nbytes: %d\n",
           dmach, (int)paddr, (int)maddr, (int)nbytes);
@@ -1004,7 +1004,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
       /* Set up the maximum size transfer */
 
       ret = sam_txbuffer(dmach, paddr, maddr, dmach->dc_txflags, maxtransfer);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Decrement the number of bytes left to transfer */
 
@@ -1030,7 +1030,7 @@ int sam_dmatxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
 
   /* Then set up the final buffer transfer */
 
-  if (ret == OK && remaining > 0)
+  if (ret == OKK && remaining > 0)
     {
       ret = sam_txbuffer(dmach, paddr, maddr, dmach->dc_txflags, remaining);
     }
@@ -1055,7 +1055,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
   struct sam_dmach_s *dmach = (struct sam_dmach_s *)handle;
   ssize_t remaining = (ssize_t)nbytes;
   size_t maxtransfer;
-  int ret = OK;
+  int ret = OKK;
 
   dmainfo("dmach: %p paddr: %08x maddr: %08x nbytes: %d\n",
           dmach, (int)paddr, (int)maddr, (int)nbytes);
@@ -1078,7 +1078,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
       /* Set up the maximum size transfer */
 
       ret = sam_rxbuffer(dmach, paddr, maddr, dmach->dc_rxflags, maxtransfer);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Decrement the number of bytes left to transfer */
 
@@ -1104,7 +1104,7 @@ int sam_dmarxsetup(DMA_HANDLE handle, uint32_t paddr, uint32_t maddr,
 
   /* Then set up the final buffer transfer */
 
-  if (ret == OK && remaining > 0)
+  if (ret == OKK && remaining > 0)
     {
       ret = sam_rxbuffer(dmach, paddr, maddr, dmach->dc_rxflags, remaining);
     }
@@ -1245,7 +1245,7 @@ int sam_dmastart(DMA_HANDLE handle, dma_callback_t callback, void *arg)
 
       putreg8(DMAC_INT_TERR | DMAC_INT_TCMPL, SAM_DMAC_CHINTENSET(chan));
       leave_critical_section(flags);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

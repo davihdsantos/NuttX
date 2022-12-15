@@ -452,7 +452,7 @@ static void spi_dmarxwait(struct efm32_spidev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -495,7 +495,7 @@ static void spi_dmatxwait(struct efm32_spidev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -768,14 +768,14 @@ static int spi_lock(struct spi_dev_s *dev, bool lock)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
   else
     {
       (void)nxsem_post(&priv->exclsem);
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -1669,7 +1669,7 @@ static int spi_portinitialize(struct efm32_spidev_s *priv)
   /* Enable SPI */
 
   spi_putreg(config, EFM32_USART_CMD_OFFSET, USART_CMD_RXEN | USART_CMD_TXEN);
-  return OK;
+  return OKK;
 
 #ifdef CONFIG_EFM32_SPI_DMA
 errout_with_txdmach:

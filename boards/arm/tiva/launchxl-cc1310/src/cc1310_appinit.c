@@ -83,7 +83,7 @@ int board_app_initialize(uintptr_t arg)
 
   return cc1310_bringup();
 #else
-  return OK;
+  return OKK;
 #endif
 }
 

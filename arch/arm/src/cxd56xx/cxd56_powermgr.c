@@ -185,7 +185,7 @@ static int cxd56_pm_semtake(FAR sem_t *id)
           return errno;
         }
     }
-  return OK;
+  return OKK;
 }
 
 static int cxd56_pm_needcallback(uint32_t target,
@@ -532,7 +532,7 @@ int cxd56_pm_bootup(void)
   /* BOOT indicate to M0P */
 
   cxd56_pmsendmsg(MSGID_BOOT, (uint32_t)(uintptr_t)&g_target_id_table);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -831,7 +831,7 @@ int cxd56_pm_initialize(void)
       return -EPERM;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

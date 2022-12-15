@@ -124,7 +124,7 @@ static int syslog_default_putc(int ch)
 
 static int syslog_default_flush(void)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -157,7 +157,7 @@ int syslog_channel(FAR const struct syslog_channel_s *channel)
                   channel->sc_flush != NULL);
 
       g_syslog_channel = channel;
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;

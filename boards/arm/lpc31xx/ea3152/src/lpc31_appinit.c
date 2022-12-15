@@ -149,7 +149,7 @@ int board_app_initialize(uintptr_t arg)
          CONFIG_NSH_MMCSDMINOR);
 
   ret = mmcsd_slotinitialize(CONFIG_NSH_MMCSDMINOR, sdio);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n", ret);
@@ -165,5 +165,5 @@ int board_app_initialize(uintptr_t arg)
 
   sdio_mediachange(sdio, true);
 #endif
-  return OK;
+  return OKK;
 }

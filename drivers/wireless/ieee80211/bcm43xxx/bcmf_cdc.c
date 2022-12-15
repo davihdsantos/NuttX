@@ -221,7 +221,7 @@ int bcmf_cdc_control_request_unsafe(FAR struct bcmf_dev_s *priv,
   /* Send control frame. iovar buffer is freed when sent */
 
   ret = bcmf_cdc_sendframe(priv, cmd, ifidx, set, frame);
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* Free allocated iovar buffer */
 
@@ -246,7 +246,7 @@ int bcmf_cdc_control_request_unsafe(FAR struct bcmf_dev_s *priv,
       return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -325,7 +325,7 @@ int bcmf_cdc_process_control_frame(FAR struct bcmf_dev_s *priv,
         }
 
       nxsem_post(&priv->control_timeout);
-      return OK;
+      return OKK;
     }
 
   wlinfo("Got unexpected control frame\n");

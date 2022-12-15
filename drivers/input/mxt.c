@@ -583,7 +583,7 @@ static int mxt_flushmsgs(FAR struct mxt_dev_s *priv)
       return -EBUSY;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -651,7 +651,7 @@ static inline int mxt_checksample(FAR struct mxt_dev_s *priv)
       /* Yes.. clear the flag and return success */
 
       priv->event = false;
-      return OK;
+      return OKK;
     }
 
   /* No.. return failure */
@@ -992,7 +992,7 @@ static void mxt_worker(FAR void *arg)
   do
     {
       ret = nxsem_wait(&priv->devsem);
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -1111,7 +1111,7 @@ static int mxt_interrupt(FAR const struct mxt_lower_s *lower, FAR void *arg)
   /* Clear any pending interrupts and return success */
 
   lower->clear(lower);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1247,7 +1247,7 @@ static int mxt_close(FAR struct file *filep)
     }
 
   nxsem_post(&priv->devsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1656,7 +1656,7 @@ static int mxt_getinfo(struct mxt_dev_s *priv)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1730,7 +1730,7 @@ static int mxt_getobjtab(FAR struct mxt_dev_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1829,7 +1829,7 @@ static int mxt_hwinitialize(FAR struct mxt_dev_s *priv)
       goto errout_with_objtab;
     }
 
-  return OK;
+  return OKK;
 
   /* Error exits */
 
@@ -1941,7 +1941,7 @@ int mxt_register(FAR struct i2c_master_s *i2c,
    * MXT device has been opened (see mxt_open).
    */
 
-  return OK;
+  return OKK;
 
   /* Error clean-up exits */
 

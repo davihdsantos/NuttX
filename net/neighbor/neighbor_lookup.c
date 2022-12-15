@@ -152,7 +152,7 @@ int neighbor_lookup(FAR const net_ipv6addr_t ipaddr,
        * address mapping is available for the IPv6 address.
        */
 
-      return OK;
+      return OKK;
     }
 
   /* No.. check if the IPv6 address is the address assigned to a local
@@ -165,7 +165,7 @@ int neighbor_lookup(FAR const net_ipv6addr_t ipaddr,
 
   if (netdev_foreach(neighbor_match, &info) != 0)
     {
-      return OK;
+      return OKK;
     }
 
   /* Not found */

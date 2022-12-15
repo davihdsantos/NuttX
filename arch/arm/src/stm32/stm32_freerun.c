@@ -83,7 +83,7 @@ static int stm32_freerun_handler(int irq, void *context, void *arg)
   freerun->overflow++;
 
   STM32_TIM_ACKINT(freerun->tch, GTIM_SR_UIF);
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_CLOCK_TIMEKEEPING */
 
@@ -165,7 +165,7 @@ int stm32_freerun_initialize(struct stm32_freerun_s *freerun, int chan,
   STM32_TIM_ENABLEINT(freerun->tch, GTIM_DIER_UIE);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -262,7 +262,7 @@ int stm32_freerun_counter(struct stm32_freerun_s *freerun,
   tmrinfo("usec=%llu ts=(%u, %lu)\n",
           usec, (unsigned long)ts->tv_sec, (unsigned long)ts->tv_nsec);
 
-  return OK;
+  return OKK;
 }
 
 #else /* CONFIG_CLOCK_TIMEKEEPING */
@@ -270,7 +270,7 @@ int stm32_freerun_counter(struct stm32_freerun_s *freerun,
 int stm32_freerun_counter(struct stm32_freerun_s *freerun, uint64_t *counter)
 {
   *counter = (uint64_t)STM32_TIM_GETCOUNTER(freerun->tch);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_CLOCK_TIMEKEEPING */
@@ -307,7 +307,7 @@ int stm32_freerun_uninitialize(struct stm32_freerun_s *freerun)
   stm32_tim_deinit(freerun->tch);
   freerun->tch = NULL;
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32_ONESHOT */

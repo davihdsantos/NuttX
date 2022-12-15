@@ -394,7 +394,7 @@ static int null_configure(FAR struct audio_lowerhalf_s *dev,
     }
 
   audinfo("Return OK\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -408,7 +408,7 @@ static int null_configure(FAR struct audio_lowerhalf_s *dev,
 static int null_shutdown(FAR struct audio_lowerhalf_s *dev)
 {
   audinfo("Return OK\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -550,7 +550,7 @@ static int null_start(FAR struct audio_lowerhalf_s *dev)
   audinfo("Starting worker thread\n");
   ret = pthread_create(&priv->threadid, &tattr, null_workerthread,
                        (pthread_addr_t)priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       auderr("ERROR: pthread_create failed: %d\n", ret);
     }
@@ -599,7 +599,7 @@ static int null_stop(FAR struct audio_lowerhalf_s *dev)
   priv->threadid = 0;
 
   audinfo("Return OK\n");
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -618,7 +618,7 @@ static int null_pause(FAR struct audio_lowerhalf_s *dev)
 #endif
 {
   audinfo("Return OK\n");
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_AUDIO_EXCLUDE_PAUSE_RESUME */
 
@@ -637,7 +637,7 @@ static int null_resume(FAR struct audio_lowerhalf_s *dev)
 #endif
 {
   audinfo("Return OK\n");
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_AUDIO_EXCLUDE_PAUSE_RESUME */
 
@@ -688,7 +688,7 @@ static int null_enqueuebuffer(FAR struct audio_lowerhalf_s *dev,
     }
 
   audinfo("Return OK\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -704,7 +704,7 @@ static int null_cancelbuffer(FAR struct audio_lowerhalf_s *dev,
   audinfo("apb=%p curbyte=%d nbytes=%d, return OK\n",
           apb, apb->curbyte, apb->nbytes);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -755,7 +755,7 @@ static int null_ioctl(FAR struct audio_lowerhalf_s *dev, int cmd,
     }
 
   audinfo("Return OK\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -773,7 +773,7 @@ static int null_reserve(FAR struct audio_lowerhalf_s *dev)
 #endif
 {
   audinfo("Return OK\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -801,7 +801,7 @@ static int null_release(FAR struct audio_lowerhalf_s *dev)
       priv->threadid = 0;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -93,13 +93,13 @@ int pthread_once(FAR pthread_once_t *once_control,
 
           sched_unlock();
           init_routine();
-          return OK;
+          return OKK;
         }
 
       /* The init_routine has already been called.  Restore pre-emption and return */
 
       sched_unlock();
-      return OK;
+      return OKK;
     }
 
   /* One of the two arguments is NULL */

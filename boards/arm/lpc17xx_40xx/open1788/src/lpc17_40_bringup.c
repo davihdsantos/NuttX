@@ -229,7 +229,7 @@ static int nsh_cdinterrupt(int irq, FAR void *context, FAR void *arg)
       inserted = present;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -275,7 +275,7 @@ static int nsh_sdinitialize(void)
   /* Now bind the SDIO interface to the MMC/SD driver */
 
   ret = mmcsd_slotinitialize(CONFIG_NSH_MMCSDMINOR, g_sdiodev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n",
@@ -293,7 +293,7 @@ static int nsh_sdinitialize(void)
 #else
   sdio_mediachange(g_sdiodev, true);
 #endif
-  return OK;
+  return OKK;
 }
 #else
 #  define nsh_sdinitialize() (OK)
@@ -323,7 +323,7 @@ static int nsh_usbhostinitialize(void)
   /* Register the USB host Mass Storage Class */
 
   ret = usbhost_msc_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the mass storage class: %d\n", ret);
@@ -334,7 +334,7 @@ static int nsh_usbhostinitialize(void)
   /* Register the CDC/ACM serial class */
 
   ret = usbhost_cdcacm_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the CDC/ACM serial class: %d\n", ret);
@@ -429,7 +429,7 @@ int open1788_bringup(void)
   /* Initialize and register the joystick driver */
 
   ret = lpc17_40_djoy_initialization();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to register the joystick driver: %d\n", ret);

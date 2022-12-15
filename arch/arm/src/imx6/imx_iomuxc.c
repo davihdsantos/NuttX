@@ -425,5 +425,5 @@ int imx_iomux_configure(uintptr_t padctl, iomux_pinset_t ioset)
   /* Write the result to the specified Pad Control register */
 
   putreg32(regval, padctl);
-  return OK;
+  return OKK;
 }

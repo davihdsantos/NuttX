@@ -338,7 +338,7 @@ static void _i2s_semtake(FAR sem_t *sem)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -563,7 +563,7 @@ static int lc823450_i2s_receive(struct i2s_dev_s *dev, struct ap_buffer_s *apb,
   /* Invoke the callback handler */
 
   callback(dev, apb, arg, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -745,7 +745,7 @@ out:
   /* Invoke the callback handler */
 
   callback(dev, apb, arg, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

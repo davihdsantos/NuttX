@@ -182,7 +182,7 @@ static inline int ajoy_takesem(sem_t *sem)
    * was awakened by a signal
    */
 
-  DEBUGASSERT(ret == OK || ret == -EINTR);
+  DEBUGASSERT(ret == OKK || ret == -EINTR);
   return ret;
 }
 
@@ -415,7 +415,7 @@ static int ajoy_open(FAR struct file *filep)
   /* Attach the open structure to the file structure */
 
   filep->f_priv = (FAR void *)opriv;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   ajoy_givesem(&priv->au_exclsem);
@@ -462,7 +462,7 @@ static int ajoy_close(FAR struct file *filep)
     {
       /* Another thread is doing the close */
 
-      return OK;
+      return OKK;
     }
 
   /* Get exclusive access to the driver structure */
@@ -510,7 +510,7 @@ static int ajoy_close(FAR struct file *filep)
   /* Enable/disable interrupt handling */
 
   ajoy_enable(priv);
-  ret = OK;
+  ret = OKK;
 
 errout_with_exclsem:
   ajoy_givesem(&priv->au_exclsem);
@@ -619,7 +619,7 @@ static int ajoy_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             DEBUGASSERT(lower && lower->al_supported);
 
             *supported = (int)lower->al_supported(lower);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -649,7 +649,7 @@ static int ajoy_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             /* Enable/disable interrupt handling */
 
             ajoy_enable(priv);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -682,7 +682,7 @@ static int ajoy_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
             /* Enable/disable interrupt handling */
 
             ajoy_enable(priv);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -848,7 +848,7 @@ int ajoy_register(FAR const char *devname,
       goto errout_with_priv;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_priv:
   nxsem_destroy(&priv->au_exclsem);

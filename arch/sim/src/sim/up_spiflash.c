@@ -343,7 +343,7 @@ struct sim_spiflashdev_s *gp_spidev[] =
 
 static int spiflash_lock(FAR struct spi_dev_s *dev, bool lock)
 {
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

@@ -115,7 +115,7 @@ int sdio_sendcmdpoll(FAR struct sdio_dev_s *dev, uint32_t cmd, uint32_t arg)
       /* Then poll-wait until the response is available */
 
       ret = SDIO_WAITRESPONSE(dev, cmd);
-      if (ret != OK)
+      if (ret != OKK)
         {
           wlerr("ERROR: Wait for response to cmd: %08x failed: %d\n",
                cmd, ret);
@@ -156,7 +156,7 @@ int sdio_io_rw_direct(FAR struct sdio_dev_s *dev, bool write,
   sdio_sendcmdpoll(dev, SD_ACMD52, arg.value);
   ret = SDIO_RECVR5(dev, SD_ACMD52, (uint32_t *)&resp);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("ERROR: SDIO_RECVR5 failed %d\n", ret);
       return ret;
@@ -181,7 +181,7 @@ int sdio_io_rw_direct(FAR struct sdio_dev_s *dev, bool write,
       *outb = resp.data & 0xff;
     }
 
-  return OK;
+  return OKK;
 }
 
 int sdio_io_rw_extended(FAR struct sdio_dev_s *dev, bool write,
@@ -264,7 +264,7 @@ int sdio_io_rw_extended(FAR struct sdio_dev_s *dev, bool write,
 
   SDIO_RECVR1(dev, SD_ACMD52ABRT, (uint32_t *)&resp);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("ERROR: SDIO_RECVR5 failed %d\n", ret);
       return ret;
@@ -290,7 +290,7 @@ int sdio_io_rw_extended(FAR struct sdio_dev_s *dev, bool write,
       return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 int sdio_set_wide_bus(struct sdio_dev_s *dev)
@@ -301,7 +301,7 @@ int sdio_set_wide_bus(struct sdio_dev_s *dev)
   /* Read Bus Interface Control register */
 
   ret = sdio_io_rw_direct(dev, false, 0, SDIO_CCCR_BUS_IF, 0, &value);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -312,13 +312,13 @@ int sdio_set_wide_bus(struct sdio_dev_s *dev)
   value |= SDIO_CCCR_BUS_IF_4_BITS;
 
   ret = sdio_io_rw_direct(dev, true, 0, SDIO_CCCR_BUS_IF, value, NULL);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
   SDIO_WIDEBUS(dev, true);
-  return OK;
+  return OKK;
 }
 
 int sdio_probe(FAR struct sdio_dev_s *dev)
@@ -329,7 +329,7 @@ int sdio_probe(FAR struct sdio_dev_s *dev)
   /* Set device state from reset to idle */
 
   ret = sdio_sendcmdpoll(dev, MMCSD_CMD0, 0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -339,7 +339,7 @@ int sdio_probe(FAR struct sdio_dev_s *dev)
   /* Device is SDIO card compatible so we can send CMD5 instead of ACMD41 */
 
   ret = sdio_sendcmdpoll(dev, SDIO_CMD5, 0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -347,7 +347,7 @@ int sdio_probe(FAR struct sdio_dev_s *dev)
   /* Receive R4 response */
 
   ret = SDIO_RECVR4(dev, SDIO_CMD5, &data);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -355,13 +355,13 @@ int sdio_probe(FAR struct sdio_dev_s *dev)
   /* Device is in Card Identification Mode, request device RCA */
 
   ret = sdio_sendcmdpoll(dev, SD_CMD3, 0);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
   ret = SDIO_RECVR6(dev, SD_CMD3, &data);
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("ERROR: RCA request failed: %d\n", ret);
       return ret;
@@ -374,14 +374,14 @@ int sdio_probe(FAR struct sdio_dev_s *dev)
    */
 
   ret = sdio_sendcmdpoll(dev, MMCSD_CMD7S, data & 0xffff0000);
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("ERROR: CMD7 request failed: %d\n", ret);
       return ret;
     }
 
   ret = SDIO_RECVR1(dev, MMCSD_CMD7S, &data);
-  if (ret != OK)
+  if (ret != OKK)
     {
       wlerr("ERROR: card selection failed: %d\n", ret);
       return ret;
@@ -390,12 +390,12 @@ int sdio_probe(FAR struct sdio_dev_s *dev)
   /*  Configure 4 bits bus width */
 
   ret = sdio_set_wide_bus(dev);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 int sdio_set_blocksize(FAR struct sdio_dev_s *dev, uint8_t function,
@@ -406,7 +406,7 @@ int sdio_set_blocksize(FAR struct sdio_dev_s *dev, uint8_t function,
   ret = sdio_io_rw_direct(dev, true, 0,
                   (function << SDIO_FBR_SHIFT) + SDIO_CCCR_FN0_BLKSIZE_0,
                   blocksize & 0xff, NULL);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -415,12 +415,12 @@ int sdio_set_blocksize(FAR struct sdio_dev_s *dev, uint8_t function,
                   (function << SDIO_FBR_SHIFT) + SDIO_CCCR_FN0_BLKSIZE_1,
                   (blocksize >> 8), NULL);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 int sdio_enable_function(FAR struct sdio_dev_s *dev, uint8_t function)
@@ -431,7 +431,7 @@ int sdio_enable_function(FAR struct sdio_dev_s *dev, uint8_t function)
   /* Read current I/O Enable register */
 
   ret = sdio_io_rw_direct(dev, false, 0, SDIO_CCCR_IOEN, 0, &value);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -439,7 +439,7 @@ int sdio_enable_function(FAR struct sdio_dev_s *dev, uint8_t function)
   ret = sdio_io_rw_direct(dev, true, 0,
                           SDIO_CCCR_IOEN, value | (1 << function), NULL);
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -453,7 +453,7 @@ int sdio_enable_function(FAR struct sdio_dev_s *dev, uint8_t function)
       up_mdelay(1);
 
       ret = sdio_io_rw_direct(dev, false, 0, SDIO_CCCR_IOEN, 0, &value);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -463,7 +463,7 @@ int sdio_enable_function(FAR struct sdio_dev_s *dev, uint8_t function)
           /* Function enabled */
 
           wlinfo("Function %d enabled\n", function);
-          return OK;
+          return OKK;
         }
     }
 
@@ -478,7 +478,7 @@ int sdio_enable_interrupt(FAR struct sdio_dev_s *dev, uint8_t function)
   /* Read current Int Enable register */
 
   ret = sdio_io_rw_direct(dev, false, 0, SDIO_CCCR_INTEN, 0, &value);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }

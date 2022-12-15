@@ -147,7 +147,7 @@ int timer_release(FAR struct posix_timer_s *timer)
   /* Release the timer structure */
 
   timer_free(timer);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_DISABLE_POSIX_TIMERS */

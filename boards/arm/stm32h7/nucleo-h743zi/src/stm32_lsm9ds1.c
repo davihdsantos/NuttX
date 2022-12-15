@@ -73,7 +73,7 @@
 int stm32_lsm9ds1_initialize(void)
 {
   FAR struct i2c_master_s *i2c;
-  int ret = OK;
+  int ret = OKK;
 
   sninfo("Initializing LMS9DS1!\n");
 

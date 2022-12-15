@@ -185,7 +185,7 @@ static int progmem_erase(FAR struct mtd_dev_s *dev, off_t startblock,
       nblocks--;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -319,7 +319,7 @@ static int progmem_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = (1 << priv->blkshift);     /* Size of one read/write block */
               geo->erasesize    = (1 << priv->ersshift);     /* Size of one erase block */
               geo->neraseblocks = up_progmem_neraseblocks(); /* Number of erase blocks */
-              ret               = OK;
+              ret               = OKK;
           }
         }
         break;
@@ -333,7 +333,7 @@ static int progmem_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               /* Return (void*) base address of FLASH memory. */
 
               *ppv = (FAR void *)up_progmem_getaddress(0);
-              ret  = OK;
+              ret  = OKK;
             }
         }
         break;

@@ -351,7 +351,7 @@ static int stm32_dma2dirq(int irq, void *context, FAR void *arg)
 
       reginfo("DMA transfer complete\n");
       putreg32(DMA2D_IFCR_CTCIF, STM32_DMA2D_IFCR);
-      priv->error = OK;
+      priv->error = OKK;
     }
 #ifdef CONFIG_STM32_DMA2D_L8
   else if (regval & DMA2D_ISR_CTCIF)
@@ -362,7 +362,7 @@ static int stm32_dma2dirq(int irq, void *context, FAR void *arg)
 
       reginfo("CLUT transfer complete\n");
       putreg32(DMA2D_IFCR_CCTCIF, STM32_DMA2D_IFCR);
-      priv->error = OK;
+      priv->error = OKK;
     }
 #endif
   else if (regval & DMA2D_ISR_TWIF)
@@ -373,7 +373,7 @@ static int stm32_dma2dirq(int irq, void *context, FAR void *arg)
 
       reginfo("Watermark transfer complete\n");
       putreg32(DMA2D_IFCR_CTWIF, STM32_DMA2D_IFCR);
-      priv->error = OK;
+      priv->error = OKK;
     }
   else if (regval & DMA2D_ISR_TEIF)
     {
@@ -421,7 +421,7 @@ static int stm32_dma2dirq(int irq, void *context, FAR void *arg)
       lcderr("ERROR: nxsem_post() failed\n");
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -658,7 +658,7 @@ static int stm32_dma2d_loutpfc(uint8_t fmt)
 
   putreg32(DMA2D_OPFCCR_CM(fmt), STM32_DMA2D_OPFCCR);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -794,7 +794,7 @@ static int stm32_dma2d_setclut(FAR const struct fb_cmap_s *cmap)
 
   nxsem_post(priv->lock);
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_STM32_FB_CMAP */
 
@@ -865,7 +865,7 @@ static int stm32_dma2d_fillcolor(FAR struct stm32_dma2d_overlay_s *oinfo,
 
   ret = stm32_dma2d_start();
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       ret = -ECANCELED;
       lcderr("ERROR: Returning ECANCELED\n");
@@ -954,7 +954,7 @@ static int stm32_dma2d_blit(FAR struct stm32_dma2d_overlay_s *doverlay,
 
   ret = stm32_dma2d_start();
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       ret = -ECANCELED;
       lcderr("ERROR: Returning ECANCELED\n");
@@ -1063,7 +1063,7 @@ static int stm32_dma2d_blend(FAR struct stm32_dma2d_overlay_s *doverlay,
 
   ret = stm32_dma2d_start();
 
-  if (ret != OK)
+  if (ret != OKK)
     {
       ret = -ECANCELED;
       lcderr("ERROR: Returning ECANCELED\n");
@@ -1139,7 +1139,7 @@ int stm32_dma2dinitialize(void)
       g_initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

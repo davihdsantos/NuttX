@@ -104,5 +104,5 @@ int file_open(FAR struct file *filep, FAR const char *path, int oflags, ...)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }

@@ -146,7 +146,7 @@ int arp_wait_cancel(FAR struct arp_notify_s *notify)
           g_arp_waiters = notify->nt_flink;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -245,11 +245,11 @@ void arp_notify(in_addr_t ipaddr)
        * entry from the list.
        */
 
-      if (curr->nt_result != OK && curr->nt_ipaddr == ipaddr)
+      if (curr->nt_result != OKK && curr->nt_ipaddr == ipaddr)
         {
           /* Yes.. Signal the waiting, returning success */
 
-          curr->nt_result = OK;
+          curr->nt_result = OKK;
           nxsem_post(&curr->nt_sem);
           break;
         }

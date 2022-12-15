@@ -94,7 +94,7 @@ static int proto_dropstats(int proto)
       return -EPROTONOSUPPORT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

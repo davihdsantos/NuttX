@@ -175,7 +175,7 @@ int stm32_rgbled_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #else

@@ -98,7 +98,7 @@ int nxffs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
   /* Set the offset to the offset to the first valid inode */
 
   dir->u.nxffs.nx_offset = volume->inoffset;
-  ret = OK;
+  ret = OKK;
 
 errout_with_semaphore:
   nxsem_post(&volume->exclsem);
@@ -144,7 +144,7 @@ int nxffs_readdir(FAR struct inode *mountpt, FAR struct fs_dirent_s *dir)
    * be returned.. which is correct for the readdir() method.
    */
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Return the filename and file type */
 
@@ -156,7 +156,7 @@ int nxffs_readdir(FAR struct inode *mountpt, FAR struct fs_dirent_s *dir)
 
       dir->u.nxffs.nx_offset = nxffs_inodeend(volume, &entry);
       nxffs_freeentry(&entry);
-      ret = OK;
+      ret = OKK;
     }
 
   nxsem_post(&volume->exclsem);
@@ -196,7 +196,7 @@ int nxffs_rewinddir(FAR struct inode *mountpt, FAR struct fs_dirent_s *dir)
   /* Reset the offset to the FLASH offset to the first valid inode */
 
   dir->u.nxffs.nx_offset = volume->inoffset;
-  ret = OK;
+  ret = OKK;
 
   nxsem_post(&volume->exclsem);
 

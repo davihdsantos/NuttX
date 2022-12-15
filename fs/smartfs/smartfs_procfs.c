@@ -252,7 +252,7 @@ static int smartfs_find_dirref(FAR const char *relpath,
         }
 
       level1->base.index    = 0;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -286,7 +286,7 @@ static int smartfs_find_dirref(FAR const char *relpath,
         {
           /* Save the mount and skip it in the relpath */
 
-          ret = OK;
+          ret = OKK;
           level1->mount = mount;
           relpath += strlen(mount->fs_blkdriver->i_name);
           if (relpath[0] == '/')
@@ -390,7 +390,7 @@ static int smartfs_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the index as the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -410,7 +410,7 @@ static int smartfs_close(FAR struct file *filep)
 
   kmm_free(priv);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -531,7 +531,7 @@ static int smartfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new attributes in the new file structure */
 
   newp->f_priv = (FAR void *)newpriv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -599,7 +599,7 @@ static int smartfs_closedir(FAR struct fs_dirent_s *dir)
     }
 
   dir->u.procfs = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -678,7 +678,7 @@ static int smartfs_readdir(struct fs_dirent_s *dir)
        * standard f_pos instead of our own private index.
        */
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -699,7 +699,7 @@ static int smartfs_rewinddir(struct fs_dirent_s *dir)
   priv = dir->u.procfs;
 
   priv->base.index = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -954,7 +954,7 @@ static size_t   smartfs_erasemap_read(FAR struct file *filep, FAR char *buffer,
   ret = priv->level1.mount->fs_blkdriver->u.i_bops->ioctl(
       priv->level1.mount->fs_blkdriver, BIOC_GETPROCFSD,
       (unsigned long) &procfs_data);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return 0;
     }

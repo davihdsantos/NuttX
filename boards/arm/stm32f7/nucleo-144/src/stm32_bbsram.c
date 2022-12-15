@@ -366,7 +366,7 @@ int stm32_bbsram_int(void)
           "state:%d\n",(unsigned int)desc.fileno, (unsigned int) desc.len,
           (unsigned int)desc.flags, state);
 
-      if (state == OK)
+      if (state == OKK)
         {
           time_sec = desc.lastwrite.tv_sec + (desc.lastwrite.tv_nsec / 1e9);
           gmtime_r(&time_sec, &tt);

@@ -171,7 +171,7 @@ static int s32k1xx_portinterrupt(int irq, FAR void *context,
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -353,7 +353,7 @@ int s32k1xx_pinirqattach(uint32_t pinset, xcpt_t pinisr, void *arg)
   /* And return the old PIN isr address */
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif /* HAVE_PORTINTS */

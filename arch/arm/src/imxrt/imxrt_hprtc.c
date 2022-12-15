@@ -278,7 +278,7 @@ int up_rtc_settime(FAR const struct timespec *ts)
   /* Unconditionally re-enable the HPRTC */
 
   imxrt_hprtc_enable();
-  return OK;
+  return OKK;
 }
 
 #endif /* !CONFIG_IMXRT_SNVS_LPSRTC */
@@ -343,7 +343,7 @@ int up_rtc_initialize(void)
 #endif
 
   g_rtc_enabled = true;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -391,7 +391,7 @@ int imxrt_hprtc_initialize(void)
   putreg32(regval, IMXRT_SNVS_HPCR);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -579,7 +579,7 @@ int imxrt_hprtc_setalarm(FAR struct timespec *ts, hprtc_alarm_callback_t cb)
 
   imxrt_hprtc_alarmenable();
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

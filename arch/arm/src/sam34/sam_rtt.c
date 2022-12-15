@@ -341,7 +341,7 @@ static int sam34_interrupt(int irq, FAR void *context, FAR void *arg)
       /* RTT_SR_ALMS is cleared by reading SAM_RTT_SR */
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -404,7 +404,7 @@ static int sam34_start(FAR struct timer_lowerhalf_s *lower)
 #endif /* !(CONFIG_RTC_HIRES && CONFIG_SAM34_RTC) */
 
   priv->started = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -442,7 +442,7 @@ static int sam34_stop(FAR struct timer_lowerhalf_s *lower)
 
   priv->started = false;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -493,7 +493,7 @@ static int sam34_getstatus(FAR struct timer_lowerhalf_s *lower,
   tmrinfo("  flags    : %08x\n", status->flags);
   tmrinfo("  timeout  : %d\n", status->timeout);
   tmrinfo("  timeleft : %d\n", status->timeleft);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -542,7 +542,7 @@ static int sam34_settimeout(FAR struct timer_lowerhalf_s *lower,
   tmrinfo("fclk=%d clkticks=%d timout=%d, adjustment=%d\n",
          RTT_FCLK, priv->clkticks, priv->timeout, priv->adjustment);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

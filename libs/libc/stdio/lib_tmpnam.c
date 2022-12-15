@@ -91,5 +91,5 @@ FAR char *tmpnam(FAR char *s)
 
   (void)snprintf(s, L_tmpnam, "%s/XXXXXX.tmp", P_tmpdir);
   ret = mktemp(s);
-  return (ret == OK) ? s : NULL;
+  return (ret == OKK) ? s : NULL;
 }

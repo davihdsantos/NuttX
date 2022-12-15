@@ -155,5 +155,5 @@ int modlib_read(FAR struct mod_loadinfo_s *loadinfo, FAR uint8_t *buffer,
     }
 
   modlib_dumpreaddata(buffer, readsize);
-  return OK;
+  return OKK;
 }

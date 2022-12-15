@@ -82,7 +82,7 @@ int modlib_allocbuffer(FAR struct mod_loadinfo_s *loadinfo)
       loadinfo->buflen = CONFIG_MODLIB_BUFFERSIZE;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -119,5 +119,5 @@ int modlib_reallocbuffer(FAR struct mod_loadinfo_s *loadinfo, size_t increment)
 
   loadinfo->iobuffer = buffer;
   loadinfo->buflen   = newsize;
-  return OK;
+  return OKK;
 }

@@ -97,7 +97,7 @@ int stm32_pca9635_initialize(void)
      return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_PCA9635PW */

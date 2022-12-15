@@ -122,7 +122,7 @@ static int lpc54_rtc_interrupt(int irq, void *context, FAR void *arg)
       g_alarmcb = NULL;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -163,7 +163,7 @@ int up_rtc_initialize(void)
    */
 
   g_rtc_enabled = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -240,7 +240,7 @@ int up_rtc_settime(FAR const struct timespec *tp)
   putreg32(RTC_MAGIC, RTC_MAGIC_REG);
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -294,7 +294,7 @@ int lpc54_rtc_setalarm(FAR const struct timespec *tp, alarmcb_t callback)
 
       regval |= RTC_CTRL_ALARMDPDEN;
       putreg32(regval, LPC54_RTC_CTRL);
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);
@@ -323,7 +323,7 @@ int lpc54_rtc_rdalarm(FAR struct tm *time)
 
   match = getreg32(LPC54_RTC_MATCH);
   (void)gmtime_r((time_t *)&match, time);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -366,7 +366,7 @@ int lpc54_rtc_cancelalarm(void)
                   RTC_CTRL_WAKEDPDEN | RTC_CTRL_OSCPD);
       putreg32(regval, LPC54_RTC_CTRL);
 
-      ret = OK;
+      ret = OKK;
     }
 
   leave_critical_section(flags);

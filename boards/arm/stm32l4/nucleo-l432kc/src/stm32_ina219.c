@@ -124,7 +124,7 @@ int stm32_ina219initialize(FAR const char *devpath)
       goto error;
     }
 
-  return OK;
+  return OKK;
 
 error:
   (void)stm32l4_i2cbus_uninitialize(i2c);

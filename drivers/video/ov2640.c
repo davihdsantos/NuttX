@@ -719,7 +719,7 @@ static int ov2640_putreg(FAR struct i2c_master_s *i2c, uint8_t regaddr,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -812,7 +812,7 @@ static int ov2640_putreglist(FAR struct i2c_master_s *i2c,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -865,7 +865,7 @@ static int ovr2640_chipid(FAR struct i2c_master_s *i2c)
     }
 
   ginfo("PID=%02x$02x MID=%02x%02x\n", pidh, pidl, midh, midl);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -897,7 +897,7 @@ static int ov2640_reset(FAR struct i2c_master_s *i2c)
     }
 
   up_mdelay(5);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1116,7 +1116,7 @@ int ov2640_initialize(FAR struct i2c_master_s *i2c)
 
 #endif /* CONFIG_OV2640_JPEG */
 
-  return OK;
+  return OKK;
 
 errout:
   gerr("ERROR: Failed to initialize the OV2640: %d\n", ret);

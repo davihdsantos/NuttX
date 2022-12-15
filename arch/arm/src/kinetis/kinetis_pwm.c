@@ -530,7 +530,7 @@ static int pwm_timer(FAR struct kinetis_pwmtimer_s *priv,
   pwm_putreg(priv, KINETIS_FTM_SC_OFFSET, (uint16_t)regval);
 
   pwm_dumpregs(priv, "After starting");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -578,7 +578,7 @@ static int pwm_setup(FAR struct pwm_lowerhalf_s *dev)
 
   kinetis_pinconfig(priv->pincfg);
   pwm_dumpgpio(priv->pincfg, "PWM setup");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -613,7 +613,7 @@ static int pwm_shutdown(FAR struct pwm_lowerhalf_s *dev)
   pincfg  = (priv->pincfg & ~(_PIN_MODE_MASK));
   pincfg |= GPIO_INPUT;
   kinetis_pinconfig(pincfg);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -719,7 +719,7 @@ static int pwm_stop(FAR struct pwm_lowerhalf_s *dev)
   leave_critical_section(flags);
 
   pwm_dumpregs(priv, "After stop");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

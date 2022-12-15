@@ -174,7 +174,7 @@ static int sim_max_delay(FAR struct oneshot_lowerhalf_s *lower,
 
   ts->tv_sec  = INT_MAX;
   ts->tv_nsec = 1000000000ul - 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

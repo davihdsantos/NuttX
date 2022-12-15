@@ -428,7 +428,7 @@ static int  usbclass_setup(FAR struct usbdevclass_driver_s *driver,
       if (ret < 0)
         {
           usbtrace(TRACE_CLSERROR(USBSER_TRACEERR_EPRESPQ), (uint16_t)-ret);
-          ctrlreq->result = OK;
+          ctrlreq->result = OKK;
         }
     }
 
@@ -449,7 +449,7 @@ static int  usbclass_bind(FAR struct usbdevclass_driver_s *driver,
 
   priv->ctrlreq->callback = usbclass_ep0incomplete;
 
-  return OK;
+  return OKK;
 }
 
 static void usbclass_unbind(FAR struct usbdevclass_driver_s *driver,
@@ -497,7 +497,7 @@ static int usbclass_classobject(int minor,
   alloc->drvr.speed = USB_SPEED_FULL;
   alloc->drvr.ops = &g_dfu_driverops;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

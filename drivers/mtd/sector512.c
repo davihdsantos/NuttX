@@ -522,7 +522,7 @@ static int s512_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = SECTOR_512;
               geo->erasesize    = SECTOR_512;
               geo->neraseblocks = priv->neblocks * priv->stdperblock;
-              ret               = OK;
+              ret               = OKK;
 
               finfo("blocksize: %d erasesize: %d neraseblocks: %d\n",
                     geo->blocksize, geo->erasesize, geo->neraseblocks);

@@ -74,7 +74,7 @@ int dlsymtab(FAR const struct symtab_s *symtab, int nsymbols)
    */
 
   modlib_setsymtab(symtab, nsymbols);
-  return OK;
+  return OKK;
 
 #else /* if defined(CONFIG_BUILD_KERNEL) */
   /* The KERNEL build is considerably more complex:  In order to be shared,

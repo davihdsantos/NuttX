@@ -367,7 +367,7 @@ static int efm32_setup(struct uart_dev_s *dev)
   /* Make sure that all interrupts are disabled */
 
   efm32_restoreuartint(priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -524,7 +524,7 @@ static int efm32_interrupt(int irq, void *context, FAR void *arg)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -541,7 +541,7 @@ static int efm32_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode *inode;
   struct uart_dev_s *dev;
   struct efm32_leuart_s *priv;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(filep, filep->f_inode);
   inode = filep->f_inode;

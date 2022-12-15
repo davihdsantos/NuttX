@@ -145,7 +145,7 @@ static void sendto_writebuffer_release(FAR struct socket *psock,
                                        FAR struct udp_conn_s *conn)
 {
   FAR struct udp_wrbuffer_s *wrb;
-  int ret = OK;
+  int ret = OKK;
 
   do
     {
@@ -388,7 +388,7 @@ static int sendto_next_transfer(FAR struct socket *psock,
   /* Notify the device driver of the availability of TX data */
 
   netdev_txnotify_dev(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -567,7 +567,7 @@ ssize_t psock_udp_sendto(FAR struct socket *psock, FAR const void *buf,
   FAR struct udp_conn_s *conn;
   FAR struct udp_wrbuffer_s *wrb;
   bool empty;
-  int ret = OK;
+  int ret = OKK;
 
   /* If the UDP socket was previously assigned a remote peer address via
    * connect(), then as with connection-mode socket, sendto() may not be
@@ -888,6 +888,6 @@ int psock_udp_cansend(FAR struct socket *psock)
       return -EWOULDBLOCK;
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET && CONFIG_NET_UDP && CONFIG_NET_UDP_WRITE_BUFFERS */

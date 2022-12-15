@@ -143,7 +143,7 @@ static inline int modlib_sectname(FAR struct mod_loadinfo_s *loadinfo,
         {
           /* Yes, the buffer contains a NUL terminator. */
 
-          return OK;
+          return OKK;
         }
 
       /* No.. then we have to read more */
@@ -158,7 +158,7 @@ static inline int modlib_sectname(FAR struct mod_loadinfo_s *loadinfo,
 
   /* We will not get here */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -267,7 +267,7 @@ static int bmp280_getregs(FAR struct bmp280_dev_s *priv, uint8_t regaddr,
       return -1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -327,7 +327,7 @@ static int bmp280_checkid(FAR struct bmp280_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -360,7 +360,7 @@ static int bmp280_set_standby(FAR struct bmp280_dev_s *priv, uint8_t value)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -419,7 +419,7 @@ static int bmp280_initialize(FAR struct bmp280_dev_s *priv)
   /* Set stand-by time to 1 ms, no IIR filter */
 
   ret = bmp280_set_standby(priv, BMP280_STANDBY_1_MS);
-  if (ret != OK)
+  if (ret != OKK)
     {
       snerr("Failed to set value for standby time.\n");
       return -1;
@@ -566,7 +566,7 @@ static int bmp280_open(FAR struct file *filep)
   bmp280_putreg8(priv, BMP280_CTRL_MEAS, BMP280_NORMAL_MODE |
                  BMP280_OS_STANDARD_RES);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -586,7 +586,7 @@ static int bmp280_close(FAR struct file *filep)
 
   bmp280_putreg8(priv, BMP280_CTRL_MEAS, BMP280_SLEEP_MODE);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -629,7 +629,7 @@ static int bmp280_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode *inode = filep->f_inode;
   FAR struct bmp280_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

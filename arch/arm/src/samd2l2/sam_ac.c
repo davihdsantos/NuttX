@@ -73,7 +73,7 @@
 
 static int sam_ac_isr(int irq, FAR void *context, FAR void *arg)
 {
-  return OK;
+  return OKK;
 }
 
 static void sam_ac_syncwait(void)
@@ -124,7 +124,7 @@ int sam_ac_initialize(uint8_t gclkgen)
 
   up_enable_irq(SAM_IRQ_AC);
 
-  return OK;
+  return OKK;
 }
 
 int sam_ac_config(uint8_t channel, uint32_t compctrl)
@@ -145,7 +145,7 @@ int sam_ac_config(uint8_t channel, uint32_t compctrl)
 
   sam_ac_syncwait();
 
-  return OK;
+  return OKK;
 }
 
 int sam_ac_enable(uint8_t channel, bool enable)
@@ -187,5 +187,5 @@ int sam_ac_enable(uint8_t channel, bool enable)
 
   sam_ac_syncwait();
 
-  return OK;
+  return OKK;
 }

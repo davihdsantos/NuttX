@@ -332,7 +332,7 @@ static int ipv4_dev_forward(FAR struct net_driver_s *dev,
   if (ret >= 0)
     {
       dev->d_len = 0;
-      return OK;
+      return OKK;
     }
 
 errout_with_iobchain:
@@ -402,7 +402,7 @@ int ipv4_forward_callback(FAR struct net_driver_s *fwddev, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -502,7 +502,7 @@ int ipv4_forward(FAR struct net_driver_s *dev, FAR struct ipv4_hdr_s *ipv4)
    * the transfer.
    */
 
-  return OK;
+  return OKK;
 
 drop:
   ipv4_dropstats(ipv4);

@@ -826,7 +826,7 @@ static int sam_prioritize_irq(uint32_t base, int irq, int priority)
       leave_critical_section(flags);
     }
 
-  return OK;
+  return OKK;
 }
 
 int up_prioritize_irq(int irq, int priority)

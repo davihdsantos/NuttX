@@ -255,7 +255,7 @@ static int uart_putxmitchar(FAR uart_dev_t *dev, int ch, bool oktoblock)
 
           dev->xmit.buffer[dev->xmit.head] = ch;
           dev->xmit.head = nexthead;
-          ret = OK;
+          ret = OKK;
           goto err_out;
         }
 
@@ -284,7 +284,7 @@ static int uart_putxmitchar(FAR uart_dev_t *dev, int ch, bool oktoblock)
 
           if (nexthead != dev->xmit.tail)
             {
-              ret = OK;
+              ret = OKK;
             }
 
 #ifdef CONFIG_SERIAL_REMOVABLE
@@ -362,7 +362,7 @@ static int uart_putxmitchar(FAR uart_dev_t *dev, int ch, bool oktoblock)
    * unreachable.
    */
 
-  ret = OK;
+  ret = OKK;
 
 err_out:
 
@@ -490,7 +490,7 @@ static int uart_tcdrain(FAR uart_dev_t *dev, clock_t timeout)
            * tcflush() first to discard this buffered Tx data.
            */
 
-          ret = OK;
+          ret = OKK;
           while (ret >= 0 && dev->xmit.head != dev->xmit.tail)
             {
               /* Inform the interrupt level logic that we are waiting. */
@@ -689,7 +689,7 @@ static int uart_close(FAR struct file *filep)
     {
       dev->open_count--;
       uart_givesem(&dev->closesem);
-      return OK;
+      return OKK;
     }
 
   /* There are no more references to the port */
@@ -727,7 +727,7 @@ static int uart_close(FAR struct file *filep)
 
   uart_reset_sem(dev);
   uart_givesem(&dev->closesem);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1156,7 +1156,7 @@ static ssize_t uart_write(FAR struct file *filep, FAR const char *buffer,
   for (; buflen; buflen--)
     {
       ch  = *buffer++;
-      ret = OK;
+      ret = OKK;
 
 #ifdef CONFIG_SERIAL_TERMIOS
       /* Do output post-processing */
@@ -1416,7 +1416,7 @@ static int uart_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 #ifdef CONFIG_SERIAL_TERMIOS
   /* Append any higher level TTY flags */
 
-  else if (ret == OK)
+  else if (ret == OKK)
     {
       switch (cmd)
         {

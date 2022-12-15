@@ -88,7 +88,7 @@ int nxcursor_enable(NXHANDLE hnd, bool enable)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -148,7 +148,7 @@ int nxcursor_setimage(NXHANDLE hnd, FAR const struct nx_cursorimage_s *image)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -191,7 +191,7 @@ int nxcursor_setposition(NXHANDLE hnd, FAR const struct nxgl_point_s *pos)
       return ERROR;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

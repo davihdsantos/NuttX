@@ -330,7 +330,7 @@ static int tms570_setup(struct uart_dev_s *dev)
 
   return tms570_sci_configure(priv->scibase, &priv->config);
 #else
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -379,7 +379,7 @@ static int tms570_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, tms570_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the SCI
@@ -443,7 +443,7 @@ static int tms570_interrupt(int irq, void *context, FAR void *arg)
       switch (intvec)
         {
           case SCI_INTVECT_NONE:    /* No interrupt */
-            return OK;
+            return OKK;
 
           case SCI_INTVECT_WAKEUP:  /* Wake-up interrupt */
             /* SCI sets the WAKEUP flag if bus activity on the RX line
@@ -503,7 +503,7 @@ static int tms570_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -520,7 +520,7 @@ static int tms570_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
 #endif
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {
@@ -611,7 +611,7 @@ static int tms570_ioctl(struct file *filep, int cmd, unsigned long arg)
 
         /* Decode baud. */
 
-        ret = OK;
+        ret = OKK;
         baud = cfgetispeed(termiosp);
 
         /* Decode number of bits */
@@ -660,7 +660,7 @@ static int tms570_ioctl(struct file *filep, int cmd, unsigned long arg)
 
         /* Verify that all settings are valid before committing */
 
-        if (ret == OK)
+        if (ret == OKK)
           {
             /* Commit */
 

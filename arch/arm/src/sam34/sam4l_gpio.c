@@ -175,7 +175,7 @@ static int sam_configinput(uintptr_t base, uint32_t pin, gpio_pinset_t cfgset)
       putreg32(pin, base + SAM_GPIO_STERC_OFFSET);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -197,7 +197,7 @@ static inline int sam_configinterrupt(uintptr_t base, uint32_t pin,
    */
 
   ret = sam_configinput(base, pin, cfgset);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Disable rising and falling edge interrupts as requested
        * {IMR1, IMR0} Interrupt Mode
@@ -298,7 +298,7 @@ static inline int sam_configoutput(uintptr_t base, uint32_t pin,
   /* And set the initial value of the output */
 
   sam_gpiowrite(cfgset, ((cfgset & GPIO_OUTPUT_SET) != 0));
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -418,7 +418,7 @@ static inline int sam_configperiph(uintptr_t base, uint32_t pin,
   /* Finally, drive the pen from the peripheral */
 
   putreg32(pin, base + SAM_GPIO_GPERC_OFFSET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -444,7 +444,7 @@ int sam_configgpio(gpio_pinset_t cfgset)
 
   inputset = GPIO_INPUT | (cfgset & (GPIO_PORT_MASK | GPIO_PIN_MASK));
   ret = sam_configinput(base, pin, inputset);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Then put the GPIO into the requested state */
 
@@ -559,7 +559,7 @@ int sam_dumpgpio(uint32_t pinset, const char *msg)
            getreg32(base + SAM_GPIO_PARAMETER_OFFSET), getreg32(base + SAM_GPIO_VERSION_OFFSET));
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 #endif
 

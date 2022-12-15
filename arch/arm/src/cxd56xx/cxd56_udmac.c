@@ -191,7 +191,7 @@ static int cxd56_dmac_interrupt(int irq, void *context, FAR void *arg)
   int done;
   int err;
   int mask;
-  int result = OK;
+  int result = OKK;
 
   chndx = irq - CXD56_IRQ_DMA_A_0;
 
@@ -226,7 +226,7 @@ static int cxd56_dmac_interrupt(int irq, void *context, FAR void *arg)
 
   dmach->arg = NULL;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

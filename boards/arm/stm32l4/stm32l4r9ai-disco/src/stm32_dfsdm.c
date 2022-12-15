@@ -141,6 +141,6 @@ int stm32_dfsdm_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_ADC && CONFIG_STM32L4_DFSDM */

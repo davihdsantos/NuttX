@@ -112,7 +112,7 @@ int vnc_read_remainder(FAR struct vnc_session_s *session, size_t msglen,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -183,7 +183,7 @@ int vnc_receiver(FAR struct vnc_session_s *session)
       else if (nrecvd == 0)
         {
           gwarn("WARNING: Connection closed\n");
-          return OK;
+          return OKK;
         }
 
       DEBUGASSERT(nrecvd == 1);
@@ -489,7 +489,7 @@ int vnc_client_encodings(FAR struct vnc_session_s *session,
     }
 
   session->change = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

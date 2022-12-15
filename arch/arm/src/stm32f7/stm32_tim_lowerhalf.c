@@ -290,7 +290,7 @@ static int stm32_timer_handler(int irq, void * context, void * arg)
       stm32_stop((struct timer_lowerhalf_s *)lower);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -323,7 +323,7 @@ static int stm32_start(FAR struct timer_lowerhalf_s *lower)
         }
 
       priv->started = true;
-      return OK;
+      return OKK;
     }
 
   /* Return EBUSY to indicate that the timer was already running */
@@ -356,7 +356,7 @@ static int stm32_stop(struct timer_lowerhalf_s *lower)
       STM32_TIM_DISABLEINT(priv->tim, ATIM_DIER_UIE);
       STM32_TIM_SETISR(priv->tim, NULL, NULL, 0);
       priv->started = false;
-      return OK;
+      return OKK;
     }
 
   /* Return ENODEV to indicate that the timer was not running */
@@ -404,7 +404,7 @@ static int stm32_settimeout(FAR struct timer_lowerhalf_s *lower,
       STM32_TIM_SETPERIOD(priv->tim, timeout);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

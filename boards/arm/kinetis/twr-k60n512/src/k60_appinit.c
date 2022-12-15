@@ -185,7 +185,7 @@ static int kinetis_cdinterrupt(int irq, FAR void *context)
   /* All of the work is done by kinetis_mediachange() */
 
   kinetis_mediachange();
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -255,7 +255,7 @@ int board_app_initialize(uintptr_t arg)
          CONFIG_NSH_MMCSDMINOR);
 
   ret = mmcsd_slotinitialize(CONFIG_NSH_MMCSDMINOR, g_nsh.sdhc);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: Failed to bind SDHC to the MMC/SD driver: %d\n",
              ret);
@@ -272,6 +272,6 @@ int board_app_initialize(uintptr_t arg)
 
   kinetis_pinirqenable(GPIO_SD_CARDDETECT);
 #endif
-  return OK;
+  return OKK;
 }
 

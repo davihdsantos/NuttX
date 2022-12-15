@@ -164,7 +164,7 @@ int up_cpu_paused(int cpu)
     }
 
   spin_unlock(&g_cpu_wait[cpu]);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -303,7 +303,7 @@ int up_cpu_resume(int cpu)
               !spin_islocked(&g_cpu_paused[cpu]));
 
   spin_unlock(&g_cpu_wait[cpu]);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SMP */

@@ -130,7 +130,7 @@ int group_setupidlefiles(FAR struct task_tcb_s *tcb)
 #if CONFIG_NFILE_STREAMS > 0
   return group_setupstreams(tcb);
 #else
-  return OK;
+  return OKK;
 #endif
 }
 

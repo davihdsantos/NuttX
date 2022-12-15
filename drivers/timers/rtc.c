@@ -274,7 +274,7 @@ static int rtc_open(FAR struct file *filep)
   upper->crefs++;
   DEBUGASSERT(upper->crefs > 0);
   nxsem_post(&upper->exclsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -321,7 +321,7 @@ static int rtc_close(FAR struct file *filep)
       rtc_destroy(upper);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -438,7 +438,7 @@ static int rtc_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         if (ops->havesettime)
           {
             *have_set_time = ops->havesettime(upper->lower);
-            ret = OK;
+            ret = OKK;
           }
       }
       break;
@@ -604,7 +604,7 @@ static int rtc_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         if (ops->cancelalarm)
           {
             ret = ops->cancelalarm(upper->lower, alarmid);
-            if (ret == OK)
+            if (ret == OKK)
               {
                 upperinfo->active = false;
                 nxsig_cancel_notification(&upperinfo->work);
@@ -737,7 +737,7 @@ static int rtc_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
         if (ops->cancelperiodic)
           {
             ret = ops->cancelperiodic(upper->lower, id);
-            if (ret == OK)
+            if (ret == OKK)
               {
                 upperinfo->active = false;
                 nxsig_cancel_notification(&upperinfo->work);
@@ -807,7 +807,7 @@ static int rtc_unlink(FAR struct inode *inode)
       rtc_destroy(upper);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -876,5 +876,5 @@ int rtc_initialize(int minor, FAR struct rtc_lowerhalf_s *lower)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }

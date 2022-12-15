@@ -387,7 +387,7 @@ static int ms58xx_readadc(FAR struct ms58xx_dev_s *priv, FAR uint32_t *adc)
 
 static int ms58xx_setosr_1(FAR struct ms58xx_dev_s *priv, uint16_t osr)
 {
-  int ret = OK;
+  int ret = OKK;
   switch (osr)
     {
       case 256:
@@ -438,7 +438,7 @@ static int ms58xx_setosr_1(FAR struct ms58xx_dev_s *priv, uint16_t osr)
 
 static int ms58xx_setosr_2(FAR struct ms58xx_dev_s *priv, uint16_t osr)
 {
-  int ret = OK;
+  int ret = OKK;
   switch (osr)
     {
       case 256:
@@ -466,7 +466,7 @@ static int ms58xx_setosr_2(FAR struct ms58xx_dev_s *priv, uint16_t osr)
         break;
     }
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       priv->osr = (osr / 256 - 1) * 2;
     }
@@ -484,7 +484,7 @@ static int ms58xx_setosr_2(FAR struct ms58xx_dev_s *priv, uint16_t osr)
 
 static int ms58xx_setosr(FAR struct ms58xx_dev_s *priv, uint16_t osr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   sninfo("osr: %04x\n", osr);
 
@@ -832,7 +832,7 @@ static int ms58xx_measure(FAR struct ms58xx_dev_s *priv)
 
 static int ms58xx_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -845,7 +845,7 @@ static int ms58xx_open(FAR struct file *filep)
 
 static int ms58xx_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -908,7 +908,7 @@ static int ms58xx_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode        *inode = filep->f_inode;
   FAR struct ms58xx_dev_s *priv  = inode->i_private;
-  int                      ret   = OK;
+  int                      ret   = OKK;
 
   /* Handle ioctl commands */
 

@@ -622,7 +622,7 @@ static void sam_takesem(struct sam_dev_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1641,7 +1641,7 @@ static int sam_hsmci_interrupt(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1921,7 +1921,7 @@ static int sam_attach(FAR struct sdio_dev_s *dev)
   /* Attach the HSMCI interrupt handler */
 
   ret = irq_attach(irq, sam_hsmci_interrupt, priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
 
       /* Disable all interrupts at the HSMCI controller and clear (most) static
@@ -2065,7 +2065,7 @@ static int sam_sendcmd(FAR struct sdio_dev_s *dev,
   mcinfo("cmd: %08x arg: %08x regval: %08x\n", cmd, arg, regval);
   sam_putreg(priv, regval, SAM_HSMCI_CMDR_OFFSET);
   sam_cmdsample1(priv, SAMPLENDX_AFTER_CMDR);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2171,7 +2171,7 @@ static int sam_recvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
 
   sam_configxfrints(priv, HSMCI_RECV_INTS);
   sam_xfrsample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2308,7 +2308,7 @@ static int sam_sendsetup(FAR struct sdio_dev_s *dev, FAR const uint8_t *buffer,
 
   leave_critical_section(flags);
   sched_unlock();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2363,7 +2363,7 @@ static int sam_cancel(FAR struct sdio_dev_s *dev)
 
   sam_putreg(priv, 0, SAM_HSMCI_DMA_OFFSET);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2456,7 +2456,7 @@ static int sam_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
               /* The Command-Response sequence ended with no error */
 
               priv->wkupevent = SDIOWAIT_CMDDONE | SDIOWAIT_RESPONSEDONE;
-              return OK;
+              return OKK;
             }
        }
       else if (--timeout <= 0)
@@ -2496,7 +2496,7 @@ static int sam_recvshort(FAR struct sdio_dev_s *dev,
                          uint32_t cmd, uint32_t *rshort)
 {
   struct sam_dev_s *priv = (struct sam_dev_s *)dev;
-  int ret = OK;
+  int ret = OKK;
 
   /* These responses could have CRC errors:
    *
@@ -2583,7 +2583,7 @@ static int sam_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd,
                         uint32_t rlong[4])
 {
   struct sam_dev_s *priv = (struct sam_dev_s *)dev;
-  int ret = OK;
+  int ret = OKK;
 
   /* R2  CID, CSD register (136-bit)
    *     135       0               Start bit
@@ -2901,7 +2901,7 @@ static int sam_registercallback(FAR struct sdio_dev_s *dev,
   priv->cbevents = 0;
   priv->cbarg    = arg;
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3010,7 +3010,7 @@ static int sam_dmarecvsetup(FAR struct sdio_dev_s *dev, FAR uint8_t *buffer,
 
   sam_xfrsample(priv, SAMPLENDX_AFTER_SETUP);
   sam_configxfrints(priv, HSMCI_DMARECV_INTS);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -3120,7 +3120,7 @@ static int sam_dmasendsetup(FAR struct sdio_dev_s *dev,
 
   sam_xfrsample(priv, SAMPLENDX_AFTER_SETUP);
   sam_configxfrints(priv, HSMCI_DMASEND_INTS);
-  return OK;
+  return OKK;
 }
 #endif
 

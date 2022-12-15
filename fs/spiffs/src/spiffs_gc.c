@@ -164,7 +164,7 @@ static int spiffs_gc_epage_stats(FAR struct spiffs_s *fs, int16_t blkndx)
   int entries_per_page   = (SPIFFS_GEO_PAGE_SIZE(fs) / sizeof(int16_t));
   int cur_entry          = 0;
   int obj_lookup_page    = 0;
-  int ret                = OK;
+  int ret                = OKK;
 
   /* Check each object lookup page */
 
@@ -241,7 +241,7 @@ static int spiffs_gc_find_candidate(FAR struct spiffs_s *fs,
   int entries_per_page;
   int max_candidates;
   int cur_entry           = 0;
-  int ret                 = OK;
+  int ret                 = OKK;
 
   /* Using fs->work area as sorted candidate memory,
    * (int16_t)cand_blkndx/(int32_t)score
@@ -325,7 +325,7 @@ static int spiffs_gc_find_candidate(FAR struct spiffs_s *fs,
 
       if (ret == 1)
         {
-          ret = OK;
+          ret = OKK;
         }
 
       /* Calculate score and insert into candidate table stoneage sort, but
@@ -445,7 +445,7 @@ static int spiffs_gc_find_candidate(FAR struct spiffs_s *fs,
 static int spiffs_gc_clean(FAR struct spiffs_s *fs, int16_t blkndx)
 {
   const int entries_per_page = (SPIFFS_GEO_PAGE_SIZE(fs) / sizeof(int16_t));
-  int ret = OK;
+  int ret = OKK;
 
   /* This is the global localizer being pushed and popped */
 
@@ -979,7 +979,7 @@ int spiffs_gc_quick(FAR struct spiffs_s *fs, uint16_t max_free_pages)
   int16_t cur_block       = 0;
   int entries_per_page    = (SPIFFS_GEO_PAGE_SIZE(fs) / sizeof(int16_t));
   int cur_entry           = 0;
-  int ret                 = OK;
+  int ret                 = OKK;
 
   spiffs_gcinfo("max_free_pages=%u\n", max_free_pages);
 #ifdef CONFIG_SPIFFS_GCDBG
@@ -1049,7 +1049,7 @@ int spiffs_gc_quick(FAR struct spiffs_s *fs, uint16_t max_free_pages)
 
       if (ret == 1)
         {
-          ret = OK;
+          ret = OKK;
         }
 
       if (ret >= 0 &&
@@ -1129,7 +1129,7 @@ int spiffs_gc_check(FAR struct spiffs_s *fs, off_t len)
       (int32_t)len < free_pages * (int32_t)SPIFFS_DATA_PAGE_SIZE(fs))
     {
       spiffs_gcinfo("Sufficient free space is available  Do nothing.\n");
-      return OK;
+      return OKK;
     }
 
   /* Get the number of pages needed */

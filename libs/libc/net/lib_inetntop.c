@@ -110,7 +110,7 @@ static int inet_ipv4_ntop(FAR const void *src, FAR char *dest, socklen_t size)
   ptr = (FAR uint8_t *)src;
   snprintf(dest, INET_ADDRSTRLEN, "%u.%u.%u.%u",
            ptr[0], ptr[1], ptr[2], ptr[3]);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -219,7 +219,7 @@ static int inet_ipv6_ntop(FAR const void *src, FAR char *dest, socklen_t size)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

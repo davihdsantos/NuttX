@@ -160,5 +160,5 @@ int elf_read(FAR struct elf_loadinfo_s *loadinfo, FAR uint8_t *buffer,
     }
 
   elf_dumpreaddata(buffer, readsize);
-  return OK;
+  return OKK;
 }

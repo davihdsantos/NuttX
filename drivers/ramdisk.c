@@ -198,7 +198,7 @@ static int rd_open(FAR struct inode *inode)
   DEBUGASSERT(dev->rd_crefs > 0);
 
   finfo("rd_crefs: %d\n", dev->rd_crefs);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -239,7 +239,7 @@ static int rd_close(FAR struct inode *inode)
     }
 #endif
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -349,7 +349,7 @@ static int rd_geometry(FAR struct inode *inode, struct geometry *geometry)
       finfo("nsectors: %d sectorsize: %d\n",
             geometry->geo_nsectors, geometry->geo_sectorsize);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -379,7 +379,7 @@ static int rd_ioctl(FAR struct inode *inode, int cmd, unsigned long arg)
       *ppv = (FAR void *)dev->rd_buffer;
 
       finfo("ppv: %p\n", *ppv);
-      return OK;
+      return OKK;
     }
 
   return -ENOTTY;
@@ -414,7 +414,7 @@ static int rd_unlink(FAR struct inode *inode)
       rd_destroy(dev);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -198,7 +198,7 @@ static int up_getvideoinfo(FAR struct fb_vtable_s *vtable,
   if (vtable && vinfo)
     {
       memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-      return OK;
+      return OKK;
     }
 
   _err("ERROR: Returning EINVAL\n");
@@ -216,7 +216,7 @@ static int up_getplaneinfo(FAR struct fb_vtable_s *vtable, int planeno,
   if (vtable && planeno == 0 && pinfo)
     {
       memcpy(pinfo, &g_planeinfo, sizeof(struct fb_planeinfo_s));
-      return OK;
+      return OKK;
     }
 
   _err("ERROR: Returning EINVAL\n");
@@ -247,7 +247,7 @@ static int up_getcmap(FAR struct fb_vtable_s *vtable, FAR struct fb_cmap_s *cmap
         }
 
       cmap->len = len;
-      return OK;
+      return OKK;
     }
 
   _err("ERROR: Returning EINVAL\n");
@@ -268,7 +268,7 @@ static int up_putcmap(FAR struct fb_vtable_s *vtable, FAR const struct fb_cmap_s
   _info("vtable=%p cmap=%p len=%d\n", vtable, cmap, cmap->len);
   if (vtable && cmap)
     {
-      return OK;
+      return OKK;
     }
 
   _err("ERROR: Returning EINVAL\n");
@@ -299,7 +299,7 @@ static int up_getcursor(FAR struct fb_vtable_s *vtable,
       _info("size:     (h=%d, w=%d)\n", g_csize.h, g_csize.w);
       attrib->size     = g_csize;
 #endif
-      return OK;
+      return OKK;
     }
 
   _err("ERROR: Returning EINVAL\n");
@@ -338,7 +338,7 @@ static int up_setcursor(FAR struct fb_vtable_s *vtable,
                settings->img.height, settings->img.width, settings->img.image);
         }
 #endif
-      return OK;
+      return OKK;
     }
 
   _err("ERROR: Returning EINVAL\n");
@@ -373,7 +373,7 @@ int up_fbinitialize(int display)
                           &g_planeinfo.fbmem, &g_planeinfo.fblen,
                           &g_planeinfo.bpp, &g_planeinfo.stride);
 #else
-  return OK;
+  return OKK;
 #endif
 }
 

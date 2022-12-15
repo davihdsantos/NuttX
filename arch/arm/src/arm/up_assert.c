@@ -173,7 +173,7 @@ static int usbtrace_syslog(FAR const char *fmt, ...)
   va_start(ap, fmt);
   ret = nx_vsyslog(LOG_EMERG, fmt, &ap);
   va_end(ap);
-  return OK;
+  return OKK;
 }
 
 static int assert_tracecallback(FAR struct usbtrace_s *trace, FAR void *arg)

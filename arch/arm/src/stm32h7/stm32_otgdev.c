@@ -2455,7 +2455,7 @@ static inline void stm32_ep0out_stdrequest(struct stm32_usbdev_s *priv,
              * configuration).
              */
 
-            if (ret == OK)
+            if (ret == OKK)
               {
                 uint8_t cfg = (uint8_t)ctrlreq->value;
                 if (cfg != 0)
@@ -3684,7 +3684,7 @@ static int stm32_usbinterrupt(int irq, FAR void *context, FAR void *arg)
 
           stm32_usbreset(priv);
           usbtrace(TRACE_INTEXIT(STM32_TRACEINTID_USB), 0);
-          return OK;
+          return OKK;
         }
 
       /* Enumeration done interrupt */
@@ -3745,7 +3745,7 @@ static int stm32_usbinterrupt(int irq, FAR void *context, FAR void *arg)
     }
 
   usbtrace(TRACE_INTEXIT(STM32_TRACEINTID_USB), 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3886,7 +3886,7 @@ static int stm32_epout_configure(FAR struct stm32_ep_s *privep,
   regval = stm32_getreg(STM32_OTG_DAINTMSK);
   regval |= OTG_DAINT_OEP(privep->epphy);
   stm32_putreg(regval, STM32_OTG_DAINTMSK);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3958,7 +3958,7 @@ static int stm32_epin_configure(FAR struct stm32_ep_s *privep,
   regval |= OTG_DAINT_IEP(privep->epphy);
   stm32_putreg(regval, STM32_OTG_DAINTMSK);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4228,7 +4228,7 @@ static int stm32_ep_disable(FAR struct usbdev_ep_s *ep)
       stm32_epout_disable(privep);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4344,7 +4344,7 @@ static int stm32_ep_submit(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s *
   FAR struct stm32_ep_s *privep = (FAR struct stm32_ep_s *)ep;
   FAR struct stm32_usbdev_s *priv;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   /* Some sanity checking */
 
@@ -4457,7 +4457,7 @@ static int stm32_ep_cancel(FAR struct usbdev_ep_s *ep, FAR struct usbdev_req_s *
 
   stm32_req_cancel(privep, -ESHUTDOWN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4510,7 +4510,7 @@ static int stm32_epout_setstall(FAR struct stm32_ep_s *privep)
   /* The endpoint is now stalled */
 
   privep->stalled = true;
-  return OK;
+  return OKK;
 #else
   /* This implementation follows the STMicro code example. */
   /* REVISIT: */
@@ -4528,7 +4528,7 @@ static int stm32_epout_setstall(FAR struct stm32_ep_s *privep)
   /* The endpoint is now stalled */
 
   privep->stalled = true;
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -4558,7 +4558,7 @@ static int stm32_epin_setstall(FAR struct stm32_ep_s *privep)
   /* The endpoint is now stalled */
 
   privep->stalled = true;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4641,7 +4641,7 @@ static int stm32_ep_clrstall(FAR struct stm32_ep_s *privep)
   /* The endpoint is no longer stalled */
 
   privep->stalled = false;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4878,7 +4878,7 @@ static int stm32_wakeup(struct usbdev_s *dev)
     }
 
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4904,7 +4904,7 @@ static int stm32_selfpowered(struct usbdev_s *dev, bool selfpowered)
 #endif
 
   priv->selfpowered = selfpowered;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4942,7 +4942,7 @@ static int stm32_pullup(struct usbdev_s *dev, bool enable)
 
   stm32_putreg(regval, STM32_OTG_DCTL);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -5012,7 +5012,7 @@ static int stm32_txfifo_flush(uint32_t txfnum)
   /* Wait for 3 PHY Clocks */
 
   up_udelay(3);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -5046,7 +5046,7 @@ static int stm32_rxfifo_flush(void)
   /* Wait for 3 PHY Clocks */
 
   up_udelay(3);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -5724,7 +5724,7 @@ int usbdev_unregister(struct usbdevclass_driver_s *driver)
   priv->driver = NULL;
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_USBDEV && CONFIG_STM32H7_OTGDEV */

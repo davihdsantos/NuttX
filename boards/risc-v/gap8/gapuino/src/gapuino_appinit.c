@@ -76,7 +76,7 @@
 
 int board_app_initialize(uintptr_t arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_FS_PROCFS
   /* Mount the proc filesystem */

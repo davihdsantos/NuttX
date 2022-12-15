@@ -242,7 +242,7 @@ int sixlowpan_meta_data(FAR struct radio_driver_s *radio,
 
   /* Ranging left zero */
 
-  return OK;
+  return OKK;
 }
 #endif
 

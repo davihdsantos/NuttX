@@ -269,12 +269,12 @@ int lc823450_gpio_config(uint16_t gpiocfg)
   uint32_t   port = ((gpiocfg & GPIO_PORT_MASK) >> GPIO_PORT_SHIFT);
   uint32_t   pin  = ((gpiocfg & GPIO_PIN_MASK) >> GPIO_PIN_SHIFT);
   irqstate_t flags;
-  int        ret = OK;
+  int        ret = OKK;
 
 #ifdef CONFIG_LC823450_VGPIO
   if (port == (GPIO_PORTV >> GPIO_PORT_SHIFT))
     {
-      return OK;
+      return OKK;
     }
 #endif /* CONFIG_LC823450_VGPIO */
 
@@ -502,7 +502,7 @@ int lc823450_gpio_initialize(void)
       return -EIO;
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_IOEX */
 
@@ -519,6 +519,6 @@ int lc823450_vgpio_register(unsigned int pin, FAR struct vgpio_ops_s *ops)
 {
   assert(pin < GPIO_VIRTUAL_NUM);
   vgpio_ops[pin] = ops;
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_LC823450_VGPIO */

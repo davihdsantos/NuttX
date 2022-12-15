@@ -99,6 +99,6 @@ int fflush(FAR FILE *stream)
       return EOF;
     }
 
-  return OK;
+  return OKK;
 }
 

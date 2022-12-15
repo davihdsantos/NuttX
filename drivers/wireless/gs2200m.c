@@ -678,7 +678,7 @@ static void gs2200m_lock(FAR struct gs2200m_dev_s *dev)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -698,7 +698,7 @@ static void gs2200m_unlock(FAR struct gs2200m_dev_s *dev)
 
 static int gs2200m_open(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -707,7 +707,7 @@ static int gs2200m_open(FAR struct file *filep)
 
 static int gs2200m_close(FAR struct file *filep)
 {
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1986,7 +1986,7 @@ static int gs2200m_ioctl_bind(FAR struct gs2200m_dev_s *dev,
 {
   enum pkt_type_e type = TYPE_OK;
   char cid = 'z';
-  int ret = OK;
+  int ret = OKK;
 
   wlinfo("+++ start: (cid=%c, port=%s) \n", msg->cid, msg->port);
 
@@ -2024,7 +2024,7 @@ static int gs2200m_ioctl_connect(FAR struct gs2200m_dev_s *dev,
 {
   enum pkt_type_e type;
   char cid = 'z';
-  int ret = OK;
+  int ret = OKK;
 
   wlinfo("++ start: addr=%s port=%s \n", msg->addr, msg->port);
 
@@ -2085,7 +2085,7 @@ static int gs2200m_ioctl_send(FAR struct gs2200m_dev_s *dev,
   enum pkt_type_e type;
   bool assigned = false;
   uint16_t s_port;
-  int ret = OK;
+  int ret = OKK;
 
   wlinfo("+++ start: (cid=%c) \n", msg->cid);
 
@@ -2151,7 +2151,7 @@ static int gs2200m_ioctl_recv(FAR struct gs2200m_dev_s *dev,
                               FAR struct gs2200m_recv_msg *msg)
 {
   bool     cont = true;
-  int      ret  = OK;
+  int      ret  = OKK;
   uint8_t  c    = _cid_to_uint8(msg->cid);
 
   wlinfo("+++ start: cid=%c \n", msg->cid);
@@ -2214,7 +2214,7 @@ static int gs2200m_ioctl_close(FAR struct gs2200m_dev_s *dev,
                                FAR struct gs2200m_close_msg *msg)
 {
   enum pkt_type_e type = TYPE_OK;
-  int ret = OK;
+  int ret = OKK;
 
   wlinfo("++ start: (cid=%c) \n", msg->cid);
 
@@ -2292,7 +2292,7 @@ static int gs2200m_ioctl_accept(FAR struct gs2200m_dev_s *dev,
 
   wlinfo("+++ end: type=%d (msg->cid=%c) \n", msg->type, msg->cid);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2356,7 +2356,7 @@ static int gs2200m_ioctl_assoc_sta(FAR struct gs2200m_dev_s *dev,
       return -1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2424,7 +2424,7 @@ static int gs2200m_ioctl_assoc_ap(FAR struct gs2200m_dev_s *dev,
       return -1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2438,7 +2438,7 @@ static int gs2200m_ioctl_ifreq(FAR struct gs2200m_dev_s *dev,
   struct in_addr in[3];
   char addr[3][17];
   bool getreq = false;
-  int ret = OK;
+  int ret = OKK;
 
   wlinfo("+++ start: cmd=%x \n", msg->cmd);
 
@@ -2475,7 +2475,7 @@ static int gs2200m_ioctl_ifreq(FAR struct gs2200m_dev_s *dev,
         break;
     }
 
-  if (false == getreq && OK == ret)
+  if (false == getreq && OKK == ret)
     {
       memcpy(&in[0], &dev->net_dev.d_ipaddr, sizeof(in[0]));
       memcpy(&in[1], &dev->net_dev.d_netmask, sizeof(in[1]));
@@ -2625,7 +2625,7 @@ static int gs2200m_poll(FAR struct file *filep, FAR struct pollfd *fds,
 {
   FAR struct inode *inode;
   FAR struct gs2200m_dev_s *dev;
-  int ret = OK;
+  int ret = OKK;
 
   wlinfo("== setup:%d\n", (int)setup);
   DEBUGASSERT(filep && fds);

@@ -106,7 +106,7 @@ int board_usbmsc_initialize(int port)
          CONFIG_SYSTEM_USBMSC_DEVMINOR1);
 
   ret = mmcsd_slotinitialize(CONFIG_SYSTEM_USBMSC_DEVMINOR1, sdio);
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR,
              "ERROR: Failed to bind SDIO to the MMC/SD driver: %d\n",
@@ -122,7 +122,7 @@ int board_usbmsc_initialize(int port)
    */
 
   sdio_mediachange(sdio, true);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SAM34_HSMCI */

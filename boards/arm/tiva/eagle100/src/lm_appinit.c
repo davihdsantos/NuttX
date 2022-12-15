@@ -158,5 +158,5 @@ int board_app_initialize(uintptr_t arg)
 
   syslog(LOG_INFO, "Successfuly bound SPI port %d to MMC/SD slot %d\n",
          CONFIG_NSH_MMCSDSPIPORTNO, CONFIG_NSH_MMCSDSLOTNO);
-  return OK;
+  return OKK;
 }

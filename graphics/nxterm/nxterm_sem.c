@@ -81,7 +81,7 @@ int nxterm_semwait(FAR struct nxterm_state_s *priv)
       /* No.. then wait until the thread that does hold it is finished with it */
 
       ret = nxsem_wait(&priv->exclsem);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* No I hold the semaphore */
 

@@ -440,7 +440,7 @@ static int st7567_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buff
 
   if (pixlen <= 0 || row > ST7567_YRES)
     {
-      return OK;
+      return OKK;
     }
 
   /* Get the page number.  The range of 64 lines is divided up into eight
@@ -543,7 +543,7 @@ static int st7567_putrun(fb_coord_t row, fb_coord_t col, FAR const uint8_t *buff
   /* Unlock and de-select the device */
 
   st7567_deselect(priv->spi);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -669,7 +669,7 @@ static int st7567_getrun(fb_coord_t row, fb_coord_t col, FAR uint8_t *buffer,
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -687,7 +687,7 @@ static int st7567_getvideoinfo(FAR struct lcd_dev_s *dev,
   ginfo("fmt: %d xres: %d yres: %d nplanes: %d\n",
          g_videoinfo.fmt, g_videoinfo.xres, g_videoinfo.yres, g_videoinfo.nplanes);
   memcpy(vinfo, &g_videoinfo, sizeof(struct fb_videoinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -704,7 +704,7 @@ static int st7567_getplaneinfo(FAR struct lcd_dev_s *dev, unsigned int planeno,
   DEBUGASSERT(dev && pinfo && planeno == 0);
   ginfo("planeno: %d bpp: %d\n", planeno, g_planeinfo.bpp);
   memcpy(pinfo, &g_planeinfo, sizeof(struct lcd_planeinfo_s));
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -762,7 +762,7 @@ static int st7567_setpower(struct lcd_dev_s *dev, int power)
 
   st7567_deselect(priv->spi);
 
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************
@@ -817,7 +817,7 @@ static int st7567_setcontrast(struct lcd_dev_s *dev, unsigned int contrast)
   /* Unlock and de-select the device */
 
   st7567_deselect(priv->spi);
-  return OK;
+  return OKK;
 }
 
 /**************************************************************************************

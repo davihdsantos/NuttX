@@ -261,7 +261,7 @@ static int cromfs_foreach_node(FAR const struct cromfs_volume_s *fs,
                                FAR const struct cromfs_node_s *node,
                                cromfs_foreach_t callback, FAR void *arg)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Traverse all entries in this directory (i.e., following the 'peer'
    * links).
@@ -270,7 +270,7 @@ static int cromfs_foreach_node(FAR const struct cromfs_volume_s *fs,
   while (node != NULL)
     {
       ret = callback(fs, node, arg);
-      if (ret != OK)
+      if (ret != OKK)
         {
           return ret;
         }
@@ -445,7 +445,7 @@ static int cromfs_findnode(FAR const struct cromfs_volume_s *fs,
   if (relpath == NULL || relpath[0] == '\0')
     {
       *node = root;
-      return OK;
+      return OKK;
     }
 
   /* Not the root directory.  Relative so it should not begin with '/'. */
@@ -465,7 +465,7 @@ static int cromfs_findnode(FAR const struct cromfs_volume_s *fs,
   ret = cromfs_foreach_node(fs, root, cromfs_comparenode, &cpnode);
   if (ret > 0)
     {
-      return OK;
+      return OKK;
     }
   else if (ret == OK)
     {
@@ -561,7 +561,7 @@ static int cromfs_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the index as the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)ff;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -585,7 +585,7 @@ static int cromfs_close(FAR struct file *filep)
   kmm_free(ff->ff_buffer);
   kmm_free(ff);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -885,7 +885,7 @@ static int cromfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Copy the index from the old to the new file structure */
 
   newp->f_priv = newff;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -932,7 +932,7 @@ static int cromfs_fstat(FAR const struct file *filep, FAR struct stat *buf)
   buf->st_mtime   = 0;
   buf->st_ctime   = 0;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -984,7 +984,7 @@ static int cromfs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
 
   dir->u.cromfs.cr_firstoffset = cromfs_addr2offset(fs, node);
   dir->u.cromfs.cr_curroffset  = dir->u.cromfs.cr_firstoffset;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1075,7 +1075,7 @@ static int cromfs_readdir(struct inode *mountpt, struct fs_dirent_s *dir)
    */
 
   dir->u.cromfs.cr_curroffset = node->cn_peer;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1090,7 +1090,7 @@ static int cromfs_rewinddir(struct inode *mountpt, struct fs_dirent_s *dir)
   finfo("mountpt: %p dir: %p\n", mountpt, dir);
 
   dir->u.cromfs.cr_curroffset  = dir->u.cromfs.cr_firstoffset;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1115,7 +1115,7 @@ static int cromfs_bind(FAR struct inode *blkdriver, const void *data,
   /* Return the new file system handle */
 
   *handle = (FAR void *)&g_cromfs_image;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1131,7 +1131,7 @@ static int cromfs_unbind(FAR void *handle, FAR struct inode **blkdriver,
 {
   finfo("handle: %p blkdriver: %p flags: %02x\n",
         handle, blkdriver, flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1163,7 +1163,7 @@ static int cromfs_statfs(struct inode *mountpt, struct statfs *buf)
   buf->f_bsize   = fs->cv_bsize;
   buf->f_blocks  = fs->cv_nblocks;
   buf->f_files   = fs->cv_nnodes;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1205,7 +1205,7 @@ static int cromfs_stat(FAR struct inode *mountpt, FAR const char *relpath,
       buf->st_size    = node->cn_size;
       buf->st_blksize = fs->cv_bsize;
       buf->st_blocks  = (node->cn_size + (fs->cv_bsize - 1)) / fs->cv_bsize;
-      ret             = OK;
+      ret             = OKK;
     }
 
   return ret;

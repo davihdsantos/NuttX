@@ -197,7 +197,7 @@ static void imxrt_takechsem(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR || ret == -ECANCELED);
+      DEBUGASSERT(ret == OKK || ret == -EINTR || ret == -ECANCELED);
     }
   while (ret == -EINTR);
 }
@@ -230,7 +230,7 @@ static void imxrt_takedsem(void)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR || ret == -ECANCELED);
+      DEBUGASSERT(ret == OKK || ret == -EINTR || ret == -ECANCELED);
     }
   while (ret == -EINTR);
 }
@@ -612,7 +612,7 @@ static void imxrt_dmach_interrupt(struct imxrt_dmach_s *dmach)
 
           regval8 = EDMA_CDNE(chan);
           putreg8(regval8, IMXRT_EDMA_CDNE);
-          result = OK;
+          result = OKK;
         }
       else
         {
@@ -676,7 +676,7 @@ static int imxrt_edma_interrupt(int irq, void *context, FAR void *arg)
   dmach = &g_edma.dmach[chan];
   imxrt_dmach_interrupt(dmach);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -727,7 +727,7 @@ static int imxrt_error_interrupt(int irq, void *context, FAR void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1187,7 +1187,7 @@ int imxrt_dmach_xfrsetup(DMACH_HANDLE *handle,
     }
 
   dmach->state = IMXRT_DMA_CONFIGURED;
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1259,7 +1259,7 @@ int imxrt_dmach_start(DMACH_HANDLE handle, edma_callback_t callback, void *arg)
     }
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************

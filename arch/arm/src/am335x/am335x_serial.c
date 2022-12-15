@@ -826,7 +826,7 @@ static int up_setup(struct uart_dev_s *dev)
   up_serialout(priv, AM335X_UART_MDR1_OFFSET, UART_MDR1_MODE_16x);
 
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -866,7 +866,7 @@ static int up_attach(struct uart_dev_s *dev)
   /* Attach and enable the IRQ */
 
   ret = irq_attach(priv->irq, uart_interrupt, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Enable the interrupt (RX and TX interrupts are still disabled
        * in the UART
@@ -988,7 +988,7 @@ static int uart_interrupt(int irq, void *context, void *arg)
 
           case UART_IIR_IID_NONE:
             {
-              return OK;
+              return OKK;
             }
 
             /* Otherwise we have received an interrupt that we cannot handle */
@@ -1000,7 +1000,7 @@ static int uart_interrupt(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1016,7 +1016,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode = filep->f_inode;
   struct uart_dev_s *dev   = inode->i_private;
   struct up_dev_s   *priv  = (struct up_dev_s *)dev->priv;
-  int                ret    = OK;
+  int                ret    = OKK;
 
   switch (cmd)
     {

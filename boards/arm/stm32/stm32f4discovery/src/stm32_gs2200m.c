@@ -263,5 +263,5 @@ int stm32_gs2200m_initialize(FAR const char *devpath, int bus)
         }
     }
 
-  return OK;
+  return OKK;
 }

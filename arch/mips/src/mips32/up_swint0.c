@@ -299,5 +299,5 @@ int up_swint0(int irq, FAR void *context, FAR void *arg)
   cause &= ~CP0_CAUSE_IP0;
   cp0_putcause(cause);
 
-  return OK;
+  return OKK;
 }

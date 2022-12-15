@@ -122,5 +122,5 @@ int open_blockdriver(FAR const char *pathname, int mountflags,
     }
 
   *ppinode = inode;
-  return OK;
+  return OKK;
 }

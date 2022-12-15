@@ -572,7 +572,7 @@ static inline void stm32_i2c_sem_wait(FAR struct stm32_i2c_priv_s *priv)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 }
@@ -1299,7 +1299,7 @@ static int stm32_i2c_isr_process(struct stm32_i2c_priv_s *priv)
 
       i2cinfo("DMA in progress: %ld [bytes] remainining. Returning.\n", left);
 #endif
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -1319,7 +1319,7 @@ static int stm32_i2c_isr_process(struct stm32_i2c_priv_s *priv)
           ((priv->msgv[0].flags & I2C_M_NOSTART) == 0 && (status & I2C_SR1_SB) == 0))
         {
 #if defined(CONFIG_STM32_I2C_DMA) || defined(CONFIG_I2C_POLLED)
-          return OK;
+          return OKK;
 #else
           priv->status |= I2C_SR1_TIMEOUT;
           goto state_error;
@@ -2029,7 +2029,7 @@ state_error:
 #endif
     }
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2203,7 +2203,7 @@ static int stm32_i2c_init(FAR struct stm32_i2c_priv_s *priv)
   /* Enable I2C */
 
   stm32_i2c_putreg(priv, STM32_I2C_CR1_OFFSET, I2C_CR1_PE);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2245,7 +2245,7 @@ static int stm32_i2c_deinit(FAR struct stm32_i2c_priv_s *priv)
   /* Disable clocking */
 
   modifyreg32(STM32_RCC_APB1ENR, priv->config->clk_bit, 0);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -2586,7 +2586,7 @@ static int stm32_i2c_reset(FAR struct i2c_master_s *dev)
   /* Restore the frequency */
 
   stm32_i2c_setclock(priv, frequency);
-  ret = OK;
+  ret = OKK;
 
 out:
 
@@ -2702,7 +2702,7 @@ int stm32_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   if (--priv->refs)
     {
       leave_critical_section(flags);
-      return OK;
+      return OKK;
     }
 
   leave_critical_section(flags);
@@ -2719,7 +2719,7 @@ int stm32_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   /* Release unused resources */
 
   stm32_i2c_sem_destroy(priv);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STM32_STM32F10XX || CONFIG_STM32_STM32F20XX || CONFIG_STM32_STM32F4XXX */

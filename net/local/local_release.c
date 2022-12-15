@@ -126,7 +126,7 @@ int local_release(FAR struct local_conn_s *conn)
 
   local_free(conn);
   net_unlock();
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET && CONFIG_NET_LOCAL */

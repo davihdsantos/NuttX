@@ -649,7 +649,7 @@ ssize_t psock_tcp_send(FAR struct socket *psock,
 {
   FAR struct tcp_conn_s *conn;
   struct send_s state;
-  int ret = OK;
+  int ret = OKK;
 
   /* Verify that the sockfd corresponds to valid, allocated socket */
 

@@ -216,7 +216,7 @@ static int ds_error(uint8_t buf[])
       return -EIO;
     }
 
-  return OK;
+  return OKK;
 }
 
 static inline int ds_busywait_time(FAR struct ds_i2c_inst_s *inst)
@@ -269,7 +269,7 @@ static int ds_busywait(FAR struct ds_i2c_inst_s *inst, size_t length)
 
       if (bit == 0)
         {
-          return OK;
+          return OKK;
         }
 
       if (retries == DS_BUSYWAIT_RETRIES)
@@ -967,7 +967,7 @@ int ds28e17_lower_half_unregister(FAR struct ds28e17_dev_s *priv,
   kmm_free(inst);
   onewire_sem_post(master);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

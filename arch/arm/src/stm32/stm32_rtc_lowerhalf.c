@@ -299,7 +299,7 @@ static int stm32_rdtime(FAR struct rtc_lowerhalf_s *lower,
       goto errout_with_errno;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_errno:
   ret = get_errno();
@@ -322,7 +322,7 @@ errout_with_errno:
       return -errcode;
     }
 
-  return OK;
+  return OKK;
 #endif
 }
 
@@ -818,7 +818,7 @@ static int stm32_periodic_callback(void)
       cb(priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_RTC_PERIODIC */
 

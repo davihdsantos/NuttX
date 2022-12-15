@@ -148,7 +148,7 @@ static int nxterm_open(FAR struct file *filep)
   /* Assign the driver structure to the file */
 
   filep->f_priv = priv;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -195,7 +195,7 @@ static int nxterm_close(FAR struct file *filep)
   nxterm_sempost(priv);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -367,7 +367,7 @@ static int nxterm_unlink(FAR struct inode *inode)
     }
 
   nxterm_sempost(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -411,7 +411,7 @@ int nxterm_ioctl_tap(int cmd, uintptr_t arg)
              (FAR struct nxtermioc_redraw_s *)((uintptr_t)arg);
 
            nxterm_redraw(redraw->handle, &redraw->rect, redraw->more);
-           ret = OK;
+           ret = OKK;
          }
          break;
 
@@ -429,7 +429,7 @@ int nxterm_ioctl_tap(int cmd, uintptr_t arg)
              (FAR struct nxtermioc_kbdin_s *)((uintptr_t)arg);
 
            nxterm_kbdin(kbdin->handle, kbdin->buffer, kbdin->buflen);
-           ret = OK;
+           ret = OKK;
 #else
            ret = -ENOSYS;
 #endif

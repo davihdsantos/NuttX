@@ -470,13 +470,13 @@ static int cxd56_i2c_interrupt(int irq, FAR void *context, FAR void *arg)
        */
 
       ret = wd_cancel(priv->timeout);
-      if (ret == OK)
+      if (ret == OKK)
         {
           sem_post(&priv->wait);
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -537,7 +537,7 @@ static int cxd56_i2c_receive(struct cxd56_i2cdev_s *priv, int last)
       leave_critical_section(flags);
       sem_wait(&priv->wait);
 
-      if (priv->error != OK)
+      if (priv->error != OKK)
         {
           break;
         }
@@ -617,7 +617,7 @@ static int cxd56_i2c_transfer(FAR struct i2c_master_s *dev,
    */
 
   ret = sem_getvalue(&priv->wait, &semval);
-  DEBUGASSERT(ret == OK && semval == 0);
+  DEBUGASSERT(ret == OKK && semval == 0);
 
   /* Disable clock gating (clock enable) */
 
@@ -628,7 +628,7 @@ static int cxd56_i2c_transfer(FAR struct i2c_master_s *dev,
       /* Pass msg descriptor via device context */
 
       priv->msgs  = msgs;
-      priv->error = OK;
+      priv->error = OKK;
 
       if ((addr != msgs->addr) && !wostop)
         {
@@ -668,7 +668,7 @@ static int cxd56_i2c_transfer(FAR struct i2c_master_s *dev,
           break;
         }
 
-      if (priv->error != OK)
+      if (priv->error != OKK)
         {
           ret = priv->error;
           break;
@@ -709,7 +709,7 @@ static int cxd56_i2c_transfer(FAR struct i2c_master_s *dev,
 #ifdef CONFIG_I2C_RESET
 static int cxd56_i2c_reset(FAR struct i2c_master_s *dev)
 {
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_I2C_RESET */
 
@@ -730,13 +730,13 @@ static int cxd56_i2c_scurecv(int port, int addr, uint8_t *buf, ssize_t buflen)
   int      len0;
   int      len1;
   ssize_t  rem;
-  int      ret = OK;
+  int      ret = OKK;
 
   /* Ignore buffer is NULL */
 
   if (buf == NULL)
     {
-      return OK;
+      return OKK;
     }
 
   rem = buflen;
@@ -782,7 +782,7 @@ static int cxd56_i2c_scusend(int port, int addr, uint8_t *buf, ssize_t buflen)
   uint16_t inst[12];
   ssize_t  rem;
   int      i;
-  int      ret = OK;
+  int      ret = OKK;
 
   rem = buflen;
 
@@ -1077,7 +1077,7 @@ int cxd56_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
 
   if (--priv->refs)
     {
-      return OK;
+      return OKK;
     }
 
   /* Configure pin */
@@ -1099,7 +1099,7 @@ int cxd56_i2cbus_uninitialize(FAR struct i2c_master_s *dev)
   sem_destroy(&priv->mutex);
   sem_destroy(&priv->wait);
 
-  return OK;
+  return OKK;
 }
 
 #endif

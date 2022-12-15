@@ -186,7 +186,7 @@ int mm_trysemaphore(FAR struct mm_heap_s *heap)
        */
 
       heap->mm_counts_held++;
-      ret = OK;
+      ret = OKK;
     }
   else
     {
@@ -203,7 +203,7 @@ int mm_trysemaphore(FAR struct mm_heap_s *heap)
 
       heap->mm_holder      = my_pid;
       heap->mm_counts_held = 1;
-      ret = OK;
+      ret = OKK;
     }
 
 errout:

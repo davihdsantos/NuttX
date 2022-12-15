@@ -241,7 +241,7 @@ static int skel_transmit(FAR struct skel_driver_s *priv)
 
   (void)wd_start(priv->sk_txtimeout, skeleton_TXTIMEOUT,
                  skel_txtimeout_expiry, 1, (wdparm_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -623,7 +623,7 @@ static int skel_interrupt(int irq, FAR void *context, FAR void *arg)
   /* Schedule to perform the interrupt processing on the worker thread. */
 
   work_queue(ETHWORK, &priv->sk_irqwork, skel_interrupt_work, priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -830,7 +830,7 @@ static int skel_ifup(FAR struct net_driver_s *dev)
 
   priv->sk_bifup = true;
   up_enable_irq(CONFIG_skeleton_IRQ);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -874,7 +874,7 @@ static int skel_ifdown(FAR struct net_driver_s *dev)
 
   priv->sk_bifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -955,7 +955,7 @@ static int skel_txavail(FAR struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->sk_pollwork, skel_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -981,7 +981,7 @@ static int skel_addmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1008,7 +1008,7 @@ static int skel_rmmac(FAR struct net_driver_s *dev, FAR const uint8_t *mac)
 
   /* Add the MAC address to the hardware multicast routing table */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1121,7 +1121,7 @@ static int skel_ioctl(FAR struct net_driver_s *dev, int cmd,
         return -ENOTTY;  /* Special return value for this case */
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1201,7 +1201,7 @@ int skel_initialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->sk_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_skeleton */

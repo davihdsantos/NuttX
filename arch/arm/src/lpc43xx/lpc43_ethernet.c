@@ -1104,7 +1104,7 @@ static int lpc43_transmit(FAR struct lpc43_ethmac_s *priv)
   /* Setup the TX timeout watchdog (perhaps restarting the timer) */
 
   (void)wd_start(priv->txtimeout, LPC43_TXTIMEOUT, lpc43_txtimeout_expiry, 1, (uint32_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1539,7 +1539,7 @@ static int lpc43_recvframe(FAR struct lpc43_ethmac_s *priv)
               ninfo("rxhead: %p d_buf: %p d_len: %d\n",
                     priv->rxhead, dev->d_buf, dev->d_len);
 
-              return OK;
+              return OKK;
             }
           else
             {
@@ -1594,7 +1594,7 @@ static void lpc43_receive(FAR struct lpc43_ethmac_s *priv)
    * Ethernet frames.
    */
 
-  while (lpc43_recvframe(priv) == OK)
+  while (lpc43_recvframe(priv) == OKK)
     {
 #ifdef CONFIG_NET_PKT
       /* When packet sockets are enabled, feed the frame into the packet tap */
@@ -2039,7 +2039,7 @@ static int lpc43_interrupt(int irq, FAR void *context, FAR void *arg)
       work_queue(ETHWORK, &priv->irqwork, lpc43_interrupt_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2270,7 +2270,7 @@ static int lpc43_ifup(struct net_driver_s *dev)
   up_enable_irq(LPC43M4_IRQ_ETHERNET);
 
   lpc43_checksetup();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2317,7 +2317,7 @@ static int lpc43_ifdown(struct net_driver_s *dev)
 
   priv->ifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2390,7 +2390,7 @@ static int lpc43_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->pollwork, lpc43_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2490,7 +2490,7 @@ static int lpc43_addmac(struct net_driver_s *dev, FAR const uint8_t *mac)
   temp |= (ETH_MACFFLT_HM | ETH_MACFFLT_HPF);
   lpc43_putreg(temp, LPC43_ETH_MACFFLT);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2553,7 +2553,7 @@ static int lpc43_rmmac(struct net_driver_s *dev, FAR const uint8_t *mac)
       lpc43_putreg(temp, LPC43_ETH_MACFFLT);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2764,7 +2764,7 @@ static int lpc43_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
       struct mii_ioctl_notify_s *req = (struct mii_ioctl_notify_s *)((uintptr_t)arg);
 
       ret = phy_notify_subscribe(dev->d_ifname, req->pid, &req->event);
-      if (ret == OK)
+      if (ret == OKK)
           {
             /* Enable PHY link up/down interrupts */
 
@@ -2778,7 +2778,7 @@ static int lpc43_ioctl(struct net_driver_s *dev, int cmd, unsigned long arg)
     {
       struct mii_ioctl_data_s *req = (struct mii_ioctl_data_s *)((uintptr_t)arg);
       req->phy_id = CONFIG_LPC43_PHYADDR;
-      ret = OK;
+      ret = OKK;
     }
     break;
 
@@ -2879,7 +2879,7 @@ static int lpc43_phyread(uint16_t phydevaddr, uint16_t phyregaddr, uint16_t *val
       if ((lpc43_getreg(LPC43_ETH_MACMIIA) & ETH_MACMIIA_GB) == 0)
         {
           *value = (uint16_t)lpc43_getreg(LPC43_ETH_MACMIID);
-          return OK;
+          return OKK;
         }
     }
 
@@ -2938,7 +2938,7 @@ static int lpc43_phywrite(uint16_t phydevaddr, uint16_t phyregaddr, uint16_t val
     {
       if ((lpc43_getreg(LPC43_ETH_MACMIIA) & ETH_MACMIIA_GB) == 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -3010,7 +3010,7 @@ static inline int lpc43_dm9161(FAR struct lpc43_ethmac_s *priv)
       up_systemreset();
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -3260,7 +3260,7 @@ static int lpc43_phyinit(FAR struct lpc43_ethmac_s *priv)
         priv->fduplex ? "FULL" : "HALF",
         priv->mbps100 ? 100 : 10);
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -3517,7 +3517,7 @@ static int lpc43_macconfig(FAR struct lpc43_ethmac_s *priv)
   regval |= DMABMR_SET_MASK;
   lpc43_putreg(regval, LPC43_ETH_DMABMODE);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3719,7 +3719,7 @@ static int lpc43_macenable(FAR struct lpc43_ethmac_s *priv)
 
   lpc43_putreg((ETH_DMAINT_RECV_ENABLE | ETH_DMAINT_ERROR_ENABLE),
                LPC43_ETH_DMAINTEN);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3858,7 +3858,7 @@ static inline int lpc43_ethinitialize(void)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

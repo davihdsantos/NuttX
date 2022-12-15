@@ -89,7 +89,7 @@ int netdev_indextoname(unsigned int ifindex, FAR char *ifname)
   if (dev != NULL)
     {
       memcpy(ifname, dev->d_ifname, IF_NAMESIZE);
-      ret = OK;
+      ret = OKK;
     }
 
   net_unlock();

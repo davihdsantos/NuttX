@@ -228,7 +228,7 @@ static int nsh_sdinitialize(void)
   syslog(LOG_INFO, "Successfully bound SSP port %d to MMC/SD slot %d\n",
          CONFIG_NSH_MMCSDSPIPORTNO,
          CONFIG_NSH_MMCSDSLOTNO);
-  return OK;
+  return OKK;
 
   /* Disable power to the SD/MMC via a GPIO. HIGH disables SD/MMC. */
 

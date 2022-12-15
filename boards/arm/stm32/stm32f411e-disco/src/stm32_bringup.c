@@ -70,7 +70,7 @@
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #if defined(CONFIG_STM32_OTGFS) && defined(CONFIG_USBHOST)
   /* Initialize USB host operation.  stm32_usbhost_initialize() starts a thread
@@ -78,7 +78,7 @@ int stm32_bringup(void)
    */
 
   ret = stm32_usbhost_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       uerr("ERROR: Failed to initialize USB host: %d\n", ret);
       return ret;

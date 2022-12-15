@@ -406,7 +406,7 @@ static int up_setup(struct uart_dev_s *dev)
   /* Make sure that all interrupts are disabled */
 
   up_restoreuartint(priv, 0);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -456,7 +456,7 @@ static int up_attach(struct uart_dev_s *dev)
    */
 
   ret = irq_attach(priv->irq, up_interrupts, dev);
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(priv->irq);
     }
@@ -576,7 +576,7 @@ static int up_interrupts(int irq, void *context, void *arg)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -593,7 +593,7 @@ static int up_ioctl(struct file *filep, int cmd, unsigned long arg)
   struct inode      *inode;
   struct uart_dev_s *dev;
   struct up_dev_s   *priv;
-  int                ret = OK;
+  int                ret = OKK;
 
   DEBUGASSERT(filep, filep->f_inode);
   inode = filep->f_inode;

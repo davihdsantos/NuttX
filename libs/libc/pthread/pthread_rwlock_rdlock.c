@@ -74,7 +74,7 @@ static int tryrdlock(FAR pthread_rwlock_t *rw_lock)
   else
     {
       rw_lock->num_readers++;
-      err = OK;
+      err = OKK;
     }
 
   return err;

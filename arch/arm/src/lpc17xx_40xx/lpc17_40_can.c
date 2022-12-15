@@ -506,7 +506,7 @@ static void lpc17can_reset(FAR struct can_dev_s *dev)
   /* Set bit timing */
 
   ret = can_bittiming(priv);
-  if (ret != OK)
+  if (ret != OKK)
     {
       canerr("ERROR: Failed to set bit timing: %d\n", ret);
     }
@@ -740,7 +740,7 @@ static int lpc17can_send(FAR struct can_dev_s *dev, FAR struct can_msg_s *msg)
   uint32_t tfi = (uint32_t)msg->cm_hdr.ch_dlc << 16;
   uint32_t regval;
   irqstate_t flags;
-  int ret = OK;
+  int ret = OKK;
 
   caninfo("CAN%d ID: %d DLC: %d\n",
           priv->port, msg->cm_hdr.ch_id, msg->cm_hdr.ch_dlc);
@@ -1063,7 +1063,7 @@ static int can12_interrupt(int irq, void *context, FAR void *arg)
   can_interrupt(&g_can2dev);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1203,7 +1203,7 @@ static int can_bittiming(struct up_dev_s *priv)
 
   caninfo("Setting CANxBTR= 0x%08x\n", btr);
   can_putreg(priv, LPC17_40_CAN_BTR_OFFSET, btr);        /* Set bit timing */
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

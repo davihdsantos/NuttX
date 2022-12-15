@@ -303,5 +303,5 @@ int sim_bringup(void)
 #endif
 
   UNUSED(ret);
-  return OK;
+  return OKK;
 }

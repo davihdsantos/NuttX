@@ -1015,14 +1015,14 @@ static int i2s_rxdma_setup(struct stm32_i2s_s *priv)
 
   if (!sq_empty(&priv->rx.act))
     {
-      return OK;
+      return OKK;
     }
 
   /* If there are no pending transfer, then bail returning success */
 
   if (sq_empty(&priv->rx.pend))
     {
-      return OK;
+      return OKK;
     }
 
   /* Initialize DMA register sampling */
@@ -1110,7 +1110,7 @@ static int i2s_rxdma_setup(struct stm32_i2s_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1200,7 +1200,7 @@ static void i2s_rx_worker(void *arg)
        * the audio buffer.
        */
 
-      if (bfcontainer->result == OK)
+      if (bfcontainer->result == OKK)
         {
           apb->nbytes = apb->nmaxbytes;
         }
@@ -1411,14 +1411,14 @@ static int i2s_txdma_setup(struct stm32_i2s_s *priv)
 
   if (!sq_empty(&priv->tx.act))
     {
-      return OK;
+      return OKK;
     }
 
   /* If there are no pending transfer, then bail returning success */
 
   if (sq_empty(&priv->tx.pend))
     {
-      return OK;
+      return OKK;
     }
 
   /* Initialize DMA register sampling */
@@ -1503,7 +1503,7 @@ static int i2s_txdma_setup(struct stm32_i2s_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1760,7 +1760,7 @@ static int i2s_checkwidth(struct stm32_i2s_s *priv, int bits)
   /* Save the new data width */
 
   priv->datalen = bits;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1935,10 +1935,10 @@ static int stm32_i2s_receive(struct i2s_dev_s *dev, struct ap_buffer_s *apb,
    */
 
   ret = i2s_rxdma_setup(priv);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   leave_critical_section(flags);
   i2s_exclsem_give(priv);
-  return OK;
+  return OKK;
 
 errout_with_exclsem:
   i2s_exclsem_give(priv);
@@ -2141,10 +2141,10 @@ static int stm32_i2s_send(struct i2s_dev_s *dev, struct ap_buffer_s *apb,
    */
 
   ret = i2s_txdma_setup(priv);
-  DEBUGASSERT(ret == OK);
+  DEBUGASSERT(ret == OKK);
   leave_critical_section(flags);
   i2s_exclsem_give(priv);
-  return OK;
+  return OKK;
 
 errout_with_exclsem:
   i2s_exclsem_give(priv);
@@ -2297,7 +2297,7 @@ static int i2s_dma_flags(struct stm32_i2s_s *priv)
       return -ENOSYS;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2381,7 +2381,7 @@ static int i2s_dma_allocate(struct stm32_i2s_s *priv)
 
   /* Success exit */
 
-  return OK;
+  return OKK;
 
   /* Error exit */
 

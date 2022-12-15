@@ -127,7 +127,7 @@ static inline void pipe_free(int pipeno)
   int ret;
 
   ret = nxsem_wait(&g_pipesem);
-  if (ret == OK)
+  if (ret == OKK)
     {
       g_pipeset &= ~(1 << pipeno);
       (void)nxsem_post(&g_pipesem);
@@ -268,7 +268,7 @@ int pipe2(int fd[2], size_t bufsize)
       goto errout_with_wrfd;
     }
 
-  return OK;
+  return OKK;
 
 errout_with_wrfd:
   close(fd[1]);

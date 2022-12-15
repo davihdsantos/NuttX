@@ -66,7 +66,7 @@
 
 int pthread_mutexattr_getpshared(FAR const pthread_mutexattr_t *attr, FAR int *pshared)
 {
-  int ret = OK;
+  int ret = OKK;
 
   linfo("attr=0x%p pshared=0x%p\n", attr, pshared);
 

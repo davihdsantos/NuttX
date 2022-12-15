@@ -151,5 +151,5 @@ int nxmq_desclose_group(mqd_t mqdes, FAR struct task_group_s *group)
   /* Deallocate the message descriptor */
 
   mq_desfree(mqdes);
-  return OK;
+  return OKK;
 }

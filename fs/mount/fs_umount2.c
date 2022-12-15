@@ -75,7 +75,7 @@ int umount2(FAR const char *target, unsigned int flags)
   FAR struct inode *mountpt_inode;
   FAR struct inode *blkdrvr_inode = NULL;
   struct inode_search_s desc;
-  int errcode = OK;
+  int errcode = OKK;
   int ret;
 
   /* Verify required pointer arguments */
@@ -176,7 +176,7 @@ int umount2(FAR const char *target, unsigned int flags)
        * not be OK)
        */
 
-      if (ret != OK && ret != -EBUSY)
+      if (ret != OKK && ret != -EBUSY)
         {
           errcode = -ret;
           goto errout_with_mountpt;
@@ -198,7 +198,7 @@ int umount2(FAR const char *target, unsigned int flags)
     }
 
   RELEASE_SEARCH(&desc);
-  return OK;
+  return OKK;
 
   /* A lot of goto's!  But they make the error handling much simpler */
 

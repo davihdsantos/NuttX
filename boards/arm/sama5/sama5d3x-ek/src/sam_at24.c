@@ -159,7 +159,7 @@ int sam_at24_automount(int minor)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_AT24 */

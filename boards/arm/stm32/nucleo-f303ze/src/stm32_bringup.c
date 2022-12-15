@@ -70,7 +70,7 @@
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
   UNUSED(ret);
 
@@ -84,5 +84,5 @@ int stm32_bringup(void)
     }
 #endif
 
-  return OK;
+  return OKK;
 }

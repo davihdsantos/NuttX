@@ -1441,7 +1441,7 @@ static int stm32l4pwm_timer(FAR struct stm32l4_pwmtimer_s *priv,
     }
 
   stm32l4pwm_dumpregs(priv, "After starting");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1580,7 +1580,7 @@ static int stm32l4pwm_lptimer(FAR struct stm32l4_pwmtimer_s *priv,
   stm32l4pwm_putreg(priv, STM32L4_LPTIM_CR_OFFSET, cr);
 
   stm32l4pwm_dumpregs(priv, "After starting");
-  return OK;
+  return OKK;
 }
 
 #ifndef CONFIG_PWM_PULSECOUNT
@@ -1679,7 +1679,7 @@ static  int stm32l4pwm_update_duty(FAR struct stm32l4_pwmtimer_s *priv,
 
   stm32l4pwm_putreg(priv, ccr_offset, (uint16_t)ccr);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1762,7 +1762,7 @@ static int stm32l4pwm_interrupt(struct stm32l4_pwmtimer_s *priv)
   pwminfo("Update interrupt SR: %04x prev: %u curr: %u count: %u\n",
           regval, priv->prev, priv->curr, priv->count);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2066,7 +2066,7 @@ static int stm32l4pwm_setup(FAR struct pwm_lowerhalf_s *dev)
       pwm_dumpgpio(pincfg, "PWM setup");
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2128,7 +2128,7 @@ static int stm32l4pwm_shutdown(FAR struct pwm_lowerhalf_s *dev)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2186,7 +2186,7 @@ static int stm32l4pwm_start(FAR struct pwm_lowerhalf_s *dev,
 static int stm32l4pwm_start(FAR struct pwm_lowerhalf_s *dev,
                      FAR const struct pwm_info_s *info)
 {
-  int ret = OK;
+  int ret = OKK;
   FAR struct stm32l4_pwmtimer_s *priv = (FAR struct stm32l4_pwmtimer_s *)dev;
 
   /* if frequency has not changed we just update duty */
@@ -2196,7 +2196,7 @@ static int stm32l4pwm_start(FAR struct pwm_lowerhalf_s *dev,
 #ifdef CONFIG_PWM_MULTICHAN
       int i;
 
-      for (i = 0; ret == OK && i < CONFIG_PWM_NCHANNELS; i++)
+      for (i = 0; ret == OKK && i < CONFIG_PWM_NCHANNELS; i++)
         {
           /* Set output if channel configured */
 
@@ -2224,7 +2224,7 @@ static int stm32l4pwm_start(FAR struct pwm_lowerhalf_s *dev,
 
       /* Save current frequency */
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           priv->frequency = info->frequency;
         }
@@ -2376,7 +2376,7 @@ static int stm32l4pwm_stop(FAR struct pwm_lowerhalf_s *dev)
 
   pwminfo("regaddr: %08x resetbit: %08x\n", regaddr, resetbit);
   stm32l4pwm_dumpregs(priv, "After stop");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -96,7 +96,7 @@ int igmp_schedmsg(FAR struct igmp_group_s *group, uint8_t msgid)
   /* Notify the device that we have a packet to send */
 
   netdev_txnotify_dev(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -145,7 +145,7 @@ int igmp_waitmsg(FAR struct igmp_group_s *group, uint8_t msgid)
               break;
             }
 
-          ret = OK;
+          ret = OKK;
         }
     }
 

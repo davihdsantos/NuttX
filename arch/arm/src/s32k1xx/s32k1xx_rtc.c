@@ -199,7 +199,7 @@ int up_rtc_initialize(void)
 
   g_rtc_enabled = true;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -275,7 +275,7 @@ int up_rtc_gettime(FAR struct timespec *tp)
 
   tp->tv_sec = seconds;
   tp->tv_nsec = prescaler * (1000000000 / CONFIG_RTC_FREQUENCY);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -320,7 +320,7 @@ int up_rtc_settime(FAR const struct timespec *ts)
 
   leave_critical_section(flags);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

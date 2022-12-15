@@ -105,7 +105,7 @@ static int nxtask_spawn_exec(FAR pid_t *pidp, FAR const char *name,
   size_t stacksize;
   int priority;
   int pid;
-  int ret = OK;
+  int ret = OKK;
 
   /* Disable pre-emption so that we can modify the task parameters after
    * we start the new task; the new task will not actually begin execution
@@ -219,7 +219,7 @@ static int nxtask_spawn_proxy(int argc, FAR char *argv[])
   /* Set the attributes and perform the file actions as appropriate */
 
   ret = spawn_proxyattrs(g_spawn_parms.attr, g_spawn_parms.file_actions);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Start the task */
 
@@ -228,7 +228,7 @@ static int nxtask_spawn_proxy(int argc, FAR char *argv[])
                               g_spawn_parms.argv);
 
 #ifdef CONFIG_SCHED_HAVE_PARENT
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Change of the parent of the task we just spawned to our parent.
            * What should we do in the event of a failure?
@@ -251,7 +251,7 @@ static int nxtask_spawn_proxy(int argc, FAR char *argv[])
 #ifndef CONFIG_SCHED_WAITPID
   spawn_semgive(&g_spawn_execsem);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

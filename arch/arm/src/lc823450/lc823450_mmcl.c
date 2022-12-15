@@ -115,7 +115,7 @@ static const struct block_operations g_bops =
 static int mmcl_open(FAR struct inode *inode)
 {
   finfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -128,7 +128,7 @@ static int mmcl_open(FAR struct inode *inode)
 static int mmcl_close(FAR struct inode *inode)
 {
   finfo("Entry\n");
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -224,7 +224,7 @@ static int mmcl_geometry(FAR struct inode *inode, struct geometry *geometry)
       finfo("nsectors: %d sectorsize: %d\n",
             geometry->geo_nsectors, geometry->geo_sectorsize);
 
-      return OK;
+      return OKK;
     }
 
   return -EINVAL;
@@ -376,7 +376,7 @@ int mmcl_uninitialize(FAR const char *devname)
   DEBUGASSERT(devname);
 
   ret = open_blockdriver(devname, 0, &inode);
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("open_blockdriver failed: %d\n", ret);
       return ret;
@@ -386,13 +386,13 @@ int mmcl_uninitialize(FAR const char *devname)
   DEBUGASSERT(dev);
 
   ret = close_blockdriver(inode);
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("close_blockdriver failed: %d\n", ret);
     }
 
   ret = unregister_blockdriver(devname);
-  if (ret != OK)
+  if (ret != OKK)
     {
       finfo("unregister_blockdriver failed: %d\n", ret);
     }

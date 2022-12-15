@@ -147,7 +147,7 @@ int pthread_sem_take(FAR sem_t *sem, FAR const struct timespec *abs_timeout,
        * occurred).
        */
 
-      return OK;
+      return OKK;
     }
 
   return EINVAL;
@@ -190,7 +190,7 @@ int pthread_sem_give(sem_t *sem)
           return -ret;
         }
 
-      return OK;
+      return OKK;
     }
   else
     {

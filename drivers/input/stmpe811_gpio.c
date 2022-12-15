@@ -5,7 +5,7 @@
  *   Author: Gregory Nutt <gnutt@nuttx.org>
  *
  * References:
- *   "STMPE811 S-Touch® advanced resistive touchscreen controller with 8-bit
+ *   "STMPE811 S-Touchï¿½ advanced resistive touchscreen controller with 8-bit
  *    GPIO expander," Doc ID 14489 Rev 6, CD00186725, STMicroelectronics"
  *
  * Redistribution and use in source and binary forms, with or without
@@ -233,7 +233,7 @@ int stmpe811_gpioconfig(STMPE811_HANDLE handle, uint8_t pinconfig)
 
   priv->inuse |= pinmask;
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -325,7 +325,7 @@ int stmpe811_gpioread(STMPE811_HANDLE handle, uint8_t pinconfig, bool *value)
   regval  = stmpe811_getreg8(priv, STMPE811_GPIO_MPSTA);
   *value = ((regval & GPIO_PIN(pin)) != 0);
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 
 /***********************************************************************************
@@ -397,7 +397,7 @@ int stmpe811_gpioattach(STMPE811_HANDLE handle, uint8_t pinconfig,
   stmpe811_putreg8(priv, STMPE811_GPIO_EN, regval);
 
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 #endif
 

@@ -443,7 +443,7 @@ static int ads1242_open(FAR struct file *filep)
   ads1242_print_regs(priv, "ads1242_open");
 #endif
 
-  return OK;
+  return OKK;
 }
 /****************************************************************************
  * Name: ads1242_close
@@ -457,7 +457,7 @@ static int ads1242_close(FAR struct file *filep)
   ads1242_reset(priv);
   up_mdelay(100);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -489,7 +489,7 @@ static int ads1242_ioctl (FAR struct file *filep, int cmd, unsigned long arg)
   FAR struct inode *inode = filep->f_inode;
   FAR struct ads1242_dev_s *priv = inode->i_private;
 
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {

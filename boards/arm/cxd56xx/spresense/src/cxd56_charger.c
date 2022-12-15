@@ -72,7 +72,7 @@ int board_charger_initialize(FAR const char *devpath, FAR int16_t *gaugemeter)
       g_chargerinitialized = 1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -98,7 +98,7 @@ int board_charger_uninitialize(FAR const char *devpath)
       g_chargerinitialized = 0;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif

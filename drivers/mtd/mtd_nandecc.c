@@ -153,7 +153,7 @@ int nandecc_readpage(FAR struct nand_dev_s *nand, off_t block,
       return -EIO;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

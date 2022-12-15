@@ -85,7 +85,7 @@ int board_ioctl(unsigned int cmd, uintptr_t arg)
         return -ENOTTY;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_BOARDCTL_IOCTL */

@@ -194,7 +194,7 @@ static int up_getvideoinfo(FAR struct fb_vtable_s *vtable,
       vinfo->yres    = CONFIG_VNCSERVER_SCREENHEIGHT;
       vinfo->nplanes = 1;
 
-      return OK;
+      return OKK;
     }
 
   gerr("ERROR: Invalid arguments\n");
@@ -238,7 +238,7 @@ static int up_getplaneinfo(FAR struct fb_vtable_s *vtable, int planeno,
       pinfo->display  = fbinfo->display;
       pinfo->bpp      = RFB_BITSPERPIXEL;
 
-      return OK;
+      return OKK;
     }
 
   gerr("ERROR: Returning EINVAL\n");
@@ -275,7 +275,7 @@ static int up_getcmap(FAR struct fb_vtable_s *vtable,
       ginfo("first=%d len=%d\n", vcmap->first, cmap->len);
 #warning Missing logic
 
-      return OK;
+      return OKK;
     }
 
   gerr("ERROR: Returning EINVAL\n");
@@ -312,7 +312,7 @@ static int up_putcmap(FAR struct fb_vtable_s *vtable, FAR const struct fb_cmap_s
       ginfo("first=%d len=%d\n", vcmap->first, cmap->len);
 #warning Missing logic
 
-      return OK;
+      return OKK;
     }
 
   gerr("ERROR: Returning EINVAL\n");
@@ -349,7 +349,7 @@ static int up_getcursor(FAR struct fb_vtable_s *vtable,
 
 #warning Missing logic
 
-      return OK;
+      return OKK;
     }
 
   gerr("ERROR: Returning EINVAL\n");
@@ -402,7 +402,7 @@ static int up_setcursor(FAR struct fb_vtable_s *vtable,
 #warning Missing logic
         }
 #endif
-      return OK;
+      return OKK;
     }
 
   gerr("ERROR: Returning EINVAL\n");
@@ -439,7 +439,7 @@ static int vnc_start_server(int display)
   if (g_vnc_sessions[display] != NULL)
     {
       DEBUGASSERT(g_vnc_sessions[display]->state >= VNCSERVER_INITIALIZED);
-      return OK;
+      return OKK;
     }
 
   /* Start the VNC server kernel thread. */
@@ -465,7 +465,7 @@ static int vnc_start_server(int display)
       return (int)pid;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -486,7 +486,7 @@ static int vnc_start_server(int display)
 
 static inline int vnc_wait_start(int display)
 {
-  int ret = OK;
+  int ret = OKK;
 
   /* Check if there has been a session allocated yet.  This is one of the
    * first things that the VNC server will do with the kernel thread is
@@ -514,7 +514,7 @@ static inline int vnc_wait_start(int display)
            * was awakened by a signal.
            */
 
-          DEBUGASSERT(ret == OK || ret == -EINTR);
+          DEBUGASSERT(ret == OKK || ret == -EINTR);
         }
       while (ret == -EINTR);
     }
@@ -603,7 +603,7 @@ static inline int vnc_wait_connect(int display)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -740,7 +740,7 @@ int vnc_fbinitialize(int display, vnc_kbdout_t kbdout,
   session->mouseout = mouseout;
   session->arg      = arg;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

@@ -260,42 +260,42 @@ uint8_t sam_spi5status(FAR struct spi_dev_s *dev, uint32_t devid)
 #ifdef SAMD2L2_HAVE_SPI0
 int sam_spi0cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
 #ifdef SAMD2L2_HAVE_SPI1
 int sam_spi1cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
 #ifdef SAMD2L2_HAVE_SPI2
 int sam_spi2cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
 #ifdef SAMD2L2_HAVE_SPI3
 int sam_spi3cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
 #ifdef SAMD2L2_HAVE_SPI4
 int sam_spi4cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 
 #ifdef SAMD2L2_HAVE_SPI5
 int sam_spi5cmddata(FAR struct spi_dev_s *dev, uint32_t devid, bool cmd)
 {
-  return OK;
+  return OKK;
 }
 #endif
 

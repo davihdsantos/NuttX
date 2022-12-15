@@ -85,7 +85,7 @@ int clock_time2ticks(FAR const struct timespec *reltime,
    */
 
   *ticks = (sclock_t)((relnsec + NSEC_PER_TICK - 1) / NSEC_PER_TICK);
-  return OK;
+  return OKK;
 #else
   int32_t relusec;
 
@@ -112,6 +112,6 @@ int clock_time2ticks(FAR const struct timespec *reltime,
    */
 
   *ticks = (sclock_t)((relusec + USEC_PER_TICK - 1) / USEC_PER_TICK);
-  return OK;
+  return OKK;
 #endif
 }

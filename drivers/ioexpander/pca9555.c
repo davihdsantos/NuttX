@@ -278,7 +278,7 @@ static int pca9555_setbit(FAR struct pca9555_dev_s *pca, uint8_t addr,
 
   ret = pca9555_write(pca, buf, 2);
 #ifdef CONFIG_PCA9555_RETRY
-  if (ret != OK)
+  if (ret != OKK)
     {
       /* Try again (only once) */
 
@@ -326,7 +326,7 @@ static int pca9555_getbit(FAR struct pca9555_dev_s *pca, uint8_t addr,
 #endif
 
   *val = (buf >> pin) & 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -514,7 +514,7 @@ static int pca9555_getmultibits(FAR struct pca9555_dev_s *pca, uint8_t addr,
                                 int count)
 {
   uint8_t buf[2];
-  int ret = OK;
+  int ret = OKK;
   int i;
   int index;
   int pin;
@@ -551,7 +551,7 @@ static int pca9555_getmultibits(FAR struct pca9555_dev_s *pca, uint8_t addr,
       values[i] = (buf[index] >> pin) & 1;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -800,7 +800,7 @@ static int pca9555_detach(FAR struct ioexpander_dev_s *dev, FAR void *handle)
   cb->pinset = 0;
   cb->cbfunc = NULL;
   cb->cbarg  = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -898,7 +898,7 @@ static int pca9555_interrupt(int irq, FAR void *context, FAR void *arg)
                  (FAR void *)pca, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif

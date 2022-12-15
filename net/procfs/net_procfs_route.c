@@ -501,7 +501,7 @@ static int route_open(FAR struct file *filep, FAR const char *relpath,
   /* Save the index as the open-specific state in filep->f_priv */
 
   filep->f_priv = (FAR void *)procfile;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -521,7 +521,7 @@ static int route_close(FAR struct file *filep)
 
   kmm_free(procfile);
   filep->f_priv = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -609,7 +609,7 @@ static int route_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save the new container in the new file structure */
 
   newp->f_priv = (FAR void *)newfile;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -664,7 +664,7 @@ static int route_opendir(FAR const char *relpath,
   level2->name             = "";
   level2->node             = PROC_ROUTE;
   dir->u.procfs            = (FAR void *)level2;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -687,7 +687,7 @@ static int route_closedir(FAR struct fs_dirent_s *dir)
     }
 
   dir->u.procfs = NULL;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -742,7 +742,7 @@ static int route_readdir(struct fs_dirent_s *dir)
    */
 
   level2->base.index = index + 1;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -760,7 +760,7 @@ static int route_rewinddir(struct fs_dirent_s *dir)
   priv = dir->u.procfs;
 
   priv->base.index = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -797,7 +797,7 @@ static int route_stat(const char *relpath, struct stat *buf)
       return -ENOENT;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

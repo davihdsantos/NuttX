@@ -92,7 +92,7 @@ static int board_button_interrupt(int irq, FAR void *context, FAR void *arg)
       return g_button_handler(irq, context, arg);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -189,7 +189,7 @@ int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
           g_button_arg     = NULL;
         }
 
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;

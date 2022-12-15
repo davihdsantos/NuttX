@@ -541,7 +541,7 @@ static int can_setup(FAR struct can_dev_s *dev)
     }
 #endif
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       up_enable_irq(priv->irq);
 
@@ -790,7 +790,7 @@ static int can_send(FAR struct can_dev_s *dev, FAR struct can_msg_s *msg)
   can_txdone(dev);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -868,7 +868,7 @@ static bool candev_txempty(FAR struct can_dev_s *dev)
 static int can0_interrupt(int irq, void *context, FAR void *arg)
 {
   can_interrupt(&g_can0dev);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -876,7 +876,7 @@ static int can0_interrupt(int irq, void *context, FAR void *arg)
 static int can1_interrupt(int irq, void *context, FAR void *arg)
 {
   can_interrupt(&g_can1dev);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1196,7 +1196,7 @@ static int can_bittiming(struct up_dev_s *priv)
   regval &= ~CAN_CNTL_CCE;
   can_putreg(priv, LPC43_CAN_CNTL_OFFSET, regval);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

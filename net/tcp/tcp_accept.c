@@ -178,7 +178,7 @@ static int accept_eventhandler(FAR struct tcp_conn_s *listener,
       /* Save the connection structure */
 
       pstate->acpt_newconn     = conn;
-      pstate->acpt_result      = OK;
+      pstate->acpt_result      = OKK;
 
       /* There should be a reference of one on the new connection */
 
@@ -192,7 +192,7 @@ static int accept_eventhandler(FAR struct tcp_conn_s *listener,
 
       listener->accept_private = NULL;
       listener->accept         = NULL;
-      ret                      = OK;
+      ret                      = OKK;
     }
 
   return ret;
@@ -279,7 +279,7 @@ int psock_tcp_accept(FAR struct socket *psock, FAR struct sockaddr *addr,
       state.acpt_addr       = addr;
       state.acpt_addrlen    = addrlen;
       state.acpt_newconn    = NULL;
-      state.acpt_result     = OK;
+      state.acpt_result     = OKK;
 
       /* This semaphore is used for signaling and, hence, should not have
        * priority inheritance enabled.
@@ -332,7 +332,7 @@ int psock_tcp_accept(FAR struct socket *psock, FAR struct sockaddr *addr,
     }
 
   *newconn = (FAR void *)state.acpt_newconn;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_NET_TCP */

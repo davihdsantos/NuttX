@@ -661,7 +661,7 @@ static int stm32_interrupt(int irq, FAR void *context, FAR void *arg)
       priv->position += (int32_t)0x00010000;
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -896,7 +896,7 @@ static int stm32_setup(FAR struct qe_lowerhalf_s *lower)
 
   stm32_dumpregs(priv, "After setup");
 
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1012,7 +1012,7 @@ static int stm32_shutdown(FAR struct qe_lowerhalf_s *lower)
   pincfg |= STM32_GPIO_INPUT_FLOAT;
 
   stm32_configgpio(pincfg);
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1057,7 +1057,7 @@ static int stm32_position(FAR struct qe_lowerhalf_s *lower, FAR int32_t *pos)
 
   *pos = (int32_t)stm32_getreg32(priv, STM32_GTIM_CNT_OFFSET);
 #endif
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1093,7 +1093,7 @@ static int stm32_reset(FAR struct qe_lowerhalf_s *lower)
 
   stm32_putreg32(priv, STM32_GTIM_CNT_OFFSET, 0);
 #endif
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -1171,7 +1171,7 @@ int stm32_qeinitialize(FAR const char *devpath, int tim)
   /* The driver is now in-use */
 
   priv->inuse = true;
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_SENSORS_QENCODER */

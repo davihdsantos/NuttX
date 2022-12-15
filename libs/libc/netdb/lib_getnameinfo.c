@@ -107,7 +107,7 @@ int getnameinfo(FAR const struct sockaddr *addr, socklen_t addrlen,
       ret = gethostbyaddr_r(saddr, saddr_len, addr->sa_family, &hostent, host,
                             hostlen, &h_errno);
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           size_t sz = strlen(hostent.h_name) + 1;
 
@@ -187,7 +187,7 @@ int getnameinfo(FAR const struct sockaddr *addr, socklen_t addrlen,
       ret = getservbyport_r(port, flags & NI_DGRAM ? "udp" : NULL, &servent,
                             serv, servlen, &result);
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           size_t sz = strlen(servent.s_name) + 1;
 
@@ -214,7 +214,7 @@ int getnameinfo(FAR const struct sockaddr *addr, socklen_t addrlen,
       snprintf(serv, servlen, "%d", port);
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_LIBC_NETDB */

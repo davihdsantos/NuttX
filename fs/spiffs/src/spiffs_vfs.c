@@ -250,7 +250,7 @@ static void spiffs_unlock_reentrant(FAR struct spiffs_sem_s *rsem)
 static int spiffs_consistency_check(FAR struct spiffs_s *fs)
 {
   int status;
-  int ret = OK;
+  int ret = OKK;
 
   status = spiffs_check_luconsistency(fs);
   if (status < 0)
@@ -339,7 +339,7 @@ static int spiffs_readdir_callback(FAR struct spiffs_s *fs,
 
       strncpy(entryp->d_name, (FAR char *)objhdr.name, NAME_MAX + 1);
       entryp->d_type = objhdr.type;
-      return OK;
+      return OKK;
     }
 
   return SPIFFS_VIS_COUNTINUE;
@@ -494,7 +494,7 @@ static int spiffs_open(FAR struct file *filep, FAR const char *relpath,
   dq_addlast((FAR dq_entry_t *)fobj, &fs->objq);
 
   spiffs_unlock_volume(fs);
-  return OK;
+  return OKK;
 
 errout_with_fileobject:
   kmm_free(fobj);
@@ -1073,7 +1073,7 @@ static int spiffs_sync(FAR struct file *filep)
   FAR struct spiffs_s *fs;
   FAR struct spiffs_file_s *fobj;
   ssize_t nflushed;
-  int ret = OK;
+  int ret = OKK;
 
   finfo("filep=%p\n", filep);
   DEBUGASSERT(filep->f_priv != NULL && filep->f_inode != NULL);
@@ -1142,7 +1142,7 @@ static int spiffs_dup(FAR const struct file *oldp, FAR struct file *newp)
   /* Save a copy of the file object as the dup'ed file. */
 
   newp->f_priv = fobj;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1272,7 +1272,7 @@ static int spiffs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
 
   dir->u.spiffs.block   = 0;
   dir->u.spiffs.entry   = 0;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1287,7 +1287,7 @@ static int spiffs_closedir(FAR struct inode *mountpt,
 
   /* There is nothing to be done */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1346,7 +1346,7 @@ static int spiffs_rewinddir(FAR struct inode *mountpt,
   dir->u.spiffs.block   = 0;
   dir->u.spiffs.entry   = 0;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1486,7 +1486,7 @@ static int spiffs_bind(FAR struct inode *mtdinode, FAR const void *data,
   /* Return the new file system handle */
 
   *handle = (FAR void *)fs;
-  return OK;
+  return OKK;
 
 errout_with_work:
   kmm_free(fs->work);
@@ -1552,7 +1552,7 @@ static int spiffs_unbind(FAR void *handle, FAR struct inode **mtdinode,
 
   nxsem_destroy(&fs->exclsem.sem);
   kmm_free(fs);
-  ret = OK;
+  ret = OKK;
 
 errout_with_lock:
   spiffs_unlock_volume(fs);
@@ -1621,7 +1621,7 @@ static int spiffs_statfs(FAR struct inode *mountpt, FAR struct statfs *buf)
   /* Release the lock on the file system */
 
   spiffs_unlock_volume(fs);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1719,7 +1719,7 @@ static int spiffs_unlink(FAR struct inode *mountpt, FAR const char *relpath)
   /* Release the lock on the volume */
 
   spiffs_unlock_volume(fs);
-  return OK;
+  return OKK;
 
 errout_with_lock:
   spiffs_unlock_volume(fs);
@@ -1803,7 +1803,7 @@ static int spiffs_rename(FAR struct inode *mountpt, FAR const char *oldrelpath,
                                  &newpgndx);
   if (ret == -ENOENT)
     {
-      ret = OK;
+      ret = OKK;
     }
   else if (ret >= 0)
     {
@@ -1894,7 +1894,7 @@ static int spiffs_stat(FAR struct inode *mountpt, FAR const char *relpath,
       buf->st_mode    = S_IFDIR | S_IRWXO | S_IRWXG | S_IRWXU;
       buf->st_blksize = fs->geo.blocksize;
       buf->st_blocks  = fs->media_size / fs->geo.blocksize;
-      ret             = OK;
+      ret             = OKK;
     }
   else
     {

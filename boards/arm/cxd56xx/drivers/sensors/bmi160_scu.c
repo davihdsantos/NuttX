@@ -406,7 +406,7 @@ static uint8_t bmi160_getregs(FAR struct bmi160_dev_s *priv,
 #else /* CONFIG_SENSORS_BMI160_SPI */
   scu_spitransfer(0, inst, ilen, buffer, len);
 #endif
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -487,7 +487,7 @@ static int bmi160_seqinit_gyro(FAR struct bmi160_dev_s *priv)
   seq_setinstruction(priv->seq, g_bmi160gyroinst, itemsof(g_bmi160gyroinst));
   seq_setsample(priv->seq, BMI160_BYTESPERSAMPLE, 0, BMI160_ELEMENTSIZE, false);
 
-  return OK;
+  return OKK;
 }
 
 static int bmi160_seqinit_accel(FAR struct bmi160_dev_s *priv)
@@ -519,7 +519,7 @@ static int bmi160_seqinit_accel(FAR struct bmi160_dev_s *priv)
   seq_setinstruction(priv->seq, g_bmi160accelinst, itemsof(g_bmi160accelinst));
   seq_setsample(priv->seq, BMI160_BYTESPERSAMPLE, 0, BMI160_ELEMENTSIZE, false);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -566,7 +566,7 @@ static int bmi160_open_gyro(FAR struct file *filep)
 
   g_refcnt_gyro++;
 
-  return OK;
+  return OKK;
 }
 
 static int bmi160_open_accel(FAR struct file *filep)
@@ -605,7 +605,7 @@ static int bmi160_open_accel(FAR struct file *filep)
 
   g_refcnt_accel++;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -639,7 +639,7 @@ static int bmi160_close_gyro(FAR struct file *filep)
       (void) seq_ioctl(priv->seq, priv->fifoid, SCUIOC_FREEFIFO, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 static int bmi160_close_accel(FAR struct file *filep)
@@ -667,7 +667,7 @@ static int bmi160_close_accel(FAR struct file *filep)
       (void) seq_ioctl(priv->seq, priv->fifoid, SCUIOC_FREEFIFO, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -705,7 +705,7 @@ static int bmi160_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
 {
   FAR struct inode        *inode = filep->f_inode;
   FAR struct bmi160_dev_s *priv  = inode->i_private;
-  int ret = OK;
+  int ret = OKK;
 
   switch (cmd)
     {
@@ -761,7 +761,7 @@ static int bmi160_checkid(FAR struct bmi160_dev_s *priv)
       return -ENODEV;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -904,7 +904,7 @@ static int bmi160_set_accel_pm(FAR struct bmi160_dev_s *priv, int pm)
         return -EINVAL;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -954,7 +954,7 @@ static int bmi160_set_accel_odr(FAR struct bmi160_dev_s *priv, int odr)
   bmi160_putreg8(priv, BMI160_ACCEL_CONFIG, value | odr);
   up_mdelay(1);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1016,7 +1016,7 @@ int bmi160_init(FAR struct spi_dev_s *dev)
   bmi160_putreg8(priv, BMI160_PMU_TRIGGER, 0);
   up_mdelay(1);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1056,7 +1056,7 @@ int bmi160gyro_register(FAR const char *devpath, int minor,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1096,7 +1096,7 @@ int bmi160accel_register(FAR const char *devpath, int minor,
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_BMI160 */

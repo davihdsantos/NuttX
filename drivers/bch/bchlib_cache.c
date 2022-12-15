@@ -99,7 +99,7 @@ static int bch_cypher(FAR struct bchlib_s *bch, int encrypt)
       bch_xor(buffer, X, T);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -121,7 +121,7 @@ static int bch_cypher(FAR struct bchlib_s *bch, int encrypt)
 int bchlib_flushsector(FAR struct bchlib_s *bch)
 {
   FAR struct inode *inode;
-  ssize_t ret = OK;
+  ssize_t ret = OKK;
 
   /* Check if the sector has been modified and is out of synch with the
    * media.
@@ -175,7 +175,7 @@ int bchlib_flushsector(FAR struct bchlib_s *bch)
 int bchlib_readsector(FAR struct bchlib_s *bch, size_t sector)
 {
   FAR struct inode *inode;
-  ssize_t ret = OK;
+  ssize_t ret = OKK;
 
   if (bch->sector != sector)
     {

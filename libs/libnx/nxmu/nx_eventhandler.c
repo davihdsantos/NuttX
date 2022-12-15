@@ -148,7 +148,7 @@ int nx_eventhandler(NXHANDLE handle)
                    * O_NONBLOCK and there is no message available now.
                    */
 
-                  return OK;
+                  return OKK;
                 }
               else
                 {
@@ -248,5 +248,5 @@ int nx_eventhandler(NXHANDLE handle)
       break;
     }
 
-  return OK;
+  return OKK;
 }

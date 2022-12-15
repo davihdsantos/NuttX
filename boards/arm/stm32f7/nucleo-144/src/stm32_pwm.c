@@ -155,7 +155,7 @@ int stm32_pwm_setup(void)
       initialized = true;
     }
 
-  return OK;
+  return OKK;
 #else
   return -ENODEV;
 #endif

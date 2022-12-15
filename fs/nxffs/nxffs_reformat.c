@@ -111,7 +111,7 @@ static int nxffs_format(FAR struct nxffs_volume_s *volume)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -253,7 +253,7 @@ static int nxffs_badblocks(FAR struct nxffs_volume_s *volume)
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

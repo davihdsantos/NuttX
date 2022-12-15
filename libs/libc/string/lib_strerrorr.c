@@ -70,5 +70,5 @@ int strerror_r(int errnum, FAR char *buf, size_t buflen)
 
   DEBUGASSERT(buf != NULL);
   (void)strncpy(buf, errstr, buflen);
-  return OK;
+  return OKK;
 }

@@ -1324,7 +1324,7 @@ static int cxd56_interrupt(int irq, FAR void *context, FAR void *arg)
   regval |= SDHCI_INT_CINT | enabled;
   putreg32(regval, CXD56_SDHCI_IRQSIGEN);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1361,7 +1361,7 @@ static int cxd56_sdio_lock(FAR struct sdio_dev_s *dev, bool lock)
       modifyreg32(CXD56_SDHCI_SYSCTL, SDHCI_SYSCTL_SDCLKEN, 0);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1733,7 +1733,7 @@ static int cxd56_sdio_attach(FAR struct sdio_dev_s *dev)
   /* Attach the SDIO interrupt handler */
 
   ret = irq_attach(CXD56_IRQ_SDIO, cxd56_interrupt, NULL);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Disable all interrupts at the SDIO controller and clear all pending
        * interrupts.
@@ -1953,7 +1953,7 @@ static int cxd56_sdio_sendcmd(FAR struct sdio_dev_s *dev, uint32_t cmd,
       putreg32(regval, CXD56_SDHCI_XFERTYP);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2041,7 +2041,7 @@ static int cxd56_sdio_recvsetup(FAR struct sdio_dev_s *dev,
 
   cxd56_configxfrints(priv, SDHCI_RCVDONE_INTS);
   cxd56_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2095,7 +2095,7 @@ static int cxd56_sdio_sendsetup(FAR struct sdio_dev_s *dev,
 
   cxd56_configxfrints(priv, SDHCI_SNDDONE_INTS);
   cxd56_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2179,7 +2179,7 @@ static int cxd56_sdio_cancel(FAR struct sdio_dev_s *dev)
 
   priv->remaining = 0;
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2204,14 +2204,14 @@ static int cxd56_sdio_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
 {
   uint32_t errors;
   int32_t  timeout = SDHCI_CMDTIMEOUT;
-  int      ret = OK;
+  int      ret = OKK;
 
 #ifdef CONFIG_SDIO_DMA
   struct cxd56_sdiodev_s *priv = (struct cxd56_sdiodev_s *)dev;
 
   if (priv->dmasend_prepare)
     {
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -2220,7 +2220,7 @@ static int cxd56_sdio_waitresponse(FAR struct sdio_dev_s *dev, uint32_t cmd)
     case MMCSD_NO_RESPONSE:
       timeout = SDHCI_CMDTIMEOUT;
       errors  = 0;
-      return OK;
+      return OKK;
 
     case MMCSD_R1_RESPONSE:
     case MMCSD_R1B_RESPONSE:
@@ -2310,7 +2310,7 @@ static int cxd56_sdio_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd,
                                 uint32_t *rshort)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 #ifdef CONFIG_SDIO_DMA
   struct cxd56_sdiodev_s *priv = (struct cxd56_sdiodev_s *)dev;
 #endif
@@ -2345,7 +2345,7 @@ static int cxd56_sdio_recvshortcrc(FAR struct sdio_dev_s *dev, uint32_t cmd,
 #ifdef CONFIG_SDIO_DMA
   if (priv->dmasend_prepare)
     {
-      return OK;
+      return OKK;
     }
 #endif
 #ifdef CONFIG_DEBUG_FEATURES
@@ -2396,7 +2396,7 @@ static int cxd56_sdio_recvlong(FAR struct sdio_dev_s *dev, uint32_t cmd,
                                uint32_t rlong[4])
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R2  CID, CSD register (136-bit)
    *     135       0               Start bit
@@ -2466,7 +2466,7 @@ static int cxd56_sdio_recvshort(FAR struct sdio_dev_s *dev, uint32_t cmd,
                                 uint32_t *rshort)
 {
   uint32_t regval;
-  int ret = OK;
+  int ret = OKK;
 
   /* R3  OCR (48-bit)
    *     47        0               Start bit
@@ -2653,7 +2653,7 @@ static sdio_eventset_t cxd56_sdio_eventwait(FAR struct sdio_dev_s *dev,
       delay = MSEC2TICK(timeout);
       ret   = wd_start(priv->waitwdog, delay, (wdentry_t)cxd56_eventtimeout,
                        1, (uint32_t)priv);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: wd_start failed: %d\n", ret);
         }
@@ -2796,7 +2796,7 @@ static int cxd56_sdio_registercallback(FAR struct sdio_dev_s *dev,
   priv->cbevents = 0;
   priv->cbarg    = arg;
   priv->callback = callback;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2859,7 +2859,7 @@ static int cxd56_sdio_admasetup(FAR const uint8_t *buffer, size_t buflen)
     }
   else
     {
-      return OK;
+      return OKK;
     }
 }
 #endif
@@ -2889,7 +2889,7 @@ static int cxd56_sdio_dmarecvsetup(FAR struct sdio_dev_s *dev,
 {
   struct cxd56_sdiodev_s *priv = (struct cxd56_sdiodev_s *)dev;
   unsigned int blocksize;
-  int          ret = OK;
+  int          ret = OKK;
 
   DEBUGASSERT(priv != NULL && buffer != NULL && buflen > 0);
   DEBUGASSERT(((uint32_t)buffer & 3) == 0);
@@ -2965,7 +2965,7 @@ static int cxd56_sdio_dmarecvsetup(FAR struct sdio_dev_s *dev,
   /* Sample the register state */
 
   cxd56_sample(priv, SAMPLENDX_AFTER_SETUP);
-  return OK;
+  return OKK;
 error:
 
   /* Free allocated align buffer */
@@ -3001,7 +3001,7 @@ static int cxd56_sdio_dmasendsetup(FAR struct sdio_dev_s *dev,
                               FAR const uint8_t *buffer, size_t buflen)
 {
   uint32_t r1;
-  int      ret = OK;
+  int      ret = OKK;
   struct cxd56_sdiodev_s *priv = (struct cxd56_sdiodev_s *)dev;
   unsigned int blocksize;
 
@@ -3074,7 +3074,7 @@ static int cxd56_sdio_dmasendsetup(FAR struct sdio_dev_s *dev,
       priv->dmasend_prepare = false;
       cxd56_sdio_waitresponse(dev, priv->dmasend_cmd);
       ret = cxd56_sdio_recvshortcrc(dev, priv->dmasend_cmd, &r1);
-      if (ret != OK)
+      if (ret != OKK)
         {
           goto error;
         }
@@ -3088,7 +3088,7 @@ static int cxd56_sdio_dmasendsetup(FAR struct sdio_dev_s *dev,
 
   cxd56_configxfrints(priv, SDHCI_DMADONE_INTS);
 
-  return OK;
+  return OKK;
 error:
 
   /* Free allocated align buffer */
@@ -3317,12 +3317,12 @@ static int cxd56_sdio_sendcmdpoll(FAR struct cxd56_sdiodev_s *priv,
   /* Send the command */
 
   ret = cxd56_sdio_sendcmd(&priv->dev, cmd, arg);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Then poll-wait until the response is available */
 
       ret = cxd56_sdio_waitresponse(&priv->dev, cmd);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: Wait for response to cmd: %08x failed: %d\n",
                                                            cmd, ret);
@@ -3352,10 +3352,10 @@ static uint32_t cxd56_sdio_readb_internal(FAR struct sdio_function_s * sf,
 
   cmd52arg = cxd56_sdio_make_cmd52arg(addr, 0, NULL, 0, sf->number);
   ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD52, cmd52arg);
-  if (ret == OK)
+  if (ret == OKK)
     {
       cxd56_sdio_recvshort(&priv->dev, SDIO_ACMD52, &response);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: Addr:0x%x, recv R5 error\n", addr);
           goto READB_ERR;
@@ -3402,10 +3402,10 @@ static uint32_t cxd56_sdio_writeb_internal(FAR struct sdio_function_s * sf,
 
   cmd52arg = cxd56_sdio_make_cmd52arg(addr, data, rdata, 1, 0);
   ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD52, cmd52arg);
-  if (ret == OK)
+  if (ret == OKK)
     {
       cxd56_sdio_recvshort(&priv->dev, SDIO_ACMD52, &response);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: Addr:0x%x, recv R5 error\n", addr);
           goto WRITEB_ERR;
@@ -3445,7 +3445,7 @@ static int cxd56_sdio_changeclock(FAR struct cxd56_sdiodev_s *priv)
   uint32_t response = 0;
 
   ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD52, 0x08 << 9);
-  if (ret == OK)
+  if (ret == OKK)
     {
       cxd56_sdio_recvshort(&priv->dev, SDIO_ACMD52, &response);
     }
@@ -3621,7 +3621,7 @@ static uint32_t cxd56_sdio_read_cis(FAR struct sdio_function_s * sf,
           break;
         }
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -3643,7 +3643,7 @@ static int cxd56_sdio_enable_cardint(void)
   putreg32(getreg32(CXD56_SDHCI_IRQSTATEN) | SDHCI_INT_CINT,
                     CXD56_SDHCI_IRQSTATEN);
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4018,7 +4018,7 @@ static int cxd56_sdio_write(FAR struct sdio_dev_s *dev, int func_num,
           if (priv->sc.dma)
             {
               ret = cxd56_sdio_dmasendsetup(&priv->dev, data, size);
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   mcerr("ERROR: SDIO_DMASENDSETUP: error %d\n", ret);
                   goto WRITE_ERR;
@@ -4033,7 +4033,7 @@ static int cxd56_sdio_write(FAR struct sdio_dev_s *dev, int func_num,
                                               priv->blocksize);
           ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD53 | MMCSD_MULTIBLOCK |
                                        MMCSD_WRDATAXFR, cmd53arg);
-          if (ret != OK)
+          if (ret != OKK)
             {
               mcerr("ERROR: Send cmd53 error\n");
               goto WRITE_ERR;
@@ -4063,7 +4063,7 @@ static int cxd56_sdio_write(FAR struct sdio_dev_s *dev, int func_num,
       if (priv->sc.dma)
         {
           ret = cxd56_sdio_dmasendsetup(&priv->dev, data, size);
-          if (ret != OK)
+          if (ret != OKK)
             {
               mcerr("ERROR: SDIO_DMASENDSETUP: error %d\n", ret);
               goto WRITE_ERR;
@@ -4077,7 +4077,7 @@ static int cxd56_sdio_write(FAR struct sdio_dev_s *dev, int func_num,
       cmd53arg = cxd56_sdio_make_cmd53arg(1, sf->number, addr, 1, 0, size);
       ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD53 | MMCSD_WRDATAXFR,
                                    cmd53arg);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: Send cmd53 error\n");
           goto WRITE_ERR;
@@ -4148,7 +4148,7 @@ static int cxd56_sdio_read(FAR struct sdio_dev_s *dev, int func_num,
           if (priv->sc.dma)
             {
               ret = cxd56_sdio_dmarecvsetup(&priv->dev, data, size);
-              if (ret != OK)
+              if (ret != OKK)
                 {
                   mcerr("ERROR: SDIO_DMASENDSETUP: error %d\n", ret);
                   goto READ_ERR;
@@ -4163,7 +4163,7 @@ static int cxd56_sdio_read(FAR struct sdio_dev_s *dev, int func_num,
                                        blocks, priv->blocksize);
           ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD53 | MMCSD_MULTIBLOCK |
                                        MMCSD_RDDATAXFR, cmd53arg);
-          if (ret != OK)
+          if (ret != OKK)
             {
               mcerr("ERROR: Send cmd53 error\n");
               goto READ_ERR;
@@ -4193,7 +4193,7 @@ static int cxd56_sdio_read(FAR struct sdio_dev_s *dev, int func_num,
       if (priv->sc.dma)
         {
           ret = cxd56_sdio_dmarecvsetup(&priv->dev, data, size);
-          if (ret != OK)
+          if (ret != OKK)
             {
               mcerr("ERROR: SDIO_DMASENDSETUP: error %d\n", ret);
               goto READ_ERR;
@@ -4207,7 +4207,7 @@ static int cxd56_sdio_read(FAR struct sdio_dev_s *dev, int func_num,
       cmd53arg = cxd56_sdio_make_cmd53arg(0, sf->number, addr, 1, 0, size);
       ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD53 |
                                    MMCSD_RDDATAXFR, cmd53arg);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: Send cmd53 error\n");
           goto READ_ERR;
@@ -4249,7 +4249,7 @@ static int cxd56_sdio_get_cis(FAR struct sdio_dev_s *dev,
     {
       *cis = priv->sc.fn[func_num]->cis;
     }
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -4279,10 +4279,10 @@ static int cxd56_sdio_initialize(struct cxd56_sdiodev_s *priv)
   cxd56_sdio_attach(&priv->dev);
   ret = cxd56_sdio_sendcmdpoll(priv, SDIO_CMD5, 0x0);
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       ret = cxd56_sdio_recvshort(&priv->dev, SDIO_CMD5, &response);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: Recv R4 error\n");
           return ret;
@@ -4301,7 +4301,7 @@ static int cxd56_sdio_initialize(struct cxd56_sdiodev_s *priv)
       do
         {
           ret = cxd56_sdio_sendcmdpoll(priv, SDIO_CMD5, 0x300000);
-          if (ret == OK)
+          if (ret == OKK)
             {
               cxd56_sdio_recvshort(&priv->dev, SDIO_CMD5, &response);
             }
@@ -4315,7 +4315,7 @@ static int cxd56_sdio_initialize(struct cxd56_sdiodev_s *priv)
   mcinfo("send CMD3 to enter standby state\n");
   cxd56_sdio_sendcmdpoll(priv, SD_CMD3, 0);
   ret = cxd56_sdio_recvshortcrc(&priv->dev, SD_CMD3, &response);
-  if (ret != OK)
+  if (ret != OKK)
     {
       return ret;
     }
@@ -4332,7 +4332,7 @@ static int cxd56_sdio_initialize(struct cxd56_sdiodev_s *priv)
   mcinfo("send cmd7(RCA:%x, %x) OK\n",
         (response >> 16), response & 0xffff0000);
   ret = cxd56_sdio_recvshortcrc(&priv->dev, MMCSD_CMD7S, &response);
-  if (ret != OK)
+  if (ret != OKK)
     {
       mcerr("ERROR: mmcsd_recvR1 for CMD7 failed: %d\n", ret);
       return ret;
@@ -4341,10 +4341,10 @@ static int cxd56_sdio_initialize(struct cxd56_sdiodev_s *priv)
   cxd56_sdio_changeclock(priv);
 
   ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD52, 0x7 << 9);
-  if (ret == OK)
+  if (ret == OKK)
     {
       ret = cxd56_sdio_recvshort(&priv->dev, SDIO_ACMD52, &response);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: Addr:0x7, recv R5 error\n");
           return ret;
@@ -4362,10 +4362,10 @@ static int cxd56_sdio_initialize(struct cxd56_sdiodev_s *priv)
     }
 
   ret = cxd56_sdio_sendcmdpoll(priv, SDIO_ACMD52, 0x8 << 9);
-  if (ret == OK)
+  if (ret == OKK)
     {
       cxd56_sdio_recvshort(&priv->dev, SDIO_ACMD52, &response);
-      if (ret != OK)
+      if (ret != OKK)
         {
           mcerr("ERROR: Addr:0x8, recv R5 error\n");
           return ret;
@@ -4431,7 +4431,7 @@ static int cxd56_sdio_initialize(struct cxd56_sdiodev_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 
 SDIO_INIT_ERR:
   return -ENOMEM;

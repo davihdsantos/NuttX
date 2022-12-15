@@ -157,7 +157,7 @@ static int spidrvr_open(FAR struct file *filep)
   DEBUGASSERT(priv->crefs > 0);
 
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -202,11 +202,11 @@ static int spidrvr_close(FAR struct file *filep)
     {
       nxsem_destroy(&priv->exclsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   nxsem_post(&priv->exclsem);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -326,7 +326,7 @@ static int spidrvr_unlink(FAR struct inode *inode)
     {
       nxsem_destroy(&priv->exclsem);
       kmm_free(priv);
-      return OK;
+      return OKK;
     }
 
   /* No... just mark the driver as unlinked and free the resouces when the

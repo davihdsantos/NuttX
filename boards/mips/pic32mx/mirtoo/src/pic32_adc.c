@@ -101,7 +101,7 @@ int pic32mx_adcinitialize(void)
 
 #warning "Missing logic"
 
-  return OK;
+  return OKK;
 }
 #endif
 

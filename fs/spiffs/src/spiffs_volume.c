@@ -152,7 +152,7 @@ int spiffs_find_fobj_bypgndx(FAR struct spiffs_s *fs, int16_t pgndx,
     {
       if (fobj->objhdr_pgndx == pgndx)
         {
-          ret = OK;
+          ret = OKK;
           break;
         }
     }
@@ -195,7 +195,7 @@ int spiffs_find_fobj_byobjid(FAR struct spiffs_s *fs, int16_t objid,
     {
       if (fobj->objid == objid)
         {
-          ret = OK;
+          ret = OKK;
           break;
         }
     }

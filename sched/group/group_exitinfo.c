@@ -103,7 +103,7 @@ int group_exitinfo(pid_t pid, FAR struct binary_s *bininfo)
   group->tg_bininfo = bininfo;
 
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 #endif  /* CONFIG_BINFMT_LOADABLE */

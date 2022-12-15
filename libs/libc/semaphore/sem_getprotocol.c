@@ -84,5 +84,5 @@ int sem_getprotocol(FAR sem_t *sem, FAR int *protocol)
   *protocol = SEM_PRIO_NONE;
 #endif
 
-  return OK;
+  return OKK;
 }

@@ -353,7 +353,7 @@ static void lpc54_i2c_timeout(int argc, uint32_t arg, ...)
   lpc54_i2c_putreg(priv, LPC54_I2C_INTENCLR_OFFSET, I2C_MASTER_INTS);
   priv->state  = I2CSTATE_IDLE;
 
-  if (priv->result == OK)
+  if (priv->result == OKK)
     {
       priv->result = -ETIMEDOUT;
     }
@@ -459,7 +459,7 @@ static bool lpc54_i2c_nextmsg(struct lpc54_i2cdev_s *priv)
 
   /* Decrement the number of messages remaining. */
 
-  if (--priv->nmsgs > 0 && priv->result == OK)
+  if (--priv->nmsgs > 0 && priv->result == OKK)
     {
       /* There are more messages, set up for the next message */
 
@@ -732,7 +732,7 @@ static int lpc54_i2c_interrupt(int irq, FAR void *context, FAR void *arg)
       nxsem_post(&priv->waitsem);
     }
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_I2C_POLLED */
 
@@ -762,7 +762,7 @@ static int lpc54_i2c_transfer(FAR struct i2c_master_s *dev,
   priv->xfrd   = 0;
   priv->msgs   = msgs;
   priv->nmsgs  = count;
-  priv->result = OK;
+  priv->result = OKK;
 
   /* Set up the transfer timeout */
 
@@ -810,7 +810,7 @@ static int lpc54_i2c_transfer(FAR struct i2c_master_s *dev,
 static int lpc54_i2c_reset(FAR struct i2c_master_s * dev)
 {
 #warning Missing logic
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_I2C_RESET */
 
@@ -1270,7 +1270,7 @@ int lpc54_i2cbus_uninitialize(FAR struct i2c_master_s * dev)
   irq_detach(priv->irq);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 #endif /* HAVE_I2C_MASTER_DEVICE */

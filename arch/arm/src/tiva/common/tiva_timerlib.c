@@ -550,7 +550,7 @@ static int tiva_timer32_interrupt(struct tiva_gptmstate_s *priv)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -676,7 +676,7 @@ static int tiva_timer16_interrupt(struct tiva_gptmstate_s *priv, int tmndx)
         }
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -990,7 +990,7 @@ static int tiva_oneshot_periodic_mode32(struct tiva_gptmstate_s *priv,
    * NOTE: This timer is not started until tiva_timer32_start() is called.
    */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1200,7 +1200,7 @@ static int tiva_oneshot_periodic_mode16(struct tiva_gptmstate_s *priv,
    * NOTE: This timer is not started until tiva_timer16_start() is called.
    */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1288,7 +1288,7 @@ static int tiva_rtc_mode32(struct tiva_gptmstate_s *priv,
    * called.
    */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1660,7 +1660,7 @@ static int tiva_pwm_mode16(struct tiva_gptmstate_s *priv,
    *    next cycle after the write.
    */
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1715,7 +1715,7 @@ static int tiva_timer16_configure(struct tiva_gptmstate_s *priv,
   switch (timer->mode)
     {
     case TIMER16_MODE_NONE:
-      return OK;
+      return OKK;
 
 #ifdef CONFIG_TIVA_TIMER16_PERIODIC
     case TIMER16_MODE_ONESHOT:       /* 16-bit programmable one-shot timer */
@@ -1942,7 +1942,7 @@ TIMER_HANDLE tiva_gptm_configure(const struct tiva_gptmconfig_s *config)
        */
 
       ret = irq_attach(attr->irq[TIMER32], attr->handler32, NULL);
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Configure the 32-bit timer */
 
@@ -1963,12 +1963,12 @@ TIMER_HANDLE tiva_gptm_configure(const struct tiva_gptmconfig_s *config)
        */
 
       ret = irq_attach(attr->irq[TIMER16A], attr->handler16[TIMER16A], NULL);
-      if (ret == OK)
+      if (ret == OKK)
         {
           ret = irq_attach(attr->irq[TIMER16B], attr->handler16[TIMER16B], NULL);
         }
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           /* Write the GPTM Configuration Register (GPTMCFG) to select 16-
            * bit operation.
@@ -1984,7 +1984,7 @@ TIMER_HANDLE tiva_gptm_configure(const struct tiva_gptmconfig_s *config)
 
       /* Configure 16-bit timer B */
 
-      if (ret == OK)
+      if (ret == OKK)
         {
           ret = tiva_timer16_configure(priv, &config16->config[TIMER16B],
                                        TIMER16B);

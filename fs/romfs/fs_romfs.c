@@ -176,7 +176,7 @@ static int romfs_open(FAR struct file *filep, FAR const char *relpath,
 
   romfs_semtake(rm);
   ret = romfs_checkmount(rm);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: romfs_checkmount failed: %d\n", ret);
       goto errout_with_semaphore;
@@ -294,7 +294,7 @@ static int romfs_open(FAR struct file *filep, FAR const char *relpath,
   rm->rm_head = rf->rf_next;
 
   romfs_semgive(rm);
-  return OK;
+  return OKK;
 
   /* Error exits */
 
@@ -311,7 +311,7 @@ static int romfs_close(FAR struct file *filep)
 {
   FAR struct romfs_mountpt_s *rm;
   FAR struct romfs_file_s    *rf;
-  int                         ret = OK;
+  int                         ret = OKK;
 
   finfo("Closing\n");
 
@@ -385,7 +385,7 @@ static ssize_t romfs_read(FAR struct file *filep, FAR char *buffer,
 
   romfs_semtake(rm);
   ret = romfs_checkmount(rm);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: romfs_checkmount failed: %d\n", ret);
       goto errout_with_semaphore;
@@ -547,7 +547,7 @@ static off_t romfs_seek(FAR struct file *filep, off_t offset, int whence)
 
   romfs_semtake(rm);
   ret = romfs_checkmount(rm);
-  if (ret != OK)
+  if (ret != OKK)
     {
        ferr("ERROR: romfs_checkmount failed: %d\n", ret);
        goto errout_with_semaphore;
@@ -568,7 +568,7 @@ static off_t romfs_seek(FAR struct file *filep, off_t offset, int whence)
   finfo("New file position: %d\n", filep->f_pos);
 
   romfs_semgive(rm);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   romfs_semgive(rm);
@@ -607,7 +607,7 @@ static int romfs_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
        */
 
       *ppv = (FAR void *)(rm->rm_xipbase + rf->rf_startoffset);
-      return OK;
+      return OKK;
     }
 
   ferr("ERROR: Invalid cmd: %d \n", cmd);
@@ -644,7 +644,7 @@ static int romfs_dup(FAR const struct file *oldp, FAR struct file *newp)
 
   romfs_semtake(rm);
   ret = romfs_checkmount(rm);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: romfs_checkmount failed: %d\n", ret);
       goto errout_with_semaphore;
@@ -695,7 +695,7 @@ static int romfs_dup(FAR const struct file *oldp, FAR struct file *newp)
   rm->rm_head = newrf->rf_next;
 
   romfs_semgive(rm);
-  return OK;
+  return OKK;
 
   /* Error exits */
 
@@ -778,7 +778,7 @@ static int romfs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
 
   romfs_semtake(rm);
   ret = romfs_checkmount(rm);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: romfs_checkmount failed: %d\n", ret);
       goto errout_with_semaphore;
@@ -808,7 +808,7 @@ static int romfs_opendir(FAR struct inode *mountpt, FAR const char *relpath,
 
   memcpy(&dir->u.romfs, &dirinfo.rd_dir, sizeof(struct fs_romfsdir_s));
   romfs_semgive(rm);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   romfs_semgive(rm);
@@ -846,7 +846,7 @@ static int romfs_readdir(FAR struct inode *mountpt,
 
   romfs_semtake(rm);
   ret = romfs_checkmount(rm);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: omfs_checkmount failed: %d\n", ret);
       goto errout_with_semaphore;
@@ -976,7 +976,7 @@ static int romfs_bind(FAR struct inode *blkdriver, FAR const void *data,
 
   if (INODE_IS_BLOCK(blkdriver) &&
       blkdriver->u.i_bops->open != NULL &&
-      blkdriver->u.i_bops->open(blkdriver) != OK)
+      blkdriver->u.i_bops->open(blkdriver) != OKK)
     {
       ferr("ERROR: No open method\n");
       return -ENODEV;
@@ -1023,7 +1023,7 @@ static int romfs_bind(FAR struct inode *blkdriver, FAR const void *data,
 
   *handle = (FAR void *)rm;
   romfs_semgive(rm);
-  return OK;
+  return OKK;
 
 errout_with_buffer:
   if (!rm->rm_xipbase)
@@ -1111,7 +1111,7 @@ static int romfs_unbind(FAR void *handle, FAR struct inode **blkdriver,
 
       nxsem_destroy(&rm->rm_sem);
       kmm_free(rm);
-      return OK;
+      return OKK;
     }
 
   romfs_semgive(rm);
@@ -1167,7 +1167,7 @@ static int romfs_statfs(FAR struct inode *mountpt, FAR struct statfs *buf)
   buf->f_namelen = NAME_MAX;
 
   romfs_semgive(rm);
-  return OK;
+  return OKK;
 
 errout_with_semaphore:
   romfs_semgive(rm);
@@ -1218,7 +1218,7 @@ static int romfs_stat_common(uint8_t type, uint32_t size,
   buf->st_size    = size;
   buf->st_blksize = sectorsize;
   buf->st_blocks  = (buf->st_size + sectorsize - 1) / sectorsize;
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1250,7 +1250,7 @@ static int romfs_stat(FAR struct inode *mountpt, FAR const char *relpath,
 
   romfs_semtake(rm);
   ret = romfs_checkmount(rm);
-  if (ret != OK)
+  if (ret != OKK)
     {
       ferr("ERROR: romfs_checkmount failed: %d\n", ret);
       goto errout_with_semaphore;

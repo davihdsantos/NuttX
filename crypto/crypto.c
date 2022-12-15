@@ -83,6 +83,6 @@ int up_cryptoinitialize(void)
 
   return ret;
 #else
-  return OK;
+  return OKK;
 #endif
 }

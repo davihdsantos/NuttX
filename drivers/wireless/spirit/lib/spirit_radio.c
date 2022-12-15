@@ -654,7 +654,7 @@ int spirit_radio_get_setup(FAR struct spirit_library_s *spirit,
     (100.0 * g_vectn_bandwidth[bwm + (bwe * 9)] *
      ((spirit->xtal_frequency >> divider) / 26e6));
 
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -1577,7 +1577,7 @@ int spirit_radio_convert_datarate(FAR struct spirit_library_s *spirit,
         }
     }
 
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -1667,7 +1667,7 @@ int spirit_radio_convert_chbandwidth(FAR struct spirit_library_s *spirit,
 
   *pce = (uint8_t)(i / 9);
   *pcm = (uint8_t)(i % 9);
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************
@@ -1731,7 +1731,7 @@ int spirit_radio_convert_freqdev(FAR struct spirit_library_s *spirit,
     }
 
   *pcm = i;
-  return OK;
+  return OKK;
 }
 
 /******************************************************************************

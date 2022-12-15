@@ -243,7 +243,7 @@ static int btnet_advertise(FAR struct net_driver_s *netdev)
   netdev->d_ipv6addr[7] = (uint16_t)addr[4] << 8 | (uint16_t)addr[5];
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -632,7 +632,7 @@ static int btnet_ifup(FAR struct net_driver_s *netdev)
       /* The interface is now up */
 
       priv->bd_bifup = true;
-      ret = OK;
+      ret = OKK;
     }
 
   return ret;
@@ -677,7 +677,7 @@ static int btnet_ifdown(FAR struct net_driver_s *netdev)
 
   priv->bd_bifup = false;
   spin_unlock_irqrestore(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -767,7 +767,7 @@ static int btnet_txavail(FAR struct net_driver_s *netdev)
       work_queue(LPWORK, &priv->bd_pollwork, btnet_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -944,7 +944,7 @@ static int btnet_req_data(FAR struct radio_driver_s *netdev,
     }
 
   UNUSED(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -979,7 +979,7 @@ static int btnet_properties(FAR struct radio_driver_s *netdev,
 
   /* Multicast, multicast, and star hub node addresses not supported */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1126,7 +1126,7 @@ int bt_netdev_register(FAR const struct bt_driver_s *btdev)
   ret = netdev_register(&priv->bd_dev.r_dev, NET_LL_BLUETOOTH);
   if (ret >= 0)
     {
-      return OK;
+      return OKK;
     }
 
   nerr("ERROR: netdev_register() failed: %d\n", ret);

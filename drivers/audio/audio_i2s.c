@@ -233,7 +233,7 @@ static int audio_i2s_configure(FAR struct audio_lowerhalf_s *dev,
   FAR struct audio_i2s_s *audio_i2s = (struct audio_i2s_s *)dev;
   FAR struct i2s_dev_s *i2s;
   int samprate, nchannels, bpsamp;
-  int ret = OK;
+  int ret = OKK;
 
   DEBUGASSERT(audio_i2s != NULL && caps != NULL);
   i2s = audio_i2s->i2s;
@@ -392,7 +392,7 @@ static int audio_i2s_reserve(FAR struct audio_lowerhalf_s *dev)
 #ifdef CONFIG_AUDIO_MULTI_SESSION
   *session = (void *)audio_i2s->playback;
 #endif
-  return OK;
+  return OKK;
 }
 
 #ifdef CONFIG_AUDIO_MULTI_SESSION
@@ -402,7 +402,7 @@ static int audio_i2s_release(FAR struct audio_lowerhalf_s *dev,
 static int audio_i2s_release(FAR struct audio_lowerhalf_s *dev)
 #endif
 {
-  return OK;
+  return OKK;
 }
 
 static void audio_i2s_callback(struct i2s_dev_s *dev,

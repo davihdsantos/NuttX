@@ -69,7 +69,7 @@
 
 int stm32_bringup(void)
 {
-  int ret = OK;
+  int ret = OKK;
 
 #ifdef CONFIG_FS_PROCFS
   /* Mount the procfs file system */
@@ -86,7 +86,7 @@ int stm32_bringup(void)
   /* Register the LED driver */
 
   ret = userled_lower_initialize("/dev/userleds");
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: userled_lower_initialize() failed: %d\n", ret);
       return ret;
@@ -103,7 +103,7 @@ int stm32_bringup(void)
   /* Register the BUTTON driver */
 
   ret = btn_lower_initialize("/dev/buttons");
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "ERROR: btn_lower_initialize() failed: %d\n", ret);
       return ret;
@@ -125,7 +125,7 @@ int stm32_bringup(void)
   /* Start WDG kicker thread */
 
   ret = photon_watchdog_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "Failed to start watchdog thread: %d\n", ret);
       return ret;
@@ -146,7 +146,7 @@ int stm32_bringup(void)
   /* Initialize wlan driver and hardware */
 
   ret = photon_wlan_initialize();
-  if (ret != OK)
+  if (ret != OKK)
     {
       syslog(LOG_ERR, "Failed to initialize wlan: %d\n", ret);
       return ret;

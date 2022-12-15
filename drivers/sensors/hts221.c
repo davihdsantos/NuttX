@@ -263,7 +263,7 @@ static int hts221_read_reg(FAR struct hts221_dev_s *priv,
 
 static int hts221_get_id(FAR struct hts221_dev_s *priv, uint8_t *value)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t cmd = HTS221_WHO_AM_I;
 
   ret = hts221_read_reg(priv, &cmd, value);
@@ -308,7 +308,7 @@ static int hts221_cfgr_resolution(FAR struct hts221_dev_s *priv,
 static int hts221_config_ctrl_reg3(FAR struct hts221_dev_s *priv,
                                    FAR hts221_settings_t *settings)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t regval = 0;
   uint8_t addr = HTS221_CTRL_REG3;
   const uint8_t mask = 0xc4;
@@ -346,7 +346,7 @@ static int hts221_config_ctrl_reg3(FAR struct hts221_dev_s *priv,
 static int hts221_config_ctrl_reg2(FAR struct hts221_dev_s *priv,
                                    FAR hts221_settings_t *settings)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t regval = 0;
   uint8_t addr = HTS221_CTRL_REG2;
   const uint8_t mask = 0x80;
@@ -355,7 +355,7 @@ static int hts221_config_ctrl_reg2(FAR struct hts221_dev_s *priv,
 
   if (!settings->is_boot)
     {
-      return OK;
+      return OKK;
     }
 
   ret = hts221_read_reg(priv, &addr, &regval);
@@ -417,7 +417,7 @@ static int hts221_config_ctrl_reg2(FAR struct hts221_dev_s *priv,
 static int hts221_config_ctrl_reg1(FAR struct hts221_dev_s *priv,
                                    FAR hts221_settings_t *settings)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t regval = 0;
   uint8_t addr = HTS221_CTRL_REG1;
   const uint8_t mask = 0x87;
@@ -453,7 +453,7 @@ static int hts221_config_ctrl_reg1(FAR struct hts221_dev_s *priv,
 
 static int hts221_power_on_off(FAR struct hts221_dev_s *priv, bool on)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t regval = 0;
   uint8_t addr = HTS221_CTRL_REG1;
   uint8_t data_to_write[2];
@@ -493,7 +493,7 @@ static int hts221_power_on_off(FAR struct hts221_dev_s *priv, bool on)
 static int hts221_config(FAR struct hts221_dev_s *priv,
                          FAR hts221_settings_t *cfgr)
 {
-  int ret = OK;
+  int ret = OKK;
 
   ret = hts221_config_ctrl_reg2(priv, cfgr); /* Performs sensor reset. */
   if (ret < 0)
@@ -550,7 +550,7 @@ static int hts221_start_conversion(FAR struct hts221_dev_s *priv)
 static int hts221_check_status(FAR struct hts221_dev_s *priv,
                                FAR hts221_status_t *status)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t addr = HTS221_STATUS_REG;
   const uint8_t humid_mask = 0x02;
   const uint8_t temp_mask = 0x01;
@@ -571,7 +571,7 @@ static int hts221_check_status(FAR struct hts221_dev_s *priv,
 static int hts221_read_raw_data(FAR struct hts221_dev_s *priv,
                                 FAR hts221_raw_data_t *data)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t addr_humid_low = HTS221_HUM_OUT_L;
   uint8_t addr_humid_high = HTS221_HUM_OUT_H;
   uint8_t addr_temp_low = HTS221_TEMP_OUT_L;
@@ -751,7 +751,7 @@ static int hts221_load_calibration_data(FAR struct hts221_dev_s *priv)
   up_rngaddentropy(RND_SRC_HW, (uint32_t *)&priv->calib,
                    sizeof(priv->calib) / sizeof(uint32_t));
 
-  return OK;
+  return OKK;
 }
 
 static int hts221_calculate_temperature(FAR struct hts221_dev_s *priv,
@@ -777,7 +777,7 @@ static int hts221_calculate_temperature(FAR struct hts221_dev_s *priv,
 
   hts221_dbg("Interpolation data temper: %d\n", *temperature);
 
-  return OK;
+  return OKK;
 }
 
 static int hts221_calculate_humidity(FAR struct hts221_dev_s *priv,
@@ -803,13 +803,13 @@ static int hts221_calculate_humidity(FAR struct hts221_dev_s *priv,
 
   hts221_dbg("Interpolation data humidity: %d\n", *humidity);
 
-  return OK;
+  return OKK;
 }
 
 static int hts221_read_convert_data(FAR struct hts221_dev_s *priv,
                                     FAR hts221_conv_data_t *data)
 {
-  int ret = OK;
+  int ret = OKK;
   hts221_raw_data_t raw_data;
 
   ret = hts221_read_raw_data(priv, &raw_data);
@@ -839,7 +839,7 @@ static int hts221_read_convert_data(FAR struct hts221_dev_s *priv,
 #ifdef CONFIG_HTS221_DEBUG
 static int hts221_dump_registers(FAR struct hts221_dev_s *priv)
 {
-  int ret = OK;
+  int ret = OKK;
   uint8_t av_addr = HTS221_AV_CONF;
   uint8_t ctrl_reg1_addr = HTS221_CTRL_REG1;
   uint8_t ctrl_reg2_addr = HTS221_CTRL_REG2;
@@ -897,7 +897,7 @@ static int hts221_open(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -906,7 +906,7 @@ static int hts221_open(FAR struct file *filep)
 
   nxsem_post(&priv->devsem);
   hts221_dbg("Sensor is powered on\n");
-  return OK;
+  return OKK;
 }
 
 static int hts221_close(FAR struct file *filep)
@@ -925,7 +925,7 @@ static int hts221_close(FAR struct file *filep)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -957,7 +957,7 @@ static ssize_t hts221_read(FAR struct file *filep, FAR char *buffer,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -1005,7 +1005,7 @@ static int hts221_ioctl(FAR struct file *filep, int cmd, unsigned long arg)
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -1117,7 +1117,7 @@ static int hts221_poll(FAR struct file *filep, FAR struct pollfd *fds,
        * awakened by a signal.
        */
 
-      DEBUGASSERT(ret == OK || ret == -EINTR);
+      DEBUGASSERT(ret == OKK || ret == -EINTR);
     }
   while (ret == -EINTR);
 
@@ -1192,7 +1192,7 @@ static int hts221_int_handler(int irq, FAR void *context, FAR void *arg)
   hts221_dbg("Hts221 interrupt\n");
   hts221_notify(priv);
 
-  return OK;
+  return OKK;
 }
 
 int hts221_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
@@ -1243,5 +1243,5 @@ int hts221_register(FAR const char *devpath, FAR struct i2c_master_s *i2c,
   priv->config->irq_attach(priv->config, hts221_int_handler, priv);
   priv->config->irq_enable(priv->config, false);
   priv->config->set_power(priv->config, false);
-  return OK;
+  return OKK;
 }

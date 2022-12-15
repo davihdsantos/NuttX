@@ -132,7 +132,7 @@ static int skel_erase(FAR struct mtd_dev_s *dev, off_t startblock,
 
   /* Erase the specified blocks and return status (OK or a negated errno) */
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -267,7 +267,7 @@ static int skel_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
               geo->blocksize    = 512;  /* Size of one read/write block */
               geo->erasesize    = 4096; /* Size of one erase block */
               geo->neraseblocks = 1024; /* Number of erase blocks */
-              ret               = OK;
+              ret               = OKK;
           }
         }
         break;
@@ -284,7 +284,7 @@ static int skel_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
                */
 
               *ppv = NULL;
-              ret  = OK;
+              ret  = OKK;
             }
         }
         break;
@@ -293,7 +293,7 @@ static int skel_ioctl(FAR struct mtd_dev_s *dev, int cmd, unsigned long arg)
         {
           /* Erase the entire device */
 
-          ret = OK;
+          ret = OKK;
         }
         break;
 

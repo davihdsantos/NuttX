@@ -273,7 +273,7 @@ int stm32_spi1cmddata(FAR struct spi_dev_s *dev, uint32_t devid,
 
       (void)stm32_gpiowrite(STM32_LCD_RS, !cmd);
 
-      return OK;
+      return OKK;
     }
 #endif
 
@@ -286,7 +286,7 @@ int stm32_spi1cmddata(FAR struct spi_dev_s *dev, uint32_t devid,
 
       (void)stm32_gpiowrite(STM32_LCD_CD, !cmd);
 
-      return OK;
+      return OKK;
     }
 #endif
 

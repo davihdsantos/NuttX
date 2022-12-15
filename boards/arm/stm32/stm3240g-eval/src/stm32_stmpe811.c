@@ -222,7 +222,7 @@ static int stmpe811_attach(FAR struct stmpe811_config_s *state, xcpt_t isr,
 
   priv->handler = isr;
   priv->arg     = arg;
-  return OK;
+  return OKK;
 }
 
 static void stmpe811_enable(FAR struct stmpe811_config_s *state, bool enable)
@@ -329,7 +329,7 @@ int stm32_tsc_setup(int minor)
         }
     }
 
-  return OK;
+  return OKK;
 #else
   return -ENOSYS;
 #endif

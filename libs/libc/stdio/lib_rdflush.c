@@ -75,7 +75,7 @@ int lib_rdflush(FAR FILE *stream)
 
   if (stream->fs_bufstart == NULL)
     {
-      return OK;
+      return OKK;
     }
 
   /* Get exclusive access to the stream */
@@ -116,7 +116,7 @@ int lib_rdflush(FAR FILE *stream)
     }
 
   lib_give_semaphore(stream);
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_STDIO_DISABLE_BUFFERING */

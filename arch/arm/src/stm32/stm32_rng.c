@@ -136,7 +136,7 @@ static int stm32_rng_initialize(void)
 
   up_enable_irq(STM32_IRQ_RNG);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -182,7 +182,7 @@ static int stm32_rng_interrupt(int irq, void *context, FAR void *arg)
     {
       /* This random value is not valid, we will try again. */
 
-      return OK;
+      return OKK;
     }
 
   data = getreg32(STM32_RNG_DR);
@@ -199,14 +199,14 @@ static int stm32_rng_interrupt(int irq, void *context, FAR void *arg)
     {
       g_rngdev.rd_first = false;
       g_rngdev.rd_lastval = data;
-      return OK;
+      return OKK;
     }
 
   if (g_rngdev.rd_lastval == data)
     {
       /* Two subsequent same numbers, we will try again. */
 
-      return OK;
+      return OKK;
     }
 
   /* If we get here, the random number is valid. */
@@ -235,7 +235,7 @@ static int stm32_rng_interrupt(int irq, void *context, FAR void *arg)
       nxsem_post(&g_rngdev.rd_readsem);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

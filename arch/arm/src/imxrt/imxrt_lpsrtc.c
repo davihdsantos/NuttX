@@ -154,7 +154,7 @@ int imxrt_lpsrtc_initialize(void)
   /* Synchronize HPRTC time with the LPSRTC and enable HPRTC */
 
   imxrt_hprtc_synchronize();
-  return OK;
+  return OKK;
 }
 
 /************************************************************************************
@@ -233,7 +233,7 @@ int up_rtc_settime(FAR const struct timespec *ts)
   /* Unconditionally re-enable the LPSRTC */
 
   imxrt_lpsrtc_enable();
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

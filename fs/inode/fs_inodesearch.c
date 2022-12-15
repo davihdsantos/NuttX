@@ -328,7 +328,7 @@ static int _inode_search(FAR struct inode_search_s *desc)
                */
 
               relpath = name;
-              ret = OK;
+              ret = OKK;
               break;
             }
           else
@@ -385,7 +385,7 @@ static int _inode_search(FAR struct inode_search_s *desc)
                               left    = NULL;
                               relpath = name;
 
-                              ret     = OK;
+                              ret     = OKK;
                               break;
                             }
 

@@ -202,7 +202,7 @@ int board_button_irq(int id, xcpt_t irqhandler, FAR void *arg)
 
   /* Return the old button handler (so that it can be restored) */
 
-  return OK;
+  return OKK;
 }
 #endif
 

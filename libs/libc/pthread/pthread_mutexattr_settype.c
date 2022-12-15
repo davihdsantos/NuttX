@@ -76,7 +76,7 @@ int pthread_mutexattr_settype(pthread_mutexattr_t *attr, int type)
         }
 #endif
 
-      return OK;
+      return OKK;
     }
 
   return EINVAL;

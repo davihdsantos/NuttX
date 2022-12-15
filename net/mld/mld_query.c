@@ -388,7 +388,7 @@ int mld_query(FAR struct net_driver_s *dev,
           dev->d_len = 0;
         }
 
-      return OK;
+      return OKK;
     }
 
   /* All of other Queries are sent with the group address set.  Find the
@@ -480,5 +480,5 @@ int mld_query(FAR struct net_driver_s *dev,
       dev->d_len = 0;
     }
 
-  return OK;
+  return OKK;
 }

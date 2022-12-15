@@ -505,5 +505,5 @@ int vnc_raw(FAR struct vnc_session_s *session, FAR struct nxgl_rect_s *rect)
         }
     }
 
-  return OK;
+  return OKK;
 }

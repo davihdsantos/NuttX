@@ -887,7 +887,7 @@ static int mcp2515_del_extfilter(FAR struct mcp2515_can_s *priv, int ndx)
   mcp2515_writeregs(priv, MCP2515_CANCTRL, &regval, 1);
 
   mcp2515_dev_unlock(priv);
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -1158,7 +1158,7 @@ static int mcp2515_del_stdfilter(FAR struct mcp2515_can_s *priv, int ndx)
   mcp2515_writeregs(priv, MCP2515_CANCTRL, &regval, 1);
 
   mcp2515_dev_unlock(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1304,7 +1304,7 @@ static int mcp2515_setup(FAR struct can_dev_s *dev)
   mcp2515_rxint(dev, true);
 
   mcp2515_dev_unlock(priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1481,7 +1481,7 @@ static int mcp2515_ioctl(FAR struct can_dev_s *dev, int cmd,
 
           bt->bt_baud   = MCP2515_CANCLK_FREQUENCY / brp /
                           (bt->bt_tseg1 + bt->bt_tseg2 + 1);
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -1590,7 +1590,7 @@ static int mcp2515_ioctl(FAR struct can_dev_s *dev, int cmd,
 
           leave_critical_section(flags);
 
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -1842,7 +1842,7 @@ static int mcp2515_send(FAR struct can_dev_s *dev, FAR struct can_msg_s *msg)
    */
 
   (void)can_txdone(dev);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2192,7 +2192,7 @@ static int mcp2515_interrupt(FAR struct mcp2515_config_s *config,
 
       if (pending == 0)
         {
-          return OK;
+          return OKK;
         }
 
       /* Check for any errors */
@@ -2330,7 +2330,7 @@ static int mcp2515_interrupt(FAR struct mcp2515_config_s *config,
     }
   while (handled);
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2469,7 +2469,7 @@ static int mcp2515_hw_initialize(struct mcp2515_can_s *priv)
   mcp2515_writeregs(priv, MCP2515_RXB1CTRL, &regval, 1);
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

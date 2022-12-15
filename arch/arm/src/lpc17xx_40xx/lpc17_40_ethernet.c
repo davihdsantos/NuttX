@@ -646,7 +646,7 @@ static int lpc17_40_transmit(struct lpc17_40_driver_s *priv)
    * must have assured that there is no transmission in progress.
    */
 
-  DEBUGASSERT(lpc17_40_txdesc(priv) == OK);
+  DEBUGASSERT(lpc17_40_txdesc(priv) == OKK);
 
   /* Increment statistics and dump the packet *if so configured) */
 
@@ -701,7 +701,7 @@ static int lpc17_40_transmit(struct lpc17_40_driver_s *priv)
 
   (void)wd_start(priv->lp_txtimeout, LPC17_40_TXTIMEOUT,
                  lpc17_40_txtimeout_expiry, 1, (uint32_t)priv);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -732,7 +732,7 @@ static int lpc17_40_transmit(struct lpc17_40_driver_s *priv)
 static int lpc17_40_txpoll(struct net_driver_s *dev)
 {
   struct lpc17_40_driver_s *priv = (struct lpc17_40_driver_s *)dev->d_private;
-  int ret = OK;
+  int ret = OKK;
 
   /* If the polling resulted in data that should be sent out on the network,
    * the field d_len is set to a value > 0.
@@ -816,7 +816,7 @@ static void lpc17_40_response(struct lpc17_40_driver_s *priv)
   /* Check if there is room in the device to hold another packet. */
 
   ret = lpc17_40_txdesc(priv);
-  if (ret == OK)
+  if (ret == OKK)
     {
       /* Yes.. queue the packet now. */
 
@@ -1128,7 +1128,7 @@ static void lpc17_40_txdone_work(FAR void *arg)
    */
 
   DEBUGASSERT(priv);
-  DEBUGASSERT(lpc17_40_txdesc(priv) == OK);
+  DEBUGASSERT(lpc17_40_txdesc(priv) == OKK);
 
   /* Check if there is a pending Tx transfer that was scheduled by Rx handling
    * while the Tx logic was busy.  If so, processing that pending Tx now.
@@ -1358,7 +1358,7 @@ static int lpc17_40_interrupt(int irq, void *context, FAR void *arg)
 # endif
 #endif
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1472,7 +1472,7 @@ static void lpc17_40_poll_work(FAR void *arg)
    */
 
   net_lock();
-  if (lpc17_40_txdesc(priv) == OK)
+  if (lpc17_40_txdesc(priv) == OKK)
     {
       /* If so, update TCP timing states and poll the network layer for new
        * XMIT data. Hmmm.. might be bug here.  Does this mean if there is a
@@ -1764,7 +1764,7 @@ static int lpc17_40_ifup(struct net_driver_s *dev)
 #else
   up_enable_irq(LPC17_40_IRQ_ETH);
 #endif
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1803,7 +1803,7 @@ static int lpc17_40_ifdown(struct net_driver_s *dev)
   lpc17_40_ethreset(priv);
   priv->lp_ifup = false;
   leave_critical_section(flags);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -1834,7 +1834,7 @@ static void lpc17_40_txavail_work(FAR void *arg)
     {
       /* Check if there is room in the hardware to hold another outgoing packet. */
 
-      if (lpc17_40_txdesc(priv) == OK)
+      if (lpc17_40_txdesc(priv) == OKK)
         {
           /* If so, then poll the network layer for new XMIT data */
 
@@ -1882,7 +1882,7 @@ static int lpc17_40_txavail(struct net_driver_s *dev)
       work_queue(ETHWORK, &priv->lp_pollwork, lpc17_40_txavail_work, priv, 0);
     }
 
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************
@@ -2049,7 +2049,7 @@ static int lpc17_40_addmac(struct net_driver_s *dev, const uint8_t *mac)
   regval |= ETH_RXFLCTRL_MCASTHASHEN;
   lpc17_40_putreg(regval, LPC17_40_ETH_RXFLCTRL);
 
-  return OK;
+  return OKK;
 }
 #endif /* CONFIG_NET_MCASTGROUP || CONFIG_NET_ICMPv6 */
 
@@ -2131,7 +2131,7 @@ static int lpc17_40_rmmac(struct net_driver_s *dev, const uint8_t *mac)
       lpc17_40_putreg(regval, LPC17_40_ETH_RXFLCTRL);
     }
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2176,7 +2176,7 @@ static int lpc17_40_eth_ioctl(struct net_driver_s *dev, int cmd,
 
           ret = phy_notify_subscribe(dev->d_ifname, req->pid, req->signo,
                                      req->arg);
-          if (ret == OK)
+          if (ret == OKK)
             {
               /* Enable PHY link up/down interrupts */
 
@@ -2191,7 +2191,7 @@ static int lpc17_40_eth_ioctl(struct net_driver_s *dev, int cmd,
             (struct mii_ioctl_data_s *)((uintptr_t)arg);
 
           req->phy_id = priv->lp_phyaddr;
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2201,7 +2201,7 @@ static int lpc17_40_eth_ioctl(struct net_driver_s *dev, int cmd,
             (struct mii_ioctl_data_s *)((uintptr_t)arg);
 
           req->val_out = lpc17_40_phyread(priv->lp_phyaddr, req->reg_num);
-          ret = OK;
+          ret = OKK;
         }
         break;
 
@@ -2211,7 +2211,7 @@ static int lpc17_40_eth_ioctl(struct net_driver_s *dev, int cmd,
             (struct mii_ioctl_data_s *)((uintptr_t)arg);
 
           lpc17_40_phywrite(priv->lp_phyaddr, req->reg_num, req->val_in);
-          ret = OK;
+          ret = OKK;
         }
         break;
 #endif /* ifdef CONFIG_NETDEV_PHY_IOCTL */
@@ -2258,7 +2258,7 @@ static int lpc17_40_phyintenable(struct lpc17_40_driver_s *priv)
   lpc17_40_phywrite(priv->lp_phyaddr, MII_INT_REG,
                            (phyval & ~MII_INT_CLREN) | MII_INT_SETEN);
 
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -2448,7 +2448,7 @@ static inline int lpc17_40_phyreset(uint8_t phyaddr)
       phyreg = lpc17_40_phyread(phyaddr, MII_MCR);
       if ((phyreg & MII_MCR_RESET) == 0)
         {
-          return OK;
+          return OKK;
         }
     }
 
@@ -2499,7 +2499,7 @@ static inline int lpc17_40_phyautoneg(uint8_t phyaddr)
         {
           /* Yes.. return success */
 
-          return OK;
+          return OKK;
         }
     }
 
@@ -2574,7 +2574,7 @@ static int lpc17_40_phymode(uint8_t phyaddr, uint8_t mode)
         {
           /* Yes.. return success */
 
-          return OK;
+          return OKK;
         }
 #else
       phyreg = lpc17_40_phyread(phyaddr, MII_MSR);
@@ -2582,7 +2582,7 @@ static int lpc17_40_phymode(uint8_t phyaddr, uint8_t mode)
         {
           /* Yes.. return success */
 
-          return OK;
+          return OKK;
         }
 #endif
     }
@@ -2939,7 +2939,7 @@ static inline int lpc17_40_phyinit(struct lpc17_40_driver_s *priv)
 static inline int lpc17_40_phyinit(struct lpc17_40_driver_s *priv)
 {
   priv->lp_mode = LPC17_40_MODE_DEFLT;
-  return OK;
+  return OKK;
 }
 #endif
 
@@ -3317,7 +3317,7 @@ static inline int lpc17_40_ethinitialize(int intf)
   /* Register the device with the OS so that socket IOCTLs can be performed */
 
   (void)netdev_register(&priv->lp_dev, NET_LL_ETHERNET);
-  return OK;
+  return OKK;
 }
 
 /****************************************************************************

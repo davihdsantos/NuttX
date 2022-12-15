@@ -84,7 +84,7 @@ int pthread_attr_setinheritsched(FAR pthread_attr_t *attr,
   else
     {
       attr->inheritsched = (uint8_t)inheritsched;
-      ret = OK;
+      ret = OKK;
     }
 
   linfo("Returning %d\n", ret);

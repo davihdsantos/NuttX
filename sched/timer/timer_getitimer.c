@@ -88,7 +88,7 @@ int getitimer(int which, FAR struct itimerval *value)
   {
   };
 
-  int ret = OK;
+  int ret = OKK;
 
   if (which != ITIMER_REAL || !value)
     {
@@ -101,7 +101,7 @@ int getitimer(int which, FAR struct itimerval *value)
       ret = timer_gettime(rtcb->group->itimer, &spec);
     }
 
-  if (ret == OK)
+  if (ret == OKK)
     {
       TIMESPEC_TO_TIMEVAL(&value->it_value, &spec.it_value);
       TIMESPEC_TO_TIMEVAL(&value->it_interval, &spec.it_interval);

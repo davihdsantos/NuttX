@@ -96,7 +96,7 @@ int stm32_st7032init(FAR const char *devpath)
       return ret;
     }
 
-  return OK;
+  return OKK;
 }
 
 #endif /* CONFIG_I2C && CONFIG_LEDS_ST7032 */

@@ -277,7 +277,7 @@ uint32_t up_get_newintctx(void)
 #ifdef CONFIG_ARCH_IRQPRIO
 int up_prioritize_irq(int irq, int priority)
 {
-  return OK;
+  return OKK;
 }
 #endif
 

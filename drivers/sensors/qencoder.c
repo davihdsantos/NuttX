@@ -167,7 +167,7 @@ static int qe_open(FAR struct file *filep)
   /* Save the new open count on success */
 
   upper->crefs = tmp;
-  ret = OK;
+  ret = OKK;
 
 errout_with_sem:
   nxsem_post(&upper->exclsem);
@@ -225,7 +225,7 @@ static int qe_close(FAR struct file *filep)
     }
 
   nxsem_post(&upper->exclsem);
-  ret = OK;
+  ret = OKK;
 
 errout:
   return ret;
